@@ -1,0 +1,2 @@
+key,filepath,filepathLowQuality,spriteNumber,centerX,centerY,headOffsetX,headOffsetY,standing,forward,backward,hurt,death,attCharge0,attSmear0,attAttack0,attCharge1,attSmear1,attAttack1,attCharge2,attSmear2,attAttack2,attCharge3,attSmear3,attAttack3,,,,
+anim_wizard_rabbit0,Animations/wizard_rabbit_0001.png,AnimationsLQ/wizard_rabbit_0001.png,22,248,299,0,-180,0-1,2-3,4-5,6,7,8-9,10,11-12,13,13,13-14-15-16,17-18,19,20-21,,,,,,,
