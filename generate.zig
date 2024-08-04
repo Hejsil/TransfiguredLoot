@@ -2,30 +2,52 @@ pub fn main() !void {
     mod.start(6);
     defer mod.end();
 
+    const transfigured_raven_grimoire_dmg_mult = -0.99;
     item(.{
-        .id = "it_steel_rabbit",
-        .name = .{ .english = "Steel Rabbit" },
-        .description = .{ .english = "Raises all damage by [VAR0_PERCENT]." },
+        .id = "it_transfigured_raven_grimoire",
+        .name = .{ .english = "Transfigured Raven Grimoire" },
+        .description = .{ .english = "Your Special applies all curses but deals [VAR0_PERCENT] less damage." },
 
         .type = .loot,
         .treasureType = .all,
-        .weaponType = .loot,
 
-        .hbVar0 = 0.1,
-        .allMult = 0.1,
+        .weaponType = .loot,
+        .delay = 250, // Delay after hit?
+        .hbsType = "hbs_curse_0",
+        .hbsLength = 5 * std.time.ms_per_s,
+
+        .hbColor0 = rgb(66, 46, 105),
+        .hbColor1 = rgb(225, 92, 239),
+
+        .hbVar0 = @abs(transfigured_raven_grimoire_dmg_mult),
+        .specialMult = transfigured_raven_grimoire_dmg_mult,
     });
+    trigger(.onDamageDone, .{.tcond_dmg_self_special});
+    target(.ttrg_player_damaged, .{});
+    set(.tset_hbs_def, .{});
+    addPattern(.ipat_apply_hbs, .{});
+
+    // Flash item when debuff was applied
+    trigger(.hbsCreated, .{.tcond_hbs_thishbcast});
+    quickPattern(.tpat_hb_flash_item, .{});
+
+    // Set color of special to hbColor0/1
+    trigger(.colorCalc, .{});
+    target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    quickPattern(.tpat_hb_set_color_def, .{});
 
     item(.{
-        .id = "it_opal_rabbit",
-        .name = .{ .english = "Opal Rabbit" },
-        .description = .{ .english = "Raises Special damage by [VAR0_PERCENT]." },
+        .id = "it_transfigured_aquamarine_bracelet",
+        .name = .{ .english = "Transfigured Aquamarine Bracelet" },
+        .description = .{ .english = "At the start of each fight, gain a random buff for [VAR0_SECONDS] seconds." },
 
         .type = .loot,
-        .treasureType = .purple,
+        .treasureType = .green,
         .weaponType = .loot,
 
-        .hbVar0 = 0.2,
-        .specialMult = 0.2,
+        .hbsType = "hbs_curse_0",
+        .hbVar0 = std.time.ms_per_min,
+        .hbsLength = std.time.ms_per_min,
     });
 
     item(.{
@@ -110,6 +132,9 @@ const addPattern = mod.addPattern;
 const condition = mod.condition;
 const item = mod.item;
 const quickPattern = mod.quickPattern;
+const rgb = mod.rgb;
+const set = mod.set;
+const target = mod.target;
 const trigger = mod.trigger;
 
 const mod = @import("mod.zig");
