@@ -297,11 +297,11 @@ pub const Item = struct {
 
     /// Affects the color of attack patterns produced by this item. Would recommend making
     /// this a slightly dark color
-    hbColor0: ?[]const u8 = null,
+    hbColor0: ?Color = null,
 
     /// Affects the color of attack patterns produced by this item. Would recommend making
     /// this a slightly bright/saturated color
-    hbColor1: ?[]const u8 = null,
+    hbColor1: ?Color = null,
 
     /// Special flags for the item. This is a binary number, the values in the
     /// "accepted values" can be combined to give a hitbox multiple properties
@@ -526,6 +526,12 @@ fn item2(opt: Item) !void {
             bool => try item_ini.print("{s}=\"{d}\"\n", .{ field.name, @intFromBool(value) }),
             i8, u8, u16, u32, f64 => try item_ini.print("{s}=\"{d}\"\n", .{ field.name, value }),
             []const u8 => try item_ini.print("{s}=\"{s}\"\n", .{ field.name, value }),
+            Color => try item_ini.print("{s}=\"#{x:02}{x:02}{x:02}\"\n", .{
+                field.name,
+                value.r,
+                value.g,
+                value.b,
+            }),
             else => try item_ini.print("{s}=\"{s}\"\n", .{ field.name, @tagName(value) }),
         };
     }
@@ -1355,6 +1361,315 @@ fn addPattern2(pat: AddPattern, args: anytype) !void {
     try writeArgs(args);
 }
 
+/// When a trigger is running, it has 3 lists of "targets".
+/// 1) A list of players/enemies
+/// 2) A list of hotbar slots (items/abilities)
+/// 3) A list of status effects"
+///
+/// When a trigger is received by a player, the list of players starts with that player in the
+/// target list.
+///
+/// When a trigger is received by a hotbar slot (items/abilities) the list of players starts with
+/// the player that's holding that slot, and the list of slots starts with the hotbar slot that
+/// received it.
+///
+/// When a trigger is received by a status effect, the list of players starts with the player that
+/// APPLIED it, the list of slots starts with the hotbar slot that applied it (if any) and the
+/// status effect list starts with itself in it.
+///
+/// When Quick Patterns are run, they affect whatever objects are in the respective lists.
+///
+/// When an Attack Pattern is run, it only affects whatever players are in the player target list
+/// at the time.
+///
+pub const Target = enum {
+    /// Clears all lists.
+    ttrg_none,
+
+    // PLAYERS
+
+    /// From a status effect receiving a trigger, target only the player afflicted with this
+    /// status.
+    ttrg_player_afflicted,
+
+    /// When a status effect is the SOURCE of the trigger, target the player afflicted by that
+    /// status effect.
+    ttrg_player_afflicted_source,
+
+    /// From an "onDamageDone" trigger, target the player that was damaged.
+    ttrg_player_damaged,
+
+    /// flag (a binary number)
+    /// Prune the current list of players to include only those that have a certain hbsFlag.
+    ttrg_player_prune_hbsflag,
+
+    /// Target the player receiving this trigger; if the trigger is received by a hotbar slot, it
+    /// will target the player who owns that slot.
+    ttrg_player_self,
+
+    /// Targets all "players" (meaning, both allies and enemies).
+    ttrg_players_all,
+
+    /// Targets all the players that are on the same team as the person receiving this trigger.
+    /// For loot items, this means all of the rabbit players, but if an enemy were to call this,
+    /// it would target all the enemies. Also, this excludes KO'd players.
+    ttrg_players_ally,
+
+    /// excludeID (an integer) Targets all players on the same team, excluding KO'd players, and
+    /// excluding the playerID passed in.
+    ttrg_players_ally_exclude,
+
+    /// Targets all players on the same team. Includes KO'd players.
+    ttrg_players_ally_include_ko,
+
+    /// Despite the name, this actually targets the player who's MISSING the most HP, not the
+    /// actual lowest HP player. I must have written this a long time ago. Also, it excludes KO'd
+    /// players.
+    ttrg_players_ally_lowest_hp,
+
+    /// numberOfPlayers (an integer; this is an optional parameter)
+    /// Targets a random selection of your teammates. If a number is passed in, it will try to
+    /// target that many players. If no number is passed in, it will target 1.
+    ttrg_players_ally_random,
+
+    /// Clears player list.
+    ttrg_players_none,
+
+    /// Targets all the players that are on the OPPOSITE team as the person receiving this trigger.
+    /// For loot items, this means all of your enemies.
+    ttrg_players_opponent,
+
+    /// Targets all of your enemies that are facing away from you.
+    ttrg_players_opponent_backstab,
+
+    /// trgBinary (a binary number representing player IDs)
+    /// Targets your enemies based off a binary number.
+    /// 1 : 0001 : Just player 0
+    /// 2 : 0010 : Just player 1
+    /// 3 : 0011 : Player 0 and Player 1
+    /// 5 : 0101 : Player 0 and Player 2
+    /// etc..
+    ttrg_players_opponent_binary,
+
+    /// excludeID (an integer)
+    /// Targets all players on the enemy team, excluding KO'd players, and excluding the playerID
+    /// passed in.
+    ttrg_players_opponent_exclude,
+
+    /// Targets whatever player this player is currently targetting.
+    ttrg_players_opponent_focus,
+
+    /// numberOfPlayers (an integer; this is an optional parameter)
+    /// Targets a random selection of your enemies.  If a number is passed in, it will try to
+    /// target that many players.  If no number is passed in, it will target 1.
+    ttrg_players_opponent_random,
+
+    /// param0 (any number)
+    /// comparitor (a string)
+    /// param1 (any number)
+    ///
+    /// Prunes current list of players to only include those that match the equation given.
+    /// For instance, to target all allies that have more that 2 HP:
+    ///
+    /// target, ttrg_players_ally
+    /// target, ttrg_players_prune, tp#_hp, >, 2
+    ///
+    /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
+    /// in the target list.
+    ttrg_players_prune,
+
+    /// Removes the player receiving this trigger from the player list, if it is in there.
+    ttrg_players_prune_self,
+
+    /// Targets the player who is the source of this trigger.
+    ttrg_players_source,
+
+    ///numberOfPlayers (an integer; this is an optional parameter)
+    ///Targets a random selection of the players that are currently in the list. If a number is
+    ///passed in, it will try to target that many players. If no number is passed in, it will
+    ///target 1.
+    ttrg_players_target_random,
+
+    /// allyBin (a binary number representing player IDs)
+    /// enemyBin (a binary number representing player IDs)
+    /// Targets both allies and enemies based off binary numbers.
+    /// 1 : 0001 : Just player 0
+    /// 2 : 0010 : Just player 1
+    /// 3 : 0011 : Player 0 and Player 1
+    /// 5 : 0101 : Player 0 and Player 2
+    /// etc..
+    ttrg_players_team_binary,
+
+    // HOTBAR SLOTS (ITEMS/ABILITIES)
+
+    /// Targets the hotbar slot receiving this trigger
+    ttrg_hotbarslot_self,
+
+    /// Targets ALL active hotbar slots
+    ttrg_hotbarslots_all,
+
+    /// Targets all hotbar slots on your team
+    ttrg_hotbarslots_ally,
+
+    /// Targets all the hotbar slots of the players in the "players" list
+    ttrg_hotbarslots_current_players,
+
+    /// Targets all the hotbar slots on your enemy's team
+    ttrg_hotbarslots_opponent,
+
+    /// param0 (any number)
+    /// comparitor (a string)
+    /// param1 (any number)
+    ///
+    /// Prunes current list of hotbar slots to only include those that match the equation given.
+    /// For instance, to target all of the current player's hotbar slots that have more than a
+    /// 10 second cooldown:
+    ///
+    /// target, ttrg_player_self
+    /// target, ttrg_hotbarslots_current_players,
+    /// target, ttrg_hotbarslots_prune, ths#_cooldown, >, 10000
+    ///
+    /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
+    /// in the target list."
+    ttrg_hotbarslots_prune,
+
+    /// Prune the current list of hotbar slots to only include items that have strength.
+    ttrg_hotbarslots_prune_base_has_str,
+
+    /// param0 (a variable that differs per target)
+    /// param1 (a boolean)
+    /// Prune the current list of hotbar slots to only include items for which a boolean matches.
+    ttrg_hotbarslots_prune_bool,
+
+    /// isBuff (if true, gets slots with buffs, if false, gets slots with debuffs)
+    /// Prune the current list of hotbar slots to include items that have a Buff or Debuff they
+    /// apply.
+    ttrg_hotbarslots_prune_bufftype,
+
+    /// type (an integer representing a cooldown type)
+    /// Prune the current list of hotbar slots to include items that have a specific cooldown type.
+    /// 0 : None
+    /// 1 : Time (only cooldown, such as Defensives/most loot)
+    /// 2 : GCD (Most Primaries, Specials, etc.)
+    /// 3 : Stock (Multiple uses, like Wizard Defensive)
+    /// 4 : StockGCD (Multiple uses + a GCD, like Heavyblade Special)
+    /// 5 : StockOnly (Cooldown doesn't make it gain stock, like Defender Special)
+    ttrg_hotbarslots_prune_cdtype,
+
+    /// Prune the current list of hotbar slots to only include items that can be reset.
+    ttrg_hotbarslots_prune_noreset,
+
+    /// Removes the hotbar slot receiving this trigger from the list of hotbar slots, if it's in
+    /// there.
+    ttrg_hotbarslots_prune_self,
+
+    /// Targets the abilities of the player receiving this trigger.
+    ttrg_hotbarslots_self_abilities,
+
+    /// Targets the ability of the player receiving this trigger with the highest strength number
+    /// (if it's tied, multiple abilities will be targeted)
+    ttrg_hotbarslots_self_higheststrweapon,
+
+    /// Targets the loot of the player receiving this trigger
+    ttrg_hotbarslots_self_loot,
+
+    /// wpType (an integer representing a weapon type)
+    /// Targets a particular ability of the player receiving this trigger.
+    /// 0 : None
+    /// 1 : Primary
+    /// 2 : Secondary
+    /// 3 : Special
+    /// 4 : Defensive
+    ttrg_hotbarslots_self_weapontype,
+
+    /// wpType (an integer representing a weapon type)
+    /// Same as ttrg_hotbarslots_self_weapontype, but will only target the ability if it has a base
+    /// strength; otherwise it will simply result in an empty list.
+    ttrg_hotbarslots_self_weapontype_withstr,
+
+    // STATUS EFFECTS
+
+    /// Targets all status effects that are currently active
+    ttrg_hbstatus_all,
+
+    /// Targets all status effects that have been APPLIED by your allies
+    ttrg_hbstatus_ally,
+
+    /// Targets all status effects that have been APPLIED by your opponent
+    ttrg_hbstatus_opponent,
+
+    /// Prunes current list of status effects to only include those that match the equation given.
+    /// For instance, to target all of the status effects afflicting allies that are buffs:
+    ///
+    /// target, ttrg_hbstatus_all
+    /// target, ttrg_hbstatus_prune,  thbs#_aflTeamId, ==, 0
+    /// target, ttrg_hotbarslots_prune, thbs#_isBuff, ==, 1
+    ///
+    /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
+    /// in the target list.
+    ttrg_hbstatus_prune,
+
+    /// Targets the status effect receiving this trigger.
+    ttrg_hbstatus_self,
+
+    /// Targets the status effect that was the source of this trigger.
+    ttrg_hbstatus_source,
+
+    /// Targets all of the status effects that have been applied by the current list of players.
+    ttrg_hbstatus_target,
+};
+
+pub fn target(targ: Target, args: anytype) void {
+    target2(targ, args) catch |err| @panic(@errorName(err));
+}
+
+fn target2(targ: Target, args: anytype) !void {
+    try item_csv.print("target,{s}", .{@tagName(targ)});
+    try writeArgs(args);
+}
+
+pub const Set = enum {
+    tset_animation,
+    tset_colorpalette,
+    tset_critratio,
+    tset_damage_flags,
+    tset_debug,
+    tset_hbs_burnhit,
+    tset_hbs_def,
+    tset_hbs_randombuff,
+    tset_hbskey,
+    tset_hbsstr,
+    tset_hbsvars,
+    tset_print,
+    tset_randomness,
+    tset_strength,
+    tset_strength_chargecount,
+    tset_strength_def,
+    tset_strength_loot,
+    tset_strmult_backstab,
+    tset_strmult_debuffcount,
+    tset_uservar,
+    tset_uservar_aflplayer_pos,
+    tset_uservar_battletime,
+    tset_uservar_blackhole_charm_calc,
+    tset_uservar_cond_squarevar_equal,
+    tset_uservar_darkflame,
+    tset_uservar_each_target_player,
+    tset_uservar_gold,
+    tset_uservar_random,
+    tset_uservar_random_range,
+    tset_uservar_slotcount,
+};
+
+pub fn set(s: Set, args: anytype) void {
+    set2(s, args) catch |err| @panic(@errorName(err));
+}
+
+fn set2(s: Set, args: anytype) !void {
+    try item_csv.print("set,{s}", .{@tagName(s)});
+    try writeArgs(args);
+}
+
 fn writeArgs(args: anytype) !void {
     inline for (args) |arg| switch (@TypeOf(arg)) {
         comptime_int => try item_csv.print(",{}", .{arg}),
@@ -1363,6 +1678,16 @@ fn writeArgs(args: anytype) !void {
 
     try item_csv.writeByteNTimes(',', 4 - args.len);
     try item_csv.writeAll("\n");
+}
+
+pub const Color = struct {
+    r: u8,
+    g: u8,
+    b: u8,
+};
+
+pub fn rgb(r: u8, g: u8, b: u8) Color {
+    return .{ .r = r, .g = g, .b = b };
 }
 
 const std = @import("std");
