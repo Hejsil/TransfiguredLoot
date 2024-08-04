@@ -1,6 +1,5 @@
 var total_items: usize = 0;
 var written_items: usize = 0;
-var first_trigger: bool = true;
 var sheetlist_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
 var item_csv_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
 var item_ini_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
@@ -55,17 +54,14 @@ fn start2(amount: usize) !void {
 
     try item_names.writeAll(
         \\key,level,English,Japanese,Chinese
-        \\,,,,
         \\
     );
     try item_descriptions.writeAll(
         \\key,level,English,Japanese,Chinese
-        \\,,,,
         \\
     );
     try item_csv.print(
         \\spriteNumber,{},,,,
-        \\,,,,,
         \\
     ,
         .{amount},
@@ -536,24 +532,18 @@ fn item2(opt: Item) !void {
         };
     }
 
-    if (written_items != 0) {
-        try item_csv.writeAll(
-            \\,,,,,
-            \\,,,,,
-            \\
-        );
-    }
-
+    try item_csv.writeAll(
+        \\,,,,,
+        \\
+    );
     try item_csv.print(
         \\{s},{},,,,
-        \\,,,,,
         \\
     ,
         .{ opt.id, written_items },
     );
 
     written_items += 1;
-    first_trigger = true;
 }
 
 /// When certain things in the game happen (everything from you gaining gold, to using an ability,
@@ -854,14 +844,10 @@ pub fn trigger(trig: Trigger, opt: TriggerOpt) void {
 }
 
 fn trigger2(trig: Trigger, opt: TriggerOpt) !void {
-    if (!first_trigger)
-        try item_csv.writeAll(",,,,,\n");
-
     try item_csv.print("trigger,{s},{s},,,\n", .{
         @tagName(trig),
         if (opt[0]) |cond| @tagName(cond) else "",
     });
-    first_trigger = false;
 }
 
 pub const Condition = enum {
