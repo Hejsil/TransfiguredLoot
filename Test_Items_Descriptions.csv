@@ -1,8 +1,0 @@
-key,level,English,Japanese,Chinese
-,,,,
-it_steel_rabbit,0,Raises all damage by [VAR0_PERCENT].,Raises all damage by [VAR0_PERCENT].,Raises all damage by [VAR0_PERCENT].
-it_opal_rabbit,0,Raises Special damage by [VAR0_PERCENT].,Raises Special damage by [VAR0_PERCENT].,Raises Special damage by [VAR0_PERCENT].
-it_sapphire_rabbit,0,Raises Secondary damage by [VAR0_PERCENT].,Raises Secondary damage by [VAR0_PERCENT].,Raises Secondary damage by [VAR0_PERCENT].
-it_ruby_rabbit,0,Raises Primary damage by [VAR0_PERCENT].,Raises Primary damage by [VAR0_PERCENT].,Raises Primary damage by [VAR0_PERCENT].
-it_garnet_rabbit,0,"Every [CD], become invulnerable for [VAR0_SECONDS].","Every [CD], become invulnerable for [VAR0_SECONDS].","Every [CD], become invulnerable for [VAR0_SECONDS]."
-it_emerald_rabbit,0,"Heals [VAR0] HP after each fight, up to [VAR1] times.","Heals [VAR0] HP after each fight, up to [VAR1] times.","Heals [VAR0] HP after each fight, up to [VAR1] times."
