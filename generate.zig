@@ -2,6 +2,7 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: Redo
     item(.{
         .id = "it_transfigured_raven_grimoire",
         .name = .{
@@ -87,9 +88,7 @@ pub fn main() !void {
     target(.ttrg_hotbarslot_self, .{});
     quickPattern(.tpat_hb_flash_item, .{});
 
-    trigger(.autoStart, .{.tcond_hb_auto_pl});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-
+    // TODO: Untested
     item(.{
         .id = "it_transfigured_nightingale_gown",
         .name = .{
@@ -130,9 +129,11 @@ pub fn main() !void {
         },
 
         .type = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
 
         .weaponType = .loot,
-        .hbsType = "hbs_rabbitluck",
+        .hbsType = "hbs_rabbit_luck", // TODO: What is the hbs for RABBITLUCK
         .hbsLength = std.time.ms_per_min,
 
         .cooldownType = .time,
@@ -150,14 +151,16 @@ pub fn main() !void {
     set(.tset_hbs_def, .{});
     addPattern(.ipat_apply_hbs, .{});
 
+    // TODO: The "Breaks if you take damage once" and "Starts the battle on cooldown" dont work
+    //       yet
     item(.{
         .id = "it_transfigured_sapphire_violin",
         .name = .{
             .english = "Transfigured Sapphire Violin",
         },
         .description = .{
-            .english = "Every [CD] seconds, grant 3 random bufffs to all allies for 4 seconds. " ++
-                "Breaks if you take damage once. Starts the battle on cooldown.",
+            .english = "Every [CD] seconds, grant 3 random bufffs to all allies for " ++
+                "[VAR0_SECONDS]. Breaks if you take damage once. Starts the battle on cooldown.",
         },
 
         .type = .loot,
@@ -165,12 +168,15 @@ pub fn main() !void {
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
+        .hbVar0 = 4 * std.time.ms_per_s,
         .hbsLength = 4 * std.time.ms_per_s,
 
         .cooldownType = .time,
         .cooldown = 15 * std.time.ms_per_s,
     });
     trigger(.hotbarUsed, .{.tcond_hb_self});
+    quickPattern(.tpat_hb_run_cooldown, .{});
+    quickPattern(.tpat_hb_flash_item, .{});
     target(.ttrg_players_ally, .{});
     set(.tset_hbs_randombuff, .{});
     addPattern(.ipat_apply_hbs, .{});
@@ -182,6 +188,7 @@ pub fn main() !void {
     trigger(.autoStart, .{.tcond_hb_auto_pl});
     quickPattern(.tpat_hb_run_cooldown, .{});
 
+    // TODO: Untested
     item(.{
         .id = "it_transfigured_topaz_charm",
         .name = .{
