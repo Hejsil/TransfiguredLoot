@@ -1,5 +1,5 @@
 pub fn main() !void {
-    mod.start(7);
+    mod.start();
     defer mod.end();
 
     item(.{

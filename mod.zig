@@ -1,48 +1,22 @@
-var total_items: usize = 0;
 var written_items: usize = 0;
-var sheetlist_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
-var item_csv_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
-var item_ini_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
-var item_names_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
-var item_descriptions_buf: std.io.BufferedWriter(4096, std.fs.File.Writer) = undefined;
-var sheetlist: std.io.BufferedWriter(4096, std.fs.File.Writer).Writer = undefined;
-var item_csv: std.io.BufferedWriter(4096, std.fs.File.Writer).Writer = undefined;
-var item_ini: std.io.BufferedWriter(4096, std.fs.File.Writer).Writer = undefined;
-var item_names: std.io.BufferedWriter(4096, std.fs.File.Writer).Writer = undefined;
-var item_descriptions: std.io.BufferedWriter(4096, std.fs.File.Writer).Writer = undefined;
 
-pub fn start(amount: usize) void {
-    start2(amount) catch |err| @panic(@errorName(err));
+var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
+var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
+var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
+var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
+var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
+
+pub fn start() void {
+    start2() catch |err| @panic(@errorName(err));
 }
 
-fn start2(amount: usize) !void {
+fn start2() !void {
     const cwd = std.fs.cwd();
-    sheetlist_buf = std.io.bufferedWriter(
-        (try cwd.createFile("SheetList.csv", .{})).writer(),
-    );
-    item_csv_buf = std.io.bufferedWriter(
-        (try cwd.createFile("Items.csv", .{})).writer(),
-    );
-    item_ini_buf = std.io.bufferedWriter(
-        (try cwd.createFile("Items.ini", .{})).writer(),
-    );
-    item_names_buf = std.io.bufferedWriter(
-        (try cwd.createFile("Items_Names.csv", .{})).writer(),
-    );
-    item_descriptions_buf = std.io.bufferedWriter(
-        (try cwd.createFile("Items_Descriptions.csv", .{})).writer(),
-    );
-    sheetlist = sheetlist_buf.writer();
-    item_csv = item_csv_buf.writer();
-    item_ini = item_ini_buf.writer();
-    item_names = item_names_buf.writer();
-    item_descriptions = item_descriptions_buf.writer();
-
     var path_buf: [std.fs.max_path_bytes]u8 = undefined;
     const path = try cwd.realpath(".", &path_buf);
     const name = std.fs.path.basename(path);
 
-    try sheetlist.print(
+    try sheetlist.writer().print(
         \\Sheet Type,filename
         \\NameSheet,Mods/{[name]s}/Items_Names
         \\DescriptionSheet,Mods/{[name]s}/items_Descriptions
@@ -52,50 +26,45 @@ fn start2(amount: usize) !void {
         .{ .name = name },
     );
 
-    try item_names.writeAll(
+    try item_names.writer().writeAll(
         \\key,level,English,Japanese,Chinese
         \\
     );
-    try item_descriptions.writeAll(
+    try item_descriptions.writer().writeAll(
         \\key,level,English,Japanese,Chinese
         \\
     );
-    try item_csv.print(
-        \\spriteNumber,{},,,,
-        \\
-    ,
-        .{amount},
-    );
-
-    total_items = amount;
-    written_items = 0;
 }
 
 pub fn end() void {
-    flush() catch |err| @panic(@errorName(err));
-    close();
-    std.debug.assert(written_items == total_items);
+    end2() catch |err| @panic(@errorName(err));
 }
 
-fn flush() !void {
-    const res1 = sheetlist.context.flush();
-    const res2 = item_csv.context.flush();
-    const res3 = item_ini.context.flush();
-    const res4 = item_names.context.flush();
-    const res5 = item_descriptions.context.flush();
-    try res1;
-    try res2;
-    try res3;
-    try res4;
-    try res5;
-}
-
-fn close() void {
-    sheetlist.context.unbuffered_writer.context.close();
-    item_csv.context.unbuffered_writer.context.close();
-    item_ini.context.unbuffered_writer.context.close();
-    item_names.context.unbuffered_writer.context.close();
-    item_descriptions.context.unbuffered_writer.context.close();
+fn end2() !void {
+    const cwd = std.fs.cwd();
+    try cwd.writeFile(.{
+        .sub_path = "SheetList.csv",
+        .data = sheetlist.items,
+    });
+    try cwd.writeFile(.{
+        .sub_path = "Items.csv",
+        .data = try std.fmt.allocPrint(std.heap.page_allocator,
+            \\spriteNumber,{},,,,
+            \\{s}
+        , .{ written_items, item_csv.items }),
+    });
+    try cwd.writeFile(.{
+        .sub_path = "Items.ini",
+        .data = item_ini.items,
+    });
+    try cwd.writeFile(.{
+        .sub_path = "Items_Names.csv",
+        .data = item_names.items,
+    });
+    try cwd.writeFile(.{
+        .sub_path = "Items_Descriptions.csv",
+        .data = item_descriptions.items,
+    });
 }
 
 pub const Item = struct {
@@ -494,20 +463,20 @@ pub fn item(opt: Item) void {
 }
 
 fn item2(opt: Item) !void {
-    try item_names.print("{s},0,\"{s}\",\"{s}\",\"{s}\"\n", .{
+    try item_names.writer().print("{s},0,\"{s}\",\"{s}\",\"{s}\"\n", .{
         opt.id,
         opt.name.english,
         opt.name.japanese orelse opt.name.english,
         opt.name.chinese orelse opt.name.english,
     });
-    try item_descriptions.print("{s},0,\"{s}\",\"{s}\",\"{s}\"\n", .{
+    try item_descriptions.writer().print("{s},0,\"{s}\",\"{s}\",\"{s}\"\n", .{
         opt.id,
         opt.description.english,
         opt.description.japanese orelse opt.description.english,
         opt.description.chinese orelse opt.description.english,
     });
 
-    try item_ini.print("[{s}]\n", .{opt.id});
+    try item_ini.writer().print("[{s}]\n", .{opt.id});
     inline for (@typeInfo(@TypeOf(opt)).Struct.fields) |field| continue_blk: {
         if (comptime std.mem.eql(u8, field.name, "id"))
             break :continue_blk;
@@ -519,24 +488,33 @@ fn item2(opt: Item) !void {
             break :continue_blk;
 
         if (@field(opt, field.name)) |value| switch (@TypeOf(value)) {
-            bool => try item_ini.print("{s}=\"{d}\"\n", .{ field.name, @intFromBool(value) }),
-            i8, u8, u16, u32, f64 => try item_ini.print("{s}=\"{d}\"\n", .{ field.name, value }),
-            []const u8 => try item_ini.print("{s}=\"{s}\"\n", .{ field.name, value }),
-            Color => try item_ini.print("{s}=\"#{x:02}{x:02}{x:02}\"\n", .{
+            bool => try item_ini.writer().print("{s}=\"{d}\"\n", .{
+                field.name,
+                @intFromBool(value),
+            }),
+            i8, u8, u16, u32, f64 => try item_ini.writer().print("{s}=\"{d}\"\n", .{
+                field.name,
+                value,
+            }),
+            []const u8 => try item_ini.writer().print("{s}=\"{s}\"\n", .{
+                field.name,
+                value,
+            }),
+            Color => try item_ini.writer().print("{s}=\"#{x:02}{x:02}{x:02}\"\n", .{
                 field.name,
                 value.r,
                 value.g,
                 value.b,
             }),
-            else => try item_ini.print("{s}=\"{s}\"\n", .{ field.name, @tagName(value) }),
+            else => try item_ini.writer().print("{s}=\"{s}\"\n", .{
+                field.name,
+                @tagName(value),
+            }),
         };
     }
 
-    try item_csv.writeAll(
+    try item_csv.writer().print(
         \\,,,,,
-        \\
-    );
-    try item_csv.print(
         \\{s},{},,,,
         \\
     ,
@@ -844,7 +822,7 @@ pub fn trigger(trig: Trigger, opt: TriggerOpt) void {
 }
 
 fn trigger2(trig: Trigger, opt: TriggerOpt) !void {
-    try item_csv.print("trigger,{s},{s},,,\n", .{
+    try item_csv.writer().print("trigger,{s},{s},,,\n", .{
         @tagName(trig),
         if (opt[0]) |cond| @tagName(cond) else "",
     });
@@ -1082,7 +1060,7 @@ pub fn condition(cond: Condition, args: anytype) void {
 }
 
 fn condition2(cond: Condition, args: anytype) !void {
-    try item_csv.print("condition,{s}", .{@tagName(cond)});
+    try item_csv.writer().print("condition,{s}", .{@tagName(cond)});
     try writeArgs(args);
 }
 
@@ -1172,7 +1150,7 @@ pub fn quickPattern(pat: QuickPattern, args: anytype) void {
 }
 
 fn quickPattern2(pat: QuickPattern, args: anytype) !void {
-    try item_csv.print("quickPattern,{s}", .{@tagName(pat)});
+    try item_csv.writer().print("quickPattern,{s}", .{@tagName(pat)});
     try writeArgs(args);
 }
 
@@ -1343,7 +1321,7 @@ pub fn addPattern(pat: AddPattern, args: anytype) void {
 }
 
 fn addPattern2(pat: AddPattern, args: anytype) !void {
-    try item_csv.print("addPattern,{s}", .{@tagName(pat)});
+    try item_csv.writer().print("addPattern,{s}", .{@tagName(pat)});
     try writeArgs(args);
 }
 
@@ -1610,7 +1588,7 @@ pub fn target(targ: Target, args: anytype) void {
 }
 
 fn target2(targ: Target, args: anytype) !void {
-    try item_csv.print("target,{s}", .{@tagName(targ)});
+    try item_csv.writer().print("target,{s}", .{@tagName(targ)});
     try writeArgs(args);
 }
 
@@ -1718,18 +1696,18 @@ pub fn set(s: Set, args: anytype) void {
 }
 
 fn set2(s: Set, args: anytype) !void {
-    try item_csv.print("set,{s}", .{@tagName(s)});
+    try item_csv.writer().print("set,{s}", .{@tagName(s)});
     try writeArgs(args);
 }
 
 fn writeArgs(args: anytype) !void {
     inline for (args) |arg| switch (@TypeOf(arg)) {
-        comptime_int => try item_csv.print(",{}", .{arg}),
-        else => try item_csv.print(",\"{s}\"", .{arg}),
+        comptime_int => try item_csv.writer().print(",{}", .{arg}),
+        else => try item_csv.writer().print(",\"{s}\"", .{arg}),
     };
 
-    try item_csv.writeByteNTimes(',', 4 - args.len);
-    try item_csv.writeAll("\n");
+    try item_csv.writer().writeByteNTimes(',', 4 - args.len);
+    try item_csv.writer().writeAll("\n");
 }
 
 pub const Color = struct {
