@@ -111,32 +111,31 @@ pub fn main() !void {
     quickPattern(.tpat_hb_run_cooldown, .{});
 
     item(.{
-        .id = "it_garnet_rabbit",
-        .name = .{ .english = "Garnet Rabbit" },
-        .description = .{ .english = "Every [CD], become invulnerable for [VAR0_SECONDS]." },
+        .id = "it_transfigured_red_tanzaku",
+        .name = .{ .english = "Transfigured Red Tanzaku" },
+        .description = .{ .english = "You have RABBITLUCK, but your abilities deal [VAR0_PERCENT] less damage." },
 
         .type = .loot,
-        .treasureType = .yellow,
-        .weaponType = .loot,
-        .lootHbDispType = .cooldown,
-        .hbInput = .auto,
+        .treasureType = .all,
 
-        .showSqVar = true,
-        .greySqVar0 = true,
+        .weaponType = .loot,
+        .hbsType = "hbs_rabbitluck",
+        .hbsLength = std.time.ms_per_min,
 
         .cooldownType = .time,
-        .cooldown = 12 * std.time.ms_per_s,
+        .cooldown = std.time.ms_per_min,
 
-        .hbVar0 = 2000,
+        .hbVar0 = 0.99,
+        .primaryMult = -0.99,
+        .secondaryMult = -0.99,
+        .specialMult = -0.99,
+        .defensiveMult = -0.99,
     });
-
     trigger(.hotbarUsed, .{.tcond_hb_self});
     quickPattern(.tpat_hb_run_cooldown, .{});
-    addPattern(.ipat_apply_invuln, .{ "duration", 2 * std.time.ms_per_s });
-    quickPattern(.tpat_hb_flash_item, .{});
-
-    trigger(.autoStart, .{.tcond_hb_auto_pl});
-    quickPattern(.tpat_hb_run_cooldown, .{});
+    target(.ttrg_player_self, .{});
+    set(.tset_hbs_def, .{});
+    addPattern(.ipat_apply_hbs, .{});
 
     item(.{
         .id = "it_emerald_rabbit",
