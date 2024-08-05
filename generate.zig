@@ -133,28 +133,6 @@ pub fn main() !void {
     addPattern(.ipat_apply_hbs, .{});
 
     item(.{
-        .id = "it_emerald_rabbit",
-        .name = .{ .english = "Emerald Rabbit" },
-        .description = .{ .english = "Heals [VAR0] HP after each fight, up to [VAR1] times." },
-
-        .type = .loot,
-        .weaponType = .loot,
-
-        .hbVar0 = 1,
-        .hbVar1 = 5,
-    });
-
-    trigger(.onSquarePickup, .{.tcond_square_self});
-    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 5 });
-
-    trigger(.battleEnd2, .{});
-    condition(.tcond_hb_check_square_var_gte, .{ 0, 1 });
-    condition(.tcond_missing_health, .{1});
-    addPattern(.ipat_heal_light, .{ "amount", 1 });
-    quickPattern(.tpat_hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
-    quickPattern(.tpat_hb_flash_item, .{});
-
-    item(.{
         .id = "it_transfigured_sapphire_violin",
         .name = .{ .english = "Transfigured Sapphire Violin" },
         .description = .{ .english = "Every [CD] seconds, grant 3 random bufffs to all allies for 4 seconds. Breaks if you take damage once. Starts the battle on cooldown." },
@@ -180,6 +158,17 @@ pub fn main() !void {
 
     trigger(.autoStart, .{.tcond_hb_auto_pl});
     quickPattern(.tpat_hb_run_cooldown, .{});
+
+    item(.{
+        .id = "it_transfigured_topaz_charm",
+        .name = .{ .english = "Transfigured Topaz Charm" },
+        .description = .{ .english = "Gain 12 extra Gold when you take damage." },
+
+        .type = .loot,
+        .weaponType = .loot,
+    });
+    trigger(.onDamage, .{.tcond_hb_self});
+    quickPattern(.tpat_add_gold, .{});
 }
 
 const addPattern = mod.addPattern;
