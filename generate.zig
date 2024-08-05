@@ -2,7 +2,6 @@ pub fn main() !void {
     mod.start(6);
     defer mod.end();
 
-    const transfigured_raven_grimoire_dmg_mult = -0.99;
     item(.{
         .id = "it_transfigured_raven_grimoire",
         .name = .{ .english = "Transfigured Raven Grimoire" },
@@ -19,8 +18,8 @@ pub fn main() !void {
         .hbColor0 = rgb(66, 46, 105),
         .hbColor1 = rgb(225, 92, 239),
 
-        .hbVar0 = @abs(transfigured_raven_grimoire_dmg_mult),
-        .specialMult = transfigured_raven_grimoire_dmg_mult,
+        .hbVar0 = 0.99,
+        .specialMult = -0.99,
     });
     trigger(.onDamageDone, .{.tcond_dmg_self_special});
     target(.ttrg_player_damaged, .{});
@@ -39,7 +38,7 @@ pub fn main() !void {
     item(.{
         .id = "it_transfigured_aquamarine_bracelet",
         .name = .{ .english = "Transfigured Aquamarine Bracelet" },
-        .description = .{ .english = "At the start of each fight, gain a random buff for [VAR0_SECONDS] seconds." },
+        .description = .{ .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] seconds." },
 
         .type = .loot,
         .treasureType = .green,
@@ -50,6 +49,8 @@ pub fn main() !void {
     });
     trigger(.battleStart3, .{});
     target(.ttrg_player_self, .{});
+    set(.tset_hbs_randombuff, .{});
+    addPattern(.ipat_apply_hbs, .{});
     set(.tset_hbs_randombuff, .{});
     addPattern(.ipat_apply_hbs, .{});
 
@@ -83,17 +84,31 @@ pub fn main() !void {
     quickPattern(.tpat_hb_run_cooldown, .{});
 
     item(.{
-        .id = "it_ruby_rabbit",
-        .name = .{ .english = "Ruby Rabbit" },
-        .description = .{ .english = "Raises Primary damage by [VAR0_PERCENT]." },
+        .id = "it_transfigured_nightingale_gown",
+        .name = .{ .english = "Transfigured Nightingale Gown" },
+        .description = .{ .english = "Every [CD] seconds, OMEGACHARGE your Defensive." },
+        .chargeType = .omegacharge,
 
         .type = .loot,
-        .treasureType = .red,
+        .treasureType = .purple,
         .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
 
-        .hbVar0 = 0.2,
-        .primaryMult = 0.2,
+        .showSqVar = true,
+        .greySqVar0 = true,
+
+        .cooldownType = .time,
+        .cooldown = 15 * std.time.ms_per_s,
     });
+    trigger(.hotbarUsed, .{.tcond_hb_self});
+    quickPattern(.tpat_hb_run_cooldown, .{});
+    target(.ttrg_hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
+    condition(.tcond_hb_check_chargeable0, .{});
+    quickPattern(.tpat_hb_charge, .{3}); // TODO: Is 3 omegacharge?
+
+    trigger(.autoStart, .{.tcond_hb_auto_pl});
+    quickPattern(.tpat_hb_run_cooldown, .{});
 
     item(.{
         .id = "it_garnet_rabbit",
