@@ -1,5 +1,5 @@
 pub fn main() !void {
-    mod.start(6);
+    mod.start(7);
     defer mod.end();
 
     item(.{
@@ -8,7 +8,6 @@ pub fn main() !void {
         .description = .{ .english = "Your Special applies all curses but deals [VAR0_PERCENT] less damage." },
 
         .type = .loot,
-        .treasureType = .all,
 
         .weaponType = .loot,
         .delay = 250, // Delay after hit?
@@ -41,7 +40,6 @@ pub fn main() !void {
         .description = .{ .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] seconds." },
 
         .type = .loot,
-        .treasureType = .green,
         .weaponType = .loot,
 
         .hbVar0 = std.time.ms_per_min,
@@ -60,7 +58,6 @@ pub fn main() !void {
         .description = .{ .english = "Every [CD] seconds, resets Special cooldowns for you and all allies." },
 
         .type = .loot,
-        .treasureType = .purple,
         .weaponType = .loot,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
@@ -90,7 +87,6 @@ pub fn main() !void {
         .chargeType = .omegacharge,
 
         .type = .loot,
-        .treasureType = .purple,
         .weaponType = .loot,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
@@ -116,7 +112,6 @@ pub fn main() !void {
         .description = .{ .english = "You have RABBITLUCK, but your abilities deal [VAR0_PERCENT] less damage." },
 
         .type = .loot,
-        .treasureType = .all,
 
         .weaponType = .loot,
         .hbsType = "hbs_rabbitluck",
@@ -143,7 +138,6 @@ pub fn main() !void {
         .description = .{ .english = "Heals [VAR0] HP after each fight, up to [VAR1] times." },
 
         .type = .loot,
-        .treasureType = .green,
         .weaponType = .loot,
 
         .hbVar0 = 1,
@@ -159,6 +153,33 @@ pub fn main() !void {
     addPattern(.ipat_heal_light, .{ "amount", 1 });
     quickPattern(.tpat_hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
     quickPattern(.tpat_hb_flash_item, .{});
+
+    item(.{
+        .id = "it_transfigured_sapphire_violin",
+        .name = .{ .english = "Transfigured Sapphire Violin" },
+        .description = .{ .english = "Every [CD] seconds, grant 3 random bufffs to all allies for 4 seconds. Breaks if you take damage once. Starts the battle on cooldown." },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
+
+        .hbsLength = 4 * std.time.ms_per_s,
+
+        .cooldownType = .time,
+        .cooldown = 15 * std.time.ms_per_s,
+    });
+    trigger(.hotbarUsed, .{.tcond_hb_self});
+    target(.ttrg_players_ally, .{});
+    set(.tset_hbs_randombuff, .{});
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbs_randombuff, .{});
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbs_randombuff, .{});
+    addPattern(.ipat_apply_hbs, .{});
+
+    trigger(.autoStart, .{.tcond_hb_auto_pl});
+    quickPattern(.tpat_hb_run_cooldown, .{});
 }
 
 const addPattern = mod.addPattern;
