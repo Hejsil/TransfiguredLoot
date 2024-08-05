@@ -4,8 +4,12 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_raven_grimoire",
-        .name = .{ .english = "Transfigured Raven Grimoire" },
-        .description = .{ .english = "Your Special applies all curses but deals [VAR0_PERCENT] less damage." },
+        .name = .{
+            .english = "Transfigured Raven Grimoire",
+        },
+        .description = .{
+            .english = "Your Special applies all curses but deals [VAR0_PERCENT] less damage.",
+        },
 
         .type = .loot,
 
@@ -36,8 +40,13 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_aquamarine_bracelet",
-        .name = .{ .english = "Transfigured Aquamarine Bracelet" },
-        .description = .{ .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] seconds." },
+        .name = .{
+            .english = "Transfigured Aquamarine Bracelet",
+        },
+        .description = .{
+            .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] " ++
+                "seconds.",
+        },
 
         .type = .loot,
         .weaponType = .loot,
@@ -54,8 +63,12 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_lullaby_harb",
-        .name = .{ .english = "Transfigured Lullaby Harp" },
-        .description = .{ .english = "Every [CD] seconds, resets Special cooldowns for you and all allies." },
+        .name = .{
+            .english = "Transfigured Lullaby Harp",
+        },
+        .description = .{
+            .english = "Every [CD] seconds, resets Special cooldowns for you and all allies.",
+        },
 
         .type = .loot,
         .weaponType = .loot,
@@ -82,8 +95,12 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_nightingale_gown",
-        .name = .{ .english = "Transfigured Nightingale Gown" },
-        .description = .{ .english = "Every [CD] seconds, OMEGACHARGE your Defensive." },
+        .name = .{
+            .english = "Transfigured Nightingale Gown",
+        },
+        .description = .{
+            .english = "Every [CD] seconds, OMEGACHARGE your Defensive.",
+        },
         .chargeType = .omegacharge,
 
         .type = .loot,
@@ -108,8 +125,12 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_red_tanzaku",
-        .name = .{ .english = "Transfigured Red Tanzaku" },
-        .description = .{ .english = "You have RABBITLUCK, but your abilities deal [VAR0_PERCENT] less damage." },
+        .name = .{
+            .english = "Transfigured Red Tanzaku",
+        },
+        .description = .{
+            .english = "You have RABBITLUCK, but your abilities deal [VAR0_PERCENT] less damage.",
+        },
 
         .type = .loot,
 
@@ -134,8 +155,13 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_sapphire_violin",
-        .name = .{ .english = "Transfigured Sapphire Violin" },
-        .description = .{ .english = "Every [CD] seconds, grant 3 random bufffs to all allies for 4 seconds. Breaks if you take damage once. Starts the battle on cooldown." },
+        .name = .{
+            .english = "Transfigured Sapphire Violin",
+        },
+        .description = .{
+            .english = "Every [CD] seconds, grant 3 random bufffs to all allies for 4 seconds. " ++
+                "Breaks if you take damage once. Starts the battle on cooldown.",
+        },
 
         .type = .loot,
         .weaponType = .loot,
@@ -161,8 +187,12 @@ pub fn main() !void {
 
     item(.{
         .id = "it_transfigured_topaz_charm",
-        .name = .{ .english = "Transfigured Topaz Charm" },
-        .description = .{ .english = "Gain 12 extra Gold when you take damage." },
+        .name = .{
+            .english = "Transfigured Topaz Charm",
+        },
+        .description = .{
+            .english = "Gain 12 extra Gold when you take damage.",
+        },
 
         .type = .loot,
         .weaponType = .loot,
