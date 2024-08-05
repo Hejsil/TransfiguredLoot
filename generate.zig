@@ -45,23 +45,42 @@ pub fn main() !void {
         .treasureType = .green,
         .weaponType = .loot,
 
-        .hbsType = "hbs_curse_0",
         .hbVar0 = std.time.ms_per_min,
         .hbsLength = std.time.ms_per_min,
     });
+    trigger(.battleStart3, .{});
+    target(.ttrg_player_self, .{});
+    set(.tset_hbs_randombuff, .{});
+    addPattern(.ipat_apply_hbs, .{});
 
     item(.{
-        .id = "it_sapphire_rabbit",
-        .name = .{ .english = "Sapphire Rabbit" },
-        .description = .{ .english = "Raises Secondary damage by [VAR0_PERCENT]." },
+        .id = "it_transfigured_lullaby_harb",
+        .name = .{ .english = "Transfigured Lullaby Harp" },
+        .description = .{ .english = "Every [CD] seconds, resets Special cooldowns for you and all allies." },
 
         .type = .loot,
-        .treasureType = .blue,
+        .treasureType = .purple,
         .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
 
-        .hbVar0 = 0.2,
-        .secondaryMult = 0.2,
+        .showSqVar = true,
+        .greySqVar0 = true,
+
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
     });
+    trigger(.hotbarUsed, .{.tcond_hb_self});
+    quickPattern(.tpat_hb_run_cooldown, .{});
+    target(.ttrg_players_ally, .{});
+    target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    condition(.tcond_hb_check_resettable0, .{});
+    quickPattern(.tpat_hb_reset_cooldown, .{});
+    target(.ttrg_hotbarslot_self, .{});
+    quickPattern(.tpat_hb_flash_item, .{});
+
+    trigger(.autoStart, .{.tcond_hb_auto_pl});
+    quickPattern(.tpat_hb_run_cooldown, .{});
 
     item(.{
         .id = "it_ruby_rabbit",
