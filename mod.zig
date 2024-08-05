@@ -154,7 +154,7 @@ pub const Item = struct {
 
     /// The color of the item, written as a hex code.  Will determine things like the color of
     /// the item's description.
-    color: ?[]const u8 = null,
+    color: ?Color = null,
 
     /// Determines where this item can appear within the game.
     treasureType: ?enum {
