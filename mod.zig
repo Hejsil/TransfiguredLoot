@@ -775,9 +775,12 @@ pub const Trigger = enum {
     /// - Blackhole Charm, Quartz Shield, Lion Charm
     cdLootProc,
 
-    /// "Happens when a player starts attacking, or when a combat encounter starts.
-    /// You most likely want to use this instead of ""battleStart"".
-    /// ""battleStart"" won't activate outside of combat with an enemy, while this will work even if a player begins attacking a Training Dummy or Treasuresphere" Tidal Greatsword, Golem's Claymore, every item that starts on cooldown tbh Loot/Abilities that "start on cooldown" should have an autoStart trigger that runs the cooldown
+    /// Happens when a player starts attacking, or when a combat encounter starts.
+    /// You most likely want to use this instead of "battleStart".
+    /// "battleStart" won't activate outside of combat with an enemy, while this will work even if
+    /// a player begins attacking a Training Dummy or Treasuresphere" Tidal Greatsword, Golem's
+    /// Claymore, every item that starts on cooldown tbh Loot/Abilities that "start on cooldown"
+    /// should have an autoStart trigger that runs the cooldown
     autoStart,
 
     /// Happens 5 seconds after a player stops attacking, or when a combat encounter ends
