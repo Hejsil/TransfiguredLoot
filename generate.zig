@@ -2,32 +2,43 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: Redo
+    const transfigured_snakefang_dagger_str = 10;
     item(.{
-        .id = "it_transfigured_raven_grimoire",
+        .id = "it_transfigured_snakefang_dagger",
         .name = .{
-            .english = "Transfigured Raven Grimoire",
+            .english = "Transfigured Snakefang Dagger",
         },
         .description = .{
-            .english = "Your Special applies all curses but deals [VAR0_PERCENT] less damage.",
+            .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies 4 [POISON].",
         },
 
         .type = .loot,
 
         .weaponType = .loot,
-        .delay = 250, // Delay after hit?
-        .hbsType = "hbs_curse_0",
+        .delay = 250,
+        .hbsType = "hbs_poison_0",
+        .hbsStrMult = transfigured_snakefang_dagger_str,
         .hbsLength = 5 * std.time.ms_per_s,
 
-        .hbColor0 = rgb(66, 46, 105),
-        .hbColor1 = rgb(225, 92, 239),
+        .hbVar0 = 0.5,
+        .secondaryMult = -0.5,
 
-        .hbVar0 = 0.99,
-        .specialMult = -0.99,
+        .hbColor0 = rgb(0x0a, 0x51, 0x00),
+        .hbColor1 = rgb(0x17, 0x7f, 0x00),
     });
-    trigger(.onDamageDone, .{.tcond_dmg_self_special});
+    trigger(.onDamageDone, .{.tcond_dmg_self_secondary});
     target(.ttrg_player_damaged, .{});
-    set(.tset_hbs_def, .{});
+    set(.tset_hbskey, .{ "hbs_poison_0", "r_hbsLength" });
+    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_poison_1", "r_hbsLength" });
+    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_poison_2", "r_hbsLength" });
+    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_poison_3", "r_hbsLength" });
+    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
     addPattern(.ipat_apply_hbs, .{});
 
     // Flash item when debuff was applied
@@ -36,7 +47,7 @@ pub fn main() !void {
 
     // Set color of special to hbColor0/1
     trigger(.colorCalc, .{});
-    target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    target(.ttrg_hotbarslots_self_weapontype, .{2}); // 2 is secondary TODO: Have constant for that
     quickPattern(.tpat_hb_set_color_def, .{});
 
     item(.{
