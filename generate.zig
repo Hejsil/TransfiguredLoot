@@ -9,7 +9,7 @@ pub fn main() !void {
             .english = "Transfigured Snakefang Dagger",
         },
         .description = .{
-            .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies 4 [POISON].",
+            .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies 4 [POISON-0].",
         },
 
         .type = .loot,
@@ -162,16 +162,14 @@ pub fn main() !void {
     set(.tset_hbs_def, .{});
     addPattern(.ipat_apply_hbs, .{});
 
-    // TODO: The "Breaks if you take damage once" and "Starts the battle on cooldown" dont work
-    //       yet
     item(.{
         .id = "it_transfigured_sapphire_violin",
         .name = .{
             .english = "Transfigured Sapphire Violin",
         },
         .description = .{
-            .english = "Every [CD] seconds, grant 3 random bufffs to all allies for " ++
-                "[VAR0_SECONDS]. Breaks if you take damage once. Starts the battle on cooldown.",
+            .english = "Every [CD] seconds, grant 3 random buffs to all allies for " ++
+                "[HBSL]. Breaks if you take damage. Starts the battle on cooldown.",
         },
 
         .type = .loot,
@@ -179,12 +177,28 @@ pub fn main() !void {
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
-        .hbVar0 = 4 * std.time.ms_per_s,
         .hbsLength = 4 * std.time.ms_per_s,
 
         .cooldownType = .time,
         .cooldown = 15 * std.time.ms_per_s,
     });
+    // TODO: The "break the item" code hasn't been tested
+    trigger(.onSquarePickup, .{.tcond_square_self});
+    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 1 });
+
+    trigger(.onDamage, .{.tcond_pl_self});
+    condition(.tcond_hb_check_square_var_false, .{ 0, 0 });
+    quickPattern(.tpat_hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
+    quickPattern(.tpat_hb_reset_statchange, .{});
+    quickPattern(.tpat_hb_flash_item, .{
+        // "messageIndex", broke?
+    });
+    quickPattern(.tpat_hb_reset_cooldown, .{});
+
+    trigger(.strCalc0, .{});
+    condition(.tcond_hb_check_square_var_lte, .{ 0, 0 });
+    quickPattern(.tpat_hb_set_cooldown_permanent, .{ "time", 0 });
+
     trigger(.hotbarUsed, .{.tcond_hb_self});
     quickPattern(.tpat_hb_run_cooldown, .{});
     quickPattern(.tpat_hb_flash_item, .{});
@@ -214,6 +228,23 @@ pub fn main() !void {
     });
     trigger(.onDamage, .{.tcond_hb_self});
     quickPattern(.tpat_add_gold, .{});
+
+    // TODO: Not enough doc to implement
+    item(.{
+        .id = "it_transfigured_mountain_staff",
+        .name = .{
+            .english = "Transfigured Mountain Staff",
+        },
+        .description = .{
+            .english = "Your Special hits two additional times. Its GCD is increased by " ++
+                "1.4 seconds. Your movement speed is also moderately reduced.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+    });
+    trigger(.cdCalc2a, .{});
+    target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    quickPattern(.tpat_hb_add_gcd_permanent, .{ "amount", 1400 });
 }
 
 const addPattern = mod.addPattern;
