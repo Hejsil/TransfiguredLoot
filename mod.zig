@@ -1615,25 +1615,91 @@ fn target2(targ: Target, args: anytype) !void {
 }
 
 pub const Set = enum {
+    /// Currently non-functional; but I will make it work soon-ish
     tset_animation,
-    tset_colorpalette,
+
+    /// percent (a number between 0 - 1)
+    /// Sets the critical hit chance for attack patterns.
+    /// Note that this doesn't need to be set outside of special conditions (such as if you want
+    /// something to always crit, or never crit)
+    /// 0 : 0%
+    /// 1 : 100%
+    /// 0.5 : 50%
     tset_critratio,
+
+    /// flags (a binary representing a number of damage flags)
+    /// Sets damage flags for upcoming attack patterns. This is a binary number, so numbers can be
+    /// added together to have multiple flags.
+    ///
+    /// 1 : DMG_FLAG_HBS (Damage comes from a status effect)
+    /// 2 : DMG_FLAG_QUIET (This damage will not make the enemy sprite "shake", recommended for
+    ///                     Poison/Spark effects)
+    /// 4 : DMG_FLAG_INVULNPIERCE (This damage will go through invulnerability)
+    /// 8 : DMG_FLAG_DARKFLAME (Special flag for Spellsword Rabbit)
     tset_damage_flags,
+
+    /// param (any number or variable)
+    /// Will print out that number. Currently doesn't do anything, but I will add it to the mod
+    /// debug log in the next update.
     tset_debug,
+
+    /// Will set the appropriate strength for applying Burn. Must be used from an onDamageDone
+    /// trigger before Burn is applied.
     tset_hbs_burnhit,
+
+    /// Will set the appropriate strength/length for a Buff or Debuff, based on the item's stats.
+    /// Should be used before a buff or debuff is applied. The next Attack pattern will apply that
+    /// Buff/Debuff on hit.
     tset_hbs_def,
+
+    /// Similar to tset_hbs_def, but will pick a random buff (for effects like Usagi Kamen)
     tset_hbs_randombuff,
+
+    /// hbsKey (a string that is a key to a status effect)
+    /// Will set a custom debuff to be applied.
     tset_hbskey,
+
+    /// amount (an integer)
+    /// Will set a custom debuff strength.
     tset_hbsstr,
-    tset_hbsvars,
-    tset_print,
+
+    /// percent (a number between 0 - 1 )
+    /// Will set a custom hit variation. Usually used to set it to 0, in the case you want
+    /// something to hit for a consistent amount each time. (Like Fire Potion, or Burn)
     tset_randomness,
+
+    /// amount (an integer)
+    /// Will set a custom strength for Attack patterns.
     tset_strength,
+
+    /// Exculsively used for Defender's Ruby Secondary; sets a strength based off number of
+    /// charges the move has.
     tset_strength_chargecount,
+
+    /// Sets the default strength for the move, based on the hotbar slot. You should usually use
+    /// this before adding attack patterns that deal damage.
     tset_strength_def,
+
+    /// amount (an integer)
+    /// Will set a custom strength for Attack patterns; this will take into account bonus damage
+    /// that loot gets from items like Darkcloud Necklace
     tset_strength_loot,
+
+    /// amount (any number)
+    /// Will set a bonus multiplier for enemies that you backstab with Attack patterns.
+    /// 1   : 1x multiplier (normal damage)
+    /// 1.3 : 1.3x multiplier (Assassin Special)
+    /// 1.5 : 1.5x multiplier (Assassin Emerald Special)
     tset_strmult_backstab,
+
+    /// amount (any number)
+    /// Will add a percentage bonus for every debuff the target has on them. This used to be one
+    /// of Assassin's upgrades, but it sucked so I removed it.
     tset_strmult_debuffcount,
+
+    // You can also save user variables with certain Set Functions like tset_uservar. These
+    // variables should always start with "u_"
+
     tset_uservar,
     tset_uservar_aflplayer_pos,
     tset_uservar_battletime,
