@@ -67,16 +67,13 @@ pub fn main() !void {
             .english = "Transfigured Lullaby Harp",
         },
         .description = .{
-            .english = "Every [CD] seconds, resets Special cooldowns for you and all allies.",
+            .english = "Every [CD], resets Special cooldowns for you and all allies.",
         },
 
         .type = .loot,
         .weaponType = .loot,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
-
-        .showSqVar = true,
-        .greySqVar0 = true,
 
         .cooldownType = .time,
         .cooldown = 10 * std.time.ms_per_s,
