@@ -825,7 +825,11 @@ pub fn trigger(trig: Trigger, opt: TriggerOpt) void {
 }
 
 fn trigger2(trig: Trigger, opt: TriggerOpt) !void {
-    try item_csv.writer().print("trigger,{s},{s},,,\n", .{
+    try item_csv.writer().print(
+        \\,,,,,
+        \\trigger,{s},{s},,,
+        \\
+    , .{
         @tagName(trig),
         if (opt[0]) |cond| @tagName(cond) else "",
     });
