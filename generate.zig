@@ -361,6 +361,39 @@ pub fn main() !void {
     addPattern(.ipat_apply_hbs, .{});
     set(.tset_hbskey, .{ "hbs_curse_4", "r_hbsLength" });
     addPattern(.ipat_apply_hbs, .{});
+
+    const transfigured_sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
+    const transfigured_sleeping_greatbow_dmg = 1000;
+    item(.{
+        .id = "transfigured_sleeping_greatbow",
+        .name = .{
+            .english = "Transfigured Sleeping Greatbow",
+        },
+        .description = .{
+            .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
+                "targeted enemy that deals [VAR1] damage.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+        .hbInput = .auto,
+
+        .delay = 10 * std.time.ms_per_s,
+        .radius = 150,
+
+        .hbVar0 = transfigured_sleeping_greatbow_cooldown,
+        .cooldown = transfigured_sleeping_greatbow_cooldown,
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+
+        .hbVar1 = transfigured_sleeping_greatbow_dmg,
+        .strMult = transfigured_sleeping_greatbow_dmg,
+    });
+    trigger(.hotbarUsed, .{.tcond_hb_self});
+    quickPattern(.tpat_hb_run_cooldown, .{});
+    quickPattern(.tpat_hb_flash_item, .{});
+    target(.ttrg_players_opponent, .{});
+    set(.tset_strength_def, .{});
+    addPattern(.ipat_sleeping_greatbow, .{});
 }
 
 const addPattern = mod.addPattern;
