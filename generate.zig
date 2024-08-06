@@ -245,6 +245,32 @@ pub fn main() !void {
     trigger(.cdCalc2a, .{});
     target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
     quickPattern(.tpat_hb_add_gcd_permanent, .{ "amount", 1400 });
+
+    const transfigured_witchs_cloak_hbs_mult = 1.5;
+    const transfigured_witchs_cloak_ability_mult = -0.1;
+    item(.{
+        .id = "it_transfigured_witchs_cloak",
+        .name = .{
+            .english = "Transfigured Witch's Cloak",
+        },
+        .description = .{
+            .english = "Your abilities deals [VAR0_PERCENT] less damage. Debuffs you place " ++
+                "deal [VAR1_PERCENT] more damage. Slightly increases movement speed.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbVar0 = @abs(transfigured_witchs_cloak_ability_mult),
+        .primaryMult = transfigured_witchs_cloak_ability_mult,
+        .secondaryMult = transfigured_witchs_cloak_ability_mult,
+        .specialMult = transfigured_witchs_cloak_ability_mult,
+        .defensiveMult = transfigured_witchs_cloak_ability_mult,
+
+        .hbVar1 = @abs(transfigured_witchs_cloak_hbs_mult),
+        .hbsMult = transfigured_witchs_cloak_hbs_mult,
+
+        .charspeed = 1,
+    });
 }
 
 const addPattern = mod.addPattern;
