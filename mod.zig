@@ -1071,6 +1071,23 @@ fn condition2(cond: Condition, args: anytype) !void {
     try writeArgs(args);
 }
 
+/// "Quick" patterns are functions that are called immediately, in line. They include things like
+/// resetting cooldowns, running GCDs, changing variables, etc..
+///
+/// The way that Parameters work for both Quick and Attack patterns are slightly different than
+/// Set Functions and Trigger Functions. Rather than having a certain number of parameters that
+/// need to be specified, they instead have key-value pairs that are passed in, all of which are
+/// optional and have default values.
+///
+/// So for instance, if you wanted to use "tpat_hb_add_cooldown" to add 5 seconds to the cooldown
+/// of your targeted hotbarslots, tpat_hb_add_cooldown has one parameter called "amount".
+///
+/// quickPattern,tpat_hb_add_cooldown,amount,5000,
+///
+/// If you wanted to use "tpat_hb_square_set_var" to set the sqVar0 of an item to "5",
+/// tpat_hb_square_set_var has two parameters: "varIndex" and "amount".
+///
+/// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
 pub const QuickPattern = enum {
     tpat_add_gold,
     tpat_bookofcheats_set_random,
@@ -1161,6 +1178,23 @@ fn quickPattern2(pat: QuickPattern, args: anytype) !void {
     try writeArgs(args);
 }
 
+/// "Attack" patterns are things that are placed into the game, to take place over time. They
+/// include things like most attacks, healing, or other things that "happen" in the game.
+///
+/// The way that Parameters work for both Quick and Attack patterns are slightly different than
+/// Set Functions and Trigger Functions. Rather than having a certain number of parameters that
+/// need to be specified, they instead have key-value pairs that are passed in, all of which are
+/// optional and have default values.
+///
+/// So for instance, if you wanted to use "tpat_hb_add_cooldown" to add 5 seconds to the cooldown
+/// of your targeted hotbarslots, tpat_hb_add_cooldown has one parameter called "amount".
+///
+/// quickPattern,tpat_hb_add_cooldown,amount,5000,
+///
+/// If you wanted to use "tpat_hb_square_set_var" to set the sqVar0 of an item to "5",
+/// tpat_hb_square_set_var has two parameters: "varIndex" and "amount".
+///
+/// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
 pub const AddPattern = enum {
     hpat_bleed,
     hpat_burn,
