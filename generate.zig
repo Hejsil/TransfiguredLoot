@@ -271,6 +271,41 @@ pub fn main() !void {
 
         .charspeed = 1,
     });
+
+    const transfigured_opal_necklace_extra_cd = 15 * std.time.ms_per_s;
+    item(.{
+        .id = "it_transfigured_opal_necklace",
+        .name = .{
+            .english = "Transfigured Opal Necklace",
+        },
+        .description = .{
+            .english = "Your Defensive applies 5 curses to all enemies, but its cooldown is " ++
+                "increased by [VAR0_SECONDS].",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbsType = "hbs_curse_0",
+        .hbsLength = 5 * std.time.ms_per_s,
+
+        .hbVar0 = transfigured_opal_necklace_extra_cd,
+    });
+    trigger(.cdCalc2a, .{});
+    target(.ttrg_hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
+    quickPattern(.tpat_hb_add_cooldown_permanent, .{ "amount", transfigured_opal_necklace_extra_cd });
+
+    trigger(.hotbarUsed, .{.tcond_hb_defensive});
+    target(.ttrg_players_opponent, .{});
+    set(.tset_hbskey, .{ "hbs_curse_0", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_curse_1", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_curse_2", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_curse_3", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
+    set(.tset_hbskey, .{ "hbs_curse_4", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
 }
 
 const addPattern = mod.addPattern;
