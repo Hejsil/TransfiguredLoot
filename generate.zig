@@ -130,15 +130,14 @@ pub fn main() !void {
     trigger(.autoStart, .{.tcond_hb_auto_pl});
     quickPattern(.tpat_hb_run_cooldown, .{});
 
-    const transfigured_red_tanzaku_dmg = -0.99;
+    const transfigured_red_tanzaku_dmg = 7;
     item(.{
         .id = "it_transfigured_red_tanzaku",
         .name = .{
             .english = "Transfigured Red Tanzaku",
         },
         .description = .{
-            .english = "You have [LUCKY], but your abilities deal [VAR0_PERCENT] less " ++
-                "damage.",
+            .english = "Your abilities deal 7 damage. You have [LUCKY].",
         },
 
         .type = .loot,
@@ -152,17 +151,20 @@ pub fn main() !void {
         .cooldownType = .time,
         .cooldown = std.time.ms_per_min,
 
-        .hbVar0 = @abs(transfigured_red_tanzaku_dmg),
-        .primaryMult = transfigured_red_tanzaku_dmg,
-        .secondaryMult = transfigured_red_tanzaku_dmg,
-        .specialMult = transfigured_red_tanzaku_dmg,
-        .defensiveMult = transfigured_red_tanzaku_dmg,
+        .hbVar0 = transfigured_red_tanzaku_dmg,
     });
     trigger(.hotbarUsed, .{.tcond_hb_self});
     quickPattern(.tpat_hb_run_cooldown, .{});
     target(.ttrg_player_self, .{});
     set(.tset_hbs_def, .{});
     addPattern(.ipat_apply_hbs, .{});
+
+    trigger(.strCalc1a, .{});
+    target(.ttrg_hotbarslots_current_players, .{});
+    target(.ttrg_hotbarslots_prune_base_has_str, .{});
+    target(.ttrg_hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.loot" });
+    target(.ttrg_hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.potion" });
+    quickPattern(.tpat_hb_set_strength, .{ "amount", transfigured_red_tanzaku_dmg });
 
     item(.{
         .id = "it_transfigured_sapphire_violin",
