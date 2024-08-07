@@ -278,6 +278,29 @@ pub fn main() !void {
     quickPattern(.tpat_hb_flash_item, .{});
     quickPattern(.tpat_add_gold, .{1});
 
+    // TODO: No tests
+    const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
+    const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
+    item(.{
+        .id = "it_transfigured_timemage_cap",
+        .name = .{
+            .english = "Transfigured Timemage Cap",
+        },
+        .description = .{
+            .english = "Cooldowns less than or equal to [VAR0_SECONDS] become [VAR1_SECONDS].",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbVar0 = transfigured_timemage_cap_cd_check,
+        .hbVar1 = transfigured_timemage_cap_cd_set,
+    });
+    trigger(.cdCalc5, .{});
+    target(.ttrg_hotbarslots_current_players, .{});
+    target(.ttrg_hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
+    target(.ttrg_hotbarslots_prune, .{ "ths#_cooldown", "<=", transfigured_timemage_cap_cd_check });
+    quickPattern(.tpat_hb_set_cooldown_permanent, .{ "time", transfigured_timemage_cap_cd_set });
+
     const transfigured_witchs_cloak_hbs_mult = 1.5;
     const transfigured_witchs_cloak_ability_mult = -0.1;
     item(.{
