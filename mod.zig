@@ -1089,30 +1089,191 @@ fn condition2(cond: Condition, args: anytype) !void {
 ///
 /// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
 pub const QuickPattern = enum {
-    tpat_add_gold,
-    tpat_bookofcheats_set_random,
+    /// Does nothing
+    tpat_nothing,
+
+    /// Adds the current list of targets to your debug log.
     tpat_debug_targets,
+
+    /// "To be used during strCalc.
+    /// Adds to the player's hitbox size.
+    /// The default hitbox size is 5 pixels."
+    tpat_player_add_radius,
+
+    /// "stat" (a stat to add, see "STAT" in enum reference)
+    /// "amount" (a number to add)
+    /// Adds some stat amount to targetted players.
+    tpat_player_add_stat,
+
+    /// Randomizes your levitation ring color (used on the Paintbrush trinket)
+    tpat_player_change_color_rand,
+
+    /// Resets the distance ticker for targeted players to 0 (used for the "Tranquility" status
+    /// effect to accurately measure 1 rabbitleap)
+    tpat_player_distcounter_reset,
+
+    /// "length" (time in milliseconds)
+    /// Locks targeted players in place for the specified length of time.
+    /// NOTE: This function currently doesn't work correctly online.
+    tpat_player_movelock,
+
+    /// "mult" (move speed multiplier)
+    /// "length" (time in milliseconds)
+    /// Slows/speeds up players for a brief amount of time.
+    /// NOTE: This function currently doesn't work correctly online.
+    tpat_player_movemult,
+
+    /// "length" (time in milliseconds)
+    /// Runs GCD for specified amount of time
+    tpat_player_run_gcd,
+    /// "amount" (size in pixels)
+    /// Sets hitbox size for players; meant to be used in strCalc
+    tpat_player_set_radius,
+
+    /// "stat" (a stat to add, see "STAT" in enum reference)
+    /// "amount" (a number to add)
+    /// Sets a base stat for targeted players to an amount.
+    tpat_player_set_stat,
+
+    /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
+    /// from damage. Use this trigger for loot/ability effects.
+    tpat_player_shield,
+
+    /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
+    /// from damage. Use this trigger for status effects (like Stoneskin).
+    tpat_player_shield_hbs,
+
+    /// "amount" (a number)
+    /// Add to the targeted player's hidden trinket counter.
+    tpat_player_trinket_counter_add,
+
+    /// "amount" (a number)
+    /// "minAm" (a number, default 0)
+    /// "maxAm" (a number, default 1000)
+    /// Add to the targeted player's hidden trinket counter, but keep the counter inbetween the
+    /// specified values.
+    tpat_player_trinket_counter_add_bounded,
+
+    /// "minAm" (a number, default 0)
+    /// "maxAm" (a number, default 5)
+    /// Randomize the hidden trinket counter between the two values
+    tpat_player_trinket_counter_randomize,
+
+    /// "amount" (a number)
+    /// Set the target player's hidden trinket counter
+    tpat_player_trinket_counter_set,
+
+    /// Make the targeted player's trinket flash/sparkle/animate
+    tpat_player_trinket_flash,
+
+    /// "amount" (a number, in milliseconds)
+    /// Adds (or subtracts, if amount is negative) an amount from targeted hotbarslot's
+    /// current cooldown.
     tpat_hb_add_cooldown,
+
+    /// "amount" (a number, in milliseconds)
+    /// To be used during cdCalc, adds (or subtracts) an amount from targeted hotbarslot's
+    /// overall cooldown
     tpat_hb_add_cooldown_permanent,
+
+    /// "flag" (a binary)
+    /// Adds a hitbox flag to a hotbarslot (see hbFlags on the "Stats" sheet)
     tpat_hb_add_flag,
-    tpat_hb_add_gcd_permanent,
+
+    /// "amount" (a number, in milliseconds)
+    /// "minimum" (a number, in milliseconds, default 200)
+    /// Adds (or subtracts) an amount from targeted hotbarslot's overall GCD.
     tpat_hb_add_hitbox_var,
+
+    /// "varIndex" (an integer from 0-3)
+    /// "amount" (a number)
+    /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
     tpat_hb_add_statchange,
+
+    /// "stat" (a stat enum, see STAT in enum reference)
+    /// "amount" (a number)
+    /// "calc" (a statChangerCalc enum, see STATCHANGERCALC in enum reference, defaults to
+    ///         statChangerCalc.addFlag)
+    /// DO NOT USE IN STRCALC, as you will get an infinite loop of changing the stat, then
+    /// recalculating it over and over.
+    /// Adds a stat to the item, which will boost the stat on the player who's holding it
+    tpat_hb_add_gcd_permanent,
+
+    /// "stat" (a stat enum, see STAT in enum reference)
+    /// "amount" (a number)
+    /// "calc" (a statChangerCalc enum, see STATCHANGERCALC in enum reference, defaults to
+    ///         statChangerCalc.addFlag)
+    /// To be used in strCalc. Adds a stat to the item, which will boost the stat on the player
+    /// who's holding it. Added stats are permanent, unless reset with
+    /// tpat_hb_reset_statchange_norefresh
     tpat_hb_add_statchange_norefresh,
+
+    /// "amount" (a number)
+    /// To be used in strCalc1a,strCalc1b,strCalc1c, to add a percentage increase in damage to
+    /// targeted hotbarslots.
     tpat_hb_add_strcalcbuff,
+
+    /// "amount" (a number)
+    /// To be used in strCalc2, adds an amount to strength of targeted hotbarslots
     tpat_hb_add_strength,
+
+    /// "amount" (a number)
+    /// To be used in strCalc2, adds an amount to hbsStrength of targeted hotbarslots
     tpat_hb_add_strength_hbs,
+
+    /// Must be called whenever a loot item with a cooldown that isn't directly "used" (aka isn't
+    /// an auto hotbarslot) is activated.
     tpat_hb_cdloot_proc,
+
+    /// "num" (a number of charges to give)
+    /// "maxNum" (maximum number of charges that can be held at once, default 1)
+    /// "type" (chargeTypes enum designating the type of Charge)
+    /// Gives specified hotbarslots Charge.
     tpat_hb_charge,
+
+    /// Clears specified hotbarslots of all Charge.
     tpat_hb_charge_clear,
+
+    /// "messageIndex" (hbFlashMessage enum, default "none")
+    /// "quiet" (a boolean that, if true, will prevent the flash from making sound. Defaults to false)
+    /// Flashes an image of the targeted hotbarslots overhead. I recommend you use this when your
+    /// item "activates". If this item procs extremely frequently, I'd recommend setting it to
+    /// "quiet" so it isn't annoying to players who pick it up
     tpat_hb_flash_item,
+
+    /// "messageIndex" (hbFlashMessage enum, default "none")
+    /// "quiet" (a boolean that, if true, will prevent the flash from making sound. Defaults to false)
+    /// Flashes an image of the RECEIVER hotbarslot overhead. Useful if you want to target a bunch
+    /// of other hotbarslots to perform other calculations before calling the flash.
     tpat_hb_flash_item_source,
+
+    /// Must be called whenever an ability, for whatever reason, is activated via some effect
+    /// other than activating itself (such as Heavyblade's Garnet Primary, or Druids Sapphire
+    /// Primary) so they can proc other items
     tpat_hb_hbuse_proc,
+
+    /// "varIndex" (an integer between 0-3 indicating the variable number)
+    /// "amount" (a number)
+    /// Adds an amount to the hotbar's hidden variables
     tpat_hb_inc_var,
+
+    /// "amount" (an integer)
+    /// Adds an amount to the uses of stock, stockGCD, and stockOnly hotbarslots that are targeted.
     tpat_hb_increase_stock,
+
+    /// Must be called whenever an item "succeeds" in a random proc chance, in order to activate
+    /// other items. This will indicate that all hotbars targeted have proc'd."
     tpat_hb_lucky_proc,
+
+    /// Alternatively, this function can be called. This will indicate that the RECEIVER hotbar
+    /// has proc'd.
     tpat_hb_lucky_proc_source,
+
+    /// "mult" (a number)
+    /// "minimum" (a time in milliseconds, default 200)
+    /// To be used during cdCalc, multiplies GCDs of targeted hotbarslots by a certain amount.
     tpat_hb_mult_gcd_permanent,
+
     tpat_hb_mult_hitbox_var,
     tpat_hb_mult_length_hbs,
     tpat_hb_mult_strength,
@@ -1150,23 +1311,8 @@ pub const QuickPattern = enum {
     tpat_hbs_destroy,
     tpat_hbs_mult_str,
     tpat_hbs_reset_statchange,
-    tpat_nothing,
-    tpat_player_add_radius,
-    tpat_player_add_stat,
-    tpat_player_change_color_rand,
-    tpat_player_distcounter_reset,
-    tpat_player_movelock,
-    tpat_player_movemult,
-    tpat_player_run_gcd,
-    tpat_player_set_radius,
-    tpat_player_set_stat,
-    tpat_player_shield,
-    tpat_player_shield_hbs,
-    tpat_player_trinket_counter_add,
-    tpat_player_trinket_counter_add_bounded,
-    tpat_player_trinket_counter_randomize,
-    tpat_player_trinket_counter_set,
-    tpat_player_trinket_flash,
+    tpat_add_gold,
+    tpat_bookofcheats_set_random,
 };
 
 pub fn quickPattern(pat: QuickPattern, args: anytype) void {
