@@ -246,6 +246,22 @@ pub fn main() !void {
     target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
     quickPattern(.tpat_hb_add_gcd_permanent, .{ "amount", 1400 });
 
+    // TODO: No tests
+    item(.{
+        .id = "it_transfigured_glittering_trumpet",
+        .name = .{
+            .english = "Transfigured Glittering Trumpet",
+        },
+        .description = .{
+            .english = "Your large hits are lucky.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+    });
+    trigger(.onDamageDone, .{.tcond_dmg_islarge});
+    quickPattern(.tpat_hb_flash_item, .{});
+    quickPattern(.tpat_hb_lucky_proc, .{});
+
     const transfigured_witchs_cloak_hbs_mult = 1.5;
     const transfigured_witchs_cloak_ability_mult = -0.1;
     item(.{
