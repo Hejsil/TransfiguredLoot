@@ -213,7 +213,7 @@ pub fn main() !void {
     trigger(.autoStart, .{.tcond_hb_auto_pl});
     quickPattern(.tpat_hb_run_cooldown, .{});
 
-    // TODO: Untested
+    // TODO: No test
     item(.{
         .id = "it_transfigured_topaz_charm",
         .name = .{
@@ -246,7 +246,6 @@ pub fn main() !void {
     target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
     quickPattern(.tpat_hb_add_gcd_permanent, .{ "amount", 1400 });
 
-    // TODO: No tests
     item(.{
         .id = "it_transfigured_glittering_trumpet",
         .name = .{
@@ -278,7 +277,6 @@ pub fn main() !void {
     quickPattern(.tpat_hb_flash_item, .{});
     quickPattern(.tpat_add_gold, .{1});
 
-    // TODO: No tests
     const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
     const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
     item(.{
