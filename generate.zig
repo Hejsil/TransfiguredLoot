@@ -252,7 +252,7 @@ pub fn main() !void {
             .english = "Transfigured Glittering Trumpet",
         },
         .description = .{
-            .english = "Your large hits are lucky.",
+            .english = "Your large hits counts as a % chance success.",
         },
         .type = .loot,
         .weaponType = .loot,
