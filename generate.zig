@@ -396,6 +396,72 @@ pub fn main() !void {
     target(.ttrg_players_opponent, .{});
     set(.tset_strength_def, .{});
     addPattern(.ipat_sleeping_greatbow, .{});
+
+    item(.{
+        .id = "it_transfigured_ornamental_bell",
+        .name = .{
+            .english = "Transfigured Ornamental Bell",
+        },
+        .description = .{
+            .english = "Every 3 seconds, grants [SMITE-0] to all allies for 1 seconds.#" ++
+                "Every 5 seconds, grants [ELEGY-0] to all allies for 1 seconds.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
+
+        .cooldownType = .time,
+        .cooldown = 1 * std.time.ms_per_s,
+
+        .showSqVar = true,
+        .hbsLength = 1 * std.time.ms_per_s,
+    });
+    trigger(.autoStart, .{.tcond_square_self});
+    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+
+    trigger(.hotbarUsed, .{.tcond_hb_self});
+    quickPattern(.tpat_hb_run_cooldown, .{});
+    quickPattern(.tpat_hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+
+    trigger(.hotbarUsed2, .{.tcond_hb_self});
+    condition(.tcond_hb_check_square_var_false, .{ 0, 1 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 2 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 4 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 5 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 7 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 8 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 10 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 11 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 13 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 14 });
+    quickPattern(.tpat_hb_flash_item, .{});
+    target(.ttrg_players_ally, .{});
+    set(.tset_hbskey, .{ "hbs_smite_0", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
+
+    trigger(.hotbarUsed2, .{.tcond_hb_self});
+    condition(.tcond_hb_check_square_var_false, .{ 0, 1 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 2 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 3 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 4 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 6 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 7 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 8 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 9 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 11 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 12 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 13 });
+    condition(.tcond_hb_check_square_var_false, .{ 0, 14 });
+    quickPattern(.tpat_hb_flash_item, .{});
+    target(.ttrg_players_ally, .{});
+    set(.tset_hbskey, .{ "hbs_elegy_0", "r_hbsLength" });
+    addPattern(.ipat_apply_hbs, .{});
+
+    trigger(.hotbarUsed3, .{.tcond_hb_self});
+    condition(.tcond_hb_check_square_var, .{ 0, 15 });
+    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
 }
 
 const addPattern = mod.addPattern;
