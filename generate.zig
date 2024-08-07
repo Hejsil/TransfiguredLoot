@@ -262,6 +262,22 @@ pub fn main() !void {
     quickPattern(.tpat_hb_flash_item, .{});
     quickPattern(.tpat_hb_lucky_proc, .{});
 
+    // TODO: No tests
+    item(.{
+        .id = "it_transfigured_silver_coin",
+        .name = .{
+            .english = "Transfigured Silver Coin",
+        },
+        .description = .{
+            .english = "When you level up, gain 1 gold.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+    });
+    trigger(.onLevelup, .{});
+    quickPattern(.tpat_hb_flash_item, .{});
+    quickPattern(.tpat_add_gold, .{1});
+
     const transfigured_witchs_cloak_hbs_mult = 1.5;
     const transfigured_witchs_cloak_ability_mult = -0.1;
     item(.{
