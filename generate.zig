@@ -462,6 +462,37 @@ pub fn main() !void {
     trigger(.hotbarUsed3, .{.tcond_hb_self});
     condition(.tcond_hb_check_square_var, .{ 0, 15 });
     quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+
+    const transfigured_meteor_staff_cd = 10 * std.time.ms_per_s;
+    item(.{
+        .id = "transfigured_meteor_staff",
+        .name = .{
+            .english = "Transfigured Meteor Staff",
+        },
+        .description = .{
+            .english = "Every [VAR0_SECONDS], your next large hit inflict [BURN-3].",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+
+        .cooldownType = .time,
+        .cooldown = transfigured_meteor_staff_cd,
+        .hbVar0 = transfigured_meteor_staff_cd,
+
+        .delay = 250,
+        .hbsType = "hbs_burn_3",
+        .hbsLength = 5 * std.time.ms_per_s,
+    });
+    trigger(.onDamageDone, .{.tcond_dmg_islarge});
+    condition(.tcond_hb_available, .{});
+    quickPattern(.tpat_hb_run_cooldown, .{});
+    target(.ttrg_player_damaged, .{});
+    set(.tset_hbs_def, .{});
+    set(.tset_hbs_burnhit, .{});
+    addPattern(.ipat_apply_hbs, .{});
+
+    trigger(.hbsCreated, .{.tcond_hbs_thishbcast});
+    quickPattern(.tpat_hb_flash_item, .{});
 }
 
 const addPattern = mod.addPattern;
