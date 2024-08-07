@@ -130,13 +130,15 @@ pub fn main() !void {
     trigger(.autoStart, .{.tcond_hb_auto_pl});
     quickPattern(.tpat_hb_run_cooldown, .{});
 
+    const transfigured_red_tanzaku_dmg = -0.99;
     item(.{
         .id = "it_transfigured_red_tanzaku",
         .name = .{
             .english = "Transfigured Red Tanzaku",
         },
         .description = .{
-            .english = "You have RABBITLUCK, but your abilities deal [VAR0_PERCENT] less damage.",
+            .english = "You have [LUCKY], but your abilities deal [VAR0_PERCENT] less " ++
+                "damage.",
         },
 
         .type = .loot,
@@ -144,17 +146,17 @@ pub fn main() !void {
         .hbInput = .auto,
 
         .weaponType = .loot,
-        .hbsType = "hbs_rabbit_luck", // TODO: What is the hbs for RABBITLUCK
+        .hbsType = "hbs_lucky",
         .hbsLength = std.time.ms_per_min,
 
         .cooldownType = .time,
         .cooldown = std.time.ms_per_min,
 
-        .hbVar0 = 0.99,
-        .primaryMult = -0.99,
-        .secondaryMult = -0.99,
-        .specialMult = -0.99,
-        .defensiveMult = -0.99,
+        .hbVar0 = @abs(transfigured_red_tanzaku_dmg),
+        .primaryMult = transfigured_red_tanzaku_dmg,
+        .secondaryMult = transfigured_red_tanzaku_dmg,
+        .specialMult = transfigured_red_tanzaku_dmg,
+        .defensiveMult = transfigured_red_tanzaku_dmg,
     });
     trigger(.hotbarUsed, .{.tcond_hb_self});
     quickPattern(.tpat_hb_run_cooldown, .{});
