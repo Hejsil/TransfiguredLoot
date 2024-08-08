@@ -463,18 +463,23 @@ pub fn item(opt: Item) void {
 }
 
 fn item2(opt: Item) !void {
-    try item_names.writer().print("{s},0,\"{s}\",\"{s}\",\"{s}\"\n", .{
-        opt.id,
-        opt.name.english,
-        opt.name.japanese orelse opt.name.english,
-        opt.name.chinese orelse opt.name.english,
-    });
-    try item_descriptions.writer().print("{s},0,\"{s}\",\"{s}\",\"{s}\"\n", .{
-        opt.id,
-        opt.description.english,
-        opt.description.japanese orelse opt.description.english,
-        opt.description.chinese orelse opt.description.english,
-    });
+    const item_names_w = item_names.writer();
+    try item_names_w.print("{s},0,", .{opt.id});
+    try writeCsvString(item_names_w, opt.name.english);
+    try item_names_w.writeAll(",");
+    try writeCsvString(item_names_w, opt.name.japanese orelse opt.name.english);
+    try item_names_w.writeAll(",");
+    try writeCsvString(item_names_w, opt.name.chinese orelse opt.name.english);
+    try item_names_w.writeAll("\n");
+
+    const item_desc_w = item_descriptions.writer();
+    try item_desc_w.print("{s},0,", .{opt.id});
+    try writeCsvString(item_desc_w, opt.description.english);
+    try item_desc_w.writeAll(",");
+    try writeCsvString(item_desc_w, opt.description.japanese orelse opt.description.english);
+    try item_desc_w.writeAll(",");
+    try writeCsvString(item_desc_w, opt.description.chinese orelse opt.description.english);
+    try item_desc_w.writeAll("\n");
 
     try item_ini.writer().print("[{s}]\n", .{opt.id});
     inline for (@typeInfo(@TypeOf(opt)).Struct.fields) |field| continue_blk: {
@@ -1129,7 +1134,7 @@ pub fn cond(condition: Condition, args: anytype) void {
 
 fn cond2(condition: Condition, args: anytype) !void {
     try item_csv.writer().print("condition,{s}", .{condition.toCsvString()});
-    try writeArgs(args);
+    try writeArgs(item_csv.writer(), args);
 }
 
 /// "Quick" patterns are functions that are called immediately, in line. They include things like
@@ -1584,7 +1589,7 @@ pub fn qpat(pat: QuickPattern, args: anytype) void {
 
 fn qpat2(pat: QuickPattern, args: anytype) !void {
     try item_csv.writer().print("quickPattern,{s}", .{pat.toCsvString()});
-    try writeArgs(args);
+    try writeArgs(item_csv.writer(), args);
 }
 
 /// "Attack" patterns are things that are placed into the game, to take place over time. They
@@ -1936,7 +1941,7 @@ pub fn apat(pat: AddPattern, args: anytype) void {
 
 fn apat2(pat: AddPattern, args: anytype) !void {
     try item_csv.writer().print("addPattern,{s}", .{pat.toCsvString()});
-    try writeArgs(args);
+    try writeArgs(item_csv.writer(), args);
 }
 
 /// When a trigger is running, it has 3 lists of "targets".
@@ -2256,7 +2261,7 @@ pub fn ttrg(targ: Target, args: anytype) void {
 
 fn ttrg2(targ: Target, args: anytype) !void {
     try item_csv.writer().print("target,{s}", .{targ.toCsvString()});
-    try writeArgs(args);
+    try writeArgs(item_csv.writer(), args);
 }
 
 pub const Set = enum {
@@ -2396,17 +2401,29 @@ pub fn tset(s: Set, args: anytype) void {
 
 fn tset2(s: Set, args: anytype) !void {
     try item_csv.writer().print("set,{s}", .{s.toCsvString()});
-    try writeArgs(args);
+    try writeArgs(item_csv.writer(), args);
 }
 
-fn writeArgs(args: anytype) !void {
+fn writeArgs(writer: anytype, args: anytype) !void {
     inline for (args) |arg| switch (@TypeOf(arg)) {
-        comptime_int => try item_csv.writer().print(",{}", .{arg}),
-        else => try item_csv.writer().print(",\"{s}\"", .{arg}),
+        comptime_int => try writer.print(",{}", .{arg}),
+        else => {
+            try writer.writeAll(",");
+            try writeCsvString(writer, arg);
+        },
     };
 
-    try item_csv.writer().writeByteNTimes(',', 4 - args.len);
-    try item_csv.writer().writeAll("\n");
+    try writer.writeByteNTimes(',', 4 - args.len);
+    try writer.writeAll("\n");
+}
+
+fn writeCsvString(writer: anytype, string: []const u8) !void {
+    if (std.mem.count(u8, string, "\"") != 0)
+        unreachable; // TODO
+    if (std.mem.count(u8, string, ",") != 0)
+        return writer.print("\"{s}\"", .{string});
+
+    return writer.writeAll(string);
 }
 
 pub const Color = struct {
