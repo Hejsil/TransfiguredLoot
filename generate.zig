@@ -3,13 +3,15 @@ pub fn main() !void {
     defer mod.end();
 
     const transfigured_snakefang_dagger_str = 10;
+    const transfigured_snakefang_dagger_num_poisons = 4;
     item(.{
         .id = "it_transfigured_snakefang_dagger",
         .name = .{
             .english = "Transfigured Snakefang Dagger",
         },
         .description = .{
-            .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies 4 [POISON-0].",
+            .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies " ++
+                "[VAR1] [POISON-0].",
         },
 
         .type = .loot,
@@ -25,21 +27,16 @@ pub fn main() !void {
 
         .hbColor0 = rgb(0x0a, 0x51, 0x00),
         .hbColor1 = rgb(0x17, 0x7f, 0x00),
+
+        .hbVar1 = transfigured_snakefang_dagger_num_poisons,
     });
     trig(.onDamageDone, .{.dmg_self_secondary});
     ttrg(.player_damaged, .{});
-    tset(.hbskey, .{ "hbs_poison_0", "r_hbsLength" });
-    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_poison_1", "r_hbsLength" });
-    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_poison_2", "r_hbsLength" });
-    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_poison_3", "r_hbsLength" });
-    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
-    apat(.apply_hbs, .{});
+    inline for (0..transfigured_snakefang_dagger_num_poisons) |i| {
+        tset(.hbskey, .{ std.fmt.comptimePrint("hbs_poison_{}", .{i}), "r_hbsLength" });
+        tset(.hbsstr, .{transfigured_snakefang_dagger_str});
+        apat(.apply_hbs, .{});
+    }
 
     // Flash item when debuff was applied
     trig(.hbsCreated, .{.hbs_thishbcast});
@@ -166,13 +163,14 @@ pub fn main() !void {
     ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.potion" });
     qpat(.hb_set_strength, .{ "amount", transfigured_red_tanzaku_dmg });
 
+    const transfigured_sapphire_violin_num_buffs = 3;
     item(.{
         .id = "it_transfigured_sapphire_violin",
         .name = .{
             .english = "Transfigured Sapphire Violin",
         },
         .description = .{
-            .english = "Every [CD] seconds, grant 3 random buffs to all allies for " ++
+            .english = "Every [CD] seconds, grant [VAR0] random buffs to all allies for " ++
                 "[HBSL]. Breaks if you take damage. Starts the battle on cooldown.",
         },
 
@@ -185,6 +183,8 @@ pub fn main() !void {
 
         .cooldownType = .time,
         .cooldown = 15 * std.time.ms_per_s,
+
+        .hbVar0 = transfigured_sapphire_violin_num_buffs,
     });
     // TODO: The "break the item" code hasn't been tested
     trig(.onSquarePickup, .{.square_self});
@@ -207,12 +207,10 @@ pub fn main() !void {
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_flash_item, .{});
     ttrg(.players_ally, .{});
-    tset(.hbs_randombuff, .{});
-    apat(.apply_hbs, .{});
-    tset(.hbs_randombuff, .{});
-    apat(.apply_hbs, .{});
-    tset(.hbs_randombuff, .{});
-    apat(.apply_hbs, .{});
+    for (0..transfigured_sapphire_violin_num_buffs) |_| {
+        tset(.hbs_randombuff, .{});
+        apat(.apply_hbs, .{});
+    }
 
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -330,14 +328,15 @@ pub fn main() !void {
     });
 
     const transfigured_opal_necklace_extra_cd = 15 * std.time.ms_per_s;
+    const transfigured_opal_necklace_num_curses = 5;
     item(.{
         .id = "it_transfigured_opal_necklace",
         .name = .{
             .english = "Transfigured Opal Necklace",
         },
         .description = .{
-            .english = "Your Defensive applies 5 curses to all enemies, but its cooldown is " ++
-                "increased by [VAR0_SECONDS].",
+            .english = "Your Defensive applies [VAR0] curses to all enemies, but its cooldown is " ++
+                "increased by [VAR1_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
@@ -345,7 +344,8 @@ pub fn main() !void {
         .hbsType = "hbs_curse_0",
         .hbsLength = 5 * std.time.ms_per_s,
 
-        .hbVar0 = transfigured_opal_necklace_extra_cd,
+        .hbVar0 = transfigured_opal_necklace_num_curses,
+        .hbVar1 = transfigured_opal_necklace_extra_cd,
     });
     trig(.cdCalc2a, .{});
     ttrg(.hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
@@ -353,16 +353,10 @@ pub fn main() !void {
 
     trig(.hotbarUsed, .{.hb_defensive});
     ttrg(.players_opponent, .{});
-    tset(.hbskey, .{ "hbs_curse_0", "r_hbsLength" });
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_curse_1", "r_hbsLength" });
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_curse_2", "r_hbsLength" });
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_curse_3", "r_hbsLength" });
-    apat(.apply_hbs, .{});
-    tset(.hbskey, .{ "hbs_curse_4", "r_hbsLength" });
-    apat(.apply_hbs, .{});
+    inline for (0..transfigured_opal_necklace_num_curses) |i| {
+        tset(.hbskey, .{ std.fmt.comptimePrint("hbs_curse_{}", .{i}), "r_hbsLength" });
+        apat(.apply_hbs, .{});
+    }
 
     const transfigured_sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
     const transfigured_sleeping_greatbow_dmg = 1000;
@@ -426,34 +420,18 @@ pub fn main() !void {
     qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
 
     trig(.hotbarUsed2, .{.hb_self});
-    cond(.hb_check_square_var_false, .{ 0, 1 });
-    cond(.hb_check_square_var_false, .{ 0, 2 });
-    cond(.hb_check_square_var_false, .{ 0, 4 });
-    cond(.hb_check_square_var_false, .{ 0, 5 });
-    cond(.hb_check_square_var_false, .{ 0, 7 });
-    cond(.hb_check_square_var_false, .{ 0, 8 });
-    cond(.hb_check_square_var_false, .{ 0, 10 });
-    cond(.hb_check_square_var_false, .{ 0, 11 });
-    cond(.hb_check_square_var_false, .{ 0, 13 });
-    cond(.hb_check_square_var_false, .{ 0, 14 });
+    for (0..16) |i| {
+        if (i % 3 != 0) cond(.hb_check_square_var_false, .{ 0, i });
+    }
     qpat(.hb_flash_item, .{});
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ "hbs_smite_0", "r_hbsLength" });
     apat(.apply_hbs, .{});
 
     trig(.hotbarUsed2, .{.hb_self});
-    cond(.hb_check_square_var_false, .{ 0, 1 });
-    cond(.hb_check_square_var_false, .{ 0, 2 });
-    cond(.hb_check_square_var_false, .{ 0, 3 });
-    cond(.hb_check_square_var_false, .{ 0, 4 });
-    cond(.hb_check_square_var_false, .{ 0, 6 });
-    cond(.hb_check_square_var_false, .{ 0, 7 });
-    cond(.hb_check_square_var_false, .{ 0, 8 });
-    cond(.hb_check_square_var_false, .{ 0, 9 });
-    cond(.hb_check_square_var_false, .{ 0, 11 });
-    cond(.hb_check_square_var_false, .{ 0, 12 });
-    cond(.hb_check_square_var_false, .{ 0, 13 });
-    cond(.hb_check_square_var_false, .{ 0, 14 });
+    for (0..16) |i| {
+        if (i % 5 != 0) cond(.hb_check_square_var_false, .{ 0, i });
+    }
     qpat(.hb_flash_item, .{});
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ "hbs_elegy_0", "r_hbsLength" });

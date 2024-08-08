@@ -2406,7 +2406,7 @@ fn tset2(s: Set, args: anytype) !void {
 
 fn writeArgs(writer: anytype, args: anytype) !void {
     inline for (args) |arg| switch (@TypeOf(arg)) {
-        comptime_int => try writer.print(",{}", .{arg}),
+        usize, comptime_int => try writer.print(",{}", .{arg}),
         else => {
             try writer.writeAll(",");
             try writeCsvString(writer, arg);
