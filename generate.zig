@@ -26,29 +26,29 @@ pub fn main() !void {
         .hbColor0 = rgb(0x0a, 0x51, 0x00),
         .hbColor1 = rgb(0x17, 0x7f, 0x00),
     });
-    trigger(.onDamageDone, .{.tcond_dmg_self_secondary});
-    target(.ttrg_player_damaged, .{});
-    set(.tset_hbskey, .{ "hbs_poison_0", "r_hbsLength" });
-    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_poison_1", "r_hbsLength" });
-    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_poison_2", "r_hbsLength" });
-    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_poison_3", "r_hbsLength" });
-    set(.tset_hbsstr, .{transfigured_snakefang_dagger_str});
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.onDamageDone, .{.dmg_self_secondary});
+    ttrg(.player_damaged, .{});
+    tset(.hbskey, .{ "hbs_poison_0", "r_hbsLength" });
+    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_poison_1", "r_hbsLength" });
+    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_poison_2", "r_hbsLength" });
+    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_poison_3", "r_hbsLength" });
+    tset(.hbsstr, .{transfigured_snakefang_dagger_str});
+    apat(.apply_hbs, .{});
 
     // Flash item when debuff was applied
-    trigger(.hbsCreated, .{.tcond_hbs_thishbcast});
-    quickPattern(.tpat_hb_flash_item, .{});
+    trig(.hbsCreated, .{.hbs_thishbcast});
+    qpat(.hb_flash_item, .{});
 
     // Set color of special to hbColor0/1
-    trigger(.colorCalc, .{});
-    target(.ttrg_hotbarslots_self_weapontype, .{2}); // 2 is secondary TODO: Have constant for that
-    quickPattern(.tpat_hb_set_color_def, .{});
+    trig(.colorCalc, .{});
+    ttrg(.hotbarslots_self_weapontype, .{2}); // 2 is secondary TODO: Have constant for that
+    qpat(.hb_set_color_def, .{});
 
     item(.{
         .id = "it_transfigured_aquamarine_bracelet",
@@ -66,12 +66,12 @@ pub fn main() !void {
         .hbVar0 = std.time.ms_per_min,
         .hbsLength = std.time.ms_per_min,
     });
-    trigger(.battleStart3, .{});
-    target(.ttrg_player_self, .{});
-    set(.tset_hbs_randombuff, .{});
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbs_randombuff, .{});
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.battleStart3, .{});
+    ttrg(.player_self, .{});
+    tset(.hbs_randombuff, .{});
+    apat(.apply_hbs, .{});
+    tset(.hbs_randombuff, .{});
+    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_lullaby_harb",
@@ -90,14 +90,14 @@ pub fn main() !void {
         .cooldownType = .time,
         .cooldown = 10 * std.time.ms_per_s,
     });
-    trigger(.hotbarUsed, .{.tcond_hb_self});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    target(.ttrg_players_ally, .{});
-    target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
-    condition(.tcond_hb_check_resettable0, .{});
-    quickPattern(.tpat_hb_reset_cooldown, .{});
-    target(.ttrg_hotbarslot_self, .{});
-    quickPattern(.tpat_hb_flash_item, .{});
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.players_ally, .{});
+    ttrg(.hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    cond(.hb_check_resettable0, .{});
+    qpat(.hb_reset_cooldown, .{});
+    ttrg(.hotbarslot_self, .{});
+    qpat(.hb_flash_item, .{});
 
     // TODO: Untested
     item(.{
@@ -121,14 +121,14 @@ pub fn main() !void {
         .cooldownType = .time,
         .cooldown = 15 * std.time.ms_per_s,
     });
-    trigger(.hotbarUsed, .{.tcond_hb_self});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    target(.ttrg_hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
-    condition(.tcond_hb_check_chargeable0, .{});
-    quickPattern(.tpat_hb_charge, .{3}); // TODO: Is 3 omegacharge?
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
+    cond(.hb_check_chargeable0, .{});
+    qpat(.hb_charge, .{3}); // TODO: Is 3 omegacharge?
 
-    trigger(.autoStart, .{.tcond_hb_auto_pl});
-    quickPattern(.tpat_hb_run_cooldown, .{});
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
 
     const transfigured_red_tanzaku_dmg = 7;
     item(.{
@@ -153,18 +153,18 @@ pub fn main() !void {
 
         .hbVar0 = transfigured_red_tanzaku_dmg,
     });
-    trigger(.hotbarUsed, .{.tcond_hb_self});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    target(.ttrg_player_self, .{});
-    set(.tset_hbs_def, .{});
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.player_self, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
-    trigger(.strCalc1a, .{});
-    target(.ttrg_hotbarslots_current_players, .{});
-    target(.ttrg_hotbarslots_prune_base_has_str, .{});
-    target(.ttrg_hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.loot" });
-    target(.ttrg_hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.potion" });
-    quickPattern(.tpat_hb_set_strength, .{ "amount", transfigured_red_tanzaku_dmg });
+    trig(.strCalc1a, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune_base_has_str, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.loot" });
+    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.potion" });
+    qpat(.hb_set_strength, .{ "amount", transfigured_red_tanzaku_dmg });
 
     item(.{
         .id = "it_transfigured_sapphire_violin",
@@ -187,35 +187,35 @@ pub fn main() !void {
         .cooldown = 15 * std.time.ms_per_s,
     });
     // TODO: The "break the item" code hasn't been tested
-    trigger(.onSquarePickup, .{.tcond_square_self});
-    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 1 });
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 1 });
 
-    trigger(.onDamage, .{.tcond_pl_self});
-    condition(.tcond_hb_check_square_var_false, .{ 0, 0 });
-    quickPattern(.tpat_hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
-    quickPattern(.tpat_hb_reset_statchange, .{});
-    quickPattern(.tpat_hb_flash_item, .{
+    trig(.onDamage, .{.pl_self});
+    cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
+    qpat(.hb_reset_statchange, .{});
+    qpat(.hb_flash_item, .{
         // "messageIndex", broke?
     });
-    quickPattern(.tpat_hb_reset_cooldown, .{});
+    qpat(.hb_reset_cooldown, .{});
 
-    trigger(.strCalc0, .{});
-    condition(.tcond_hb_check_square_var_lte, .{ 0, 0 });
-    quickPattern(.tpat_hb_set_cooldown_permanent, .{ "time", 0 });
+    trig(.strCalc0, .{});
+    cond(.hb_check_square_var_lte, .{ 0, 0 });
+    qpat(.hb_set_cooldown_permanent, .{ "time", 0 });
 
-    trigger(.hotbarUsed, .{.tcond_hb_self});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    quickPattern(.tpat_hb_flash_item, .{});
-    target(.ttrg_players_ally, .{});
-    set(.tset_hbs_randombuff, .{});
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbs_randombuff, .{});
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbs_randombuff, .{});
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_ally, .{});
+    tset(.hbs_randombuff, .{});
+    apat(.apply_hbs, .{});
+    tset(.hbs_randombuff, .{});
+    apat(.apply_hbs, .{});
+    tset(.hbs_randombuff, .{});
+    apat(.apply_hbs, .{});
 
-    trigger(.autoStart, .{.tcond_hb_auto_pl});
-    quickPattern(.tpat_hb_run_cooldown, .{});
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
 
     // TODO: No test
     item(.{
@@ -230,8 +230,8 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
     });
-    trigger(.onDamage, .{.tcond_hb_self});
-    // quickPattern(.tpat_add_gold, .{});
+    trig(.onDamage, .{.hb_self});
+    // quickPattern(.add_gold, .{});
 
     // TODO: Not enough doc to implement
     item(.{
@@ -246,9 +246,9 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
     });
-    trigger(.cdCalc2a, .{});
-    target(.ttrg_hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
-    quickPattern(.tpat_hb_add_gcd_permanent, .{ "amount", 1400 });
+    trig(.cdCalc2a, .{});
+    ttrg(.hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    qpat(.hb_add_gcd_permanent, .{ "amount", 1400 });
 
     item(.{
         .id = "it_transfigured_glittering_trumpet",
@@ -261,9 +261,9 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
     });
-    trigger(.onDamageDone, .{.tcond_dmg_islarge});
-    quickPattern(.tpat_hb_flash_item, .{});
-    quickPattern(.tpat_hb_lucky_proc, .{});
+    trig(.onDamageDone, .{.dmg_islarge});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_lucky_proc, .{});
 
     // TODO: No tests
     item(.{
@@ -277,9 +277,9 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
     });
-    trigger(.onLevelup, .{});
-    quickPattern(.tpat_hb_flash_item, .{});
-    // quickPattern(.tpat_add_gold, .{1});
+    trig(.onLevelup, .{});
+    qpat(.hb_flash_item, .{});
+    // quickPattern(.add_gold, .{1});
 
     const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
     const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
@@ -297,11 +297,11 @@ pub fn main() !void {
         .hbVar0 = transfigured_timemage_cap_cd_check,
         .hbVar1 = transfigured_timemage_cap_cd_set,
     });
-    trigger(.cdCalc5, .{});
-    target(.ttrg_hotbarslots_current_players, .{});
-    target(.ttrg_hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
-    target(.ttrg_hotbarslots_prune, .{ "ths#_cooldown", "<=", transfigured_timemage_cap_cd_check });
-    quickPattern(.tpat_hb_set_cooldown_permanent, .{ "time", transfigured_timemage_cap_cd_set });
+    trig(.cdCalc5, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
+    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", "<=", transfigured_timemage_cap_cd_check });
+    qpat(.hb_set_cooldown_permanent, .{ "time", transfigured_timemage_cap_cd_set });
 
     const transfigured_witchs_cloak_hbs_mult = 1.5;
     const transfigured_witchs_cloak_ability_mult = -0.1;
@@ -347,22 +347,22 @@ pub fn main() !void {
 
         .hbVar0 = transfigured_opal_necklace_extra_cd,
     });
-    trigger(.cdCalc2a, .{});
-    target(.ttrg_hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
-    quickPattern(.tpat_hb_add_cooldown_permanent, .{ "amount", transfigured_opal_necklace_extra_cd });
+    trig(.cdCalc2a, .{});
+    ttrg(.hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
+    qpat(.hb_add_cooldown_permanent, .{ "amount", transfigured_opal_necklace_extra_cd });
 
-    trigger(.hotbarUsed, .{.tcond_hb_defensive});
-    target(.ttrg_players_opponent, .{});
-    set(.tset_hbskey, .{ "hbs_curse_0", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_curse_1", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_curse_2", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_curse_3", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
-    set(.tset_hbskey, .{ "hbs_curse_4", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.hotbarUsed, .{.hb_defensive});
+    ttrg(.players_opponent, .{});
+    tset(.hbskey, .{ "hbs_curse_0", "r_hbsLength" });
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_curse_1", "r_hbsLength" });
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_curse_2", "r_hbsLength" });
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_curse_3", "r_hbsLength" });
+    apat(.apply_hbs, .{});
+    tset(.hbskey, .{ "hbs_curse_4", "r_hbsLength" });
+    apat(.apply_hbs, .{});
 
     const transfigured_sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
     const transfigured_sleeping_greatbow_dmg = 1000;
@@ -373,7 +373,7 @@ pub fn main() !void {
         },
         .description = .{
             .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
-                "targeted enemy that deals [VAR1] damage.",
+                "ttrged enemy that deals [VAR1] damage.",
         },
         .type = .loot,
         .weaponType = .loot,
@@ -390,12 +390,12 @@ pub fn main() !void {
         .hbVar1 = transfigured_sleeping_greatbow_dmg,
         .strMult = transfigured_sleeping_greatbow_dmg,
     });
-    trigger(.hotbarUsed, .{.tcond_hb_self});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    quickPattern(.tpat_hb_flash_item, .{});
-    target(.ttrg_players_opponent, .{});
-    set(.tset_strength_def, .{});
-    addPattern(.ipat_sleeping_greatbow, .{});
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.sleeping_greatbow, .{});
 
     item(.{
         .id = "it_transfigured_ornamental_bell",
@@ -418,50 +418,50 @@ pub fn main() !void {
         .showSqVar = true,
         .hbsLength = 1 * std.time.ms_per_s,
     });
-    trigger(.autoStart, .{.tcond_square_self});
-    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    trig(.autoStart, .{.square_self});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
 
-    trigger(.hotbarUsed, .{.tcond_hb_self});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    quickPattern(.tpat_hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
 
-    trigger(.hotbarUsed2, .{.tcond_hb_self});
-    condition(.tcond_hb_check_square_var_false, .{ 0, 1 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 2 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 4 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 5 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 7 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 8 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 10 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 11 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 13 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 14 });
-    quickPattern(.tpat_hb_flash_item, .{});
-    target(.ttrg_players_ally, .{});
-    set(.tset_hbskey, .{ "hbs_smite_0", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.hotbarUsed2, .{.hb_self});
+    cond(.hb_check_square_var_false, .{ 0, 1 });
+    cond(.hb_check_square_var_false, .{ 0, 2 });
+    cond(.hb_check_square_var_false, .{ 0, 4 });
+    cond(.hb_check_square_var_false, .{ 0, 5 });
+    cond(.hb_check_square_var_false, .{ 0, 7 });
+    cond(.hb_check_square_var_false, .{ 0, 8 });
+    cond(.hb_check_square_var_false, .{ 0, 10 });
+    cond(.hb_check_square_var_false, .{ 0, 11 });
+    cond(.hb_check_square_var_false, .{ 0, 13 });
+    cond(.hb_check_square_var_false, .{ 0, 14 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_ally, .{});
+    tset(.hbskey, .{ "hbs_smite_0", "r_hbsLength" });
+    apat(.apply_hbs, .{});
 
-    trigger(.hotbarUsed2, .{.tcond_hb_self});
-    condition(.tcond_hb_check_square_var_false, .{ 0, 1 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 2 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 3 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 4 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 6 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 7 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 8 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 9 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 11 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 12 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 13 });
-    condition(.tcond_hb_check_square_var_false, .{ 0, 14 });
-    quickPattern(.tpat_hb_flash_item, .{});
-    target(.ttrg_players_ally, .{});
-    set(.tset_hbskey, .{ "hbs_elegy_0", "r_hbsLength" });
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.hotbarUsed2, .{.hb_self});
+    cond(.hb_check_square_var_false, .{ 0, 1 });
+    cond(.hb_check_square_var_false, .{ 0, 2 });
+    cond(.hb_check_square_var_false, .{ 0, 3 });
+    cond(.hb_check_square_var_false, .{ 0, 4 });
+    cond(.hb_check_square_var_false, .{ 0, 6 });
+    cond(.hb_check_square_var_false, .{ 0, 7 });
+    cond(.hb_check_square_var_false, .{ 0, 8 });
+    cond(.hb_check_square_var_false, .{ 0, 9 });
+    cond(.hb_check_square_var_false, .{ 0, 11 });
+    cond(.hb_check_square_var_false, .{ 0, 12 });
+    cond(.hb_check_square_var_false, .{ 0, 13 });
+    cond(.hb_check_square_var_false, .{ 0, 14 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_ally, .{});
+    tset(.hbskey, .{ "hbs_elegy_0", "r_hbsLength" });
+    apat(.apply_hbs, .{});
 
-    trigger(.hotbarUsed3, .{.tcond_hb_self});
-    condition(.tcond_hb_check_square_var, .{ 0, 15 });
-    quickPattern(.tpat_hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    trig(.hotbarUsed3, .{.hb_self});
+    cond(.hb_check_square_var, .{ 0, 15 });
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
 
     const transfigured_meteor_staff_cd = 10 * std.time.ms_per_s;
     item(.{
@@ -483,26 +483,26 @@ pub fn main() !void {
         .hbsType = "hbs_burn_3",
         .hbsLength = 5 * std.time.ms_per_s,
     });
-    trigger(.onDamageDone, .{.tcond_dmg_islarge});
-    condition(.tcond_hb_available, .{});
-    quickPattern(.tpat_hb_run_cooldown, .{});
-    target(.ttrg_player_damaged, .{});
-    set(.tset_hbs_def, .{});
-    set(.tset_hbs_burnhit, .{});
-    addPattern(.ipat_apply_hbs, .{});
+    trig(.onDamageDone, .{.dmg_islarge});
+    cond(.hb_available, .{});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.player_damaged, .{});
+    tset(.hbs_def, .{});
+    tset(.hbs_burnhit, .{});
+    apat(.apply_hbs, .{});
 
-    trigger(.hbsCreated, .{.tcond_hbs_thishbcast});
-    quickPattern(.tpat_hb_flash_item, .{});
+    trig(.hbsCreated, .{.hbs_thishbcast});
+    qpat(.hb_flash_item, .{});
 }
 
-const addPattern = mod.addPattern;
-const condition = mod.condition;
+const apat = mod.apat;
+const cond = mod.cond;
 const item = mod.item;
-const quickPattern = mod.quickPattern;
+const qpat = mod.qpat;
 const rgb = mod.rgb;
-const set = mod.set;
-const target = mod.target;
-const trigger = mod.trigger;
+const tset = mod.tset;
+const ttrg = mod.ttrg;
+const trig = mod.trig;
 
 const mod = @import("mod.zig");
 const std = @import("std");
