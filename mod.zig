@@ -1600,21 +1600,260 @@ fn qpat2(pat: QuickPattern, args: anytype) !void {
 /// need to be specified, they instead have key-value pairs that are passed in, all of which are
 /// optional and have default values.
 ///
-/// So for instance, if you wanted to use "tpat_hb_add_cooldown" to add 5 seconds to the cooldown
-/// of your targeted hotbarslots, tpat_hb_add_cooldown has one parameter called "amount".
+/// So for instance, if you wanted to use "ipat_winged_cap" to double your character's speed for 3
+/// seconds, ipat_winged_cap has three parameters: "delay", "speedMult", "speedDuration". However,
+/// we don't need to fill in "delay" if we don't intend to change it from its default value.
 ///
-/// quickPattern,tpat_hb_add_cooldown,amount,5000,
+/// attackPattern,ipat_winged_cap,speedMult,2,speedDuration,3000
 ///
-/// If you wanted to use "tpat_hb_square_set_var" to set the sqVar0 of an item to "5",
-/// tpat_hb_square_set_var has two parameters: "varIndex" and "amount".
+/// NOTE: Many attack patterns work with the following variables. These are filled in
+/// automatically with parameters from the player/item, unless they are overwritten. You *can*
+/// overwrite them, but I generally wouldn't unless you have a good reason to; as it might mess up
+/// certain item combinations (like items that increase the radius of other items not working if
+/// you change "radius")
 ///
-/// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
+/// "x"      : The player's x position
+/// "y"      : The player's y position
+/// "delay"  : The "delay" variable from the item's hitbox variables. Inserts a small delay before
+///            the pattern takes effect.
+/// "radius" : The "radius" variable from the item's hitbox variables. Dictates the size of the
+///            attack; effects might vary from attack to attack.
+/// "number" : The "hitNumber" variable from the item's hitbox variables. Changes how many times
+///            the attack hits its target.  Doesn't work with all attacks, but works with many of
+///            them.
+/// "frot"   : Set to 0 if the player is facing right, 180 if the player is facing left. Used to
+///            aim some attacks.
+/// "fdir"   : Set to 1 if the player is facing right, -1 if the player is facing left. Used to
+///            aim some attacks.
+/// "rot"    : The angle from the player to its target reticule.
+/// "fx"     : The x position of the player's target reticule
+/// "fy"     : The y position of the player's target reticule
 pub const AttackPattern = enum {
+    /// "hbsColorInd" (an integer representing a color palette)
+    /// These are all status patterns for poison ticks and the like; the hbsColorInd refers to the
+    /// status's ID. It's probably best not to use these functions unless I add in custom status
+    /// effects in later.
     bleed,
+
+    /// "hbsColorInd" (an integer representing a color palette)
     burn,
+
+    /// "hbsColorInd" (an integer representing a color palette)
     curse,
+
+    /// "hbsColorInd" (an integer representing a color palette)
     poison,
+
+    /// "hbsColorInd" (an integer representing a color palette)
     spark,
+
+    /// "hbsColorInd" (an integer representing a color palette)
+    /// Makes a flash effect based off the color of the status ID passed in.
+    starflash_hbs,
+
+    /// "hbsColorInd" (an integer representing a color palette)
+    /// Erases an area, with color based off the status ID passed in.
+    erase_area_hbs,
+
+    /// "displayNumber" (an integer representing a hotbar slot; default 10)
+    /// Applies a status effect set by tset_hbs or tset_hbs_def. If displayNumber is 0-3, then
+    /// this will add a timer to the corresponding character's hotbarslot matching the debuff
+    /// timer. (Similar to Sniper's Secondary)
+    apply_hbs,
+
+    /// "displayNumber" (an integer representing a hotbar slot; default 10)
+    /// Applies a status effect set by tset_hbs or tset_hbs_def. (with a bit of a "flash" to
+    /// indicate something happened). If displayNumber is 0-3, then this will add a timer to the
+    /// corresponding character's hotbarslot matching the debuff timer. (Similar to Sniper's
+    /// Secondary)
+    apply_hbs_starflash,
+
+    /// "duration" (length of invuln, in milliseconds, default 3000)
+    /// Applies invulnerability for the specified duration.
+    apply_invuln,
+
+    /// "number"
+    /// "radius"
+    /// Hits with a slashing effect at your targeted position
+    black_wakizashi,
+
+    /// "number"
+    /// Hits all enemies the specified number of times.
+    blackhole_charm,
+
+    /// "amount" (an integer representing an xp amount, default 0)
+    /// At the end of the battle, will give targeted players an additional "amount" exp. Calling
+    /// this creates a new, hidden object in the background, and creating a whole lot of them in
+    /// one fight might lag the game. I'd recommend NOT calling this frequently during a single
+    /// battle, but rather designing items in a way that this only needs to be called once per
+    /// battle or so. For instance, if you wanted an item that gave 1 xp per time the character
+    /// hit an enemy, instead of calling this every time you hit an enemy, increment a hidden
+    /// variable each time you hit the enemy, then call this once at the end of battle to give
+    /// the character their xp.
+    blue_rose,
+
+    /// "amount" (an integer representing an amount to heal, default 0)
+    /// Heals targeted players for the specified amount.
+    butterly_ocarina,
+
+    /// Deals damage to all enemies, with the "spark" effect.
+    crown_of_storms,
+
+    /// Deals damage to targeted enemies. Despite the name, this is actually the Crescentmoon
+    /// Dagger effect.
+    curse_talon,
+
+    /// "x"
+    /// "y"
+    /// "radius"
+    /// Deals damage in a radius around the player.
+    darkmagic_blade,
+
+    /// "x"
+    /// "y"
+    /// "radius"
+    /// Erases area in a radius around the player. Despite the name, Divine Mirror doesn't do this
+    /// anymore; but items like Peridot Rapier do.
+    divine_mirror,
+
+    /// "fx"
+    /// "fy"
+    /// "radius"
+    /// "rot"
+    /// Fires a bow shot at your target. NOTE: "radius" here is actually the maximum distance the
+    /// bow shot will travel, not the size of the impact.
+    floral_bow,
+
+    /// "time" (length of invuln, in milliseconds, default 0)
+    /// Makes the player using the item invulnerable for the specified length of time.
+    garnet_staff,
+
+    /// "amount" (an integer representing an amount to heal, default 0)
+    /// Heals targeted players for the specified amount.
+    heal_light,
+
+    /// "amount" (an integer representing an amount to heal, default 0)
+    /// Heals targeted players for the specified amount. This should be used after a max health
+    /// increase, as it includes extra network calls to make sure there's no desyncs (where, for
+    /// instance, on one client a player heals before their max HP increases, resulting in
+    /// mismatched health)
+    heal_light_maxhealth,
+
+    /// "amount" (an integer representing an amount to heal, default 0)
+    /// "duration" (length of invuln, in milliseconds, default 3000)
+    /// Heals targeted players AND grants them invulnerability for a specified length of time.
+    heal_revive,
+
+    /// "fx"
+    /// "fy"
+    /// "radius"
+    /// Hydrous blob attack
+    hydrous_blob,
+
+    /// "type" (a weaponType enum, see enum reference)
+    /// "duration" (length of cooldown in milliseconds, default 500)
+    /// Runs specified cooldown. If type is "weaponType.none", it will run ALL your ability
+    /// cooldowns for the specified amount."
+    lullaby_harp,
+
+    /// "number"
+    /// Hits the targeted enemies the specified number of times.
+    melee_hit,
+
+    /// ""fx"
+    /// "fy"
+    /// "radius"
+    /// Deals damage once in a radius around your target (old Meteor Staff effect)
+    meteor_staff,
+
+    /// "x"
+    /// "y"
+    /// "radius"
+    /// Deals damage once in a radius around the player
+    moon_pendant,
+
+    /// "fx"
+    /// "fy"
+    /// "radius"
+    /// Deals damage once in a radius around your target (old Nightstar Grimoire effect)
+    nightstar_grimoire,
+
+    /// Applies status effect to all targeted players. Generally used for party buffs (uses
+    /// "important" network alpha setting)
+    ornamental_bell,
+
+    /// "amount" (an integer representing an amount to heal, default 0)
+    /// Heals targeted players for the specified amount. Looks fancier than other heal effects.
+    phoenix_charm,
+
+    /// Applies status effect to all targeted players. Generally used for applying debuffs (uses
+    /// player's network alpha setting)
+    poisonfrog_charm,
+
+    /// "fx"
+    /// "fy"
+    /// "radius"
+    /// Deals damage once in a radius around your target
+    potion_throw,
+
+    /// "x"
+    /// "y"
+    /// Deals damage to all enemies. Effect is centered on specified position.
+    pulse_damage,
+
+    /// "number"
+    /// Deals damage to targeted enemies, with a "backstab" effect on the text.
+    reaper_cloak,
+
+    /// Makes a big flashy effect, that does nothing by itself.
+    red_tanzaku,
+
+    /// Deals damage once in a radius around your target. Projectile is similar to Wizard's
+    /// Primary
+    sleeping_greatbow,
+
+    /// Deals damage to all enemies. Visual effect is very subtle, lending itself well to items
+    /// that trigger frequently.
+    sparrow_feather,
+
+    /// Makes a flash effect around the player, indicating something has happened.
+    starflash,
+
+    /// Makes a dark-red flash effect around the player, indicating something has happened.
+    starflash_failure,
+
+    /// Adds a status effect and speeds up player's movement.
+    thiefs_coat,
+
+    /// Adds a status effect to targeted players. Recommended for buffs that target only yourself.
+    timewarp_wand,
+
+    /// "amount" (an integer representing a gold amount)
+    /// At the end of the battle, will give targeted players an additional "amount" of gold.
+    /// Calling this creates a new, hidden object in the background, and creating a whole lot of
+    /// them in one fight might lag the game. I'd recommend NOT calling this frequently during a
+    /// single battle, but rather designing items in a way that this only needs to be called once
+    /// per battle or so. For instance, if you wanted an item that gave 1 gold per time the
+    /// character hit an enemy, instead of calling this every time you hit an enemy, increment a
+    /// hidden variable each time you hit the enemy, then call this once at the end of battle to
+    /// give the character their gold.
+    topaz_charm,
+
+    /// "speedMult" (a number representing a multiplier to character speed)
+    /// "speedDuration" (duration of speed increase)
+    /// Increases speed by a multiplier for the specified duration.
+    winged_cap,
+
+    // Below this point are functions for Abilities. Currently, invulnerability times and
+    // animations are included within the ability itself, but I'd like to refactor this so that
+    // you'll be able to specify them for custom abilities. This might take me a bit. For now, I'm
+    // leaving the below parts blank, and will fill them in at a later date.
+
+    none_0,
+    none_1,
+    none_2,
+    none_3,
+
     ancient_0,
     ancient_0_petonly,
     ancient_0_pt2,
@@ -1629,10 +1868,7 @@ pub const AttackPattern = enum {
     ancient_3_emerald,
     ancient_3_emerald_pt2,
     ancient_3_emerald_pt3,
-    apply_hbs,
-    apply_hbs_starflash,
-    apply_invuln,
-    starflash_hbs,
+
     assassin_0,
     assassin_0_ruby,
     assassin_1,
@@ -1644,9 +1880,7 @@ pub const AttackPattern = enum {
     assassin_3,
     assassin_3_opal,
     assassin_3_ruby,
-    black_wakizashi,
-    blackhole_charm,
-    blue_rose,
+
     bruiser_0,
     bruiser_0_saph,
     bruiser_1,
@@ -1654,9 +1888,7 @@ pub const AttackPattern = enum {
     bruiser_3,
     bruiser_3_pt2,
     bruiser_3_ruby,
-    butterly_ocarina,
-    crown_of_storms,
-    curse_talon,
+
     dancer_0,
     dancer_0_opal,
     dancer_1,
@@ -1665,7 +1897,7 @@ pub const AttackPattern = enum {
     dancer_2_saph,
     dancer_3,
     dancer_3_emerald,
-    darkmagic_blade,
+
     defender_0,
     defender_0_fast,
     defender_0_ruby,
@@ -1676,7 +1908,7 @@ pub const AttackPattern = enum {
     defender_2_emerald,
     defender_3,
     defender_3_pt2,
-    divine_mirror,
+
     druid_0,
     druid_0_emerald,
     druid_0_ruby,
@@ -1695,9 +1927,7 @@ pub const AttackPattern = enum {
     druid_3_opal,
     druid_3_ruby,
     druid_3_saph,
-    erase_area_hbs,
-    floral_bow,
-    garnet_staff,
+
     hblade_0,
     hblade_0_garnet,
     hblade_0_garnet_pt2,
@@ -1712,27 +1942,7 @@ pub const AttackPattern = enum {
     hblade_3_garnet,
     hblade_3_opal,
     hblade_3_ruby,
-    heal_light,
-    heal_light_maxhealth,
-    heal_revive,
-    hydrous_blob,
-    lullaby_harp,
-    melee_hit,
-    meteor_staff,
-    moon_pendant,
-    nightstar_grimoire,
-    none_0,
-    none_1,
-    none_2,
-    none_3,
-    ornamental_bell,
-    phoenix_charm,
-    poisonfrog_charm,
-    potion_throw,
-    pulse_damage,
-    reaper_cloak,
-    red_tanzaku,
-    sleeping_greatbow,
+
     sniper_0,
     sniper_0_emerald,
     sniper_0_garnet,
@@ -1742,7 +1952,7 @@ pub const AttackPattern = enum {
     sniper_2,
     sniper_2_emerald,
     sniper_3,
-    sparrow_feather,
+
     spsword_0,
     spsword_0_pt2,
     spsword_1,
@@ -1752,12 +1962,7 @@ pub const AttackPattern = enum {
     spsword_2_pt2,
     spsword_3,
     spsword_3_pt2,
-    starflash,
-    starflash_failure,
-    thiefs_coat,
-    timewarp_wand,
-    topaz_charm,
-    winged_cap,
+
     wizard_0,
     wizard_0_ruby,
     wizard_1,
