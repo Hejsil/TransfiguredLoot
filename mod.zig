@@ -1274,44 +1274,166 @@ pub const QuickPattern = enum {
     /// To be used during cdCalc, multiplies GCDs of targeted hotbarslots by a certain amount.
     tpat_hb_mult_gcd_permanent,
 
+    /// "varIndex" (an integer between 0-3 indicating the variable number)
+    /// "mult" (a number)
+    /// Multiplies the targeted hotbar's hidden variable by a certain amount
     tpat_hb_mult_hitbox_var,
+
+    /// "mult" (a number)
+    /// Multiplies the targeted hotbar's hbsLength by a certain amount
     tpat_hb_mult_length_hbs,
+
+    /// "mult" (a number)
+    /// Multiplies the targeted hotbar's strength by a certain amount
     tpat_hb_mult_strength,
+
+    /// "mult" (a number)
+    /// Multiplies the targeted hotbar's hbsStrength by a certain amount
     tpat_hb_mult_strength_hbs,
+
+    /// Forces a recalculation of color
     tpat_hb_recalc_color,
+
+    /// "amount" (an integer)
+    /// Reduces the stock of stock, stockGcd, and stockOnly hotbarslots targeted.
     tpat_hb_reduce_stock,
+
+    /// Resets the cooldown of targeted hotbarslots. tcond_hb_check_resettable0 or
+    /// ttrg_hotbarslots_prune_noreset should be run before using this to avoid resetting slots
+    /// that aren't meant to be resettable.
     tpat_hb_reset_cooldown,
+
+    /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Will
+    /// also refresh strCalc. Not to be used during strCalc, or you will get an infinite refresh
+    /// loop.
     tpat_hb_reset_statchange,
+
+    /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Can be
+    /// used during strCalc.
     tpat_hb_reset_statchange_norefresh,
+
+    /// Runs cooldown of targeted hotbarslots.
     tpat_hb_run_cooldown,
+
+    /// "length" (time in milliseconds)
+    /// Runs cooldown of targeted hotbarslots for a specified amount.
     tpat_hb_run_cooldown_ext,
+
+    /// "length" (time in milliseconds)
+    /// Runs hidden cooldown of targeted hotbarslots for a specified amount.
     tpat_hb_run_cooldown_hidden,
+
+    /// Changes the color of the targeted hotbarslots to the color of the RECEIVER of the original
+    /// trigger. If your item upgrades an ability, you should add a colorCalc trigger that calls
+    /// this on that ability, to add a bit of flair to your item!
     tpat_hb_set_color_def,
+
+    /// "time" (in milliseconds)
+    /// To be called during cdCalc, sets the cooldown of targeted hotbarslots to specified amount.
     tpat_hb_set_cooldown_permanent,
+
+    /// "amount" (in milliseconds)
+    /// "minimum" (in milliseconds, default 200)
+    /// To be called during cdCalc, sets the GCD of targeted hotbarslots to specified amount.
     tpat_hb_set_gcd_permanent,
+
+    /// "amount" (an integer)
+    /// Sets stock of stock, stockGcd, and stockOnly hotbarslots to a specific amount.
     tpat_hb_set_stock,
+
+    /// "amount" (a number)
+    /// To be caled during strCalc, sets the strength of hotbarslots to a specific amount.
     tpat_hb_set_strength,
-    tpat_hb_set_strength_cd,
+
+    /// "ratio" (a number)
+    /// "maxAmount" (a number)
+    /// Special function for Darkglass Spear
     tpat_hb_set_strength_darkglass_spear,
-    tpat_hb_set_strength_gcd,
+
+    // "ratio" (a number)
+    // "maxAmount" (a number)
+    // Special function for Obsidian Rod
     tpat_hb_set_strength_obsidian_rod,
+
+    /// "ratio" (a number)
+    /// "maxAmount" (a number)
+    /// Special function for Timespace Dagger
     tpat_hb_set_strength_timespace_dagger,
+
+    /// Special function for Tidal Greatsword
     tpat_hb_set_tidalgreatsword,
+
+    /// Special function for Tidal Greatsword
     tpat_hb_set_tidalgreatsword_start,
+
+    /// "varIndex" (an integer between 0-3 indicating the variable number)
+    /// "amount" (a number)
+    /// Sets targeted hotbarslot's hidden variable to a specific amount
     tpat_hb_set_var,
+
+    /// "varIndex" (an integer between 0-3 indicating the variable number)
+    /// "minAmount" (a number)
+    /// "maxAmount" (a number)
+    /// Sets targeted hotbarslot's hidden variable to a random number between the two parameters
     tpat_hb_set_var_random_range,
+
+    /// "varIndex" (an integer between 0-3 indicating the variable number)
+    /// "amount" (a number)
+    /// "minAmount" (a number, defaults to 0)
+    /// "maxAmount" (a number, defaults to 100000)
+    /// "netcallThreshold" (a number, defaults to 1)
+    /// Adds to the targeted hotbarslot's sqVar. Keeps the sqVar between the min and max amount.
+    /// "netcallThreshold" can be used to limit the number of pings this item makes to the
+    /// others in your lobby, by only pinging every X increases. If you make an item like those
+    /// in the Sparkblade set that changes sqVar0 constantly, you might want to set
+    /// netcallThreshold to 5 or so.
     tpat_hb_square_add_var,
+
+    /// "varIndex" (an integer between 0-3 indicating the variable number)
+    /// "amount" (a number)
+    /// Sets the targeted hotbarslot's sqVar.
     tpat_hb_square_set_var,
+
+    /// For stock, stockGcd and stockOnly hotbarslots, zeros out stock and starts the slot's
+    /// cooldown.
     tpat_hb_zero_stock,
+
+    /// "flag" (a binary number representing an hbsFlag)
+    /// Adds an HBS flag to targeted status effects (see hbsFlag on the "Stats" sheet)
     tpat_hbs_add_hbsflag,
+
+    /// "flag" (a binary number representing an hbsShineFlag)
+    /// Adds an HBS shine flag to targeted status effects (see hbShineFlag on the "Stats" sheet)
     tpat_hbs_add_shineflag,
+
+    // "stat" (a stat enum, see STAT in enum reference)
+    // "amount" (a number)
+    // "calc" (a statChangerCalc enum, see STATCHANGERCALC in enum reference, defaults to
+    //         statChangerCalc.addFlag)
+    // Adds a stat to the targeted status effect, which will boost the stat on the player who's
+    // holding it (Recommend that you use this during hbsCreatedSelf trigger)
     tpat_hbs_add_statchange,
+
+    /// "playerId" (an integer repesenting a playerID)
+    /// "amount" (an amount of bleed)
+    /// Adds appropriate damagePlus stats to a status effect for Bleed status
     tpat_hbs_add_statchange_bleed,
+
+    /// "amount" (an amount of bleed)
+    /// Adds appropriate damagePlus stats to a status effect for Sap status
     tpat_hbs_add_statchange_sap,
+
+    /// Destroys targeted status effects
     tpat_hbs_destroy,
+
+    /// "mult" (a number)
+    /// Multiplies strength of status effects targeted by specified number
     tpat_hbs_mult_str,
+
+    /// Resets stats added to targeted status effects via tpat_hbs_add_statchange
     tpat_hbs_reset_statchange,
-    tpat_add_gold,
+
+    /// Don't use this
     tpat_bookofcheats_set_random,
 };
 

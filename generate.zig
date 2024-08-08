@@ -231,7 +231,7 @@ pub fn main() !void {
         .weaponType = .loot,
     });
     trigger(.onDamage, .{.tcond_hb_self});
-    quickPattern(.tpat_add_gold, .{});
+    // quickPattern(.tpat_add_gold, .{});
 
     // TODO: Not enough doc to implement
     item(.{
@@ -279,7 +279,7 @@ pub fn main() !void {
     });
     trigger(.onLevelup, .{});
     quickPattern(.tpat_hb_flash_item, .{});
-    quickPattern(.tpat_add_gold, .{1});
+    // quickPattern(.tpat_add_gold, .{1});
 
     const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
     const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
