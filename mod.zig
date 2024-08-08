@@ -1609,7 +1609,7 @@ fn qpat2(pat: QuickPattern, args: anytype) !void {
 /// tpat_hb_square_set_var has two parameters: "varIndex" and "amount".
 ///
 /// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
-pub const AddPattern = enum {
+pub const AttackPattern = enum {
     bleed,
     burn,
     curse,
@@ -1770,7 +1770,7 @@ pub const AddPattern = enum {
     wizard_3_emerald,
     wizard_3_opal,
 
-    pub fn toCsvString(pat: AddPattern) []const u8 {
+    pub fn toCsvString(pat: AttackPattern) []const u8 {
         return switch (pat) {
             .bleed => "hpat_bleed",
             .burn => "hpat_burn",
@@ -1935,11 +1935,11 @@ pub const AddPattern = enum {
     }
 };
 
-pub fn apat(pat: AddPattern, args: anytype) void {
+pub fn apat(pat: AttackPattern, args: anytype) void {
     apat2(pat, args) catch |err| @panic(@errorName(err));
 }
 
-fn apat2(pat: AddPattern, args: anytype) !void {
+fn apat2(pat: AttackPattern, args: anytype) !void {
     try item_csv.writer().print("addPattern,{s}", .{pat.toCsvString()});
     try writeArgs(item_csv.writer(), args);
 }
