@@ -2555,17 +2555,94 @@ pub const Set = enum {
     // You can also save user variables with certain Set Functions like tset_uservar. These
     // variables should always start with "u_"
 
+    /// key (string)
+    /// param0 (any number)
+    /// mathSign (string)
+    /// param1 (any number)
+    /// .....
+    ///
+    /// Sets a uservar based on a mathematical formula.
+    ///
+    /// Set a uservar "u_amount" to the cooldown of the source of this trigger:
+    /// set,tset_uservar,u_amount,s_cooldown
+    ///
+    /// Set a uservar "u_amount" to the HP of the source of this trigger, times 100
+    /// set,tset_uservar,u_amount,s_hp,*,100,
+    ///
+    /// Set a uservar "u_amount" to the max HP of the source of this trigger, minus its current HP,
+    /// plus 1, then times 1000
+    /// set,tset_uservar,u_amount,s_hpMax,-,s_hp,+,1,*,1000
+    ///
+    /// Math formulas will execute one by one, in the order that they're in the line, regardless
+    /// of order of operations
     uservar,
+
+    /// For hotbar statuses, creates two uservariables "u_aflX" and "u_aflY" based on the position
+    /// of the afflicted player.
     uservar_aflplayer_pos,
-    uservar_battletime,
+
+    /// key (string)
+    /// cooldownAm (number)
+    /// minimumCd (number)
+    /// incrementCd (number)
+    /// maxAm (number)
+    /// A set function specifically to make Blackhole Charm work (saves a variable based off how
+    /// long a cooldown is)
     uservar_blackhole_charm_calc,
+
+    /// "key (string)
+    /// onEqual (anything)
+    /// onUnequal (anything)
+    /// checkVarNum (integer)
+    /// checkVarAm (number)
+    /// If the squareVar indicated by checkVarNum is equal to checkVarAm, saves "onEqual" to the
+    /// key provided. Otherwise, saves "onUnequal" to the key provided.
     uservar_cond_squarevar_equal,
+
+    /// maxAm (integer)
+    /// For Spellblade, saves the amount of darkflame this ability will consume to "u_darkflame".
+    /// If an ability consumes 4 darkflame normally, and you have more than 4 darkflame, it will
+    /// be set to 4.  If it normally consumes 4 and you only have 2 darkflame, it will be set to 2.
     uservar_darkflame,
+
+    /// key (string)
+    /// param0 (any number)
+    /// mathSign (string)
+    /// param1 (any number)
+    ///
+    /// Similar to tset_uservar, but it will loop through all of the players in your targetted player
+    /// list, and save a uservariable for each player. Unlike tset_uservar, this only can do one
+    /// mathSign at a time. "#" is replaced with the position of the player in the list.
+    ///
+    /// For each player, set a uservar "u_amount#" to their Max HP minus their current HP (where #
+    /// is replaced with their position in the list)
+    /// set,tset_uservar_each_target_player,u_amount#,s_hpMax,-,s_hp
     uservar_each_target_player,
+
+    /// key (string)
+    /// playerId (integer)
+    /// Creates a user variable from that key, representing the player's gold
     uservar_gold,
+
+    /// percentChance (number between 0 and 1)
+    /// key (string)
+    /// onSuccess (anything)
+    /// onFail (anything)
+    ///
+    /// Flips a weighted coin based on the percentChance and the player's luck stat, and saves the
+    /// result to a uservar based on whether or not it succeeded.
     uservar_random,
+
+    /// key (string)
+    /// minimumAmount (number)
+    /// maximumAmount (number)
+    ///
+    /// Saves a random number between the minimum and maximum amount to a uservar.
     uservar_random_range,
+
     uservar_slotcount,
+    uservar_hbscount,
+    uservar_playercount,
 
     pub fn toCsvString(set: Set) []const u8 {
         return switch (set) {
@@ -2587,7 +2664,6 @@ pub const Set = enum {
             .strmult_debuffcount => "tset_strmult_debuffcount",
             .uservar => "tset_uservar",
             .uservar_aflplayer_pos => "tset_uservar_aflplayer_pos",
-            .uservar_battletime => "tset_uservar_battletime",
             .uservar_blackhole_charm_calc => "tset_uservar_blackhole_charm_calc",
             .uservar_cond_squarevar_equal => "tset_uservar_cond_squarevar_equal",
             .uservar_darkflame => "tset_uservar_darkflame",
@@ -2596,6 +2672,8 @@ pub const Set = enum {
             .uservar_random => "tset_uservar_random",
             .uservar_random_range => "tset_uservar_random_range",
             .uservar_slotcount => "tset_uservar_slotcount",
+            .uservar_hbscount => "tset_uservar_hbscount",
+            .uservar_playercount => "tset_uservar_playercount",
         };
     }
 };
