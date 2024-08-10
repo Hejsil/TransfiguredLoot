@@ -2,6 +2,65 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_mimick_rabbitfoot_all_mult = -0.13;
+    const transfigured_mimick_rabbitfoot_hbs_str_mult = 30;
+    const transfigured_mimick_rabbitfoot_cd = 4 * std.time.ms_per_s;
+    item(.{
+        .id = "it_transfigured_mimick_rabbitfoot",
+        .name = .{
+            .english = "Transfigured Mimick Rabbitfoot",
+        },
+        .description = .{
+            .english = "It's a real rabbit foot.#" ++
+                "Negative emotions consume you.#" ++
+                " #" ++
+                "You are unlucky.#" ++
+                // "You go into massive debt. (You lose all you're money.)#" ++
+                "You deal [VAR0_PERCENT] less damage.#" ++
+                "Every [CD], inflict a [HBSL] debuff to all enemies.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbsStrMult = transfigured_mimick_rabbitfoot_hbs_str_mult,
+        .hbsLength = 13 * std.time.ms_per_s,
+
+        .hbVar0 = @abs(transfigured_mimick_rabbitfoot_all_mult),
+        .allMult = transfigured_mimick_rabbitfoot_all_mult,
+        .luck = -13,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = transfigured_mimick_rabbitfoot_cd,
+        .hbInput = .auto,
+    });
+    var random_state = std.Random.DefaultPrng.init(1);
+    const random = random_state.random();
+    var debuffs = mod.Hbs.debuffs;
+    random.shuffle(Hbs, &debuffs);
+
+    for (debuffs, 0..) |debuff, i| {
+        trig(.hotbarUsed, .{.hb_self});
+        cond(.hb_check_square_var, .{ 0, i });
+        qpat(.hb_flash_item, .{});
+        ttrg(.players_opponent, .{});
+        tset(.hbskey, .{ @tagName(debuff), "r_hbsLength" });
+        tset(.hbsstr, .{transfigured_mimick_rabbitfoot_hbs_str_mult});
+        apat(.poisonfrog_charm, .{});
+        ttrg(.player_self, .{});
+        tset(.hbskey, .{ @tagName(Hbs.hbs_berserk), transfigured_mimick_rabbitfoot_cd });
+        apat(.apply_hbs, .{});
+    }
+
+    trig(.hotbarUsed2, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+
+    trig(.hotbarUsed3, .{.hb_self});
+    cond(.hb_check_square_var, .{ 0, debuffs.len });
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+
     const transfigured_snakefang_dagger_str = 10;
     const transfigured_snakefang_dagger_num_poisons = 4;
     item(.{
@@ -481,6 +540,7 @@ const rgb = mod.rgb;
 const tset = mod.tset;
 const ttrg = mod.ttrg;
 const trig = mod.trig;
+const Hbs = mod.Hbs;
 
 const mod = @import("mod.zig");
 const std = @import("std");
