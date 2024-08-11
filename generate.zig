@@ -56,6 +56,7 @@ pub fn main() !void {
 
         .hbsType = .hbs_hex_poison,
         .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = 40,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond(.hb_available, .{});
