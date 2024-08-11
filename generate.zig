@@ -2,7 +2,6 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    const transfigured_darkmagic_blade_str_mult = 400;
     item(.{
         .id = "it_transfigured_darkmagic_blade",
         .name = .{
@@ -10,7 +9,7 @@ pub fn main() !void {
         },
         .description = .{
             .english = "Every [CD], consume a curse you apply to slice the air around you " ++
-                "dealing [VAR0] damage.",
+                "dealing [STR] damage.",
         },
 
         .type = .loot,
@@ -22,9 +21,7 @@ pub fn main() !void {
 
         .delay = 400,
         .radius = 400,
-
-        .hbVar0 = transfigured_darkmagic_blade_str_mult,
-        .strMult = transfigured_darkmagic_blade_str_mult,
+        .strMult = 400,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond(.hb_available, .{});
@@ -524,7 +521,6 @@ pub fn main() !void {
     }
 
     const transfigured_sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
-    const transfigured_sleeping_greatbow_dmg = 1000;
     item(.{
         .id = "transfigured_sleeping_greatbow",
         .name = .{
@@ -532,7 +528,7 @@ pub fn main() !void {
         },
         .description = .{
             .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
-                "ttrged enemy that deals [VAR1] damage.",
+                "ttrged enemy that deals [STR] damage.",
         },
         .type = .loot,
         .weaponType = .loot,
@@ -546,8 +542,7 @@ pub fn main() !void {
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
 
-        .hbVar1 = transfigured_sleeping_greatbow_dmg,
-        .strMult = transfigured_sleeping_greatbow_dmg,
+        .strMult = 1000,
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
