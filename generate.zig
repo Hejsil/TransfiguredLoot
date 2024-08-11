@@ -3,6 +3,37 @@ pub fn main() !void {
     defer mod.end();
 
     item(.{
+        .id = "it_transfigured_curse_talon",
+        .name = .{
+            .english = "Transfigured Curse Talon",
+        },
+        .description = .{
+            .english = "Every [CD], replace a curse you apply with [HEXP]",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+
+        .hbsType = .hbs_hex_poison,
+        .hbsLength = 5 * std.time.ms_per_s,
+    });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.hb_available, .{});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+    ttrg(.player_afflicted_source, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
+    item(.{
         .id = "it_transfigured_raven_grimoire",
         .name = .{
             .english = "Transfigured Raven Grimoire",
