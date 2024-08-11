@@ -2,6 +2,48 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_shrinemaidens_kosode_mult_per_buff = 0.1;
+    item(.{
+        .id = "it_transfigured_shrinemaidens_kosode",
+        .name = .{
+            .english = "Transfigured Shrinemaiden's Kosode",
+        },
+        .description = .{
+            .english = "Deal [VAR0_PERCENT] more damage for each buff on you.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = transfigured_shrinemaidens_kosode_mult_per_buff,
+    });
+    trig(.battleStart0, .{});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.hbsCreated, .{.hbs_selfafl});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.hbsRefreshed, .{.hbs_selfafl});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.hbsDestroyed, .{.hbs_selfafl});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc0, .{});
+    tset(.uservar, .{
+        "u_allMult", "r_sqVar0",
+        "*",         transfigured_shrinemaidens_kosode_mult_per_buff,
+    });
+    qpat(.hb_add_statchange_norefresh, .{
+        "stat",   "stat.allMult",
+        "amount", "u_allMult",
+    });
+
     item(.{
         .id = "it_transfigured_darkmagic_blade",
         .name = .{
