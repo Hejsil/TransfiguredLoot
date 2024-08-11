@@ -2,6 +2,42 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_darkmagic_blade_str_mult = 400;
+    item(.{
+        .id = "it_transfigured_darkmagic_blade",
+        .name = .{
+            .english = "Transfigured Darkmagic Blade",
+        },
+        .description = .{
+            .english = "Every [CD], consume a curse you apply to slice the air around you " ++
+                "dealing [VAR0] damage",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 4 * std.time.ms_per_s,
+
+        .delay = 400,
+        .radius = 400,
+
+        .hbVar0 = transfigured_darkmagic_blade_str_mult,
+        .strMult = transfigured_darkmagic_blade_str_mult,
+    });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.hb_available, .{});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+
     item(.{
         .id = "it_transfigured_curse_talon",
         .name = .{
