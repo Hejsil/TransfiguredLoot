@@ -2,6 +2,37 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    item(.{
+        .id = "it_transfigured_raven_grimoire",
+        .name = .{
+            .english = "Transfigured Raven Grimoire",
+        },
+        .description = .{
+            .english = "Every [CD], replace a curse you apply with [HEXS]",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+
+        .hbsType = .hbs_hex_super,
+        .hbsLength = 5 * std.time.ms_per_s,
+    });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.hb_available, .{});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+    ttrg(.player_afflicted_source, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
     const transfigured_mimick_rabbitfoot_all_mult = -0.13;
     const transfigured_mimick_rabbitfoot_hbs_str_mult = 30;
     const transfigured_mimick_rabbitfoot_cd = 4 * std.time.ms_per_s;
@@ -77,7 +108,7 @@ pub fn main() !void {
 
         .weaponType = .loot,
         .delay = 250,
-        .hbsType = "hbs_poison_0",
+        .hbsType = .hbs_poison_0,
         .hbsStrMult = transfigured_snakefang_dagger_str,
         .hbsLength = 5 * std.time.ms_per_s,
 
@@ -201,7 +232,7 @@ pub fn main() !void {
         .hbInput = .auto,
 
         .weaponType = .loot,
-        .hbsType = "hbs_lucky",
+        .hbsType = .hbs_lucky,
         .hbsLength = std.time.ms_per_min,
 
         .cooldownType = .time,
@@ -400,7 +431,7 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbsType = "hbs_curse_0",
+        .hbsType = .hbs_curse_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
         .hbVar0 = transfigured_opal_necklace_num_curses,
@@ -517,7 +548,7 @@ pub fn main() !void {
         .hbVar0 = transfigured_meteor_staff_cd,
 
         .delay = 250,
-        .hbsType = "hbs_burn_3",
+        .hbsType = .hbs_burn_3,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig(.onDamageDone, .{.dmg_islarge});

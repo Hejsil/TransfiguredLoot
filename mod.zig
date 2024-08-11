@@ -232,7 +232,7 @@ pub const Item = struct {
 
     /// The key for the Status Effect this item applies.  For instance, if an item applies
     /// Curse, "hbs_curse_0"
-    hbsType: ?[]const u8 = null,
+    hbsType: ?Hbs = null,
 
     /// The amount of damage that the Status Effect does.
     /// For poison, it will deal this damage every tick, for ghostflame, the amount of
@@ -2180,10 +2180,9 @@ pub const Target = enum {
     /// status.
     player_afflicted,
 
+    player_afflicted_source,
     /// When a status effect is the SOURCE of the trigger, target the player afflicted by that
     /// status effect.
-    player_afflicted_source,
-
     /// From an "onDamageDone" trigger, target the player that was damaged.
     player_damaged,
 
@@ -2689,7 +2688,7 @@ fn tset2(s: Set, args: anytype) !void {
 
 fn writeArgs(writer: anytype, args: anytype) !void {
     inline for (args) |arg| switch (@TypeOf(arg)) {
-        usize, comptime_int => try writer.print(",{}", .{arg}),
+        u8, u16, u32, u64, usize, comptime_int => try writer.print(",{}", .{arg}),
         else => {
             try writer.writeAll(",");
             try writeCsvString(writer, arg);
@@ -2719,7 +2718,7 @@ pub fn rgb(r: u8, g: u8, b: u8) Color {
     return .{ .r = r, .g = g, .b = b };
 }
 
-pub const Hbs = enum {
+pub const Hbs = enum(u8) {
     hbs_vanish,
     hbs_ghost,
     hbs_warcry,
@@ -2737,6 +2736,9 @@ pub const Hbs = enum {
     hbs_flashint,
     hbs_berserk,
     hbs_astra,
+    hbs_abyssrage,
+    hbs_hex_anti,
+    hbs_stillness,
 
     hbs_elegy_0,
     hbs_elegy_1,
@@ -2757,13 +2759,15 @@ pub const Hbs = enum {
 
     hbs_sap,
     hbs_hex,
+    hbs_hex_super,
+    hbs_hex_poison,
 
-    hbs_curse_0,
-    hbs_curse_1,
-    hbs_curse_2,
-    hbs_curse_3,
-    hbs_curse_4,
-    hbs_curse_5,
+    hbs_curse_0 = 56,
+    hbs_curse_1 = 57,
+    hbs_curse_2 = 58,
+    hbs_curse_3 = 59,
+    hbs_curse_4 = 60,
+    hbs_curse_5 = 61,
 
     hbs_decay_0,
     hbs_decay_1,
@@ -2821,6 +2825,15 @@ pub const Hbs = enum {
     hbs_snare_6,
     hbs_snare_7,
 
+    hbs_snare2_0,
+    hbs_snare2_1,
+    hbs_snare2_2,
+    hbs_snare2_3,
+    hbs_snare2_4,
+    hbs_snare2_5,
+    hbs_snare2_6,
+    hbs_snare2_7,
+
     pub const buffs = [_]Hbs{
         .hbs_vanish,
         .hbs_ghost,
@@ -2839,6 +2852,9 @@ pub const Hbs = enum {
         .hbs_flashint,
         .hbs_berserk,
         .hbs_astra,
+        .hbs_abyssrage,
+        .hbs_hex_anti,
+        .hbs_stillness,
         .hbs_elegy_0,
         .hbs_elegy_1,
         .hbs_elegy_2,
@@ -2857,6 +2873,8 @@ pub const Hbs = enum {
     pub const debuffs = [_]Hbs{
         .hbs_sap,
         .hbs_hex,
+        .hbs_hex_super,
+        .hbs_hex_poison,
         .hbs_curse_0,
         .hbs_curse_1,
         .hbs_curse_2,
@@ -2912,14 +2930,15 @@ pub const Hbs = enum {
         .hbs_snare_5,
         .hbs_snare_6,
         .hbs_snare_7,
+        .hbs_snare2_0,
+        .hbs_snare2_1,
+        .hbs_snare2_2,
+        .hbs_snare2_3,
+        .hbs_snare2_4,
+        .hbs_snare2_5,
+        .hbs_snare2_6,
+        .hbs_snare2_7,
     };
-
-    // hbs_transquility, TODO
-    // hbs_antihex, TODO
-    // hbs_abyssalrage, TODO
-    // hbs_tri_snare, TODO
-    // hbs_super_hex, TODO
-    // hbs_poison_hex, TODO
 };
 
 const std = @import("std");
