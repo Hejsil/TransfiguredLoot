@@ -10,7 +10,7 @@ pub fn main() !void {
         },
         .description = .{
             .english = "Every [CD], consume a curse you apply to slice the air around you " ++
-                "dealing [VAR0] damage",
+                "dealing [VAR0] damage.",
         },
 
         .type = .loot,
@@ -31,12 +31,13 @@ pub fn main() !void {
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
     qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     item(.{
         .id = "it_transfigured_curse_talon",
@@ -44,7 +45,7 @@ pub fn main() !void {
             .english = "Transfigured Curse Talon",
         },
         .description = .{
-            .english = "Every [CD], replace a curse you apply with [HEXP]",
+            .english = "Every [CD], replace a curse you apply with [HEXP].",
         },
 
         .type = .loot,
@@ -63,12 +64,13 @@ pub fn main() !void {
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
     qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
     ttrg(.player_afflicted_source, .{});
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     item(.{
         .id = "it_transfigured_raven_grimoire",
@@ -76,7 +78,7 @@ pub fn main() !void {
             .english = "Transfigured Raven Grimoire",
         },
         .description = .{
-            .english = "Every [CD], replace a curse you apply with [HEXS]",
+            .english = "Every [CD], replace a curse you apply with [HEXS].",
         },
 
         .type = .loot,
@@ -94,12 +96,13 @@ pub fn main() !void {
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
     qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
     ttrg(.player_afflicted_source, .{});
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     const transfigured_mimick_rabbitfoot_all_mult = -0.13;
     const transfigured_mimick_rabbitfoot_hbs_str_mult = 30;
@@ -142,7 +145,6 @@ pub fn main() !void {
     for (debuffs, 0..) |debuff, i| {
         trig(.hotbarUsed, .{.hb_self});
         cond(.hb_check_square_var, .{ 0, i });
-        qpat(.hb_flash_item, .{});
         ttrg(.players_opponent, .{});
         tset(.hbskey, .{ @tagName(debuff), "r_hbsLength" });
         tset(.hbsstr, .{transfigured_mimick_rabbitfoot_hbs_str_mult});
@@ -155,6 +157,8 @@ pub fn main() !void {
     trig(.hotbarUsed2, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     trig(.hotbarUsed3, .{.hb_self});
     cond(.hb_check_square_var, .{ 0, debuffs.len });
@@ -253,6 +257,7 @@ pub fn main() !void {
     qpat(.hb_reset_cooldown, .{});
     ttrg(.hotbarslot_self, .{});
     qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     // TODO: Untested
     item(.{
@@ -281,6 +286,8 @@ pub fn main() !void {
     ttrg(.hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
     cond(.hb_check_chargeable0, .{});
     qpat(.hb_charge, .{3}); // TODO: Is 3 omegacharge?
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -544,10 +551,11 @@ pub fn main() !void {
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.sleeping_greatbow, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     item(.{
         .id = "it_transfigured_ornamental_bell",
@@ -581,19 +589,21 @@ pub fn main() !void {
     for (0..16) |i| {
         if (i % 3 != 0) cond(.hb_check_square_var_false, .{ 0, i });
     }
-    qpat(.hb_flash_item, .{});
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ "hbs_smite_0", "r_hbsLength" });
     apat(.apply_hbs, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     trig(.hotbarUsed2, .{.hb_self});
     for (0..16) |i| {
         if (i % 5 != 0) cond(.hb_check_square_var_false, .{ 0, i });
     }
-    qpat(.hb_flash_item, .{});
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ "hbs_elegy_0", "r_hbsLength" });
     apat(.apply_hbs, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     trig(.hotbarUsed3, .{.hb_self});
     cond(.hb_check_square_var, .{ 0, 15 });
@@ -626,6 +636,7 @@ pub fn main() !void {
     tset(.hbs_def, .{});
     tset(.hbs_burnhit, .{});
     apat(.apply_hbs, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     trig(.hbsCreated, .{.hbs_thishbcast});
     qpat(.hb_flash_item, .{});
