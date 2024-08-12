@@ -2,6 +2,48 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    for ([_]mod.Item{
+        .{
+            .id = "it_transfigured_sandpriestess_spear",
+            .name = .{ .english = "Transfigured Sandpriestess Spear" },
+            .description = .{ .english = "Every time you gain [FLASH-STR], gain [FLOW-STR]." },
+            .hbsType = .hbs_flowstr,
+        },
+        .{
+            .id = "it_transfigured_flamedancer_dagger",
+            .name = .{ .english = "Transfigured Flamedancer Dagger" },
+            .description = .{ .english = "Every time you gain [FLASH-DEX], gain [FLOW-DEX]." },
+            .hbsType = .hbs_flowdex,
+        },
+        .{
+            .id = "it_transfigured_whiteflame_staff",
+            .name = .{ .english = "Transfigured Whiteflame Staff" },
+            .description = .{ .english = "Every time you gain [FLASH-INT], gain [FLOW-INT]." },
+            .hbsType = .hbs_flowint,
+        },
+    }) |_item| {
+        var i = _item;
+        i.type = .loot;
+        i.weaponType = .loot;
+        i.hbsLength = 5 * std.time.ms_per_s;
+
+        const flash_hbs: Hbs = switch (_item.hbsType.?) {
+            .hbs_flowstr => .hbs_flashstr,
+            .hbs_flowdex => .hbs_flashdex,
+            .hbs_flowint => .hbs_flashint,
+            else => unreachable,
+        };
+
+        // TODO: No test
+        item(i);
+        trig(.hbsCreated, .{.hbs_selfafl});
+        cond(.eval, .{ "s_statusId", "==", @intFromEnum(flash_hbs) });
+        ttrg(.player_afflicted_source, .{});
+        tset(.hbs_def, .{});
+        apat(.apply_hbs, .{});
+        qpat(.hb_flash_item, .{});
+    }
+
     // TODO: No test
     const transfigured_cursed_candlestafff_hbs_str_mult = 250;
     item(.{
