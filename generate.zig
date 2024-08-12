@@ -34,7 +34,6 @@ pub fn main() !void {
             else => unreachable,
         };
 
-        // TODO: No test
         item(i);
         trig(.hbsCreated, .{.hbs_selfafl});
         cond(.eval, .{ "s_statusId", "==", @intFromEnum(flash_hbs) });
@@ -44,7 +43,6 @@ pub fn main() !void {
         qpat(.hb_flash_item, .{});
     }
 
-    // TODO: No test
     const transfigured_cursed_candlestafff_hbs_str_mult = 250;
     item(.{
         .id = "it_transfigured_cursed_candlestafff",
@@ -81,7 +79,6 @@ pub fn main() !void {
         qpat(.hb_flash_item, .{});
     }
 
-    // TODO: No test
     item(.{
         .id = "it_transfigured_ballroom_gown",
         .name = .{
@@ -97,14 +94,13 @@ pub fn main() !void {
         .hp = 1,
         .allMult = 0.05,
         .cdp = -500,
-        .haste = -0.05,
+        .haste = 0.95,
         .luck = 0.05,
         .charspeed = 0.5,
         .charradius = -5,
         .invulnPlus = 500,
     });
 
-    // TODO: No test
     item(.{
         .id = "it_transfigured_holy_greatsword",
         .name = .{
