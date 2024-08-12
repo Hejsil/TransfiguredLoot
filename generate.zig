@@ -2,6 +2,40 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No test
+    item(.{
+        .id = "it_transfigured_holy_greatsword",
+        .name = .{
+            .english = "Transfigured Holy Greatsword",
+        },
+        .description = .{
+            .english = "Every [CD], consume a buff you gain to slices the air around you " ++
+                "dealing [STR] damage.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 4 * std.time.ms_per_s,
+
+        .delay = 400,
+        .radius = 400,
+        .strMult = 400,
+    });
+    trig(.hbsCreated, .{.hbs_selfafl});
+    cond(.hb_available, .{});
+    cond(.true, .{"s_isBuff"});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+
     const transfigured_shrinemaidens_kosode_mult_per_buff = 0.1;
     item(.{
         .id = "it_transfigured_shrinemaidens_kosode",
