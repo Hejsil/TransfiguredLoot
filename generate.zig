@@ -3,6 +3,43 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No test
+    const transfigured_cursed_candlestafff_hbs_str_mult = 250;
+    item(.{
+        .id = "it_transfigured_cursed_candlestafff",
+        .name = .{
+            .english = "Transfigured Cursed Candlestaff",
+        },
+        .description = .{
+            .english = "When you inflict a burn, also inflict [GHOSTFLAME-0].",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbsType = .hbs_ghostflame_0,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = transfigured_cursed_candlestafff_hbs_str_mult,
+    });
+    for ([_][2]Hbs{
+        .{ .hbs_burn_0, .hbs_ghostflame_0 },
+        .{ .hbs_burn_1, .hbs_ghostflame_1 },
+        .{ .hbs_burn_2, .hbs_ghostflame_2 },
+        .{ .hbs_burn_3, .hbs_ghostflame_3 },
+        .{ .hbs_burn_4, .hbs_ghostflame_4 },
+        .{ .hbs_burn_5, .hbs_ghostflame_5 },
+        .{ .hbs_burn_6, .hbs_ghostflame_0 },
+    }) |hbs| {
+        trig(.hbsCreated, .{.hbs_selfcast});
+        cond(.hb_available, .{});
+        cond(.eval, .{ "s_statusId", "==", @intFromEnum(hbs[0]) });
+        ttrg(.player_afflicted_source, .{});
+        tset(.hbskey, .{ @tagName(hbs[1]), "r_hbsLength" });
+        tset(.hbsstr, .{transfigured_cursed_candlestafff_hbs_str_mult});
+        apat(.apply_hbs, .{});
+        qpat(.hb_flash_item, .{});
+    }
+
+    // TODO: No test
     item(.{
         .id = "it_transfigured_ballroom_gown",
         .name = .{
