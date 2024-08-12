@@ -383,7 +383,7 @@ pub const Item = struct {
 
     /// Adds a flat value to all cooldowns this character has, measured in milliseconds.
     /// Currently only used on Firescale Corset. Any integer 0 - 3276750
-    cdp: ?u32 = null,
+    cdp: ?i32 = null,
 
     /// Increases or decreases GCDs by a percentage. Note that this being a negative number makes
     /// the GCD faster, and it being positive makes the GCD slower.
@@ -412,13 +412,13 @@ pub const Item = struct {
     /// Makes your character's hitbox larger or smaller. Used on Sunflower Crown and Evasion
     /// Potion, which have -10 each. Any number -2000 to 2000 (but should probably be kept in
     /// the -25 to 25 range)
-    charradius: ?f64 = null,
+    charradius: ?i32 = null,
 
     /// Make invulnerability effects last longer (or shorter) by a flat amount, in
     /// milliseconds. Any number -15000 to 15000 (but should probably be kept in the -3000 to
     /// 3000 range).  Note that invulnerability effects have a hard cap of 7.5 seconds, no
     /// matter what stats you have
-    invulnPlus: ?f64 = null,
+    invulnPlus: ?u32 = null,
 
     /// Currently does nothing
     stockPlus: ?f64 = null,
@@ -481,7 +481,8 @@ fn item2(opt: Item) !void {
     try writeCsvString(item_desc_w, opt.description.chinese orelse opt.description.english);
     try item_desc_w.writeAll("\n");
 
-    try item_ini.writer().print("[{s}]\n", .{opt.id});
+    const item_ini_w = item_ini.writer();
+    try item_ini_w.print("[{s}]\n", .{opt.id});
     inline for (@typeInfo(@TypeOf(opt)).Struct.fields) |field| continue_blk: {
         if (comptime std.mem.eql(u8, field.name, "id"))
             break :continue_blk;
@@ -493,25 +494,25 @@ fn item2(opt: Item) !void {
             break :continue_blk;
 
         if (@field(opt, field.name)) |value| switch (@TypeOf(value)) {
-            bool => try item_ini.writer().print("{s}=\"{d}\"\n", .{
+            bool => try item_ini_w.print("{s}=\"{d}\"\n", .{
                 field.name,
                 @intFromBool(value),
             }),
-            i8, u8, u16, u32, f64 => try item_ini.writer().print("{s}=\"{d}\"\n", .{
+            i8, u8, u16, i32, u32, f64 => try item_ini_w.print("{s}=\"{d}\"\n", .{
                 field.name,
                 value,
             }),
-            []const u8 => try item_ini.writer().print("{s}=\"{s}\"\n", .{
+            []const u8 => try item_ini_w.print("{s}=\"{s}\"\n", .{
                 field.name,
                 value,
             }),
-            Color => try item_ini.writer().print("{s}=\"#{x:02}{x:02}{x:02}\"\n", .{
+            Color => try item_ini_w.print("{s}=\"#{x:02}{x:02}{x:02}\"\n", .{
                 field.name,
                 value.r,
                 value.g,
                 value.b,
             }),
-            else => try item_ini.writer().print("{s}=\"{s}\"\n", .{
+            else => try item_ini_w.print("{s}=\"{s}\"\n", .{
                 field.name,
                 @tagName(value),
             }),

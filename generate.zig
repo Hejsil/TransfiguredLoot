@@ -4,6 +4,29 @@ pub fn main() !void {
 
     // TODO: No test
     item(.{
+        .id = "it_transfigured_ballroom_gown",
+        .name = .{
+            .english = "Transfigured Ballroom Gown",
+        },
+        .description = .{
+            .english = "Makes everything very slightly better.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hp = 1,
+        .allMult = 0.05,
+        .cdp = -500,
+        .haste = -0.05,
+        .luck = 0.05,
+        .charspeed = 0.5,
+        .charradius = -5,
+        .invulnPlus = 500,
+    });
+
+    // TODO: No test
+    item(.{
         .id = "it_transfigured_holy_greatsword",
         .name = .{
             .english = "Transfigured Holy Greatsword",
