@@ -2,6 +2,36 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No tests
+    item(.{
+        .id = "it_transfigured_thunderclap_gloves",
+        .name = .{
+            .english = "Transfigured Thunderclap Gloves",
+        },
+        .description = .{
+            .english = "Every [CD] have a [LUCK] chance of dealing [STR] damage to all enemies.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 3 * std.time.ms_per_s,
+
+        .delay = 400,
+        .strMult = 200,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    cond(.random_def, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.crown_of_storms, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_lucky_proc, .{});
+    qpat(.hb_cdloot_proc, .{});
+
     for ([_]mod.Item{
         .{
             .id = "it_transfigured_sandpriestess_spear",
