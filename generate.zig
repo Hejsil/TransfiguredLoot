@@ -4,6 +4,30 @@ pub fn main() !void {
 
     // TODO: No tests
     item(.{
+        .id = "it_transfigured_staticshock_earrings",
+        .name = .{
+            .english = "Transfigured Staticshock Earrings",
+        },
+        .description = .{
+            .english = "When you inflict spark, deal [STR] damage to all enemies.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .delay = 400,
+        .strMult = 150,
+    });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_spark_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_spark_6) });
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+    qpat(.hb_flash_item, .{});
+
+    // TODO: No tests
+    item(.{
         .id = "it_transfigured_thunderclap_gloves",
         .name = .{
             .english = "Transfigured Thunderclap Gloves",
