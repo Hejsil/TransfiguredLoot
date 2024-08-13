@@ -2,7 +2,6 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: No tests
     item(.{
         .id = "it_transfigured_staticshock_earrings",
         .name = .{
@@ -15,15 +14,15 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .delay = 400,
         .strMult = 150,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
+    tset(.debug, .{"s_statusId"});
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_spark_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_spark_6) });
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
-    apat(.darkmagic_blade, .{});
+    apat(.crown_of_storms, .{});
     qpat(.hb_flash_item, .{});
 
     item(.{

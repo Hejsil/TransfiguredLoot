@@ -2771,6 +2771,22 @@ pub const Hbs = enum(u8) {
     hbs_curse_4 = 60,
     hbs_curse_5 = 61,
 
+    hbs_spark_0 = 69,
+    hbs_spark_1 = 70,
+    hbs_spark_2 = 71,
+    hbs_spark_3 = 72,
+    hbs_spark_4 = 73,
+    hbs_spark_5 = 74,
+    hbs_spark_6 = 75,
+
+    hbs_burn_0 = 91,
+    hbs_burn_1 = 92,
+    hbs_burn_2 = 93,
+    hbs_burn_3 = 94,
+    hbs_burn_4 = 95,
+    hbs_burn_5 = 96,
+    hbs_burn_6 = 97,
+
     hbs_decay_0,
     hbs_decay_1,
     hbs_decay_2,
@@ -2782,14 +2798,6 @@ pub const Hbs = enum(u8) {
     hbs_decay_8,
     hbs_decay_9,
 
-    hbs_spark_0,
-    hbs_spark_1,
-    hbs_spark_2,
-    hbs_spark_3,
-    hbs_spark_4,
-    hbs_spark_5,
-    hbs_spark_6,
-
     hbs_poison_0,
     hbs_poison_1,
     hbs_poison_2,
@@ -2797,14 +2805,6 @@ pub const Hbs = enum(u8) {
     hbs_poison_4,
     hbs_poison_5,
     hbs_poison_6,
-
-    hbs_burn_0 = 91,
-    hbs_burn_1 = 92,
-    hbs_burn_2 = 93,
-    hbs_burn_3 = 94,
-    hbs_burn_4 = 95,
-    hbs_burn_5 = 96,
-    hbs_burn_6 = 97,
 
     hbs_bleed_0,
     hbs_bleed_1,
