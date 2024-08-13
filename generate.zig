@@ -26,7 +26,6 @@ pub fn main() !void {
     apat(.darkmagic_blade, .{});
     qpat(.hb_flash_item, .{});
 
-    // TODO: No tests
     item(.{
         .id = "it_transfigured_thunderclap_gloves",
         .name = .{
@@ -42,8 +41,9 @@ pub fn main() !void {
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
         .cooldown = 3 * std.time.ms_per_s,
+        .hbInput = .auto,
 
-        .delay = 400,
+        .procChance = 0.3,
         .strMult = 200,
     });
     trig(.hotbarUsed, .{.hb_self});
