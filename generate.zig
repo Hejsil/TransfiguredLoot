@@ -2,6 +2,26 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_sunflower_crown_hp = 3;
+    item(.{
+        .id = "it_transfigured_sunflower_crown",
+        .name = .{
+            .english = "Transfigured Sunflower Crown",
+        },
+        .description = .{
+            .english = "Your max HP is increased by [VAR0]. You are easier to hit. Slightly " ++
+                "increases movement speed.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .charspeed = 1,
+        .charradius = 20,
+        .hp = transfigured_sunflower_crown_hp,
+        .hbVar0 = transfigured_sunflower_crown_hp,
+    });
+
     const transfigured_midsummer_dress_hp = 1;
     const transfigured_midsummer_dress_mult_per_hp = 0.05;
     item(.{
