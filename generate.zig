@@ -2,6 +2,35 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_midsummer_dress_hp = 1;
+    const transfigured_midsummer_dress_mult_per_hp = 0.05;
+    item(.{
+        .id = "it_transfigured_midsummer_dress",
+        .name = .{
+            .english = "Transfigured Midsummer Dress",
+        },
+        .description = .{
+            .english = "Your max HP is increased by [VAR0]. You deal [VAR1_PERCENT] more " ++
+                "damage per HP. Slightly increases movement speed.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hp = transfigured_midsummer_dress_hp,
+        .hbVar0 = transfigured_midsummer_dress_hp,
+        .hbVar1 = transfigured_midsummer_dress_mult_per_hp,
+    });
+    trig(.strCalc0, .{});
+    tset(.uservar, .{
+        "u_allMult", "r_hp",
+        "*",         transfigured_midsummer_dress_mult_per_hp,
+    });
+    qpat(.hb_add_statchange_norefresh, .{
+        "stat",   "stat.allMult",
+        "amount", "u_allMult",
+    });
+
     item(.{
         .id = "it_transfigured_staticshock_earrings",
         .name = .{
@@ -17,7 +46,6 @@ pub fn main() !void {
         .strMult = 150,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
-    tset(.debug, .{"s_statusId"});
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_spark_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_spark_6) });
     ttrg(.players_opponent, .{});
