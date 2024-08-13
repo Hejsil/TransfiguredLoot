@@ -2,6 +2,41 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_grasswoven_bracelet_hp = 1;
+    const transfigured_grasswoven_bracelet_aoe_per_hp = 0.1;
+    item(.{
+        .id = "it_transfigured_grasswoven_bracelet",
+        .name = .{
+            .english = "Transfigured Grasswoven Bracelet",
+        },
+        .description = .{
+            .english = "Your max HP is increased by [VAR0]. All abilities and loot's hitboxes " ++
+                "are [VAR1_PERCENT] larger per HP. Slightly increases movement speed.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .charspeed = 1,
+        .hp = transfigured_grasswoven_bracelet_hp,
+        .hbVar0 = transfigured_grasswoven_bracelet_hp,
+        .hbVar1 = transfigured_grasswoven_bracelet_aoe_per_hp,
+    });
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    tset(.uservar, .{
+        "u_aoeMult", "r_hp",
+        "*",         transfigured_grasswoven_bracelet_aoe_per_hp,
+    });
+    tset(.uservar, .{
+        "u_aoeMultFull", "u_aoeMult",
+        "+",             1,
+    });
+    qpat(.hb_mult_hitbox_var, .{
+        "varIndex", "hitbox.radius",
+        "mult",     "u_aoeMultFull",
+    });
+
     const transfigured_sunflower_crown_hp = 3;
     item(.{
         .id = "it_transfigured_sunflower_crown",
@@ -37,6 +72,7 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
+        .charspeed = 1,
         .hp = transfigured_midsummer_dress_hp,
         .hbVar0 = transfigured_midsummer_dress_hp,
         .hbVar1 = transfigured_midsummer_dress_mult_per_hp,
