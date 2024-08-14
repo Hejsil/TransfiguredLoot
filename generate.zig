@@ -45,7 +45,6 @@ pub fn main() !void {
         "mult",     1 + transfigured_greysteel_shield_aoe,
     });
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_cursed_poisonfrog_charm",
         .name = .{
@@ -63,11 +62,11 @@ pub fn main() !void {
         .hbsStrMult = 40,
     });
     trig(.luckyProc, .{.pl_self});
+    ttrg(.players_opponent, .{});
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
     qpat(.hb_flash_item, .{});
 
-    // TODO: No Test
     const transfigured_cursed_deathcap_tome_hbs_str_mult = 30;
     item(.{
         .id = "it_transfigured_cursed_deathcap_tome",
@@ -95,7 +94,6 @@ pub fn main() !void {
         .{ .poison_6, .decay_6 },
     }) |hbs| {
         trig(.hbsCreated, .{.hbs_selfcast});
-        cond(.hb_available, .{});
         cond(.eval, .{ "s_statusId", "==", @intFromEnum(hbs[0]) });
         ttrg(.player_afflicted_source, .{});
         tset(.hbskey, .{ hbs[1], "r_hbsLength" });

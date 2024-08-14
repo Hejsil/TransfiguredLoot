@@ -1247,9 +1247,9 @@ pub const QuickPattern = enum {
     /// Adds a hitbox flag to a hotbarslot (see hbFlags on the "Stats" sheet)
     hb_add_flag,
 
-    /// "amount" (a number, in milliseconds)
-    /// "minimum" (a number, in milliseconds, default 200)
-    /// Adds (or subtracts) an amount from targeted hotbarslot's overall GCD.
+    /// ""varIndex" (an integer from 0-3)
+    /// "amount" (a number)"
+    /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
     hb_add_hitbox_var,
 
     /// "varIndex" (an integer from 0-3)
@@ -2781,6 +2781,14 @@ pub const Hbs = enum(u8) {
     spark_5 = 74,
     spark_6 = 75,
 
+    poison_0 = 84,
+    poison_1 = 85,
+    poison_2 = 86,
+    poison_3 = 87,
+    poison_4 = 88,
+    poison_5 = 89,
+    poison_6 = 90,
+
     burn_0 = 91,
     burn_1 = 92,
     burn_2 = 93,
@@ -2799,14 +2807,6 @@ pub const Hbs = enum(u8) {
     decay_7,
     decay_8,
     decay_9,
-
-    poison_0,
-    poison_1,
-    poison_2,
-    poison_3,
-    poison_4,
-    poison_5,
-    poison_6,
 
     bleed_0,
     bleed_1,
