@@ -213,15 +213,7 @@ pub const Item = struct {
         auto, // Item will activate automatically if the character is in combat and the cooldown is available
     } = null,
 
-    weaponType: ?enum {
-        none, // - No type
-        primary, // - Primary
-        secondary, // - Secondary
-        special, // - Special
-        defensive, // - Defensive
-        loot, // - Loot
-        potion, // - Potion
-    } = null,
+    weaponType: ?WeaponType = null,
 
     /// The amount of damage this item does
     strMult: ?u16 = null,
@@ -515,6 +507,10 @@ fn item2(opt: Item) !void {
             Hbs => try item_ini_w.print("{s}=\"{s}\"\n", .{
                 field.name,
                 value.toString(),
+            }),
+            WeaponType => try item_ini_w.print("{s}=\"{s}\"\n", .{
+                field.name,
+                value.toIniString(),
             }),
             else => try item_ini_w.print("{s}=\"{s}\"\n", .{
                 field.name,
@@ -2696,6 +2692,7 @@ fn writeArgs(writer: anytype, args: anytype) !void {
         u8, u16, u32, u64, usize, comptime_int => try writer.print(",{}", .{arg}),
         f64, comptime_float => try writer.print(",{d}", .{arg}),
         Hbs => try writer.print(",{s}", .{arg.toString()}),
+        WeaponType => try writer.print(",{s}", .{arg.toCsvString()}),
         else => {
             try writer.writeAll(",");
             try writeCsvString(writer, arg);
@@ -3049,6 +3046,40 @@ pub const Hbs = enum(u8) {
             .snare2_5 => "hbs_snare2_5",
             .snare2_6 => "hbs_snare2_6",
             .snare2_7 => "hbs_snare2_7",
+        };
+    }
+};
+
+pub const WeaponType = enum {
+    none,
+    primary,
+    secondary,
+    special,
+    defensive,
+    loot,
+    potion,
+
+    pub fn toIniString(wt: WeaponType) []const u8 {
+        return switch (wt) {
+            .none => "none",
+            .primary => "primary",
+            .secondary => "secondary",
+            .special => "special",
+            .defensive => "defensive",
+            .loot => "loot",
+            .potion => "potion",
+        };
+    }
+
+    pub fn toCsvString(wt: WeaponType) []const u8 {
+        return switch (wt) {
+            .none => "weaponType.none",
+            .primary => "weaponType.primary",
+            .secondary => "weaponType.secondary",
+            .special => "weaponType.special",
+            .defensive => "weaponType.defensive",
+            .loot => "weaponType.loot",
+            .potion => "weaponType.potion",
         };
     }
 };

@@ -2,6 +2,29 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No test
+    const transfigured_greysteel_shield_aoe = 1;
+    item(.{
+        .id = "it_transfigured_greysteel_shield",
+        .name = .{
+            .english = "Transfigured Greysteel Shield",
+        },
+        .description = .{
+            .english = "Your Defensive has a [VAR0_PERCENT] larger radius.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbVar0 = transfigured_greysteel_shield_aoe,
+    });
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
+    qpat(.hb_mult_hitbox_var, .{
+        "varIndex", "hitbox.radius",
+        "mult",     1 + transfigured_greysteel_shield_aoe,
+    });
+
     // TODO: No Test
     item(.{
         .id = "it_transfigured_cursed_poisonfrog_charm",
@@ -573,7 +596,7 @@ pub fn main() !void {
 
     // Set color of special to hbColor0/1
     trig(.colorCalc, .{});
-    ttrg(.hotbarslots_self_weapontype, .{"weaponType.secondary"});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
     qpat(.hb_set_color_def, .{});
 
     item(.{
@@ -619,7 +642,7 @@ pub fn main() !void {
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
     ttrg(.players_ally, .{});
-    ttrg(.hotbarslots_self_weapontype, .{"weaponType.special"});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
     cond(.hb_check_resettable0, .{});
     qpat(.hb_reset_cooldown, .{});
     ttrg(.hotbarslot_self, .{});
@@ -650,7 +673,7 @@ pub fn main() !void {
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
-    ttrg(.hotbarslots_self_weapontype, .{"weaponType.defensive"});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     cond(.hb_check_chargeable0, .{});
     qpat(.hb_charge, .{3}); // TODO: Is 3 omegacharge?
     qpat(.hb_flash_item, .{});
@@ -691,8 +714,8 @@ pub fn main() !void {
     trig(.strCalc1a, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg(.hotbarslots_prune_base_has_str, .{});
-    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.loot" });
-    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", "weaponType.potion" });
+    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", WeaponType.loot });
+    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", WeaponType.potion });
     qpat(.hb_set_strength, .{ "amount", transfigured_red_tanzaku_dmg });
 
     const transfigured_sapphire_violin_num_buffs = 3;
@@ -777,7 +800,7 @@ pub fn main() !void {
         .weaponType = .loot,
     });
     trig(.cdCalc2a, .{});
-    ttrg(.hotbarslots_self_weapontype, .{"weaponType.special"});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
     qpat(.hb_add_gcd_permanent, .{ "amount", 1400 });
 
     item(.{
@@ -880,7 +903,7 @@ pub fn main() !void {
         .hbVar1 = transfigured_opal_necklace_extra_cd,
     });
     trig(.cdCalc2a, .{});
-    ttrg(.hotbarslots_self_weapontype, .{"weaponType.defensive"});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     qpat(.hb_add_cooldown_permanent, .{ "amount", transfigured_opal_necklace_extra_cd });
 
     trig(.hotbarUsed, .{.hb_defensive});
@@ -1018,13 +1041,14 @@ pub fn main() !void {
 
 const apat = mod.apat;
 const cond = mod.cond;
+const Hbs = mod.Hbs;
 const item = mod.item;
 const qpat = mod.qpat;
 const rgb = mod.rgb;
+const trig = mod.trig;
 const tset = mod.tset;
 const ttrg = mod.ttrg;
-const trig = mod.trig;
-const Hbs = mod.Hbs;
+const WeaponType = mod.WeaponType;
 
 const mod = @import("mod.zig");
 const std = @import("std");
