@@ -217,9 +217,9 @@ pub fn main() !void {
         qpat(.hb_flash_item, .{});
     }
 
-    const transfigured_cursed_candlestafff_hbs_str_mult = 250;
+    const transfigured_cursed_candlestaff_hbs_str_mult = 250;
     item(.{
-        .id = "it_transfigured_cursed_candlestafff",
+        .id = "it_transfigured_cursed_candlestaff",
         .name = .{
             .english = "Transfigured Cursed Candlestaff",
         },
@@ -232,7 +232,7 @@ pub fn main() !void {
 
         .hbsType = .hbs_ghostflame_0,
         .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = transfigured_cursed_candlestafff_hbs_str_mult,
+        .hbsStrMult = transfigured_cursed_candlestaff_hbs_str_mult,
     });
     for ([_][2]Hbs{
         .{ .hbs_burn_0, .hbs_ghostflame_0 },
@@ -248,7 +248,7 @@ pub fn main() !void {
         cond(.eval, .{ "s_statusId", "==", @intFromEnum(hbs[0]) });
         ttrg(.player_afflicted_source, .{});
         tset(.hbskey, .{ @tagName(hbs[1]), "r_hbsLength" });
-        tset(.hbsstr, .{transfigured_cursed_candlestafff_hbs_str_mult});
+        tset(.hbsstr, .{transfigured_cursed_candlestaff_hbs_str_mult});
         apat(.apply_hbs, .{});
         qpat(.hb_flash_item, .{});
     }
