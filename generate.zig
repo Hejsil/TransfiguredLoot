@@ -2,6 +2,27 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_redwhite_ribbon_mult = 0.3;
+    item(.{
+        .id = "it_transfigured_redwhite_ribbon",
+        .name = .{
+            .english = "Transfigured Redwhite Ribbon",
+        },
+        .description = .{
+            .english = "You deal [VAR0_PERCENT] more damage. You cannot gain buffs.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .allMult = transfigured_redwhite_ribbon_mult,
+        .hbVar0 = transfigured_redwhite_ribbon_mult,
+    });
+    trig(.hbsCreated, .{.hbs_selfafl});
+    cond(.true, .{"s_isBuff"});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+
     item(.{
         .id = "it_transfigured_shadow_bracelet",
         .name = .{
