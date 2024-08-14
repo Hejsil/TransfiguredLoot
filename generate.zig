@@ -3,6 +3,28 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    item(.{
+        .id = "it_transfigured_cursed_poisonfrog_charm",
+        .name = .{
+            .english = "Transfigured Poisonfrog Charm",
+        },
+        .description = .{
+            .english = "When a % chance succeeds, apply [HEXP] to all enemies for [HBSL].",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbsType = .hex_poison,
+        .hbsLength = 2 * std.time.ms_per_s,
+        .hbsStrMult = 40,
+    });
+    trig(.luckyProc, .{.pl_self});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+    qpat(.hb_flash_item, .{});
+
+    // TODO: No Test
     const transfigured_cursed_deathcap_tome_hbs_str_mult = 30;
     item(.{
         .id = "it_transfigured_cursed_deathcap_tome",
@@ -16,24 +38,24 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbsType = .hbs_decay_0,
+        .hbsType = .decay_0,
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = transfigured_cursed_deathcap_tome_hbs_str_mult,
     });
     for ([_][2]Hbs{
-        .{ .hbs_poison_0, .hbs_decay_0 },
-        .{ .hbs_poison_1, .hbs_decay_1 },
-        .{ .hbs_poison_2, .hbs_decay_2 },
-        .{ .hbs_poison_3, .hbs_decay_3 },
-        .{ .hbs_poison_4, .hbs_decay_4 },
-        .{ .hbs_poison_5, .hbs_decay_5 },
-        .{ .hbs_poison_6, .hbs_decay_6 },
+        .{ .poison_0, .decay_0 },
+        .{ .poison_1, .decay_1 },
+        .{ .poison_2, .decay_2 },
+        .{ .poison_3, .decay_3 },
+        .{ .poison_4, .decay_4 },
+        .{ .poison_5, .decay_5 },
+        .{ .poison_6, .decay_6 },
     }) |hbs| {
         trig(.hbsCreated, .{.hbs_selfcast});
         cond(.hb_available, .{});
         cond(.eval, .{ "s_statusId", "==", @intFromEnum(hbs[0]) });
         ttrg(.player_afflicted_source, .{});
-        tset(.hbskey, .{ @tagName(hbs[1]), "r_hbsLength" });
+        tset(.hbskey, .{ hbs[1], "r_hbsLength" });
         tset(.hbsstr, .{transfigured_cursed_deathcap_tome_hbs_str_mult});
         apat(.apply_hbs, .{});
         qpat(.hb_flash_item, .{});
@@ -139,8 +161,8 @@ pub fn main() !void {
         .strMult = 150,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
-    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_spark_0) });
-    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_spark_6) });
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.spark_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.spark_6) });
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
@@ -181,19 +203,19 @@ pub fn main() !void {
             .id = "it_transfigured_sandpriestess_spear",
             .name = .{ .english = "Transfigured Sandpriestess Spear" },
             .description = .{ .english = "Every time you gain [FLASH-STR], gain [FLOW-STR]." },
-            .hbsType = .hbs_flowstr,
+            .hbsType = .flowstr,
         },
         .{
             .id = "it_transfigured_flamedancer_dagger",
             .name = .{ .english = "Transfigured Flamedancer Dagger" },
             .description = .{ .english = "Every time you gain [FLASH-DEX], gain [FLOW-DEX]." },
-            .hbsType = .hbs_flowdex,
+            .hbsType = .flowdex,
         },
         .{
             .id = "it_transfigured_whiteflame_staff",
             .name = .{ .english = "Transfigured Whiteflame Staff" },
             .description = .{ .english = "Every time you gain [FLASH-INT], gain [FLOW-INT]." },
-            .hbsType = .hbs_flowint,
+            .hbsType = .flowint,
         },
     }) |_item| {
         var i = _item;
@@ -202,9 +224,9 @@ pub fn main() !void {
         i.hbsLength = 5 * std.time.ms_per_s;
 
         const flash_hbs: Hbs = switch (_item.hbsType.?) {
-            .hbs_flowstr => .hbs_flashstr,
-            .hbs_flowdex => .hbs_flashdex,
-            .hbs_flowint => .hbs_flashint,
+            .flowstr => .flashstr,
+            .flowdex => .flashdex,
+            .flowint => .flashint,
             else => unreachable,
         };
 
@@ -230,24 +252,24 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbsType = .hbs_ghostflame_0,
+        .hbsType = .ghostflame_0,
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = transfigured_cursed_candlestaff_hbs_str_mult,
     });
     for ([_][2]Hbs{
-        .{ .hbs_burn_0, .hbs_ghostflame_0 },
-        .{ .hbs_burn_1, .hbs_ghostflame_1 },
-        .{ .hbs_burn_2, .hbs_ghostflame_2 },
-        .{ .hbs_burn_3, .hbs_ghostflame_3 },
-        .{ .hbs_burn_4, .hbs_ghostflame_4 },
-        .{ .hbs_burn_5, .hbs_ghostflame_5 },
-        .{ .hbs_burn_6, .hbs_ghostflame_0 },
+        .{ .burn_0, .ghostflame_0 },
+        .{ .burn_1, .ghostflame_1 },
+        .{ .burn_2, .ghostflame_2 },
+        .{ .burn_3, .ghostflame_3 },
+        .{ .burn_4, .ghostflame_4 },
+        .{ .burn_5, .ghostflame_5 },
+        .{ .burn_6, .ghostflame_0 },
     }) |hbs| {
         trig(.hbsCreated, .{.hbs_selfcast});
         cond(.hb_available, .{});
         cond(.eval, .{ "s_statusId", "==", @intFromEnum(hbs[0]) });
         ttrg(.player_afflicted_source, .{});
-        tset(.hbskey, .{ @tagName(hbs[1]), "r_hbsLength" });
+        tset(.hbskey, .{ hbs[1], "r_hbsLength" });
         tset(.hbsstr, .{transfigured_cursed_candlestaff_hbs_str_mult});
         apat(.apply_hbs, .{});
         qpat(.hb_flash_item, .{});
@@ -373,8 +395,8 @@ pub fn main() !void {
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond(.hb_available, .{});
-    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
-    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.curse_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.curse_5) });
     qpat(.hb_run_cooldown, .{});
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
@@ -400,14 +422,14 @@ pub fn main() !void {
         .cooldownType = .time,
         .cooldown = 10 * std.time.ms_per_s,
 
-        .hbsType = .hbs_hex_poison,
+        .hbsType = .hex_poison,
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = 40,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond(.hb_available, .{});
-    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
-    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.curse_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.curse_5) });
     qpat(.hb_run_cooldown, .{});
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
@@ -433,13 +455,13 @@ pub fn main() !void {
         .cooldownType = .time,
         .cooldown = 10 * std.time.ms_per_s,
 
-        .hbsType = .hbs_hex_super,
+        .hbsType = .hex_super,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond(.hb_available, .{});
-    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.hbs_curse_0) });
-    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.hbs_curse_5) });
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.curse_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.curse_5) });
     qpat(.hb_run_cooldown, .{});
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
@@ -491,11 +513,11 @@ pub fn main() !void {
         trig(.hotbarUsed, .{.hb_self});
         cond(.hb_check_square_var, .{ 0, i });
         ttrg(.players_opponent, .{});
-        tset(.hbskey, .{ @tagName(debuff), "r_hbsLength" });
+        tset(.hbskey, .{ debuff, "r_hbsLength" });
         tset(.hbsstr, .{transfigured_mimick_rabbitfoot_hbs_str_mult});
         apat(.poisonfrog_charm, .{});
         ttrg(.player_self, .{});
-        tset(.hbskey, .{ @tagName(Hbs.hbs_berserk), transfigured_mimick_rabbitfoot_cd });
+        tset(.hbskey, .{ Hbs.berserk, transfigured_mimick_rabbitfoot_cd });
         apat(.apply_hbs, .{});
     }
 
@@ -525,7 +547,7 @@ pub fn main() !void {
 
         .weaponType = .loot,
         .delay = 250,
-        .hbsType = .hbs_poison_0,
+        .hbsType = .poison_0,
         .hbsStrMult = transfigured_snakefang_dagger_str,
         .hbsLength = 5 * std.time.ms_per_s,
 
@@ -652,7 +674,7 @@ pub fn main() !void {
         .hbInput = .auto,
 
         .weaponType = .loot,
-        .hbsType = .hbs_lucky,
+        .hbsType = .lucky,
         .hbsLength = std.time.ms_per_min,
 
         .cooldownType = .time,
@@ -851,7 +873,7 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbsType = .hbs_curse_0,
+        .hbsType = .curse_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
         .hbVar0 = transfigured_opal_necklace_num_curses,
@@ -863,8 +885,17 @@ pub fn main() !void {
 
     trig(.hotbarUsed, .{.hb_defensive});
     ttrg(.players_opponent, .{});
-    inline for (0..transfigured_opal_necklace_num_curses) |i| {
-        tset(.hbskey, .{ std.fmt.comptimePrint("hbs_curse_{}", .{i}), "r_hbsLength" });
+
+    const curses = [_]Hbs{
+        .curse_0,
+        .curse_1,
+        .curse_2,
+        .curse_3,
+        .curse_4,
+        .curse_5,
+    };
+    for (curses[0..transfigured_opal_necklace_num_curses]) |curse| {
+        tset(.hbskey, .{ curse, "r_hbsLength" });
         apat(.apply_hbs, .{});
     }
 
@@ -969,7 +1000,7 @@ pub fn main() !void {
         .hbVar0 = transfigured_meteor_staff_cd,
 
         .delay = 250,
-        .hbsType = .hbs_burn_3,
+        .hbsType = .burn_3,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig(.onDamageDone, .{.dmg_islarge});
