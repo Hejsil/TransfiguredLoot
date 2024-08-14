@@ -2,6 +2,27 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_amethyst_bracelet_mult = 0.3;
+    item(.{
+        .id = "it_transfigured_amethyst_bracelet",
+        .name = .{
+            .english = "Transfigured Amethyst Bracelet",
+        },
+        .description = .{
+            .english = "You deal [VAR0_PERCENT] more damage. You cannot inflict debuffs.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .allMult = transfigured_amethyst_bracelet_mult,
+        .hbVar0 = transfigured_amethyst_bracelet_mult,
+    });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.false, .{"s_isBuff"});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+
     const transfigured_redwhite_ribbon_mult = 0.3;
     item(.{
         .id = "it_transfigured_redwhite_ribbon",
