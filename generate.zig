@@ -2,7 +2,27 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: No test
+    item(.{
+        .id = "it_transfigured_shadow_bracelet",
+        .name = .{
+            .english = "Transfigured Shadow Bracelet",
+        },
+        .description = .{
+            .english = "Abilities and loot that hit more than twice hits and additional time.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+    });
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_number", ">", 2 });
+    qpat(.debug_targets, .{});
+    qpat(.hb_add_hitbox_var, .{
+        "varIndex", "hitbox.number",
+        "amount",   1,
+    });
+
     const transfigured_greysteel_shield_aoe = 1;
     item(.{
         .id = "it_transfigured_greysteel_shield",
