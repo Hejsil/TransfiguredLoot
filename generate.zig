@@ -573,7 +573,7 @@ pub fn main() !void {
 
     // Set color of special to hbColor0/1
     trig(.colorCalc, .{});
-    ttrg(.hotbarslots_self_weapontype, .{2}); // 2 is secondary TODO: Have constant for that
+    ttrg(.hotbarslots_self_weapontype, .{"weaponType.secondary"});
     qpat(.hb_set_color_def, .{});
 
     item(.{
@@ -619,7 +619,7 @@ pub fn main() !void {
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
     ttrg(.players_ally, .{});
-    ttrg(.hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    ttrg(.hotbarslots_self_weapontype, .{"weaponType.special"});
     cond(.hb_check_resettable0, .{});
     qpat(.hb_reset_cooldown, .{});
     ttrg(.hotbarslot_self, .{});
@@ -650,7 +650,7 @@ pub fn main() !void {
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
-    ttrg(.hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
+    ttrg(.hotbarslots_self_weapontype, .{"weaponType.defensive"});
     cond(.hb_check_chargeable0, .{});
     qpat(.hb_charge, .{3}); // TODO: Is 3 omegacharge?
     qpat(.hb_flash_item, .{});
@@ -777,7 +777,7 @@ pub fn main() !void {
         .weaponType = .loot,
     });
     trig(.cdCalc2a, .{});
-    ttrg(.hotbarslots_self_weapontype, .{3}); // 3 is special TODO: Have constant for that
+    ttrg(.hotbarslots_self_weapontype, .{"weaponType.special"});
     qpat(.hb_add_gcd_permanent, .{ "amount", 1400 });
 
     item(.{
@@ -880,7 +880,7 @@ pub fn main() !void {
         .hbVar1 = transfigured_opal_necklace_extra_cd,
     });
     trig(.cdCalc2a, .{});
-    ttrg(.hotbarslots_self_weapontype, .{4}); // 4 is defensive TODO: Have constant for that
+    ttrg(.hotbarslots_self_weapontype, .{"weaponType.defensive"});
     qpat(.hb_add_cooldown_permanent, .{ "amount", transfigured_opal_necklace_extra_cd });
 
     trig(.hotbarUsed, .{.hb_defensive});
