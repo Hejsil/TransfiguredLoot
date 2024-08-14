@@ -2,6 +2,43 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No Test
+    const transfigured_cursed_deathcap_tome_hbs_str_mult = 30;
+    item(.{
+        .id = "it_transfigured_cursed_deathcap_tome",
+        .name = .{
+            .english = "Transfigured Deathcap Tome",
+        },
+        .description = .{
+            .english = "When you inflict a poison, also inflict [DECAY-0].",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbsType = .hbs_decay_0,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = transfigured_cursed_deathcap_tome_hbs_str_mult,
+    });
+    for ([_][2]Hbs{
+        .{ .hbs_poison_0, .hbs_decay_0 },
+        .{ .hbs_poison_1, .hbs_decay_1 },
+        .{ .hbs_poison_2, .hbs_decay_2 },
+        .{ .hbs_poison_3, .hbs_decay_3 },
+        .{ .hbs_poison_4, .hbs_decay_4 },
+        .{ .hbs_poison_5, .hbs_decay_5 },
+        .{ .hbs_poison_6, .hbs_decay_6 },
+    }) |hbs| {
+        trig(.hbsCreated, .{.hbs_selfcast});
+        cond(.hb_available, .{});
+        cond(.eval, .{ "s_statusId", "==", @intFromEnum(hbs[0]) });
+        ttrg(.player_afflicted_source, .{});
+        tset(.hbskey, .{ @tagName(hbs[1]), "r_hbsLength" });
+        tset(.hbsstr, .{transfigured_cursed_deathcap_tome_hbs_str_mult});
+        apat(.apply_hbs, .{});
+        qpat(.hb_flash_item, .{});
+    }
+
     const transfigured_grasswoven_bracelet_hp = 1;
     const transfigured_grasswoven_bracelet_aoe_per_hp = 0.1;
     item(.{
