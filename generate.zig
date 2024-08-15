@@ -4,6 +4,34 @@ pub fn main() !void {
 
     // TODO: No Test
     item(.{
+        .id = "it_transfigured_leech_staff",
+        .name = .{
+            .english = "Transfigured Leech Staff",
+        },
+        .description = .{
+            .english = "When you inflict a bleed, also inflict [SAP].",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 4 * std.time.ms_per_s,
+
+        .hbsType = .sap,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = 20,
+    });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.bleed_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.bleed_3) });
+    qpat(.hb_flash_item, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
+    // TODO: No Test
+    item(.{
         .id = "it_transfigured_tiny_hourglass",
         .name = .{
             .english = "Transfigured Tiny Hourglass",
