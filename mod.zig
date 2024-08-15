@@ -664,24 +664,32 @@ pub const Trigger = enum {
     /// Called when a status effect is overwritten by an instance of the same status
     /// - Currently unused
     hbsRefreshed,
+
     /// Called when a status effect is destroyed
     /// - Stoneskin, Ghostflame, Snare, Burn
     hbsDestroyed,
+
     /// - Currently unused
     hbsFlagTrigger,
+
     /// The following are shield checks. If your character is hit while they have the
     /// HBS_FLAG_SHIELD flag (see hbsFlag on the Stats sheet), it will go through these triggers
     /// in order, and stop if the character is shielded
     /// - Rockdragon Mail
     hbsShield0,
+
     /// - Red Tanzaku
     hbsShield1,
+
     /// - Stoneskin
     hbsShield2,
+
     /// - Graniteskin
     hbsShield3,
+
     /// - Emerald chestplate
     hbsShield4,
+
     /// - Phoenix charm
     hbsShield5,
 
@@ -990,12 +998,15 @@ pub const Condition = enum {
     /// Exclusively for use with "hbsCreated".
     /// Returns true if the Status Effect that called the trigger was created by this hotbar.
     hbs_thishbcast,
+
     /// Exclusively for use with "hbsCreated".
     /// Returns true if the Status Effect that called the trigger was not created by this hotbar.
     hbs_not_thishbcast,
+
     /// Exclusively for use with "hbsCreated".
     /// Returns true if the Status Effect that called the trigger was placed ON this player.
     hbs_selfafl,
+
     /// "Exclusively for use with "hbsCreated".
     /// Returns true if the Status Effect that called the trigger was placed BY this player.
     hbs_selfcast,
@@ -1010,9 +1021,11 @@ pub const Condition = enum {
     /// amount (any number)
     /// Returns true if the player receiving this trigger is missing at least "amount" health
     missing_health,
+
     /// Checks if the current player is currently attacking or in battle (currently only used for
     /// Ancient Emerald Defensive)
     pl_autocheck,
+
     /// Checks if trigger is coming from this player (or one of their hotbars)
     pl_self,
 
@@ -1194,6 +1207,7 @@ pub const QuickPattern = enum {
     /// "length" (time in milliseconds)
     /// Runs GCD for specified amount of time
     player_run_gcd,
+
     /// "amount" (size in pixels)
     /// Sets hitbox size for players; meant to be used in strCalc
     player_set_radius,
@@ -2183,6 +2197,7 @@ pub const Target = enum {
     player_afflicted,
 
     player_afflicted_source,
+
     /// When a status effect is the SOURCE of the trigger, target the player afflicted by that
     /// status effect.
     /// From an "onDamageDone" trigger, target the player that was damaged.
