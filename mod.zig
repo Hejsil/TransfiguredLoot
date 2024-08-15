@@ -1041,6 +1041,16 @@ pub const Condition = enum {
     /// "!=" not equal
     player_target_count,
 
+    /// comparitor (string)
+    /// numberOfHBS (integer)
+    /// Same as tcond_player_target_count, but for status effects
+    hbs_target_count,
+
+    /// comparitor (string)
+    /// numberOfSlots (integer)
+    /// Same as tcond_player_target_count, but for hotbarslots
+    slot_target_count,
+
     /// percentChance (a number between 0 and 1)
     /// Will return true percentChance% of the time. Number should be between 0 and 1, with 0
     /// being a 0% chance and 1 being a 100% chance. If the player has a luck-increasing item,
@@ -1118,6 +1128,8 @@ pub const Condition = enum {
             .pl_autocheck => "tcond_pl_autocheck",
             .pl_self => "tcond_pl_self",
             .player_target_count => "tcond_player_target_count",
+            .hbs_target_count => "tcond_hbs_target_count",
+            .slot_target_count => "tcond_slot_target_count",
             .random => "tcond_random",
             .random_def => "tcond_random_def",
             .square_self => "tcond_square_self",
