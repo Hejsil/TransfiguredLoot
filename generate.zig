@@ -4,6 +4,27 @@ pub fn main() !void {
 
     // TODO: No Test
     item(.{
+        .id = "it_transfigured_gemini_necklace",
+        .name = .{
+            .english = "Transfigured Gemini Necklace",
+        },
+        .description = .{
+            .english = "Your Secondary have a [LUCK] chance of instantly resetting when used.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+
+        .procChance = 0.5,
+    });
+    trig(.hotbarUsed, .{.hb_secondary});
+    cond(.hb_check_resettable0, .{});
+    cond(.random_def, .{});
+    qpat(.hb_reset_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_lucky_proc, .{});
+
+    // TODO: No Test
+    item(.{
         .id = "it_transfigured_abyss_artifact",
         .name = .{
             .english = "Transfigured Abyss Artifact",
