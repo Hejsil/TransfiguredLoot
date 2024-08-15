@@ -3,6 +3,41 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    const transfigured_golden_katana_hits = 5;
+    item(.{
+        .id = "it_transfigured_golden_katana",
+        .name = .{
+            .english = "Transfigured Golden Katana",
+        },
+        .description = .{
+            .english = "Every [CD] have a [LUCK] chance to slices the air around you dealing " ++
+                "[STR] damage [VAR0_TIMES] to nearby enemies.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 1 * std.time.ms_per_s,
+
+        .procChance = 0.05,
+        .radius = 400,
+        .strMult = 100,
+        .hitNumber = transfigured_golden_katana_hits,
+        .hbVar0 = transfigured_golden_katana_hits,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    cond(.random_def, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    qpat(.hb_lucky_proc, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+
+    // TODO: No Test
     const transfigured_nova_crown_cd = 99 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_nova_crown",
