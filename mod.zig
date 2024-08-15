@@ -1,4 +1,5 @@
 var written_items: usize = 0;
+var have_trigger: bool = false;
 
 var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
 var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
@@ -517,6 +518,7 @@ fn item2(opt: Item) !void {
     );
 
     written_items += 1;
+    have_trigger = false;
 }
 
 /// When certain things in the game happen (everything from you gaining gold, to using an ability,
@@ -840,6 +842,7 @@ fn trig2(trigger: Trigger, opt: TriggerOpt) !void {
         trigger.toCsvString(),
         if (opt[0]) |condition| condition.toCsvString() else "",
     });
+    have_trigger = true;
 }
 
 pub const Condition = enum {
@@ -1148,6 +1151,7 @@ pub fn cond(condition: Condition, args: anytype) void {
 }
 
 fn cond2(condition: Condition, args: anytype) !void {
+    std.debug.assert(have_trigger);
     try item_csv.writer().print("condition,{s}", .{condition.toCsvString()});
     try writeArgs(item_csv.writer(), args);
 }
@@ -1604,6 +1608,7 @@ pub fn qpat(pat: QuickPattern, args: anytype) void {
 }
 
 fn qpat2(pat: QuickPattern, args: anytype) !void {
+    std.debug.assert(have_trigger);
     try item_csv.writer().print("quickPattern,{s}", .{pat.toCsvString()});
     try writeArgs(item_csv.writer(), args);
 }
@@ -2161,6 +2166,7 @@ pub fn apat(pat: AttackPattern, args: anytype) void {
 }
 
 fn apat2(pat: AttackPattern, args: anytype) !void {
+    std.debug.assert(have_trigger);
     try item_csv.writer().print("addPattern,{s}", .{pat.toCsvString()});
     try writeArgs(item_csv.writer(), args);
 }
@@ -2481,6 +2487,7 @@ pub fn ttrg(targ: Target, args: anytype) void {
 }
 
 fn ttrg2(targ: Target, args: anytype) !void {
+    std.debug.assert(have_trigger);
     try item_csv.writer().print("target,{s}", .{targ.toCsvString()});
     try writeArgs(item_csv.writer(), args);
 }
@@ -2699,6 +2706,7 @@ pub fn tset(s: Set, args: anytype) void {
 }
 
 fn tset2(s: Set, args: anytype) !void {
+    std.debug.assert(have_trigger);
     try item_csv.writer().print("set,{s}", .{s.toCsvString()});
     try writeArgs(item_csv.writer(), args);
 }
