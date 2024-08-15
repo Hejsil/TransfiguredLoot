@@ -25,7 +25,7 @@ pub fn main() !void {
     cond(.hb_check_resettable0, .{});
     qpat(.hb_reset_cooldown, .{});
     ttrg(.hotbarslot_self, .{});
-    cond(.hb_flash_item, .{});
+    qpat(.hb_flash_item, .{});
 
     trig(.cdCalc5, .{});
     ttrg(.hotbarslots_current_players, .{});
@@ -388,6 +388,8 @@ pub fn main() !void {
         apat(.apply_hbs, .{});
     }
 
+    // TODO: No Test
+    const transfigured_ballroom_gown_buff = 5.0;
     item(.{
         .id = "it_transfigured_ballroom_gown",
         .name = .{
@@ -400,14 +402,22 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hp = 1,
-        .allMult = 0.05,
-        .cdp = -500,
-        .haste = 0.95,
-        .luck = 0.05,
-        .charspeed = 0.5,
-        .charradius = -5,
-        .invulnPlus = 500,
+        .allMult = transfigured_ballroom_gown_buff * 0.01,
+        .haste = 1 - transfigured_ballroom_gown_buff * 0.01,
+        .luck = transfigured_ballroom_gown_buff * 0.01,
+        .invulnPlus = transfigured_ballroom_gown_buff * 100,
+        .cdp = -transfigured_ballroom_gown_buff * 100,
+        .charspeed = transfigured_ballroom_gown_buff * 0.1,
+        .charradius = -transfigured_ballroom_gown_buff,
+    });
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    qpat(.hb_mult_hitbox_var, .{
+        "varIndex", "hitbox.radius",
+        "mult",     1 + transfigured_ballroom_gown_buff * 0.01,
+    });
+    qpat(.hb_add_strength, .{
+        "amount", transfigured_ballroom_gown_buff,
     });
 
     item(.{
