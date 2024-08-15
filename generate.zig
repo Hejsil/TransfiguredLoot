@@ -3,6 +3,33 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    item(.{
+        .id = "it_transfigured_abyss_artifact",
+        .name = .{
+            .english = "Transfigured Abyss Artifact",
+        },
+        .description = .{
+            .english = "Every [CD], gaining [STILLNESS] will also grant you [SUPER] for [HBSL].",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 16 * std.time.ms_per_s,
+
+        .hbsType = .super,
+        .hbsLength = 4 * std.time.ms_per_s,
+    });
+    trig(.hbsCreated, .{.hbs_selfafl});
+    cond(.eval, .{ "s_statusId", "==", @intFromEnum(Hbs.stillness) });
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_afflicted_source, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
+    // TODO: No Test
     const transfigured_golden_katana_hits = 5;
     item(.{
         .id = "it_transfigured_golden_katana",
