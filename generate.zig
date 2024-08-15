@@ -3,6 +3,25 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    item(.{
+        .id = "it_transfigured_reflection_shield",
+        .name = .{
+            .english = "Transfigured Reflection Shield",
+        },
+        .description = .{
+            .english = "Every time you gain a buff, allies gain it too.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+    });
+    trig(.hbsCreated, .{.hbs_selfafl});
+    cond(.true, .{"s_isBuff"});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_ally, .{});
+    tset(.hbskey, .{"s_statusId"});
+    apat(.apply_hbs, .{});
+
+    // TODO: No Test
     const transfigured_kyou_no_omikuji_dmg_mult = 0.5;
     item(.{
         .id = "it_transfigured_kyou_no_omikuji",
