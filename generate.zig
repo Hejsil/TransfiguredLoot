@@ -4,6 +4,34 @@ pub fn main() !void {
 
     // TODO: No Test
     item(.{
+        .id = "it_transfigured_tiny_hourglass",
+        .name = .{
+            .english = "Transfigured Tiny Hourglass",
+        },
+        .description = .{
+            .english = "Every [CD], deal [STR] damage to all enemies.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 60 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .strMult = 2000,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.crown_of_storms, .{});
+
+    // TODO: No Test
+    item(.{
         .id = "it_transfigured_reflection_shield",
         .name = .{
             .english = "Transfigured Reflection Shield",
