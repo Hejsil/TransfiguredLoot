@@ -3,6 +3,27 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    const transfigured_kyou_no_omikuji_dmg_mult = 0.5;
+    item(.{
+        .id = "it_transfigured_kyou_no_omikuji",
+        .name = .{
+            .english = "Transfigured Kyou No Omikuji",
+        },
+        .description = .{
+            .english = "All damage you deal increases by [VAR0_PERCENT]. You cannot use your " ++
+                "Primary and Special.",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+
+        .allMult = transfigured_kyou_no_omikuji_dmg_mult,
+        .hbVar0 = transfigured_kyou_no_omikuji_dmg_mult,
+
+        .hbShineFlag = 16 | // HBCROSS_PRIMARY   - Makes Primary unusable
+            64, // HBCROSS_SPECIAL   - Makes Special unusable
+    });
+
+    // TODO: No Test
     item(.{
         .id = "it_transfigured_gemini_necklace",
         .name = .{

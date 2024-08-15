@@ -439,14 +439,14 @@ pub const Item = struct {
     /// effects like Flash-Int, Flow-Str or Super.
     /// Can also be used to cross them out and make them unusable.
     /// This is a binary number, so multiple values can be combined to have multiple effects.
-    /// 1  HBSHINE_PRIMARY   - Makes Primary shine
-    /// 2  HBSHINE_SECONDARY - Makes Secondary shine
-    /// 4  HBSHINE_SPECIAL   - Makes Special shine
-    /// 8  HBSHINE_DEFENSIVE - Makes Defensive shine
-    /// 16 HBCROSS_PRIMARY   - Makes Primary unusable
-    /// 16 HBCROSS_SECONDARY - Makes Secondary unusable
-    /// 16 HBCROSS_SPECIAL   - Makes Special unusable
-    /// 16 HBCROSS_DEFENSIVE - Makes Defensive unusable
+    /// 1   HBSHINE_PRIMARY   - Makes Primary shine
+    /// 2   HBSHINE_SECONDARY - Makes Secondary shine
+    /// 4   HBSHINE_SPECIAL   - Makes Special shine
+    /// 8   HBSHINE_DEFENSIVE - Makes Defensive shine
+    /// 16  HBCROSS_PRIMARY   - Makes Primary unusable
+    /// 32  HBCROSS_SECONDARY - Makes Secondary unusable
+    /// 64  HBCROSS_SPECIAL   - Makes Special unusable
+    /// 128 HBCROSS_DEFENSIVE - Makes Defensive unusable
     hbShineFlag: ?u8 = null,
 };
 
