@@ -2757,6 +2757,7 @@ pub const Hbs = enum(u8) {
     stoneskin,
     super,
     blackstrike,
+    stillness = 20,
     repeat,
     flowstr = 22,
     flowdex = 23,
@@ -2768,7 +2769,6 @@ pub const Hbs = enum(u8) {
     astra,
     abyssrage,
     hex_anti,
-    stillness,
 
     elegy_0,
     elegy_1,
@@ -2798,6 +2798,11 @@ pub const Hbs = enum(u8) {
     curse_3 = 59,
     curse_4 = 60,
     curse_5 = 61,
+
+    bleed_0 = 62,
+    bleed_1 = 63,
+    bleed_2 = 64,
+    bleed_3 = 65,
 
     spark_0 = 69,
     spark_1 = 70,
@@ -2833,11 +2838,6 @@ pub const Hbs = enum(u8) {
     decay_7,
     decay_8,
     decay_9,
-
-    bleed_0,
-    bleed_1,
-    bleed_2,
-    bleed_3,
 
     ghostflame_0,
     ghostflame_1,

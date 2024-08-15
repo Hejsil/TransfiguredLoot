@@ -2,7 +2,6 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_leech_staff",
         .name = .{
@@ -15,22 +14,19 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .lootHbDispType = .cooldown,
-        .cooldownType = .time,
-        .cooldown = 4 * std.time.ms_per_s,
-
         .hbsType = .sap,
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = 20,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
+    tset(.debug, .{"s_statusId"});
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.bleed_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.bleed_3) });
     qpat(.hb_flash_item, .{});
+    ttrg(.player_afflicted_source, .{});
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_tiny_hourglass",
         .name = .{
@@ -50,6 +46,9 @@ pub fn main() !void {
 
         .strMult = 2000,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_flash_item, .{});
@@ -58,26 +57,6 @@ pub fn main() !void {
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
 
-    // TODO: No Test
-    item(.{
-        .id = "it_transfigured_reflection_shield",
-        .name = .{
-            .english = "Transfigured Reflection Shield",
-        },
-        .description = .{
-            .english = "Every time you gain a buff, allies gain it too.",
-        },
-        .type = .loot,
-        .weaponType = .loot,
-    });
-    trig(.hbsCreated, .{.hbs_selfafl});
-    cond(.true, .{"s_isBuff"});
-    qpat(.hb_flash_item, .{});
-    ttrg(.players_ally, .{});
-    tset(.hbskey, .{"s_statusId"});
-    apat(.apply_hbs, .{});
-
-    // TODO: No Test
     const transfigured_kyou_no_omikuji_dmg_mult = 0.5;
     item(.{
         .id = "it_transfigured_kyou_no_omikuji",
@@ -98,7 +77,6 @@ pub fn main() !void {
             64, // HBCROSS_SPECIAL   - Makes Special unusable
     });
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_gemini_necklace",
         .name = .{
@@ -112,14 +90,15 @@ pub fn main() !void {
 
         .procChance = 0.5,
     });
-    trig(.hotbarUsed, .{.hb_secondary});
-    cond(.hb_check_resettable0, .{});
+    trig(.hotbarUsedProc, .{.hb_secondary});
     cond(.random_def, .{});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
+    cond(.hb_check_resettable0, .{});
     qpat(.hb_reset_cooldown, .{});
+    ttrg(.hotbarslot_self, .{});
     qpat(.hb_flash_item, .{});
     qpat(.hb_lucky_proc, .{});
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_abyss_artifact",
         .name = .{
@@ -140,14 +119,14 @@ pub fn main() !void {
         .hbsLength = 4 * std.time.ms_per_s,
     });
     trig(.hbsCreated, .{.hbs_selfafl});
+    cond(.hb_available, .{});
     cond(.eval, .{ "s_statusId", "==", @intFromEnum(Hbs.stillness) });
+    qpat(.hb_run_cooldown, .{});
     qpat(.hb_flash_item, .{});
     ttrg(.player_afflicted_source, .{});
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
-    // TODO: No Test
-    const transfigured_golden_katana_hits = 5;
     item(.{
         .id = "it_transfigured_golden_katana",
         .name = .{
@@ -155,7 +134,7 @@ pub fn main() !void {
         },
         .description = .{
             .english = "Every [CD] have a [LUCK] chance to slices the air around you dealing " ++
-                "[STR] damage [VAR0_TIMES] to nearby enemies.",
+                "[STR] damage.",
         },
 
         .type = .loot,
@@ -164,12 +143,11 @@ pub fn main() !void {
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
         .cooldown = 1 * std.time.ms_per_s,
+        .hbInput = .auto,
 
         .procChance = 0.05,
         .radius = 400,
-        .strMult = 100,
-        .hitNumber = transfigured_golden_katana_hits,
-        .hbVar0 = transfigured_golden_katana_hits,
+        .strMult = 500,
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
