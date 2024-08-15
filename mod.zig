@@ -485,38 +485,27 @@ fn item2(opt: Item) !void {
         if (comptime std.mem.eql(u8, field.name, "script"))
             break :continue_blk;
 
-        if (@field(opt, field.name)) |value| switch (@TypeOf(value)) {
-            bool => try item_ini_w.print("{s}=\"{d}\"\n", .{
-                field.name,
-                @intFromBool(value),
-            }),
-            i8, u8, u16, i32, u32, f64 => try item_ini_w.print("{s}=\"{d}\"\n", .{
-                field.name,
-                value,
-            }),
-            []const u8 => try item_ini_w.print("{s}=\"{s}\"\n", .{
-                field.name,
-                value,
-            }),
-            Color => try item_ini_w.print("{s}=\"#{x:02}{x:02}{x:02}\"\n", .{
-                field.name,
-                value.r,
-                value.g,
-                value.b,
-            }),
-            Hbs => try item_ini_w.print("{s}=\"{s}\"\n", .{
-                field.name,
-                value.toString(),
-            }),
-            WeaponType => try item_ini_w.print("{s}=\"{s}\"\n", .{
-                field.name,
-                value.toIniString(),
-            }),
-            else => try item_ini_w.print("{s}=\"{s}\"\n", .{
-                field.name,
-                @tagName(value),
-            }),
-        };
+        if (@field(opt, field.name)) |value| {
+            const T = @TypeOf(value);
+            try item_ini_w.print("{s}=\"", .{field.name});
+            if (T == Color) {
+                try item_ini_w.print("#{x:02}{x:02}{x:02}", .{
+                    value.r,
+                    value.g,
+                    value.b,
+                });
+            } else switch (@typeInfo(T)) {
+                .Bool => try item_ini_w.print("{d}", .{@intFromBool(value)}),
+                .Int, .Float => try item_ini_w.print("{d}", .{value}),
+                .Enum, .Struct, .Union => if (@hasDecl(@TypeOf(value), "toIniString")) {
+                    try item_ini_w.writeAll(value.toIniString());
+                } else {
+                    try item_ini_w.writeAll(@tagName(value));
+                },
+                else => try item_ini_w.writeAll(value),
+            }
+            try item_ini_w.writeAll("\"\n");
+        }
     }
 
     try item_csv.writer().print(
@@ -2700,16 +2689,18 @@ fn tset2(s: Set, args: anytype) !void {
 }
 
 fn writeArgs(writer: anytype, args: anytype) !void {
-    inline for (args) |arg| switch (@TypeOf(arg)) {
-        u8, u16, u32, u64, usize, comptime_int => try writer.print(",{}", .{arg}),
-        f64, comptime_float => try writer.print(",{d}", .{arg}),
-        Hbs => try writer.print(",{s}", .{arg.toString()}),
-        WeaponType => try writer.print(",{s}", .{arg.toCsvString()}),
-        else => {
-            try writer.writeAll(",");
-            try writeCsvString(writer, arg);
-        },
-    };
+    inline for (args) |arg| {
+        const T = @TypeOf(arg);
+        switch (@typeInfo(T)) {
+            .Int, .ComptimeInt => try writer.print(",{}", .{arg}),
+            .Float, .ComptimeFloat => try writer.print(",{d}", .{arg}),
+            .Enum, .Union, .Struct => try writer.print(",{s}", .{arg.toCsvString()}),
+            else => {
+                try writer.writeAll(",");
+                try writeCsvString(writer, arg);
+            },
+        }
+    }
 
     try writer.writeByteNTimes(',', 4 - args.len);
     try writer.writeAll("\n");
@@ -2955,6 +2946,9 @@ pub const Hbs = enum(u8) {
         .spark_5,
         .spark_6,
     };
+
+    pub const toCsvString = toString;
+    pub const toIniString = toString;
 
     pub fn toString(hbs: Hbs) []const u8 {
         return switch (hbs) {
