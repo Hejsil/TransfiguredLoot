@@ -58,7 +58,7 @@ pub fn main() !void {
         },
         .description = .{
             .english = "Damage from abilities is reduced by [VAR0_PERCENT].#" ++
-                "Damage from loot is increased by [VAR1_PERCENT.",
+                "Damage from loot is increased by [VAR1_PERCENT].",
         },
 
         .type = .loot,
