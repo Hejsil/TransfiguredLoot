@@ -2,7 +2,6 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_granite_greatsword",
         .name = .{
@@ -24,6 +23,7 @@ pub fn main() !void {
 
         .strMult = 700,
         .radius = 600,
+        .charspeed = -1,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -39,7 +39,6 @@ pub fn main() !void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_queens_crown",
         .name = .{
@@ -54,6 +53,7 @@ pub fn main() !void {
 
         .procChance = 0.2,
         .strMult = 200,
+        .delay = 200,
     });
     trig(.onDamageDone, .{.pl_self});
     cond(.true, .{"s_isCrit"});
@@ -85,7 +85,6 @@ pub fn main() !void {
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
 
-    // TODO: No Test
     const transfigured_darkcloud_necklace_ability_mult = -0.5;
     const transfigured_darkcloud_necklace_loot_mult = 1.5;
     item(.{
