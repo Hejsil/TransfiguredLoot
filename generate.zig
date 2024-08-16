@@ -22,7 +22,7 @@ pub fn main() !void {
         .cooldown = 5 * std.time.ms_per_s,
         .hbInput = .auto,
 
-        .strMult = 1750,
+        .strMult = 700,
         .radius = 600,
     });
     trig(.autoStart, .{.hb_auto_pl});
