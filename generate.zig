@@ -267,36 +267,6 @@ pub fn main() !void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
-    // TODO: No Test
-    const transfigured_nova_crown_cd = 99 * std.time.ms_per_s;
-    item(.{
-        .id = "it_transfigured_nova_crown",
-        .name = .{
-            .english = "Transfigured Nova Crown",
-        },
-        .description = .{
-            .english = "Your cooldowns becomes [VAR0_SECONDS]. When you crit, reset all " ++
-                "cooldowns.",
-        },
-
-        .type = .loot,
-        .weaponType = .loot,
-
-        .hbVar0 = transfigured_nova_crown_cd,
-    });
-    trig(.onDamageDone, .{});
-    cond(.true, .{"s_isCrit"});
-    ttrg(.hotbarslots_current_players, .{});
-    cond(.hb_check_resettable0, .{});
-    qpat(.hb_reset_cooldown, .{});
-    ttrg(.hotbarslot_self, .{});
-    qpat(.hb_flash_item, .{});
-
-    trig(.cdCalc5, .{});
-    ttrg(.hotbarslots_current_players, .{});
-    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
-    qpat(.hb_set_cooldown_permanent, .{ "time", transfigured_nova_crown_cd });
-
     const transfigured_amethyst_bracelet_mult = 0.3;
     item(.{
         .id = "it_transfigured_amethyst_bracelet",
