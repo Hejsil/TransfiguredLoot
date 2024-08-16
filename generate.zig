@@ -4,6 +4,31 @@ pub fn main() !void {
 
     // TODO: No Test
     item(.{
+        .id = "it_transfigured_queens_crown",
+        .name = .{
+            .english = "Transfigured Queen's Crown",
+        },
+        .description = .{
+            .english = "Your crits have a [LUCK] chance to deal an additional [STR] damage.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .procChance = 0.2,
+        .strMult = 200,
+    });
+    trig(.onDamageDone, .{});
+    cond(.true, .{"s_isCrit"});
+    cond(.random_def, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_lucky_proc, .{});
+    ttrg(.player_damaged, .{});
+    tset(.strength_def, .{});
+    apat(.curse_talon, .{});
+
+    // TODO: No Test
+    item(.{
         .id = "it_transfigured_storm_petticoat",
         .name = .{
             .english = "Transfigured Storm Petticoat",
