@@ -3,6 +3,27 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    item(.{
+        .id = "it_transfigured_storm_petticoat",
+        .name = .{
+            .english = "Transfigured Storm Petticoat",
+        },
+        .description = .{
+            .english = "Do [STR] damage to all enemies when you take damage.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .strMult = 2000,
+    });
+    trig(.onDamage, .{.pl_self});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.crown_of_storms, .{});
+
+    // TODO: No Test
     const transfigured_darkcloud_necklace_ability_mult = -0.5;
     const transfigured_darkcloud_necklace_loot_mult = 1.5;
     item(.{
