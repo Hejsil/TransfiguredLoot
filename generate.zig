@@ -2,6 +2,32 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No Test
+    const transfigured_darkcloud_necklace_ability_mult = -0.5;
+    const transfigured_darkcloud_necklace_loot_mult = 1.5;
+    item(.{
+        .id = "it_transfigured_darkcloud_necklace",
+        .name = .{
+            .english = "Transfigured Darkcloud Necklace",
+        },
+        .description = .{
+            .english = "Damage from abilities is reduced by [VAR0_PERCENT].#" ++
+                "Damage from loot is increased by [VAR1_PERCENT.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbVar0 = @abs(transfigured_darkcloud_necklace_ability_mult),
+        .primaryMult = transfigured_darkcloud_necklace_ability_mult,
+        .secondaryMult = transfigured_darkcloud_necklace_ability_mult,
+        .specialMult = transfigured_darkcloud_necklace_ability_mult,
+        .defensiveMult = transfigured_darkcloud_necklace_ability_mult,
+
+        .hbVar1 = transfigured_darkcloud_necklace_loot_mult,
+        .lootMult = transfigured_darkcloud_necklace_loot_mult,
+    });
+
     item(.{
         .id = "it_transfigured_leech_staff",
         .name = .{
