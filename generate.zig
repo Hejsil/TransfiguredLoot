@@ -4,6 +4,43 @@ pub fn main() !void {
 
     // TODO: No Test
     item(.{
+        .id = "it_transfigured_granite_greatsword",
+        .name = .{
+            .english = "Transfigured Granite Greatsword",
+        },
+        .description = .{
+            .english = "Every [CD], slices a HUGE radius around you dealing [STR] damage.#" ++
+                "Moving a rabbitleap puts the item on cooldown.#" ++
+                "Also slightly reduces movement speed.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 5 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .strMult = 1750,
+        .radius = 600,
+    });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.distanceTick, .{.pl_self});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+
+    // TODO: No Test
+    item(.{
         .id = "it_transfigured_queens_crown",
         .name = .{
             .english = "Transfigured Queen's Crown",
@@ -18,7 +55,7 @@ pub fn main() !void {
         .procChance = 0.2,
         .strMult = 200,
     });
-    trig(.onDamageDone, .{});
+    trig(.onDamageDone, .{.pl_self});
     cond(.true, .{"s_isCrit"});
     cond(.random_def, .{});
     qpat(.hb_flash_item, .{});
