@@ -2,6 +2,28 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    item(.{
+        .id = "it_transfigured_moss_shield",
+        .name = .{
+            .english = "Transfigured Moss Shield",
+        },
+        .description = .{
+            .english = "Every [CD], abilities with multiple uses gains a use.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 5 * std.time.ms_per_s,
+        .hbInput = .auto,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.hotbarslots_self_abilities, .{});
+    qpat(.hb_increase_stock, .{ "amount", 1 });
+
     const transfigured_redblack_ribbon_dmg = 250;
     item(.{
         .id = "it_transfigured_redblack_ribbon",
