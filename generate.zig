@@ -2,6 +2,35 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_redblack_ribbon_dmg = 250;
+    item(.{
+        .id = "it_transfigured_redblack_ribbon",
+        .name = .{
+            .english = "Transfigured Redblack Ribbon",
+        },
+        .description = .{
+            .english = "Your Defensive consumes all debuffs on damaged enemies, dealing an " ++
+                "additional [STR] damage per debuff consumed.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .strMult = transfigured_redblack_ribbon_dmg,
+        .delay = 200,
+    });
+    trig(.onDamageDone, .{.dmg_self_defensive});
+    ttrg(.hbstatus_target, .{});
+    ttrg(.hbstatus_target, .{});
+    tset(.uservar_hbscount, .{"u_hbscount"});
+    cond(.unequal, .{ "u_hbscount", 0 });
+    qpat(.hb_flash_item, .{});
+    qpat(.hbs_destroy, .{});
+    tset(.uservar, .{ "u_str", "u_hbscount", "*", transfigured_redblack_ribbon_dmg });
+    tset(.strength_def, .{});
+    tset(.strength, .{"u_str"});
+    ttrg(.player_damaged, .{});
+    apat(.curse_talon, .{});
+
     item(.{
         .id = "it_transfigured_granite_greatsword",
         .name = .{
