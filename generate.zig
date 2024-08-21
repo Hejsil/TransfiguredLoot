@@ -3,7 +3,43 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
-    const transfigured_talon_charm_dmg_per_leap = 10;
+    const transfigured_tiny_wings_leaps = 5;
+    const transfigured_tiny_wings_dmg_per_leaps = 0.01;
+    item(.{
+        .id = "it_transfigured_tiny_wings",
+        .name = .{
+            .english = "Transfigured Tiny Wings",
+        },
+        .description = .{
+            .english = "You deal [VAR0_PERCENT] more damage per [VAR1] rabbitleaps moved since " ++
+                "the start of each battle.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = transfigured_tiny_wings_leaps,
+        .hbVar1 = transfigured_tiny_wings_dmg_per_leaps,
+    });
+    trig(.autoStart, .{});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.distanceTickBattle, .{.pl_self});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc0, .{});
+    tset(.uservar, .{
+        "u_mult", "r_sqVar0",
+        "*",      transfigured_tiny_wings_dmg_per_leaps / transfigured_tiny_wings_leaps,
+    });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{ "stat", "stat.allMult", "amount", "u_mult" });
+
+    // TODO: No Test
+    const transfigured_hermes_bow_dmg_per_leap = 10;
     item(.{
         .id = "it_transfigured_hermes_bow",
         .name = .{
@@ -18,7 +54,7 @@ pub fn main() !void {
         .weaponType = .loot,
 
         .showSqVar = true,
-        .hbVar0 = transfigured_talon_charm_dmg_per_leap,
+        .hbVar0 = transfigured_hermes_bow_dmg_per_leap,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -38,7 +74,7 @@ pub fn main() !void {
     ttrg(.players_opponent, .{});
     tset(.uservar, .{
         "u_str", "r_sqVar0",
-        "*",     transfigured_talon_charm_dmg_per_leap,
+        "*",     transfigured_hermes_bow_dmg_per_leap,
     });
     tset(.strength, .{"u_str"});
     apat(.floral_bow, .{});
@@ -613,6 +649,7 @@ pub fn main() !void {
         "u_allMult", "r_hp",
         "*",         transfigured_midsummer_dress_mult_per_hp,
     });
+    qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         "stat",   "stat.allMult",
         "amount", "u_allMult",
@@ -849,6 +886,7 @@ pub fn main() !void {
         "u_allMult", "r_sqVar0",
         "*",         transfigured_shrinemaidens_kosode_mult_per_buff,
     });
+    qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         "stat",   "stat.allMult",
         "amount", "u_allMult",
