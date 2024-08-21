@@ -3,6 +3,47 @@ pub fn main() !void {
     defer mod.end();
 
     // TODO: No Test
+    const transfigured_talon_charm_dmg_per_leap = 10;
+    item(.{
+        .id = "it_transfigured_hermes_bow",
+        .name = .{
+            .english = "Transfigured Hermes Bow",
+        },
+        .description = .{
+            .english = "Every [CD], fires a projectile at your targeted enemy that deals " ++
+                "[VAR0] damage per rabbitleap moved since last fired.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = transfigured_talon_charm_dmg_per_leap,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
+    });
+    trig(.autoStart, .{});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.distanceTickBattle, .{.pl_self});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.uservar, .{
+        "u_str", "r_sqVar0",
+        "*",     transfigured_talon_charm_dmg_per_leap,
+    });
+    tset(.strength, .{"u_str"});
+    apat(.floral_bow, .{});
+
+    // TODO: No Test
     const transfigured_talon_charm_reduction = -(1 * std.time.ms_per_s);
     const transfigured_talon_charm_distance = 5;
     item(.{
