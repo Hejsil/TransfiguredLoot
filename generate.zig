@@ -2,8 +2,7 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: No Test
-    const transfigured_tiny_wings_leaps = 5;
+    const transfigured_tiny_wings_leaps = 5.0;
     const transfigured_tiny_wings_dmg_per_leaps = 0.01;
     item(.{
         .id = "it_transfigured_tiny_wings",
@@ -19,22 +18,27 @@ pub fn main() !void {
         .weaponType = .loot,
 
         .showSqVar = true,
-        .hbVar0 = transfigured_tiny_wings_leaps,
-        .hbVar1 = transfigured_tiny_wings_dmg_per_leaps,
+        .hbVar0 = transfigured_tiny_wings_dmg_per_leaps,
+        .hbVar1 = transfigured_tiny_wings_leaps,
     });
     trig(.autoStart, .{});
     qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    qpat(.hb_square_set_var, .{ "varIndex", 1, "amount", 0 });
     qpat(.hb_run_cooldown, .{});
 
     trig(.distanceTickBattle, .{.pl_self});
+    qpat(.hb_square_add_var, .{ "varIndex", 1, "amount", 1 });
+    cond(.hb_check_square_var, .{ 1, transfigured_tiny_wings_leaps });
     qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    qpat(.hb_square_set_var, .{ "varIndex", 1, "amount", 0 });
     qpat(.hb_reset_statchange, .{});
 
     trig(.strCalc0, .{});
     tset(.uservar, .{
         "u_mult", "r_sqVar0",
-        "*",      transfigured_tiny_wings_dmg_per_leaps / transfigured_tiny_wings_leaps,
+        "*",      transfigured_tiny_wings_dmg_per_leaps,
     });
+    tset(.debug, .{"u_mult"});
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{ "stat", "stat.allMult", "amount", "u_mult" });
 
