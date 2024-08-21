@@ -2,7 +2,7 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    const transfigured_tiny_wings_leaps = 5.0;
+    const transfigured_tiny_wings_leaps = 10.0;
     const transfigured_tiny_wings_dmg_per_leaps = 0.01;
     item(.{
         .id = "it_transfigured_tiny_wings",
@@ -42,7 +42,6 @@ pub fn main() !void {
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{ "stat", "stat.allMult", "amount", "u_mult" });
 
-    // TODO: No Test
     const transfigured_hermes_bow_dmg_per_leap = 10;
     item(.{
         .id = "it_transfigured_hermes_bow",
@@ -64,6 +63,10 @@ pub fn main() !void {
         .cooldownType = .time,
         .cooldown = 10 * std.time.ms_per_s,
         .hbInput = .auto,
+
+        .delay = 250,
+        .radius = 1800,
+        .strMult = transfigured_hermes_bow_dmg_per_leap,
     });
     trig(.autoStart, .{});
     qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
@@ -80,12 +83,14 @@ pub fn main() !void {
         "u_str", "r_sqVar0",
         "*",     transfigured_hermes_bow_dmg_per_leap,
     });
+    tset(.strength_def, .{});
     tset(.strength, .{"u_str"});
     apat(.floral_bow, .{});
+    tset(.debug, .{"u_str"});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
 
-    // TODO: No Test
     const transfigured_talon_charm_reduction = -(1 * std.time.ms_per_s);
-    const transfigured_talon_charm_distance = 5;
+    const transfigured_talon_charm_distance = 10;
     item(.{
         .id = "it_transfigured_talon_charm",
         .name = .{
