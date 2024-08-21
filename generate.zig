@@ -2,6 +2,38 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No Test
+    const transfigured_talon_charm_reduction = -(1 * std.time.ms_per_s);
+    const transfigured_talon_charm_distance = 5;
+    item(.{
+        .id = "it_transfigured_talon_charm",
+        .name = .{
+            .english = "Transfigured Talon Charm",
+        },
+        .description = .{
+            .english = "Decreases all cooldowns by [VAR0_SECONDS] every time you move [VAR1] " ++
+                "rabbitleaps.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = @abs(transfigured_talon_charm_reduction),
+        .hbVar1 = transfigured_talon_charm_distance,
+    });
+    trig(.battleStart0, .{});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+
+    trig(.distanceTickBattle, .{.pl_self});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    cond(.hb_check_square_var, .{ 0, transfigured_talon_charm_distance });
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
+    qpat(.hb_add_cooldown, .{ "amount", transfigured_talon_charm_reduction });
+
     item(.{
         .id = "it_transfigured_moss_shield",
         .name = .{
