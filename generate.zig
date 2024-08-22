@@ -2,7 +2,6 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
-    // TODO: No test
     const transfigured_ivy_staff_poison_dmg = 30;
     item(.{
         .id = "it_transfigured_ivy_staff",
@@ -10,13 +9,13 @@ pub fn main() !void {
             .english = "Transfigured Ivy Staff",
         },
         .description = .{
-            .english = "Inflicting a poison has [LUCK] chance to inflict another posion.",
+            .english = "Inflicting a [POISON-0] has [LUCK] chance to inflict another [POISON-0].",
         },
 
         .type = .loot,
         .weaponType = .loot,
 
-        .procChance = 0.25,
+        .procChance = 0.60,
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = transfigured_ivy_staff_poison_dmg,
     });
