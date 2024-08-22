@@ -2,6 +2,109 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    item(.{
+        .id = "it_transfigured_nightingale_gown",
+        .name = .{
+            .english = "Transfigured Nightingale Gown",
+        },
+        .description = .{
+            .english = "Every [CD] seconds, [OMEGACHARGE] your Defensive.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
+
+        .cooldownType = .time,
+        .cooldown = 15 * std.time.ms_per_s,
+
+        .chargeType = .omegacharge,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_cdloot_proc, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
+    cond(.hb_check_chargeable0, .{});
+    qpat(.hb_charge, .{ "type", "chargeTypes.omegacharge" });
+
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    const transfigured_sapphire_violin_num_buffs = 3;
+    item(.{
+        .id = "it_transfigured_sapphire_violin",
+        .name = .{
+            .english = "Transfigured Sapphire Violin",
+        },
+        .description = .{
+            .english = "Every [CD] seconds, grant [VAR0] random buffs to all allies for " ++
+                "[HBSL]. Breaks if you take damage. Starts the battle on cooldown.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .lootHbDispType = .cooldownVarAm,
+        .hbInput = .auto,
+
+        .hbsLength = 4 * std.time.ms_per_s,
+
+        .cooldownType = .time,
+        .cooldown = 15 * std.time.ms_per_s,
+
+        .hbVar0 = transfigured_sapphire_violin_num_buffs,
+        .greySqVar0 = true,
+        .hbFlags = 32, // HTB_FLAG_VAR0REQ - Item will not activate unless sqVar0 is greater than 0,
+    });
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 1 });
+
+    trig(.onDamage, .{.pl_self});
+    cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
+    qpat(.hb_reset_statchange, .{});
+    qpat(.hb_flash_item, .{ "messageIndex", "hbFlashMessage.broken" });
+    qpat(.hb_reset_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_ally, .{});
+    for (0..transfigured_sapphire_violin_num_buffs) |_| {
+        tset(.hbs_randombuff, .{});
+        apat(.apply_hbs, .{});
+    }
+
+    trig(.strCalc0, .{});
+    cond(.hb_check_square_var_lte, .{ 0, 0 });
+    qpat(.hb_set_cooldown_permanent, .{ "time", 0 });
+
+    trig(.autoStart, .{.hb_auto_pl});
+    cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_run_cooldown, .{});
+
+    item(.{
+        .id = "it_transfigured_storm_petticoat",
+        .name = .{
+            .english = "Transfigured Storm Petticoat",
+        },
+        .description = .{
+            .english = "Do [STR] damage to all enemies when you take damage.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .strMult = 2000,
+    });
+    trig(.onDamage, .{.pl_self});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.crown_of_storms, .{});
+
     const transfigured_ivy_staff_poison_dmg = 30;
     item(.{
         .id = "it_transfigured_ivy_staff",
@@ -268,27 +371,6 @@ pub fn main() !void {
     ttrg(.player_damaged, .{});
     tset(.strength_def, .{});
     apat(.curse_talon, .{});
-
-    // TODO: No Test
-    item(.{
-        .id = "it_transfigured_storm_petticoat",
-        .name = .{
-            .english = "Transfigured Storm Petticoat",
-        },
-        .description = .{
-            .english = "Do [STR] damage to all enemies when you take damage.",
-        },
-
-        .type = .loot,
-        .weaponType = .loot,
-
-        .strMult = 2000,
-    });
-    trig(.onDamage, .{.pl_self});
-    qpat(.hb_flash_item, .{});
-    ttrg(.players_opponent, .{});
-    tset(.strength_def, .{});
-    apat(.crown_of_storms, .{});
 
     const transfigured_darkcloud_necklace_ability_mult = -0.5;
     const transfigured_darkcloud_necklace_loot_mult = 1.5;
@@ -827,7 +909,6 @@ pub fn main() !void {
         apat(.apply_hbs, .{});
     }
 
-    // TODO: No Test
     const transfigured_ballroom_gown_buff = 5.0;
     item(.{
         .id = "it_transfigured_ballroom_gown",
@@ -1189,39 +1270,6 @@ pub fn main() !void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
 
-    // TODO: Untested
-    item(.{
-        .id = "it_transfigured_nightingale_gown",
-        .name = .{
-            .english = "Transfigured Nightingale Gown",
-        },
-        .description = .{
-            .english = "Every [CD] seconds, OMEGACHARGE your Defensive.",
-        },
-        .chargeType = .omegacharge,
-
-        .type = .loot,
-        .weaponType = .loot,
-        .lootHbDispType = .cooldown,
-        .hbInput = .auto,
-
-        .showSqVar = true,
-        .greySqVar0 = true,
-
-        .cooldownType = .time,
-        .cooldown = 15 * std.time.ms_per_s,
-    });
-    trig(.hotbarUsed, .{.hb_self});
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
-    qpat(.hb_cdloot_proc, .{});
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
-    cond(.hb_check_chargeable0, .{});
-    qpat(.hb_charge, .{3}); // TODO: Is 3 omegacharge?
-
-    trig(.autoStart, .{.hb_auto_pl});
-    qpat(.hb_run_cooldown, .{});
-
     const transfigured_red_tanzaku_dmg = 7;
     item(.{
         .id = "it_transfigured_red_tanzaku",
@@ -1258,74 +1306,6 @@ pub fn main() !void {
     ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", WeaponType.potion });
     qpat(.hb_set_strength, .{ "amount", transfigured_red_tanzaku_dmg });
 
-    const transfigured_sapphire_violin_num_buffs = 3;
-    item(.{
-        .id = "it_transfigured_sapphire_violin",
-        .name = .{
-            .english = "Transfigured Sapphire Violin",
-        },
-        .description = .{
-            .english = "Every [CD] seconds, grant [VAR0] random buffs to all allies for " ++
-                "[HBSL]. Breaks if you take damage. Starts the battle on cooldown.",
-        },
-
-        .type = .loot,
-        .weaponType = .loot,
-        .lootHbDispType = .cooldown,
-        .hbInput = .auto,
-
-        .hbsLength = 4 * std.time.ms_per_s,
-
-        .cooldownType = .time,
-        .cooldown = 15 * std.time.ms_per_s,
-
-        .hbVar0 = transfigured_sapphire_violin_num_buffs,
-    });
-    // TODO: The "break the item" code hasn't been tested
-    trig(.onSquarePickup, .{.square_self});
-    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 1 });
-
-    trig(.onDamage, .{.pl_self});
-    cond(.hb_check_square_var_false, .{ 0, 0 });
-    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
-    qpat(.hb_reset_statchange, .{});
-    qpat(.hb_flash_item, .{
-        // "messageIndex", broke?
-    });
-    qpat(.hb_reset_cooldown, .{});
-
-    trig(.strCalc0, .{});
-    cond(.hb_check_square_var_lte, .{ 0, 0 });
-    qpat(.hb_set_cooldown_permanent, .{ "time", 0 });
-
-    trig(.hotbarUsed, .{.hb_self});
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
-    ttrg(.players_ally, .{});
-    for (0..transfigured_sapphire_violin_num_buffs) |_| {
-        tset(.hbs_randombuff, .{});
-        apat(.apply_hbs, .{});
-    }
-
-    trig(.autoStart, .{.hb_auto_pl});
-    qpat(.hb_run_cooldown, .{});
-
-    // TODO: No test
-    item(.{
-        .id = "it_transfigured_topaz_charm",
-        .name = .{
-            .english = "Transfigured Topaz Charm",
-        },
-        .description = .{
-            .english = "Gain 12 extra Gold when you take damage.",
-        },
-
-        .type = .loot,
-        .weaponType = .loot,
-    });
-    trig(.onDamage, .{.hb_self});
-    // quickPattern(.add_gold, .{});
-
     // TODO: Not enough doc to implement
     item(.{
         .id = "it_transfigured_mountain_staff",
@@ -1357,22 +1337,6 @@ pub fn main() !void {
     trig(.onDamageDone, .{.dmg_islarge});
     qpat(.hb_flash_item, .{});
     qpat(.hb_lucky_proc, .{});
-
-    // TODO: No tests
-    item(.{
-        .id = "it_transfigured_silver_coin",
-        .name = .{
-            .english = "Transfigured Silver Coin",
-        },
-        .description = .{
-            .english = "When you level up, gain 1 gold.",
-        },
-        .type = .loot,
-        .weaponType = .loot,
-    });
-    trig(.onLevelup, .{});
-    qpat(.hb_flash_item, .{});
-    // quickPattern(.add_gold, .{1});
 
     const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
     const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
