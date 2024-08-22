@@ -3,6 +3,42 @@ pub fn main() !void {
     defer mod.end();
 
     item(.{
+        .id = "it_transfigured_nightstar_grimoire",
+        .name = .{
+            .english = "Transfigured Nightstar Grimoire",
+        },
+        .description = .{
+            .english = "Every [CD], hit a random area of the arena, dealing 900 damage. If " ++
+                "an enemy gets hit, the cooldown is reset.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
+
+        .cooldownType = .time,
+        .cooldown = 25 * std.time.ms_per_s,
+
+        .delay = 200,
+        .radius = 150,
+        .strMult = 900,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    tset(.strength_def, .{});
+    ttrg(.players_opponent, .{});
+    tset(.uservar_random_range, .{ "u_x", 200, 1600 });
+    tset(.uservar_random_range, .{ "u_y", 200, 800 });
+    apat(.meteor_staff, .{ "fx", "u_x", "fy", "u_y" });
+
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.onDamageDone, .{.dmg_self_thishb});
+    qpat(.hb_reset_cooldown, .{});
+
+    item(.{
         .id = "it_transfigured_nightingale_gown",
         .name = .{
             .english = "Transfigured Nightingale Gown",

@@ -1781,7 +1781,7 @@ pub const AttackPattern = enum {
     /// Hits the targeted enemies the specified number of times.
     melee_hit,
 
-    /// ""fx"
+    /// "fx"
     /// "fy"
     /// "radius"
     /// Deals damage once in a radius around your target (old Meteor Staff effect)
