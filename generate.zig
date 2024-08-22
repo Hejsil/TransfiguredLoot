@@ -2,6 +2,45 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    // TODO: No test
+    const transfigured_ivy_staff_poison_dmg = 30;
+    item(.{
+        .id = "it_transfigured_ivy_staff",
+        .name = .{
+            .english = "Transfigured Ivy Staff",
+        },
+        .description = .{
+            .english = "Inflicting a poison has [LUCK] chance to inflict another posion.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .procChance = 0.25,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = transfigured_ivy_staff_poison_dmg,
+    });
+    const poison_pairs = [_][2]Hbs{
+        .{ .poison_0, .poison_6 },
+        .{ .poison_1, .poison_0 },
+        .{ .poison_2, .poison_1 },
+        .{ .poison_3, .poison_2 },
+        .{ .poison_4, .poison_3 },
+        .{ .poison_5, .poison_4 },
+        .{ .poison_6, .poison_5 },
+    };
+    for (poison_pairs) |pair| {
+        trig(.hbsCreated, .{.hbs_selfcast});
+        cond(.eval, .{ "s_statusId", "==", @intFromEnum(pair[0]) });
+        cond(.random_def, .{});
+        qpat(.hb_flash_item, .{});
+        qpat(.hb_lucky_proc, .{});
+        ttrg(.player_afflicted_source, .{});
+        tset(.hbskey, .{ pair[1], "r_hbsLength" });
+        tset(.hbsstr, .{transfigured_ivy_staff_poison_dmg});
+        apat(.apply_hbs, .{});
+    }
+
     const transfigured_tiny_wings_leaps = 10.0;
     const transfigured_tiny_wings_dmg_per_leaps = 0.01;
     item(.{
@@ -38,7 +77,6 @@ pub fn main() !void {
         "u_mult", "r_sqVar0",
         "*",      transfigured_tiny_wings_dmg_per_leaps,
     });
-    tset(.debug, .{"u_mult"});
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{ "stat", "stat.allMult", "amount", "u_mult" });
 
@@ -86,7 +124,6 @@ pub fn main() !void {
     tset(.strength_def, .{});
     tset(.strength, .{"u_str"});
     apat(.floral_bow, .{});
-    tset(.debug, .{"u_str"});
     qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
 
     const transfigured_talon_charm_reduction = -(1 * std.time.ms_per_s);
@@ -296,7 +333,6 @@ pub fn main() !void {
         .hbsStrMult = 20,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
-    tset(.debug, .{"s_statusId"});
     cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.bleed_0) });
     cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.bleed_3) });
     qpat(.hb_flash_item, .{});
@@ -493,7 +529,6 @@ pub fn main() !void {
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg(.hotbarslots_prune, .{ "ths#_number", ">", 2 });
-    qpat(.debug_targets, .{});
     qpat(.hb_add_hitbox_var, .{
         "varIndex", "hitbox.number",
         "amount",   1,
