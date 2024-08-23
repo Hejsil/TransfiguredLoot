@@ -2,6 +2,29 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    item(.{
+        .id = "it_transfigured_golems_claymore",
+        .name = .{
+            .english = "Transfigured Golem's Claymore",
+        },
+        .description = .{
+            .english = "When you are shielded from damage, slice the air around you dealing " ++
+                "[STR] damage.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .delay = 400,
+        .radius = 400,
+        .strMult = 800,
+    });
+    trig(.hbsShield0, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+
     const transfigured_stoneplate_armor_dmg_mult = 0.04;
     item(.{
         .id = "it_transfigured_stoneplate_armor",
