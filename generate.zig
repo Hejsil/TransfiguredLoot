@@ -2,6 +2,39 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_stoneplate_armor_dmg_mult = 0.04;
+    item(.{
+        .id = "it_transfigured_stoneplate_armor",
+        .name = .{
+            .english = "Transfigured Stoneplate Armor",
+        },
+        .description = .{
+            .english = "For every point of damage you've been shielded from you permanently " ++
+                "deal [VAR0_PERCENT] more damage.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = transfigured_stoneplate_armor_dmg_mult,
+    });
+    trig(.onSquarePickup, .{});
+    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
+
+    trig(.hbsShield0, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc0, .{});
+    tset(.uservar, .{
+        "u_mult", "r_sqVar0",
+        "*",      transfigured_stoneplate_armor_dmg_mult,
+    });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{ "stat", "stat.allMult", "amount", "u_mult" });
+
     item(.{
         .id = "it_transfigured_nightstar_grimoire",
         .name = .{
