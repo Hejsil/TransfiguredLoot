@@ -3,6 +3,43 @@ pub fn main() !void {
     defer mod.end();
 
     item(.{
+        .id = "it_transfigured_fairy_spear",
+        .name = .{
+            .english = "Transfigured Fairy Spear",
+        },
+        .description = .{
+            .english = "Every [CD], using your Primary will summon an ethereal ally that " ++
+                "fires at your target, dealing [STR] damage each time.#The number of of times " ++
+                "each ally will fire is equal to you HP.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+
+        .strMult = 100,
+    });
+    trig(.onDamage, .{.pl_self});
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.hotbarUsed, .{.hb_primary});
+    cond(.hb_available, .{});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_cdloot_proc, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.druid_2, .{});
+
+    trig(.strCalc2, .{});
+    qpat(.hb_add_hitbox_var, .{
+        "varIndex", "hitbox.number",
+        "amount",   "r_hp",
+    });
+
+    item(.{
         .id = "it_transfigured_golems_claymore",
         .name = .{
             .english = "Transfigured Golem's Claymore",
