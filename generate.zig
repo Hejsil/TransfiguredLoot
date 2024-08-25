@@ -2,6 +2,27 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    item(.{
+        .id = "it_transfigured_chrome_shield",
+        .name = .{
+            .english = "Transfigured Chrome Shield",
+        },
+        .description = .{
+            .english = "When you are shielded from damage, gain [HASTE-1].",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .hbsType = Hbs.haste_1,
+        .hbsLength = 60 * std.time.ms_per_s,
+    });
+    trig(.hbsShield0, .{.pl_self});
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
     const transfigured_timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timewarp_wand",
@@ -87,7 +108,7 @@ pub fn main() !void {
         .radius = 400,
         .strMult = 800,
     });
-    trig(.hbsShield0, .{});
+    trig(.hbsShield0, .{.pl_self});
     qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
@@ -113,7 +134,7 @@ pub fn main() !void {
     trig(.onSquarePickup, .{});
     qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
 
-    trig(.hbsShield0, .{});
+    trig(.hbsShield0, .{.pl_self});
     qpat(.hb_flash_item, .{});
     qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
     qpat(.hb_reset_statchange, .{});
