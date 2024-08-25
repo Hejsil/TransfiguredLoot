@@ -1603,14 +1603,60 @@ pub const QuickPattern = enum {
     }
 };
 
-pub fn qpat(pat: QuickPattern, args: anytype) void {
+pub const QuickPatternArgs = struct {
+    varIndex: ?usize = null,
+    varIndexStr: ?[]const u8 = null,
+    stat: ?[]const u8 = null,
+    type: ?[]const u8 = null,
+    messageIndex: ?[]const u8 = null,
+    time: ?usize = null,
+    mult: ?f64 = null,
+    multStr: ?[]const u8 = null,
+    amount: ?f64 = null,
+    amountStr: ?[]const u8 = null,
+
+    pub fn notNullFieldCount(args: QuickPatternArgs) usize {
+        var res: usize = 0;
+        inline for (@typeInfo(QuickPatternArgs).Struct.fields) |field| {
+            res += @intFromBool(@field(args, field.name) != null);
+        }
+
+        return res;
+    }
+};
+
+pub fn qpat(pat: QuickPattern, args: QuickPatternArgs) void {
     qpat2(pat, args) catch |err| @panic(@errorName(err));
 }
 
-fn qpat2(pat: QuickPattern, args: anytype) !void {
+fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
     std.debug.assert(have_trigger);
-    try item_csv.writer().print("quickPattern,{s}", .{pat.toCsvString()});
-    try writeArgs(item_csv.writer(), args);
+    const writer = item_csv.writer();
+    try writer.print("quickPattern,{s}", .{pat.toCsvString()});
+
+    if (args.varIndex) |varIndex|
+        try writer.print(",varIndex,{d}", .{varIndex});
+    if (args.varIndexStr) |varIndex|
+        try writer.print(",varIndex,{s}", .{varIndex});
+    if (args.stat) |stat|
+        try writer.print(",stat,{s}", .{stat});
+    if (args.type) |typ|
+        try writer.print(",type,{s}", .{typ});
+    if (args.messageIndex) |messageIndex|
+        try writer.print(",messageIndex,{s}", .{messageIndex});
+    if (args.time) |time|
+        try writer.print(",time,{d}", .{time});
+    if (args.mult) |mult|
+        try writer.print(",mult,{d}", .{mult});
+    if (args.multStr) |mult|
+        try writer.print(",mult,{s}", .{mult});
+    if (args.amount) |amount|
+        try writer.print(",amount,{d}", .{amount});
+    if (args.amountStr) |amount|
+        try writer.print(",amount,{s}", .{amount});
+
+    try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
+    try writer.writeAll("\n");
 }
 
 /// "Attack" patterns are things that are placed into the game, to take place over time. They
