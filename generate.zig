@@ -1371,8 +1371,18 @@ pub fn main() !void {
     });
     trig(.onDamageDone, .{.dmg_self_secondary});
     ttrg(.player_damaged, .{});
-    inline for (0..transfigured_snakefang_dagger_num_poisons) |i| {
-        tset(.hbskey, .{ std.fmt.comptimePrint("hbs_poison_{}", .{i}), "r_hbsLength" });
+
+    const poisons = [_]Hbs{
+        .poison_0,
+        .poison_1,
+        .poison_2,
+        .poison_3,
+        .poison_4,
+        .poison_5,
+        .poison_6,
+    };
+    inline for (poisons[0..transfigured_snakefang_dagger_num_poisons]) |hbs| {
+        tset(.hbskey, .{ hbs, "r_hbsLength" });
         tset(.hbsstr, .{transfigured_snakefang_dagger_str});
         apat(.apply_hbs, .{});
     }
@@ -1659,7 +1669,7 @@ pub fn main() !void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
     ttrg(.players_ally, .{});
-    tset(.hbskey, .{ "hbs_smite_0", "r_hbsLength" });
+    tset(.hbskey, .{ Hbs.smite_0, "r_hbsLength" });
     apat(.apply_hbs, .{});
 
     trig(.hotbarUsed2, .{.hb_self});
@@ -1669,7 +1679,7 @@ pub fn main() !void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
     ttrg(.players_ally, .{});
-    tset(.hbskey, .{ "hbs_elegy_0", "r_hbsLength" });
+    tset(.hbskey, .{ Hbs.elegy_0, "r_hbsLength" });
     apat(.apply_hbs, .{});
 
     trig(.hotbarUsed3, .{.hb_self});
