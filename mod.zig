@@ -2749,6 +2749,10 @@ pub fn rgb(r: u8, g: u8, b: u8) Color {
 }
 
 pub const Hbs = enum(u8) {
+    haste_0 = 8,
+    haste_1 = 9,
+    haste_2 = 10,
+
     vanish,
     ghost,
     warcry,
@@ -2773,10 +2777,6 @@ pub const Hbs = enum(u8) {
     elegy_0,
     elegy_1,
     elegy_2,
-
-    haste_0,
-    haste_1,
-    haste_2,
 
     smite_0,
     smite_1,

@@ -2,6 +2,37 @@ pub fn main() !void {
     mod.start();
     defer mod.end();
 
+    const transfigured_timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
+    item(.{
+        .id = "it_transfigured_timewarp_wand",
+        .name = .{
+            .english = "Transfigured Timewarp Wand",
+        },
+        .description = .{
+            .english = "When you have [HASTE-0] your GCDs are [VAR0_SECONDS] shorter.",
+        },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = @abs(transfigured_timewarp_wand_gcd_shorting),
+    });
+    trig(.cdCalc5, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg(.hbstatus_prune, .{ "thbs#_statusId", ">=", @intFromEnum(Hbs.haste_0) });
+    ttrg(.hbstatus_prune, .{ "thbs#_statusId", "<=", @intFromEnum(Hbs.haste_2) });
+    tset(.uservar_hbscount, .{"u_hastes"});
+    cond(.unequal, .{ "u_hastes", 0 });
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
+    qpat(.hb_add_gcd_permanent, .{ "amount", transfigured_timewarp_wand_gcd_shorting });
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
+    qpat(.hb_add_gcd_permanent, .{ "amount", transfigured_timewarp_wand_gcd_shorting });
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
+    qpat(.hb_add_gcd_permanent, .{ "amount", transfigured_timewarp_wand_gcd_shorting });
+
     item(.{
         .id = "it_transfigured_fairy_spear",
         .name = .{
@@ -1115,30 +1146,17 @@ pub fn main() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .showSqVar = true,
         .hbVar0 = transfigured_shrinemaidens_kosode_mult_per_buff,
     });
-    trig(.battleStart0, .{});
-    qpat(.hb_square_set_var, .{ "varIndex", 0, "amount", 0 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.hbsCreated, .{.hbs_selfafl});
-    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", 1 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.hbsRefreshed, .{.hbs_selfafl});
-    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.hbsDestroyed, .{.hbs_selfafl});
-    qpat(.hb_square_add_var, .{ "varIndex", 0, "amount", -1 });
-    qpat(.hb_reset_statchange, .{});
-
     trig(.strCalc0, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg(.hbstatus_prune, .{ "thbs#_isBuff", "==", 1 });
+    tset(.uservar_hbscount, .{"u_buffs"});
     tset(.uservar, .{
-        "u_allMult", "r_sqVar0",
+        "u_allMult", "u_buffs",
         "*",         transfigured_shrinemaidens_kosode_mult_per_buff,
     });
+    tset(.debug, .{"u_allMult"});
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         "stat",   "stat.allMult",
