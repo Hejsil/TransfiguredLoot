@@ -1,21 +1,25 @@
+var generating_mod: bool = false;
 var written_items: usize = 0;
 var have_trigger: bool = false;
 
+var mod: Mod = undefined;
 var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
 var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
 var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
 var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
 var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
 
-pub fn start() void {
-    start2() catch |err| @panic(@errorName(err));
+pub const Mod = struct {
+    name: []const u8,
+    image_path: []const u8,
+};
+
+pub fn start(m: Mod) void {
+    start2(m) catch |err| @panic(@errorName(err));
 }
 
-fn start2() !void {
-    const cwd = std.fs.cwd();
-    var path_buf: [std.fs.max_path_bytes]u8 = undefined;
-    const path = try cwd.realpath(".", &path_buf);
-    const name = std.fs.path.basename(path);
+fn start2(m: Mod) !void {
+    std.debug.assert(!generating_mod);
 
     try sheetlist.writer().print(
         \\Sheet Type,filename
@@ -24,7 +28,7 @@ fn start2() !void {
         \\ItemSheet,Mods/{[name]s}/Items
         \\
     ,
-        .{ .name = name },
+        .{ .name = m.name },
     );
 
     try item_names.writer().writeAll(
@@ -35,6 +39,10 @@ fn start2() !void {
         \\key,level,English,Japanese,Chinese
         \\
     );
+
+    mod = m;
+    written_items = 0;
+    generating_mod = true;
 }
 
 pub fn end() void {
@@ -42,30 +50,50 @@ pub fn end() void {
 }
 
 fn end2() !void {
+    std.debug.assert(generating_mod);
+
+    const args = try std.process.argsAlloc(std.heap.page_allocator);
+    defer std.process.argsFree(std.heap.page_allocator, args);
+
     const cwd = std.fs.cwd();
-    try cwd.writeFile(.{
+    const output_dir_path = if (args.len >= 2) args[1] else ".";
+    var output_parent_dir = try cwd.makeOpenPath(output_dir_path, .{});
+    defer output_parent_dir.close();
+
+    var output_dir = try output_parent_dir.makeOpenPath(mod.name, .{});
+    defer output_dir.close();
+
+    try cwd.copyFile(mod.image_path, output_dir, "items.png", .{});
+    try output_dir.writeFile(.{
         .sub_path = "SheetList.csv",
         .data = sheetlist.items,
     });
-    try cwd.writeFile(.{
+    try output_dir.writeFile(.{
         .sub_path = "Items.csv",
         .data = try std.fmt.allocPrint(std.heap.page_allocator,
             \\spriteNumber,{},,,,
             \\{s}
         , .{ written_items, item_csv.items }),
     });
-    try cwd.writeFile(.{
+    try output_dir.writeFile(.{
         .sub_path = "Items.ini",
         .data = item_ini.items,
     });
-    try cwd.writeFile(.{
+    try output_dir.writeFile(.{
         .sub_path = "Items_Names.csv",
         .data = item_names.items,
     });
-    try cwd.writeFile(.{
+    try output_dir.writeFile(.{
         .sub_path = "Items_Descriptions.csv",
         .data = item_descriptions.items,
     });
+
+    sheetlist.shrinkRetainingCapacity(0);
+    item_csv.shrinkRetainingCapacity(0);
+    item_ini.shrinkRetainingCapacity(0);
+    item_names.shrinkRetainingCapacity(0);
+    item_descriptions.shrinkRetainingCapacity(0);
+    generating_mod = false;
 }
 
 pub const Item = struct {
@@ -476,7 +504,7 @@ fn item2(opt: Item) !void {
 
     const item_ini_w = item_ini.writer();
     try item_ini_w.print("[{s}]\n", .{opt.id});
-    inline for (@typeInfo(@TypeOf(opt)).Struct.fields) |field| continue_blk: {
+    inline for (@typeInfo(@TypeOf(opt)).@"struct".fields) |field| continue_blk: {
         if (comptime std.mem.eql(u8, field.name, "id"))
             break :continue_blk;
         if (comptime std.mem.eql(u8, field.name, "name"))
@@ -496,9 +524,9 @@ fn item2(opt: Item) !void {
                     value.b,
                 });
             } else switch (@typeInfo(T)) {
-                .Bool => try item_ini_w.print("{d}", .{@intFromBool(value)}),
-                .Int, .Float => try item_ini_w.print("{d}", .{value}),
-                .Enum, .Struct, .Union => if (@hasDecl(@TypeOf(value), "toIniString")) {
+                .bool => try item_ini_w.print("{d}", .{@intFromBool(value)}),
+                .int, .float => try item_ini_w.print("{d}", .{value}),
+                .@"enum", .@"struct", .@"union" => if (@hasDecl(@TypeOf(value), "toIniString")) {
                     try item_ini_w.writeAll(value.toIniString());
                 } else {
                     try item_ini_w.writeAll(@tagName(value));
@@ -1617,7 +1645,7 @@ pub const QuickPatternArgs = struct {
 
     pub fn notNullFieldCount(args: QuickPatternArgs) usize {
         var res: usize = 0;
-        inline for (@typeInfo(QuickPatternArgs).Struct.fields) |field| {
+        inline for (@typeInfo(QuickPatternArgs).@"struct".fields) |field| {
             res += @intFromBool(@field(args, field.name) != null);
         }
 
@@ -2761,9 +2789,9 @@ fn writeArgs(writer: anytype, args: anytype) !void {
     inline for (args) |arg| {
         const T = @TypeOf(arg);
         switch (@typeInfo(T)) {
-            .Int, .ComptimeInt => try writer.print(",{}", .{arg}),
-            .Float, .ComptimeFloat => try writer.print(",{d}", .{arg}),
-            .Enum, .Union, .Struct => try writer.print(",{s}", .{arg.toCsvString()}),
+            .int, .comptime_int => try writer.print(",{}", .{arg}),
+            .float, .comptime_float => try writer.print(",{d}", .{arg}),
+            .@"enum", .@"union", .@"struct" => try writer.print(",{s}", .{arg.toCsvString()}),
             else => {
                 try writer.writeAll(",");
                 try writeCsvString(writer, arg);
