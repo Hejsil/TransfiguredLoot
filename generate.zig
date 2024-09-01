@@ -1919,8 +1919,8 @@ fn transfiguredLuckySet() void {
                 "Negative emotions consume you.#" ++
                 " #" ++
                 "You are unlucky.#" ++
-                // "You go into massive debt. (You lose all you're money.)#" ++
                 "You deal [VAR0_PERCENT] less damage.#" ++
+                "You have [BERSERK].#" ++
                 "Every [CD], inflict a [HBSL] debuff to all enemies.",
         },
 
