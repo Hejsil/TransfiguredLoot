@@ -73,6 +73,8 @@ fn transfiguredArcaneSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -176,6 +178,8 @@ fn transfiguredArcaneSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_redblack_ribbon_dmg = 250;
@@ -295,6 +299,8 @@ fn transfiguredNightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -368,6 +374,8 @@ fn transfiguredNightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -378,6 +386,8 @@ fn transfiguredNightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -388,6 +398,8 @@ fn transfiguredNightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -436,6 +448,8 @@ fn transfiguredTimespaceSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
@@ -498,6 +512,8 @@ fn transfiguredTimespaceSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -508,6 +524,8 @@ fn transfiguredTimespaceSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
@@ -540,6 +558,8 @@ fn transfiguredTimespaceSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -580,6 +600,8 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -590,17 +612,45 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
+    const transfigured_pidgeon_bow_num_proj = 3;
     item(.{
         .id = "it_transfigured_pidgeon_bow",
         .name = .{
             .english = "Transfigured Pidgeon Bow",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], fires [VAR0] projectile at your targeted enemy that deals " ++
+                "[STR] damage.",
         },
+
+        .type = .loot,
+        .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 3 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .delay = 250,
+        .radius = 100,
+        .strMult = 10,
+
+        .hbVar0 = transfigured_pidgeon_bow_num_proj,
+        .hitNumber = transfigured_pidgeon_bow_num_proj,
     });
+    trig(.autoStart, .{});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.sniper_2, .{});
 
     item(.{
         .id = "it_transfigured_shinsoku_katana",
@@ -610,6 +660,8 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -620,6 +672,8 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -630,6 +684,8 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -640,6 +696,8 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -650,6 +708,8 @@ fn transfiguredWindSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -668,6 +728,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -678,6 +740,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -712,6 +776,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -722,6 +788,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -732,6 +800,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -742,6 +812,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -752,6 +824,8 @@ fn transfiguredBloodwolfSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -770,6 +844,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -780,6 +856,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -790,6 +868,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -800,6 +880,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -830,6 +912,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -840,6 +924,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -850,6 +936,8 @@ fn transfiguredAssasinSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -868,6 +956,8 @@ fn transfiguredRockdragonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -937,6 +1027,8 @@ fn transfiguredRockdragonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -947,6 +1039,8 @@ fn transfiguredRockdragonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -957,6 +1051,8 @@ fn transfiguredRockdragonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -967,6 +1063,8 @@ fn transfiguredRockdragonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -977,6 +1075,8 @@ fn transfiguredRockdragonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -995,6 +1095,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1005,6 +1107,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1015,6 +1119,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_meteor_staff_cd = 10 * std.time.ms_per_s;
@@ -1057,6 +1163,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1067,6 +1175,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1077,6 +1187,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1087,6 +1199,8 @@ fn transfiguredFlameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -1105,6 +1219,8 @@ fn transfiguredGemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1115,6 +1231,8 @@ fn transfiguredGemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1125,6 +1243,8 @@ fn transfiguredGemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_sapphire_violin_num_buffs = 3;
@@ -1188,6 +1308,8 @@ fn transfiguredGemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_amethyst_bracelet_mult = 0.3;
@@ -1219,6 +1341,8 @@ fn transfiguredGemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1229,6 +1353,8 @@ fn transfiguredGemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -1247,6 +1373,8 @@ fn transfiguredLightningSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1257,6 +1385,8 @@ fn transfiguredLightningSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1267,6 +1397,8 @@ fn transfiguredLightningSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1277,6 +1409,8 @@ fn transfiguredLightningSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_darkcloud_necklace_ability_mult = -0.5;
@@ -1312,6 +1446,8 @@ fn transfiguredLightningSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1413,6 +1549,8 @@ fn transfiguredShrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1423,6 +1561,8 @@ fn transfiguredShrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1536,6 +1676,8 @@ fn transfiguredShrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1546,6 +1688,8 @@ fn transfiguredShrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -1564,6 +1708,8 @@ fn transfiguredLuckySet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1621,6 +1767,8 @@ fn transfiguredLuckySet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_ballroom_gown_buff = 5.0;
@@ -1660,6 +1808,8 @@ fn transfiguredLuckySet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1763,6 +1913,8 @@ fn transfiguredLifeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1832,6 +1984,8 @@ fn transfiguredLifeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -1842,6 +1996,8 @@ fn transfiguredLifeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_sunflower_crown_hp = 3;
@@ -2074,6 +2230,8 @@ fn transfiguredPoisonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2084,6 +2242,8 @@ fn transfiguredPoisonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2116,6 +2276,8 @@ fn transfiguredPoisonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2126,6 +2288,8 @@ fn transfiguredPoisonSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2144,6 +2308,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2154,6 +2320,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2164,6 +2332,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2174,6 +2344,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2184,6 +2356,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2194,6 +2368,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2232,6 +2408,8 @@ fn transfiguredDepthSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2250,6 +2428,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2260,6 +2440,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2270,6 +2452,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2280,6 +2464,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2290,6 +2476,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2300,6 +2488,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2310,6 +2500,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2320,6 +2512,8 @@ fn transfiguredDarkbiteSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2338,6 +2532,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2348,6 +2544,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2358,6 +2556,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2368,6 +2568,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2378,6 +2580,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2388,6 +2592,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2398,6 +2604,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2408,6 +2616,8 @@ fn transfiguredTimegemSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2446,6 +2656,8 @@ fn transfiguredYoukaiSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2456,6 +2668,8 @@ fn transfiguredYoukaiSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2466,6 +2680,8 @@ fn transfiguredYoukaiSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2476,6 +2692,8 @@ fn transfiguredYoukaiSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_red_tanzaku_dmg = 7;
@@ -2522,6 +2740,8 @@ fn transfiguredYoukaiSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2532,6 +2752,8 @@ fn transfiguredYoukaiSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2550,6 +2772,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2560,6 +2784,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_cursed_candlestaff_hbs_str_mult = 250;
@@ -2606,6 +2832,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2616,6 +2844,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2626,6 +2856,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2636,6 +2868,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2646,6 +2880,8 @@ fn transfiguredHauntedSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2664,6 +2900,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2674,6 +2912,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2684,6 +2924,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2694,6 +2936,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2704,6 +2948,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2714,6 +2960,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2724,6 +2972,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2734,6 +2984,8 @@ fn transfiguredGladiatorSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2752,6 +3004,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2762,6 +3016,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2772,6 +3028,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2782,6 +3040,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2792,6 +3052,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2824,6 +3086,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2834,6 +3098,8 @@ fn transfiguredSparkbladeSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -2852,6 +3118,8 @@ fn transfiguredSwiftflightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2862,6 +3130,8 @@ fn transfiguredSwiftflightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2872,6 +3142,8 @@ fn transfiguredSwiftflightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -2882,6 +3154,8 @@ fn transfiguredSwiftflightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     const transfigured_hermes_bow_dmg_per_leap = 10;
@@ -3008,6 +3282,8 @@ fn transfiguredSwiftflightSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -3067,6 +3343,8 @@ fn transfiguredSacredflameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3077,6 +3355,8 @@ fn transfiguredSacredflameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3087,6 +3367,8 @@ fn transfiguredSacredflameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3127,6 +3409,8 @@ fn transfiguredSacredflameSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -3145,6 +3429,8 @@ fn transfiguredRuinsSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3155,6 +3441,8 @@ fn transfiguredRuinsSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     // TODO: Not enough doc to implement
@@ -3182,6 +3470,8 @@ fn transfiguredRuinsSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3248,6 +3538,8 @@ fn transfiguredRuinsSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3258,6 +3550,8 @@ fn transfiguredRuinsSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 }
 
@@ -3276,6 +3570,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3286,6 +3582,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3296,6 +3594,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3306,6 +3606,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3316,6 +3618,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3326,6 +3630,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
@@ -3336,6 +3642,8 @@ fn transfiguredLakeshrineSet() void {
         .description = .{
             .english = "TODO",
         },
+        .type = .loot,
+        .weaponType = .loot,
     });
 
     item(.{
