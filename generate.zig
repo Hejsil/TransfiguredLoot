@@ -1569,17 +1569,59 @@ fn transfiguredShrineSet() void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
+    const transfigured_sacred_bow_mult_per_buff = 1;
+    const transfigured_sacred_bow_dmg = 250;
     item(.{
         .id = "it_transfigured_sacred_bow",
         .name = .{
             .english = "Transfigured Sacred Bow",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], fires a projectile at your targeted enemy that deals " ++
+                "[STR] damage.#Deals [VAR0_PERCENT] more damage for each buff on you.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .delay = 250,
+        .radius = 1800,
+
+        .strMult = transfigured_sacred_bow_dmg,
+        .hbVar0 = transfigured_sacred_bow_mult_per_buff,
     });
+    trig(.autoStart, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg(.hbstatus_prune, .{ "thbs#_isBuff", "==", 1 });
+    tset(.uservar_hbscount, .{"u_buffs"});
+    tset(.uservar, .{
+        "u_allMult", "u_buffs",
+        "*",         transfigured_sacred_bow_mult_per_buff,
+    });
+    tset(.uservar, .{
+        "u_extraStr", transfigured_sacred_bow_dmg,
+        "*",          "u_allMult",
+    });
+    tset(.uservar, .{
+        "u_str", transfigured_sacred_bow_dmg,
+        "+",     "u_extraStr",
+    });
+    tset(.debug, .{"u_str"});
+    tset(.strength_def, .{});
+    tset(.strength, .{"u_str"});
+    ttrg(.players_opponent, .{});
+    apat(.floral_bow, .{});
 
     item(.{
         .id = "it_transfigured_purification_rod",
@@ -1668,7 +1710,6 @@ fn transfiguredShrineSet() void {
         "u_allMult", "u_buffs",
         "*",         transfigured_shrinemaidens_kosode_mult_per_buff,
     });
-    tset(.debug, .{"u_allMult"});
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = "stat.allMult",
