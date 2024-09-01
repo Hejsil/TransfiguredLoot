@@ -1345,17 +1345,45 @@ fn transfiguredGemSet() void {
         .weaponType = .loot,
     });
 
+    const transfigured_ruby_circlet_stocks = 1;
+    const transfigured_ruby_circlet_def_dmg_mult = 1.2;
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
             .english = "Transfigured Ruby Circlet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your Defensive deals [VAR0_PERCENT] more damage. Breaks if you take " ++
+                "damage once.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .showSqVar = true,
+        .greySqVar0 = true,
+        .glowSqVar0 = true,
+        .lootHbDispType = .glowing,
+
+        .hbVar0 = transfigured_ruby_circlet_def_dmg_mult,
+        .hbVar1 = transfigured_ruby_circlet_stocks,
     });
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = transfigured_ruby_circlet_stocks });
+
+    trig(.strCalc0, .{});
+    qpat(.hb_reset_statchange_norefresh, .{});
+    cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = "stat.defensiveMult",
+        .amount = transfigured_ruby_circlet_def_dmg_mult,
+    });
+
+    trig(.onDamage, .{.pl_self});
+    cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
+    qpat(.hb_reset_statchange, .{});
+    cond(.hb_check_square_var, .{ 0, 0 });
+    qpat(.hb_flash_item, .{ .messageIndex = "hbFlashMessage.broken" });
 }
 
 fn transfiguredLightningSet() void {
