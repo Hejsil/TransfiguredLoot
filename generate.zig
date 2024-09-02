@@ -459,7 +459,7 @@ fn transfiguredTimespaceSet() void {
         .hbsType = Hbs.berserk,
         .hbsLength = 4 * std.time.ms_per_s,
     });
-    trig(.autoStart, .{});
+    trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
 
     trig(.hotbarUsed, .{.hb_self});
@@ -532,17 +532,50 @@ fn transfiguredTimespaceSet() void {
         .weaponType = .loot,
     });
 
+    const transfigured_metronome_boots_hbs_len = 5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_metronome_boots",
         .name = .{
             .english = "Transfigured Metronome Boots",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], switch between gaining [HASTE-2] and [SMITE-3] for " ++
+                "[VAR0_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbsLength = transfigured_metronome_boots_hbs_len,
+        .hbVar0 = transfigured_metronome_boots_hbs_len,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    trig(.hotbarUsed, .{.hb_self});
+    cond(.hb_check_square_var, .{ 0, 0 });
+    ttrg(.player_self, .{});
+    tset(.hbskey, .{ Hbs.haste_2, "r_hbsLength" });
+    apat(.apply_hbs, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    cond(.hb_check_square_var, .{ 0, 1 });
+    ttrg(.player_self, .{});
+    tset(.hbskey, .{ Hbs.smite_3, "r_hbsLength" });
+    apat(.apply_hbs, .{});
+
+    trig(.hotbarUsed2, .{.hb_self});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_cdloot_proc, .{});
+    qpat(.hb_flash_item, .{});
+    cond(.hb_check_square_var, .{ 0, 2 });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
     const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
@@ -658,7 +691,7 @@ fn transfiguredWindSet() void {
         .hbVar0 = transfigured_pidgeon_bow_num_proj,
         .hitNumber = transfigured_pidgeon_bow_num_proj,
     });
-    trig(.autoStart, .{});
+    trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
 
     trig(.hotbarUsed, .{.hb_self});
@@ -1610,7 +1643,7 @@ fn transfiguredShrineSet() void {
         .strMult = transfigured_sacred_bow_dmg,
         .hbVar0 = transfigured_sacred_bow_mult_per_buff,
     });
-    trig(.autoStart, .{});
+    trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_run_cooldown, .{});
 
@@ -1672,7 +1705,7 @@ fn transfiguredShrineSet() void {
         .showSqVar = true,
         .hbsLength = 1 * std.time.ms_per_s,
     });
-    trig(.autoStart, .{.square_self});
+    trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     trig(.hotbarUsed, .{.hb_self});
@@ -3269,7 +3302,7 @@ fn transfiguredSwiftflightSet() void {
         .radius = 1800,
         .strMult = transfigured_hermes_bow_dmg_per_leap,
     });
-    trig(.autoStart, .{});
+    trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_run_cooldown, .{});
 
@@ -3339,7 +3372,7 @@ fn transfiguredSwiftflightSet() void {
         .hbVar0 = transfigured_tiny_wings_dmg_per_leaps,
         .hbVar1 = transfigured_tiny_wings_leaps,
     });
-    trig(.autoStart, .{});
+    trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_square_set_var, .{ .varIndex = 1, .amount = 0 });
     qpat(.hb_run_cooldown, .{});
