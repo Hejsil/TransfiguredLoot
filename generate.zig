@@ -641,17 +641,25 @@ fn transfiguredWindSet() void {
     });
     defer mod.end();
 
+    const transfigured_hawkfeather_fan_cd_reduction = -1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_hawkfeather_fan",
         .name = .{
             .english = "Transfigured Hawkfeather Fan",
         },
         .description = .{
-            .english = "TODO",
+            .english = "All of your cooldowns are reduced by [VAR0_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = @abs(transfigured_hawkfeather_fan_cd_reduction),
     });
+    trig(.cdCalc2b, .{});
+    ttrg(.player_self, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
+    qpat(.hb_add_cooldown_permanent, .{ .amount = transfigured_hawkfeather_fan_cd_reduction });
 
     item(.{
         .id = "it_transfigured_windbite_dagger",
