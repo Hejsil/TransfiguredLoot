@@ -446,11 +446,27 @@ fn transfiguredTimespaceSet() void {
             .english = "Transfigured Eternity Flute",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], grant [BERSERK] to all allies.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 12 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbsType = Hbs.berserk,
+        .hbsLength = 4 * std.time.ms_per_s,
     });
+    trig(.autoStart, .{});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.players_ally, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
     const transfigured_timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
     item(.{
