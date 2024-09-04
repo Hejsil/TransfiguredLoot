@@ -1,13 +1,15 @@
+const ally = std.heap.page_allocator;
+
 var generating_mod: bool = false;
 var written_items: usize = 0;
 var have_trigger: bool = false;
 
 var mod: Mod = undefined;
-var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
-var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
-var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
-var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
-var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(std.heap.page_allocator);
+var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
+var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
+var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
+var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
+var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
 
 pub const Mod = struct {
     name: []const u8,
@@ -52,11 +54,15 @@ pub fn end() void {
 fn end2() !void {
     std.debug.assert(generating_mod);
 
-    const args = try std.process.argsAlloc(std.heap.page_allocator);
-    defer std.process.argsFree(std.heap.page_allocator, args);
+    const args = try std.process.argsAlloc(ally);
 
     const cwd = std.fs.cwd();
-    const output_dir_path = if (args.len >= 2) args[1] else ".";
+    const output_dir_path = if (args.len >= 2) args[1] else blk: {
+        const home = try std.process.getEnvVarOwned(ally, "HOME");
+        break :blk try std.fs.path.join(ally, &.{
+            home, ".local/share/Steam/steamapps/common/Rabbit and Steel/Mods",
+        });
+    };
     var output_parent_dir = try cwd.makeOpenPath(output_dir_path, .{});
     defer output_parent_dir.close();
 
@@ -70,7 +76,7 @@ fn end2() !void {
     });
     try output_dir.writeFile(.{
         .sub_path = "Items.csv",
-        .data = try std.fmt.allocPrint(std.heap.page_allocator,
+        .data = try std.fmt.allocPrint(ally,
             \\spriteNumber,{},,,,
             \\{s}
         , .{ written_items, item_csv.items }),
