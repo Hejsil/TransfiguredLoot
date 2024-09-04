@@ -1546,17 +1546,24 @@ fn transfiguredLightningSet() void {
         .lootMult = transfigured_darkcloud_necklace_loot_mult,
     });
 
+    const transfigured_crown_of_storms_mult = 0.25;
     item(.{
         .id = "it_transfigured_crown_of_storms",
         .name = .{
             .english = "Transfigured Crown of Storms",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your abilities and loot with a % chance deals [VAR0_PERCENT] more damage.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = transfigured_crown_of_storms_mult,
     });
+    trig(.strCalc1c, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_luck", ">", 0 });
+    qpat(.hb_add_strcalcbuff, .{ .amount = transfigured_crown_of_storms_mult });
 
     item(.{
         .id = "it_transfigured_thunderclap_gloves",
