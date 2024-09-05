@@ -427,7 +427,7 @@ fn transfiguredNightSet() void {
     qpat(.hb_flash_item, .{});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     cond(.hb_check_chargeable0, .{});
-    qpat(.hb_charge, .{ .type = "chargeTypes.omegacharge" });
+    qpat(.hb_charge, .{ .type = .omegacharge });
 
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});

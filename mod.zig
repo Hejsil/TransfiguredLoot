@@ -271,13 +271,7 @@ pub const Item = struct {
 
     /// Only used for the item description, will add a text blurb explaining a certain kind of
     /// "Charge".
-    chargeType: ?enum {
-        charge,
-        supercharge,
-        ultracharge,
-        omegacharge,
-        darkspell,
-    } = null,
+    chargeType: ?ChargeType = null,
 
     /// The default chance of an item's random effect activating.
     /// Any decimal number 0 through 1:
@@ -1641,7 +1635,7 @@ pub const QuickPatternArgs = struct {
     varIndex: ?usize = null,
     varIndexStr: ?[]const u8 = null,
     stat: ?[]const u8 = null,
-    type: ?[]const u8 = null,
+    type: ?ChargeType = null,
     messageIndex: ?[]const u8 = null,
     time: ?usize = null,
     mult: ?f64 = null,
@@ -1675,7 +1669,7 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
     if (args.stat) |stat|
         try writer.print(",stat,{s}", .{stat});
     if (args.type) |typ|
-        try writer.print(",type,{s}", .{typ});
+        try writer.print(",type,{s}", .{typ.toCsvString()});
     if (args.messageIndex) |messageIndex|
         try writer.print(",messageIndex,{s}", .{messageIndex});
     if (args.time) |time|
@@ -3189,6 +3183,34 @@ pub const WeaponType = enum {
             .defensive => "weaponType.defensive",
             .loot => "weaponType.loot",
             .potion => "weaponType.potion",
+        };
+    }
+};
+
+pub const ChargeType = enum {
+    charge,
+    supercharge,
+    ultracharge,
+    omegacharge,
+    darkspell,
+
+    pub fn toIniString(ct: ChargeType) []const u8 {
+        return switch (ct) {
+            .charge => "charge",
+            .supercharge => "supercharge",
+            .ultracharge => "ultracharge",
+            .omegacharge => "omegacharge",
+            .darkspell => "darkspell",
+        };
+    }
+
+    pub fn toCsvString(ct: ChargeType) []const u8 {
+        return switch (ct) {
+            .charge => "chargeTypes.charge",
+            .supercharge => "chargeTypes.supercharge",
+            .ultracharge => "chargeTypes.ultracharge",
+            .omegacharge => "chargeTypes.omegacharge",
+            .darkspell => "chargeTypes.darkspell",
         };
     }
 };
