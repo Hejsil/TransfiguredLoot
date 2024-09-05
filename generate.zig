@@ -520,7 +520,6 @@ fn transfiguredTimespaceSet() void {
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
-    // TODO: No test
     item(.{
         .id = "it_transfigured_clockwork_tome",
         .name = .{
@@ -543,8 +542,14 @@ fn transfiguredTimespaceSet() void {
     for ([_]mod.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
         trig(.hotbarUsed, .{c});
         cond(.random_def, .{});
-        tset(.uservar_random_range, .{ "u_haste", 0, 2 });
-        qpat(.hb_square_set_var, .{ .varIndex = 0, .amountStr = "u_haste" });
+        tset(.uservar_random_range, .{ "u_haste", 0, 3 });
+        // `uservar_random_range` generates a float, I just want an int between 0 and 2
+        cond(.eval, .{ "u_haste", "<", 3 });
+        qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 2 });
+        cond(.eval, .{ "u_haste", "<", 2 });
+        qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+        cond(.eval, .{ "u_haste", "<", 1 });
+        qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     }
 
     for ([_]Hbs{ .haste_0, .haste_1, .haste_2 }, 0..) |hbs, i| {
