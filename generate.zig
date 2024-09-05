@@ -3195,17 +3195,26 @@ fn transfiguredSparkbladeSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No Test
     item(.{
         .id = "it_transfigured_raiju_crown",
         .name = .{
             .english = "Transfigured Raiju Crown",
         },
         .description = .{
-            .english = "TODO",
+            .english = "At the start of each fight, inflict all enemies with [SPARK-6]",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbsType = .spark_6,
+        .hbsStrMult = 15,
+        .hbsLength = 60 * std.time.ms_per_s,
     });
+    trig(.battleStart3, .{});
+    ttrg(.players_opponent, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_staticshock_earrings",
