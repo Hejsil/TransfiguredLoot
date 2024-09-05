@@ -3546,17 +3546,39 @@ fn transfiguredSacredflameSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No Test
+    const transfigured_marble_clasp_times = 10;
     item(.{
         .id = "it_transfigured_marble_clasp",
         .name = .{
             .english = "Transfigured Marble Clasp",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [VAR0] times you use an ability, gain [FLASH-STR], [FLASH-DEX] " ++
+                "and [FLASH-INT].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+        .hbVar0 = transfigured_marble_clasp_times,
+
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    for ([_]mod.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
+        trig(.hotbarUsed, .{c});
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    }
+    trig(.hotbarUsed2, .{});
+    cond(.hb_check_square_var, .{ 0, transfigured_marble_clasp_times });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    for ([_]Hbs{ .flashdex, .flashint, .flashstr }) |hbs| {
+        tset(.hbskey, .{ hbs, "r_hbsLength" });
+        apat(.apply_hbs, .{});
+    }
 
     item(.{
         .id = "it_transfigured_sun_pendant",
