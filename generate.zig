@@ -520,17 +520,42 @@ fn transfiguredTimespaceSet() void {
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
+    // TODO: No test
     item(.{
         .id = "it_transfigured_clockwork_tome",
         .name = .{
             .english = "Transfigured Clockwork Tome",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your abilities have a [LUCK] chance of giving a random haste buff.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .procChance = 0.1,
+
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsType = .haste_0,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 3 });
+
+    for ([_]mod.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
+        trig(.hotbarUsed, .{c});
+        cond(.random_def, .{});
+        tset(.uservar_random_range, .{ "u_haste", 0, 2 });
+        qpat(.hb_square_set_var, .{ .varIndex = 0, .amountStr = "u_haste" });
+    }
+
+    for ([_]Hbs{ .haste_0, .haste_1, .haste_2 }, 0..) |hbs, i| {
+        trig(.hotbarUsed2, .{.hb_selfcast});
+        cond(.hb_check_square_var, .{ 0, i });
+        tset(.hbskey, .{ hbs, "r_hbsLength" });
+        apat(.apply_hbs, .{});
+    }
+
+    trig(.hotbarUsed3, .{.hb_selfcast});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 3 });
 
     const transfigured_metronome_boots_hbs_len = 5 * std.time.ms_per_s;
     item(.{
