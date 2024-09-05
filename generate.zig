@@ -3183,8 +3183,8 @@ fn transfiguredSparkbladeSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: Not implemented. Idk how loot like Blackbolt Ribbon work
-    const transfigured_battery_shield_hits = 20;
+    // TODO: No Test
+    const transfigured_battery_shield_sparks = 10;
     const transfigured_battery_shield_invul_dur = 5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_battery_shield",
@@ -3192,19 +3192,31 @@ fn transfiguredSparkbladeSet() void {
             .english = "Transfigured Battery Shield",
         },
         .description = .{
-            .english = "Every [VAR0] times your sparks deal damage to an enemy, deal [STR] " ++
+            .english = "Every [VAR0] times you inflict spark, deal [STR] " ++
                 "damage to all enemies and gain invulnerability for [VAR1_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
 
         .strMult = 1200,
-        .hbVar0 = transfigured_battery_shield_hits,
+        .hbVar0 = transfigured_battery_shield_sparks,
         .hbVar1 = transfigured_battery_shield_invul_dur,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
     });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.spark_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.spark_6) });
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    cond(.hb_check_square_var, .{ 0, transfigured_battery_shield_sparks });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    apat(.apply_invuln, .{transfigured_battery_shield_invul_dur});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.crown_of_storms, .{});
 
     // TODO: No Test
     item(.{
