@@ -3183,16 +3183,27 @@ fn transfiguredSparkbladeSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: Not implemented. Idk how loot like Blackbolt Ribbon work
+    const transfigured_battery_shield_hits = 20;
+    const transfigured_battery_shield_invul_dur = 5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_battery_shield",
         .name = .{
             .english = "Transfigured Battery Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [VAR0] times your sparks deal damage to an enemy, deal [STR] " ++
+                "damage to all enemies and gain invulnerability for [VAR1_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .strMult = 1200,
+        .hbVar0 = transfigured_battery_shield_hits,
+        .hbVar1 = transfigured_battery_shield_invul_dur,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
     });
 
     // TODO: No Test
