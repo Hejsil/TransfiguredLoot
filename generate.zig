@@ -602,26 +602,24 @@ fn transfiguredTimespaceSet() void {
     cond(.hb_check_square_var, .{ 0, 2 });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    const transfigured_timemage_cap_cd_set = 2 * std.time.ms_per_s;
-    const transfigured_timemage_cap_cd_check = 4 * std.time.ms_per_s;
+    // TODO: No Test
+    const transfigured_timemage_cap_cd_set = 15 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timemage_cap",
         .name = .{
             .english = "Transfigured Timemage Cap",
         },
         .description = .{
-            .english = "Cooldowns less than or equal to [VAR0_SECONDS] become [VAR1_SECONDS].",
+            .english = "Cooldowns greater than [VAR0_SECONDS] become [VAR0_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_timemage_cap_cd_check,
-        .hbVar1 = transfigured_timemage_cap_cd_set,
+        .hbVar0 = transfigured_timemage_cap_cd_set,
     });
     trig(.cdCalc5, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", ">", 0 });
-    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", "<=", transfigured_timemage_cap_cd_check });
+    ttrg(.hotbarslots_prune, .{ "ths#_cooldown", ">", transfigured_timemage_cap_cd_set });
     qpat(.hb_set_cooldown_permanent, .{ .time = transfigured_timemage_cap_cd_set });
 
     item(.{
