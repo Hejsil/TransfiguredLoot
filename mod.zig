@@ -5,6 +5,7 @@ var written_items: usize = 0;
 var have_trigger: bool = false;
 
 var mod: Mod = undefined;
+var m_args: ?[][:0]u8 = null;
 var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
 var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
 var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
@@ -54,7 +55,10 @@ pub fn end() void {
 fn end2() !void {
     std.debug.assert(generating_mod);
 
-    const args = try std.process.argsAlloc(ally);
+    const args = m_args orelse blk: {
+        m_args = try std.process.argsAlloc(ally);
+        break :blk m_args.?;
+    };
 
     const cwd = std.fs.cwd();
     const output_dir_path = if (args.len >= 2) args[1] else blk: {
