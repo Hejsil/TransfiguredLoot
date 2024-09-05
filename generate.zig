@@ -3180,7 +3180,6 @@ fn transfiguredSparkbladeSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_shockwave_tome",
         .name = .{
@@ -3201,12 +3200,15 @@ fn transfiguredSparkbladeSet() void {
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = 30,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
     tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
+    apat(.poisonfrog_charm, .{});
 
     // TODO: No Test
     const transfigured_battery_shield_sparks = 10;
@@ -3243,7 +3245,6 @@ fn transfiguredSparkbladeSet() void {
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_raiju_crown",
         .name = .{
@@ -3260,9 +3261,10 @@ fn transfiguredSparkbladeSet() void {
         .hbsLength = 60 * std.time.ms_per_s,
     });
     trig(.battleStart3, .{});
+    qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
     tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
+    apat(.poisonfrog_charm, .{});
 
     item(.{
         .id = "it_transfigured_staticshock_earrings",
