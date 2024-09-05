@@ -607,7 +607,6 @@ fn transfiguredTimespaceSet() void {
     cond(.hb_check_square_var, .{ 0, 2 });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    // TODO: No Test
     const transfigured_timemage_cap_cd_set = 15 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timemage_cap",
