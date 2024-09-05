@@ -1456,7 +1456,7 @@ fn transfiguredGemSet() void {
     qpat(.hb_reset_statchange_norefresh, .{});
     cond(.hb_check_square_var_false, .{ 0, 0 });
     qpat(.hb_add_statchange_norefresh, .{
-        .stat = "stat.defensiveMult",
+        .stat = .defensiveMult,
         .amount = transfigured_ruby_circlet_def_dmg_mult,
     });
 
@@ -1794,7 +1794,7 @@ fn transfiguredShrineSet() void {
     });
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
-        .stat = "stat.allMult",
+        .stat = .allMult,
         .amountStr = "u_allMult",
     });
 
@@ -2198,7 +2198,7 @@ fn transfiguredLifeSet() void {
     });
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
-        .stat = "stat.allMult",
+        .stat = .allMult,
         .amountStr = "u_allMult",
     });
 
@@ -3423,7 +3423,7 @@ fn transfiguredSwiftflightSet() void {
         "*",      transfigured_tiny_wings_dmg_per_leaps,
     });
     qpat(.hb_reset_statchange_norefresh, .{});
-    qpat(.hb_add_statchange_norefresh, .{ .stat = "stat.allMult", .amountStr = "u_mult" });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .allMult, .amountStr = "u_mult" });
 
     item(.{
         .id = "it_transfigured_feathered_overcoat",
@@ -3679,7 +3679,7 @@ fn transfiguredRuinsSet() void {
         "*",      transfigured_stoneplate_armor_dmg_mult,
     });
     qpat(.hb_reset_statchange_norefresh, .{});
-    qpat(.hb_add_statchange_norefresh, .{ .stat = "stat.allMult", .amountStr = "u_mult" });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .allMult, .amountStr = "u_mult" });
 
     item(.{
         .id = "it_transfigured_sacredstone_charm",

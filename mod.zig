@@ -1638,7 +1638,7 @@ pub const QuickPattern = enum {
 pub const QuickPatternArgs = struct {
     varIndex: ?usize = null,
     varIndexStr: ?[]const u8 = null,
-    stat: ?[]const u8 = null,
+    stat: ?Stat = null,
     type: ?ChargeType = null,
     messageIndex: ?[]const u8 = null,
     time: ?usize = null,
@@ -1671,7 +1671,7 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
     if (args.varIndexStr) |varIndex|
         try writer.print(",varIndex,{s}", .{varIndex});
     if (args.stat) |stat|
-        try writer.print(",stat,{s}", .{stat});
+        try writer.print(",stat,{s}", .{stat.toCsvString()});
     if (args.type) |typ|
         try writer.print(",type,{s}", .{typ.toCsvString()});
     if (args.messageIndex) |messageIndex|
@@ -3215,6 +3215,135 @@ pub const ChargeType = enum {
             .ultracharge => "chargeTypes.ultracharge",
             .omegacharge => "chargeTypes.omegacharge",
             .darkspell => "chargeTypes.darkspell",
+        };
+    }
+};
+
+pub const Stat = enum {
+    none,
+
+    /// Adjusts Max HP
+    hp,
+
+    /// Makes your Primary deal extra damage (as a percentage). For example, inputting 0.2 will
+    /// make your Primary deal 20% more damage. Inputting -0.5 will make your primary deal 50%
+    /// less damage.
+    primaryMult,
+
+    /// Above, but for Secondary
+    secondaryMult,
+
+    /// Above, but for Special
+    specialMult,
+
+    /// Above, but for Defensive
+    defensiveMult,
+
+    /// Above, but for Loot items
+    lootMult,
+
+    /// Will make ALL damage you deal greater by a percentage
+    allMult,
+
+    /// Will make Status Effects deal you place deal more damage
+    hbsMult,
+
+    // For the following variables, same as above, but they are added in later in calculations.
+    // These are only meant to be on Status Effects like Flash-Int, and should probably not be
+    // used for items.
+
+    primaryMultHbs,
+    secondaryMultHbs,
+    specialMultHbs,
+    defensiveMultHbs,
+    lootMultHbs,
+    allMultHbs,
+    hbsMultHbs,
+
+    /// This makes afflicted characters TAKE more damage by a percentage. It is used for things
+    /// like Curse, and shouldn't be placed on items.
+    damageMult,
+
+    // These make afflicted characters TAKE more damage by a flat number. Used for Bleed's effect,
+    // and shouldn't be placed on items.
+
+    damagePlusP0,
+    damagePlusP1,
+    damagePlusP2,
+    damagePlusP3,
+
+    /// Adds a flat value to all cooldowns this character has, measured in milliseconds. Currently
+    /// only used on Firescale Corset.
+    cdp,
+
+    /// Increases or decreases GCDs by a percentage. Note that this being a negative number makes
+    /// the GCD faster, and it being positive makes the GCD slower. If a character has multiple
+    /// items that give haste, their effects are multiplied.
+    haste,
+
+    /// Makes the character luckier by a percentage. Use wisely.
+    luck,
+
+    /// Makes your character START with more gold. This is only used in toybox mode to make Silver
+    /// Coin work there. It won't affect anything mid-run.
+    startingGold,
+
+    /// Makes your character move faster or slower.
+    charspeed,
+
+    /// Makes your character's hitbox larger or smaller. Used on Sunflower Crown and Evasion
+    /// Potion, which have -10 each
+    radius,
+
+    /// Make invulnerability effects last longer (or shorter) by a flat amount, in milliseconds.
+    invulnPlus,
+
+    /// Currently does nothing
+    stockPlus,
+
+    /// Special flags that affect your character in various ways. This is a binary number, so
+    /// multiple values can be combined to have multiple effects.
+    hbsFlag,
+
+    /// Makes abilities on the mini-hotbar shine, indicating that they're stronger. Used on status
+    /// effects like Flash-Int, Flow-Str or Super. Can also be used to cross them out and make
+    /// them unusable. This is a binary number, so multiple values can be combined to have multiple
+    /// effects.
+    hbShineFlag,
+
+    pub fn toCsvString(stat: Stat) []const u8 {
+        return switch (stat) {
+            .none => "stat.none",
+            .hp => "stat.hp",
+            .primaryMult => "stat.primaryMult",
+            .secondaryMult => "stat.secondaryMult",
+            .specialMult => "stat.specialMult",
+            .defensiveMult => "stat.defensiveMult",
+            .lootMult => "stat.lootMult",
+            .allMult => "stat.allMult",
+            .hbsMult => "stat.hbsMult",
+            .primaryMultHbs => "stat.primaryMultHbs",
+            .secondaryMultHbs => "stat.secondaryMultHbs",
+            .specialMultHbs => "stat.specialMultHbs",
+            .defensiveMultHbs => "stat.defensiveMultHbs",
+            .lootMultHbs => "stat.lootMultHbs",
+            .allMultHbs => "stat.allMultHbs",
+            .hbsMultHbs => "stat.hbsMultHbs",
+            .damageMult => "stat.damageMult",
+            .damagePlusP0 => "stat.damagePlusP0",
+            .damagePlusP1 => "stat.damagePlusP1",
+            .damagePlusP2 => "stat.damagePlusP2",
+            .damagePlusP3 => "stat.damagePlusP3",
+            .cdp => "stat.cdp",
+            .haste => "stat.haste",
+            .luck => "stat.luck",
+            .startingGold => "stat.startingGold",
+            .charspeed => "stat.charspeed",
+            .radius => "stat.radius",
+            .invulnPlus => "stat.invulnPlus",
+            .stockPlus => "stat.stockPlus",
+            .hbsFlag => "stat.hbsFlag",
+            .hbShineFlag => "stat.hbShineFlag",
         };
     }
 };
