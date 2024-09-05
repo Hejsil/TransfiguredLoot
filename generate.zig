@@ -3171,17 +3171,33 @@ fn transfiguredSparkbladeSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No Test
     item(.{
         .id = "it_transfigured_shockwave_tome",
         .name = .{
             .english = "Transfigured Shockwave Tome",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], apply [SPARK-5] to all enemies.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbsType = .spark_5,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = 30,
     });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
     // TODO: No Test
     const transfigured_battery_shield_sparks = 10;
