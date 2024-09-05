@@ -3210,7 +3210,6 @@ fn transfiguredSparkbladeSet() void {
     tset(.hbs_def, .{});
     apat(.poisonfrog_charm, .{});
 
-    // TODO: No Test
     const transfigured_battery_shield_sparks = 10;
     const transfigured_battery_shield_invul_dur = 5 * std.time.ms_per_s;
     item(.{
@@ -3240,7 +3239,7 @@ fn transfiguredSparkbladeSet() void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
-    apat(.apply_invuln, .{transfigured_battery_shield_invul_dur});
+    apat(.apply_invuln, .{ "duration", transfigured_battery_shield_invul_dur });
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
