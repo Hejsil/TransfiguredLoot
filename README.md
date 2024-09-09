@@ -3,7 +3,7 @@
 A set of Rabbit and Steel mods that adds "transfigured" version of loot. Inspired by Path of Exile
 [Transfigured Gems](https://www.poewiki.net/wiki/Transfigured_skill_gem).
 
-The mods are currently work in progress. Currently a little over 60 pieces of loot have been
+The mods are work in progress. Currently a little over 60 pieces of loot have been
 implemented, but none of them have art or correct colors.
 
 ## Build
