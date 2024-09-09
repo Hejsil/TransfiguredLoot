@@ -3556,7 +3556,6 @@ fn transfiguredSacredflameSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No Test
     const transfigured_marble_clasp_times = 10;
     item(.{
         .id = "it_transfigured_marble_clasp",
