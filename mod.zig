@@ -2827,48 +2827,50 @@ pub fn rgb(r: u8, g: u8, b: u8) Color {
 }
 
 pub const Hbs = enum(u8) {
+    smite_0 = 1,
+    smite_1 = 2,
+    smite_2 = 3,
+    smite_3 = 4,
+
+    elegy_0 = 5,
+    elegy_1 = 6,
+    elegy_2 = 7,
+
     haste_0 = 8,
     haste_1 = 9,
     haste_2 = 10,
 
-    vanish,
-    ghost,
-    warcry,
-    flutterstep,
-    lucky,
-    stoneskin,
-    super,
-    blackstrike,
+    stoneskin = 11,
+    lucky = 13,
+    super = 14,
+    flutterstep = 15,
+
+    counter_0 = 16,
+    counter_1 = 17,
+    counter_2 = 18,
+
+    blackstrike = 19,
     stillness = 20,
-    repeat,
+    repeat = 21,
     flowstr = 22,
     flowdex = 23,
     flowint = 24,
     flashstr = 25,
     flashdex = 26,
     flashint = 27,
-    berserk,
-    astra,
-    abyssrage,
-    hex_anti,
-
-    elegy_0,
-    elegy_1,
-    elegy_2,
-
-    smite_0,
-    smite_1,
-    smite_2,
-    smite_3,
-
-    counter_0,
-    counter_1,
-    counter_2,
+    vanish = 28,
+    ghost = 29,
+    warcry = 30,
+    astra = 31,
+    berserk = 34,
+    abyssrage = 35,
 
     sap,
     hex,
     hex_super,
     hex_poison,
+
+    hex_anti = 55,
 
     curse_0 = 56,
     curse_1 = 57,

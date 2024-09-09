@@ -3834,11 +3834,22 @@ fn transfiguredLakeshrineSet() void {
             .english = "Transfigured Reflection Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every time you gain a buff, allies gain a buff of the same type for " ++
+                "[HBSL].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    for (Hbs.buffs) |buff| {
+        trig(.hbsCreated, .{.hbs_selfafl});
+        cond(.eval, .{ "s_statusId", "==", @intFromEnum(buff) });
+        tset(.hbskey, .{ buff, "r_hbsLength" });
+        ttrg(.players_ally, .{});
+        ttrg(.players_prune_self, .{});
+        apat(.apply_hbs, .{});
+    }
 
     item(.{
         .id = "it_transfigured_butterfly_hairpin",
