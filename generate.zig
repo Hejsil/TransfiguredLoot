@@ -1012,17 +1012,38 @@ fn transfiguredAssasinSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
     item(.{
         .id = "it_transfigured_shinobi_tabi",
         .name = .{
             .english = "Transfigured Shinobi Tabi",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Standing still will cause you to [VANISH] for 2s. " ++
+                "Available every [CD]. Slightly increases movement speed.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 4 * std.time.ms_per_s,
+
+        .hbsType = .vanish,
+        .hbsLength = 2 * std.time.ms_per_s,
+
+        .charspeed = 1,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.standingStill, .{.pl_self});
+    cond(.hb_available, .{});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    tset(.hbs_def, .{});
+    apat(.thiefs_coat, .{});
 }
 
 fn transfiguredRockdragonSet() void {
