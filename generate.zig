@@ -2537,16 +2537,71 @@ fn transfiguredDepthSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const transfigured_tidal_greatsword_dmg_mult = 0.01;
+    const transfigured_tidal_greatsword_aoe_mult = 0.01;
     item(.{
         .id = "it_transfigured_tidal_greatsword",
         .name = .{
             .english = "Transfigured Tidal Greatsword",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every 10s slices a large radius around you dealing 200 damage.#" ++
+                "For each enemy hit, your abilities and loot deal [VAR0_PERCENT] more damage " ++
+                "and has a [VAR1_PERCENT] larger hitbox until the end of battle.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .hbInput = .auto,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_min,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .strMult = 200,
+        .radius = 400,
+
+        .hbVar0 = transfigured_tidal_greatsword_dmg_mult,
+        .hbVar1 = transfigured_tidal_greatsword_aoe_mult,
+    });
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    qpat(.hb_run_cooldown, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
+
+    trig(.onDamageDone, .{.dmg_self_thishb});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+
+    trig(.strCalc0, .{});
+    tset(.uservar, .{
+        "u_allMult", "r_sqVar0",
+        "*",         transfigured_tidal_greatsword_dmg_mult,
+    });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .allMult,
+        .amountStr = "u_allMult",
+    });
+
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_weaponType", "!=", WeaponType.potion });
+    tset(.uservar, .{
+        "u_aoeMultBase", "r_sqVar0",
+        "*",             transfigured_tidal_greatsword_aoe_mult,
+    });
+    tset(.uservar, .{
+        "u_aoeMult", "u_aoeMultBase",
+        "+",         1,
+    });
+    qpat(.hb_mult_hitbox_var, .{
+        .varIndexStr = "hitbox.radius",
+        .multStr = "u_aoeMult",
     });
 
     item(.{
