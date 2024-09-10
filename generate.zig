@@ -1740,7 +1740,6 @@ fn transfiguredShrineSet() void {
         .hbVar0 = transfigured_sacred_bow_mult_per_buff,
     });
     trig(.autoStart, .{.hb_auto_pl});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_run_cooldown, .{});
 
     trig(.hotbarUsed, .{.hb_self});
@@ -2096,9 +2095,6 @@ fn transfiguredLuckySet() void {
         tset(.hbskey, .{ debuff, "r_hbsLength" });
         tset(.hbsstr, .{transfigured_mimick_rabbitfoot_hbs_str_mult});
         apat(.poisonfrog_charm, .{});
-        ttrg(.player_self, .{});
-        tset(.hbskey, .{ Hbs.berserk, transfigured_mimick_rabbitfoot_cd });
-        apat(.apply_hbs, .{});
     }
 
     trig(.hotbarUsed2, .{.hb_self});
@@ -2106,6 +2102,9 @@ fn transfiguredLuckySet() void {
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    ttrg(.player_self, .{});
+    tset(.hbskey, .{ Hbs.berserk, transfigured_mimick_rabbitfoot_cd });
+    apat(.apply_hbs, .{});
 
     trig(.hotbarUsed3, .{.hb_self});
     cond(.hb_check_square_var, .{ 0, debuffs.len });
