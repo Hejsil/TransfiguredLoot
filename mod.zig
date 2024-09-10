@@ -3168,6 +3168,19 @@ pub const WeaponType = enum {
     loot,
     potion,
 
+    pub const abilities = [_]WeaponType{
+        .primary,
+        .secondary,
+        .special,
+        .defensive,
+    };
+
+    pub const abilities_with_gcd = [_]WeaponType{
+        .primary,
+        .secondary,
+        .special,
+    };
+
     pub fn toIniString(wt: WeaponType) []const u8 {
         return switch (wt) {
             .none => "none",

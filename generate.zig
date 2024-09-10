@@ -492,12 +492,10 @@ fn transfiguredTimespaceSet() void {
     ttrg(.hbstatus_prune, .{ "thbs#_statusId", "<=", @intFromEnum(Hbs.haste_2) });
     tset(.uservar_hbscount, .{"u_hastes"});
     cond(.unequal, .{ "u_hastes", 0 });
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
-    qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_timewarp_wand_gcd_shorting });
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
-    qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_timewarp_wand_gcd_shorting });
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
-    qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_timewarp_wand_gcd_shorting });
+    for (WeaponType.abilities_with_gcd) |weapontype| {
+        ttrg(.hotbarslots_self_weapontype, .{weapontype});
+        qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_timewarp_wand_gcd_shorting });
+    }
 
     item(.{
         .id = "it_transfigured_chrome_shield",
@@ -1150,17 +1148,38 @@ fn transfiguredRockdragonSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const transfigured_tough_gauntlet_extra_hits = 2;
+    const transfigured_tough_gauntlet_extra_gcd = 1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_tough_gauntlet",
         .name = .{
             .english = "Transfigured Tough Gauntlet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your abilities hit [VAR0] additional times, but all GCDs are " ++
+                "[VAR1_SECONDS] longer.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = transfigured_tough_gauntlet_extra_hits,
+        .hbVar1 = transfigured_tough_gauntlet_extra_gcd,
     });
+    trig(.strCalc2, .{});
+    for (WeaponType.abilities) |weapontype| {
+        ttrg(.hotbarslots_self_weapontype, .{weapontype});
+        qpat(.hb_add_hitbox_var, .{
+            .varIndexStr = "hitbox.number",
+            .amount = transfigured_tough_gauntlet_extra_hits,
+        });
+    }
+
+    trig(.cdCalc2a, .{});
+    for (WeaponType.abilities_with_gcd) |weapontype| {
+        ttrg(.hotbarslots_self_weapontype, .{weapontype});
+        qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_tough_gauntlet_extra_gcd });
+    }
 
     item(.{
         .id = "it_transfigured_rockdragon_mail",
