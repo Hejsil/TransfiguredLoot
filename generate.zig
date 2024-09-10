@@ -876,17 +876,31 @@ fn transfiguredBloodwolfSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const transfigured_bloodflower_brooch_hits = 3;
     item(.{
         .id = "it_transfigured_bloodflower_brooch",
         .name = .{
             .english = "Transfigured Bloodflower Brooch",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Deal [STR] damage [VAR0_TIMES] to enemies you inflict with bleed.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = transfigured_bloodflower_brooch_hits,
+        .hitNumber = transfigured_bloodflower_brooch_hits,
+        .radius = 2000,
+        .strMult = 40,
     });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.eval, .{ "s_statusId", ">=", @intFromEnum(Hbs.bleed_0) });
+    cond(.eval, .{ "s_statusId", "<=", @intFromEnum(Hbs.bleed_3) });
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_afflicted_source, .{});
+    tset(.strength_def, .{});
+    apat(.melee_hit, .{}); // TODO: Bloodflower Brooch effect
 
     item(.{
         .id = "it_transfigured_wolf_hood",
