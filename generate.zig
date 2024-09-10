@@ -3253,7 +3253,7 @@ fn transfiguredSparkbladeSet() void {
             .english = "Transfigured Battery Shield",
         },
         .description = .{
-            .english = "Every [VAR0] times you inflict spark, deal [STR] " ++
+            .english = "Every [VAR0_TIMES] you inflict spark, deal [STR] " ++
                 "damage to all enemies and gain invulnerability for [VAR1_SECONDS].",
         },
         .type = .loot,
@@ -3598,7 +3598,7 @@ fn transfiguredSacredflameSet() void {
             .english = "Transfigured Marble Clasp",
         },
         .description = .{
-            .english = "Every [VAR0] times you use an ability, gain [FLASH-STR], [FLASH-DEX] " ++
+            .english = "Every [VAR0_TIMES] you use an ability, gain [FLASH-STR], [FLASH-DEX] " ++
                 "and [FLASH-INT].",
         },
         .type = .loot,
