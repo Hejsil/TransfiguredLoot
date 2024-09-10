@@ -1359,17 +1359,44 @@ fn transfiguredFlameSet() void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_reset_statchange, .{});
 
+    // TODO: No test
     item(.{
         .id = "it_transfigured_flamewalker_boots",
         .name = .{
             .english = "Transfigured Flamewalker Boots",
         },
         .description = .{
-            .english = "TODO",
+            .english = "All your abilities and loot hit an additional time. If you use your " ++
+                "Defensive, this effect ends until the end of battle.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .glowing,
+        .autoOffSqVar0 = 1,
+        .glowSqVar0 = true,
+        .greySqVar0 = true,
     });
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune, .{ "ths#_number", ">", 0 });
+    qpat(.hb_add_hitbox_var, .{
+        .varIndexStr = "hitbox.number",
+        .amount = 1,
+    });
+
+    trig(.hotbarUsedProc2, .{.hb_defensive});
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.autoStart, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
 }
 
 fn transfiguredGemSet() void {
