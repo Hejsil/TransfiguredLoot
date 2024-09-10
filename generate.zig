@@ -1317,17 +1317,47 @@ fn transfiguredFlameSet() void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const transfigured_demon_horns_aoe_mult = 1;
     item(.{
         .id = "it_transfigured_demon_horns",
         .name = .{
             .english = "Transfigured Demon Horns",
         },
         .description = .{
-            .english = "TODO",
+            .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger. If you use your " ++
+                "Defensive, this effect ends until the end of battle.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .glowing,
+        .autoOffSqVar0 = 1,
+        .glowSqVar0 = true,
+        .greySqVar0 = true,
+
+        .hbVar0 = transfigured_demon_horns_aoe_mult,
     });
+    trig(.strCalc2, .{});
+    cond(.hb_check_square_var, .{ 0, 1 });
+    ttrg(.hotbarslots_current_players, .{});
+    qpat(.hb_mult_hitbox_var, .{
+        .varIndexStr = "hitbox.radius",
+        .mult = 1 + transfigured_demon_horns_aoe_mult,
+    });
+
+    trig(.hotbarUsedProc2, .{.hb_defensive});
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.autoStart, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
 
     item(.{
         .id = "it_transfigured_flamewalker_boots",
