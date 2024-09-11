@@ -874,7 +874,6 @@ fn transfiguredBloodwolfSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     const transfigured_bloodflower_brooch_hits = 3;
     item(.{
         .id = "it_transfigured_bloodflower_brooch",
@@ -898,7 +897,7 @@ fn transfiguredBloodwolfSet() void {
     qpat(.hb_flash_item, .{});
     ttrg(.player_afflicted_source, .{});
     tset(.strength_def, .{});
-    apat(.melee_hit, .{}); // TODO: Bloodflower Brooch effect
+    apat(.melee_hit, .{});
 
     item(.{
         .id = "it_transfigured_wolf_hood",
@@ -1024,7 +1023,6 @@ fn transfiguredAssasinSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     item(.{
         .id = "it_transfigured_shinobi_tabi",
         .name = .{
@@ -1148,7 +1146,7 @@ fn transfiguredRockdragonSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
+    // TODO: Redo. Not all abilities have the ability to hit multiple times
     const transfigured_tough_gauntlet_extra_hits = 2;
     const transfigured_tough_gauntlet_extra_gcd = 1 * std.time.ms_per_s;
     item(.{
@@ -1317,7 +1315,6 @@ fn transfiguredFlameSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     const transfigured_demon_horns_aoe_mult = 1;
     item(.{
         .id = "it_transfigured_demon_horns",
@@ -1325,8 +1322,8 @@ fn transfiguredFlameSet() void {
             .english = "Transfigured Demon Horns",
         },
         .description = .{
-            .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger. If you use your " ++
-                "Defensive, this effect ends until the end of battle.",
+            .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger. If you " ++
+                "use your Defensive, this effect ends until the end of battle.",
         },
         .type = .loot,
         .weaponType = .loot,
@@ -1359,7 +1356,7 @@ fn transfiguredFlameSet() void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_reset_statchange, .{});
 
-    // TODO: No test
+    // TODO: Redo. Not all abilities have the ability to hit multiple times
     item(.{
         .id = "it_transfigured_flamewalker_boots",
         .name = .{
@@ -2594,7 +2591,6 @@ fn transfiguredDepthSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     const transfigured_tidal_greatsword_dmg_mult = 0.01;
     const transfigured_tidal_greatsword_aoe_mult = 0.01;
     item(.{
@@ -2603,7 +2599,7 @@ fn transfiguredDepthSet() void {
             .english = "Transfigured Tidal Greatsword",
         },
         .description = .{
-            .english = "Every 10s slices a large radius around you dealing 200 damage.#" ++
+            .english = "Every [CD] slices a large radius around you dealing 200 damage.#" ++
                 "For each enemy hit, your abilities and loot deal [VAR0_PERCENT] more damage " ++
                 "and has a [VAR1_PERCENT] larger hitbox until the end of battle.",
         },
@@ -2613,7 +2609,7 @@ fn transfiguredDepthSet() void {
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
         .cooldownType = .time,
-        .cooldown = 10 * std.time.ms_per_min,
+        .cooldown = 10 * std.time.ms_per_s,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
@@ -2628,11 +2624,13 @@ fn transfiguredDepthSet() void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_run_cooldown, .{});
+    ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
     trig(.onDamageDone, .{.dmg_self_thishb});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
 
     trig(.strCalc0, .{});
     tset(.uservar, .{
@@ -3863,7 +3861,7 @@ fn transfiguredRuinsSet() void {
         .weaponType = .loot,
     });
 
-    // TODO: Not enough doc to implement
+    // TODO: Redo. Not all abilities have the ability to hit multiple times
     item(.{
         .id = "it_transfigured_mountain_staff",
         .name = .{
