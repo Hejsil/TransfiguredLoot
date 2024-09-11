@@ -3508,17 +3508,32 @@ fn transfiguredSwiftflightSet() void {
         .weaponType = .loot,
     });
 
+    const transfigured_tornado_staff_dist = 15;
     item(.{
         .id = "it_transfigured_tornado_staff",
         .name = .{
             .english = "Transfigured Tornado Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Gain a random buff every time you move [VAR0] rabbitleaps.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = transfigured_tornado_staff_dist,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    trig(.distanceTickBattle, .{.pl_self});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    cond(.hb_check_square_var, .{ 0, transfigured_tornado_staff_dist });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_flash_item, .{});
+    tset(.hbs_randombuff, .{});
+    ttrg(.player_self, .{});
+    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_cloud_guard",
