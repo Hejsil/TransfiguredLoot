@@ -3721,11 +3721,23 @@ fn transfiguredSacredflameSet() void {
         .weaponType = .loot,
     });
 
-    const transfigured_marble_clasp_times = 10;
     item(.{
         .id = "it_transfigured_marble_clasp",
         .name = .{
             .english = "Transfigured Marble Clasp",
+        },
+        .description = .{
+            .english = "TODO",
+        },
+        .type = .loot,
+        .weaponType = .loot,
+    });
+
+    const transfigured_sun_pendant_times = 10;
+    item(.{
+        .id = "it_transfigured_sun_pendant",
+        .name = .{
+            .english = "Transfigured Sun Pendant",
         },
         .description = .{
             .english = "Every [VAR0_TIMES] you use an ability, gain [FLASH-STR], [FLASH-DEX] " ++
@@ -3736,7 +3748,7 @@ fn transfiguredSacredflameSet() void {
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
-        .hbVar0 = transfigured_marble_clasp_times,
+        .hbVar0 = transfigured_sun_pendant_times,
 
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -3745,7 +3757,7 @@ fn transfiguredSacredflameSet() void {
         qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     }
     trig(.hotbarUsed2, .{});
-    cond(.hb_check_square_var, .{ 0, transfigured_marble_clasp_times });
+    cond(.hb_check_square_var, .{ 0, transfigured_sun_pendant_times });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
@@ -3753,18 +3765,6 @@ fn transfiguredSacredflameSet() void {
         tset(.hbskey, .{ hbs, "r_hbsLength" });
         apat(.apply_hbs, .{});
     }
-
-    item(.{
-        .id = "it_transfigured_sun_pendant",
-        .name = .{
-            .english = "Transfigured Sun Pendant",
-        },
-        .description = .{
-            .english = "TODO",
-        },
-        .type = .loot,
-        .weaponType = .loot,
-    });
 
     item(.{
         .id = "it_transfigured_tiny_hourglass",
