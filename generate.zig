@@ -3715,11 +3715,19 @@ fn transfiguredSacredflameSet() void {
             .english = "Transfigured Sacred Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Whenever you gain invulnerability, gain [FLASH-INT].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsType = .flashint,
     });
+    trig(.onInvuln, .{.pl_self});
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_marble_clasp",
