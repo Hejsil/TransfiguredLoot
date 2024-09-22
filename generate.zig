@@ -2026,16 +2026,48 @@ fn transfiguredLuckySet() void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_lucky_proc, .{});
 
+    const transfigured_royal_staff_aoe_buff = 0.01;
+    const transfigured_royal_staff_crit_dmg_buff = 0.01;
     item(.{
         .id = "it_transfigured_royal_staff",
         .name = .{
             .english = "Transfigured Royal Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger per Gold.#" ++
+                "Critical hits deal [VAR1_PERCENT] extra damage per Gold.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = transfigured_royal_staff_aoe_buff,
+        .hbVar1 = transfigured_royal_staff_crit_dmg_buff,
+    });
+    trig(.onGoldChange, .{.pl_self});
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc2, .{});
+    tset(.uservar_gold, .{"u_gold"});
+    tset(.uservar, .{
+        "u_critDmg", "u_gold",
+        "*",         transfigured_royal_staff_crit_dmg_buff,
+    });
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .critDamage,
+        .amountStr = "u_critDmg",
+    });
+    ttrg(.hotbarslots_current_players, .{});
+    tset(.uservar, .{
+        "u_aoeMult", "u_gold",
+        "*",         transfigured_royal_staff_aoe_buff,
+    });
+    tset(.uservar, .{
+        "u_aoeMultFull", "u_aoeMult",
+        "+",             1,
+    });
+    qpat(.hb_mult_hitbox_var, .{
+        .varIndexStr = "hitbox.radius",
+        .multStr = "u_aoeMultFull",
     });
 
     const transfigured_ballroom_gown_buff = 5.0;
@@ -2054,6 +2086,7 @@ fn transfiguredLuckySet() void {
         .allMult = transfigured_ballroom_gown_buff * 0.01,
         .haste = 1 - transfigured_ballroom_gown_buff * 0.01,
         .luck = transfigured_ballroom_gown_buff * 0.01,
+        .critDamage = transfigured_ballroom_gown_buff * 0.01,
         .invulnPlus = transfigured_ballroom_gown_buff * 100,
         .cdp = -transfigured_ballroom_gown_buff * 100,
         .charspeed = transfigured_ballroom_gown_buff * 0.1,
@@ -2454,9 +2487,9 @@ fn transfiguredPoisonSet() void {
         apat(.apply_hbs, .{});
     }
 
-    const transfigured_cursed_deathcap_tome_hbs_str_mult = 30;
+    const transfigured_deathcap_tome_hbs_str_mult = 30;
     item(.{
-        .id = "it_transfigured_cursed_deathcap_tome",
+        .id = "it_transfigured_deathcap_tome",
         .name = .{
             .english = "Transfigured Deathcap Tome",
         },
@@ -2469,7 +2502,7 @@ fn transfiguredPoisonSet() void {
 
         .hbsType = .decay_0,
         .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = transfigured_cursed_deathcap_tome_hbs_str_mult,
+        .hbsStrMult = transfigured_deathcap_tome_hbs_str_mult,
     });
     for ([_][2]Hbs{
         .{ .poison_0, .decay_0 },
@@ -2485,7 +2518,7 @@ fn transfiguredPoisonSet() void {
         qpat(.hb_flash_item, .{});
         ttrg(.player_afflicted_source, .{});
         tset(.hbskey, .{ hbs[1], "r_hbsLength" });
-        tset(.hbsstr, .{transfigured_cursed_deathcap_tome_hbs_str_mult});
+        tset(.hbsstr, .{transfigured_deathcap_tome_hbs_str_mult});
         apat(.apply_hbs, .{});
     }
 

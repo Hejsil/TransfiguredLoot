@@ -426,6 +426,15 @@ pub const Item = struct {
     /// might get from other items.
     luck: ?f64 = null,
 
+    /// Makes critical hits deal more or less damage.
+    /// Any number (recommended to be kept from -2ish to 2ish)
+    /// 0     : Critical hits will deal 1.75x damage
+    /// 1     : Critical hits will deal 2.75x damage
+    /// 2     : Critical hits will deal 3.75x damage
+    /// -0.5  : Critical hits will deal 1.25x damage
+    /// -0.75 : Critical hits will deal 1x damage (and will no longer count as "critical" hits)
+    critDamage: ?f64 = null,
+
     /// Makes your character START with more gold. This is only used in toybox mode to make
     /// Silver Coin work there. It won't affect anything mid-run.
     startingGold: ?u32 = null,
@@ -3296,6 +3305,9 @@ pub const Stat = enum {
     /// items that give haste, their effects are multiplied.
     haste,
 
+    /// Makes critical hits deal more or less damage.
+    critDamage,
+
     /// Makes the character luckier by a percentage. Use wisely.
     luck,
 
@@ -3351,6 +3363,7 @@ pub const Stat = enum {
             .damagePlusP3 => "stat.damagePlusP3",
             .cdp => "stat.cdp",
             .haste => "stat.haste",
+            .critDamage => "stat.critDamage",
             .luck => "stat.luck",
             .startingGold => "stat.startingGold",
             .charspeed => "stat.charspeed",
