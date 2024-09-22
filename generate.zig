@@ -2034,8 +2034,8 @@ fn transfiguredLuckySet() void {
             .english = "Transfigured Royal Staff",
         },
         .description = .{
-            .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger per Gold.#" ++
-                "Critical hits deal [VAR1_PERCENT] extra damage per Gold.",
+            .english = "Critical hits deal [VAR1_PERCENT] extra damage per Gold.#" ++
+                "All abilities and loot's hitboxes are [VAR0_PERCENT] larger per Gold.",
         },
         .type = .loot,
         .weaponType = .loot,
