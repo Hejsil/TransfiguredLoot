@@ -1,32 +1,32 @@
 pub fn main() !void {
-    transfiguredArcaneSet();
-    transfiguredNightSet();
-    transfiguredTimespaceSet();
-    transfiguredWindSet();
-    transfiguredBloodwolfSet();
-    transfiguredAssasinSet();
-    transfiguredRockdragonSet();
-    transfiguredFlameSet();
-    transfiguredGemSet();
-    transfiguredLightningSet();
-    transfiguredShrineSet();
-    transfiguredLuckySet();
-    transfiguredLifeSet();
-    transfiguredPoisonSet();
-    transfiguredDepthSet();
-    transfiguredDarkbiteSet();
-    transfiguredTimegemSet();
-    transfiguredYoukaiSet();
-    transfiguredHauntedSet();
-    transfiguredGladiatorSet();
-    transfiguredSparkbladeSet();
-    transfiguredSwiftflightSet();
-    transfiguredSacredflameSet();
-    transfiguredRuinsSet();
-    transfiguredLakeshrineSet();
+    try transfiguredArcaneSet();
+    try transfiguredNightSet();
+    try transfiguredTimespaceSet();
+    try transfiguredWindSet();
+    try transfiguredBloodwolfSet();
+    try transfiguredAssasinSet();
+    try transfiguredRockdragonSet();
+    try transfiguredFlameSet();
+    try transfiguredGemSet();
+    try transfiguredLightningSet();
+    try transfiguredShrineSet();
+    try transfiguredLuckySet();
+    try transfiguredLifeSet();
+    try transfiguredPoisonSet();
+    try transfiguredDepthSet();
+    try transfiguredDarkbiteSet();
+    try transfiguredTimegemSet();
+    try transfiguredYoukaiSet();
+    try transfiguredHauntedSet();
+    try transfiguredGladiatorSet();
+    try transfiguredSparkbladeSet();
+    try transfiguredSwiftflightSet();
+    try transfiguredSacredflameSet();
+    try transfiguredRuinsSet();
+    try transfiguredLakeshrineSet();
 }
 
-fn transfiguredArcaneSet() void {
+fn transfiguredArcaneSet() !void {
     mod.start(.{
         .name = "TransfiguredArcaneSet",
         .image_path = "images/arcane.png",
@@ -252,7 +252,7 @@ fn transfiguredArcaneSet() void {
     }
 }
 
-fn transfiguredNightSet() void {
+fn transfiguredNightSet() !void {
     mod.start(.{
         .name = "TransfiguredNightSet",
         .image_path = "images/night.png",
@@ -433,7 +433,7 @@ fn transfiguredNightSet() void {
     qpat(.hb_run_cooldown, .{});
 }
 
-fn transfiguredTimespaceSet() void {
+fn transfiguredTimespaceSet() !void {
     mod.start(.{
         .name = "TransfiguredTimespaceSet",
         .image_path = "images/timespace.png",
@@ -659,7 +659,7 @@ fn transfiguredTimespaceSet() void {
     qpat(.hb_lucky_proc, .{});
 }
 
-fn transfiguredWindSet() void {
+fn transfiguredWindSet() !void {
     mod.start(.{
         .name = "TransfiguredWindSet",
         .image_path = "images/wind.png",
@@ -795,7 +795,7 @@ fn transfiguredWindSet() void {
     });
 }
 
-fn transfiguredBloodwolfSet() void {
+fn transfiguredBloodwolfSet() !void {
     mod.start(.{
         .name = "TransfiguredBloodwolfSet",
         .image_path = "images/bloodwolf.png",
@@ -924,7 +924,7 @@ fn transfiguredBloodwolfSet() void {
     });
 }
 
-fn transfiguredAssasinSet() void {
+fn transfiguredAssasinSet() !void {
     mod.start(.{
         .name = "TransfiguredAssasinSet",
         .image_path = "images/assasin.png",
@@ -1056,7 +1056,7 @@ fn transfiguredAssasinSet() void {
     apat(.thiefs_coat, .{});
 }
 
-fn transfiguredRockdragonSet() void {
+fn transfiguredRockdragonSet() !void {
     mod.start(.{
         .name = "TransfiguredRockdragonSet",
         .image_path = "images/rockdragon.png",
@@ -1216,7 +1216,7 @@ fn transfiguredRockdragonSet() void {
     });
 }
 
-fn transfiguredFlameSet() void {
+fn transfiguredFlameSet() !void {
     mod.start(.{
         .name = "TransfiguredFlameSet",
         .image_path = "images/flame.png",
@@ -1396,7 +1396,7 @@ fn transfiguredFlameSet() void {
     qpat(.hb_reset_statchange, .{});
 }
 
-fn transfiguredGemSet() void {
+fn transfiguredGemSet() !void {
     mod.start(.{
         .name = "TransfiguredGemSet",
         .image_path = "images/gem.png",
@@ -1578,7 +1578,7 @@ fn transfiguredGemSet() void {
     qpat(.hb_flash_item, .{ .messageIndex = "hbFlashMessage.broken" });
 }
 
-fn transfiguredLightningSet() void {
+fn transfiguredLightningSet() !void {
     mod.start(.{
         .name = "TransfiguredLightningSet",
         .image_path = "images/lightning.png",
@@ -1728,7 +1728,7 @@ fn transfiguredLightningSet() void {
     apat(.crown_of_storms, .{});
 }
 
-fn transfiguredShrineSet() void {
+fn transfiguredShrineSet() !void {
     mod.start(.{
         .name = "TransfiguredShrineSet",
         .image_path = "images/shrine.png",
@@ -1960,7 +1960,7 @@ fn transfiguredShrineSet() void {
     });
 }
 
-fn transfiguredLuckySet() void {
+fn transfiguredLuckySet() !void {
     mod.start(.{
         .name = "TransfiguredLuckySet",
         .image_path = "images/lucky.png",
@@ -2198,7 +2198,7 @@ fn transfiguredLuckySet() void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 }
 
-fn transfiguredLifeSet() void {
+fn transfiguredLifeSet() !void {
     mod.start(.{
         .name = "TransfiguredLifeSet",
         .image_path = "images/life.png",
@@ -2387,7 +2387,7 @@ fn transfiguredLifeSet() void {
     });
 }
 
-fn transfiguredPoisonSet() void {
+fn transfiguredPoisonSet() !void {
     mod.start(.{
         .name = "TransfiguredPoisonSet",
         .image_path = "images/poison.png",
@@ -2593,7 +2593,7 @@ fn transfiguredPoisonSet() void {
     });
 }
 
-fn transfiguredDepthSet() void {
+fn transfiguredDepthSet() !void {
     mod.start(.{
         .name = "TransfiguredDepthSet",
         .image_path = "images/depth.png",
@@ -2769,7 +2769,7 @@ fn transfiguredDepthSet() void {
     });
 }
 
-fn transfiguredDarkbiteSet() void {
+fn transfiguredDarkbiteSet() !void {
     mod.start(.{
         .name = "TransfiguredDarkbiteSet",
         .image_path = "images/darkbite.png",
@@ -2824,17 +2824,64 @@ fn transfiguredDarkbiteSet() void {
         .weaponType = .loot,
     });
 
+    const transfigured_nightguard_gloves_dmg_mult = 0.35;
     item(.{
         .id = "it_transfigured_nightguard_gloves",
         .name = .{
             .english = "Transfigured Nightguard Gloves",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Whichever ability has the lowest base damage value deals " ++
+                "[VAR0_PERCENT] more damage.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = transfigured_nightguard_gloves_dmg_mult,
     });
+
+    // There doesn't exist a hotbarslots_self_loweststrweapon, so the code below emulate this.
+    // First, we need to ignore abilities with no base strength. To do this, we create 4 triggers,
+    // one for each of the possible number of slots that has strength.
+    for (1..5) |slots| {
+        trig(.strCalc1c, .{});
+        ttrg(.hotbarslots_self_abilities, .{});
+        ttrg(.hotbarslots_prune_base_has_str, .{});
+        tset(.uservar_slotcount, .{"u_slots"});
+        // Here is the check to exit triggers that does not match the slot count. The trigger for
+        // 3 slots with base strength should not do any work if we have 4 abilities with strength.
+        cond(.equal, .{ "u_slots", slots });
+
+        // Ok, we now know how many slots we need to perform checks for to isolate the ability with
+        // the lowest stength. First, we save each abilities strength in a uservar. The strength
+        // of all abilities will be gone once we start pruning.
+        var buf1: [std.mem.page_size]u8 = undefined;
+        var buf2: [std.mem.page_size]u8 = undefined;
+        for (0..slots) |i| {
+            tset(.uservar, .{
+                try std.fmt.bufPrint(&buf1, "u_ths{}_strength", .{i}),
+                try std.fmt.bufPrint(&buf2, "ths{}_strength", .{i}),
+            });
+        }
+
+        // Next, for each uservar we created earlier, we prune the slots that have strength larger
+        // than the user var.
+        // For 3 slots that have strength, this turns into:
+        // ttrg(.hotbarslots_prune, .{ "ths#_strength", "<=", "u_ths0_strength" });
+        // ttrg(.hotbarslots_prune, .{ "ths#_strength", "<=", "u_ths1_strength" });
+        // ttrg(.hotbarslots_prune, .{ "ths#_strength", "<=", "u_ths2_strength" });
+        for (0..slots) |i| {
+            ttrg(.hotbarslots_prune, .{
+                "ths#_strength",
+                "<=",
+                try std.fmt.bufPrint(&buf1, "u_ths{}_strength", .{i}),
+            });
+        }
+
+        // With the above prune, only abilites with the lowest strength should be left (there can
+        // be multiple).
+        qpat(.hb_add_strcalcbuff, .{ .amount = transfigured_nightguard_gloves_dmg_mult });
+    }
 
     item(.{
         .id = "it_transfigured_snipers_eyeglasses",
@@ -2873,7 +2920,7 @@ fn transfiguredDarkbiteSet() void {
     });
 }
 
-fn transfiguredTimegemSet() void {
+fn transfiguredTimegemSet() !void {
     mod.start(.{
         .name = "TransfiguredTimegemSet",
         .image_path = "images/timegem.png",
@@ -2977,7 +3024,7 @@ fn transfiguredTimegemSet() void {
     });
 }
 
-fn transfiguredYoukaiSet() void {
+fn transfiguredYoukaiSet() !void {
     mod.start(.{
         .name = "TransfiguredYoukaiSet",
         .image_path = "images/youkai.png",
@@ -3113,7 +3160,7 @@ fn transfiguredYoukaiSet() void {
     });
 }
 
-fn transfiguredHauntedSet() void {
+fn transfiguredHauntedSet() !void {
     mod.start(.{
         .name = "TransfiguredHauntedSet",
         .image_path = "images/haunted.png",
@@ -3241,7 +3288,7 @@ fn transfiguredHauntedSet() void {
     });
 }
 
-fn transfiguredGladiatorSet() void {
+fn transfiguredGladiatorSet() !void {
     mod.start(.{
         .name = "TransfiguredGladiatorSet",
         .image_path = "images/gladiator.png",
@@ -3345,7 +3392,7 @@ fn transfiguredGladiatorSet() void {
     });
 }
 
-fn transfiguredSparkbladeSet() void {
+fn transfiguredSparkbladeSet() !void {
     mod.start(.{
         .name = "TransfiguredSparkbladeSet",
         .image_path = "images/sparkblade.png",
@@ -3508,7 +3555,7 @@ fn transfiguredSparkbladeSet() void {
     });
 }
 
-fn transfiguredSwiftflightSet() void {
+fn transfiguredSwiftflightSet() !void {
     mod.start(.{
         .name = "TransfiguredSwiftflightSet",
         .image_path = "images/swiftflight.png",
@@ -3707,7 +3754,7 @@ fn transfiguredSwiftflightSet() void {
     });
 }
 
-fn transfiguredSacredflameSet() void {
+fn transfiguredSacredflameSet() !void {
     mod.start(.{
         .name = "TransfiguredSacredflameSet",
         .image_path = "images/sacredflame.png",
@@ -3863,7 +3910,7 @@ fn transfiguredSacredflameSet() void {
     });
 }
 
-fn transfiguredRuinsSet() void {
+fn transfiguredRuinsSet() !void {
     mod.start(.{
         .name = "TransfiguredRuinsSet",
         .image_path = "images/ruins.png",
@@ -4004,7 +4051,7 @@ fn transfiguredRuinsSet() void {
     });
 }
 
-fn transfiguredLakeshrineSet() void {
+fn transfiguredLakeshrineSet() !void {
     mod.start(.{
         .name = "TransfiguredLakeshrineSet",
         .image_path = "images/lakeshrine.png",
