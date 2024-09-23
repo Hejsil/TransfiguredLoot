@@ -2997,8 +2997,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Kyou No Omikuji",
         },
         .description = .{
-            .english = "All damage you deal increases by [VAR0_PERCENT]. You cannot use your " ++
-                "Primary and Special.",
+            .english = "All damage you deal is increased by [VAR0_PERCENT]. You cannot use " ++
+                "your Primary and Special.",
         },
         .type = .loot,
         .weaponType = .loot,
