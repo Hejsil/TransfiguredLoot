@@ -291,17 +291,37 @@ fn transfiguredNightSet() !void {
     tset(.strength_def, .{});
     apat(.sleeping_greatbow, .{});
 
+    const transfigured_crescentmoon_dagger_hits = 2;
     item(.{
         .id = "it_transfigured_crescentmoon_dagger",
         .name = .{
             .english = "Transfigured Crescentmoon Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], your Primary will deal an additional [VAR0] hits of " ++
+                "[STR] damage on hit.#" ++
+                "These hits always crit.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .lootHbDispType = .cooldown,
+
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+
+        .hbVar0 = transfigured_crescentmoon_dagger_hits,
+        .hitNumber = transfigured_crescentmoon_dagger_hits,
+        .strMult = 120,
     });
+    trig(.onDamageDone, .{.dmg_self_primary});
+    cond(.hb_available, .{});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.player_damaged, .{});
+    tset(.strength_def, .{});
+    tset(.critratio, .{1});
+    apat(.black_wakizashi, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
 
     item(.{
         .id = "it_transfigured_lullaby_harb",
