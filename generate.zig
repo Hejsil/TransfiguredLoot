@@ -358,7 +358,7 @@ fn transfiguredNightSet() !void {
     ttrg(.players_opponent, .{});
     tset(.uservar_random_range, .{ "u_x", 200, 1600 });
     tset(.uservar_random_range, .{ "u_y", 200, 800 });
-    apat(.meteor_staff, .{ "fx", "u_x", "fy", "u_y" });
+    apat(.meteor_staff, .{ .fxStr = "u_x", .fyStr = "u_y" });
 
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -3441,7 +3441,7 @@ fn transfiguredSparkbladeSet() !void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
-    apat(.apply_invuln, .{ "duration", transfigured_battery_shield_invul_dur });
+    apat(.apply_invuln, .{ .duration = transfigured_battery_shield_invul_dur });
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});

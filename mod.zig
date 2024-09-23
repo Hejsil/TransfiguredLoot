@@ -2263,14 +2263,39 @@ pub const AttackPattern = enum {
     }
 };
 
-pub fn apat(pat: AttackPattern, args: anytype) void {
+pub const AttackPatternArgs = struct {
+    fxStr: ?[]const u8 = null,
+    fyStr: ?[]const u8 = null,
+    duration: ?u16 = null,
+
+    pub fn notNullFieldCount(args: AttackPatternArgs) usize {
+        var res: usize = 0;
+        inline for (@typeInfo(AttackPatternArgs).@"struct".fields) |field| {
+            res += @intFromBool(@field(args, field.name) != null);
+        }
+
+        return res;
+    }
+};
+
+pub fn apat(pat: AttackPattern, args: AttackPatternArgs) void {
     apat2(pat, args) catch |err| @panic(@errorName(err));
 }
 
-fn apat2(pat: AttackPattern, args: anytype) !void {
+fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
     std.debug.assert(have_trigger);
-    try item_csv.writer().print("addPattern,{s}", .{pat.toCsvString()});
-    try writeArgs(item_csv.writer(), args);
+    const writer = item_csv.writer();
+    try writer.print("addPattern,{s}", .{pat.toCsvString()});
+
+    if (args.fxStr) |fxStr|
+        try writer.print(",fx,{s}", .{fxStr});
+    if (args.fyStr) |fyStr|
+        try writer.print(",fy,{s}", .{fyStr});
+    if (args.duration) |duration|
+        try writer.print(",duration,{d}", .{duration});
+
+    try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
+    try writer.writeAll("\n");
 }
 
 /// When a trigger is running, it has 3 lists of "targets".
