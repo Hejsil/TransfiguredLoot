@@ -3059,17 +3059,22 @@ fn transfiguredYoukaiSet() !void {
         .weaponType = .loot,
     });
 
+    // TODO: No tests
     item(.{
         .id = "it_transfigured_usagi_kamen",
         .name = .{
             .english = "Transfigured Usagi Kamen",
         },
         .description = .{
-            .english = "TODO",
+            .english = "When a % chance succeeds, your Special resets.",
         },
         .type = .loot,
         .weaponType = .loot,
     });
+    trig(.luckyProc, .{.pl_self});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
+    cond(.hb_check_resettable0, .{});
+    qpat(.hb_reset_cooldown, .{});
 
     const transfigured_red_tanzaku_dmg = 7;
     item(.{
