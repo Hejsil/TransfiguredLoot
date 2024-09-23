@@ -3010,17 +3010,30 @@ fn transfiguredYoukaiSet() !void {
             64, // HBCROSS_SPECIAL   - Makes Special unusable
     });
 
+    // TODO: No Test
     item(.{
         .id = "it_transfigured_youkai_bracelet",
         .name = .{
             .english = "Transfigured Youkai Bracelet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your abilities base damage value becomes the average base damage " ++
+                "value of all your abilities.",
         },
         .type = .loot,
         .weaponType = .loot,
     });
+    trig(.strCalc1c, .{});
+    ttrg(.hotbarslots_self_abilities, .{});
+    ttrg(.hotbarslots_prune_base_has_str, .{});
+    tset(.uservar_slotcount, .{"u_slots"});
+
+    tset_uservar2("u_sum0", TargetHotbar0.strength, .@"+", TargetHotbar1.strength);
+    tset_uservar2("u_sum1", "u_sum0", .@"+", TargetHotbar2.strength);
+    tset_uservar2("u_sum", "u_sum1", .@"+", TargetHotbar3.strength);
+    tset_uservar2("u_avg", "u_sum", .@"/", "u_slots");
+
+    qpat(.hb_set_strength, .{ .amountStr = "u_avg" });
 
     item(.{
         .id = "it_transfigured_oni_staff",
