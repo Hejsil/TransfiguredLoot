@@ -106,6 +106,7 @@ fn end2() !void {
     generating_mod = false;
 }
 
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=0#gid=0
 pub const Item = struct {
     id: []const u8,
     name: struct {
@@ -565,6 +566,8 @@ fn item2(opt: Item) !void {
 /// When certain things in the game happen (everything from you gaining gold, to using an ability,
 /// to starting a run, to a % chance succeeding), a "Trigger" is called. You can make your items
 /// react to these Triggers, to do the things they're supposed to do.
+///
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1624073505#gid=1624073505
 pub const Trigger = enum {
     /// Never called
     none,
@@ -886,6 +889,7 @@ fn trig2(trigger: Trigger, opt: TriggerOpt) !void {
     have_trigger = true;
 }
 
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=75351937#gid=75351937
 pub const Condition = enum {
     /// Always returns false
     none,
@@ -1223,6 +1227,8 @@ pub fn cond_eval2(a: anytype, op: Compare, b: anytype) void {
 /// tpat_hb_square_set_var has two parameters: "varIndex" and "amount".
 ///
 /// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
+///
+///https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1513724686#gid=1513724686
 pub const QuickPattern = enum {
     /// Does nothing
     nothing,
@@ -1751,6 +1757,8 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
 /// "rot"    : The angle from the player to its target reticule.
 /// "fx"     : The x position of the player's target reticule
 /// "fy"     : The y position of the player's target reticule
+///
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=258117569#gid=258117569
 pub const AttackPattern = enum {
     /// "hbsColorInd" (an integer representing a color palette)
     /// These are all status patterns for poison ticks and the like; the hbsColorInd refers to the
@@ -2319,6 +2327,7 @@ fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
 /// When an Attack Pattern is run, it only affects whatever players are in the player target list
 /// at the time.
 ///
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1880256260#gid=1880256260
 pub const Target = enum {
     /// Clears all lists.
     none,
@@ -2634,6 +2643,12 @@ pub fn ttrg_hbstatus_prune(a: anytype, op: Compare, b: anytype) void {
     ttrg2(.hbstatus_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
 }
 
+/// Set functions can be used to setup different variables, as well as set parameters for Attack
+/// patterns.
+///
+/// There's also a few helpful things, like a debug print function.
+///
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1105686251#gid=1105686251
 pub const Set = enum {
     /// Currently non-functional; but I will make it work soon-ish
     animation,
@@ -2904,6 +2919,7 @@ pub fn rgb(r: u8, g: u8, b: u8) Color {
     return .{ .r = r, .g = g, .b = b };
 }
 
+/// https://docs.google.com/spreadsheets/d/1Mcj2EbtQD15Aq-lIVE6_GeW_w7_N_aDKhgZzWg4vx54/edit?gid=68441595#gid=68441595
 pub const Hbs = enum(u8) {
     smite_0 = 1,
     smite_1 = 2,
@@ -3237,6 +3253,7 @@ pub const Hbs = enum(u8) {
     }
 };
 
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1987338796#gid=1987338796&range=A82
 pub const WeaponType = enum {
     none,
     primary,
@@ -3284,6 +3301,7 @@ pub const WeaponType = enum {
     }
 };
 
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1987338796#gid=1987338796&range=A105
 pub const ChargeType = enum {
     charge,
     supercharge,
@@ -3312,6 +3330,7 @@ pub const ChargeType = enum {
     }
 };
 
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1987338796#gid=1987338796&range=A5
 pub const Stat = enum {
     none,
 
