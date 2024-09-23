@@ -3456,6 +3456,44 @@ pub const Compare = enum {
     }
 };
 
+/// While trigger code is being run, various variables are stored into a few different ds_maps (Or
+/// hashtable or dictionary or whatever you want to call them)
+///
+/// * Whatever object calls the trigger is the SOURCE. Variables relating to the source of the
+///   trigger start with "s_".
+/// * Whatever object is receiving the trigger is the RECEIVER. Variables relating to the receiver
+///   of the trigger start with "r_".
+///
+/// Trigger code is also capable of targetting lists of players, items, and status effects.
+///
+/// When you target a list of players, the variables relating to those players will start with
+/// "tp#_", where # is replaced with the index. For instance, if you have 4 players and target all
+/// of them, their HPs will be "tp0_hp" "tp1_hp" "tp2_hp" "tp3_hp".
+///
+/// When you target a list of items (hotbars), the variables relating
+/// to those will start with "ths#_", where # is replaced with the index. ths is short for
+/// "Targeted Hotbar Slot". For instance, if you target all of one player's abilities, their
+/// cooldowns will be "ths0_cooldown" "ths1_cooldown" "ths2_cooldown" "ths3_cooldown".
+///
+/// When you target a list of status effects, the variables relating to those players will start
+/// with "thbs#_", where # is replaced with the index. thbs is short for "Targeted Hotbar Status".
+/// Status effects are called "HBS" everywhere because they used to go onto the hotbars, not the
+/// players. Deepest lore. For instance, if you target a list of 3 status effects on one player,
+/// whether or not those are buffs or not will be "thbs0_isBuff" "thbs1_isBuff" "thbs2_isBuff"
+/// "thbs3_isBuff""
+///
+/// When using "prune" target functions, "#" will automatically be replaced with the appropriate
+/// number as it goes through the list. For instance, to target all allies that have more that 2
+/// HP:
+///
+/// target, ttrg_players_ally
+/// target, ttrg_players_prune, tp#_hp, >, 2
+///
+/// Also, it's a bit complicated, but Items like Loot and Abilities and Potions all take up
+/// "Hotbar Slots" that are persistent so when I talk about "Hotbars" and "Hotbar Slots" that's
+/// what I mean, the Loot and Abilities on your character's hud at the bottom that do things
+///
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1235653286#gid=1235653286
 fn TriggerVariable(comptime prefix: []const u8) type {
     return enum {
         /// 0: Allies
@@ -3672,5 +3710,20 @@ fn TriggerVariable(comptime prefix: []const u8) type {
 
 pub const Source = TriggerVariable("s_");
 pub const Receiver = TriggerVariable("r_");
+pub const TargetPlayers = TriggerVariable("tp#_");
+pub const TargetPlayer0 = TriggerVariable("tp0_");
+pub const TargetPlayer1 = TriggerVariable("tp1_");
+pub const TargetPlayer2 = TriggerVariable("tp2_");
+pub const TargetPlayer3 = TriggerVariable("tp3_");
+pub const TargetHotbars = TriggerVariable("ths#_");
+pub const TargetHotbar0 = TriggerVariable("ths0_");
+pub const TargetHotbar1 = TriggerVariable("ths1_");
+pub const TargetHotbar2 = TriggerVariable("ths2_");
+pub const TargetHotbar3 = TriggerVariable("ths3_");
+pub const TargetStatuses = TriggerVariable("thbs#_");
+pub const TargetStatus0 = TriggerVariable("thbs0_");
+pub const TargetStatus1 = TriggerVariable("thbs1_");
+pub const TargetStatus2 = TriggerVariable("thbs2_");
+pub const TargetStatus3 = TriggerVariable("thbs3_");
 
 const std = @import("std");

@@ -267,7 +267,7 @@ fn transfiguredNightSet() !void {
         },
         .description = .{
             .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
-                "ttrged enemy that deals [STR] damage.",
+                "targed enemy that deals [STR] damage.",
         },
         .type = .loot,
         .weaponType = .loot,
@@ -488,8 +488,8 @@ fn transfiguredTimespaceSet() !void {
     });
     trig(.cdCalc5, .{});
     ttrg(.hbstatus_target, .{});
-    ttrg_hbstatus_prune("thbs#_statusId", .@">=", @intFromEnum(Hbs.haste_0));
-    ttrg_hbstatus_prune("thbs#_statusId", .@"<=", @intFromEnum(Hbs.haste_2));
+    ttrg_hbstatus_prune(TargetStatuses.statusId, .@">=", @intFromEnum(Hbs.haste_0));
+    ttrg_hbstatus_prune(TargetStatuses.statusId, .@"<=", @intFromEnum(Hbs.haste_2));
     tset(.uservar_hbscount, .{"u_hastes"});
     cond(.unequal, .{ "u_hastes", 0 });
     for (WeaponType.abilities_with_gcd) |weapontype| {
@@ -621,7 +621,7 @@ fn transfiguredTimespaceSet() !void {
     });
     trig(.cdCalc5, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_cooldown", .@">", transfigured_timemage_cap_cd_set);
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", transfigured_timemage_cap_cd_set);
     qpat(.hb_set_cooldown_permanent, .{ .time = transfigured_timemage_cap_cd_set });
 
     item(.{
@@ -683,7 +683,7 @@ fn transfiguredWindSet() !void {
     trig(.cdCalc2b, .{});
     ttrg(.player_self, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_cooldown", .@">", 0);
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
     qpat(.hb_add_cooldown_permanent, .{ .amount = transfigured_hawkfeather_fan_cd_reduction });
 
     item(.{
@@ -993,7 +993,7 @@ fn transfiguredAssasinSet() !void {
     });
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_number", .@">", 2);
+    ttrg_hotbarslots_prune(TargetHotbars.number, .@">", 2);
     qpat(.hb_add_hitbox_var, .{
         .varIndexStr = "hitbox.number",
         .amount = 1,
@@ -1261,7 +1261,7 @@ fn transfiguredFlameSet() !void {
 
     const transfigured_meteor_staff_cd = 10 * std.time.ms_per_s;
     item(.{
-        .id = "transfigured_meteor_staff",
+        .id = "it_transfigured_meteor_staff",
         .name = .{
             .english = "Transfigured Meteor Staff",
         },
@@ -1376,7 +1376,7 @@ fn transfiguredFlameSet() !void {
     });
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_number", .@">", 0);
+    ttrg_hotbarslots_prune(TargetHotbars.number, .@">", 0);
     qpat(.hb_add_hitbox_var, .{
         .varIndexStr = "hitbox.number",
         .amount = 1,
@@ -1674,7 +1674,7 @@ fn transfiguredLightningSet() !void {
     });
     trig(.strCalc1c, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_luck", .@">", 0);
+    ttrg_hotbarslots_prune(TargetHotbars.luck, .@">", 0);
     qpat(.hb_add_strcalcbuff, .{ .amount = transfigured_crown_of_storms_mult });
 
     item(.{
@@ -1801,7 +1801,7 @@ fn transfiguredShrineSet() !void {
     qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
     ttrg(.hbstatus_target, .{});
-    ttrg_hbstatus_prune("thbs#_isBuff", .@"==", 1);
+    ttrg_hbstatus_prune(TargetStatuses.isBuff, .@"==", 1);
     tset(.uservar_hbscount, .{"u_buffs"});
     tset_uservar2("u_allMult", "u_buffs", .@"*", transfigured_sacred_bow_mult_per_buff);
     tset_uservar2("u_extraStr", "u_allMult", .@"*", transfigured_sacred_bow_dmg);
@@ -1893,7 +1893,7 @@ fn transfiguredShrineSet() !void {
     });
     trig(.strCalc0, .{});
     ttrg(.hbstatus_target, .{});
-    ttrg_hbstatus_prune("thbs#_isBuff", .@"==", 1);
+    ttrg_hbstatus_prune(TargetStatuses.isBuff, .@"==", 1);
     tset(.uservar_hbscount, .{"u_buffs"});
     tset_uservar2("u_allMult", "u_buffs", .@"*", transfigured_shrinemaidens_kosode_mult_per_buff);
     qpat(.hb_reset_statchange_norefresh, .{});
@@ -2645,7 +2645,7 @@ fn transfiguredDepthSet() !void {
 
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_weaponType", .@"!=", WeaponType.potion);
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
     tset_uservar2("u_aoeMultBase", Receiver.sqVar0, .@"*", transfigured_tidal_greatsword_aoe_mult);
     tset_uservar2("u_aoeMult", "u_aoeMultBase", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
@@ -2804,23 +2804,24 @@ fn transfiguredDarkbiteSet() !void {
     // There doesn't exist a hotbarslots_self_loweststrweapon, so the code below emulate this.
     // First, we need to ignore abilities with no base strength. To do this, we create 4 triggers,
     // one for each of the possible number of slots that has strength.
-    for (1..5) |slots| {
+    for (1..5) |slot_count| {
         trig(.strCalc1c, .{});
         ttrg(.hotbarslots_self_abilities, .{});
         ttrg(.hotbarslots_prune_base_has_str, .{});
         tset(.uservar_slotcount, .{"u_slots"});
         // Here is the check to exit triggers that does not match the slot count. The trigger for
         // 3 slots with base strength should not do any work if we have 4 abilities with strength.
-        cond(.equal, .{ "u_slots", slots });
+        cond(.equal, .{ "u_slots", slot_count });
 
         // Ok, we now know how many slots we need to perform checks for to isolate the ability with
         // the lowest stength. First, we save each abilities strength in a uservar. The strength
         // of all abilities will be gone once we start pruning.
         var buf1: [std.mem.page_size]u8 = undefined;
         var buf2: [std.mem.page_size]u8 = undefined;
-        for (0..slots) |i| {
+        for (0..slot_count) |i| {
             tset_uservar1(
                 try std.fmt.bufPrint(&buf1, "u_ths{}_strength", .{i}),
+                // TODO: Refactor to use TargetHotbarX
                 try std.fmt.bufPrint(&buf2, "ths{}_strength", .{i}),
             );
         }
@@ -2828,12 +2829,12 @@ fn transfiguredDarkbiteSet() !void {
         // Next, for each uservar we created earlier, we prune the slots that have strength larger
         // than the user var.
         // For 3 slots that have strength, this turns into:
-        // ttrg_hotbarslots_prune("ths#_strength", .@"<=", "u_ths0_strength");
-        // ttrg_hotbarslots_prune("ths#_strength", .@"<=", "u_ths1_strength");
-        // ttrg_hotbarslots_prune("ths#_strength", .@"<=", "u_ths2_strength");
-        for (0..slots) |i| {
+        // ttrg_hotbarslots_prune(TargetHotbars.strength, .@"<=", "u_ths0_strength");
+        // ttrg_hotbarslots_prune(TargetHotbars.strength, .@"<=", "u_ths1_strength");
+        // ttrg_hotbarslots_prune(TargetHotbars.strength, .@"<=", "u_ths2_strength");
+        for (0..slot_count) |i| {
             const u_strength = try std.fmt.bufPrint(&buf1, "u_ths{}_strength", .{i});
-            ttrg_hotbarslots_prune("ths#_strength", .@"<=", u_strength);
+            ttrg_hotbarslots_prune(TargetHotbars.strength, .@"<=", u_strength);
         }
 
         // With the above prune, only abilites with the lowest strength should be left (there can
@@ -3089,8 +3090,8 @@ fn transfiguredYoukaiSet() !void {
     trig(.strCalc1a, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg(.hotbarslots_prune_base_has_str, .{});
-    ttrg_hotbarslots_prune("ths#_weaponType", .@"!=", WeaponType.loot);
-    ttrg_hotbarslots_prune("ths#_weaponType", .@"!=", WeaponType.potion);
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.loot);
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
     qpat(.hb_set_strength, .{ .amount = transfigured_red_tanzaku_dmg });
 
     item(.{
@@ -3654,7 +3655,7 @@ fn transfiguredSwiftflightSet() !void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune("ths#_cooldown", .@">", 0);
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
     qpat(.hb_add_cooldown, .{ .amount = transfigured_talon_charm_reduction });
 
     const transfigured_tiny_wings_leaps = 10.0;
@@ -4126,23 +4127,44 @@ fn transfiguredLakeshrineSet() !void {
     apat(.apply_hbs, .{});
 }
 
+const item = mod.item;
+const rgb = mod.rgb;
+
 const apat = mod.apat;
+const qpat = mod.qpat;
+const trig = mod.trig;
+
 const cond_eval2 = mod.cond_eval2;
 const cond = mod.cond;
-const Hbs = mod.Hbs;
-const item = mod.item;
-const qpat = mod.qpat;
-const Receiver = mod.Receiver;
-const rgb = mod.rgb;
-const Source = mod.Source;
-const trig = mod.trig;
+
 const tset = mod.tset;
 const tset_uservar1 = mod.tset_uservar1;
 const tset_uservar2 = mod.tset_uservar2;
+
 const ttrg_hbstatus_prune = mod.ttrg_hbstatus_prune;
 const ttrg_hotbarslots_prune = mod.ttrg_hotbarslots_prune;
 const ttrg = mod.ttrg;
+
+const Hbs = mod.Hbs;
 const WeaponType = mod.WeaponType;
+
+const Source = mod.Source;
+const Receiver = mod.Receiver;
+const TargetPlayers = mod.TargetPlayers;
+const TargetPlayer0 = mod.TargetPlayer0;
+const TargetPlayer1 = mod.TargetPlayer1;
+const TargetPlayer2 = mod.TargetPlayer2;
+const TargetPlayer3 = mod.TargetPlayer3;
+const TargetHotbars = mod.TargetHotbars;
+const TargetHotbar0 = mod.TargetHotbar0;
+const TargetHotbar1 = mod.TargetHotbar1;
+const TargetHotbar2 = mod.TargetHotbar2;
+const TargetHotbar3 = mod.TargetHotbar3;
+const TargetStatuses = mod.TargetStatuses;
+const TargetStatus0 = mod.TargetStatus0;
+const TargetStatus1 = mod.TargetStatus1;
+const TargetStatus2 = mod.TargetStatus2;
+const TargetStatus3 = mod.TargetStatus3;
 
 const mod = @import("mod.zig");
 const std = @import("std");
