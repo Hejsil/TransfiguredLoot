@@ -1664,6 +1664,8 @@ pub const QuickPatternArgs = struct {
     multStr: ?[]const u8 = null,
     amount: ?f64 = null,
     amountStr: ?[]const u8 = null,
+    amountR: ?Receiver = null,
+    amountS: ?Source = null,
 
     pub fn notNullFieldCount(args: QuickPatternArgs) usize {
         var res: usize = 0;
@@ -1704,6 +1706,10 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
         try writer.print(",amount,{d}", .{amount});
     if (args.amountStr) |amount|
         try writer.print(",amount,{s}", .{amount});
+    if (args.amountR) |amount|
+        try writer.print(",amount,{s}", .{amount.toCsvString()});
+    if (args.amountS) |amount|
+        try writer.print(",amount,{s}", .{amount.toCsvString()});
 
     try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
     try writer.writeAll("\n");
@@ -3449,5 +3455,222 @@ pub const Compare = enum {
         };
     }
 };
+
+fn TriggerVariable(comptime prefix: []const u8) type {
+    return enum {
+        /// 0: Allies
+        /// 1: Enemies
+        teamId,
+
+        /// A number 0-3
+        /// Player IDs are assigned in the order that they FINISH selecting their character, not
+        /// the order in which they're displayed at the bottom. Enemies also have IDs from 0-9,
+        /// with 0 being the first enemy that spawns in any given battle.
+        playerId,
+
+        /// The player ID of the enemy that this player is focused on
+        focusId,
+
+        /// The current HP of the player
+        hp,
+
+        /// The Max HP of the player
+        hpMax,
+
+        /// A binary number, combined from all the items or statuses that give them the hbsFlag
+        /// Stat (see Item Variable sheet)
+        hbsFlag,
+
+        /// The current number of buffs on this player
+        hbsBuffCount,
+
+        /// The current number of debuffs on this player
+        hbsDebuffCount,
+
+        /// The player's current x position (measured in pixels)
+        xpos,
+
+        /// The player's current y position (measured in pixels)
+        ypos,
+
+        /// The unique ID of this hotbar slot, numbered 0-80ish (each player has 20 I think)
+        hbId,
+
+        /// The "type" of the item
+        /// 0: Character
+        /// 1: "Weapon" (Which really means Ability)
+        /// 2: Loot
+        /// 3: Potion
+        /// 4: Pickup (Full Heals + Level Ups in the store)
+        /// 5: Upgrade (The upgrade gems in the store)
+        type,
+
+        /// The item ID of this hotbar slot (determined by the Item it is, like Obsidian Hairpin's
+        /// ID is different from Mountain Staff)
+        dataId,
+
+        /// The amount of milliseconds before this particular item can be used again (the max of
+        /// cooldown, hidden cooldown, GCD, etc..)
+        milSecLeft,
+
+        /// The amount of milliseconds left on its cooldown (disregarding GCD etc..)
+        cdSecLeft,
+
+        /// Whether or not this item can be "reset" (will be false if cdSecLeft is less than 600ms
+        /// or if it's an unresettable item)
+        resettable,
+
+        /// The cooldown type of this item, compare using "cdType" enum
+        cooldownType,
+
+        /// The cooldown of this item, in milliseconds
+        cooldown,
+
+        /// The GCD of this item, in milliseconds
+        gcd,
+
+        /// The current number of uses on this item
+        stock,
+
+        /// The maximum number of uses on this item
+        maxStock,
+
+        /// The number of Charges on this item
+        chargeCount,
+
+        /// The strength of this item (Charge bonus is counted in)
+        strength,
+
+        /// The strength of the status effect on this item
+        hbsStrength,
+
+        /// The status effect ID of this item
+        hbsType,
+
+        hbsLength,
+
+        /// The weapon type of this item, compare using "weaponType" enum
+        weaponType,
+
+        /// The strength of this item before calculations (I think, you probably shouldn't use
+        /// this tbh)
+        strengthMult,
+
+        /// The radius of this item
+        radius,
+
+        /// The number of times this item deals damage per use (Like Assassin's Primary is 2,
+        /// Golden Katana is 5)
+        number,
+
+        /// The delay between activation and hit for this item
+        delay,
+
+        /// The input type of this item, compare using "hitboxInput" enum
+        hbInput,
+
+        /// The item's proc chance ("procChance" on the Item Variable page, NOT "luck")
+        luck,
+
+        /// The item's hitbox flags ("hbFlags" on the Item Variable page, NOT "flags")
+        flags,
+
+        // These are hidden variables on the hotbar slots you can set
+        vars0,
+        vars1,
+        vars2,
+        vars3,
+
+        sqVar0,
+        sqVar1,
+        sqVar2,
+        sqVar3,
+
+        /// The unique ID of the item that applied the status
+        originHbId,
+
+        /// The status ID (As in, Curse's ID is different from Vanish's ID)
+        statusId,
+
+        /// A unique number given to this particular instance of a status effect; starts at 0,
+        /// increments with each new status application, and resets when the run resets
+        uniqueId,
+
+        /// The team ID of the player AFFLICTED with the status
+        aflTeamId,
+
+        /// The player ID of the player AFFLICTED with the status
+        aflPlayerId,
+
+        /// True if it's a buff, false if it's a debuff
+        isBuff,
+
+        /// True if it's a crit
+        isCrit,
+
+        /// A saved number on this trinket that can be used for various things. For instance, the
+        /// Floof Ball is 'perfect' while its counter is 0; and its counter increments when you're
+        /// hit, changing it to a ruffled Floof Ball
+        counter,
+
+        pub fn toCsvString(variable: @This()) []const u8 {
+            return switch (variable) {
+                .teamId => prefix ++ "teamId",
+                .playerId => prefix ++ "playerId",
+                .focusId => prefix ++ "focusId",
+                .hp => prefix ++ "hp",
+                .hpMax => prefix ++ "hpMax",
+                .hbsFlag => prefix ++ "hbsFlag",
+                .hbsBuffCount => prefix ++ "hbsBuffCount",
+                .hbsDebuffCount => prefix ++ "hbsDebuffCount",
+                .xpos => prefix ++ "xpos",
+                .ypos => prefix ++ "ypos",
+                .hbId => prefix ++ "hbId",
+                .type => prefix ++ "type",
+                .dataId => prefix ++ "dataId",
+                .milSecLeft => prefix ++ "milSecLeft",
+                .cdSecLeft => prefix ++ "cdSecLeft",
+                .resettable => prefix ++ "resettable",
+                .cooldownType => prefix ++ "cooldownType",
+                .cooldown => prefix ++ "cooldown",
+                .gcd => prefix ++ "gcd",
+                .stock => prefix ++ "stock",
+                .maxStock => prefix ++ "maxStock",
+                .chargeCount => prefix ++ "chargeCount",
+                .strength => prefix ++ "strength",
+                .hbsStrength => prefix ++ "hbsStrength",
+                .hbsType => prefix ++ "hbsType",
+                .hbsLength => prefix ++ "hbsLength",
+                .weaponType => prefix ++ "weaponType",
+                .strengthMult => prefix ++ "strengthMult",
+                .radius => prefix ++ "radius",
+                .number => prefix ++ "number",
+                .delay => prefix ++ "delay",
+                .hbInput => prefix ++ "hbInput",
+                .luck => prefix ++ "luck",
+                .flags => prefix ++ "flags",
+                .vars0 => prefix ++ "vars0",
+                .vars1 => prefix ++ "vars1",
+                .vars2 => prefix ++ "vars2",
+                .vars3 => prefix ++ "vars3",
+                .sqVar0 => prefix ++ "sqVar0",
+                .sqVar1 => prefix ++ "sqVar1",
+                .sqVar2 => prefix ++ "sqVar2",
+                .sqVar3 => prefix ++ "sqVar3",
+                .originHbId => prefix ++ "originHbId",
+                .statusId => prefix ++ "statusId",
+                .uniqueId => prefix ++ "uniqueId",
+                .aflTeamId => prefix ++ "aflTeamId",
+                .aflPlayerId => prefix ++ "aflPlayerId",
+                .isBuff => prefix ++ "isBuff",
+                .isCrit => prefix ++ "isCrit",
+                .counter => prefix ++ "counter",
+            };
+        }
+    };
+}
+
+pub const Source = TriggerVariable("s_");
+pub const Receiver = TriggerVariable("r_");
 
 const std = @import("std");
