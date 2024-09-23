@@ -1,16 +1,17 @@
-const ally = std.heap.page_allocator;
+const gpa = std.heap.page_allocator;
 
 var generating_mod: bool = false;
 var written_items: usize = 0;
 var have_trigger: bool = false;
 
-var mod: Mod = undefined;
 var m_args: ?[][:0]u8 = null;
-var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
-var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
-var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
-var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
-var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(ally);
+
+var mod: Mod = undefined;
+var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
+var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
+var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
+var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
+var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
 
 pub const Mod = struct {
     name: []const u8,
@@ -56,14 +57,14 @@ fn end2() !void {
     std.debug.assert(generating_mod);
 
     const args = m_args orelse blk: {
-        m_args = try std.process.argsAlloc(ally);
+        m_args = try std.process.argsAlloc(gpa);
         break :blk m_args.?;
     };
 
     const cwd = std.fs.cwd();
     const output_dir_path = if (args.len >= 2) args[1] else blk: {
-        const home = try std.process.getEnvVarOwned(ally, "HOME");
-        break :blk try std.fs.path.join(ally, &.{
+        const home = try std.process.getEnvVarOwned(gpa, "HOME");
+        break :blk try std.fs.path.join(gpa, &.{
             home, ".local/share/Steam/steamapps/common/Rabbit and Steel/Mods",
         });
     };
@@ -80,7 +81,7 @@ fn end2() !void {
     });
     try output_dir.writeFile(.{
         .sub_path = "Items.csv",
-        .data = try std.fmt.allocPrint(ally,
+        .data = try std.fmt.allocPrint(gpa,
             \\spriteNumber,{},,,,
             \\{s}
         , .{ written_items, item_csv.items }),
