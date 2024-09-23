@@ -3010,7 +3010,6 @@ fn transfiguredYoukaiSet() !void {
             64, // HBCROSS_SPECIAL   - Makes Special unusable
     });
 
-    // TODO: No Test
     item(.{
         .id = "it_transfigured_youkai_bracelet",
         .name = .{
@@ -3059,7 +3058,6 @@ fn transfiguredYoukaiSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: No tests
     item(.{
         .id = "it_transfigured_usagi_kamen",
         .name = .{
@@ -3868,7 +3866,6 @@ fn transfiguredSacredflameSet() !void {
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
 
-    // TODO: No test
     item(.{
         .id = "it_transfigured_desert_earrings",
         .name = .{
