@@ -3868,17 +3868,30 @@ fn transfiguredSacredflameSet() !void {
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
 
+    // TODO: No test
     item(.{
         .id = "it_transfigured_desert_earrings",
         .name = .{
             .english = "Transfigured Desert Earrings",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every time your allies gain a buff, you gain a buff of the same type " ++
+                "for [HBSL].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    for (Hbs.buffs) |buff| {
+        trig(.hbsCreated, .{});
+        cond_eval2(Source.statusId, .@"==", @intFromEnum(buff));
+        cond_eval2(Source.playerId, .@"!=", Receiver.playerId);
+        cond_eval2(Source.teamId, .@"==", Receiver.teamId);
+        tset(.hbskey, .{ buff, Receiver.hbsLength });
+        ttrg(.player_self, .{});
+        apat(.apply_hbs, .{});
+    }
 }
 
 fn transfiguredRuinsSet() !void {
