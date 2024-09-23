@@ -1188,6 +1188,10 @@ pub const Condition = enum {
 };
 
 pub fn cond(condition: Condition, args: anytype) void {
+    switch (condition) {
+        .eval => unreachable, // Call cond_eval2 instead
+        else => {},
+    }
     cond2(condition, args) catch |err| @panic(@errorName(err));
 }
 
@@ -1195,6 +1199,11 @@ fn cond2(condition: Condition, args: anytype) !void {
     std.debug.assert(have_trigger);
     try item_csv.writer().print("condition,{s}", .{condition.toCsvString()});
     try writeArgs(item_csv.writer(), args);
+}
+
+/// Typesafe wrapper around `cond(.eval, .{a, op, b})`
+pub fn cond_eval2(a: anytype, op: Compare, b: anytype) void {
+    cond2(.eval, .{ a, op, b }) catch |err| @panic(@errorName(err));
 }
 
 /// "Quick" patterns are functions that are called immediately, in line. They include things like
@@ -2570,6 +2579,11 @@ pub const Target = enum {
 };
 
 pub fn ttrg(targ: Target, args: anytype) void {
+    switch (targ) {
+        .hotbarslots_prune => unreachable, // Call ttrg_hotbarslots_prune instead
+        .hbstatus_prune => unreachable, // Call ttrg_hbstatus_prune instead
+        else => {},
+    }
     ttrg2(targ, args) catch |err| @panic(@errorName(err));
 }
 
@@ -2577,6 +2591,16 @@ fn ttrg2(targ: Target, args: anytype) !void {
     std.debug.assert(have_trigger);
     try item_csv.writer().print("target,{s}", .{targ.toCsvString()});
     try writeArgs(item_csv.writer(), args);
+}
+
+/// Typesafe wrapper for `ttrg(.hotbarslots_prune, .{a, op, b})`
+pub fn ttrg_hotbarslots_prune(a: anytype, op: Compare, b: anytype) void {
+    ttrg2(.hotbarslots_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
+}
+
+/// Typesafe wrapper for `ttrg(.hbstatus_prune, .{a, op, b})`
+pub fn ttrg_hbstatus_prune(a: anytype, op: Compare, b: anytype) void {
+    ttrg2(.hbstatus_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
 }
 
 pub const Set = enum {
@@ -2789,6 +2813,10 @@ pub const Set = enum {
 };
 
 pub fn tset(s: Set, args: anytype) void {
+    switch (s) {
+        .uservar => unreachable, // Call tset_uservar1 or tset_uservar2 instead
+        else => {},
+    }
     tset2(s, args) catch |err| @panic(@errorName(err));
 }
 
@@ -2796,6 +2824,16 @@ fn tset2(s: Set, args: anytype) !void {
     std.debug.assert(have_trigger);
     try item_csv.writer().print("set,{s}", .{s.toCsvString()});
     try writeArgs(item_csv.writer(), args);
+}
+
+/// Typesafe wrapper for `tset(.uservar, .{name, v})`
+pub fn tset_uservar1(name: []const u8, v: anytype) void {
+    tset2(.uservar, .{ name, v }) catch |err| @panic(@errorName(err));
+}
+
+/// Typesafe wrapper for `tset(.uservar, .{name, a, op, b})`
+pub fn tset_uservar2(name: []const u8, a: anytype, op: MathSign, b: anytype) void {
+    tset2(.uservar, .{ name, a, op, b }) catch |err| @panic(@errorName(err));
 }
 
 fn writeArgs(writer: anytype, args: anytype) !void {
@@ -3372,6 +3410,42 @@ pub const Stat = enum {
             .stockPlus => "stat.stockPlus",
             .hbsFlag => "stat.hbsFlag",
             .hbShineFlag => "stat.hbShineFlag",
+        };
+    }
+};
+
+pub const MathSign = enum {
+    @"*",
+    @"+",
+    @"/",
+    @"-",
+
+    pub fn toCsvString(op: MathSign) []const u8 {
+        return switch (op) {
+            .@"*" => "*",
+            .@"+" => "+",
+            .@"/" => "/",
+            .@"-" => "-",
+        };
+    }
+};
+
+pub const Compare = enum {
+    @"<",
+    @"<=",
+    @">",
+    @">=",
+    @"==",
+    @"!=",
+
+    pub fn toCsvString(op: Compare) []const u8 {
+        return switch (op) {
+            .@"<" => "<",
+            .@"<=" => "<=",
+            .@">" => ">",
+            .@">=" => ">=",
+            .@"==" => "==",
+            .@"!=" => "!=",
         };
     }
 };
