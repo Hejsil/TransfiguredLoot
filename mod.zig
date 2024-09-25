@@ -2359,6 +2359,7 @@ pub const Target = enum {
     player_damaged,
 
     /// flag (a binary number)
+    ///
     /// Prune the current list of players to include only those that have a certain hbsFlag.
     player_prune_hbsflag,
 
@@ -2374,8 +2375,10 @@ pub const Target = enum {
     /// it would target all the enemies. Also, this excludes KO'd players.
     players_ally,
 
-    /// excludeID (an integer) Targets all players on the same team, excluding KO'd players, and
-    /// excluding the playerID passed in.
+    /// excludeID (an integer)
+    ///
+    /// Targets all players on the same team, excluding KO'd players, and excluding the playerID
+    /// passed in.
     players_ally_exclude,
 
     /// Targets all players on the same team. Includes KO'd players.
@@ -2387,6 +2390,7 @@ pub const Target = enum {
     players_ally_lowest_hp,
 
     /// numberOfPlayers (an integer; this is an optional parameter)
+    ///
     /// Targets a random selection of your teammates. If a number is passed in, it will try to
     /// target that many players. If no number is passed in, it will target 1.
     players_ally_random,
@@ -2402,6 +2406,7 @@ pub const Target = enum {
     players_opponent_backstab,
 
     /// trgBinary (a binary number representing player IDs)
+    ///
     /// Targets your enemies based off a binary number.
     /// 1 : 0001 : Just player 0
     /// 2 : 0010 : Just player 1
@@ -2411,6 +2416,7 @@ pub const Target = enum {
     players_opponent_binary,
 
     /// excludeID (an integer)
+    ///
     /// Targets all players on the enemy team, excluding KO'd players, and excluding the playerID
     /// passed in.
     players_opponent_exclude,
@@ -2419,6 +2425,7 @@ pub const Target = enum {
     players_opponent_focus,
 
     /// numberOfPlayers (an integer; this is an optional parameter)
+    ///
     /// Targets a random selection of your enemies.  If a number is passed in, it will try to
     /// target that many players.  If no number is passed in, it will target 1.
     players_opponent_random,
@@ -2443,14 +2450,16 @@ pub const Target = enum {
     /// Targets the player who is the source of this trigger.
     players_source,
 
-    ///numberOfPlayers (an integer; this is an optional parameter)
-    ///Targets a random selection of the players that are currently in the list. If a number is
-    ///passed in, it will try to target that many players. If no number is passed in, it will
-    ///target 1.
+    /// numberOfPlayers (an integer; this is an optional parameter)
+    ///
+    /// Targets a random selection of the players that are currently in the list. If a number is
+    /// passed in, it will try to target that many players. If no number is passed in, it will
+    /// target 1.
     players_target_random,
 
     /// allyBin (a binary number representing player IDs)
     /// enemyBin (a binary number representing player IDs)
+    ///
     /// Targets both allies and enemies based off binary numbers.
     /// 1 : 0001 : Just player 0
     /// 2 : 0010 : Just player 1
@@ -2497,15 +2506,18 @@ pub const Target = enum {
 
     /// param0 (a variable that differs per target)
     /// param1 (a boolean)
+    ///
     /// Prune the current list of hotbar slots to only include items for which a boolean matches.
     hotbarslots_prune_bool,
 
     /// isBuff (if true, gets slots with buffs, if false, gets slots with debuffs)
+    ///
     /// Prune the current list of hotbar slots to include items that have a Buff or Debuff they
     /// apply.
     hotbarslots_prune_bufftype,
 
     /// type (an integer representing a cooldown type)
+    ///
     /// Prune the current list of hotbar slots to include items that have a specific cooldown type.
     /// 0 : None
     /// 1 : Time (only cooldown, such as Defensives/most loot)
@@ -2533,6 +2545,7 @@ pub const Target = enum {
     hotbarslots_self_loot,
 
     /// wpType (an integer representing a weapon type)
+    ///
     /// Targets a particular ability of the player receiving this trigger.
     /// 0 : None
     /// 1 : Primary
@@ -2542,6 +2555,7 @@ pub const Target = enum {
     hotbarslots_self_weapontype,
 
     /// wpType (an integer representing a weapon type)
+    ///
     /// Same as ttrg_hotbarslots_self_weapontype, but will only target the ability if it has a base
     /// strength; otherwise it will simply result in an empty list.
     hotbarslots_self_weapontype_withstr,
