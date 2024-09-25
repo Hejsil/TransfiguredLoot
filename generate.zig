@@ -144,8 +144,8 @@ fn transfiguredArcaneSet() !void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
-    const transfigured_witchs_cloak_hbs_mult = 1.5;
-    const transfigured_witchs_cloak_ability_mult = -0.1;
+    const witchs_cloak_hbs_mult = 1.5;
+    const witchs_cloak_ability_mult = -0.1;
     item(.{
         .id = "it_transfigured_witchs_cloak",
         .name = .{
@@ -158,14 +158,14 @@ fn transfiguredArcaneSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = @abs(transfigured_witchs_cloak_ability_mult),
-        .primaryMult = transfigured_witchs_cloak_ability_mult,
-        .secondaryMult = transfigured_witchs_cloak_ability_mult,
-        .specialMult = transfigured_witchs_cloak_ability_mult,
-        .defensiveMult = transfigured_witchs_cloak_ability_mult,
+        .hbVar0 = @abs(witchs_cloak_ability_mult),
+        .primaryMult = witchs_cloak_ability_mult,
+        .secondaryMult = witchs_cloak_ability_mult,
+        .specialMult = witchs_cloak_ability_mult,
+        .defensiveMult = witchs_cloak_ability_mult,
 
-        .hbVar1 = @abs(transfigured_witchs_cloak_hbs_mult),
-        .hbsMult = transfigured_witchs_cloak_hbs_mult,
+        .hbVar1 = @abs(witchs_cloak_hbs_mult),
+        .hbsMult = witchs_cloak_hbs_mult,
 
         .charspeed = 1,
     });
@@ -182,7 +182,7 @@ fn transfiguredArcaneSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_redblack_ribbon_dmg = 250;
+    const redblack_ribbon_dmg = 250;
     item(.{
         .id = "it_transfigured_redblack_ribbon",
         .name = .{
@@ -195,7 +195,7 @@ fn transfiguredArcaneSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
-        .strMult = transfigured_redblack_ribbon_dmg,
+        .strMult = redblack_ribbon_dmg,
         .delay = 200,
     });
     trig(.onDamageDone, .{.dmg_self_defensive});
@@ -205,14 +205,14 @@ fn transfiguredArcaneSet() !void {
     cond(.unequal, .{ "u_hbscount", 0 });
     qpat(.hb_flash_item, .{});
     qpat(.hbs_destroy, .{});
-    tset_uservar2("u_str", "u_hbscount", .@"*", transfigured_redblack_ribbon_dmg);
+    tset_uservar2("u_str", "u_hbscount", .@"*", redblack_ribbon_dmg);
     tset(.strength_def, .{});
     tset(.strength, .{"u_str"});
     ttrg(.player_damaged, .{});
     apat(.curse_talon, .{});
 
-    const transfigured_opal_necklace_extra_cd = 15 * std.time.ms_per_s;
-    const transfigured_opal_necklace_num_curses = 5;
+    const opal_necklace_extra_cd = 15 * std.time.ms_per_s;
+    const opal_necklace_num_curses = 5;
     item(.{
         .id = "it_transfigured_opal_necklace",
         .name = .{
@@ -228,12 +228,12 @@ fn transfiguredArcaneSet() !void {
         .hbsType = .curse_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
-        .hbVar0 = transfigured_opal_necklace_num_curses,
-        .hbVar1 = transfigured_opal_necklace_extra_cd,
+        .hbVar0 = opal_necklace_num_curses,
+        .hbVar1 = opal_necklace_extra_cd,
     });
     trig(.cdCalc2a, .{});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
-    qpat(.hb_add_cooldown_permanent, .{ .amount = transfigured_opal_necklace_extra_cd });
+    qpat(.hb_add_cooldown_permanent, .{ .amount = opal_necklace_extra_cd });
 
     trig(.hotbarUsed, .{.hb_defensive});
     ttrg(.players_opponent, .{});
@@ -246,7 +246,7 @@ fn transfiguredArcaneSet() !void {
         .curse_4,
         .curse_5,
     };
-    for (curses[0..transfigured_opal_necklace_num_curses]) |curse| {
+    for (curses[0..opal_necklace_num_curses]) |curse| {
         tset(.hbskey, .{ curse, Receiver.hbsLength });
         apat(.apply_hbs, .{});
     }
@@ -259,7 +259,7 @@ fn transfiguredNightSet() !void {
     });
     defer mod.end();
 
-    const transfigured_sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
+    const sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_sleeping_greatbow",
         .name = .{
@@ -276,8 +276,8 @@ fn transfiguredNightSet() !void {
         .delay = 10 * std.time.ms_per_s,
         .radius = 150,
 
-        .hbVar0 = transfigured_sleeping_greatbow_cooldown,
-        .cooldown = transfigured_sleeping_greatbow_cooldown,
+        .hbVar0 = sleeping_greatbow_cooldown,
+        .cooldown = sleeping_greatbow_cooldown,
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
 
@@ -468,7 +468,7 @@ fn transfiguredTimespaceSet() !void {
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
-    const transfigured_timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
+    const timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timewarp_wand",
         .name = .{
@@ -484,7 +484,7 @@ fn transfiguredTimespaceSet() !void {
         .showSqVar = true,
         .autoOffSqVar0 = 0,
 
-        .hbVar0 = @abs(transfigured_timewarp_wand_gcd_shorting),
+        .hbVar0 = @abs(timewarp_wand_gcd_shorting),
     });
     trig(.cdCalc5, .{});
     ttrg(.hbstatus_target, .{});
@@ -494,7 +494,7 @@ fn transfiguredTimespaceSet() !void {
     cond(.unequal, .{ "u_hastes", 0 });
     for (WeaponType.abilities_with_gcd) |weapontype| {
         ttrg(.hotbarslots_self_weapontype, .{weapontype});
-        qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_timewarp_wand_gcd_shorting });
+        qpat(.hb_add_gcd_permanent, .{ .amount = timewarp_wand_gcd_shorting });
     }
 
     item(.{
@@ -560,7 +560,7 @@ fn transfiguredTimespaceSet() !void {
     trig(.hotbarUsed3, .{.hb_selfcast});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 3 });
 
-    const transfigured_metronome_boots_hbs_len = 5 * std.time.ms_per_s;
+    const metronome_boots_hbs_len = 5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_metronome_boots",
         .name = .{
@@ -578,8 +578,8 @@ fn transfiguredTimespaceSet() !void {
         .cooldown = 10 * std.time.ms_per_s,
         .hbInput = .auto,
 
-        .hbsLength = transfigured_metronome_boots_hbs_len,
-        .hbVar0 = transfigured_metronome_boots_hbs_len,
+        .hbsLength = metronome_boots_hbs_len,
+        .hbVar0 = metronome_boots_hbs_len,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -605,7 +605,7 @@ fn transfiguredTimespaceSet() !void {
     cond(.hb_check_square_var, .{ 0, 2 });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    const transfigured_timemage_cap_cd_set = 15 * std.time.ms_per_s;
+    const timemage_cap_cd_set = 15 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timemage_cap",
         .name = .{
@@ -617,12 +617,12 @@ fn transfiguredTimespaceSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_timemage_cap_cd_set,
+        .hbVar0 = timemage_cap_cd_set,
     });
     trig(.cdCalc5, .{});
     ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", transfigured_timemage_cap_cd_set);
-    qpat(.hb_set_cooldown_permanent, .{ .time = transfigured_timemage_cap_cd_set });
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", timemage_cap_cd_set);
+    qpat(.hb_set_cooldown_permanent, .{ .time = timemage_cap_cd_set });
 
     item(.{
         .id = "it_transfigured_starry_cloak",
@@ -666,7 +666,7 @@ fn transfiguredWindSet() !void {
     });
     defer mod.end();
 
-    const transfigured_hawkfeather_fan_cd_reduction = -1 * std.time.ms_per_s;
+    const hawkfeather_fan_cd_reduction = -1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_hawkfeather_fan",
         .name = .{
@@ -678,13 +678,13 @@ fn transfiguredWindSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = @abs(transfigured_hawkfeather_fan_cd_reduction),
+        .hbVar0 = @abs(hawkfeather_fan_cd_reduction),
     });
     trig(.cdCalc2b, .{});
     ttrg(.player_self, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
-    qpat(.hb_add_cooldown_permanent, .{ .amount = transfigured_hawkfeather_fan_cd_reduction });
+    qpat(.hb_add_cooldown_permanent, .{ .amount = hawkfeather_fan_cd_reduction });
 
     item(.{
         .id = "it_transfigured_windbite_dagger",
@@ -698,7 +698,7 @@ fn transfiguredWindSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_pidgeon_bow_num_proj = 3;
+    const pidgeon_bow_num_proj = 3;
     item(.{
         .id = "it_transfigured_pidgeon_bow",
         .name = .{
@@ -721,8 +721,8 @@ fn transfiguredWindSet() !void {
         .radius = 100,
         .strMult = 10,
 
-        .hbVar0 = transfigured_pidgeon_bow_num_proj,
-        .hitNumber = transfigured_pidgeon_bow_num_proj,
+        .hbVar0 = pidgeon_bow_num_proj,
+        .hitNumber = pidgeon_bow_num_proj,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -874,7 +874,7 @@ fn transfiguredBloodwolfSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_bloodflower_brooch_hits = 3;
+    const bloodflower_brooch_hits = 3;
     item(.{
         .id = "it_transfigured_bloodflower_brooch",
         .name = .{
@@ -886,8 +886,8 @@ fn transfiguredBloodwolfSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_bloodflower_brooch_hits,
-        .hitNumber = transfigured_bloodflower_brooch_hits,
+        .hbVar0 = bloodflower_brooch_hits,
+        .hitNumber = bloodflower_brooch_hits,
         .radius = 2000,
         .strMult = 40,
     });
@@ -1112,7 +1112,7 @@ fn transfiguredRockdragonSet() !void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
-    const transfigured_greysteel_shield_aoe = 1;
+    const greysteel_shield_aoe = 1;
     item(.{
         .id = "it_transfigured_greysteel_shield",
         .name = .{
@@ -1125,13 +1125,13 @@ fn transfiguredRockdragonSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_greysteel_shield_aoe,
+        .hbVar0 = greysteel_shield_aoe,
     });
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     qpat(.hb_mult_hitbox_var, .{
         .varIndexStr = "hitbox.radius",
-        .mult = 1 + transfigured_greysteel_shield_aoe,
+        .mult = 1 + greysteel_shield_aoe,
     });
 
     item(.{
@@ -1147,8 +1147,8 @@ fn transfiguredRockdragonSet() !void {
     });
 
     // TODO: Redo. Not all abilities have the ability to hit multiple times
-    const transfigured_tough_gauntlet_extra_hits = 2;
-    const transfigured_tough_gauntlet_extra_gcd = 1 * std.time.ms_per_s;
+    const tough_gauntlet_extra_hits = 2;
+    const tough_gauntlet_extra_gcd = 1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_tough_gauntlet",
         .name = .{
@@ -1161,22 +1161,22 @@ fn transfiguredRockdragonSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_tough_gauntlet_extra_hits,
-        .hbVar1 = transfigured_tough_gauntlet_extra_gcd,
+        .hbVar0 = tough_gauntlet_extra_hits,
+        .hbVar1 = tough_gauntlet_extra_gcd,
     });
     trig(.strCalc2, .{});
     for (WeaponType.abilities) |weapontype| {
         ttrg(.hotbarslots_self_weapontype, .{weapontype});
         qpat(.hb_add_hitbox_var, .{
             .varIndexStr = "hitbox.number",
-            .amount = transfigured_tough_gauntlet_extra_hits,
+            .amount = tough_gauntlet_extra_hits,
         });
     }
 
     trig(.cdCalc2a, .{});
     for (WeaponType.abilities_with_gcd) |weapontype| {
         ttrg(.hotbarslots_self_weapontype, .{weapontype});
-        qpat(.hb_add_gcd_permanent, .{ .amount = transfigured_tough_gauntlet_extra_gcd });
+        qpat(.hb_add_gcd_permanent, .{ .amount = tough_gauntlet_extra_gcd });
     }
 
     item(.{
@@ -1259,7 +1259,7 @@ fn transfiguredFlameSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_meteor_staff_cd = 10 * std.time.ms_per_s;
+    const meteor_staff_cd = 10 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_meteor_staff",
         .name = .{
@@ -1272,8 +1272,8 @@ fn transfiguredFlameSet() !void {
         .weaponType = .loot,
 
         .cooldownType = .time,
-        .cooldown = transfigured_meteor_staff_cd,
-        .hbVar0 = transfigured_meteor_staff_cd,
+        .cooldown = meteor_staff_cd,
+        .hbVar0 = meteor_staff_cd,
 
         .delay = 250,
         .hbsType = .burn_3,
@@ -1315,7 +1315,7 @@ fn transfiguredFlameSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_demon_horns_aoe_mult = 1;
+    const demon_horns_aoe_mult = 1;
     item(.{
         .id = "it_transfigured_demon_horns",
         .name = .{
@@ -1333,14 +1333,14 @@ fn transfiguredFlameSet() !void {
         .glowSqVar0 = true,
         .greySqVar0 = true,
 
-        .hbVar0 = transfigured_demon_horns_aoe_mult,
+        .hbVar0 = demon_horns_aoe_mult,
     });
     trig(.strCalc2, .{});
     cond(.hb_check_square_var, .{ 0, 1 });
     ttrg(.hotbarslots_current_players, .{});
     qpat(.hb_mult_hitbox_var, .{
         .varIndexStr = "hitbox.radius",
-        .mult = 1 + transfigured_demon_horns_aoe_mult,
+        .mult = 1 + demon_horns_aoe_mult,
     });
 
     trig(.hotbarUsedProc2, .{.hb_defensive});
@@ -1439,7 +1439,7 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_sapphire_violin_num_buffs = 3;
+    const sapphire_violin_num_buffs = 3;
     item(.{
         .id = "it_transfigured_sapphire_violin",
         .name = .{
@@ -1460,7 +1460,7 @@ fn transfiguredGemSet() !void {
         .cooldownType = .time,
         .cooldown = 15 * std.time.ms_per_s,
 
-        .hbVar0 = transfigured_sapphire_violin_num_buffs,
+        .hbVar0 = sapphire_violin_num_buffs,
         .greySqVar0 = true,
         .hbFlags = 32, // HTB_FLAG_VAR0REQ - Item will not activate unless sqVar0 is greater than 0,
     });
@@ -1479,7 +1479,7 @@ fn transfiguredGemSet() !void {
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_flash_item, .{});
     ttrg(.players_ally, .{});
-    for (0..transfigured_sapphire_violin_num_buffs) |_| {
+    for (0..sapphire_violin_num_buffs) |_| {
         tset(.hbs_randombuff, .{});
         apat(.apply_hbs, .{});
     }
@@ -1504,7 +1504,7 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_amethyst_bracelet_mult = 0.3;
+    const amethyst_bracelet_mult = 0.3;
     item(.{
         .id = "it_transfigured_amethyst_bracelet",
         .name = .{
@@ -1517,8 +1517,8 @@ fn transfiguredGemSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .allMult = transfigured_amethyst_bracelet_mult,
-        .hbVar0 = transfigured_amethyst_bracelet_mult,
+        .allMult = amethyst_bracelet_mult,
+        .hbVar0 = amethyst_bracelet_mult,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond(.false, .{Source.isBuff});
@@ -1537,8 +1537,8 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_ruby_circlet_stocks = 1;
-    const transfigured_ruby_circlet_def_dmg_mult = 1.2;
+    const ruby_circlet_stocks = 1;
+    const ruby_circlet_def_dmg_mult = 1.2;
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
@@ -1556,18 +1556,18 @@ fn transfiguredGemSet() !void {
         .glowSqVar0 = true,
         .lootHbDispType = .glowing,
 
-        .hbVar0 = transfigured_ruby_circlet_def_dmg_mult,
-        .hbVar1 = transfigured_ruby_circlet_stocks,
+        .hbVar0 = ruby_circlet_def_dmg_mult,
+        .hbVar1 = ruby_circlet_stocks,
     });
     trig(.onSquarePickup, .{.square_self});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = transfigured_ruby_circlet_stocks });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = ruby_circlet_stocks });
 
     trig(.strCalc0, .{});
     qpat(.hb_reset_statchange_norefresh, .{});
     cond(.hb_check_square_var_false, .{ 0, 0 });
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .defensiveMult,
-        .amount = transfigured_ruby_circlet_def_dmg_mult,
+        .amount = ruby_circlet_def_dmg_mult,
     });
 
     trig(.onDamage, .{.pl_self});
@@ -1633,8 +1633,8 @@ fn transfiguredLightningSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_darkcloud_necklace_ability_mult = -0.5;
-    const transfigured_darkcloud_necklace_loot_mult = 1.5;
+    const darkcloud_necklace_ability_mult = -0.5;
+    const darkcloud_necklace_loot_mult = 1.5;
     item(.{
         .id = "it_transfigured_darkcloud_necklace",
         .name = .{
@@ -1648,17 +1648,17 @@ fn transfiguredLightningSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = @abs(transfigured_darkcloud_necklace_ability_mult),
-        .primaryMult = transfigured_darkcloud_necklace_ability_mult,
-        .secondaryMult = transfigured_darkcloud_necklace_ability_mult,
-        .specialMult = transfigured_darkcloud_necklace_ability_mult,
-        .defensiveMult = transfigured_darkcloud_necklace_ability_mult,
+        .hbVar0 = @abs(darkcloud_necklace_ability_mult),
+        .primaryMult = darkcloud_necklace_ability_mult,
+        .secondaryMult = darkcloud_necklace_ability_mult,
+        .specialMult = darkcloud_necklace_ability_mult,
+        .defensiveMult = darkcloud_necklace_ability_mult,
 
-        .hbVar1 = transfigured_darkcloud_necklace_loot_mult,
-        .lootMult = transfigured_darkcloud_necklace_loot_mult,
+        .hbVar1 = darkcloud_necklace_loot_mult,
+        .lootMult = darkcloud_necklace_loot_mult,
     });
 
-    const transfigured_crown_of_storms_mult = 0.25;
+    const crown_of_storms_mult = 0.25;
     item(.{
         .id = "it_transfigured_crown_of_storms",
         .name = .{
@@ -1670,12 +1670,12 @@ fn transfiguredLightningSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_crown_of_storms_mult,
+        .hbVar0 = crown_of_storms_mult,
     });
     trig(.strCalc1c, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.luck, .@">", 0);
-    qpat(.hb_add_strcalcbuff, .{ .amount = transfigured_crown_of_storms_mult });
+    qpat(.hb_add_strcalcbuff, .{ .amount = crown_of_storms_mult });
 
     item(.{
         .id = "it_transfigured_thunderclap_gloves",
@@ -1768,8 +1768,8 @@ fn transfiguredShrineSet() !void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
-    const transfigured_sacred_bow_mult_per_buff = 1;
-    const transfigured_sacred_bow_dmg = 250;
+    const sacred_bow_mult_per_buff = 1;
+    const sacred_bow_dmg = 250;
     item(.{
         .id = "it_transfigured_sacred_bow",
         .name = .{
@@ -1790,8 +1790,8 @@ fn transfiguredShrineSet() !void {
         .delay = 250,
         .radius = 1800,
 
-        .strMult = transfigured_sacred_bow_dmg,
-        .hbVar0 = transfigured_sacred_bow_mult_per_buff,
+        .strMult = sacred_bow_dmg,
+        .hbVar0 = sacred_bow_mult_per_buff,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -1803,9 +1803,9 @@ fn transfiguredShrineSet() !void {
     ttrg(.hbstatus_target, .{});
     ttrg_hbstatus_prune(TargetStatuses.isBuff, .@"==", 1);
     tset(.uservar_hbscount, .{"u_buffs"});
-    tset_uservar2("u_allMult", "u_buffs", .@"*", transfigured_sacred_bow_mult_per_buff);
-    tset_uservar2("u_extraStr", "u_allMult", .@"*", transfigured_sacred_bow_dmg);
-    tset_uservar2("u_str", "u_extraStr", .@"+", transfigured_sacred_bow_dmg);
+    tset_uservar2("u_allMult", "u_buffs", .@"*", sacred_bow_mult_per_buff);
+    tset_uservar2("u_extraStr", "u_allMult", .@"*", sacred_bow_dmg);
+    tset_uservar2("u_str", "u_extraStr", .@"+", sacred_bow_dmg);
     tset(.debug, .{"u_str"});
     tset(.strength_def, .{});
     tset(.strength, .{"u_str"});
@@ -1876,7 +1876,7 @@ fn transfiguredShrineSet() !void {
     cond(.hb_check_square_var, .{ 0, 15 });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    const transfigured_shrinemaidens_kosode_mult_per_buff = 0.1;
+    const shrinemaidens_kosode_mult_per_buff = 0.1;
     item(.{
         .id = "it_transfigured_shrinemaidens_kosode",
         .name = .{
@@ -1889,20 +1889,20 @@ fn transfiguredShrineSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_shrinemaidens_kosode_mult_per_buff,
+        .hbVar0 = shrinemaidens_kosode_mult_per_buff,
     });
     trig(.strCalc0, .{});
     ttrg(.hbstatus_target, .{});
     ttrg_hbstatus_prune(TargetStatuses.isBuff, .@"==", 1);
     tset(.uservar_hbscount, .{"u_buffs"});
-    tset_uservar2("u_allMult", "u_buffs", .@"*", transfigured_shrinemaidens_kosode_mult_per_buff);
+    tset_uservar2("u_allMult", "u_buffs", .@"*", shrinemaidens_kosode_mult_per_buff);
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .allMult,
         .amountStr = "u_allMult",
     });
 
-    const transfigured_redwhite_ribbon_mult = 0.3;
+    const redwhite_ribbon_mult = 0.3;
     item(.{
         .id = "it_transfigured_redwhite_ribbon",
         .name = .{
@@ -1915,8 +1915,8 @@ fn transfiguredShrineSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .allMult = transfigured_redwhite_ribbon_mult,
-        .hbVar0 = transfigured_redwhite_ribbon_mult,
+        .allMult = redwhite_ribbon_mult,
+        .hbVar0 = redwhite_ribbon_mult,
     });
     trig(.hbsCreated, .{.hbs_selfafl});
     cond(.true, .{Source.isBuff});
@@ -2014,8 +2014,8 @@ fn transfiguredLuckySet() !void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_lucky_proc, .{});
 
-    const transfigured_royal_staff_aoe_buff = 0.01;
-    const transfigured_royal_staff_crit_dmg_buff = 0.01;
+    const royal_staff_aoe_buff = 0.01;
+    const royal_staff_crit_dmg_buff = 0.01;
     item(.{
         .id = "it_transfigured_royal_staff",
         .name = .{
@@ -2028,28 +2028,28 @@ fn transfiguredLuckySet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_royal_staff_aoe_buff,
-        .hbVar1 = transfigured_royal_staff_crit_dmg_buff,
+        .hbVar0 = royal_staff_aoe_buff,
+        .hbVar1 = royal_staff_crit_dmg_buff,
     });
     trig(.onGoldChange, .{.pl_self});
     qpat(.hb_reset_statchange, .{});
 
     trig(.strCalc2, .{});
     tset(.uservar_gold, .{"u_gold"});
-    tset_uservar2("u_critDmg", "u_gold", .@"*", transfigured_royal_staff_crit_dmg_buff);
+    tset_uservar2("u_critDmg", "u_gold", .@"*", royal_staff_crit_dmg_buff);
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .critDamage,
         .amountStr = "u_critDmg",
     });
     ttrg(.hotbarslots_current_players, .{});
-    tset_uservar2("u_aoeMult", "u_gold", .@"*", transfigured_royal_staff_aoe_buff);
+    tset_uservar2("u_aoeMult", "u_gold", .@"*", royal_staff_aoe_buff);
     tset_uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
         .varIndexStr = "hitbox.radius",
         .multStr = "u_aoeMultFull",
     });
 
-    const transfigured_ballroom_gown_buff = 5.0;
+    const ballroom_gown_buff = 5.0;
     item(.{
         .id = "it_transfigured_ballroom_gown",
         .name = .{
@@ -2062,22 +2062,22 @@ fn transfiguredLuckySet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .allMult = transfigured_ballroom_gown_buff * 0.01,
-        .haste = 1 - transfigured_ballroom_gown_buff * 0.01,
-        .luck = transfigured_ballroom_gown_buff * 0.01,
-        .critDamage = transfigured_ballroom_gown_buff * 0.01,
-        .invulnPlus = transfigured_ballroom_gown_buff * 100,
-        .cdp = -transfigured_ballroom_gown_buff * 100,
-        .charspeed = transfigured_ballroom_gown_buff * 0.1,
-        .charradius = -transfigured_ballroom_gown_buff,
+        .allMult = ballroom_gown_buff * 0.01,
+        .haste = 1 - ballroom_gown_buff * 0.01,
+        .luck = ballroom_gown_buff * 0.01,
+        .critDamage = ballroom_gown_buff * 0.01,
+        .invulnPlus = ballroom_gown_buff * 100,
+        .cdp = -ballroom_gown_buff * 100,
+        .charspeed = ballroom_gown_buff * 0.1,
+        .charradius = -ballroom_gown_buff,
     });
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
     qpat(.hb_mult_hitbox_var, .{
         .varIndexStr = "hitbox.radius",
-        .mult = 1 + transfigured_ballroom_gown_buff * 0.01,
+        .mult = 1 + ballroom_gown_buff * 0.01,
     });
-    qpat(.hb_add_strength, .{ .amount = transfigured_ballroom_gown_buff });
+    qpat(.hb_add_strength, .{ .amount = ballroom_gown_buff });
 
     item(.{
         .id = "it_transfigured_silver_coin",
@@ -2116,9 +2116,9 @@ fn transfiguredLuckySet() !void {
     tset(.strength_def, .{});
     apat(.curse_talon, .{});
 
-    const transfigured_mimick_rabbitfoot_all_mult = -0.13;
-    const transfigured_mimick_rabbitfoot_hbs_str_mult = 30;
-    const transfigured_mimick_rabbitfoot_cd = 4 * std.time.ms_per_s;
+    const mimick_rabbitfoot_all_mult = -0.13;
+    const mimick_rabbitfoot_hbs_str_mult = 30;
+    const mimick_rabbitfoot_cd = 4 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_mimick_rabbitfoot",
         .name = .{
@@ -2137,16 +2137,16 @@ fn transfiguredLuckySet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbsStrMult = transfigured_mimick_rabbitfoot_hbs_str_mult,
+        .hbsStrMult = mimick_rabbitfoot_hbs_str_mult,
         .hbsLength = 13 * std.time.ms_per_s,
 
-        .hbVar0 = @abs(transfigured_mimick_rabbitfoot_all_mult),
-        .allMult = transfigured_mimick_rabbitfoot_all_mult,
+        .hbVar0 = @abs(mimick_rabbitfoot_all_mult),
+        .allMult = mimick_rabbitfoot_all_mult,
         .luck = -13,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = transfigured_mimick_rabbitfoot_cd,
+        .cooldown = mimick_rabbitfoot_cd,
         .hbInput = .auto,
     });
     var random_state = std.Random.DefaultPrng.init(1);
@@ -2159,7 +2159,7 @@ fn transfiguredLuckySet() !void {
         cond(.hb_check_square_var, .{ 0, i });
         ttrg(.players_opponent, .{});
         tset(.hbskey, .{ debuff, Receiver.hbsLength });
-        tset(.hbsstr, .{transfigured_mimick_rabbitfoot_hbs_str_mult});
+        tset(.hbsstr, .{mimick_rabbitfoot_hbs_str_mult});
         apat(.poisonfrog_charm, .{});
     }
 
@@ -2169,7 +2169,7 @@ fn transfiguredLuckySet() !void {
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     ttrg(.player_self, .{});
-    tset(.hbskey, .{ Hbs.berserk, transfigured_mimick_rabbitfoot_cd });
+    tset(.hbskey, .{ Hbs.berserk, mimick_rabbitfoot_cd });
     apat(.apply_hbs, .{});
 
     trig(.hotbarUsed3, .{.hb_self});
@@ -2279,7 +2279,7 @@ fn transfiguredLifeSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_sunflower_crown_hp = 3;
+    const sunflower_crown_hp = 3;
     item(.{
         .id = "it_transfigured_sunflower_crown",
         .name = .{
@@ -2295,12 +2295,12 @@ fn transfiguredLifeSet() !void {
 
         .charspeed = 1,
         .charradius = 20,
-        .hp = transfigured_sunflower_crown_hp,
-        .hbVar0 = transfigured_sunflower_crown_hp,
+        .hp = sunflower_crown_hp,
+        .hbVar0 = sunflower_crown_hp,
     });
 
-    const transfigured_midsummer_dress_hp = 1;
-    const transfigured_midsummer_dress_mult_per_hp = 0.05;
+    const midsummer_dress_hp = 1;
+    const midsummer_dress_mult_per_hp = 0.05;
     item(.{
         .id = "it_transfigured_midsummer_dress",
         .name = .{
@@ -2315,20 +2315,20 @@ fn transfiguredLifeSet() !void {
         .weaponType = .loot,
 
         .charspeed = 1,
-        .hp = transfigured_midsummer_dress_hp,
-        .hbVar0 = transfigured_midsummer_dress_hp,
-        .hbVar1 = transfigured_midsummer_dress_mult_per_hp,
+        .hp = midsummer_dress_hp,
+        .hbVar0 = midsummer_dress_hp,
+        .hbVar1 = midsummer_dress_mult_per_hp,
     });
     trig(.strCalc0, .{});
-    tset_uservar2("u_allMult", Receiver.hp, .@"*", transfigured_midsummer_dress_mult_per_hp);
+    tset_uservar2("u_allMult", Receiver.hp, .@"*", midsummer_dress_mult_per_hp);
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .allMult,
         .amountStr = "u_allMult",
     });
 
-    const transfigured_grasswoven_bracelet_hp = 1;
-    const transfigured_grasswoven_bracelet_aoe_per_hp = 0.1;
+    const grasswoven_bracelet_hp = 1;
+    const grasswoven_bracelet_aoe_per_hp = 0.1;
     item(.{
         .id = "it_transfigured_grasswoven_bracelet",
         .name = .{
@@ -2343,13 +2343,13 @@ fn transfiguredLifeSet() !void {
         .weaponType = .loot,
 
         .charspeed = 1,
-        .hp = transfigured_grasswoven_bracelet_hp,
-        .hbVar0 = transfigured_grasswoven_bracelet_hp,
-        .hbVar1 = transfigured_grasswoven_bracelet_aoe_per_hp,
+        .hp = grasswoven_bracelet_hp,
+        .hbVar0 = grasswoven_bracelet_hp,
+        .hbVar1 = grasswoven_bracelet_aoe_per_hp,
     });
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
-    tset_uservar2("u_aoeMult", Receiver.hp, .@"*", transfigured_grasswoven_bracelet_aoe_per_hp);
+    tset_uservar2("u_aoeMult", Receiver.hp, .@"*", grasswoven_bracelet_aoe_per_hp);
     tset_uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
         .varIndexStr = "hitbox.radius",
@@ -2364,8 +2364,8 @@ fn transfiguredPoisonSet() !void {
     });
     defer mod.end();
 
-    const transfigured_snakefang_dagger_str = 10;
-    const transfigured_snakefang_dagger_num_poisons = 4;
+    const snakefang_dagger_str = 10;
+    const snakefang_dagger_num_poisons = 4;
     item(.{
         .id = "it_transfigured_snakefang_dagger",
         .name = .{
@@ -2381,7 +2381,7 @@ fn transfiguredPoisonSet() !void {
         .weaponType = .loot,
         .delay = 250,
         .hbsType = .poison_0,
-        .hbsStrMult = transfigured_snakefang_dagger_str,
+        .hbsStrMult = snakefang_dagger_str,
         .hbsLength = 5 * std.time.ms_per_s,
 
         .hbVar0 = 0.5,
@@ -2390,7 +2390,7 @@ fn transfiguredPoisonSet() !void {
         .hbColor0 = rgb(0x0a, 0x51, 0x00),
         .hbColor1 = rgb(0x17, 0x7f, 0x00),
 
-        .hbVar1 = transfigured_snakefang_dagger_num_poisons,
+        .hbVar1 = snakefang_dagger_num_poisons,
     });
     trig(.onDamageDone, .{.dmg_self_secondary});
     ttrg(.player_damaged, .{});
@@ -2404,9 +2404,9 @@ fn transfiguredPoisonSet() !void {
         .poison_5,
         .poison_6,
     };
-    inline for (poisons[0..transfigured_snakefang_dagger_num_poisons]) |hbs| {
+    inline for (poisons[0..snakefang_dagger_num_poisons]) |hbs| {
         tset(.hbskey, .{ hbs, Receiver.hbsLength });
-        tset(.hbsstr, .{transfigured_snakefang_dagger_str});
+        tset(.hbsstr, .{snakefang_dagger_str});
         apat(.apply_hbs, .{});
     }
 
@@ -2419,7 +2419,7 @@ fn transfiguredPoisonSet() !void {
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
     qpat(.hb_set_color_def, .{});
 
-    const transfigured_ivy_staff_poison_dmg = 30;
+    const ivy_staff_poison_dmg = 30;
     item(.{
         .id = "it_transfigured_ivy_staff",
         .name = .{
@@ -2434,7 +2434,7 @@ fn transfiguredPoisonSet() !void {
 
         .procChance = 0.60,
         .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = transfigured_ivy_staff_poison_dmg,
+        .hbsStrMult = ivy_staff_poison_dmg,
     });
     const poison_pairs = [_][2]Hbs{
         .{ .poison_0, .poison_6 },
@@ -2453,11 +2453,11 @@ fn transfiguredPoisonSet() !void {
         qpat(.hb_lucky_proc, .{});
         ttrg(.player_afflicted_source, .{});
         tset(.hbskey, .{ pair[1], Receiver.hbsLength });
-        tset(.hbsstr, .{transfigured_ivy_staff_poison_dmg});
+        tset(.hbsstr, .{ivy_staff_poison_dmg});
         apat(.apply_hbs, .{});
     }
 
-    const transfigured_deathcap_tome_hbs_str_mult = 30;
+    const deathcap_tome_hbs_str_mult = 30;
     item(.{
         .id = "it_transfigured_deathcap_tome",
         .name = .{
@@ -2472,7 +2472,7 @@ fn transfiguredPoisonSet() !void {
 
         .hbsType = .decay_0,
         .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = transfigured_deathcap_tome_hbs_str_mult,
+        .hbsStrMult = deathcap_tome_hbs_str_mult,
     });
     for ([_][2]Hbs{
         .{ .poison_0, .decay_0 },
@@ -2488,7 +2488,7 @@ fn transfiguredPoisonSet() !void {
         qpat(.hb_flash_item, .{});
         ttrg(.player_afflicted_source, .{});
         tset(.hbskey, .{ hbs[1], Receiver.hbsLength });
-        tset(.hbsstr, .{transfigured_deathcap_tome_hbs_str_mult});
+        tset(.hbsstr, .{deathcap_tome_hbs_str_mult});
         apat(.apply_hbs, .{});
     }
 
@@ -2594,8 +2594,8 @@ fn transfiguredDepthSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_tidal_greatsword_dmg_mult = 0.01;
-    const transfigured_tidal_greatsword_aoe_mult = 0.01;
+    const tidal_greatsword_dmg_mult = 0.01;
+    const tidal_greatsword_aoe_mult = 0.01;
     item(.{
         .id = "it_transfigured_tidal_greatsword",
         .name = .{
@@ -2620,8 +2620,8 @@ fn transfiguredDepthSet() !void {
         .strMult = 200,
         .radius = 400,
 
-        .hbVar0 = transfigured_tidal_greatsword_dmg_mult,
-        .hbVar1 = transfigured_tidal_greatsword_aoe_mult,
+        .hbVar0 = tidal_greatsword_dmg_mult,
+        .hbVar1 = tidal_greatsword_aoe_mult,
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_flash_item, .{});
@@ -2636,7 +2636,7 @@ fn transfiguredDepthSet() !void {
     qpat(.hb_reset_statchange, .{});
 
     trig(.strCalc0, .{});
-    tset_uservar2("u_allMult", Receiver.sqVar0, .@"*", transfigured_tidal_greatsword_dmg_mult);
+    tset_uservar2("u_allMult", Receiver.sqVar0, .@"*", tidal_greatsword_dmg_mult);
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .allMult,
@@ -2646,7 +2646,7 @@ fn transfiguredDepthSet() !void {
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
-    tset_uservar2("u_aoeMultBase", Receiver.sqVar0, .@"*", transfigured_tidal_greatsword_aoe_mult);
+    tset_uservar2("u_aoeMultBase", Receiver.sqVar0, .@"*", tidal_greatsword_aoe_mult);
     tset_uservar2("u_aoeMult", "u_aoeMultBase", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
         .varIndexStr = "hitbox.radius",
@@ -2785,7 +2785,7 @@ fn transfiguredDarkbiteSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_nightguard_gloves_dmg_mult = 0.35;
+    const nightguard_gloves_dmg_mult = 0.35;
     item(.{
         .id = "it_transfigured_nightguard_gloves",
         .name = .{
@@ -2798,7 +2798,7 @@ fn transfiguredDarkbiteSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .hbVar0 = transfigured_nightguard_gloves_dmg_mult,
+        .hbVar0 = nightguard_gloves_dmg_mult,
     });
 
     // There doesn't exist a hotbarslots_self_loweststrweapon, so the code below emulate this.
@@ -2839,7 +2839,7 @@ fn transfiguredDarkbiteSet() !void {
 
         // With the above prune, only abilites with the lowest strength should be left (there can
         // be multiple).
-        qpat(.hb_add_strcalcbuff, .{ .amount = transfigured_nightguard_gloves_dmg_mult });
+        qpat(.hb_add_strcalcbuff, .{ .amount = nightguard_gloves_dmg_mult });
     }
 
     item(.{
@@ -2990,7 +2990,7 @@ fn transfiguredYoukaiSet() !void {
     });
     defer mod.end();
 
-    const transfigured_kyou_no_omikuji_dmg_mult = 0.5;
+    const kyou_no_omikuji_dmg_mult = 0.5;
     item(.{
         .id = "it_transfigured_kyou_no_omikuji",
         .name = .{
@@ -3003,8 +3003,8 @@ fn transfiguredYoukaiSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .allMult = transfigured_kyou_no_omikuji_dmg_mult,
-        .hbVar0 = transfigured_kyou_no_omikuji_dmg_mult,
+        .allMult = kyou_no_omikuji_dmg_mult,
+        .hbVar0 = kyou_no_omikuji_dmg_mult,
 
         .hbShineFlag = 16 | // HBCROSS_PRIMARY   - Makes Primary unusable
             64, // HBCROSS_SPECIAL   - Makes Special unusable
@@ -3074,7 +3074,7 @@ fn transfiguredYoukaiSet() !void {
     cond(.hb_check_resettable0, .{});
     qpat(.hb_reset_cooldown, .{});
 
-    const transfigured_red_tanzaku_dmg = 7;
+    const red_tanzaku_dmg = 7;
     item(.{
         .id = "it_transfigured_red_tanzaku",
         .name = .{
@@ -3095,7 +3095,7 @@ fn transfiguredYoukaiSet() !void {
         .cooldownType = .time,
         .cooldown = std.time.ms_per_min,
 
-        .hbVar0 = transfigured_red_tanzaku_dmg,
+        .hbVar0 = red_tanzaku_dmg,
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
@@ -3108,7 +3108,7 @@ fn transfiguredYoukaiSet() !void {
     ttrg(.hotbarslots_prune_base_has_str, .{});
     ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.loot);
     ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
-    qpat(.hb_set_strength, .{ .amount = transfigured_red_tanzaku_dmg });
+    qpat(.hb_set_strength, .{ .amount = red_tanzaku_dmg });
 
     item(.{
         .id = "it_transfigured_vega_spear",
@@ -3166,7 +3166,7 @@ fn transfiguredHauntedSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_cursed_candlestaff_hbs_str_mult = 250;
+    const cursed_candlestaff_hbs_str_mult = 250;
     item(.{
         .id = "it_transfigured_cursed_candlestaff",
         .name = .{
@@ -3181,7 +3181,7 @@ fn transfiguredHauntedSet() !void {
 
         .hbsType = .ghostflame_0,
         .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = transfigured_cursed_candlestaff_hbs_str_mult,
+        .hbsStrMult = cursed_candlestaff_hbs_str_mult,
     });
     for ([_][2]Hbs{
         .{ .burn_0, .ghostflame_0 },
@@ -3198,7 +3198,7 @@ fn transfiguredHauntedSet() !void {
         qpat(.hb_flash_item, .{});
         ttrg(.player_afflicted_source, .{});
         tset(.hbskey, .{ hbs[1], Receiver.hbsLength });
-        tset(.hbsstr, .{transfigured_cursed_candlestaff_hbs_str_mult});
+        tset(.hbsstr, .{cursed_candlestaff_hbs_str_mult});
         apat(.apply_hbs, .{});
     }
 
@@ -3428,8 +3428,8 @@ fn transfiguredSparkbladeSet() !void {
     tset(.hbs_def, .{});
     apat(.poisonfrog_charm, .{});
 
-    const transfigured_battery_shield_sparks = 10;
-    const transfigured_battery_shield_invul_dur = 5 * std.time.ms_per_s;
+    const battery_shield_sparks = 10;
+    const battery_shield_invul_dur = 5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_battery_shield",
         .name = .{
@@ -3443,8 +3443,8 @@ fn transfiguredSparkbladeSet() !void {
         .weaponType = .loot,
 
         .strMult = 1200,
-        .hbVar0 = transfigured_battery_shield_sparks,
-        .hbVar1 = transfigured_battery_shield_invul_dur,
+        .hbVar0 = battery_shield_sparks,
+        .hbVar1 = battery_shield_invul_dur,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
@@ -3453,11 +3453,11 @@ fn transfiguredSparkbladeSet() !void {
     cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.spark_0));
     cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.spark_6));
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    cond(.hb_check_square_var, .{ 0, transfigured_battery_shield_sparks });
+    cond(.hb_check_square_var, .{ 0, battery_shield_sparks });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
-    apat(.apply_invuln, .{ .duration = transfigured_battery_shield_invul_dur });
+    apat(.apply_invuln, .{ .duration = battery_shield_invul_dur });
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
@@ -3561,7 +3561,7 @@ fn transfiguredSwiftflightSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_tornado_staff_dist = 15;
+    const tornado_staff_dist = 15;
     item(.{
         .id = "it_transfigured_tornado_staff",
         .name = .{
@@ -3576,12 +3576,12 @@ fn transfiguredSwiftflightSet() !void {
         .showSqVar = true,
         .autoOffSqVar0 = 0,
 
-        .hbVar0 = transfigured_tornado_staff_dist,
+        .hbVar0 = tornado_staff_dist,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig(.distanceTickBattle, .{.pl_self});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    cond(.hb_check_square_var, .{ 0, transfigured_tornado_staff_dist });
+    cond(.hb_check_square_var, .{ 0, tornado_staff_dist });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     tset(.hbs_randombuff, .{});
@@ -3600,7 +3600,7 @@ fn transfiguredSwiftflightSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_hermes_bow_dmg_per_leap = 10;
+    const hermes_bow_dmg_per_leap = 10;
     item(.{
         .id = "it_transfigured_hermes_bow",
         .name = .{
@@ -3615,7 +3615,7 @@ fn transfiguredSwiftflightSet() !void {
         .weaponType = .loot,
 
         .showSqVar = true,
-        .hbVar0 = transfigured_hermes_bow_dmg_per_leap,
+        .hbVar0 = hermes_bow_dmg_per_leap,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -3624,7 +3624,7 @@ fn transfiguredSwiftflightSet() !void {
 
         .delay = 250,
         .radius = 1800,
-        .strMult = transfigured_hermes_bow_dmg_per_leap,
+        .strMult = hermes_bow_dmg_per_leap,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
@@ -3637,14 +3637,14 @@ fn transfiguredSwiftflightSet() !void {
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
-    tset_uservar2("u_str", Receiver.sqVar0, .@"*", transfigured_hermes_bow_dmg_per_leap);
+    tset_uservar2("u_str", Receiver.sqVar0, .@"*", hermes_bow_dmg_per_leap);
     tset(.strength_def, .{});
     tset(.strength, .{"u_str"});
     apat(.floral_bow, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    const transfigured_talon_charm_reduction = -(1 * std.time.ms_per_s);
-    const transfigured_talon_charm_distance = 10;
+    const talon_charm_reduction = -(1 * std.time.ms_per_s);
+    const talon_charm_distance = 10;
     item(.{
         .id = "it_transfigured_talon_charm",
         .name = .{
@@ -3659,23 +3659,23 @@ fn transfiguredSwiftflightSet() !void {
         .weaponType = .loot,
 
         .showSqVar = true,
-        .hbVar0 = @abs(transfigured_talon_charm_reduction),
-        .hbVar1 = transfigured_talon_charm_distance,
+        .hbVar0 = @abs(talon_charm_reduction),
+        .hbVar1 = talon_charm_distance,
     });
     trig(.battleStart0, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     trig(.distanceTickBattle, .{.pl_self});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    cond(.hb_check_square_var, .{ 0, transfigured_talon_charm_distance });
+    cond(.hb_check_square_var, .{ 0, talon_charm_distance });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
-    qpat(.hb_add_cooldown, .{ .amount = transfigured_talon_charm_reduction });
+    qpat(.hb_add_cooldown, .{ .amount = talon_charm_reduction });
 
-    const transfigured_tiny_wings_leaps = 10.0;
-    const transfigured_tiny_wings_dmg_per_leaps = 0.01;
+    const tiny_wings_leaps = 10.0;
+    const tiny_wings_dmg_per_leaps = 0.01;
     item(.{
         .id = "it_transfigured_tiny_wings",
         .name = .{
@@ -3690,8 +3690,8 @@ fn transfiguredSwiftflightSet() !void {
         .weaponType = .loot,
 
         .showSqVar = true,
-        .hbVar0 = transfigured_tiny_wings_dmg_per_leaps,
-        .hbVar1 = transfigured_tiny_wings_leaps,
+        .hbVar0 = tiny_wings_dmg_per_leaps,
+        .hbVar1 = tiny_wings_leaps,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
@@ -3700,13 +3700,13 @@ fn transfiguredSwiftflightSet() !void {
 
     trig(.distanceTickBattle, .{.pl_self});
     qpat(.hb_square_add_var, .{ .varIndex = 1, .amount = 1 });
-    cond(.hb_check_square_var, .{ 1, transfigured_tiny_wings_leaps });
+    cond(.hb_check_square_var, .{ 1, tiny_wings_leaps });
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_square_set_var, .{ .varIndex = 1, .amount = 0 });
     qpat(.hb_reset_statchange, .{});
 
     trig(.strCalc0, .{});
-    tset_uservar2("u_mult", Receiver.sqVar0, .@"*", transfigured_tiny_wings_dmg_per_leaps);
+    tset_uservar2("u_mult", Receiver.sqVar0, .@"*", tiny_wings_dmg_per_leaps);
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{ .stat = .allMult, .amountStr = "u_mult" });
 
@@ -3803,7 +3803,7 @@ fn transfiguredSacredflameSet() !void {
         .weaponType = .loot,
     });
 
-    const transfigured_sun_pendant_times = 10;
+    const sun_pendant_times = 10;
     item(.{
         .id = "it_transfigured_sun_pendant",
         .name = .{
@@ -3818,7 +3818,7 @@ fn transfiguredSacredflameSet() !void {
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
-        .hbVar0 = transfigured_sun_pendant_times,
+        .hbVar0 = sun_pendant_times,
 
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -3827,7 +3827,7 @@ fn transfiguredSacredflameSet() !void {
         qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     }
     trig(.hotbarUsed2, .{});
-    cond(.hb_check_square_var, .{ 0, transfigured_sun_pendant_times });
+    cond(.hb_check_square_var, .{ 0, sun_pendant_times });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
@@ -3974,7 +3974,7 @@ fn transfiguredRuinsSet() !void {
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
 
-    const transfigured_stoneplate_armor_dmg_mult = 0.04;
+    const stoneplate_armor_dmg_mult = 0.04;
     item(.{
         .id = "it_transfigured_stoneplate_armor",
         .name = .{
@@ -3989,7 +3989,7 @@ fn transfiguredRuinsSet() !void {
         .weaponType = .loot,
 
         .showSqVar = true,
-        .hbVar0 = transfigured_stoneplate_armor_dmg_mult,
+        .hbVar0 = stoneplate_armor_dmg_mult,
     });
     trig(.onSquarePickup, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
@@ -4000,7 +4000,7 @@ fn transfiguredRuinsSet() !void {
     qpat(.hb_reset_statchange, .{});
 
     trig(.strCalc0, .{});
-    tset_uservar2("u_mult", Receiver.sqVar0, .@"*", transfigured_stoneplate_armor_dmg_mult);
+    tset_uservar2("u_mult", Receiver.sqVar0, .@"*", stoneplate_armor_dmg_mult);
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{ .stat = .allMult, .amountStr = "u_mult" });
 
