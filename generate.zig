@@ -2113,17 +2113,50 @@ fn transfiguredLuckySet() !void {
     });
     qpat(.hb_add_strength, .{ .amount = ballroom_gown_buff });
 
+    // TODO: No test
+    const silver_coin_dmg_mult = 0.3;
     item(.{
         .id = "it_transfigured_silver_coin",
         .name = .{
             .english = "Transfigured Silver Coin",
         },
         .description = .{
-            .english = "TODO",
+            .english = "On pickup, flip the coin. 0 is heads, 1 is tails.#" ++
+                "# " ++
+                "On heads: Your Primary, Special and Status Effects deals 30% more damage. " ++
+                "Significantly increases movement speed.#" ++
+                "# " ++
+                "On tails: Your Secondary, Defensive and Loot deals 30% more damage. Makes " ++
+                "you significantly luckier.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = silver_coin_dmg_mult,
     });
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_reset_statchange, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    tset(.uservar_random_range, .{ "u_flip", 0, 1 });
+    cond_eval2("u_flip", .@"<", 0.5);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+
+    trig(.strCalc0, .{});
+    cond(.hb_check_square_var, .{ 0, 0 });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .primaryMult, .amount = silver_coin_dmg_mult });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .specialMult, .amount = silver_coin_dmg_mult });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .hbsMult, .amount = silver_coin_dmg_mult });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .charspeed, .amount = 3 });
+
+    trig(.strCalc0, .{});
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .secondaryMult, .amount = silver_coin_dmg_mult });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .defensiveMult, .amount = silver_coin_dmg_mult });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .lootMult, .amount = silver_coin_dmg_mult });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .luck, .amount = 0.15 });
 
     item(.{
         .id = "it_transfigured_queens_crown",
