@@ -378,17 +378,26 @@ fn transfiguredNightSet() !void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const pajama_hat_cd_reduction = 1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_pajama_hat",
         .name = .{
             .english = "Transfigured Pajama Hat",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Using your Defensive decreases all other cooldowns by [VAR0_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = pajama_hat_cd_reduction,
     });
+    trig(.hotbarUsedProc, .{.hb_defensive});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune_self, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
+    qpat(.hb_add_cooldown, .{ .amount = -pajama_hat_cd_reduction });
 
     item(.{
         .id = "it_transfigured_stuffed_rabbit",
