@@ -398,7 +398,6 @@ fn transfiguredNightSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     const pajama_hat_cd_reduction = 1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_pajama_hat",
@@ -996,7 +995,6 @@ fn transfiguredAssasinSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     const ninjutsu_scroll_max_hits = 9;
     item(.{
         .id = "it_transfigured_ninjutsu_scroll",
@@ -2133,7 +2131,6 @@ fn transfiguredLuckySet() !void {
     });
     qpat(.hb_add_strength, .{ .amount = ballroom_gown_buff });
 
-    // TODO: No test
     const silver_coin_dmg_mult = 0.3;
     item(.{
         .id = "it_transfigured_silver_coin",
@@ -2142,10 +2139,10 @@ fn transfiguredLuckySet() !void {
         },
         .description = .{
             .english = "On pickup, flip the coin. 0 is heads, 1 is tails.#" ++
-                "# " ++
+                "# #" ++
                 "On heads: Your Primary, Special and Status Effects deals 30% more damage. " ++
                 "Significantly increases movement speed.#" ++
-                "# " ++
+                "# #" ++
                 "On tails: Your Secondary, Defensive and Loot deals 30% more damage. Makes " ++
                 "you significantly luckier.",
         },
