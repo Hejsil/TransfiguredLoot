@@ -976,17 +976,42 @@ fn transfiguredAssasinSet() !void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const ninjutsu_scroll_max_hits = 9;
     item(.{
         .id = "it_transfigured_ninjutsu_scroll",
         .name = .{
             .english = "Transfigured Ninjutsu Scroll",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your Special can deal up to [VAR0] additional blows, dealing [STR] " ++
+                "damage each, in a radius around your target enemy.#" ++
+                "Starting at [LUCK], each extra blow is half as likely to happen as the previous.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .strMult = 150,
+        .radius = 350,
+        .delay = 125,
+        .procChance = 0.5,
+        .hbVar0 = ninjutsu_scroll_max_hits,
     });
+    trig(.hotbarUsed, .{.hb_special});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    for (0..ninjutsu_scroll_max_hits) |_| {
+        cond(.random_def, .{});
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    }
+
+    trig(.hotbarUsed2, .{.hb_special});
+    cond(.hb_check_square_var_gte, .{ 0, 1 });
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_lucky_proc, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.black_wakizashi, .{ .numberR = .sqVar0 });
 
     item(.{
         .id = "it_transfigured_shadow_bracelet",

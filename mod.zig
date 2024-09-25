@@ -2276,6 +2276,10 @@ pub const AttackPatternArgs = struct {
     fxStr: ?[]const u8 = null,
     fyStr: ?[]const u8 = null,
     duration: ?u16 = null,
+    number: ?u16 = null,
+    numberR: ?Receiver = null,
+    numberS: ?Source = null,
+    radius: ?u16 = null,
 
     pub fn notNullFieldCount(args: AttackPatternArgs) usize {
         var res: usize = 0;
@@ -2302,6 +2306,14 @@ fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
         try writer.print(",fy,{s}", .{fyStr});
     if (args.duration) |duration|
         try writer.print(",duration,{d}", .{duration});
+    if (args.number) |number|
+        try writer.print(",number,{d}", .{number});
+    if (args.numberR) |number|
+        try writer.print(",number,{s}", .{number.toCsvString()});
+    if (args.numberS) |number|
+        try writer.print(",number,{s}", .{number.toCsvString()});
+    if (args.radius) |radius|
+        try writer.print(",radius,{d}", .{radius});
 
     try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
     try writer.writeAll("\n");
