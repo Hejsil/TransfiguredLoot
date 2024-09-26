@@ -483,15 +483,7 @@ pub const Item = struct {
     /// effects like Flash-Int, Flow-Str or Super.
     /// Can also be used to cross them out and make them unusable.
     /// This is a binary number, so multiple values can be combined to have multiple effects.
-    /// 1   HBSHINE_PRIMARY   - Makes Primary shine
-    /// 2   HBSHINE_SECONDARY - Makes Secondary shine
-    /// 4   HBSHINE_SPECIAL   - Makes Special shine
-    /// 8   HBSHINE_DEFENSIVE - Makes Defensive shine
-    /// 16  HBCROSS_PRIMARY   - Makes Primary unusable
-    /// 32  HBCROSS_SECONDARY - Makes Secondary unusable
-    /// 64  HBCROSS_SPECIAL   - Makes Special unusable
-    /// 128 HBCROSS_DEFENSIVE - Makes Defensive unusable
-    hbShineFlag: ?u8 = null,
+    hbShineFlag: ?ShineFlag = null,
 };
 
 pub fn item(opt: Item) void {
@@ -543,6 +535,8 @@ fn item2(opt: Item) !void {
                 .int, .float => try item_ini_w.print("{d}", .{value}),
                 .@"enum", .@"struct", .@"union" => if (@hasDecl(@TypeOf(value), "toIniString")) {
                     try item_ini_w.writeAll(value.toIniString());
+                } else if (@hasDecl(@TypeOf(value), "toIniInt")) {
+                    try item_ini_w.print("{d}", .{value.toIniInt()});
                 } else {
                     try item_ini_w.writeAll(@tagName(value));
                 },
@@ -3861,5 +3855,39 @@ pub const luck = struct {
     pub const slightly = 0.10;
     pub const significantly = 0.15;
 };
+
+/// 1   HBSHINE_PRIMARY   - Makes Primary shine
+/// 2   HBSHINE_SECONDARY - Makes Secondary shine
+/// 4   HBSHINE_SPECIAL   - Makes Special shine
+/// 8   HBSHINE_DEFENSIVE - Makes Defensive shine
+/// 16  HBCROSS_PRIMARY   - Makes Primary unusable
+/// 32  HBCROSS_SECONDARY - Makes Secondary unusable
+/// 64  HBCROSS_SPECIAL   - Makes Special unusable
+/// 128 HBCROSS_DEFENSIVE - Makes Defensive unusable
+pub const ShineFlag = packed struct(u8) {
+    shine_primary: bool = false,
+    shine_secondary: bool = false,
+    shine_special: bool = false,
+    shine_defensive: bool = false,
+    cross_primary: bool = false,
+    cross_secondary: bool = false,
+    cross_special: bool = false,
+    cross_defensive: bool = false,
+
+    pub fn toIniInt(flags: ShineFlag) u8 {
+        return @bitCast(flags);
+    }
+};
+
+comptime {
+    std.debug.assert((ShineFlag{ .shine_primary = true }).toIniInt() == 1);
+    std.debug.assert((ShineFlag{ .shine_secondary = true }).toIniInt() == 2);
+    std.debug.assert((ShineFlag{ .shine_special = true }).toIniInt() == 4);
+    std.debug.assert((ShineFlag{ .shine_defensive = true }).toIniInt() == 8);
+    std.debug.assert((ShineFlag{ .cross_primary = true }).toIniInt() == 16);
+    std.debug.assert((ShineFlag{ .cross_secondary = true }).toIniInt() == 32);
+    std.debug.assert((ShineFlag{ .cross_special = true }).toIniInt() == 64);
+    std.debug.assert((ShineFlag{ .cross_defensive = true }).toIniInt() == 128);
+}
 
 const std = @import("std");

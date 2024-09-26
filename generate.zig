@@ -3159,8 +3159,10 @@ fn transfiguredYoukaiSet() !void {
         .allMult = kyou_no_omikuji_dmg_mult,
         .hbVar0 = kyou_no_omikuji_dmg_mult,
 
-        .hbShineFlag = 16 | // HBCROSS_PRIMARY   - Makes Primary unusable
-            64, // HBCROSS_SPECIAL   - Makes Special unusable
+        .hbShineFlag = .{
+            .cross_primary = true,
+            .cross_special = true,
+        },
     });
 
     item(.{
