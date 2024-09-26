@@ -2008,6 +2008,7 @@ fn transfiguredLuckySet() !void {
     });
     defer mod.end();
 
+    // TODO: No test
     const book_of_cheats_dmg_mult = 1;
     const book_of_cheats_luck = 0.9;
     const book_of_cheats_charspeed = 4;
@@ -3485,17 +3486,27 @@ fn transfiguredGladiatorSet() !void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const gladiator_helmet_dmg_mult = 0.2;
     item(.{
         .id = "it_transfigured_gladiator_helmet",
         .name = .{
             .english = "Transfigured Gladiator Helmet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Abilities and loot that doesn't have cooldowns deal [VAR0_PERCENT] " ++
+                "more damage.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = gladiator_helmet_dmg_mult,
     });
+    trig(.strCalc1c, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@"==", 0);
+    qpat(.hb_add_strcalcbuff, .{ .amount = gladiator_helmet_dmg_mult });
 
     item(.{
         .id = "it_transfigured_lancer_gauntlets",
