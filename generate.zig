@@ -1877,7 +1877,6 @@ fn transfiguredShrineSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
     const ornamental_bell_fizz = 3;
     const ornamental_bell_buzz = 5;
     const ornamental_bell_fizzbuzz = 15;
@@ -1899,14 +1898,20 @@ fn transfiguredShrineSet() !void {
         .cooldownType = .time,
         .cooldown = 1 * std.time.ms_per_s,
 
-        .autoOffSqVar0 = 1,
+        .autoOffSqVar0 = 0,
         .showSqVar = true,
         .hbsLength = 2 * std.time.ms_per_s,
 
-        .hbVar0 = ornamental_bell_fizz,
-        .hbVar1 = ornamental_bell_buzz,
+        .hbVar0 = ornamental_bell_fizz * std.time.ms_per_s,
+        .hbVar1 = ornamental_bell_buzz * std.time.ms_per_s,
     });
     trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_run_cooldown, .{});
+    cond(.hb_check_square_var, .{ 0, ornamental_bell_fizzbuzz });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    trig(.hotbarUsed2, .{.hb_self});
     for (0..ornamental_bell_fizzbuzz) |i| {
         if (i % ornamental_bell_fizz != 0)
             cond(.hb_check_square_var_false, .{ 0, i });
@@ -1917,7 +1922,7 @@ fn transfiguredShrineSet() !void {
     tset(.hbskey, .{ Hbs.smite_0, Receiver.hbsLength });
     apat(.apply_hbs, .{});
 
-    trig(.hotbarUsed, .{.hb_self});
+    trig(.hotbarUsed2, .{.hb_self});
     for (0..ornamental_bell_fizzbuzz) |i| {
         if (i % ornamental_bell_buzz != 0)
             cond(.hb_check_square_var_false, .{ 0, i });
@@ -1927,12 +1932,6 @@ fn transfiguredShrineSet() !void {
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ Hbs.elegy_0, Receiver.hbsLength });
     apat(.apply_hbs, .{});
-
-    trig(.hotbarUsed2, .{.hb_self});
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    cond(.hb_check_square_var, .{ 0, ornamental_bell_fizzbuzz });
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     const shrinemaidens_kosode_mult_per_buff = 0.1;
     item(.{
