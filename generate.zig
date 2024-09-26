@@ -2140,11 +2140,11 @@ fn transfiguredLuckySet() !void {
         .description = .{
             .english = "On pickup, flip the coin. 0 is heads, 1 is tails.#" ++
                 "# #" ++
-                "On heads: Your Primary, Special and Status Effects deals 30% more damage. " ++
+                "On heads: Your Primary, Special and Debuffs deals [VAR0_PERCENT] more damage. " ++
                 "Significantly increases movement speed.#" ++
                 "# #" ++
-                "On tails: Your Secondary, Defensive and Loot deals 30% more damage. Makes " ++
-                "you significantly luckier.",
+                "On tails: Your Secondary, Defensive and Loot deals [VAR0_PERCENT] more " ++
+                "damage. Makes you significantly luckier.",
         },
         .type = .loot,
         .weaponType = .loot,
