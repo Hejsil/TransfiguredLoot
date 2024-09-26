@@ -1976,17 +1976,38 @@ fn transfiguredShrineSet() !void {
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
 
+    // TODO: No test
+    const divine_mirror_abilities_used = 10;
     item(.{
         .id = "it_transfigured_divine_mirror",
         .name = .{
             .english = "Transfigured Divine Mirror",
         },
         .description = .{
-            .english = "TODO",
+            .english = "very [VAR0] times you use an ability, deal damage to all enemies equal " ++
+                "to the base strength of the strongest ability used.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = divine_mirror_abilities_used,
     });
+    trig(.hotbarUsed, .{.hb_self_weapon});
+    cond_eval2(Receiver.sqVar1, .@"<", TargetHotbar0.strengthMult);
+    qpat(.hb_square_set_var, .{
+        .varIndex = 1,
+        .amountStr = TargetHotbar0.strengthMult.toCsvString(),
+    });
+
+    trig(.hotbarUsed2, .{.hb_self_weapon});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    cond(.hb_check_square_var, .{ 0, divine_mirror_abilities_used });
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength, .{Receiver.sqVar1});
+    apat(.crown_of_storms, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 1, .amount = 0 });
 
     item(.{
         .id = "it_transfigured_golden_chime",
