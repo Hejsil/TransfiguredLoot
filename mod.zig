@@ -3851,4 +3851,15 @@ pub const TargetStatus1 = TriggerVariable("thbs1_");
 pub const TargetStatus2 = TriggerVariable("thbs2_");
 pub const TargetStatus3 = TriggerVariable("thbs3_");
 
+pub const charspeed = struct {
+    pub const slightly = 1;
+    pub const moderately = 2;
+    pub const significantly = 3;
+};
+
+pub const luck = struct {
+    pub const slightly = 0.10;
+    pub const significantly = 0.15;
+};
+
 const std = @import("std");

@@ -167,7 +167,7 @@ fn transfiguredArcaneSet() !void {
         .hbVar1 = @abs(witchs_cloak_hbs_mult),
         .hbsMult = witchs_cloak_hbs_mult,
 
-        .charspeed = 1,
+        .charspeed = charspeed.slightly,
     });
 
     item(.{
@@ -570,11 +570,12 @@ fn transfiguredTimespaceSet() !void {
         cond(.random_def, .{});
         tset(.uservar_random_range, .{ "u_haste", 0, 3 });
         // `uservar_random_range` generates a float, I just want an int between 0 and 2
-        cond_eval2("u_haste", .@"<", 3);
+        // TODO: Figure out a better way
+        cond_eval2("u_haste", .@"<=", 3);
         qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 2 });
-        cond_eval2("u_haste", .@"<", 2);
+        cond_eval2("u_haste", .@"<=", 2);
         qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
-        cond_eval2("u_haste", .@"<", 1);
+        cond_eval2("u_haste", .@"<=", 1);
         qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     }
 
@@ -1094,7 +1095,7 @@ fn transfiguredAssasinSet() !void {
         .hbsType = .vanish,
         .hbsLength = 2 * std.time.ms_per_s,
 
-        .charspeed = 1,
+        .charspeed = charspeed.slightly,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -1148,7 +1149,7 @@ fn transfiguredRockdragonSet() !void {
 
         .strMult = 700,
         .radius = 600,
-        .charspeed = -1,
+        .charspeed = -charspeed.slightly,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -2007,16 +2008,84 @@ fn transfiguredLuckySet() !void {
     });
     defer mod.end();
 
+    const book_of_cheats_dmg_mult = 1;
+    const book_of_cheats_luck = 0.9;
+    const book_of_cheats_charspeed = 4;
+    const book_of_cheats_haste = -0.3;
     item(.{
         .id = "it_transfigured_book_of_cheats",
         .name = .{
             .english = "Transfigured Book of Cheats",
         },
         .description = .{
-            .english = "TODO",
+            .english = "At the start of each battle and until it ends, gain one of the " ++
+                "following:#" ++
+                " #" ++
+                "0-3: One of your abilities deal [VAR0_PERCENT] more damage.#" ++
+                "4: Your loot deals [VAR0_PERCENT] more damage.#" ++
+                "5: Debuffs you place deals [VAR0_PERCENT] more damage.#" ++
+                "6: You are extremely fast.#" ++
+                "7: You are extremely lucky.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .showSqVar = true,
+        .hbVar0 = book_of_cheats_dmg_mult,
+    });
+    trig(.battleStart0, .{});
+    tset(.uservar_random_range, .{ "u_pick", 0, 8 });
+    // `uservar_random_range` generates a float, I just want an int between 0 and 7
+    // TODO: Figure out a better way
+    cond_eval2("u_pick", .@"<=", 8);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 7 });
+    cond_eval2("u_pick", .@"<=", 7);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 6 });
+    cond_eval2("u_pick", .@"<=", 6);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 5 });
+    cond_eval2("u_pick", .@"<=", 5);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 4 });
+    cond_eval2("u_pick", .@"<=", 4);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 3 });
+    cond_eval2("u_pick", .@"<=", 3);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 2 });
+    cond_eval2("u_pick", .@"<=", 2);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    cond_eval2("u_pick", .@"<=", 1);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    for ([_]Stat{
+        .primaryMult,
+        .secondaryMult,
+        .specialMult,
+        .defensiveMult,
+        .lootMult,
+        .hbsMult,
+    }, 0..) |stat, i| {
+        trig(.strCalc0, .{});
+        cond(.hb_check_square_var, .{ 0, i });
+        qpat(.hb_reset_statchange_norefresh, .{});
+        qpat(.hb_add_statchange_norefresh, .{ .stat = stat, .amount = book_of_cheats_dmg_mult });
+    }
+
+    trig(.strCalc0, .{});
+    cond(.hb_check_square_var, .{ 0, 6 });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .charspeed,
+        .amount = book_of_cheats_charspeed,
+    });
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .haste,
+        .amount = book_of_cheats_haste,
+    });
+
+    trig(.strCalc0, .{});
+    cond(.hb_check_square_var, .{ 0, 7 });
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .luck,
+        .amount = book_of_cheats_luck,
     });
 
     item(.{
@@ -2139,10 +2208,10 @@ fn transfiguredLuckySet() !void {
         },
         .description = .{
             .english = "On pickup, flip the coin. 0 is heads, 1 is tails.#" ++
-                "# #" ++
+                " #" ++
                 "On heads: Your Primary, Special and Debuffs deals [VAR0_PERCENT] more damage. " ++
                 "Significantly increases movement speed.#" ++
-                "# #" ++
+                " #" ++
                 "On tails: Your Secondary, Defensive and Loot deals [VAR0_PERCENT] more " ++
                 "damage. Makes you significantly luckier.",
         },
@@ -2377,7 +2446,7 @@ fn transfiguredLifeSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .charspeed = 1,
+        .charspeed = charspeed.slightly,
         .charradius = 20,
         .hp = sunflower_crown_hp,
         .hbVar0 = sunflower_crown_hp,
@@ -2398,7 +2467,7 @@ fn transfiguredLifeSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .charspeed = 1,
+        .charspeed = charspeed.slightly,
         .hp = midsummer_dress_hp,
         .hbVar0 = midsummer_dress_hp,
         .hbVar1 = midsummer_dress_mult_per_hp,
@@ -2426,7 +2495,7 @@ fn transfiguredLifeSet() !void {
         .type = .loot,
         .weaponType = .loot,
 
-        .charspeed = 1,
+        .charspeed = charspeed.slightly,
         .hp = grasswoven_bracelet_hp,
         .hbVar0 = grasswoven_bracelet_hp,
         .hbVar1 = grasswoven_bracelet_aoe_per_hp,
@@ -4239,7 +4308,9 @@ fn transfiguredLakeshrineSet() !void {
     apat(.apply_hbs, .{});
 }
 
+const charspeed = mod.charspeed;
 const item = mod.item;
+const luck = mod.luck;
 const rgb = mod.rgb;
 
 const apat = mod.apat;
@@ -4258,6 +4329,7 @@ const ttrg_hotbarslots_prune = mod.ttrg_hotbarslots_prune;
 const ttrg = mod.ttrg;
 
 const Hbs = mod.Hbs;
+const Stat = mod.Stat;
 const WeaponType = mod.WeaponType;
 
 const Source = mod.Source;
