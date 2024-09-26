@@ -3474,17 +3474,32 @@ fn transfiguredGladiatorSet() !void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const battlemaiden_armor_dmg_mult = -0.2;
     item(.{
         .id = "it_transfigured_battlemaiden_armor",
         .name = .{
             .english = "Transfigured Battlemaiden Armor",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your non Defensive abilities with a cooldown deal [VAR0_PERCENT] less " ++
+                "damage but no longer has a cooldown.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = @abs(battlemaiden_armor_dmg_mult),
     });
+    trig(.strCalc1c, .{});
+    ttrg(.hotbarslots_self_abilities, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
+    qpat(.hb_add_strcalcbuff, .{ .amount = battlemaiden_armor_dmg_mult });
+
+    trig(.cdCalc6, .{});
+    ttrg(.hotbarslots_self_abilities, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
+    qpat(.hb_set_cooldown_permanent, .{ .time = 0 });
 
     // TODO: No test
     const gladiator_helmet_dmg_mult = 0.2;
