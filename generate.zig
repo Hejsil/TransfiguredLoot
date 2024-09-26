@@ -1877,14 +1877,18 @@ fn transfiguredShrineSet() !void {
         .weaponType = .loot,
     });
 
+    // TODO: No test
+    const ornamental_bell_fizz = 3;
+    const ornamental_bell_buzz = 5;
+    const ornamental_bell_fizzbuzz = 15;
     item(.{
         .id = "it_transfigured_ornamental_bell",
         .name = .{
             .english = "Transfigured Ornamental Bell",
         },
         .description = .{
-            .english = "Every 3 seconds, grants [SMITE-0] to all allies for 1 seconds.#" ++
-                "Every 5 seconds, grants [ELEGY-0] to all allies for 1 seconds.",
+            .english = "Every [VAR0_SECONDS], grants [SMITE-0] to all allies for [HBSL].#" ++
+                "Every [VAR1_SECONDS], grants [ELEGY-0] to all allies for [HBSL].",
         },
 
         .type = .loot,
@@ -1895,19 +1899,17 @@ fn transfiguredShrineSet() !void {
         .cooldownType = .time,
         .cooldown = 1 * std.time.ms_per_s,
 
+        .autoOffSqVar0 = 1,
         .showSqVar = true,
-        .hbsLength = 1 * std.time.ms_per_s,
+        .hbsLength = 2 * std.time.ms_per_s,
+
+        .hbVar0 = ornamental_bell_fizz,
+        .hbVar1 = ornamental_bell_buzz,
     });
-    trig(.autoStart, .{.hb_auto_pl});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
-
     trig(.hotbarUsed, .{.hb_self});
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-
-    trig(.hotbarUsed2, .{.hb_self});
-    for (0..16) |i| {
-        if (i % 3 != 0) cond(.hb_check_square_var_false, .{ 0, i });
+    for (0..ornamental_bell_fizzbuzz) |i| {
+        if (i % ornamental_bell_fizz != 0)
+            cond(.hb_check_square_var_false, .{ 0, i });
     }
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
@@ -1915,9 +1917,10 @@ fn transfiguredShrineSet() !void {
     tset(.hbskey, .{ Hbs.smite_0, Receiver.hbsLength });
     apat(.apply_hbs, .{});
 
-    trig(.hotbarUsed2, .{.hb_self});
-    for (0..16) |i| {
-        if (i % 5 != 0) cond(.hb_check_square_var_false, .{ 0, i });
+    trig(.hotbarUsed, .{.hb_self});
+    for (0..ornamental_bell_fizzbuzz) |i| {
+        if (i % ornamental_bell_buzz != 0)
+            cond(.hb_check_square_var_false, .{ 0, i });
     }
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
@@ -1925,8 +1928,10 @@ fn transfiguredShrineSet() !void {
     tset(.hbskey, .{ Hbs.elegy_0, Receiver.hbsLength });
     apat(.apply_hbs, .{});
 
-    trig(.hotbarUsed3, .{.hb_self});
-    cond(.hb_check_square_var, .{ 0, 15 });
+    trig(.hotbarUsed2, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    cond(.hb_check_square_var, .{ 0, ornamental_bell_fizzbuzz });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     const shrinemaidens_kosode_mult_per_buff = 0.1;
