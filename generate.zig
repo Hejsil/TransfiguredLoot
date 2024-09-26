@@ -1523,7 +1523,7 @@ fn transfiguredGemSet() !void {
     cond(.hb_check_square_var_false, .{ 0, 0 });
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
     qpat(.hb_reset_statchange, .{});
-    qpat(.hb_flash_item, .{ .messageIndex = "hbFlashMessage.broken" });
+    qpat(.hb_flash_item, .{ .message = .broken });
     qpat(.hb_reset_cooldown, .{});
 
     trig(.hotbarUsed, .{.hb_self});
@@ -1627,7 +1627,7 @@ fn transfiguredGemSet() !void {
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
     qpat(.hb_reset_statchange, .{});
     cond(.hb_check_square_var, .{ 0, 0 });
-    qpat(.hb_flash_item, .{ .messageIndex = "hbFlashMessage.broken" });
+    qpat(.hb_flash_item, .{ .message = .broken });
 }
 
 fn transfiguredLightningSet() !void {

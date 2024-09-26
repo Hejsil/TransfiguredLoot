@@ -1665,7 +1665,7 @@ pub const QuickPatternArgs = struct {
     hitboxVar: ?Hitbox = null,
     stat: ?Stat = null,
     type: ?ChargeType = null,
-    messageIndex: ?[]const u8 = null,
+    message: ?FlashMessage = null,
     time: ?usize = null,
     mult: ?f64 = null,
     multStr: ?[]const u8 = null,
@@ -1701,8 +1701,8 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
         try writer.print(",stat,{s}", .{stat.toCsvString()});
     if (args.type) |typ|
         try writer.print(",type,{s}", .{typ.toCsvString()});
-    if (args.messageIndex) |messageIndex|
-        try writer.print(",messageIndex,{s}", .{messageIndex});
+    if (args.message) |message|
+        try writer.print(",messageIndex,{s}", .{message.toCsvString()});
     if (args.time) |time|
         try writer.print(",time,{d}", .{time});
     if (args.mult) |mult|
@@ -3491,6 +3491,7 @@ pub const Stat = enum {
     }
 };
 
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1987338796#gid=1987338796&range=A146
 pub const Hitbox = enum {
     radius,
     delay,
@@ -3517,6 +3518,29 @@ pub const Hitbox = enum {
             .hbsLength => "hitbox.hbsLength",
             .chargeType => "hitbox.chargeType",
             .luck => "hitbox.luck",
+        };
+    }
+};
+
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1987338796#gid=1987338796&range=A172
+pub const FlashMessage = enum {
+    none,
+    reset,
+    proc,
+    plus,
+    failed,
+    shield,
+    broken,
+
+    pub fn toCsvString(message: FlashMessage) []const u8 {
+        return switch (message) {
+            .none => "hbFlashMessage.none",
+            .reset => "hbFlashMessage.reset",
+            .proc => "hbFlashMessage.proc",
+            .plus => "hbFlashMessage.plus",
+            .failed => "hbFlashMessage.failed",
+            .shield => "hbFlashMessage.shield",
+            .broken => "hbFlashMessage.broken",
         };
     }
 };
