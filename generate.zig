@@ -1980,7 +1980,7 @@ fn transfiguredShrineSet() !void {
     ttrg(.hbstatus_source, .{});
     qpat(.hbs_destroy, .{});
 
-    // TODO: No test
+    // TODO: No test Doesn't work currently
     const divine_mirror_abilities_used = 10;
     item(.{
         .id = "it_transfigured_divine_mirror",
@@ -1998,10 +1998,10 @@ fn transfiguredShrineSet() !void {
         .hbVar0 = divine_mirror_abilities_used,
     });
     trig(.hotbarUsed, .{.hb_self_weapon});
-    cond_eval2(Receiver.sqVar1, .@"<", TargetHotbar0.strengthMult);
+    cond_eval2(Receiver.sqVar1, .@"<", Source.strength);
     qpat(.hb_square_set_var, .{
         .varIndex = 1,
-        .amountStr = TargetHotbar0.strengthMult.toCsvString(),
+        .amountStr = Source.strength.toCsvString(),
     });
 
     trig(.hotbarUsed2, .{.hb_self_weapon});
@@ -2011,6 +2011,7 @@ fn transfiguredShrineSet() !void {
     ttrg(.players_opponent, .{});
     tset(.strength, .{Receiver.sqVar1});
     apat(.crown_of_storms, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_square_set_var, .{ .varIndex = 1, .amount = 0 });
 
     item(.{
@@ -2033,10 +2034,9 @@ fn transfiguredLuckySet() !void {
     });
     defer mod.end();
 
-    // TODO: No test
     const book_of_cheats_dmg_mult = 1;
     const book_of_cheats_luck = 0.9;
-    const book_of_cheats_charspeed = 4;
+    const book_of_cheats_charspeed = 5;
     const book_of_cheats_haste = -0.3;
     item(.{
         .id = "it_transfigured_book_of_cheats",
@@ -2047,22 +2047,29 @@ fn transfiguredLuckySet() !void {
             .english = "At the start of each battle and until it ends, gain one of the " ++
                 "following:#" ++
                 " #" ++
-                "0-3: One of your abilities deal [VAR0_PERCENT] more damage.#" ++
-                "4: Your loot deals [VAR0_PERCENT] more damage.#" ++
-                "5: Debuffs you place deals [VAR0_PERCENT] more damage.#" ++
-                "6: You are extremely fast.#" ++
-                "7: You are extremely lucky.",
+                "1-4: One of your abilities deal [VAR0_PERCENT] more damage.#" ++
+                "5: Your loot deals [VAR0_PERCENT] more damage.#" ++
+                "6: Debuffs you place deals [VAR0_PERCENT] more damage.#" ++
+                "7: You are extremely fast.#" ++
+                "8: You are extremely lucky.",
         },
         .type = .loot,
         .weaponType = .loot,
 
         .showSqVar = true,
+        .glowSqVar0 = true,
         .hbVar0 = book_of_cheats_dmg_mult,
     });
+    trig(.onSquarePickup, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+
     trig(.battleStart0, .{});
-    tset(.uservar_random_range, .{ "u_pick", 0, 8 });
-    // `uservar_random_range` generates a float, I just want an int between 0 and 7
+    qpat(.hb_flash_item, .{});
+    tset(.uservar_random_range, .{ "u_pick", 1, 9 });
+    // `uservar_random_range` generates a float, I just want an int between 1 and 8
     // TODO: Figure out a better way
+    cond_eval2("u_pick", .@"<=", 9);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 8 });
     cond_eval2("u_pick", .@"<=", 8);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 7 });
     cond_eval2("u_pick", .@"<=", 7);
@@ -2077,8 +2084,6 @@ fn transfiguredLuckySet() !void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 2 });
     cond_eval2("u_pick", .@"<=", 2);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
-    cond_eval2("u_pick", .@"<=", 1);
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     for ([_]Stat{
         .primaryMult,
@@ -2087,7 +2092,7 @@ fn transfiguredLuckySet() !void {
         .defensiveMult,
         .lootMult,
         .hbsMult,
-    }, 0..) |stat, i| {
+    }, 1..) |stat, i| {
         trig(.strCalc0, .{});
         cond(.hb_check_square_var, .{ 0, i });
         qpat(.hb_reset_statchange_norefresh, .{});
@@ -2095,7 +2100,7 @@ fn transfiguredLuckySet() !void {
     }
 
     trig(.strCalc0, .{});
-    cond(.hb_check_square_var, .{ 0, 6 });
+    cond(.hb_check_square_var, .{ 0, 7 });
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .charspeed,
@@ -2107,7 +2112,7 @@ fn transfiguredLuckySet() !void {
     });
 
     trig(.strCalc0, .{});
-    cond(.hb_check_square_var, .{ 0, 7 });
+    cond(.hb_check_square_var, .{ 0, 8 });
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .luck,
