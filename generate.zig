@@ -2755,7 +2755,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Tidal Greatsword",
         },
         .description = .{
-            .english = "Every [CD] slices a large radius around you dealing 200 damage.#" ++
+            .english = "Every [CD] slices a large radius around you dealing [STR] damage.#" ++
                 "For each enemy hit, your abilities and loot deal [VAR0_PERCENT] more damage " ++
                 "and has a [VAR1_PERCENT] larger hitbox until the end of battle.",
         },
