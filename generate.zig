@@ -3940,20 +3940,32 @@ fn transfiguredSacredflameSet() !void {
     for ([_]mod.Item{
         .{
             .id = "it_transfigured_sandpriestess_spear",
-            .name = .{ .english = "Transfigured Sandpriestess Spear" },
-            .description = .{ .english = "Every time you gain [FLASH-STR], gain [FLOW-STR]." },
+            .name = .{
+                .english = "Transfigured Sandpriestess Spear",
+            },
+            .description = .{
+                .english = "Every time you gain [FLASH-STR], gain [FLOW-STR].",
+            },
             .hbsType = .flowstr,
         },
         .{
             .id = "it_transfigured_flamedancer_dagger",
-            .name = .{ .english = "Transfigured Flamedancer Dagger" },
-            .description = .{ .english = "Every time you gain [FLASH-DEX], gain [FLOW-DEX]." },
+            .name = .{
+                .english = "Transfigured Flamedancer Dagger",
+            },
+            .description = .{
+                .english = "Every time you gain [FLASH-DEX], gain [FLOW-DEX].",
+            },
             .hbsType = .flowdex,
         },
         .{
             .id = "it_transfigured_whiteflame_staff",
-            .name = .{ .english = "Transfigured Whiteflame Staff" },
-            .description = .{ .english = "Every time you gain [FLASH-INT], gain [FLOW-INT]." },
+            .name = .{
+                .english = "Transfigured Whiteflame Staff",
+            },
+            .description = .{
+                .english = "Every time you gain [FLASH-INT], gain [FLOW-INT].",
+            },
             .hbsType = .flowint,
         },
     }) |_item| {
