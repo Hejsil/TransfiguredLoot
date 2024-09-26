@@ -1047,7 +1047,7 @@ fn transfiguredAssasinSet() !void {
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.number, .@">", 2);
     qpat(.hb_add_hitbox_var, .{
-        .varIndexStr = "hitbox.number",
+        .hitboxVar = .number,
         .amount = 1,
     });
 
@@ -1182,7 +1182,7 @@ fn transfiguredRockdragonSet() !void {
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     qpat(.hb_mult_hitbox_var, .{
-        .varIndexStr = "hitbox.radius",
+        .hitboxVar = .radius,
         .mult = 1 + greysteel_shield_aoe,
     });
 
@@ -1220,7 +1220,7 @@ fn transfiguredRockdragonSet() !void {
     for (WeaponType.abilities) |weapontype| {
         ttrg(.hotbarslots_self_weapontype, .{weapontype});
         qpat(.hb_add_hitbox_var, .{
-            .varIndexStr = "hitbox.number",
+            .hitboxVar = .number,
             .amount = tough_gauntlet_extra_hits,
         });
     }
@@ -1391,7 +1391,7 @@ fn transfiguredFlameSet() !void {
     cond(.hb_check_square_var, .{ 0, 1 });
     ttrg(.hotbarslots_current_players, .{});
     qpat(.hb_mult_hitbox_var, .{
-        .varIndexStr = "hitbox.radius",
+        .hitboxVar = .radius,
         .mult = 1 + demon_horns_aoe_mult,
     });
 
@@ -1430,7 +1430,7 @@ fn transfiguredFlameSet() !void {
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.number, .@">", 0);
     qpat(.hb_add_hitbox_var, .{
-        .varIndexStr = "hitbox.number",
+        .hitboxVar = .number,
         .amount = 1,
     });
 
@@ -2097,7 +2097,7 @@ fn transfiguredLuckySet() !void {
     tset_uservar2("u_aoeMult", "u_gold", .@"*", royal_staff_aoe_buff);
     tset_uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
-        .varIndexStr = "hitbox.radius",
+        .hitboxVar = .radius,
         .multStr = "u_aoeMultFull",
     });
 
@@ -2126,7 +2126,7 @@ fn transfiguredLuckySet() !void {
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
     qpat(.hb_mult_hitbox_var, .{
-        .varIndexStr = "hitbox.radius",
+        .hitboxVar = .radius,
         .mult = 1 + ballroom_gown_buff * 0.01,
     });
     qpat(.hb_add_strength, .{ .amount = ballroom_gown_buff });
@@ -2313,7 +2313,7 @@ fn transfiguredLifeSet() !void {
 
     trig(.strCalc2, .{});
     qpat(.hb_add_hitbox_var, .{
-        .varIndexStr = "hitbox.number",
+        .hitboxVar = .number,
         .amountR = .hp,
     });
 
@@ -2436,7 +2436,7 @@ fn transfiguredLifeSet() !void {
     tset_uservar2("u_aoeMult", Receiver.hp, .@"*", grasswoven_bracelet_aoe_per_hp);
     tset_uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
-        .varIndexStr = "hitbox.radius",
+        .hitboxVar = .radius,
         .multStr = "u_aoeMultFull",
     });
 }
@@ -2733,7 +2733,7 @@ fn transfiguredDepthSet() !void {
     tset_uservar2("u_aoeMultBase", Receiver.sqVar0, .@"*", tidal_greatsword_aoe_mult);
     tset_uservar2("u_aoeMult", "u_aoeMultBase", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
-        .varIndexStr = "hitbox.radius",
+        .hitboxVar = .radius,
         .multStr = "u_aoeMult",
     });
 

@@ -1662,7 +1662,7 @@ pub const QuickPattern = enum {
 
 pub const QuickPatternArgs = struct {
     varIndex: ?usize = null,
-    varIndexStr: ?[]const u8 = null,
+    hitboxVar: ?Hitbox = null,
     stat: ?Stat = null,
     type: ?ChargeType = null,
     messageIndex: ?[]const u8 = null,
@@ -1695,8 +1695,8 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
 
     if (args.varIndex) |varIndex|
         try writer.print(",varIndex,{d}", .{varIndex});
-    if (args.varIndexStr) |varIndex|
-        try writer.print(",varIndex,{s}", .{varIndex});
+    if (args.hitboxVar) |hitboxVar|
+        try writer.print(",varIndex,{s}", .{hitboxVar.toCsvString()});
     if (args.stat) |stat|
         try writer.print(",stat,{s}", .{stat.toCsvString()});
     if (args.type) |typ|
@@ -3487,6 +3487,36 @@ pub const Stat = enum {
             .stockPlus => "stat.stockPlus",
             .hbsFlag => "stat.hbsFlag",
             .hbShineFlag => "stat.hbShineFlag",
+        };
+    }
+};
+
+pub const Hitbox = enum {
+    radius,
+    delay,
+    hbInput,
+    weaponType,
+    strMult,
+    number,
+    hbsType,
+    hbsStrMult,
+    hbsLength,
+    chargeType,
+    luck,
+
+    pub fn toCsvString(hitbox: Hitbox) []const u8 {
+        return switch (hitbox) {
+            .radius => "hitbox.radius",
+            .delay => "hitbox.delay",
+            .hbInput => "hitbox.hbInput",
+            .weaponType => "hitbox.weaponType",
+            .strMult => "hitbox.strMult",
+            .number => "hitbox.number",
+            .hbsType => "hitbox.hbsType",
+            .hbsStrMult => "hitbox.hbsStrMult",
+            .hbsLength => "hitbox.hbsLength",
+            .chargeType => "hitbox.chargeType",
+            .luck => "hitbox.luck",
         };
     }
 };
