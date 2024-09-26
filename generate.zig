@@ -3531,7 +3531,6 @@ fn transfiguredGladiatorSet() !void {
     ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
     qpat(.hb_set_cooldown_permanent, .{ .time = 0 });
 
-    // TODO: No test
     const gladiator_helmet_dmg_mult = 0.2;
     item(.{
         .id = "it_transfigured_gladiator_helmet",
