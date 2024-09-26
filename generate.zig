@@ -44,6 +44,7 @@ fn transfiguredArcaneSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -88,6 +89,7 @@ fn transfiguredArcaneSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -122,6 +124,7 @@ fn transfiguredArcaneSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -157,6 +160,7 @@ fn transfiguredArcaneSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .hbVar0 = @abs(witchs_cloak_ability_mult),
         .primaryMult = witchs_cloak_ability_mult,
@@ -195,6 +199,8 @@ fn transfiguredArcaneSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
+
         .strMult = redblack_ribbon_dmg,
         .delay = 200,
     });
@@ -224,6 +230,7 @@ fn transfiguredArcaneSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .hbsType = .curse_0,
         .hbsLength = 5 * std.time.ms_per_s,
@@ -271,6 +278,7 @@ fn transfiguredNightSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
         .hbInput = .auto,
 
         .delay = 10 * std.time.ms_per_s,
@@ -304,6 +312,7 @@ fn transfiguredNightSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
         .lootHbDispType = .cooldown,
 
         .cooldownType = .time,
@@ -334,6 +343,7 @@ fn transfiguredNightSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
@@ -362,6 +372,7 @@ fn transfiguredNightSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
@@ -409,6 +420,7 @@ fn transfiguredNightSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .hbVar0 = pajama_hat_cd_reduction,
     });
@@ -441,6 +453,7 @@ fn transfiguredNightSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
@@ -478,6 +491,7 @@ fn transfiguredTimespaceSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -508,6 +522,7 @@ fn transfiguredTimespaceSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
@@ -536,6 +551,7 @@ fn transfiguredTimespaceSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .hbsType = Hbs.haste_1,
         .hbsLength = 60 * std.time.ms_per_s,
@@ -556,6 +572,7 @@ fn transfiguredTimespaceSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .procChance = 0.1,
 
@@ -601,6 +618,7 @@ fn transfiguredTimespaceSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -645,6 +663,7 @@ fn transfiguredTimespaceSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .hbVar0 = timemage_cap_cd_set,
     });
@@ -675,6 +694,7 @@ fn transfiguredTimespaceSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .procChance = 0.5,
     });
@@ -706,6 +726,7 @@ fn transfiguredWindSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
 
         .hbVar0 = @abs(hawkfeather_fan_cd_reduction),
     });
@@ -740,6 +761,7 @@ fn transfiguredWindSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -866,6 +888,7 @@ fn transfiguredBloodwolfSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
 
         .hbsType = .sap,
         .hbsLength = 5 * std.time.ms_per_s,
@@ -914,6 +937,7 @@ fn transfiguredBloodwolfSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
 
         .hbVar0 = bloodflower_brooch_hits,
         .hitNumber = bloodflower_brooch_hits,
@@ -1009,6 +1033,7 @@ fn transfiguredAssasinSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
 
         .strMult = 150,
         .radius = 350,
@@ -1043,6 +1068,7 @@ fn transfiguredAssasinSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
     });
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
@@ -1087,6 +1113,7 @@ fn transfiguredAssasinSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -1141,6 +1168,7 @@ fn transfiguredRockdragonSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -1177,6 +1205,7 @@ fn transfiguredRockdragonSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .hbVar0 = greysteel_shield_aoe,
     });
@@ -1213,6 +1242,7 @@ fn transfiguredRockdragonSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .hbVar0 = tough_gauntlet_extra_hits,
         .hbVar1 = tough_gauntlet_extra_gcd,
@@ -1323,6 +1353,7 @@ fn transfiguredFlameSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .cooldownType = .time,
         .cooldown = meteor_staff_cd,
@@ -1380,6 +1411,7 @@ fn transfiguredFlameSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .lootHbDispType = .glowing,
         .autoOffSqVar0 = 1,
@@ -1421,6 +1453,7 @@ fn transfiguredFlameSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .lootHbDispType = .glowing,
         .autoOffSqVar0 = 1,
@@ -1505,6 +1538,7 @@ fn transfiguredGemSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
         .lootHbDispType = .cooldownVarAm,
         .hbInput = .auto,
 
@@ -1569,6 +1603,7 @@ fn transfiguredGemSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .allMult = amethyst_bracelet_mult,
         .hbVar0 = amethyst_bracelet_mult,
@@ -1603,6 +1638,7 @@ fn transfiguredGemSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
 
         .showSqVar = true,
         .greySqVar0 = true,
@@ -1700,6 +1736,7 @@ fn transfiguredLightningSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .hbVar0 = @abs(darkcloud_necklace_ability_mult),
         .primaryMult = darkcloud_necklace_ability_mult,
@@ -1722,6 +1759,7 @@ fn transfiguredLightningSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .hbVar0 = crown_of_storms_mult,
     });
@@ -1741,6 +1779,7 @@ fn transfiguredLightningSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -1771,6 +1810,7 @@ fn transfiguredLightningSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .strMult = 2000,
     });
@@ -1800,6 +1840,7 @@ fn transfiguredShrineSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -1834,6 +1875,7 @@ fn transfiguredShrineSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -1892,6 +1934,7 @@ fn transfiguredShrineSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
@@ -1945,6 +1988,7 @@ fn transfiguredShrineSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .hbVar0 = shrinemaidens_kosode_mult_per_buff,
     });
@@ -1971,6 +2015,7 @@ fn transfiguredShrineSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .allMult = redwhite_ribbon_mult,
         .hbVar0 = redwhite_ribbon_mult,
@@ -1993,6 +2038,7 @@ fn transfiguredShrineSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .showSqVar = true,
         .hbVar0 = divine_mirror_abilities_used,
@@ -2055,6 +2101,7 @@ fn transfiguredLuckySet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .showSqVar = true,
         .glowSqVar0 = true,
@@ -2131,6 +2178,7 @@ fn transfiguredLuckySet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -2179,6 +2227,7 @@ fn transfiguredLuckySet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .hbVar0 = royal_staff_aoe_buff,
         .hbVar1 = royal_staff_crit_dmg_buff,
@@ -2213,6 +2262,7 @@ fn transfiguredLuckySet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .allMult = ballroom_gown_buff * 0.01,
         .haste = 1 - ballroom_gown_buff * 0.01,
@@ -2248,6 +2298,7 @@ fn transfiguredLuckySet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .showSqVar = true,
         .hbVar0 = silver_coin_dmg_mult,
@@ -2286,6 +2337,7 @@ fn transfiguredLuckySet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .procChance = 0.2,
         .strMult = 200,
@@ -2320,6 +2372,7 @@ fn transfiguredLuckySet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
 
         .hbsStrMult = mimick_rabbitfoot_hbs_str_mult,
         .hbsLength = 13 * std.time.ms_per_s,
@@ -2393,6 +2446,7 @@ fn transfiguredLifeSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
         .lootHbDispType = .cooldown,
 
         .cooldownType = .time,
@@ -2428,6 +2482,7 @@ fn transfiguredLifeSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -2476,6 +2531,7 @@ fn transfiguredLifeSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .charspeed = charspeed.slightly,
         .charradius = 20,
@@ -2497,6 +2553,7 @@ fn transfiguredLifeSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .charspeed = charspeed.slightly,
         .hp = midsummer_dress_hp,
@@ -2525,6 +2582,7 @@ fn transfiguredLifeSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .charspeed = charspeed.slightly,
         .hp = grasswoven_bracelet_hp,
@@ -2561,8 +2619,9 @@ fn transfiguredPoisonSet() !void {
         },
 
         .type = .loot,
-
         .weaponType = .loot,
+        .treasureType = .green,
+
         .delay = 250,
         .hbsType = .poison_0,
         .hbsStrMult = snakefang_dagger_str,
@@ -2615,6 +2674,7 @@ fn transfiguredPoisonSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .procChance = 0.60,
         .hbsLength = 5 * std.time.ms_per_s,
@@ -2653,6 +2713,7 @@ fn transfiguredPoisonSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .hbsType = .decay_0,
         .hbsLength = 5 * std.time.ms_per_s,
@@ -2711,6 +2772,7 @@ fn transfiguredPoisonSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .hbsType = .hex_poison,
         .hbsLength = 2 * std.time.ms_per_s,
@@ -2792,6 +2854,7 @@ fn transfiguredDepthSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
@@ -2884,6 +2947,7 @@ fn transfiguredDepthSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .green,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -2981,6 +3045,7 @@ fn transfiguredDarkbiteSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purpleblue,
 
         .hbVar0 = nightguard_gloves_dmg_mult,
     });
@@ -3186,6 +3251,7 @@ fn transfiguredYoukaiSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purpleyellow,
 
         .allMult = kyou_no_omikuji_dmg_mult,
         .hbVar0 = kyou_no_omikuji_dmg_mult,
@@ -3207,6 +3273,7 @@ fn transfiguredYoukaiSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purpleyellow,
     });
     trig(.strCalc1c, .{});
     ttrg(.hotbarslots_self_abilities, .{});
@@ -3254,6 +3321,7 @@ fn transfiguredYoukaiSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purpleyellow,
     });
     trig(.luckyProc, .{.pl_self});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
@@ -3271,10 +3339,12 @@ fn transfiguredYoukaiSet() !void {
         },
 
         .type = .loot,
+        .weaponType = .loot,
+        .treasureType = .purpleyellow,
+
         .lootHbDispType = .cooldown,
         .hbInput = .auto,
 
-        .weaponType = .loot,
         .hbsType = .lucky,
         .hbsLength = std.time.ms_per_min,
 
@@ -3364,6 +3434,7 @@ fn transfiguredHauntedSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purplegreen,
 
         .hbsType = .ghostflame_0,
         .hbsLength = 5 * std.time.ms_per_s,
@@ -3504,29 +3575,26 @@ fn transfiguredGladiatorSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: No test
-    const battlemaiden_armor_dmg_mult = -0.2;
+    // TODO: No test - This is unbalanaced. Redo!
+    const battlemaiden_armor_dmg_mult = -0.25;
     item(.{
         .id = "it_transfigured_battlemaiden_armor",
         .name = .{
             .english = "Transfigured Battlemaiden Armor",
         },
         .description = .{
-            .english = "Your non Defensive abilities with a cooldown deal [VAR0_PERCENT] less " ++
-                "damage but no longer has a cooldown.",
+            .english = "You deal [VAR0_PERCENT] less damage. Your none Defensive abilities no " ++
+                "longer has a cooldown.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluered,
 
         .hbVar0 = @abs(battlemaiden_armor_dmg_mult),
+        .allMult = battlemaiden_armor_dmg_mult,
     });
-    trig(.strCalc1c, .{});
-    ttrg(.hotbarslots_self_abilities, .{});
-    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
-    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
-    qpat(.hb_add_strcalcbuff, .{ .amount = battlemaiden_armor_dmg_mult });
-
     trig(.cdCalc6, .{});
+    tset(.debug, .{Receiver.playerId});
     ttrg(.hotbarslots_self_abilities, .{});
     ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
     qpat(.hb_set_cooldown_permanent, .{ .time = 0 });
@@ -3543,6 +3611,7 @@ fn transfiguredGladiatorSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluered,
 
         .hbVar0 = gladiator_helmet_dmg_mult,
     });
@@ -3618,6 +3687,7 @@ fn transfiguredSparkbladeSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blueyellow,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -3651,6 +3721,7 @@ fn transfiguredSparkbladeSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blueyellow,
 
         .strMult = 1200,
         .hbVar0 = battery_shield_sparks,
@@ -3682,6 +3753,7 @@ fn transfiguredSparkbladeSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blueyellow,
 
         .hbsType = .spark_6,
         .hbsStrMult = 15,
@@ -3704,6 +3776,7 @@ fn transfiguredSparkbladeSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blueyellow,
 
         .strMult = 150,
     });
@@ -3782,6 +3855,7 @@ fn transfiguredSwiftflightSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluegreen,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
@@ -3823,6 +3897,7 @@ fn transfiguredSwiftflightSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluegreen,
 
         .showSqVar = true,
         .hbVar0 = hermes_bow_dmg_per_leap,
@@ -3867,6 +3942,7 @@ fn transfiguredSwiftflightSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluegreen,
 
         .showSqVar = true,
         .hbVar0 = @abs(talon_charm_reduction),
@@ -3898,6 +3974,7 @@ fn transfiguredSwiftflightSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluegreen,
 
         .showSqVar = true,
         .hbVar0 = tiny_wings_dmg_per_leaps,
@@ -3975,6 +4052,7 @@ fn transfiguredSacredflameSet() !void {
         var i = _item;
         i.type = .loot;
         i.weaponType = .loot;
+        i.treasureType = .redyellow;
         i.hbsLength = 5 * std.time.ms_per_s;
 
         const flash_hbs: Hbs = switch (_item.hbsType.?) {
@@ -4003,6 +4081,7 @@ fn transfiguredSacredflameSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redyellow,
 
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsType = .flashint,
@@ -4037,6 +4116,7 @@ fn transfiguredSacredflameSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redyellow,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
@@ -4069,6 +4149,7 @@ fn transfiguredSacredflameSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redyellow,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
@@ -4099,6 +4180,7 @@ fn transfiguredSacredflameSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redyellow,
 
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -4156,6 +4238,7 @@ fn transfiguredRuinsSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redgreen,
     });
     trig(.cdCalc2a, .{});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
@@ -4185,6 +4268,7 @@ fn transfiguredRuinsSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redgreen,
 
         .delay = 400,
         .radius = 400,
@@ -4209,6 +4293,7 @@ fn transfiguredRuinsSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redgreen,
 
         .showSqVar = true,
         .hbVar0 = stoneplate_armor_dmg_mult,
@@ -4305,6 +4390,7 @@ fn transfiguredLakeshrineSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellowgreen,
 
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -4365,6 +4451,7 @@ fn transfiguredLakeshrineSet() !void {
 
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellowgreen,
 
         .hbVar0 = std.time.ms_per_min,
         .hbsLength = std.time.ms_per_min,
