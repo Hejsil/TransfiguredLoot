@@ -599,6 +599,8 @@ fn transfiguredTimespaceSet() !void {
     for ([_]Hbs{ .haste_0, .haste_1, .haste_2 }, 0..) |hbs, i| {
         trig(.hotbarUsed2, .{.hb_selfcast});
         cond(.hb_check_square_var, .{ 0, i });
+        qpat(.hb_flash_item, .{});
+        qpat(.hb_lucky_proc, .{});
         tset(.hbskey, .{ hbs, Receiver.hbsLength });
         apat(.apply_hbs, .{});
     }
