@@ -237,6 +237,8 @@ fn transfiguredArcaneSet() !void {
 
         .hbVar0 = opal_necklace_num_curses,
         .hbVar1 = opal_necklace_extra_cd,
+
+        .autoOffSqVar0 = 0,
     });
     trig(.cdCalc2a, .{});
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
@@ -244,6 +246,7 @@ fn transfiguredArcaneSet() !void {
 
     trig(.hotbarUsed, .{.hb_defensive});
     ttrg(.players_opponent, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
 
     const curses = [_]Hbs{
         .curse_0,
@@ -257,6 +260,14 @@ fn transfiguredArcaneSet() !void {
         tset(.hbskey, .{ curse, Receiver.hbsLength });
         apat(.apply_hbs, .{});
     }
+
+    // Flash item when debuff was applied
+    trig(.hbsCreated, .{.hbs_thishbcast});
+    // To avoid flashing for every debuff applied, instead keep track of if the defensive was used.
+    // If so, flash once, and set the used flag to 0, so we don't flash again.
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 }
 
 fn transfiguredNightSet() !void {
