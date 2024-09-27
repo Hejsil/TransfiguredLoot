@@ -2620,7 +2620,7 @@ fn transfiguredPoisonSet() !void {
 
     // Flash item when debuff was applied
     trig(.hbsCreated, .{.hbs_thishbcast});
-    // To avoid flashing for every debuff applied, instead keep track of if the scondary has done
+    // To avoid flashing for every debuff applied, instead keep track of if the secondary has done
     // damage. If so, flash once, and set the damage flag to 0, so we don't flash again.
     cond(.hb_check_square_var, .{ 0, 1 });
     qpat(.hb_flash_item, .{});
