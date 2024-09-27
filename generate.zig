@@ -2586,9 +2586,11 @@ fn transfiguredPoisonSet() !void {
         .hbColor1 = rgb(0x17, 0x7f, 0x00),
 
         .hbVar1 = snakefang_dagger_num_poisons,
+        .autoOffSqVar0 = 0,
     });
     trig(.onDamageDone, .{.dmg_self_secondary});
     ttrg(.player_damaged, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
 
     const poisons = [_]Hbs{
         .poison_0,
@@ -2607,7 +2609,11 @@ fn transfiguredPoisonSet() !void {
 
     // Flash item when debuff was applied
     trig(.hbsCreated, .{.hbs_thishbcast});
+    // To avoid flashing for every debuff applied, instead keep track of if the scondary has done
+    // damage. If so, flash once, and set the damage flag to 0, so we don't flash again.
+    cond(.hb_check_square_var, .{ 0, 1 });
     qpat(.hb_flash_item, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     // Set color of special to hbColor0/1
     trig(.colorCalc, .{});
