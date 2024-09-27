@@ -1230,39 +1230,17 @@ fn transfiguredRockdragonSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: Redo. Not all abilities have the ability to hit multiple times
-    const tough_gauntlet_extra_hits = 2;
-    const tough_gauntlet_extra_gcd = 1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_tough_gauntlet",
         .name = .{
             .english = "Transfigured Tough Gauntlet",
         },
         .description = .{
-            .english = "Your abilities hit [VAR0] additional times, but all GCDs are " ++
-                "[VAR1_SECONDS] longer.",
+            .english = "TODO",
         },
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .red,
-
-        .hbVar0 = tough_gauntlet_extra_hits,
-        .hbVar1 = tough_gauntlet_extra_gcd,
     });
-    trig(.strCalc2, .{});
-    for (WeaponType.abilities) |weapontype| {
-        ttrg(.hotbarslots_self_weapontype, .{weapontype});
-        qpat(.hb_add_hitbox_var, .{
-            .hitboxVar = .number,
-            .amount = tough_gauntlet_extra_hits,
-        });
-    }
-
-    trig(.cdCalc2a, .{});
-    for (WeaponType.abilities_with_gcd) |weapontype| {
-        ttrg(.hotbarslots_self_weapontype, .{weapontype});
-        qpat(.hb_add_gcd_permanent, .{ .amount = tough_gauntlet_extra_gcd });
-    }
 
     item(.{
         .id = "it_transfigured_rockdragon_mail",
@@ -1443,45 +1421,17 @@ fn transfiguredFlameSet() !void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_reset_statchange, .{});
 
-    // TODO: Redo. Not all abilities have the ability to hit multiple times
     item(.{
         .id = "it_transfigured_flamewalker_boots",
         .name = .{
             .english = "Transfigured Flamewalker Boots",
         },
         .description = .{
-            .english = "All your abilities and loot hit an additional time. If you use your " ++
-                "Defensive, this effect ends until the end of battle.",
+            .english = "TODO",
         },
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .red,
-
-        .lootHbDispType = .glowing,
-        .autoOffSqVar0 = 1,
-        .glowSqVar0 = true,
-        .greySqVar0 = true,
     });
-    trig(.strCalc2, .{});
-    ttrg(.hotbarslots_current_players, .{});
-    ttrg_hotbarslots_prune(TargetHotbars.number, .@">", 0);
-    qpat(.hb_add_hitbox_var, .{
-        .hitboxVar = .number,
-        .amount = 1,
-    });
-
-    trig(.hotbarUsedProc2, .{.hb_defensive});
-    cond(.hb_check_square_var, .{ 0, 1 });
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.autoStart, .{});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.onSquarePickup, .{.square_self});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
-    qpat(.hb_reset_statchange, .{});
 }
 
 fn transfiguredGemSet() !void {
@@ -3577,29 +3527,17 @@ fn transfiguredGladiatorSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: No test - This is unbalanaced. Redo!
-    const battlemaiden_armor_dmg_mult = -0.25;
     item(.{
         .id = "it_transfigured_battlemaiden_armor",
         .name = .{
             .english = "Transfigured Battlemaiden Armor",
         },
         .description = .{
-            .english = "You deal [VAR0_PERCENT] less damage. Your none Defensive abilities no " ++
-                "longer has a cooldown.",
+            .english = "TODO",
         },
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .bluered,
-
-        .hbVar0 = @abs(battlemaiden_armor_dmg_mult),
-        .allMult = battlemaiden_armor_dmg_mult,
     });
-    trig(.cdCalc6, .{});
-    tset(.debug, .{Receiver.playerId});
-    ttrg(.hotbarslots_self_abilities, .{});
-    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
-    qpat(.hb_set_cooldown_permanent, .{ .time = 0 });
 
     const gladiator_helmet_dmg_mult = 0.2;
     item(.{
@@ -4228,23 +4166,17 @@ fn transfiguredRuinsSet() !void {
         .weaponType = .loot,
     });
 
-    // TODO: Redo. Not all abilities have the ability to hit multiple times
     item(.{
         .id = "it_transfigured_mountain_staff",
         .name = .{
             .english = "Transfigured Mountain Staff",
         },
         .description = .{
-            .english = "Your Special hits two additional times. Its GCD is increased by " ++
-                "1.4 seconds. Your movement speed is also moderately reduced.",
+            .english = "TODO",
         },
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .redgreen,
     });
-    trig(.cdCalc2a, .{});
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
-    qpat(.hb_add_gcd_permanent, .{ .amount = 1400 });
 
     item(.{
         .id = "it_transfigured_boulder_shield",
