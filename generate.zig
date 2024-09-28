@@ -2816,6 +2816,9 @@ fn transfiguredDepthSet() !void {
         .hbVar0 = tidal_greatsword_dmg_mult,
         .hbVar1 = tidal_greatsword_aoe_mult,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
