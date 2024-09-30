@@ -371,6 +371,7 @@ fn transfiguredNightSet() !void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
 
+    const nightstar_grimoire_radius = 200;
     item(.{
         .id = "it_transfigured_nightstar_grimoire",
         .name = .{
@@ -391,15 +392,15 @@ fn transfiguredNightSet() !void {
         .cooldown = 25 * std.time.ms_per_s,
 
         .delay = 200,
-        .radius = 150,
+        .radius = nightstar_grimoire_radius,
         .strMult = 900,
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
     tset(.strength_def, .{});
     ttrg(.players_opponent, .{});
-    tset(.uservar_random_range, .{ "u_x", 200, 1600 });
-    tset(.uservar_random_range, .{ "u_y", 200, 800 });
+    tset(.uservar_random_range, .{ "u_x", nightstar_grimoire_radius, 1800 - nightstar_grimoire_radius });
+    tset(.uservar_random_range, .{ "u_y", nightstar_grimoire_radius, 1000 - nightstar_grimoire_radius });
     apat(.meteor_staff, .{ .fxStr = "u_x", .fyStr = "u_y" });
 
     trig(.autoStart, .{.hb_auto_pl});
