@@ -27,11 +27,11 @@ pub fn main() !void {
 }
 
 fn transfiguredArcaneSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredArcaneSet",
         .image_path = "images/arcane.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_raven_grimoire",
@@ -281,11 +281,11 @@ fn transfiguredArcaneSet() !void {
 }
 
 fn transfiguredNightSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredNightSet",
         .image_path = "images/night.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     const sleeping_greatbow_cooldown = 12 * std.time.ms_per_s;
     item(.{
@@ -497,11 +497,11 @@ fn transfiguredNightSet() !void {
 }
 
 fn transfiguredTimespaceSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredTimespaceSet",
         .image_path = "images/timespace.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_eternity_flute",
@@ -609,7 +609,7 @@ fn transfiguredTimespaceSet() !void {
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 3 });
 
-    for ([_]mod.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
+    for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
         trig(.hotbarUsed, .{c});
         cond(.random_def, .{});
         tset(.uservar_random_range, .{ "u_haste", 0, 3 });
@@ -738,11 +738,11 @@ fn transfiguredTimespaceSet() !void {
 }
 
 fn transfiguredWindSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredWindSet",
         .image_path = "images/wind.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     const hawkfeather_fan_cd_reduction = -1 * std.time.ms_per_s;
     item(.{
@@ -876,11 +876,11 @@ fn transfiguredWindSet() !void {
 }
 
 fn transfiguredBloodwolfSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredBloodwolfSet",
         .image_path = "images/bloodwolf.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_vampiric_dagger",
@@ -1007,11 +1007,11 @@ fn transfiguredBloodwolfSet() !void {
 }
 
 fn transfiguredAssasinSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredAssasinSet",
         .image_path = "images/assasin.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_black_wakizashi",
@@ -1169,11 +1169,11 @@ fn transfiguredAssasinSet() !void {
 }
 
 fn transfiguredRockdragonSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredRockdragonSet",
         .image_path = "images/rockdragon.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_dragonhead_spear",
@@ -1310,11 +1310,11 @@ fn transfiguredRockdragonSet() !void {
 }
 
 fn transfiguredFlameSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredFlameSet",
         .image_path = "images/flame.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_volcano_spear",
@@ -1465,11 +1465,11 @@ fn transfiguredFlameSet() !void {
 }
 
 fn transfiguredGemSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredGemSet",
         .image_path = "images/gem.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_diamond_shield",
@@ -1650,11 +1650,11 @@ fn transfiguredGemSet() !void {
 }
 
 fn transfiguredLightningSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredLightningSet",
         .image_path = "images/lightning.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_brightstorm_spear",
@@ -1804,11 +1804,11 @@ fn transfiguredLightningSet() !void {
 }
 
 fn transfiguredShrineSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredShrineSet",
         .image_path = "images/shrine.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_holy_greatsword",
@@ -2035,11 +2035,11 @@ fn transfiguredShrineSet() !void {
 }
 
 fn transfiguredLuckySet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredLuckySet",
         .image_path = "images/lucky.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     const book_of_cheats_dmg_mult = 1;
     const book_of_cheats_luck = 0.9;
@@ -2349,7 +2349,7 @@ fn transfiguredLuckySet() !void {
     });
     var random_state = std.Random.DefaultPrng.init(1);
     const random = random_state.random();
-    var debuffs = mod.Hbs.debuffs;
+    var debuffs = rns.Hbs.debuffs;
     random.shuffle(Hbs, &debuffs);
 
     for (debuffs, 0..) |debuff, i| {
@@ -2376,11 +2376,11 @@ fn transfiguredLuckySet() !void {
 }
 
 fn transfiguredLifeSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredLifeSet",
         .image_path = "images/life.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_butterfly_ocarina",
@@ -2561,11 +2561,11 @@ fn transfiguredLifeSet() !void {
 }
 
 fn transfiguredPoisonSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredPoisonSet",
         .image_path = "images/poison.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     const snakefang_dagger_str = 10;
     const snakefang_dagger_num_poisons = 4;
@@ -2777,11 +2777,11 @@ fn transfiguredPoisonSet() !void {
 }
 
 fn transfiguredDepthSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredDepthSet",
         .image_path = "images/depth.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_seashell_shield",
@@ -2949,11 +2949,11 @@ fn transfiguredDepthSet() !void {
 }
 
 fn transfiguredDarkbiteSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredDarkbiteSet",
         .image_path = "images/darkbite.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_sawtooth_cleaver",
@@ -3099,11 +3099,11 @@ fn transfiguredDarkbiteSet() !void {
 }
 
 fn transfiguredTimegemSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredTimegemSet",
         .image_path = "images/timegem.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_obsidian_rod",
@@ -3203,11 +3203,11 @@ fn transfiguredTimegemSet() !void {
 }
 
 fn transfiguredYoukaiSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredYoukaiSet",
         .image_path = "images/youkai.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     const kyou_no_omikuji_dmg_mult = 0.5;
     item(.{
@@ -3362,11 +3362,11 @@ fn transfiguredYoukaiSet() !void {
 }
 
 fn transfiguredHauntedSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredHauntedSet",
         .image_path = "images/haunted.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_ghost_spear",
@@ -3491,11 +3491,11 @@ fn transfiguredHauntedSet() !void {
 }
 
 fn transfiguredGladiatorSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredGladiatorSet",
         .image_path = "images/gladiator.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_grandmaster_spear",
@@ -3605,11 +3605,11 @@ fn transfiguredGladiatorSet() !void {
 }
 
 fn transfiguredSparkbladeSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredSparkbladeSet",
         .image_path = "images/sparkblade.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_bluebolt_staff",
@@ -3772,11 +3772,11 @@ fn transfiguredSparkbladeSet() !void {
 }
 
 fn transfiguredSwiftflightSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredSwiftflightSet",
         .image_path = "images/swiftflight.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_crane_katana",
@@ -3969,13 +3969,13 @@ fn transfiguredSwiftflightSet() !void {
 }
 
 fn transfiguredSacredflameSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredSacredflameSet",
         .image_path = "images/sacredflame.png",
     });
-    defer mod.end();
+    defer rns.end();
 
-    for ([_]mod.Item{
+    for ([_]rns.Item{
         .{
             .id = "it_transfigured_sandpriestess_spear",
             .name = .{
@@ -4082,7 +4082,7 @@ fn transfiguredSacredflameSet() !void {
 
         .hbsLength = 5 * std.time.ms_per_s,
     });
-    for ([_]mod.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
+    for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
         trig(.hotbarUsed, .{c});
         qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     }
@@ -4154,11 +4154,11 @@ fn transfiguredSacredflameSet() !void {
 }
 
 fn transfiguredRuinsSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredRuinsSet",
         .image_path = "images/ruins.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_giant_stone_club",
@@ -4309,11 +4309,11 @@ fn transfiguredRuinsSet() !void {
 }
 
 fn transfiguredLakeshrineSet() !void {
-    mod.start(.{
+    rns.start(.{
         .name = "TransfiguredLakeshrineSet",
         .image_path = "images/lakeshrine.png",
     });
-    defer mod.end();
+    defer rns.end();
 
     item(.{
         .id = "it_transfigured_waterfall_polearm",
@@ -4436,47 +4436,47 @@ fn transfiguredLakeshrineSet() !void {
     apat(.apply_hbs, .{});
 }
 
-const charspeed = mod.charspeed;
-const item = mod.item;
-const luck = mod.luck;
-const rgb = mod.rgb;
+const charspeed = rns.charspeed;
+const item = rns.item;
+const luck = rns.luck;
+const rgb = rns.rgb;
 
-const apat = mod.apat;
-const qpat = mod.qpat;
-const trig = mod.trig;
+const apat = rns.apat;
+const qpat = rns.qpat;
+const trig = rns.trig;
 
-const cond_eval2 = mod.cond_eval2;
-const cond = mod.cond;
+const cond_eval2 = rns.cond_eval2;
+const cond = rns.cond;
 
-const tset = mod.tset;
-const tset_uservar1 = mod.tset_uservar1;
-const tset_uservar2 = mod.tset_uservar2;
+const tset = rns.tset;
+const tset_uservar1 = rns.tset_uservar1;
+const tset_uservar2 = rns.tset_uservar2;
 
-const ttrg_hbstatus_prune = mod.ttrg_hbstatus_prune;
-const ttrg_hotbarslots_prune = mod.ttrg_hotbarslots_prune;
-const ttrg = mod.ttrg;
+const ttrg_hbstatus_prune = rns.ttrg_hbstatus_prune;
+const ttrg_hotbarslots_prune = rns.ttrg_hotbarslots_prune;
+const ttrg = rns.ttrg;
 
-const Hbs = mod.Hbs;
-const Stat = mod.Stat;
-const WeaponType = mod.WeaponType;
+const Hbs = rns.Hbs;
+const Stat = rns.Stat;
+const WeaponType = rns.WeaponType;
 
-const Source = mod.Source;
-const Receiver = mod.Receiver;
-const TargetPlayers = mod.TargetPlayers;
-const TargetPlayer0 = mod.TargetPlayer0;
-const TargetPlayer1 = mod.TargetPlayer1;
-const TargetPlayer2 = mod.TargetPlayer2;
-const TargetPlayer3 = mod.TargetPlayer3;
-const TargetHotbars = mod.TargetHotbars;
-const TargetHotbar0 = mod.TargetHotbar0;
-const TargetHotbar1 = mod.TargetHotbar1;
-const TargetHotbar2 = mod.TargetHotbar2;
-const TargetHotbar3 = mod.TargetHotbar3;
-const TargetStatuses = mod.TargetStatuses;
-const TargetStatus0 = mod.TargetStatus0;
-const TargetStatus1 = mod.TargetStatus1;
-const TargetStatus2 = mod.TargetStatus2;
-const TargetStatus3 = mod.TargetStatus3;
+const Source = rns.Source;
+const Receiver = rns.Receiver;
+const TargetPlayers = rns.TargetPlayers;
+const TargetPlayer0 = rns.TargetPlayer0;
+const TargetPlayer1 = rns.TargetPlayer1;
+const TargetPlayer2 = rns.TargetPlayer2;
+const TargetPlayer3 = rns.TargetPlayer3;
+const TargetHotbars = rns.TargetHotbars;
+const TargetHotbar0 = rns.TargetHotbar0;
+const TargetHotbar1 = rns.TargetHotbar1;
+const TargetHotbar2 = rns.TargetHotbar2;
+const TargetHotbar3 = rns.TargetHotbar3;
+const TargetStatuses = rns.TargetStatuses;
+const TargetStatus0 = rns.TargetStatus0;
+const TargetStatus1 = rns.TargetStatus1;
+const TargetStatus2 = rns.TargetStatus2;
+const TargetStatus3 = rns.TargetStatus3;
 
-const mod = @import("mod.zig");
+const rns = @import("rns.zig");
 const std = @import("std");
