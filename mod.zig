@@ -3686,12 +3686,17 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Battery Shield",
         },
         .description = .{
-            .english = "Every [VAR0_TIMES] you inflict spark, deal [STR] " ++
-                "damage to all enemies and gain invulnerability for [VAR1_SECONDS].",
+            .english = "When you use your Defensive, apply [SPARK-5] to all enemies.#" ++
+                "Every [VAR0_TIMES] you inflict spark, deal [STR] damage to all enemies and " ++
+                "gain invulnerability for [VAR1_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blueyellow,
+
+        .hbsType = .spark_5,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = 20,
 
         .strMult = 1200,
         .hbVar0 = battery_shield_sparks,
@@ -3700,6 +3705,12 @@ fn transfiguredSparkbladeSet() !void {
         .showSqVar = true,
         .autoOffSqVar0 = 0,
     });
+    trig(.hotbarUsed, .{.hb_defensive});
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.hbs_def, .{});
+    apat(.poisonfrog_charm, .{});
+
     trig(.hbsCreated, .{.hbs_selfcast});
     cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.spark_0));
     cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.spark_6));
