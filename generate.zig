@@ -522,14 +522,15 @@ fn transfiguredTimespaceSet() !void {
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
-    const timewarp_wand_gcd_shorting = -0.2 * std.time.ms_per_s;
+    const timewarp_wand_gcd_shorting = -0.1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timewarp_wand",
         .name = .{
             .english = "Transfigured Timewarp Wand",
         },
         .description = .{
-            .english = "When you have [HASTE-0] your GCDs are [VAR0_SECONDS] shorter.",
+            .english = "Your GCDs are [VAR0_SECONDS] shorter.#" ++
+                "When you have [HASTE-0] this value is doubled.",
         },
 
         .type = .loot,
@@ -542,6 +543,10 @@ fn transfiguredTimespaceSet() !void {
         .hbVar0 = @abs(timewarp_wand_gcd_shorting),
     });
     trig(.cdCalc5, .{});
+    for (WeaponType.abilities_with_gcd) |weapontype| {
+        ttrg(.hotbarslots_self_weapontype, .{weapontype});
+        qpat(.hb_add_gcd_permanent, .{ .amount = timewarp_wand_gcd_shorting });
+    }
     ttrg(.hbstatus_target, .{});
     ttrg_hbstatus_prune(TargetStatuses.statusId, .@">=", @intFromEnum(Hbs.haste_0));
     ttrg_hbstatus_prune(TargetStatuses.statusId, .@"<=", @intFromEnum(Hbs.haste_2));
