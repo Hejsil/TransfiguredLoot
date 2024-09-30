@@ -4222,7 +4222,8 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Stoneplate Armor",
         },
         .description = .{
-            .english = "For every point of damage you've been shielded from you permanently " ++
+            .english = "Every [CD], grants you [STONESKIN]. Starts battle off cooldown.#" ++
+                "For every point of damage you've been shielded from you permanently " ++
                 "deal [VAR0_PERCENT] more damage.",
         },
 
@@ -4230,11 +4231,29 @@ fn transfiguredRuinsSet() !void {
         .weaponType = .loot,
         .treasureType = .redgreen,
 
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 60 * std.time.ms_per_s,
+
+        .hbsType = .stoneskin,
+        .hbsLength = 3 * std.time.ms_per_s,
+
         .showSqVar = true,
         .hbVar0 = stoneplate_armor_dmg_mult,
     });
     trig(.onSquarePickup, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    ttrg(.player_self, .{});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
     trig(.hbsShield0, .{.pl_self});
     qpat(.hb_flash_item, .{});
