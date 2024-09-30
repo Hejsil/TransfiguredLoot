@@ -784,7 +784,7 @@ fn transfiguredWindSet() !void {
 
         .delay = 250,
         .radius = 100,
-        .strMult = 10,
+        .strMult = 20,
 
         .hbVar0 = pidgeon_bow_num_proj,
         .hitNumber = pidgeon_bow_num_proj,
