@@ -1816,8 +1816,8 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Holy Greatsword",
         },
         .description = .{
-            .english = "Every [CD], consume a buff you gain to slices the air around you " ++
-                "dealing [STR] damage.",
+            .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
+                "Cooldown resets every time you gain a buff.",
         },
 
         .type = .loot,
@@ -1826,20 +1826,22 @@ fn transfiguredShrineSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 4 * std.time.ms_per_s,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
 
         .delay = 400,
         .radius = 400,
-        .strMult = 400,
+        .strMult = 300,
     });
     trig(.hbsCreated, .{.hbs_selfafl});
-    cond(.hb_available, .{});
-    cond(.true, .{Source.isBuff});
+    cond_eval2(Source.isBuff, .@"==", 1);
+    ttrg(.hotbarslot_self, .{});
+    qpat(.hb_reset_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_run_cooldown, .{});
-    ttrg(.hbstatus_source, .{});
-    qpat(.hbs_destroy, .{});
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
