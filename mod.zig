@@ -135,6 +135,8 @@ fn transfiguredArcaneSet() !void {
         .radius = 400,
         .strMult = 300,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
 
     for ([_]Hbs{ .hex, .hex_super, .hex_poison }) |hbs| {
         trig(.hbsCreated, .{.hbs_selfcast});

@@ -2981,9 +2981,10 @@ pub const Hbs = enum(u8) {
     abyssrage = 35,
 
     sap,
-    hex,
-    hex_super,
-    hex_poison,
+
+    hex = 52,
+    hex_super = 53,
+    hex_poison = 54,
 
     hex_anti = 55,
 
