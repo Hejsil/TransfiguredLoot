@@ -9,14 +9,14 @@ implemented, but none of them have art or correct colors.
 ## Build
 
 As you might have noticed, there are no csv or ini files in this repository. That is because
-the Transfigured Loot mods are generated from the `generate.zig` "script".
+the Transfigured Loot mods are generated from the `mod.zig` "script".
 
 TODO: Pointers on how to get zig installed
 
 To generate the mods, run:
 
 ```sh
-zig run generate.zig
+zig run mod.zig
 ```
 
 This will try to find the Rabbit and Steel mods folder and generate the mods inside it (currently
@@ -24,5 +24,5 @@ only works on Linux). The mods folder can be specified like so:
 
 ```sh
 # Generates the mods in the "Mods" folder in the current directory
-zig run generate.zig -- Mods
+zig run mod.zig -- Mods
 ```
