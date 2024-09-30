@@ -118,8 +118,8 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Darkmagic Blade",
         },
         .description = .{
-            .english = "Every [CD], consume a curse you apply to slice the air around you " ++
-                "dealing [STR] damage.",
+            .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
+                "Cooldown resets every time you inflict a curse or hex.",
         },
 
         .type = .loot,
@@ -128,21 +128,31 @@ fn transfiguredArcaneSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 4 * std.time.ms_per_s,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
 
         .delay = 400,
         .radius = 400,
-        .strMult = 400,
+        .strMult = 300,
     });
+
+    for ([_]Hbs{ .hex, .hex_super, .hex_poison }) |hbs| {
+        trig(.hbsCreated, .{.hbs_selfcast});
+        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs));
+        ttrg(.hotbarslot_self, .{});
+        qpat(.hb_reset_cooldown, .{});
+    }
+
     trig(.hbsCreated, .{.hbs_selfcast});
-    cond(.hb_available, .{});
     cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
     cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
+    ttrg(.hotbarslot_self, .{});
+    qpat(.hb_reset_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_run_cooldown, .{});
-    ttrg(.hbstatus_source, .{});
-    qpat(.hbs_destroy, .{});
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
     apat(.darkmagic_blade, .{});
@@ -4239,6 +4249,7 @@ fn transfiguredRuinsSet() !void {
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
         .cooldown = 60 * std.time.ms_per_s,
+        .hbInput = .auto,
 
         .hbsType = .stoneskin,
         .hbsLength = 3 * std.time.ms_per_s,
