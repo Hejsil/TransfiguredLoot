@@ -1661,6 +1661,7 @@ pub const QuickPatternArgs = struct {
     type: ?ChargeType = null,
     message: ?FlashMessage = null,
     time: ?usize = null,
+    length: ?usize = null,
     mult: ?f64 = null,
     multStr: ?[]const u8 = null,
     amount: ?f64 = null,
@@ -1699,6 +1700,8 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
         try writer.print(",messageIndex,{s}", .{message.toCsvString()});
     if (args.time) |time|
         try writer.print(",time,{d}", .{time});
+    if (args.length) |length|
+        try writer.print(",length,{d}", .{length});
     if (args.mult) |mult|
         try writer.print(",mult,{d}", .{mult});
     if (args.multStr) |mult|

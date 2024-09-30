@@ -3281,10 +3281,10 @@ fn transfiguredYoukaiSet() !void {
         .hbVar0 = oni_staff_mult,
         .hbVar1 = oni_staff_cd,
     });
-    trig(.hotbarUsed, .{.hb_special});
+    trig(.hotbarUsedProc, .{.hb_special});
     ttrg(.hotbarslots_current_players, .{});
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
-    qpat(.hb_run_cooldown_ext, .{ .amount = oni_staff_cd });
+    qpat(.hb_run_cooldown_ext, .{ .length = oni_staff_cd });
 
     item(.{
         .id = "it_transfigured_kappa_shield",
