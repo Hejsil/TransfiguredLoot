@@ -1835,6 +1835,9 @@ fn transfiguredShrineSet() !void {
         .radius = 400,
         .strMult = 300,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
     trig(.hbsCreated, .{.hbs_selfafl});
     cond_eval2(Source.isBuff, .@"==", 1);
     ttrg(.hotbarslot_self, .{});
