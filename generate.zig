@@ -1034,6 +1034,7 @@ fn transfiguredAssasinSet() !void {
     });
 
     const ninjutsu_scroll_max_hits = 9;
+    const ninjutsu_scroll_proc_chance = 0.5;
     item(.{
         .id = "it_transfigured_ninjutsu_scroll",
         .name = .{
@@ -1042,17 +1043,19 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "Your Special can deal up to [VAR0] additional blows, dealing [STR] " ++
                 "damage each, in a radius around your target enemy.#" ++
-                "Starting at [LUCK], each extra blow is half as likely to happen as the previous.",
+                "Starting at [LUCK], each extra blow is [VAR1_PERCENT] less likely to happen " ++
+                "as the previous.",
         },
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
 
-        .strMult = 150,
+        .strMult = 130,
         .radius = 350,
         .delay = 125,
-        .procChance = 0.5,
+        .procChance = ninjutsu_scroll_proc_chance,
         .hbVar0 = ninjutsu_scroll_max_hits,
+        .hbVar1 = 1.0 - ninjutsu_scroll_proc_chance,
     });
     trig(.hotbarUsed, .{.hb_special});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
