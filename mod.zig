@@ -3257,17 +3257,29 @@ fn transfiguredYoukaiSet() !void {
 
     qpat(.hb_set_strength, .{ .amountStr = "u_avg" });
 
+    const oni_staff_mult = 0.6;
+    const oni_staff_cd = 15 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_oni_staff",
         .name = .{
             .english = "Transfigured Oni Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your Special deals [VAR0_PERCENT] more damage.#" ++
+                "When you use your Special, abilities or loot with a cooldown goes on a " ++
+                "[VAR1_SECONDS] cooldown.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .specialMult = oni_staff_mult,
+        .hbVar0 = oni_staff_mult,
+        .hbVar1 = oni_staff_cd,
     });
+    trig(.hotbarUsed, .{.hb_special});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
+    qpat(.hb_run_cooldown_ext, .{ .amount = oni_staff_cd });
 
     item(.{
         .id = "it_transfigured_kappa_shield",
