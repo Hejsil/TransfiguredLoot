@@ -1206,7 +1206,7 @@ fn transfiguredRockdragonSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 5 * std.time.ms_per_s,
+        .cooldown = 4 * std.time.ms_per_s,
         .hbInput = .auto,
 
         .strMult = 700,
