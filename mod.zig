@@ -2077,7 +2077,7 @@ fn transfiguredLuckySet() !void {
         .glowSqVar0 = true,
         .hbVar0 = book_of_cheats_dmg_mult,
     });
-    trig(.onSquarePickup, .{});
+    trig(.onSquarePickup, .{.square_self});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
 
     trig(.battleStart0, .{});
@@ -4328,7 +4328,7 @@ fn transfiguredRuinsSet() !void {
         .showSqVar = true,
         .hbVar0 = stoneplate_armor_dmg_mult,
     });
-    trig(.onSquarePickup, .{});
+    trig(.onSquarePickup, .{.square_self});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     trig(.autoStart, .{.hb_auto_pl});
