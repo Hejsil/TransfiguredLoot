@@ -59,24 +59,53 @@ fn transfiguredArcaneSet() !void {
         ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(hbs));
         tset(.uservar_hbscount, .{"u_hbscount"});
         tset_uservar2("u_hbs_matching", "u_hbs_matching", .@"+", "u_hbscount");
-        tset(.debug, .{"u_hbs_matching"});
     }
     cond_eval2("u_hbs_matching", .@"!=", 0);
     ttrg(.player_damaged, .{});
     tset(.strength_def, .{});
     apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
+    const blackwing_staff_mult = 0.5;
     item(.{
         .id = "it_transfigured_blackwing_staff",
         .name = .{
             .english = "Transfigured Blackwing Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your Primary deals [VAR0_PERCENT] more damage if an enemy is cursed " ++
+                "or hexed.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .lootHbDispType = .glowing,
+
+        .glowSqVar0 = true,
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = blackwing_staff_mult,
     });
+
+    for ([_]Hbs{
+        .curse_0,   .curse_1, .curse_2, .curse_3,
+        .curse_4,   .curse_5, .hex,     .hex_poison,
+        .hex_super,
+    }) |hbs| {
+        trig(.hbsCreated, .{});
+        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs));
+        qpat(.hb_reset_statchange, .{});
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+
+        trig(.hbsDestroyed, .{});
+        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs));
+        qpat(.hb_reset_statchange, .{});
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
+    }
+
+    trig(.strCalc1c, .{});
+    cond(.hb_check_square_var_gte, .{ 0, 1 });
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
+    qpat(.hb_add_strcalcbuff, .{ .amount = blackwing_staff_mult });
 
     item(.{
         .id = "it_transfigured_curse_talon",
@@ -1889,7 +1918,6 @@ fn transfiguredShrineSet() !void {
     tset_uservar2("u_allMult", "u_buffs", .@"*", sacred_bow_mult_per_buff);
     tset_uservar2("u_extraStr", "u_allMult", .@"*", sacred_bow_dmg);
     tset_uservar2("u_str", "u_extraStr", .@"+", sacred_bow_dmg);
-    tset(.debug, .{"u_str"});
     tset(.strength_def, .{});
     tset(.strength, .{"u_str"});
     ttrg(.players_opponent, .{});
