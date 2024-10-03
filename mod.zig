@@ -800,7 +800,7 @@ fn transfiguredWindSet() !void {
         .hbInput = .auto,
 
         .delay = 250,
-        .radius = 100,
+        .radius = 1800,
         .strMult = 20,
 
         .hbVar0 = pidgeon_bow_num_proj,
@@ -814,7 +814,7 @@ fn transfiguredWindSet() !void {
     qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
     tset(.strength_def, .{});
-    apat(.sniper_2, .{});
+    apat(.floral_bow, .{});
 
     item(.{
         .id = "it_transfigured_shinsoku_katana",
