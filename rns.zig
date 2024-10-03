@@ -2274,6 +2274,7 @@ pub const AttackPatternArgs = struct {
     fyStr: ?[]const u8 = null,
     duration: ?u16 = null,
     number: ?u16 = null,
+    numberStr: ?[]const u8 = null,
     numberR: ?Receiver = null,
     numberS: ?Source = null,
     radius: ?u16 = null,
@@ -2306,6 +2307,8 @@ fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
         try writer.print(",duration,{d}", .{duration});
     if (args.number) |number|
         try writer.print(",number,{d}", .{number});
+    if (args.numberStr) |number|
+        try writer.print(",number,{s}", .{number});
     if (args.numberR) |number|
         try writer.print(",number,{s}", .{number.toCsvString()});
     if (args.numberS) |number|

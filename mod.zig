@@ -39,32 +39,32 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Raven Grimoire",
         },
         .description = .{
-            .english = "Every [CD], replace a curse you apply with [HEXS].",
+            .english = "When your Special hits a cursed or hexed enemy, deal an additional hit " ++
+                "per curse or hex of [STR] damage.",
         },
 
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
 
-        .lootHbDispType = .cooldown,
-        .cooldownType = .time,
-        .cooldown = 10 * std.time.ms_per_s,
-
-        .hbsType = .hex_super,
-        .hbsLength = 5 * std.time.ms_per_s,
+        .strMult = 35,
     });
-    trig(.hbsCreated, .{.hbs_selfcast});
-    cond(.hb_available, .{});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
-    qpat(.hb_flash_item, .{});
-    qpat(.hb_cdloot_proc, .{});
-    qpat(.hb_run_cooldown, .{});
-    ttrg(.hbstatus_source, .{});
-    qpat(.hbs_destroy, .{});
-    ttrg(.player_afflicted_source, .{});
-    tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
+    trig(.onDamageDone, .{.dmg_self_special});
+    for ([_]Hbs{
+        .curse_0,   .curse_1, .curse_2, .curse_3,
+        .curse_4,   .curse_5, .hex,     .hex_poison,
+        .hex_super,
+    }) |hbs| {
+        ttrg(.hbstatus_target, .{});
+        ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(hbs));
+        tset(.uservar_hbscount, .{"u_hbscount"});
+        tset_uservar2("u_hbs_matching", "u_hbs_matching", .@"+", "u_hbscount");
+        tset(.debug, .{"u_hbs_matching"});
+    }
+    cond_eval2("u_hbs_matching", .@"!=", 0);
+    ttrg(.player_damaged, .{});
+    tset(.strength_def, .{});
+    apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
     item(.{
         .id = "it_transfigured_blackwing_staff",
@@ -217,7 +217,6 @@ fn transfiguredArcaneSet() !void {
         .delay = 200,
     });
     trig(.onDamageDone, .{.dmg_self_defensive});
-    ttrg(.hbstatus_target, .{});
     ttrg(.hbstatus_target, .{});
     tset(.uservar_hbscount, .{"u_hbscount"});
     cond(.unequal, .{ "u_hbscount", 0 });
