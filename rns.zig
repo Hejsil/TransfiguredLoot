@@ -2277,6 +2277,7 @@ pub const AttackPatternArgs = struct {
     numberR: ?Receiver = null,
     numberS: ?Source = null,
     radius: ?u16 = null,
+    amount: ?u16 = null,
 
     pub fn notNullFieldCount(args: AttackPatternArgs) usize {
         var res: usize = 0;
@@ -2311,6 +2312,8 @@ fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
         try writer.print(",number,{s}", .{number.toCsvString()});
     if (args.radius) |radius|
         try writer.print(",radius,{d}", .{radius});
+    if (args.amount) |amount|
+        try writer.print(",amount,{d}", .{amount});
 
     try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
     try writer.writeAll("\n");

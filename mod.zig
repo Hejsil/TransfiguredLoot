@@ -2508,6 +2508,9 @@ fn transfiguredLifeSet() !void {
         .hp = sunflower_crown_hp,
         .hbVar0 = sunflower_crown_hp,
     });
+    trig(.onSquarePickup, .{.square_self});
+    ttrg(.player_self, .{});
+    apat(.heal_light, .{ .amount = sunflower_crown_hp });
 
     const midsummer_dress_hp = 1;
     const midsummer_dress_mult_per_hp = 0.05;
@@ -2530,6 +2533,10 @@ fn transfiguredLifeSet() !void {
         .hbVar0 = midsummer_dress_hp,
         .hbVar1 = midsummer_dress_mult_per_hp,
     });
+    trig(.onSquarePickup, .{.square_self});
+    ttrg(.player_self, .{});
+    apat(.heal_light, .{ .amount = midsummer_dress_hp });
+
     trig(.strCalc0, .{});
     tset_uservar2("u_allMult", Receiver.hp, .@"*", midsummer_dress_mult_per_hp);
     qpat(.hb_reset_statchange_norefresh, .{});
@@ -2559,6 +2566,10 @@ fn transfiguredLifeSet() !void {
         .hbVar0 = grasswoven_bracelet_hp,
         .hbVar1 = grasswoven_bracelet_aoe_per_hp,
     });
+    trig(.onSquarePickup, .{.square_self});
+    ttrg(.player_self, .{});
+    apat(.heal_light, .{ .amount = grasswoven_bracelet_hp });
+
     trig(.strCalc2, .{});
     ttrg(.hotbarslots_current_players, .{});
     tset_uservar2("u_aoeMult", Receiver.hp, .@"*", grasswoven_bracelet_aoe_per_hp);
