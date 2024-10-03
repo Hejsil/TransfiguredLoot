@@ -4253,18 +4253,37 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Golem's Claymore",
         },
         .description = .{
-            .english = "When you are shielded from damage, slice the air around you dealing " ++
-                "[STR] damage.",
+            .english = "Every [CD], grants you [STONESKIN].#" ++
+                "When you are shielded from damage, slice the air around you dealing [STR] damage.",
         },
 
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redgreen,
 
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 30 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbsType = .stoneskin,
+        .hbsLength = 3 * std.time.ms_per_s,
+
         .delay = 400,
         .radius = 400,
         .strMult = 800,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    ttrg(.player_self, .{});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
     trig(.hbsShield0, .{.pl_self});
     qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
