@@ -4007,6 +4007,8 @@ fn transfiguredSacredflameSet() !void {
     });
     defer rns.end();
 
+    const flame_to_flow_mult = 0.1;
+
     for ([_]rns.Item{
         .{
             .id = "it_transfigured_sandpriestess_spear",
@@ -4014,7 +4016,8 @@ fn transfiguredSacredflameSet() !void {
                 .english = "Transfigured Sandpriestess Spear",
             },
             .description = .{
-                .english = "Every time you gain [FLASH-STR], gain [FLOW-STR].",
+                .english = "You deal [VAR0_PERCENT] more damage.#" ++
+                    "Every time you gain [FLASH-STR], gain [FLOW-STR].",
             },
             .hbsType = .flowstr,
         },
@@ -4024,7 +4027,8 @@ fn transfiguredSacredflameSet() !void {
                 .english = "Transfigured Flamedancer Dagger",
             },
             .description = .{
-                .english = "Every time you gain [FLASH-DEX], gain [FLOW-DEX].",
+                .english = "You deal [VAR0_PERCENT] more damage.#" ++
+                    "Every time you gain [FLASH-DEX], gain [FLOW-DEX].",
             },
             .hbsType = .flowdex,
         },
@@ -4034,7 +4038,8 @@ fn transfiguredSacredflameSet() !void {
                 .english = "Transfigured Whiteflame Staff",
             },
             .description = .{
-                .english = "Every time you gain [FLASH-INT], gain [FLOW-INT].",
+                .english = "You deal [VAR0_PERCENT] more damage.#" ++
+                    "Every time you gain [FLASH-INT], gain [FLOW-INT].",
             },
             .hbsType = .flowint,
         },
@@ -4044,6 +4049,8 @@ fn transfiguredSacredflameSet() !void {
         i.weaponType = .loot;
         i.treasureType = .redyellow;
         i.hbsLength = 5 * std.time.ms_per_s;
+        i.allMult = flame_to_flow_mult;
+        i.hbVar0 = flame_to_flow_mult;
 
         const flash_hbs: Hbs = switch (_item.hbsType.?) {
             .flowstr => .flashstr,
