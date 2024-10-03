@@ -1965,6 +1965,7 @@ fn transfiguredShrineSet() !void {
     tset(.hbskey, .{ Hbs.elegy_0, Receiver.hbsLength });
     apat(.apply_hbs, .{});
 
+    const shrinemaidens_kosode_mult = 0.1;
     const shrinemaidens_kosode_mult_per_buff = 0.1;
     item(.{
         .id = "it_transfigured_shrinemaidens_kosode",
@@ -1972,14 +1973,17 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Shrinemaiden's Kosode",
         },
         .description = .{
-            .english = "Deal [VAR0_PERCENT] more damage for each buff on you.",
+            .english = "You deal [VAR0_PERCENT] more damage.#" ++
+                "You deal [VAR1_PERCENT] more damage for each buff on you.",
         },
 
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
 
-        .hbVar0 = shrinemaidens_kosode_mult_per_buff,
+        .allMult = shrinemaidens_kosode_mult,
+        .hbVar0 = shrinemaidens_kosode_mult,
+        .hbVar1 = shrinemaidens_kosode_mult_per_buff,
     });
     trig(.strCalc0, .{});
     ttrg(.hbstatus_target, .{});
