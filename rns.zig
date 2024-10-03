@@ -3175,6 +3175,21 @@ pub const Hbs = enum(u8) {
         .spark_6,
     };
 
+    pub const curses = [_]Hbs{
+        .curse_0,
+        .curse_1,
+        .curse_2,
+        .curse_3,
+        .curse_4,
+        .curse_5,
+    };
+
+    pub const hexes = [_]Hbs{
+        .hex,
+        .hex_poison,
+        .hex_super,
+    };
+
     pub const toCsvString = toString;
     pub const toIniString = toString;
 

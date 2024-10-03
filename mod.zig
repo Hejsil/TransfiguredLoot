@@ -50,11 +50,7 @@ fn transfiguredArcaneSet() !void {
         .strMult = 35,
     });
     trig(.onDamageDone, .{.dmg_self_special});
-    for ([_]Hbs{
-        .curse_0,   .curse_1, .curse_2, .curse_3,
-        .curse_4,   .curse_5, .hex,     .hex_poison,
-        .hex_super,
-    }) |hbs| {
+    for (Hbs.curses ++ Hbs.hexes) |hbs| {
         ttrg(.hbstatus_target, .{});
         ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(hbs));
         tset(.uservar_hbscount, .{"u_hbscount"});
@@ -86,11 +82,7 @@ fn transfiguredArcaneSet() !void {
         .hbVar0 = blackwing_staff_mult,
     });
 
-    for ([_]Hbs{
-        .curse_0,   .curse_1, .curse_2, .curse_3,
-        .curse_4,   .curse_5, .hex,     .hex_poison,
-        .hex_super,
-    }) |hbs| {
+    for (Hbs.curses ++ Hbs.hexes) |hbs| {
         trig(.hbsCreated, .{});
         cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs));
         qpat(.hb_reset_statchange, .{});
@@ -288,15 +280,7 @@ fn transfiguredArcaneSet() !void {
     ttrg(.players_opponent, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
 
-    const curses = [_]Hbs{
-        .curse_0,
-        .curse_1,
-        .curse_2,
-        .curse_3,
-        .curse_4,
-        .curse_5,
-    };
-    for (curses[0..opal_necklace_num_curses]) |curse| {
+    for (Hbs.curses[0..opal_necklace_num_curses]) |curse| {
         tset(.hbskey, .{ curse, Receiver.hbsLength });
         apat(.apply_hbs, .{});
     }
