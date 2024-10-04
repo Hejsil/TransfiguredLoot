@@ -783,7 +783,7 @@ fn transfiguredTimespaceSet() !void {
     trig(.hotbarUsed, .{.hb_selfcast});
     cond_eval2(Source.cooldown, .@">=", starry_cloak_cd_threshold);
     ttrg(.player_self, .{});
-    apat(.hbs_def, .{});
+    tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
     trig(.hbsCreated, .{.hbs_thishbcast});
