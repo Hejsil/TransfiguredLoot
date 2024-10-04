@@ -462,6 +462,7 @@ fn transfiguredNightSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .delay = 200,
         .radius = moon_pendant_radius,
@@ -496,17 +497,32 @@ fn transfiguredNightSet() !void {
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
     qpat(.hb_add_cooldown, .{ .amount = -pajama_hat_cd_reduction });
 
+    const stuffed_rabbit_activate_count = 10;
+    const stuffed_rabbit_invul_dur = 3 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_stuffed_rabbit",
         .name = .{
             .english = "Transfigured Stuffed Rabbit",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [VAR0] an ability or loot with a cooldown is activated, gain " ++
+                "invulnerability for [VAR1_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
+
+        .hbVar0 = stuffed_rabbit_activate_count,
+        .hbVar1 = stuffed_rabbit_invul_dur,
     });
+    trig(.hotbarUsed, .{.hb_selfcast});
+    cond_eval2(Source.cooldown, .@">", 0);
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    cond(.hb_check_square_var, .{ 0, stuffed_rabbit_activate_count });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    apat(.apply_invuln, .{ .duration = stuffed_rabbit_invul_dur });
 
     item(.{
         .id = "it_transfigured_nightingale_gown",
