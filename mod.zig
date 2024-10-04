@@ -417,7 +417,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Nightstar Grimoire",
         },
         .description = .{
-            .english = "Every [CD], hit a random area of the arena, dealing 900 damage. If " ++
+            .english = "Every [CD], hit a random area of the arena, dealing [STR] damage. If " ++
                 "an enemy gets hit, the cooldown is reset.",
         },
 
@@ -435,6 +435,8 @@ fn transfiguredNightSet() !void {
         .strMult = 900,
     });
     trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_cdloot_proc, .{});
+    qpat(.hb_flash_item, .{});
     qpat(.hb_run_cooldown, .{});
     tset(.strength_def, .{});
     ttrg(.players_opponent, .{});
@@ -448,17 +450,30 @@ fn transfiguredNightSet() !void {
     trig(.onDamageDone, .{.dmg_self_thishb});
     qpat(.hb_reset_cooldown, .{});
 
+    const moon_pendant_radius = 200;
     item(.{
         .id = "it_transfigured_moon_pendant",
         .name = .{
             .english = "Transfigured Moon Pendant",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Deals [STR] damage to a random area of the arena when you use your " ++
+                "Special.",
         },
         .type = .loot,
         .weaponType = .loot,
+
+        .delay = 200,
+        .radius = moon_pendant_radius,
+        .strMult = 300,
     });
+    trig(.hotbarUsed, .{.hb_special});
+    qpat(.hb_flash_item, .{});
+    tset(.strength_def, .{});
+    ttrg(.players_opponent, .{});
+    tset(.uservar_random_range, .{ "u_x", moon_pendant_radius, 1800 - moon_pendant_radius });
+    tset(.uservar_random_range, .{ "u_y", moon_pendant_radius, 1000 - moon_pendant_radius });
+    apat(.meteor_staff, .{ .fxStr = "u_x", .fyStr = "u_y" });
 
     const pajama_hat_cd_reduction = 1 * std.time.ms_per_s;
     item(.{
