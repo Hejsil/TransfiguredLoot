@@ -513,6 +513,8 @@ fn transfiguredNightSet() !void {
         .weaponType = .loot,
         .treasureType = .purple,
 
+        .showSqVar = true,
+
         .hbVar0 = stuffed_rabbit_activate_count,
         .hbVar1 = stuffed_rabbit_invul_dur,
     });
