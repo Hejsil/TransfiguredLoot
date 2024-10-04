@@ -39,11 +39,29 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Raven Grimoire",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [CD], your Special applies [HEXS].",
         },
+
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+
+        .hbsType = .hex_super,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = 40,
     });
+    trig(.onDamageDone, .{.dmg_self_special});
+    cond(.hb_available, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    qpat(.hb_run_cooldown, .{});
+    ttrg(.player_damaged, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
 
     const blackwing_staff_mult = 0.5;
     item(.{
