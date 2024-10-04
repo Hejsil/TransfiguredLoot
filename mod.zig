@@ -73,6 +73,7 @@ fn transfiguredArcaneSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
         .lootHbDispType = .glowing,
 
         .glowSqVar0 = true,
@@ -105,7 +106,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Curse Talon",
         },
         .description = .{
-            .english = "Every [CD], replace a curse you apply with [HEXP].",
+            .english = "Every [CD], your Secondary applies [HEXP].",
         },
 
         .type = .loot,
@@ -120,16 +121,12 @@ fn transfiguredArcaneSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = 40,
     });
-    trig(.hbsCreated, .{.hbs_selfcast});
+    trig(.onDamageDone, .{.dmg_self_secondary});
     cond(.hb_available, .{});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
     qpat(.hb_flash_item, .{});
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_run_cooldown, .{});
-    ttrg(.hbstatus_source, .{});
-    qpat(.hbs_destroy, .{});
-    ttrg(.player_afflicted_source, .{});
+    ttrg(.player_damaged, .{});
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
