@@ -761,17 +761,33 @@ fn transfiguredTimespaceSet() !void {
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", timemage_cap_cd_set);
     qpat(.hb_set_cooldown_permanent, .{ .time = timemage_cap_cd_set });
 
+    const starry_cloak_cd_threshold = 15 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_starry_cloak",
         .name = .{
             .english = "Transfigured Starry Cloak",
         },
         .description = .{
-            .english = "TODO",
+            .english = "When an ability or loot with a cooldown greater than or equal to " ++
+                "[VAR0_SECONDS] is activated, gain [HASTE-2].",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
+
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsType = .haste_2,
+
+        .hbVar0 = starry_cloak_cd_threshold,
     });
+    trig(.hotbarUsed, .{.hb_selfcast});
+    cond_eval2(Source.cooldown, .@">=", starry_cloak_cd_threshold);
+    ttrg(.player_self, .{});
+    apat(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
+    trig(.hbsCreated, .{.hbs_thishbcast});
+    qpat(.hb_flash_item, .{});
 
     item(.{
         .id = "it_transfigured_gemini_necklace",
