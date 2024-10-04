@@ -39,27 +39,11 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Raven Grimoire",
         },
         .description = .{
-            .english = "When your Special hits a cursed or hexed enemy, deal an additional hit " ++
-                "per curse or hex of [STR] damage.",
+            .english = "TODO",
         },
-
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purple,
-
-        .strMult = 35,
     });
-    trig(.onDamageDone, .{.dmg_self_special});
-    for (Hbs.curses ++ Hbs.hexes) |hbs| {
-        ttrg(.hbstatus_target, .{});
-        ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(hbs));
-        tset(.uservar_hbscount, .{"u_hbscount"});
-        tset_uservar2("u_hbs_matching", "u_hbs_matching", .@"+", "u_hbscount");
-    }
-    cond_eval2("u_hbs_matching", .@"!=", 0);
-    ttrg(.player_damaged, .{});
-    tset(.strength_def, .{});
-    apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
     const blackwing_staff_mult = 0.5;
     item(.{
@@ -210,11 +194,27 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Crowfeather Hairpin",
         },
         .description = .{
-            .english = "TODO",
+            .english = "When your Special hits a cursed or hexed enemy, deal an additional hit " ++
+                "per curse or hex of [STR] damage.",
         },
+
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
+
+        .strMult = 35,
     });
+    trig(.onDamageDone, .{.dmg_self_special});
+    for (Hbs.curses ++ Hbs.hexes) |hbs| {
+        ttrg(.hbstatus_target, .{});
+        ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(hbs));
+        tset(.uservar_hbscount, .{"u_hbscount"});
+        tset_uservar2("u_hbs_matching", "u_hbs_matching", .@"+", "u_hbscount");
+    }
+    cond_eval2("u_hbs_matching", .@"!=", 0);
+    ttrg(.player_damaged, .{});
+    tset(.strength_def, .{});
+    apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
     const redblack_ribbon_dmg = 250;
     item(.{
