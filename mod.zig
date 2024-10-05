@@ -1777,11 +1777,26 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Darkstorm Knife",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Deals [STR] damage to all enemies when your abilities deal damage.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .yellow,
+
+        .strMult = 15,
+        .delay = 150,
     });
+    for ([_]Condition{
+        .dmg_self_primary,
+        .dmg_self_secondary,
+        .dmg_self_special,
+        .dmg_self_defensive,
+    }) |trigger| {
+        trig(.onDamageDone, .{trigger});
+        ttrg(.players_opponent, .{});
+        tset(.strength_def, .{});
+        apat(.crown_of_storms, .{});
+    }
 
     const darkcloud_necklace_ability_mult = -0.5;
     const darkcloud_necklace_loot_mult = 1.5;
@@ -1849,6 +1864,7 @@ fn transfiguredLightningSet() !void {
 
         .procChance = 0.3,
         .strMult = 200,
+        .delay = 150,
     });
     trig(.hotbarUsed, .{.hb_self});
     qpat(.hb_run_cooldown, .{});
@@ -1874,6 +1890,7 @@ fn transfiguredLightningSet() !void {
         .treasureType = .yellow,
 
         .strMult = 2000,
+        .delay = 150,
     });
     trig(.onDamage, .{.pl_self});
     qpat(.hb_flash_item, .{});
@@ -3794,12 +3811,14 @@ fn transfiguredSparkbladeSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
         .hbsStrMult = 20,
 
-        .strMult = 1200,
         .hbVar0 = battery_shield_sparks,
         .hbVar1 = battery_shield_invul_dur,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
+
+        .strMult = 1200,
+        .delay = 150,
     });
     trig(.hotbarUsed, .{.hb_defensive});
     qpat(.hb_flash_item, .{});
@@ -3856,6 +3875,7 @@ fn transfiguredSparkbladeSet() !void {
         .treasureType = .blueyellow,
 
         .strMult = 150,
+        .delay = 150,
     });
     trig(.hbsCreated, .{.hbs_selfcast});
     cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.spark_0));
@@ -4241,6 +4261,7 @@ fn transfiguredSacredflameSet() !void {
         .hbInput = .auto,
 
         .strMult = 2000,
+        .delay = 150,
     });
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
@@ -4601,8 +4622,10 @@ const ttrg_hbstatus_prune = rns.ttrg_hbstatus_prune;
 const ttrg_hotbarslots_prune = rns.ttrg_hotbarslots_prune;
 const ttrg = rns.ttrg;
 
+const Condition = rns.Condition;
 const Hbs = rns.Hbs;
 const Stat = rns.Stat;
+const Trigger = rns.Trigger;
 const WeaponType = rns.WeaponType;
 
 const Source = rns.Source;
