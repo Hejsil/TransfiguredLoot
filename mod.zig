@@ -2379,7 +2379,7 @@ fn transfiguredLuckySet() !void {
     qpat(.hb_add_statchange_norefresh, .{ .stat = .primaryMult, .amount = silver_coin_dmg_mult });
     qpat(.hb_add_statchange_norefresh, .{ .stat = .specialMult, .amount = silver_coin_dmg_mult });
     qpat(.hb_add_statchange_norefresh, .{ .stat = .hbsMult, .amount = silver_coin_dmg_mult });
-    qpat(.hb_add_statchange_norefresh, .{ .stat = .charspeed, .amount = 3 });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .charspeed, .amount = charspeed.significantly });
 
     trig(.strCalc0, .{});
     cond(.hb_check_square_var, .{ 0, 1 });
@@ -2387,7 +2387,7 @@ fn transfiguredLuckySet() !void {
     qpat(.hb_add_statchange_norefresh, .{ .stat = .secondaryMult, .amount = silver_coin_dmg_mult });
     qpat(.hb_add_statchange_norefresh, .{ .stat = .defensiveMult, .amount = silver_coin_dmg_mult });
     qpat(.hb_add_statchange_norefresh, .{ .stat = .lootMult, .amount = silver_coin_dmg_mult });
-    qpat(.hb_add_statchange_norefresh, .{ .stat = .luck, .amount = 0.15 });
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .luck, .amount = luck.significantly });
 
     item(.{
         .id = "it_transfigured_queens_crown",
