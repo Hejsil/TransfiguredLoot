@@ -3646,17 +3646,26 @@ fn transfiguredGladiatorSet() !void {
         .weaponType = .loot,
     });
 
+    const tactician_rod_mult = -0.2;
     item(.{
         .id = "it_transfigured_tactician_rod",
         .name = .{
             .english = "Transfigured Tactician Rod",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Your Special no longer has a cooldown, but deals [VAR0_PERCENT] less " ++
+                "damage.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluered,
+
+        .specialMult = tactician_rod_mult,
+        .hbVar0 = @abs(tactician_rod_mult),
     });
+    trig(.cdCalc5, .{});
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
+    qpat(.hb_set_cooldown_permanent, .{ .time = 0 });
 
     item(.{
         .id = "it_transfigured_spiked_shield",
@@ -4105,6 +4114,7 @@ fn transfiguredSwiftflightSet() !void {
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluegreen,
         .lootHbDispType = .glowing,
 
         .showSqVar = true,
