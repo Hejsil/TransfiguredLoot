@@ -4161,22 +4161,25 @@ fn transfiguredSwiftflightSet() !void {
         .lootHbDispType = .glowing,
 
         .showSqVar = true,
-        .autoOffSqVar0 = 0,
-
         .hbVar0 = feathered_overcoat_mult,
     });
-    trig(.standingStillBattle, .{});
-    cond(.hb_check_square_var, .{ 0, 0 });
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_reset_statchange, .{});
 
-    trig(.distanceTickBattle, .{});
+    trig(.standingStill, .{});
     cond(.hb_check_square_var, .{ 0, 1 });
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
     qpat(.hb_reset_statchange, .{});
 
+    trig(.distanceTick, .{});
+    cond(.hb_check_square_var, .{ 0, 0 });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
     trig(.strCalc0, .{});
     qpat(.hb_reset_statchange_norefresh, .{});
+    cond(.hb_check_square_var, .{ 0, 1 });
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .allMult,
         .amount = feathered_overcoat_mult,
