@@ -3713,17 +3713,60 @@ fn transfiguredGladiatorSet() !void {
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@"==", 0);
     qpat(.hb_add_strcalcbuff, .{ .amount = gladiator_helmet_dmg_mult });
 
+    const lancer_gauntlets_mult = 0.35;
     item(.{
         .id = "it_transfigured_lancer_gauntlets",
         .name = .{
             .english = "Transfigured Lancer Gauntlets",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Abilities different from the one you used last deal [VAR0_PERCENT] " ++
+                "more damage.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .bluered,
+
+        .showSqVar = true,
+        .hbVar0 = lancer_gauntlets_mult,
     });
+
+    const hb_conditions = [_]Condition{
+        .hb_primary,
+        .hb_secondary,
+        .hb_special,
+        .hb_defensive,
+    };
+
+    const hb_stats = [_]Stat{
+        .primaryMult,
+        .secondaryMult,
+        .specialMult,
+        .defensiveMult,
+    };
+
+    trig(.onSquarePickup, .{.square_self});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = hb_stats.len });
+
+    for (hb_conditions, hb_stats, 0..) |hotbar, exclude, i| {
+        trig(.hotbarUsed, .{hotbar});
+        cond(.hb_check_square_var_false, .{ 0, i });
+        qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = @floatFromInt(i) });
+        qpat(.hb_reset_statchange, .{});
+
+        trig(.strCalc0, .{});
+        cond(.hb_check_square_var, .{ 0, i });
+        qpat(.hb_reset_statchange_norefresh, .{});
+        for (hb_stats) |stat| {
+            if (stat == exclude)
+                continue;
+
+            qpat(.hb_add_statchange_norefresh, .{
+                .stat = stat,
+                .amount = lancer_gauntlets_mult,
+            });
+        }
+    }
 
     item(.{
         .id = "it_transfigured_lion_charm",
