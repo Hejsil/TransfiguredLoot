@@ -4094,16 +4094,39 @@ fn transfiguredSwiftflightSet() !void {
     qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{ .stat = .allMult, .amountStr = "u_mult" });
 
+    const feathered_overcoat_mult = 0.25;
     item(.{
         .id = "it_transfigured_feathered_overcoat",
         .name = .{
             .english = "Transfigured Feathered Overcoat",
         },
         .description = .{
-            .english = "TODO",
+            .english = "You deal [VAR0_PERCENT] more damage while moving.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .lootHbDispType = .glowing,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = feathered_overcoat_mult,
+    });
+    trig(.standingStillBattle, .{});
+    cond(.hb_check_square_var, .{ 0, 0 });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.distanceTickBattle, .{});
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc0, .{});
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .allMult,
+        .amount = feathered_overcoat_mult,
     });
 }
 
