@@ -506,8 +506,8 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Stuffed Rabbit",
         },
         .description = .{
-            .english = "Every [VAR0] an ability or loot with a cooldown is activated, gain " ++
-                "invulnerability for [VAR1_SECONDS].",
+            .english = "Every [VAR0] times an ability or loot with a cooldown is activated, " ++
+                "gain invulnerability for [VAR1_SECONDS].",
         },
         .type = .loot,
         .weaponType = .loot,
