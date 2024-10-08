@@ -2277,36 +2277,43 @@ fn transfiguredLuckySet() !void {
     qpat(.hb_flash_item, .{});
     qpat(.hb_lucky_proc, .{});
 
+    const royal_staff_crit_dmg_buff = 0.02;
     const royal_staff_aoe_buff = 0.01;
-    const royal_staff_crit_dmg_buff = 0.01;
+    const royal_staff_gold_per_aoe = 2;
     item(.{
         .id = "it_transfigured_royal_staff",
         .name = .{
             .english = "Transfigured Royal Staff",
         },
         .description = .{
-            .english = "Critical hits deal [VAR1_PERCENT] extra damage per Gold.#" ++
-                "All abilities and loot's hitboxes are [VAR0_PERCENT] larger per Gold.",
+            .english = "Critical hits deal [VAR0_PERCENT] extra damage per Gold.#" ++
+                "All abilities and loot's hitboxes are [VAR1_PERCENT] larger per [VAR2] Gold.",
         },
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
 
-        .hbVar0 = royal_staff_aoe_buff,
-        .hbVar1 = royal_staff_crit_dmg_buff,
+        .hbVar0 = royal_staff_crit_dmg_buff,
+        .hbVar1 = royal_staff_aoe_buff,
+        .hbVar2 = royal_staff_gold_per_aoe,
     });
     trig(.onGoldChange, .{.pl_self});
     qpat(.hb_reset_statchange, .{});
 
-    trig(.strCalc2, .{});
+    trig(.strCalc0, .{});
     tset(.uservar_gold, .{"u_gold"});
     tset_uservar2("u_critDmg", "u_gold", .@"*", royal_staff_crit_dmg_buff);
+    qpat(.hb_reset_statchange_norefresh, .{});
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .critDamage,
         .amountStr = "u_critDmg",
     });
+
+    trig(.strCalc2, .{});
+    tset(.uservar_gold, .{"u_gold"});
     ttrg(.hotbarslots_current_players, .{});
     tset_uservar2("u_aoeMult", "u_gold", .@"*", royal_staff_aoe_buff);
+    tset_uservar2("u_aoeMult", "u_aoeMult", .@"/", royal_staff_gold_per_aoe);
     tset_uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat(.hb_mult_hitbox_var, .{
         .hitboxVar = .radius,
