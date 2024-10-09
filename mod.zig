@@ -863,7 +863,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Pidgeon Bow",
         },
         .description = .{
-            .english = "Every [CD], fires [VAR0] projectile at your targeted enemy that deals " ++
+            .english = "Every [CD], fires [VAR0] projectiles at your targeted enemy that deals " ++
                 "[STR] damage.",
         },
 
