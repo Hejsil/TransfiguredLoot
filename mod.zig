@@ -3960,17 +3960,35 @@ fn transfiguredSparkbladeSet() !void {
     tset(.strength_def, .{});
     apat(.crown_of_storms, .{});
 
+    const stormdance_gown_times_dmg_dealt = 40;
     item(.{
         .id = "it_transfigured_stormdance_gown",
         .name = .{
             .english = "Transfigured Stormdance Gown",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Every [VAR0] times you or debuffs you apply deal damage to an enemy, " ++
+                "gain a random buff for [HBSL].",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blueyellow,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbsLength = 5 * std.time.ms_per_s,
+
+        .hbVar0 = stormdance_gown_times_dmg_dealt,
     });
+    trig(.onDamageDone, .{});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    cond(.hb_check_square_var, .{ 0, stormdance_gown_times_dmg_dealt });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_self, .{});
+    tset(.hbs_randombuff, .{});
+    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_blackbolt_ribbon",
