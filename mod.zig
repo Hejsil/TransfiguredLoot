@@ -1574,17 +1574,33 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
+    const garnet_staff_dmg_per_erase = 0.5;
     item(.{
         .id = "it_transfigured_garnet_staff",
         .name = .{
             .english = "Transfigured Garnet Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "When an ability or loot effect erases projectiles in a radius around " ++
+                "you, you deal [VAR0_PERCENT] more damage. Resets at the start of each battle.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = garnet_staff_dmg_per_erase,
     });
+    trig(.onEraseDone, .{});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc0, .{});
+    tset_uservar2("u_mult", Receiver.sqVar0, .@"*", garnet_staff_dmg_per_erase);
+    qpat(.hb_reset_statchange_norefresh, .{});
+    qpat(.hb_add_statchange_norefresh, .{ .stat = .allMult, .amountStr = "u_mult" });
 
     const sapphire_violin_num_buffs = 3;
     item(.{
