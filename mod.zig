@@ -1626,7 +1626,7 @@ fn transfiguredGemSet() !void {
 
         .hbVar0 = sapphire_violin_num_buffs,
         .greySqVar0 = true,
-        .hbFlags = 32, // HTB_FLAG_VAR0REQ - Item will not activate unless sqVar0 is greater than 0,
+        .hbFlags = .{ .var0req = true },
     });
     trig(.onSquarePickup, .{.square_self});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });

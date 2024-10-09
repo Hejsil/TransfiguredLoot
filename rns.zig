@@ -297,16 +297,7 @@ pub const Item = struct {
 
     /// Special flags for the item. This is a binary number, the values in the
     /// "accepted values" can be combined to give a hitbox multiple properties
-    /// 1  HTB_FLAG_STEALTHY     - Using item doesn't break Vanish/Ghost
-    /// 2  HTB_FLAG_UNRESETTABLE - Cooldown can't be reset by other loot effects
-    /// 4  HTB_FLAG_HIDEHBS      - Hides Status Effect description on the item's description
-    /// 8  HTB_FLAG_UNCHARGEABLE - For abilities that can't be charged by other abilities or
-    ///                            loot
-    /// 16 HTB_FLAG_COMBATREQ    - For abilities that can't be used outside combat
-    /// 32 HTB_FLAG_VAR0REQ      - Item will not activate unless sqVar0 is greater than 0
-    ///                            (like for items that break)
-    /// 64 HTB_FLAG_HIDESTR      - Item's strength won't be shown in the window"
-    hbFlags: ?u16 = null,
+    hbFlags: ?HbFlag = null,
 
     /// Variable that can be set to any number; will replace [VAR0] in item descriptions
     hbVar0: ?f64 = null,
@@ -3922,6 +3913,40 @@ comptime {
     std.debug.assert((ShineFlag{ .cross_secondary = true }).toIniInt() == 32);
     std.debug.assert((ShineFlag{ .cross_special = true }).toIniInt() == 64);
     std.debug.assert((ShineFlag{ .cross_defensive = true }).toIniInt() == 128);
+}
+
+/// 1  HTB_FLAG_STEALTHY     - Using item doesn't break Vanish/Ghost
+/// 2  HTB_FLAG_UNRESETTABLE - Cooldown can't be reset by other loot effects
+/// 4  HTB_FLAG_HIDEHBS      - Hides Status Effect description on the item's description
+/// 8  HTB_FLAG_UNCHARGEABLE - For abilities that can't be charged by other abilities or
+///                            loot
+/// 16 HTB_FLAG_COMBATREQ    - For abilities that can't be used outside combat
+/// 32 HTB_FLAG_VAR0REQ      - Item will not activate unless sqVar0 is greater than 0
+///                            (like for items that break)
+/// 64 HTB_FLAG_HIDESTR      - Item's strength won't be shown in the window
+pub const HbFlag = packed struct(u8) {
+    stealthy: bool = false,
+    unresettable: bool = false,
+    hidehbs: bool = false,
+    unchargeable: bool = false,
+    combatreq: bool = false,
+    var0req: bool = false,
+    hidestr: bool = false,
+    __pad: bool = false,
+
+    pub fn toIniInt(flags: HbFlag) u8 {
+        return @bitCast(flags);
+    }
+};
+
+comptime {
+    std.debug.assert((HbFlag{ .stealthy = true }).toIniInt() == 1);
+    std.debug.assert((HbFlag{ .unresettable = true }).toIniInt() == 2);
+    std.debug.assert((HbFlag{ .hidehbs = true }).toIniInt() == 4);
+    std.debug.assert((HbFlag{ .unchargeable = true }).toIniInt() == 8);
+    std.debug.assert((HbFlag{ .combatreq = true }).toIniInt() == 16);
+    std.debug.assert((HbFlag{ .var0req = true }).toIniInt() == 32);
+    std.debug.assert((HbFlag{ .hidestr = true }).toIniInt() == 64);
 }
 
 /// 1     HBS_FLAG_VANISH        - attacks are dodged, char invisible
