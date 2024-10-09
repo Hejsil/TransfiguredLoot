@@ -461,23 +461,7 @@ pub const Item = struct {
 
     /// Special flags that affect your character in various ways.
     /// This is a binary number, so multiple values can be combined to have multiple effects.
-    /// 1     HBS_FLAG_VANISH        - attacks are dodged, char invisible
-    /// 2     HBS_FLAG_SHIELD        - activates onShieled triggers when damaged to see if you should be shielded
-    /// 4     HBS_FLAG_FROZEN        - hotbars do not move (used for Twili's Timestop)
-    /// 8     HBS_FLAG_STABLESPEED   - uneffected by speed changes (Midsummer Dress etc.)
-    /// 16    HBS_FLAG_BIND          - movement tech (like Heavyblade's Special) won't work
-    /// 32    HBS_FLAG_SUPER         - special super rainbow effect
-    /// 64    HBS_FLAG_FADE          - draws faded afterimage as your character moves
-    /// 128   HBS_FLAG_NOLUCKY       - lucky procs don't happen
-    /// 256   HBS_FLAG_STABLEDAMAGE  - no crits and no random damage
-    /// 512   HBS_FLAG_HOLYSHIELD    - used for Matti fight
-    /// 1024  HBS_FLAG_NOINVULN      - Can't become invulnerable (used for Merran fight)
-    /// 2048  HBS_FLAG_STILLDISPLAY  - for ""Tranquility"" status effect, draws the circle showing how far you can move
-    /// 4096  HBS_FLAG_NOCRIT        - Can't hit for critical damage
-    /// 8192  HBS_FLAG_EXTRACRIT     - Crits deal 175% instead of 75% more damage (Royal Crown effect)
-    /// 16384 HBS_FLAG_SUPERLUCKY    - Lucky procs always happen (Rabbitluck effect)
-    /// 32768 HBS_FLAG_EXTRADEADZONE - Adds an extra deadzone to people playing with the mouse ( for Turbulent Winds)"
-    hbsFlag: ?u16 = null,
+    hbsFlag: ?HbsFlag = null,
 
     /// Makes abilities on the mini-hotbar shine, indicating that they're stronger. Used on status
     /// effects like Flash-Int, Flow-Str or Super.
@@ -3938,6 +3922,64 @@ comptime {
     std.debug.assert((ShineFlag{ .cross_secondary = true }).toIniInt() == 32);
     std.debug.assert((ShineFlag{ .cross_special = true }).toIniInt() == 64);
     std.debug.assert((ShineFlag{ .cross_defensive = true }).toIniInt() == 128);
+}
+
+/// 1     HBS_FLAG_VANISH        - attacks are dodged, char invisible
+/// 2     HBS_FLAG_SHIELD        - activates onShieled triggers when damaged to see if you should be shielded
+/// 4     HBS_FLAG_FROZEN        - hotbars do not move (used for Twili's Timestop)
+/// 8     HBS_FLAG_STABLESPEED   - uneffected by speed changes (Midsummer Dress etc.)
+/// 16    HBS_FLAG_BIND          - movement tech (like Heavyblade's Special) won't work
+/// 32    HBS_FLAG_SUPER         - special super rainbow effect
+/// 64    HBS_FLAG_FADE          - draws faded afterimage as your character moves
+/// 128   HBS_FLAG_NOLUCKY       - lucky procs don't happen
+/// 256   HBS_FLAG_STABLEDAMAGE  - no crits and no random damage
+/// 512   HBS_FLAG_HOLYSHIELD    - used for Matti fight
+/// 1024  HBS_FLAG_NOINVULN      - Can't become invulnerable (used for Merran fight)
+/// 2048  HBS_FLAG_STILLDISPLAY  - for ""Tranquility"" status effect, draws the circle showing how far you can move
+/// 4096  HBS_FLAG_NOCRIT        - Can't hit for critical damage
+/// 8192  HBS_FLAG_EXTRACRIT     - Crits deal 175% instead of 75% more damage (Royal Crown effect)
+/// 16384 HBS_FLAG_SUPERLUCKY    - Lucky procs always happen (Rabbitluck effect)
+/// 32768 HBS_FLAG_EXTRADEADZONE - Adds an extra deadzone to people playing with the mouse (for Turbulent Winds)
+pub const HbsFlag = packed struct(u16) {
+    vanish: bool = false,
+    shield: bool = false,
+    frozen: bool = false,
+    stablespeed: bool = false,
+    bind: bool = false,
+    super: bool = false,
+    fade: bool = false,
+    nolucky: bool = false,
+    stabledamage: bool = false,
+    holyshield: bool = false,
+    noinvuln: bool = false,
+    stilldisplay: bool = false,
+    nocrit: bool = false,
+    extracrit: bool = false,
+    superlucky: bool = false,
+    extradeadzone: bool = false,
+
+    pub fn toIniInt(flags: HbsFlag) u16 {
+        return @bitCast(flags);
+    }
+};
+
+comptime {
+    std.debug.assert((HbsFlag{ .vanish = true }).toIniInt() == 1);
+    std.debug.assert((HbsFlag{ .shield = true }).toIniInt() == 2);
+    std.debug.assert((HbsFlag{ .frozen = true }).toIniInt() == 4);
+    std.debug.assert((HbsFlag{ .stablespeed = true }).toIniInt() == 8);
+    std.debug.assert((HbsFlag{ .bind = true }).toIniInt() == 16);
+    std.debug.assert((HbsFlag{ .super = true }).toIniInt() == 32);
+    std.debug.assert((HbsFlag{ .fade = true }).toIniInt() == 64);
+    std.debug.assert((HbsFlag{ .nolucky = true }).toIniInt() == 128);
+    std.debug.assert((HbsFlag{ .stabledamage = true }).toIniInt() == 256);
+    std.debug.assert((HbsFlag{ .holyshield = true }).toIniInt() == 512);
+    std.debug.assert((HbsFlag{ .noinvuln = true }).toIniInt() == 1024);
+    std.debug.assert((HbsFlag{ .stilldisplay = true }).toIniInt() == 2048);
+    std.debug.assert((HbsFlag{ .nocrit = true }).toIniInt() == 4096);
+    std.debug.assert((HbsFlag{ .extracrit = true }).toIniInt() == 8192);
+    std.debug.assert((HbsFlag{ .superlucky = true }).toIniInt() == 16384);
+    std.debug.assert((HbsFlag{ .extradeadzone = true }).toIniInt() == 32768);
 }
 
 const std = @import("std");
