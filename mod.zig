@@ -4492,7 +4492,7 @@ fn transfiguredRuinsSet() !void {
         },
         .description = .{
             .english = "Every [CD], grants you [STONESKIN]. Starts battle off cooldown.#" ++
-                "For every point of damage you've been shielded from you permanently " ++
+                "When [STONESKIN] or [GRANITESKIN] shields you from damage you permanently " ++
                 "deal [VAR0_PERCENT] more damage.",
         },
 
@@ -4526,6 +4526,17 @@ fn transfiguredRuinsSet() !void {
     apat(.apply_hbs, .{});
 
     trig(.hbsShield0, .{.pl_self});
+    ttrg(.player_self, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
+    tset(.uservar_hbscount, .{"u_stoneskins"});
+    tset_uservar1("u_count", "u_stoneskins");
+    // ttrg(.player_self, .{});
+    // ttrg(.hbstatus_target, .{});
+    // ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
+    // tset(.uservar_hbscount, .{"u_graniteskins"});
+    // tset_uservar2("u_count", "u_count", .@"+", "u_graniteskins");
+    cond_eval2("u_count", .@">", 0);
     qpat(.hb_flash_item, .{});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_reset_statchange, .{});
