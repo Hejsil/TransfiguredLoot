@@ -905,17 +905,39 @@ fn transfiguredWindSet() !void {
         .weaponType = .loot,
     });
 
+    const eaglewing_charm_extra_dmg = 5;
     item(.{
         .id = "it_transfigured_eaglewing_charm",
         .name = .{
             .english = "Transfigured Eaglewing Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "All your abilities deal [VAR0] more damage for every defensive used " ++
+                "this battle. Slightly increases movement speed.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
+
+        .charspeed = charspeed.slightly,
+
+        .showSqVar = true,
+        .hbVar0 = eaglewing_charm_extra_dmg,
     });
+    trig(.battleStart0, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    trig(.hotbarUsed, .{.hb_defensive});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc2, .{});
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune_base_has_str, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.loot);
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
+    tset_uservar2("u_str", Receiver.sqVar0, .@"*", eaglewing_charm_extra_dmg);
+    qpat(.hb_add_strength, .{ .amountStr = "u_str" });
 
     const sparrow_feather_dmg = 10;
     const sparrow_feather_dmg_inc = 10;
