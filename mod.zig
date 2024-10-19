@@ -917,17 +917,43 @@ fn transfiguredWindSet() !void {
         .weaponType = .loot,
     });
 
+    const sparrow_feather_dmg = 10;
+    const sparrow_feather_dmg_inc = 10;
     item(.{
         .id = "it_transfigured_sparrow_feather",
         .name = .{
             .english = "Transfigured Sparrow Feather",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Deals [VAR0] damage to all enemies when your Primary.#" ++
+                "When you use your Secondary, this damage is increased by [VAR1] until the end " ++
+                "of the fight.",
         },
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
+
+        .showSqVar = true,
+
+        .hbVar0 = sparrow_feather_dmg,
+        .hbVar1 = sparrow_feather_dmg_inc,
+        .strMult = sparrow_feather_dmg,
+        .delay = 150,
     });
+    trig(.battleStart0, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
+
+    trig(.hotbarUsed, .{.hb_primary});
+    tset_uservar2("u_str", Receiver.sqVar0, .@"*", sparrow_feather_dmg_inc);
+    tset_uservar2("u_str", "u_str", .@"+", sparrow_feather_dmg);
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    tset(.strength, .{"u_str"});
+    apat(.crown_of_storms, .{});
+
+    trig(.hotbarUsed, .{.hb_secondary});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
 
     item(.{
         .id = "it_transfigured_winged_cap",
