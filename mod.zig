@@ -1682,7 +1682,7 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const garnet_staff_dmg_per_erase = 0.5;
+    const garnet_staff_dmg_per_erase = 0.05;
     item(.{
         .id = "it_transfigured_garnet_staff",
         .name = .{
