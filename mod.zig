@@ -27,6 +27,7 @@ pub fn main() !void {
 }
 
 fn transfiguredArcaneSet() !void {
+    const color = rgb(0x53, 0x33, 0xe3);
     rns.start(.{
         .name = "TransfiguredArcaneSet",
         .image_path = "images/arcane.png",
@@ -41,7 +42,7 @@ fn transfiguredArcaneSet() !void {
         .description = .{
             .english = "Every [CD], your Special applies [HEXS].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -74,6 +75,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Your Primary deals [VAR0_PERCENT] more damage if an enemy is cursed " ++
                 "or hexed.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -111,7 +113,7 @@ fn transfiguredArcaneSet() !void {
         .description = .{
             .english = "Every [CD], your Secondary applies [HEXP].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -142,7 +144,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
                 "Cooldown resets every time you inflict a curse or hex.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -191,6 +193,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Your abilities deals [VAR0_PERCENT] less damage. Debuffs you place " ++
                 "deal [VAR1_PERCENT] more damage. Slightly increases movement speed.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -216,7 +219,7 @@ fn transfiguredArcaneSet() !void {
             .english = "When your Special hits a cursed or hexed enemy, deal an additional hit " ++
                 "per curse or hex of [STR] damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -245,7 +248,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Your Defensive consumes all debuffs on damaged enemies, dealing an " ++
                 "additional [STR] damage per debuff consumed.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -276,6 +279,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Your Defensive applies [VAR0] curses to all enemies, but its cooldown is " ++
                 "increased by [VAR1_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -311,6 +315,7 @@ fn transfiguredArcaneSet() !void {
 }
 
 fn transfiguredNightSet() !void {
+    const color = rgb(0x8d, 0x57, 0xd6);
     rns.start(.{
         .name = "TransfiguredNightSet",
         .image_path = "images/night.png",
@@ -327,6 +332,7 @@ fn transfiguredNightSet() !void {
             .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
                 "targed enemy that deals [STR] damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -361,6 +367,7 @@ fn transfiguredNightSet() !void {
                 "[STR] damage on hit.#" ++
                 "These hits always crit.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -391,7 +398,7 @@ fn transfiguredNightSet() !void {
         .description = .{
             .english = "Every [CD], resets Special cooldowns for you and all allies.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -421,7 +428,7 @@ fn transfiguredNightSet() !void {
             .english = "Every [CD], hit a random area of the arena, dealing [STR] damage. If " ++
                 "an enemy gets hit, the cooldown is reset.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -461,6 +468,7 @@ fn transfiguredNightSet() !void {
             .english = "Deals [STR] damage to a random area of the arena when you use your " ++
                 "Special.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -486,6 +494,7 @@ fn transfiguredNightSet() !void {
         .description = .{
             .english = "Using your Defensive decreases all other cooldowns by [VAR0_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -509,6 +518,7 @@ fn transfiguredNightSet() !void {
             .english = "Every [VAR0] times an ability or loot with a cooldown is activated, " ++
                 "gain invulnerability for [VAR1_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -535,7 +545,7 @@ fn transfiguredNightSet() !void {
         .description = .{
             .english = "Every [CD] seconds, [OMEGACHARGE] your Defensive.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -560,6 +570,7 @@ fn transfiguredNightSet() !void {
 }
 
 fn transfiguredTimespaceSet() !void {
+    const color = rgb(0x6e, 0x56, 0xe8);
     rns.start(.{
         .name = "TransfiguredTimespaceSet",
         .image_path = "images/timespace.png",
@@ -574,6 +585,7 @@ fn transfiguredTimespaceSet() !void {
         .description = .{
             .english = "Every [CD], grant [BERSERK] to all allies.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -605,7 +617,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Your GCDs are [VAR0_SECONDS] shorter.#" ++
                 "When you have [HASTE-0] this value is doubled.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -638,7 +650,7 @@ fn transfiguredTimespaceSet() !void {
         .description = .{
             .english = "When you are shielded from damage, gain [HASTE-1].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -660,6 +672,7 @@ fn transfiguredTimespaceSet() !void {
         .description = .{
             .english = "Your abilities have a [LUCK] chance of giving a random haste buff.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -708,6 +721,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Every [CD], switch between gaining [HASTE-2] and [SMITE-3] for " ++
                 "[VAR0_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -753,6 +767,7 @@ fn transfiguredTimespaceSet() !void {
         .description = .{
             .english = "Cooldowns greater than [VAR0_SECONDS] become [VAR0_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -774,6 +789,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "When an ability or loot with a cooldown greater than or equal to " ++
                 "[VAR0_SECONDS] is activated, gain [HASTE-2].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -800,6 +816,7 @@ fn transfiguredTimespaceSet() !void {
         .description = .{
             .english = "Your Secondary have a [LUCK] chance of instantly resetting when used.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
@@ -817,6 +834,7 @@ fn transfiguredTimespaceSet() !void {
 }
 
 fn transfiguredWindSet() !void {
+    const color = rgb(0x56, 0xe6, 0xd1);
     rns.start(.{
         .name = "TransfiguredWindSet",
         .image_path = "images/wind.png",
@@ -832,6 +850,7 @@ fn transfiguredWindSet() !void {
         .description = .{
             .english = "All of your cooldowns are reduced by [VAR0_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -852,6 +871,7 @@ fn transfiguredWindSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -866,7 +886,7 @@ fn transfiguredWindSet() !void {
             .english = "Every [CD], fires [VAR0] projectiles at your targeted enemy that deals " ++
                 "[STR] damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -901,6 +921,7 @@ fn transfiguredWindSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -915,6 +936,7 @@ fn transfiguredWindSet() !void {
             .english = "All your abilities deal [VAR0] more damage for every defensive used " ++
                 "this battle. Slightly increases movement speed.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -951,6 +973,7 @@ fn transfiguredWindSet() !void {
                 "When you use your Secondary, this damage is increased by [VAR1] until the end " ++
                 "of the fight.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -985,6 +1008,7 @@ fn transfiguredWindSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -997,12 +1021,14 @@ fn transfiguredWindSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredBloodwolfSet() !void {
+    const color = rgb(0x25, 0x3d, 0xb0);
     rns.start(.{
         .name = "TransfiguredBloodwolfSet",
         .image_path = "images/bloodwolf.png",
@@ -1017,6 +1043,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1029,6 +1056,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1041,7 +1069,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "When you inflict a bleed, also inflict [SAP].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -1066,6 +1094,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1078,6 +1107,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1091,6 +1121,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "Deal [STR] damage [VAR0_TIMES] to enemies you inflict with bleed.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -1116,6 +1147,7 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1128,12 +1160,14 @@ fn transfiguredBloodwolfSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredAssasinSet() !void {
+    const color = rgb(0x36, 0x50, 0xcf);
     rns.start(.{
         .name = "TransfiguredAssasinSet",
         .image_path = "images/assasin.png",
@@ -1148,6 +1182,7 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1160,6 +1195,7 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1172,6 +1208,7 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1189,6 +1226,7 @@ fn transfiguredAssasinSet() !void {
                 "Starting at [LUCK], each extra blow is [VAR1_PERCENT] less likely to happen " ++
                 "as the previous.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -1224,7 +1262,7 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "Abilities and loot that hit more than twice hits and additional time.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -1245,6 +1283,7 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1257,6 +1296,7 @@ fn transfiguredAssasinSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1270,6 +1310,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Standing still will cause you to [VANISH] for 2s. " ++
                 "Available every [CD]. Slightly increases movement speed.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blue,
@@ -1296,6 +1337,7 @@ fn transfiguredAssasinSet() !void {
 }
 
 fn transfiguredRockdragonSet() !void {
+    const color = rgb(0xb9, 0x3b, 0x4f);
     rns.start(.{
         .name = "TransfiguredRockdragonSet",
         .image_path = "images/rockdragon.png",
@@ -1310,6 +1352,7 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1324,7 +1367,7 @@ fn transfiguredRockdragonSet() !void {
                 "Moving a rabbitleap puts the item on cooldown.#" ++
                 "Also slightly reduces movement speed.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1361,7 +1404,7 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "Your Defensive has a [VAR0_PERCENT] larger radius.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1383,6 +1426,7 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1395,6 +1439,7 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1407,6 +1452,7 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1419,6 +1465,7 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1431,12 +1478,14 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredFlameSet() !void {
+    const color = rgb(0xe2, 0x34, 0x34);
     rns.start(.{
         .name = "TransfiguredFlameSet",
         .image_path = "images/flame.png",
@@ -1451,6 +1500,7 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1463,6 +1513,7 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1475,6 +1526,7 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1488,6 +1540,7 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "Every [VAR0_SECONDS], your next large hit inflict [BURN-3].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1520,6 +1573,7 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1532,6 +1586,7 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1546,6 +1601,7 @@ fn transfiguredFlameSet() !void {
             .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger. If you " ++
                 "use your Defensive, this effect ends until the end of battle.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1586,12 +1642,14 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredGemSet() !void {
+    const color = rgb(0xda, 0x57, 0x8a);
     rns.start(.{
         .name = "TransfiguredGemSet",
         .image_path = "images/gem.png",
@@ -1606,6 +1664,7 @@ fn transfiguredGemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1618,6 +1677,7 @@ fn transfiguredGemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1632,6 +1692,7 @@ fn transfiguredGemSet() !void {
             .english = "When an ability or loot effect erases projectiles in a radius around " ++
                 "you, you deal [VAR0_PERCENT] more damage. Resets at the start of each battle.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1660,7 +1721,7 @@ fn transfiguredGemSet() !void {
             .english = "Every [CD] seconds, grant [VAR0] random buffs to all allies for " ++
                 "[HBSL]. Breaks if you take damage. Starts the battle on cooldown.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1712,6 +1773,7 @@ fn transfiguredGemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1725,7 +1787,7 @@ fn transfiguredGemSet() !void {
         .description = .{
             .english = "You deal [VAR0_PERCENT] more damage. You cannot inflict debuffs.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1746,6 +1808,7 @@ fn transfiguredGemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1761,6 +1824,7 @@ fn transfiguredGemSet() !void {
             .english = "Your Defensive deals [VAR0_PERCENT] more damage. Breaks if you take " ++
                 "damage once.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .red,
@@ -1793,6 +1857,7 @@ fn transfiguredGemSet() !void {
 }
 
 fn transfiguredLightningSet() !void {
+    const color = rgb(0xe8, 0xe1, 0xa7);
     rns.start(.{
         .name = "TransfiguredLightningSet",
         .image_path = "images/lightning.png",
@@ -1807,6 +1872,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1819,6 +1885,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1831,6 +1898,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -1843,6 +1911,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "Deals [STR] damage to all enemies when your abilities deal damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -1873,7 +1942,7 @@ fn transfiguredLightningSet() !void {
             .english = "Damage from abilities is reduced by [VAR0_PERCENT].#" ++
                 "Damage from loot is increased by [VAR1_PERCENT].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -1897,6 +1966,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "Your abilities and loot with a % chance deals [VAR0_PERCENT] more damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -1916,7 +1986,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "Every [CD] have a [LUCK] chance of dealing [STR] damage to all enemies.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -1948,7 +2018,7 @@ fn transfiguredLightningSet() !void {
         .description = .{
             .english = "Do [STR] damage to all enemies when you take damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -1964,6 +2034,7 @@ fn transfiguredLightningSet() !void {
 }
 
 fn transfiguredShrineSet() !void {
+    const color = rgb(0xdb, 0x99, 0x85);
     rns.start(.{
         .name = "TransfiguredShrineSet",
         .image_path = "images/shrine.png",
@@ -1979,7 +2050,7 @@ fn transfiguredShrineSet() !void {
             .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
                 "Cooldown resets every time you gain a buff.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2020,6 +2091,7 @@ fn transfiguredShrineSet() !void {
             .english = "Every [CD], fires a projectile at your targeted enemy that deals " ++
                 "[STR] damage.#Deals [VAR0_PERCENT] more damage for each buff on you.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2061,6 +2133,7 @@ fn transfiguredShrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2077,7 +2150,7 @@ fn transfiguredShrineSet() !void {
             .english = "Every [VAR0_SECONDS], grants [SMITE-0] to all allies for [HBSL].#" ++
                 "Every [VAR1_SECONDS], grants [ELEGY-0] to all allies for [HBSL].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2133,7 +2206,7 @@ fn transfiguredShrineSet() !void {
             .english = "You deal [VAR0_PERCENT] more damage.#" ++
                 "You deal [VAR1_PERCENT] more damage for each buff on you.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2162,7 +2235,7 @@ fn transfiguredShrineSet() !void {
         .description = .{
             .english = "You deal [VAR0_PERCENT] more damage. You cannot gain buffs.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2183,6 +2256,7 @@ fn transfiguredShrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2195,12 +2269,14 @@ fn transfiguredShrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredLuckySet() !void {
+    const color = rgb(0xdb, 0x99, 0x85);
     rns.start(.{
         .name = "TransfiguredLuckySet",
         .image_path = "images/lucky.png",
@@ -2226,6 +2302,7 @@ fn transfiguredLuckySet() !void {
                 "7: You are extremely fast.#" ++
                 "8: You are extremely lucky.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2302,7 +2379,7 @@ fn transfiguredLuckySet() !void {
             .english = "Every [CD] have a [LUCK] chance to slices the air around you dealing " ++
                 "[STR] damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2334,6 +2411,7 @@ fn transfiguredLuckySet() !void {
         .description = .{
             .english = "Your large hits counts as a % chance success.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2353,6 +2431,7 @@ fn transfiguredLuckySet() !void {
             .english = "Critical hits deal [VAR0_PERCENT] extra damage per Gold.#" ++
                 "All abilities and loot's hitboxes are [VAR1_PERCENT] larger per [VAR2] Gold.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2393,7 +2472,7 @@ fn transfiguredLuckySet() !void {
         .description = .{
             .english = "Makes everything very slightly better.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2430,6 +2509,7 @@ fn transfiguredLuckySet() !void {
                 "On tails: Your Secondary, Defensive and Loot deals [VAR0_PERCENT] more " ++
                 "damage. Makes you significantly luckier.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2468,7 +2548,7 @@ fn transfiguredLuckySet() !void {
         .description = .{
             .english = "Your crits have a [LUCK] chance to deal an additional [STR] damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2503,7 +2583,7 @@ fn transfiguredLuckySet() !void {
                 "You have [BERSERK].#" ++
                 "Every [CD], inflict a [HBSL] debuff to all enemies.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
@@ -2549,6 +2629,7 @@ fn transfiguredLuckySet() !void {
 }
 
 fn transfiguredLifeSet() !void {
+    const color = rgb(0x78, 0xf2, 0x66);
     rns.start(.{
         .name = "TransfiguredLifeSet",
         .image_path = "images/life.png",
@@ -2563,6 +2644,7 @@ fn transfiguredLifeSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2577,7 +2659,7 @@ fn transfiguredLifeSet() !void {
                 "fires at your target, dealing [STR] damage each time.#The number of of times " ++
                 "each ally will fire is equal to you HP.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2613,7 +2695,7 @@ fn transfiguredLifeSet() !void {
         .description = .{
             .english = "Every [CD], abilities with multiple uses gains a use.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2636,6 +2718,7 @@ fn transfiguredLifeSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2648,6 +2731,7 @@ fn transfiguredLifeSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2662,7 +2746,7 @@ fn transfiguredLifeSet() !void {
             .english = "Your max HP is increased by [VAR0]. You are easier to hit. Slightly " ++
                 "increases movement speed.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2687,7 +2771,7 @@ fn transfiguredLifeSet() !void {
             .english = "Your max HP is increased by [VAR0]. You deal [VAR1_PERCENT] more " ++
                 "damage per HP. Slightly increases movement speed.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2720,7 +2804,7 @@ fn transfiguredLifeSet() !void {
             .english = "Your max HP is increased by [VAR0]. All abilities and loot's hitboxes " ++
                 "are [VAR1_PERCENT] larger per HP. Slightly increases movement speed.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2745,6 +2829,7 @@ fn transfiguredLifeSet() !void {
 }
 
 fn transfiguredPoisonSet() !void {
+    const color = rgb(0x46, 0xd1, 0x72);
     rns.start(.{
         .name = "TransfiguredPoisonSet",
         .image_path = "images/poison.png",
@@ -2762,7 +2847,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies " ++
                 "[VAR1] [POISON-0].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2822,7 +2907,7 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "Inflicting a [POISON-0] has [LUCK] chance to inflict another [POISON-0].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2861,7 +2946,7 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "When you inflict a poison, also inflict [DECAY-0].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2896,6 +2981,7 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2908,6 +2994,7 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2920,7 +3007,7 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "When a % chance succeeds, apply [HEXP] to all enemies for [HBSL].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -2943,6 +3030,7 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2955,12 +3043,14 @@ fn transfiguredPoisonSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredDepthSet() !void {
+    const color = rgb(0x44, 0xc8, 0x84);
     rns.start(.{
         .name = "TransfiguredDepthSet",
         .image_path = "images/depth.png",
@@ -2975,6 +3065,7 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -2987,6 +3078,7 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3003,6 +3095,7 @@ fn transfiguredDepthSet() !void {
                 "For each enemy hit, your abilities and loot deal [VAR0_PERCENT] more damage " ++
                 "and has a [VAR1_PERCENT] larger hitbox until the end of battle.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -3062,6 +3155,7 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3074,6 +3168,7 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3086,6 +3181,7 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3098,7 +3194,7 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "Every [CD], gaining [STILLNESS] will also grant you [SUPER] for [HBSL].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .green,
@@ -3127,12 +3223,14 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredDarkbiteSet() !void {
+    const color = rgb(0x68, 0x4e, 0xf2);
     rns.start(.{
         .name = "TransfiguredDarkbiteSet",
         .image_path = "images/darkbite.png",
@@ -3147,6 +3245,7 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3159,6 +3258,7 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3171,6 +3271,7 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3183,6 +3284,7 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3197,6 +3299,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Whichever ability has the lowest base damage value deals " ++
                 "[VAR0_PERCENT] more damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purpleblue,
@@ -3253,6 +3356,7 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3265,6 +3369,7 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3277,12 +3382,14 @@ fn transfiguredDarkbiteSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredTimegemSet() !void {
+    const color = rgb(0x50, 0x3a, 0xe8);
     rns.start(.{
         .name = "TransfiguredTimegemSet",
         .image_path = "images/timegem.png",
@@ -3297,6 +3404,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3309,6 +3417,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3321,6 +3430,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3333,6 +3443,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3345,6 +3456,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3357,6 +3469,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3369,6 +3482,7 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3381,12 +3495,15 @@ fn transfiguredTimegemSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredYoukaiSet() !void {
+    const color_dark = rgb(0x5e, 0x55, 0x5e);
+    const color_light = rgb(0xf2, 0xed, 0xd6);
     rns.start(.{
         .name = "TransfiguredYoukaiSet",
         .image_path = "images/youkai.png",
@@ -3403,6 +3520,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "All damage you deal is increased by [VAR0_PERCENT]. You cannot use " ++
                 "your Primary and Special.",
         },
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purpleyellow,
@@ -3425,6 +3543,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Your abilities base damage value becomes the average base damage " ++
                 "value of all your abilities.",
         },
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purpleyellow,
@@ -3453,6 +3572,7 @@ fn transfiguredYoukaiSet() !void {
                 "When you use your Special, abilities or loot with a cooldown goes on a " ++
                 "[VAR1_SECONDS] cooldown.",
         },
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
 
@@ -3473,6 +3593,7 @@ fn transfiguredYoukaiSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3485,6 +3606,7 @@ fn transfiguredYoukaiSet() !void {
         .description = .{
             .english = "When a % chance succeeds, your Special resets.",
         },
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purpleyellow,
@@ -3503,7 +3625,7 @@ fn transfiguredYoukaiSet() !void {
         .description = .{
             .english = "Your abilities deal 7 damage. You have [LUCKY].",
         },
-
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purpleyellow,
@@ -3540,6 +3662,7 @@ fn transfiguredYoukaiSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3552,12 +3675,14 @@ fn transfiguredYoukaiSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredHauntedSet() !void {
+    const color = rgb(0x7d, 0xe2, 0xc8);
     rns.start(.{
         .name = "TransfiguredHauntedSet",
         .image_path = "images/haunted.png",
@@ -3572,6 +3697,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3584,6 +3710,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3597,7 +3724,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "When you inflict a burn, also inflict [GHOSTFLAME-0].",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purplegreen,
@@ -3633,6 +3760,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3645,6 +3773,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3657,6 +3786,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3669,6 +3799,7 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3681,12 +3812,14 @@ fn transfiguredHauntedSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredGladiatorSet() !void {
+    const color = rgb(0x86, 0x7b, 0x7a);
     rns.start(.{
         .name = "TransfiguredGladiatorSet",
         .image_path = "images/gladiator.png",
@@ -3701,6 +3834,7 @@ fn transfiguredGladiatorSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3713,6 +3847,7 @@ fn transfiguredGladiatorSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3727,6 +3862,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Your Special no longer has a cooldown, but deals [VAR0_PERCENT] less " ++
                 "damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluered,
@@ -3746,6 +3882,7 @@ fn transfiguredGladiatorSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3758,6 +3895,7 @@ fn transfiguredGladiatorSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3772,6 +3910,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Abilities and loot that doesn't have cooldowns deal [VAR0_PERCENT] " ++
                 "more damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluered,
@@ -3794,6 +3933,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Abilities different from the one you used last deal [VAR0_PERCENT] " ++
                 "more damage.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluered,
@@ -3847,12 +3987,14 @@ fn transfiguredGladiatorSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredSparkbladeSet() !void {
+    const color = rgb(0x37, 0x5b, 0xe8);
     rns.start(.{
         .name = "TransfiguredSparkbladeSet",
         .image_path = "images/sparkblade.png",
@@ -3867,6 +4009,7 @@ fn transfiguredSparkbladeSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3879,6 +4022,7 @@ fn transfiguredSparkbladeSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -3891,6 +4035,7 @@ fn transfiguredSparkbladeSet() !void {
         .description = .{
             .english = "Every [CD], apply [SPARK-5] to all enemies.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blueyellow,
@@ -3926,6 +4071,7 @@ fn transfiguredSparkbladeSet() !void {
                 "Every [VAR0_TIMES] you inflict spark, deal [STR] damage to all enemies and " ++
                 "gain invulnerability for [VAR1_SECONDS].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blueyellow,
@@ -3970,6 +4116,7 @@ fn transfiguredSparkbladeSet() !void {
         .description = .{
             .english = "At the start of each fight, inflict all enemies with [SPARK-6]",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blueyellow,
@@ -3992,7 +4139,7 @@ fn transfiguredSparkbladeSet() !void {
         .description = .{
             .english = "When you inflict spark, deal [STR] damage to all enemies.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blueyellow,
@@ -4018,6 +4165,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Every [VAR0] times you or debuffs you apply deal damage to an enemy, " ++
                 "gain a random buff for [HBSL].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .blueyellow,
@@ -4046,12 +4194,14 @@ fn transfiguredSparkbladeSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredSwiftflightSet() !void {
+    const color = rgb(0x3d, 0xe6, 0xe8);
     rns.start(.{
         .name = "TransfiguredSwiftflightSet",
         .image_path = "images/swiftflight.png",
@@ -4066,6 +4216,7 @@ fn transfiguredSwiftflightSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4078,6 +4229,7 @@ fn transfiguredSwiftflightSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4091,6 +4243,7 @@ fn transfiguredSwiftflightSet() !void {
         .description = .{
             .english = "Gain a random buff every time you move [VAR0] rabbitleaps.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluegreen,
@@ -4118,6 +4271,7 @@ fn transfiguredSwiftflightSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4132,7 +4286,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Every [CD], fires a projectile at your targeted enemy that deals " ++
                 "[VAR0] damage per rabbitleap moved since last fired.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluegreen,
@@ -4177,7 +4331,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Decreases all cooldowns by [VAR0_SECONDS] every time you move [VAR1] " ++
                 "rabbitleaps.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluegreen,
@@ -4209,7 +4363,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "You deal [VAR0_PERCENT] more damage per [VAR1] rabbitleaps moved since " ++
                 "the start of each battle.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluegreen,
@@ -4244,6 +4398,7 @@ fn transfiguredSwiftflightSet() !void {
         .description = .{
             .english = "You deal [VAR0_PERCENT] more damage while moving.",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .bluegreen,
@@ -4276,6 +4431,7 @@ fn transfiguredSwiftflightSet() !void {
 }
 
 fn transfiguredSacredflameSet() !void {
+    const color = rgb(0xe8, 0x8a, 0x72);
     rns.start(.{
         .name = "TransfiguredSacredflameSet",
         .image_path = "images/sacredflame.png",
@@ -4283,7 +4439,6 @@ fn transfiguredSacredflameSet() !void {
     defer rns.end();
 
     const flame_to_flow_mult = 0.1;
-
     for ([_]rns.Item{
         .{
             .id = "it_transfigured_sandpriestess_spear",
@@ -4320,6 +4475,7 @@ fn transfiguredSacredflameSet() !void {
         },
     }) |_item| {
         var i = _item;
+        i.color = color;
         i.type = .loot;
         i.weaponType = .loot;
         i.treasureType = .redyellow;
@@ -4351,6 +4507,7 @@ fn transfiguredSacredflameSet() !void {
         .description = .{
             .english = "Whenever you gain invulnerability, gain [FLASH-INT].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redyellow,
@@ -4372,6 +4529,7 @@ fn transfiguredSacredflameSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4386,6 +4544,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Every [VAR0_TIMES] you use an ability, gain [FLASH-STR], [FLASH-DEX] " ++
                 "and [FLASH-INT].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redyellow,
@@ -4418,7 +4577,7 @@ fn transfiguredSacredflameSet() !void {
         .description = .{
             .english = "Every [CD], deal [STR] damage to all enemies.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redyellow,
@@ -4451,6 +4610,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Every time your allies gain a buff, you gain a buff of the same type " ++
                 "for [HBSL].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redyellow,
@@ -4469,6 +4629,7 @@ fn transfiguredSacredflameSet() !void {
 }
 
 fn transfiguredRuinsSet() !void {
+    const color = rgb(0x65, 0xe8, 0xa2);
     rns.start(.{
         .name = "TransfiguredRuinsSet",
         .image_path = "images/ruins.png",
@@ -4483,6 +4644,7 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4495,6 +4657,7 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4507,6 +4670,7 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4519,6 +4683,7 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4532,7 +4697,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Every [CD], grants you [STONESKIN].#" ++
                 "When you are shielded from damage, slice the air around you dealing [STR] damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redgreen,
@@ -4577,7 +4742,7 @@ fn transfiguredRuinsSet() !void {
                 "When [STONESKIN] or [GRANITESKIN] shields you from damage you permanently " ++
                 "deal [VAR0_PERCENT] more damage.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .redgreen,
@@ -4636,6 +4801,7 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4648,12 +4814,14 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
 }
 
 fn transfiguredLakeshrineSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c);
     rns.start(.{
         .name = "TransfiguredLakeshrineSet",
         .image_path = "images/lakeshrine.png",
@@ -4668,6 +4836,7 @@ fn transfiguredLakeshrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4680,6 +4849,7 @@ fn transfiguredLakeshrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4692,6 +4862,7 @@ fn transfiguredLakeshrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4705,6 +4876,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Every time you gain a buff, allies gain a buff of the same type for " ++
                 "[HBSL].",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellowgreen,
@@ -4728,6 +4900,7 @@ fn transfiguredLakeshrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4740,6 +4913,7 @@ fn transfiguredLakeshrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4752,6 +4926,7 @@ fn transfiguredLakeshrineSet() !void {
         .description = .{
             .english = "TODO",
         },
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
@@ -4765,7 +4940,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] " ++
                 "seconds.",
         },
-
+        .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellowgreen,
