@@ -961,8 +961,8 @@ fn transfiguredWindSet() !void {
     tset_uservar2("u_str", Receiver.sqVar0, .@"*", eaglewing_charm_extra_dmg);
     qpat(.hb_add_strength, .{ .amountStr = "u_str" });
 
-    const sparrow_feather_dmg = 10;
-    const sparrow_feather_dmg_inc = 10;
+    const sparrow_feather_dmg = 5;
+    const sparrow_feather_dmg_inc = 5;
     item(.{
         .id = "it_transfigured_sparrow_feather",
         .name = .{
