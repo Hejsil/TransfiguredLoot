@@ -869,7 +869,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Windbite Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -919,7 +919,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Shinsoku Katana",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1006,7 +1006,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Winged Cap",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1019,7 +1019,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Thief's Coat",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1041,7 +1041,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Vampiric Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1054,7 +1054,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloody Bandage",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1092,7 +1092,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloodhound Greatsword",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1105,7 +1105,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Reaper Cloak",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1145,7 +1145,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Wolf Hood",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1158,7 +1158,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Blood Vial",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1180,7 +1180,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Black Wakizashi",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1193,7 +1193,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Throwing Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1206,7 +1206,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Assassin's Knife",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1281,7 +1281,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Ninja Robe",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1294,7 +1294,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Kunoichi Hood",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1350,7 +1350,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Dragonhead Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1424,7 +1424,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Stonebreaker Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1437,7 +1437,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Tough Gauntlet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1450,7 +1450,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Rockdragon Mail",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1463,7 +1463,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Obsidian Hairpin",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1476,7 +1476,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Iron Greaves",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1498,7 +1498,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Volcano Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1511,7 +1511,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Reddragon Blade",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1524,7 +1524,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Flame Bow",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1571,7 +1571,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Phoenix Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1584,7 +1584,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Firescale Corset",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1640,7 +1640,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Flamewalker Boots",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1662,7 +1662,7 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Diamond Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1675,7 +1675,7 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Peridot Rapier",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1771,7 +1771,7 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Emerald Chestplate",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1806,7 +1806,7 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Topaz Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1870,7 +1870,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Brightstorm Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1883,7 +1883,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Bolt Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -1896,7 +1896,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Lightning Bow",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2131,7 +2131,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Purification Rod",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2254,7 +2254,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Divine Mirror",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2267,7 +2267,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Golden Chime",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2642,7 +2642,7 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Butterfly Ocarina",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2716,7 +2716,7 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Floral Bow",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2729,7 +2729,7 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Blue Rose",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2979,7 +2979,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Spiderbite Bow",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -2992,7 +2992,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Compound Gloves",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3028,7 +3028,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Venom Hood",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3041,7 +3041,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Chemist's Coat",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3063,7 +3063,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Seashell Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3076,7 +3076,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Necronomicon",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3153,7 +3153,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Occult Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3166,7 +3166,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Mermaid Scalemail",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3179,7 +3179,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Hydrous Blob",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3221,7 +3221,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Lost Pendant",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3243,7 +3243,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Sawtooth Cleaver",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3256,7 +3256,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Raven's Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3269,7 +3269,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Killing Note",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3282,7 +3282,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Blacksteel Buckler",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3354,7 +3354,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Sniper's Eyeglasses",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3367,7 +3367,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Darkmage Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3380,7 +3380,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Firststrike Bracelet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3402,7 +3402,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Obsidian Rod",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3415,7 +3415,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Darkglass Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3428,7 +3428,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Timespace Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3441,7 +3441,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Quartz Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3454,7 +3454,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Pocketwatch",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3467,7 +3467,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Nova Crown",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3480,7 +3480,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Blackhole Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3493,7 +3493,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Twinstar Earrings",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3591,7 +3591,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Kappa Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_dark,
         .type = .loot,
@@ -3660,7 +3660,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Vega Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_light,
         .type = .loot,
@@ -3673,7 +3673,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Altair Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_light,
         .type = .loot,
@@ -3695,7 +3695,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Ghost Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3708,7 +3708,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Phantom Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3758,7 +3758,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Smoke Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3771,7 +3771,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Haunted Gloves",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3784,7 +3784,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Old Bonnet",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3797,7 +3797,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Maid Outfit",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3810,7 +3810,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Calling Bell",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3832,7 +3832,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Grandmaster Spear",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3845,7 +3845,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Teacher Knife",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3880,7 +3880,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Spiked Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3893,7 +3893,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Battlemaiden Armor",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -3985,7 +3985,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Lion Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4007,7 +4007,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Bluebolt Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4020,7 +4020,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Lapis Sword",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4192,7 +4192,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Blackbolt Ribbon",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4214,7 +4214,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Crane Katana",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4227,7 +4227,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Falconfeather Dagger",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4269,7 +4269,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Cloud Guard",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4527,7 +4527,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Marble Clasp",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4642,7 +4642,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Giant Stone Club",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4655,7 +4655,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Ruins Sword",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4668,7 +4668,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Mountain Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4681,7 +4681,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Boulder Shield",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4799,7 +4799,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Sacredstone Charm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4812,7 +4812,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Clay Rabbit",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4834,7 +4834,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Waterfall Polearm",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4847,7 +4847,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Vorpal Dao",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4860,7 +4860,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Jade Staff",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4898,7 +4898,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Butterfly Hairpin",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4911,7 +4911,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Watermage Pendant",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
@@ -4924,7 +4924,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Raindrop Earrings",
         },
         .description = .{
-            .english = "TODO",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
