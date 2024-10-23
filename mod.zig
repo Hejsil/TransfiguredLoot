@@ -4772,17 +4772,17 @@ fn transfiguredRuinsSet() !void {
     tset(.hbs_def, .{});
     apat(.apply_hbs, .{});
 
-    trig(.hbsShield0, .{.pl_self});
+    trig(.hbsShield2, .{.pl_self});
     ttrg(.player_self, .{});
     ttrg(.hbstatus_target, .{});
     ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
     tset(.uservar_hbscount, .{"u_stoneskins"});
     tset_uservar1("u_count", "u_stoneskins");
-    // ttrg(.player_self, .{});
-    // ttrg(.hbstatus_target, .{});
-    // ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
-    // tset(.uservar_hbscount, .{"u_graniteskins"});
-    // tset_uservar2("u_count", "u_count", .@"+", "u_graniteskins");
+    ttrg(.player_self, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
+    tset(.uservar_hbscount, .{"u_graniteskins"});
+    tset_uservar2("u_count", "u_count", .@"+", "u_graniteskins");
     cond_eval2("u_count", .@">", 0);
     qpat(.hb_flash_item, .{});
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });

@@ -2963,6 +2963,7 @@ pub const Hbs = enum(u8) {
     haste_2 = 10,
 
     stoneskin = 11,
+    graniteskin = 12,
     lucky = 13,
     super = 14,
     flutterstep = 15,
@@ -3199,6 +3200,7 @@ pub const Hbs = enum(u8) {
             .flutterstep => "hbs_flutterstep",
             .lucky => "hbs_lucky",
             .stoneskin => "hbs_stoneskin",
+            .graniteskin => "hbs_graniteskin",
             .super => "hbs_super",
             .blackstrike => "hbs_blackstrike",
             .repeat => "hbs_repeat",
