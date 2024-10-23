@@ -25,14 +25,12 @@ pub fn start(m: Mod) void {
 fn start2(m: Mod) !void {
     std.debug.assert(!generating_mod);
 
-    try sheetlist.writer().print(
+    try sheetlist.writer().writeAll(
         \\Sheet Type,filename
-        \\NameSheet,Mods/{[name]s}/Items_Names
-        \\DescriptionSheet,Mods/{[name]s}/items_Descriptions
-        \\ItemSheet,Mods/{[name]s}/Items
+        \\NameSheet,Items_Names
+        \\DescriptionSheet,Items_Descriptions
+        \\ItemSheet,Items
         \\
-    ,
-        .{ .name = m.name },
     );
 
     try item_names.writer().writeAll(
