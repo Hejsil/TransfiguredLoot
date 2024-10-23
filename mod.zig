@@ -29,7 +29,7 @@ pub fn main() !void {
 fn transfiguredArcaneSet() !void {
     const color = rgb(0x53, 0x33, 0xe3);
     rns.start(.{
-        .name = "TransfiguredArcaneSet",
+        .name = "Transfigured Arcane Set",
         .image_path = "images/arcane.png",
     });
     defer rns.end();
@@ -317,7 +317,7 @@ fn transfiguredArcaneSet() !void {
 fn transfiguredNightSet() !void {
     const color = rgb(0x8d, 0x57, 0xd6);
     rns.start(.{
-        .name = "TransfiguredNightSet",
+        .name = "Transfigured Night Set",
         .image_path = "images/night.png",
     });
     defer rns.end();
@@ -572,7 +572,7 @@ fn transfiguredNightSet() !void {
 fn transfiguredTimespaceSet() !void {
     const color = rgb(0x6e, 0x56, 0xe8);
     rns.start(.{
-        .name = "TransfiguredTimespaceSet",
+        .name = "Transfigured Timespace Set",
         .image_path = "images/timespace.png",
     });
     defer rns.end();
@@ -836,7 +836,7 @@ fn transfiguredTimespaceSet() !void {
 fn transfiguredWindSet() !void {
     const color = rgb(0x56, 0xe6, 0xd1);
     rns.start(.{
-        .name = "TransfiguredWindSet",
+        .name = "Transfigured Wind Set",
         .image_path = "images/wind.png",
     });
     defer rns.end();
@@ -1030,7 +1030,7 @@ fn transfiguredWindSet() !void {
 fn transfiguredBloodwolfSet() !void {
     const color = rgb(0x25, 0x3d, 0xb0);
     rns.start(.{
-        .name = "TransfiguredBloodwolfSet",
+        .name = "Transfigured Bloodwolf Set",
         .image_path = "images/bloodwolf.png",
     });
     defer rns.end();
@@ -1169,7 +1169,7 @@ fn transfiguredBloodwolfSet() !void {
 fn transfiguredAssasinSet() !void {
     const color = rgb(0x36, 0x50, 0xcf);
     rns.start(.{
-        .name = "TransfiguredAssasinSet",
+        .name = "Transfigured Assasin Set",
         .image_path = "images/assasin.png",
     });
     defer rns.end();
@@ -1339,7 +1339,7 @@ fn transfiguredAssasinSet() !void {
 fn transfiguredRockdragonSet() !void {
     const color = rgb(0xb9, 0x3b, 0x4f);
     rns.start(.{
-        .name = "TransfiguredRockdragonSet",
+        .name = "Transfigured Rockdragon Set",
         .image_path = "images/rockdragon.png",
     });
     defer rns.end();
@@ -1487,7 +1487,7 @@ fn transfiguredRockdragonSet() !void {
 fn transfiguredFlameSet() !void {
     const color = rgb(0xe2, 0x34, 0x34);
     rns.start(.{
-        .name = "TransfiguredFlameSet",
+        .name = "Transfigured Flame Set",
         .image_path = "images/flame.png",
     });
     defer rns.end();
@@ -1651,7 +1651,7 @@ fn transfiguredFlameSet() !void {
 fn transfiguredGemSet() !void {
     const color = rgb(0xda, 0x57, 0x8a);
     rns.start(.{
-        .name = "TransfiguredGemSet",
+        .name = "Transfigured Gem Set",
         .image_path = "images/gem.png",
     });
     defer rns.end();
@@ -1859,7 +1859,7 @@ fn transfiguredGemSet() !void {
 fn transfiguredLightningSet() !void {
     const color = rgb(0xe8, 0xe1, 0xa7);
     rns.start(.{
-        .name = "TransfiguredLightningSet",
+        .name = "Transfigured Lightning Set",
         .image_path = "images/lightning.png",
     });
     defer rns.end();
@@ -2036,7 +2036,7 @@ fn transfiguredLightningSet() !void {
 fn transfiguredShrineSet() !void {
     const color = rgb(0xdb, 0x99, 0x85);
     rns.start(.{
-        .name = "TransfiguredShrineSet",
+        .name = "Transfigured Shrine Set",
         .image_path = "images/shrine.png",
     });
     defer rns.end();
@@ -2278,7 +2278,7 @@ fn transfiguredShrineSet() !void {
 fn transfiguredLuckySet() !void {
     const color = rgb(0xdb, 0x99, 0x85);
     rns.start(.{
-        .name = "TransfiguredLuckySet",
+        .name = "Transfigured Lucky Set",
         .image_path = "images/lucky.png",
     });
     defer rns.end();
@@ -2631,7 +2631,7 @@ fn transfiguredLuckySet() !void {
 fn transfiguredLifeSet() !void {
     const color = rgb(0x78, 0xf2, 0x66);
     rns.start(.{
-        .name = "TransfiguredLifeSet",
+        .name = "Transfigured Life Set",
         .image_path = "images/life.png",
     });
     defer rns.end();
@@ -2831,7 +2831,7 @@ fn transfiguredLifeSet() !void {
 fn transfiguredPoisonSet() !void {
     const color = rgb(0x46, 0xd1, 0x72);
     rns.start(.{
-        .name = "TransfiguredPoisonSet",
+        .name = "Transfigured Poison Set",
         .image_path = "images/poison.png",
     });
     defer rns.end();
@@ -3052,7 +3052,7 @@ fn transfiguredPoisonSet() !void {
 fn transfiguredDepthSet() !void {
     const color = rgb(0x44, 0xc8, 0x84);
     rns.start(.{
-        .name = "TransfiguredDepthSet",
+        .name = "Transfigured Depth Set",
         .image_path = "images/depth.png",
     });
     defer rns.end();
@@ -3232,7 +3232,7 @@ fn transfiguredDepthSet() !void {
 fn transfiguredDarkbiteSet() !void {
     const color = rgb(0x68, 0x4e, 0xf2);
     rns.start(.{
-        .name = "TransfiguredDarkbiteSet",
+        .name = "Transfigured Darkbite Set",
         .image_path = "images/darkbite.png",
     });
     defer rns.end();
@@ -3391,7 +3391,7 @@ fn transfiguredDarkbiteSet() !void {
 fn transfiguredTimegemSet() !void {
     const color = rgb(0x50, 0x3a, 0xe8);
     rns.start(.{
-        .name = "TransfiguredTimegemSet",
+        .name = "Transfigured Timegem Set",
         .image_path = "images/timegem.png",
     });
     defer rns.end();
@@ -3505,7 +3505,7 @@ fn transfiguredYoukaiSet() !void {
     const color_dark = rgb(0x5e, 0x55, 0x5e);
     const color_light = rgb(0xf2, 0xed, 0xd6);
     rns.start(.{
-        .name = "TransfiguredYoukaiSet",
+        .name = "Transfigured Youkai Set",
         .image_path = "images/youkai.png",
     });
     defer rns.end();
@@ -3684,7 +3684,7 @@ fn transfiguredYoukaiSet() !void {
 fn transfiguredHauntedSet() !void {
     const color = rgb(0x7d, 0xe2, 0xc8);
     rns.start(.{
-        .name = "TransfiguredHauntedSet",
+        .name = "Transfigured Haunted Set",
         .image_path = "images/haunted.png",
     });
     defer rns.end();
@@ -3821,7 +3821,7 @@ fn transfiguredHauntedSet() !void {
 fn transfiguredGladiatorSet() !void {
     const color = rgb(0x86, 0x7b, 0x7a);
     rns.start(.{
-        .name = "TransfiguredGladiatorSet",
+        .name = "Transfigured Gladiator Set",
         .image_path = "images/gladiator.png",
     });
     defer rns.end();
@@ -3996,7 +3996,7 @@ fn transfiguredGladiatorSet() !void {
 fn transfiguredSparkbladeSet() !void {
     const color = rgb(0x37, 0x5b, 0xe8);
     rns.start(.{
-        .name = "TransfiguredSparkbladeSet",
+        .name = "Transfigured Sparkblade Set",
         .image_path = "images/sparkblade.png",
     });
     defer rns.end();
@@ -4203,7 +4203,7 @@ fn transfiguredSparkbladeSet() !void {
 fn transfiguredSwiftflightSet() !void {
     const color = rgb(0x3d, 0xe6, 0xe8);
     rns.start(.{
-        .name = "TransfiguredSwiftflightSet",
+        .name = "Transfigured Swiftflight Set",
         .image_path = "images/swiftflight.png",
     });
     defer rns.end();
@@ -4433,7 +4433,7 @@ fn transfiguredSwiftflightSet() !void {
 fn transfiguredSacredflameSet() !void {
     const color = rgb(0xe8, 0x8a, 0x72);
     rns.start(.{
-        .name = "TransfiguredSacredflameSet",
+        .name = "Transfigured Sacredflame Set",
         .image_path = "images/sacredflame.png",
     });
     defer rns.end();
@@ -4631,7 +4631,7 @@ fn transfiguredSacredflameSet() !void {
 fn transfiguredRuinsSet() !void {
     const color = rgb(0x65, 0xe8, 0xa2);
     rns.start(.{
-        .name = "TransfiguredRuinsSet",
+        .name = "Transfigured Ruins Set",
         .image_path = "images/ruins.png",
     });
     defer rns.end();
@@ -4823,7 +4823,7 @@ fn transfiguredRuinsSet() !void {
 fn transfiguredLakeshrineSet() !void {
     const color = rgb(0x45, 0xcd, 0x9c);
     rns.start(.{
-        .name = "TransfiguredLakeshrineSet",
+        .name = "Transfigured Lakeshrine Set",
         .image_path = "images/lakeshrine.png",
     });
     defer rns.end();
