@@ -1639,8 +1639,6 @@ pub const QuickPatternArgs = struct {
     multStr: ?[]const u8 = null,
     amount: ?f64 = null,
     amountStr: ?[]const u8 = null,
-    amountR: ?Receiver = null,
-    amountS: ?Source = null,
 
     pub fn notNullFieldCount(args: QuickPatternArgs) usize {
         var res: usize = 0;
@@ -1683,10 +1681,6 @@ fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
         try writer.print(",amount,{d}", .{amount});
     if (args.amountStr) |amount|
         try writer.print(",amount,{s}", .{amount});
-    if (args.amountR) |amount|
-        try writer.print(",amount,{s}", .{amount.toCsvString()});
-    if (args.amountS) |amount|
-        try writer.print(",amount,{s}", .{amount.toCsvString()});
 
     try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
     try writer.writeAll("\n");

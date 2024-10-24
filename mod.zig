@@ -2644,7 +2644,7 @@ fn transfiguredLifeSet() !void {
     trig(.strCalc2, .{});
     qpat(.hb_add_hitbox_var, .{
         .hitboxVar = .number,
-        .amountR = .hp,
+        .amountStr = Receiver.hp.toCsvString(),
     });
 
     item(.{
@@ -3291,18 +3291,34 @@ fn transfiguredTimegemSet() !void {
     });
     defer rns.end();
 
+    const obsidian_rod_str = 75;
     item(.{
         .id = "it_transfigured_obsidian_rod",
         .name = .{
             .english = "Transfigured Obsidian Rod",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your Special's strength becomes the total GCD of all your abilities, " ++
+                "in seconds, multiplied by [VAR0], divided by the times it hits your target.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purplered,
+
+        .hbVar0 = obsidian_rod_str,
     });
+    trig(.strCalc1b, .{});
+    for (WeaponType.abilities_with_gcd) |weapon_type| {
+        ttrg(.hotbarslots_self_weapontype, .{weapon_type});
+        tset_uservar2("u_gcd", "u_gcd", .@"+", TargetHotbar0.gcd);
+    }
+
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
+    tset_uservar2("u_gcd", "u_gcd", .@"/", std.time.ms_per_s);
+    tset_uservar2("u_str", "u_gcd", .@"*", obsidian_rod_str);
+    tset_uservar2("u_str", "u_str", .@"/", TargetHotbar0.number);
+    qpat(.hb_set_strength, .{ .amountStr = "u_str" });
 
     item(.{
         .id = "it_transfigured_darkglass_spear",
