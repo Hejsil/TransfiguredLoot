@@ -3700,12 +3700,31 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Calling Bell",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Afflicts all enemies with [GHOSTFLAME-4] when an ability or " ++
+                "loot with a cooldown is activated.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purplegreen,
+
+        .hbsStrMult = 200,
+        .hbsType = .ghostflame_4,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    trig(.hotbarUsed, .{.hb_selfcast});
+    cond_eval2(Source.cooldown, .@">", 0);
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    ttrg(.players_opponent, .{});
+    tset(.hbs_def, .{});
+    apat(.poisonfrog_charm, .{});
+
+    trig(.hbsCreated, .{.hbs_thishbcast});
+    // To avoid flashing for every debuff applied, instead keep track of if the loot has been
+    // used. If so, flash once, and set the used flag to 0, so we don't flash again.
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 }
 
 fn transfiguredGladiatorSet() !void {
