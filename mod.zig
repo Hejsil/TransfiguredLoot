@@ -1092,8 +1092,8 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloodflower Brooch",
         },
         .description = .{
-            .english = "Every [CD], apply [BLEED-1] to all enemies.#" ++
-                "Deal [STR] damage [VAR0_TIMES] to enemies you inflict with bleed.",
+            .english = "Every [CD], apply [BLEED-1] to all enemies. Deal [STR] damage " ++
+                "[VAR0_TIMES] to enemies you inflict with bleed.",
         },
         .color = color,
         .type = .loot,
@@ -1103,6 +1103,7 @@ fn transfiguredBloodwolfSet() !void {
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
         .cooldown = 20 * std.time.ms_per_s,
+        .hbInput = .auto,
 
         .hbsStrMult = 20,
         .hbsType = .bleed_1,
