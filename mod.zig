@@ -238,35 +238,18 @@ fn transfiguredArcaneSet() !void {
     tset(.strength_def, .{});
     apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
-    const redblack_ribbon_dmg = 250;
     item(.{
         .id = "it_transfigured_redblack_ribbon",
         .name = .{
             .english = "Transfigured Redblack Ribbon",
         },
         .description = .{
-            .english = "Your Defensive consumes all debuffs on damaged enemies, dealing an " ++
-                "additional [STR] damage per debuff consumed.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purple,
-
-        .strMult = redblack_ribbon_dmg,
-        .delay = 200,
     });
-    trig(.onDamageDone, .{.dmg_self_defensive});
-    ttrg(.hbstatus_target, .{});
-    tset(.uservar_hbscount, .{"u_hbscount"});
-    cond(.unequal, .{ "u_hbscount", 0 });
-    qpat(.hb_flash_item, .{});
-    qpat(.hbs_destroy, .{});
-    tset_uservar2("u_str", "u_hbscount", .@"*", redblack_ribbon_dmg);
-    tset(.strength_def, .{});
-    tset(.strength, .{"u_str"});
-    ttrg(.player_damaged, .{});
-    apat(.curse_talon, .{});
 
     const opal_necklace_extra_cd = 15 * std.time.ms_per_s;
     const opal_necklace_num_curses = 5;
@@ -648,21 +631,12 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Chrome Shield",
         },
         .description = .{
-            .english = "When you are shielded from damage, gain [HASTE-1].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purple,
-
-        .hbsType = Hbs.haste_1,
-        .hbsLength = 60 * std.time.ms_per_s,
     });
-    trig(.hbsShield0, .{.pl_self});
-    qpat(.hb_flash_item, .{});
-    ttrg(.player_self, .{});
-    tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_clockwork_tome",
@@ -814,23 +788,12 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Gemini Necklace",
         },
         .description = .{
-            .english = "Your Secondary have a [LUCK] chance of instantly resetting when used.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purple,
-
-        .procChance = 0.5,
     });
-    trig(.hotbarUsedProc, .{.hb_secondary});
-    cond(.random_def, .{});
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
-    cond(.hb_check_resettable0, .{});
-    qpat(.hb_reset_cooldown, .{});
-    ttrg(.hotbarslot_self, .{});
-    qpat(.hb_flash_item, .{});
-    qpat(.hb_lucky_proc, .{});
 }
 
 fn transfiguredWindSet() !void {
@@ -1067,24 +1030,12 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Leech Staff",
         },
         .description = .{
-            .english = "When you inflict a bleed, also inflict [SAP].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .blue,
-
-        .hbsType = .sap,
-        .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = 20,
     });
-    trig(.hbsCreated, .{.hbs_selfcast});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.bleed_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.bleed_3));
-    qpat(.hb_flash_item, .{});
-    ttrg(.player_afflicted_source, .{});
-    tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_bloodhound_greatsword",
@@ -1112,32 +1063,18 @@ fn transfiguredBloodwolfSet() !void {
         .weaponType = .loot,
     });
 
-    const bloodflower_brooch_hits = 3;
     item(.{
         .id = "it_transfigured_bloodflower_brooch",
         .name = .{
             .english = "Transfigured Bloodflower Brooch",
         },
         .description = .{
-            .english = "Deal [STR] damage [VAR0_TIMES] to enemies you inflict with bleed.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .blue,
-
-        .hbVar0 = bloodflower_brooch_hits,
-        .hitNumber = bloodflower_brooch_hits,
-        .radius = 2000,
-        .strMult = 40,
     });
-    trig(.hbsCreated, .{.hbs_selfcast});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.bleed_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.bleed_3));
-    qpat(.hb_flash_item, .{});
-    ttrg(.player_afflicted_source, .{});
-    tset(.strength_def, .{});
-    apat(.melee_hit, .{});
 
     item(.{
         .id = "it_transfigured_wolf_hood",
@@ -1591,48 +1528,18 @@ fn transfiguredFlameSet() !void {
         .weaponType = .loot,
     });
 
-    const demon_horns_aoe_mult = 1;
     item(.{
         .id = "it_transfigured_demon_horns",
         .name = .{
             .english = "Transfigured Demon Horns",
         },
         .description = .{
-            .english = "All abilities and loot's hitboxes are [VAR0_PERCENT] larger. If you " ++
-                "use your Defensive, this effect ends until the end of battle.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .red,
-
-        .lootHbDispType = .glowing,
-        .autoOffSqVar0 = 1,
-        .glowSqVar0 = true,
-        .greySqVar0 = true,
-
-        .hbVar0 = demon_horns_aoe_mult,
     });
-    trig(.strCalc2, .{});
-    cond(.hb_check_square_var, .{ 0, 1 });
-    ttrg(.hotbarslots_current_players, .{});
-    qpat(.hb_mult_hitbox_var, .{
-        .hitboxVar = .radius,
-        .mult = 1 + demon_horns_aoe_mult,
-    });
-
-    trig(.hotbarUsedProc2, .{.hb_defensive});
-    cond(.hb_check_square_var, .{ 0, 1 });
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.autoStart, .{});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.onSquarePickup, .{.square_self});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
-    qpat(.hb_reset_statchange, .{});
 
     item(.{
         .id = "it_transfigured_flamewalker_boots",
@@ -2406,18 +2313,15 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_glittering_trumpet",
         .name = .{
-            .english = "Transfigured Glittering Trumpet",
+            .english = "Transfigured Butterfly Ocarina",
         },
         .description = .{
-            .english = "Your large hits counts as a % chance success.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
     });
-    trig(.onDamageDone, .{.dmg_islarge});
-    qpat(.hb_flash_item, .{});
-    qpat(.hb_lucky_proc, .{});
 
     const royal_staff_crit_dmg_buff = 0.02;
     const royal_staff_aoe_buff = 0.01;
@@ -2898,80 +2802,31 @@ fn transfiguredPoisonSet() !void {
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
     qpat(.hb_set_color_def, .{});
 
-    const ivy_staff_poison_dmg = 30;
     item(.{
         .id = "it_transfigured_ivy_staff",
         .name = .{
             .english = "Transfigured Ivy Staff",
         },
         .description = .{
-            .english = "Inflicting a [POISON-0] has [LUCK] chance to inflict another [POISON-0].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .green,
-
-        .procChance = 0.60,
-        .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = ivy_staff_poison_dmg,
     });
-    const poison_pairs = [_][2]Hbs{
-        .{ .poison_0, .poison_6 },
-        .{ .poison_1, .poison_0 },
-        .{ .poison_2, .poison_1 },
-        .{ .poison_3, .poison_2 },
-        .{ .poison_4, .poison_3 },
-        .{ .poison_5, .poison_4 },
-        .{ .poison_6, .poison_5 },
-    };
-    for (poison_pairs) |pair| {
-        trig(.hbsCreated, .{.hbs_selfcast});
-        cond_eval2(Source.statusId, .@"==", @intFromEnum(pair[0]));
-        cond(.random_def, .{});
-        qpat(.hb_flash_item, .{});
-        qpat(.hb_lucky_proc, .{});
-        ttrg(.player_afflicted_source, .{});
-        tset(.hbskey, .{ pair[1], Receiver.hbsLength });
-        tset(.hbsstr, .{ivy_staff_poison_dmg});
-        apat(.apply_hbs, .{});
-    }
 
-    const deathcap_tome_hbs_str_mult = 30;
     item(.{
         .id = "it_transfigured_deathcap_tome",
         .name = .{
             .english = "Transfigured Deathcap Tome",
         },
         .description = .{
-            .english = "When you inflict a poison, also inflict [DECAY-0].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .green,
-
-        .hbsType = .decay_0,
-        .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = deathcap_tome_hbs_str_mult,
     });
-    for ([_][2]Hbs{
-        .{ .poison_0, .decay_0 },
-        .{ .poison_1, .decay_1 },
-        .{ .poison_2, .decay_2 },
-        .{ .poison_3, .decay_3 },
-        .{ .poison_4, .decay_4 },
-        .{ .poison_5, .decay_5 },
-        .{ .poison_6, .decay_6 },
-    }) |hbs| {
-        trig(.hbsCreated, .{.hbs_selfcast});
-        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs[0]));
-        qpat(.hb_flash_item, .{});
-        ttrg(.player_afflicted_source, .{});
-        tset(.hbskey, .{ hbs[1], Receiver.hbsLength });
-        tset(.hbsstr, .{deathcap_tome_hbs_str_mult});
-        apat(.apply_hbs, .{});
-    }
 
     item(.{
         .id = "it_transfigured_spiderbite_bow",
@@ -3192,28 +3047,12 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Abyss Artifact",
         },
         .description = .{
-            .english = "Every [CD], gaining [STILLNESS] will also grant you [SUPER] for [HBSL].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .green,
-
-        .lootHbDispType = .cooldown,
-        .cooldownType = .time,
-        .cooldown = 16 * std.time.ms_per_s,
-
-        .hbsType = .super,
-        .hbsLength = 4 * std.time.ms_per_s,
     });
-    trig(.hbsCreated, .{.hbs_selfafl});
-    cond(.hb_available, .{});
-    cond_eval2(Source.statusId, .@"==", @intFromEnum(Hbs.stillness));
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
-    ttrg(.player_afflicted_source, .{});
-    tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
 
     item(.{
         .id = "it_transfigured_lost_pendant",
@@ -3715,42 +3554,18 @@ fn transfiguredHauntedSet() !void {
         .weaponType = .loot,
     });
 
-    const cursed_candlestaff_hbs_str_mult = 250;
     item(.{
         .id = "it_transfigured_cursed_candlestaff",
         .name = .{
             .english = "Transfigured Cursed Candlestaff",
         },
         .description = .{
-            .english = "When you inflict a burn, also inflict [GHOSTFLAME-0].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purplegreen,
-
-        .hbsType = .ghostflame_0,
-        .hbsLength = 5 * std.time.ms_per_s,
-        .hbsStrMult = cursed_candlestaff_hbs_str_mult,
     });
-    for ([_][2]Hbs{
-        .{ .burn_0, .ghostflame_0 },
-        .{ .burn_1, .ghostflame_1 },
-        .{ .burn_2, .ghostflame_2 },
-        .{ .burn_3, .ghostflame_3 },
-        .{ .burn_4, .ghostflame_4 },
-        .{ .burn_5, .ghostflame_5 },
-        .{ .burn_6, .ghostflame_0 },
-    }) |hbs| {
-        trig(.hbsCreated, .{.hbs_selfcast});
-        cond(.hb_available, .{});
-        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs[0]));
-        qpat(.hb_flash_item, .{});
-        ttrg(.player_afflicted_source, .{});
-        tset(.hbskey, .{ hbs[1], Receiver.hbsLength });
-        tset(.hbsstr, .{cursed_candlestaff_hbs_str_mult});
-        apat(.apply_hbs, .{});
-    }
 
     item(.{
         .id = "it_transfigured_smoke_shield",
@@ -4137,23 +3952,12 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Staticshock Earrings",
         },
         .description = .{
-            .english = "When you inflict spark, deal [STR] damage to all enemies.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .blueyellow,
-
-        .strMult = 150,
-        .delay = 150,
     });
-    trig(.hbsCreated, .{.hbs_selfcast});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.spark_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.spark_6));
-    qpat(.hb_flash_item, .{});
-    ttrg(.players_opponent, .{});
-    tset(.strength_def, .{});
-    apat(.crown_of_storms, .{});
 
     const stormdance_gown_times_dmg_dealt = 40;
     item(.{
@@ -4694,42 +4498,12 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Golem's Claymore",
         },
         .description = .{
-            .english = "Every [CD], grants you [STONESKIN].#" ++
-                "When you are shielded from damage, slice the air around you dealing [STR] damage.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .redgreen,
-
-        .lootHbDispType = .cooldown,
-        .cooldownType = .time,
-        .cooldown = 30 * std.time.ms_per_s,
-        .hbInput = .auto,
-
-        .hbsType = .stoneskin,
-        .hbsLength = 3 * std.time.ms_per_s,
-
-        .delay = 400,
-        .radius = 400,
-        .strMult = 800,
     });
-    trig(.autoStart, .{.hb_auto_pl});
-    qpat(.hb_run_cooldown, .{});
-
-    trig(.hotbarUsed, .{.hb_self});
-    ttrg(.player_self, .{});
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_flash_item, .{});
-    qpat(.hb_cdloot_proc, .{});
-    tset(.hbs_def, .{});
-    apat(.apply_hbs, .{});
-
-    trig(.hbsShield0, .{.pl_self});
-    qpat(.hb_flash_item, .{});
-    ttrg(.players_opponent, .{});
-    tset(.strength_def, .{});
-    apat(.darkmagic_blade, .{});
 
     const stoneplate_armor_dmg_mult = 0.04;
     item(.{
