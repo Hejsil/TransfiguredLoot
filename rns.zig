@@ -16,6 +16,7 @@ var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
 pub const Mod = struct {
     name: []const u8,
     image_path: []const u8,
+    thumbnail_path: []const u8,
 };
 
 pub fn start(m: Mod) void {
@@ -73,6 +74,7 @@ fn end2() !void {
     defer output_dir.close();
 
     try cwd.copyFile(mod.image_path, output_dir, "items.png", .{});
+    try cwd.copyFile(mod.thumbnail_path, output_dir, "thumbnail.png", .{});
     try output_dir.writeFile(.{
         .sub_path = "SheetList.csv",
         .data = sheetlist.items,

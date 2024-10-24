@@ -31,6 +31,7 @@ fn transfiguredArcaneSet() !void {
     rns.start(.{
         .name = "Transfigured Arcane Set",
         .image_path = "images/arcane.png",
+        .thumbnail_path = "images/arcane_thumbnail.png",
     });
     defer rns.end();
 
@@ -302,6 +303,7 @@ fn transfiguredNightSet() !void {
     rns.start(.{
         .name = "Transfigured Night Set",
         .image_path = "images/night.png",
+        .thumbnail_path = "images/night_thumbnail.png",
     });
     defer rns.end();
 
@@ -557,6 +559,7 @@ fn transfiguredTimespaceSet() !void {
     rns.start(.{
         .name = "Transfigured Timespace Set",
         .image_path = "images/timespace.png",
+        .thumbnail_path = "images/timespace_thumbnail.png",
     });
     defer rns.end();
 
@@ -801,6 +804,7 @@ fn transfiguredWindSet() !void {
     rns.start(.{
         .name = "Transfigured Wind Set",
         .image_path = "images/wind.png",
+        .thumbnail_path = "images/wind_thumbnail.png",
     });
     defer rns.end();
 
@@ -995,6 +999,7 @@ fn transfiguredBloodwolfSet() !void {
     rns.start(.{
         .name = "Transfigured Bloodwolf Set",
         .image_path = "images/bloodwolf.png",
+        .thumbnail_path = "images/bloodwolf_thumbnail.png",
     });
     defer rns.end();
 
@@ -1165,6 +1170,7 @@ fn transfiguredAssasinSet() !void {
     rns.start(.{
         .name = "Transfigured Assasin Set",
         .image_path = "images/assasin.png",
+        .thumbnail_path = "images/assasin_thumbnail.png",
     });
     defer rns.end();
 
@@ -1335,6 +1341,7 @@ fn transfiguredRockdragonSet() !void {
     rns.start(.{
         .name = "Transfigured Rockdragon Set",
         .image_path = "images/rockdragon.png",
+        .thumbnail_path = "images/rockdragon_thumbnail.png",
     });
     defer rns.end();
 
@@ -1483,6 +1490,7 @@ fn transfiguredFlameSet() !void {
     rns.start(.{
         .name = "Transfigured Flame Set",
         .image_path = "images/flame.png",
+        .thumbnail_path = "images/flame_thumbnail.png",
     });
     defer rns.end();
 
@@ -1617,6 +1625,7 @@ fn transfiguredGemSet() !void {
     rns.start(.{
         .name = "Transfigured Gem Set",
         .image_path = "images/gem.png",
+        .thumbnail_path = "images/gem_thumbnail.png",
     });
     defer rns.end();
 
@@ -1825,6 +1834,7 @@ fn transfiguredLightningSet() !void {
     rns.start(.{
         .name = "Transfigured Lightning Set",
         .image_path = "images/lightning.png",
+        .thumbnail_path = "images/lightning_thumbnail.png",
     });
     defer rns.end();
 
@@ -2002,6 +2012,7 @@ fn transfiguredShrineSet() !void {
     rns.start(.{
         .name = "Transfigured Shrine Set",
         .image_path = "images/shrine.png",
+        .thumbnail_path = "images/shrine_thumbnail.png",
     });
     defer rns.end();
 
@@ -2244,6 +2255,7 @@ fn transfiguredLuckySet() !void {
     rns.start(.{
         .name = "Transfigured Lucky Set",
         .image_path = "images/lucky.png",
+        .thumbnail_path = "images/lucky_thumbnail.png",
     });
     defer rns.end();
 
@@ -2594,6 +2606,7 @@ fn transfiguredLifeSet() !void {
     rns.start(.{
         .name = "Transfigured Life Set",
         .image_path = "images/life.png",
+        .thumbnail_path = "images/life_thumbnail.png",
     });
     defer rns.end();
 
@@ -2794,6 +2807,7 @@ fn transfiguredPoisonSet() !void {
     rns.start(.{
         .name = "Transfigured Poison Set",
         .image_path = "images/poison.png",
+        .thumbnail_path = "images/poison_thumbnail.png",
     });
     defer rns.end();
 
@@ -2966,6 +2980,7 @@ fn transfiguredDepthSet() !void {
     rns.start(.{
         .name = "Transfigured Depth Set",
         .image_path = "images/depth.png",
+        .thumbnail_path = "images/depth_thumbnail.png",
     });
     defer rns.end();
 
@@ -3130,6 +3145,7 @@ fn transfiguredDarkbiteSet() !void {
     rns.start(.{
         .name = "Transfigured Darkbite Set",
         .image_path = "images/darkbite.png",
+        .thumbnail_path = "images/darkbite_thumbnail.png",
     });
     defer rns.end();
 
@@ -3289,6 +3305,7 @@ fn transfiguredTimegemSet() !void {
     rns.start(.{
         .name = "Transfigured Timegem Set",
         .image_path = "images/timegem.png",
+        .thumbnail_path = "images/timegem_thumbnail.png",
     });
     defer rns.end();
 
@@ -3421,6 +3438,7 @@ fn transfiguredYoukaiSet() !void {
     rns.start(.{
         .name = "Transfigured Youkai Set",
         .image_path = "images/youkai.png",
+        .thumbnail_path = "images/youkai_thumbnail.png",
     });
     defer rns.end();
 
@@ -3600,6 +3618,7 @@ fn transfiguredHauntedSet() !void {
     rns.start(.{
         .name = "Transfigured Haunted Set",
         .image_path = "images/haunted.png",
+        .thumbnail_path = "images/haunted_thumbnail.png",
     });
     defer rns.end();
 
@@ -3732,6 +3751,7 @@ fn transfiguredGladiatorSet() !void {
     rns.start(.{
         .name = "Transfigured Gladiator Set",
         .image_path = "images/gladiator.png",
+        .thumbnail_path = "images/gladiator_thumbnail.png",
     });
     defer rns.end();
 
@@ -3907,6 +3927,7 @@ fn transfiguredSparkbladeSet() !void {
     rns.start(.{
         .name = "Transfigured Sparkblade Set",
         .image_path = "images/sparkblade.png",
+        .thumbnail_path = "images/sparkblade_thumbnail.png",
     });
     defer rns.end();
 
@@ -4103,6 +4124,7 @@ fn transfiguredSwiftflightSet() !void {
     rns.start(.{
         .name = "Transfigured Swiftflight Set",
         .image_path = "images/swiftflight.png",
+        .thumbnail_path = "images/swiftflight_thumbnail.png",
     });
     defer rns.end();
 
@@ -4333,6 +4355,7 @@ fn transfiguredSacredflameSet() !void {
     rns.start(.{
         .name = "Transfigured Sacredflame Set",
         .image_path = "images/sacredflame.png",
+        .thumbnail_path = "images/sacredflame_thumbnail.png",
     });
     defer rns.end();
 
@@ -4531,6 +4554,7 @@ fn transfiguredRuinsSet() !void {
     rns.start(.{
         .name = "Transfigured Ruins Set",
         .image_path = "images/ruins.png",
+        .thumbnail_path = "images/ruins_thumbnail.png",
     });
     defer rns.end();
 
@@ -4693,6 +4717,7 @@ fn transfiguredLakeshrineSet() !void {
     rns.start(.{
         .name = "Transfigured Lakeshrine Set",
         .image_path = "images/lakeshrine.png",
+        .thumbnail_path = "images/lakeshrine_thumbnail.png",
     });
     defer rns.end();
 
