@@ -1017,12 +1017,34 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloody Bandage",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "When you used your Defensive, apply [BLEED-1] and [SAP] to enemies " ++
+                "facing away from you.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
+
+        .hbsStrMult = 20,
+        .hbsType = .bleed_1,
+        .hbsLength = 10 * std.time.ms_per_s,
     });
+    trig(.hotbarUsed, .{.hb_defensive});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
+    ttrg(.players_opponent_backstab, .{});
+    tset(.hbs_def, .{});
+    tset(.hbskey, .{ Hbs.bleed_1, Receiver.hbsLength });
+    apat(.poisonfrog_charm, .{});
+    tset(.hbs_def, .{});
+    tset(.hbskey, .{ Hbs.sap, Receiver.hbsLength });
+    apat(.poisonfrog_charm, .{});
+
+    trig(.hbsCreated, .{.hbs_thishbcast});
+    // To avoid flashing for every debuff applied, instead keep track of if the defensive has been
+    // used. If so, flash once, and set the damage flag to 0, so we don't flash again.
+    cond(.hb_check_square_var, .{ 0, 1 });
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     item(.{
         .id = "it_transfigured_leech_staff",
@@ -1082,6 +1104,7 @@ fn transfiguredBloodwolfSet() !void {
         .cooldownType = .time,
         .cooldown = 20 * std.time.ms_per_s,
 
+        .hbsStrMult = 20,
         .hbsType = .bleed_1,
         .hbsLength = 5 * std.time.ms_per_s,
 
