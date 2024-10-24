@@ -3292,7 +3292,7 @@ fn transfiguredTimegemSet() !void {
     });
     defer rns.end();
 
-    const obsidian_rod_str = 75;
+    const obsidian_rod_str = 80;
     item(.{
         .id = "it_transfigured_obsidian_rod",
         .name = .{
@@ -3318,6 +3318,8 @@ fn transfiguredTimegemSet() !void {
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
     tset_uservar2("u_gcd", "u_gcd", .@"/", std.time.ms_per_s);
     tset_uservar2("u_str", "u_gcd", .@"*", obsidian_rod_str);
+    qpat(.hb_set_strength, .{ .amountStr = "u_str" });
+    cond_eval2(TargetHotbar0.number, .@">", 1);
     tset_uservar2("u_str", "u_str", .@"/", TargetHotbar0.number);
     qpat(.hb_set_strength, .{ .amountStr = "u_str" });
 
