@@ -1063,18 +1063,51 @@ fn transfiguredBloodwolfSet() !void {
         .weaponType = .loot,
     });
 
+    const bloodflower_brooch_hits = 3;
     item(.{
         .id = "it_transfigured_bloodflower_brooch",
         .name = .{
             .english = "Transfigured Bloodflower Brooch",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], apply [BLEED-1] to all enemies.#" ++
+                "Deal [STR] damage [VAR0_TIMES] to enemies you inflict with bleed.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .blue,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 20 * std.time.ms_per_s,
+
+        .hbsType = .bleed_1,
+        .hbsLength = 5 * std.time.ms_per_s,
+
+        .hbVar0 = bloodflower_brooch_hits,
+        .hitNumber = bloodflower_brooch_hits,
+        .radius = 2000,
+        .strMult = 40,
     });
+    trig(.autoStart, .{.hb_auto_pl});
+    qpat(.hb_run_cooldown, .{});
+
+    trig(.hotbarUsed, .{.hb_self});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    ttrg(.players_opponent, .{});
+    tset(.hbs_def, .{});
+    apat(.poisonfrog_charm, .{});
+
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.bleed_0));
+    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.bleed_3));
+    qpat(.hb_flash_item, .{});
+    ttrg(.player_afflicted_source, .{});
+    tset(.strength_def, .{});
+    apat(.melee_hit, .{});
 
     item(.{
         .id = "it_transfigured_wolf_hood",
