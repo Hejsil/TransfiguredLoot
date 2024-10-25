@@ -3449,7 +3449,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Kyou No Omikuji",
         },
         .description = .{
-            .english = "All damage you deal is increased by [VAR0_PERCENT]. You cannot use " ++
+            .english = "All damage you deal increased by [VAR0_PERCENT]. You cannot use " ++
                 "your Primary and Special.",
         },
         .color = color_dark,
