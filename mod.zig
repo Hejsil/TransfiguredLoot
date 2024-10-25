@@ -315,7 +315,7 @@ fn transfiguredNightSet() !void {
         },
         .description = .{
             .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
-                "targed enemy that deals [STR] damage.",
+                "targeted enemy that deals [STR] damage.",
         },
         .color = color,
         .type = .loot,
