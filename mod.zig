@@ -528,7 +528,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Nightingale Gown",
         },
         .description = .{
-            .english = "Every [CD] seconds, [OMEGACHARGE] your Defensive.",
+            .english = "Every [CD] seconds, [OMEGACHARGE] your Secondary and Defensive.",
         },
         .color = color,
         .type = .loot,
@@ -546,9 +546,13 @@ fn transfiguredNightSet() !void {
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_flash_item, .{});
-    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
-    cond(.hb_check_chargeable0, .{});
-    qpat(.hb_charge, .{ .type = .omegacharge });
+
+    for ([_]WeaponType{ .secondary, .defensive }) |weapon_type| {
+        trig(.hotbarUsed2, .{.hb_self});
+        ttrg(.hotbarslots_self_weapontype, .{weapon_type});
+        cond(.hb_check_chargeable0, .{});
+        qpat(.hb_charge, .{ .type = .omegacharge });
+    }
 
     trig(.autoStart, .{.hb_auto_pl});
     qpat(.hb_run_cooldown, .{});
