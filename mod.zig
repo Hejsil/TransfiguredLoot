@@ -1787,15 +1787,19 @@ fn transfiguredGemSet() !void {
     });
 
     const ruby_circlet_stocks = 1;
-    const ruby_circlet_def_dmg_mult = 1.2;
+    const ruby_circlet_primary_secondary_dmg_mult = 0.20;
+    const ruby_circlet_special_dmg_mult = 0.60;
+    const ruby_circlet_def_dmg_mult = 1.8;
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
             .english = "Transfigured Ruby Circlet",
         },
         .description = .{
-            .english = "Your Defensive deals [VAR0_PERCENT] more damage. Breaks if you take " ++
-                "damage once.",
+            .english = "Your Primary and Secondary deals [VAR0_PERCENT] more damage.#" ++
+                "Your Special deals [VAR1_PERCENT] more damage.#" ++
+                "Your Defensive deals [VAR2_PERCENT] more damage.#" ++
+                "Breaks if you take damage once.",
         },
         .color = color,
         .type = .loot,
@@ -1807,8 +1811,9 @@ fn transfiguredGemSet() !void {
         .glowSqVar0 = true,
         .lootHbDispType = .glowing,
 
-        .hbVar0 = ruby_circlet_def_dmg_mult,
-        .hbVar1 = ruby_circlet_stocks,
+        .hbVar0 = ruby_circlet_primary_secondary_dmg_mult,
+        .hbVar1 = ruby_circlet_special_dmg_mult,
+        .hbVar2 = ruby_circlet_def_dmg_mult,
     });
     trig(.onSquarePickup, .{.square_self});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = ruby_circlet_stocks });
@@ -1816,6 +1821,18 @@ fn transfiguredGemSet() !void {
     trig(.strCalc0, .{});
     qpat(.hb_reset_statchange_norefresh, .{});
     cond(.hb_check_square_var_false, .{ 0, 0 });
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .primaryMult,
+        .amount = ruby_circlet_primary_secondary_dmg_mult,
+    });
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .secondaryMult,
+        .amount = ruby_circlet_primary_secondary_dmg_mult,
+    });
+    qpat(.hb_add_statchange_norefresh, .{
+        .stat = .specialMult,
+        .amount = ruby_circlet_special_dmg_mult,
+    });
     qpat(.hb_add_statchange_norefresh, .{
         .stat = .defensiveMult,
         .amount = ruby_circlet_def_dmg_mult,
