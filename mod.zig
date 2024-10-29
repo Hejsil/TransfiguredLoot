@@ -363,7 +363,7 @@ fn transfiguredNightSet() !void {
 
         .hbVar0 = transfigured_crescentmoon_dagger_hits,
         .hitNumber = transfigured_crescentmoon_dagger_hits,
-        .strMult = 120,
+        .strMult = 130,
     });
     trig(.onDamageDone, .{.dmg_self_primary});
     cond(.hb_available, .{});
