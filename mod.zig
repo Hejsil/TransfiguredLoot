@@ -252,8 +252,8 @@ fn transfiguredArcaneSet() !void {
         .weaponType = .loot,
     });
 
-    const opal_necklace_extra_cd = 15 * std.time.ms_per_s;
-    const opal_necklace_num_curses = 5;
+    const opal_necklace_extra_cd = 10 * std.time.ms_per_s;
+    const opal_necklace_num_curses = 4;
     item(.{
         .id = "it_transfigured_opal_necklace",
         .name = .{
