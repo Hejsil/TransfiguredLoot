@@ -4202,7 +4202,7 @@ fn transfiguredSwiftflightSet() !void {
         .weaponType = .loot,
     });
 
-    const hermes_bow_dmg_per_leap = 10;
+    const hermes_bow_dmg_per_leap = 25;
     item(.{
         .id = "it_transfigured_hermes_bow",
         .name = .{
