@@ -1704,7 +1704,7 @@ fn transfiguredGemSet() !void {
         .lootHbDispType = .cooldownVarAm,
         .hbInput = .auto,
 
-        .hbsLength = 4 * std.time.ms_per_s,
+        .hbsLength = 5 * std.time.ms_per_s,
 
         .cooldownType = .time,
         .cooldown = 15 * std.time.ms_per_s,
