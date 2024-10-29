@@ -2391,7 +2391,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_glittering_trumpet",
         .name = .{
-            .english = "Transfigured Butterfly Ocarina",
+            .english = "Transfigured Glittering Trumpet",
         },
         .description = .{
             .english = "Not Implemented. Should not appear in a run.",
