@@ -1754,7 +1754,7 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const amethyst_bracelet_mult = 0.3;
+    const amethyst_bracelet_mult = 0.25;
     item(.{
         .id = "it_transfigured_amethyst_bracelet",
         .name = .{
