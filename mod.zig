@@ -89,29 +89,19 @@ fn transfiguredArcaneSet() !void {
         .hbVar0 = blackwing_staff_mult,
     });
 
-    trig(.hbsCreated, .{});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    qpat(.hb_reset_statchange, .{});
+    for ([_]Hbs{ .curse_0, .hex }, [_]Hbs{ .curse_5, .hex_poison }) |start, end| {
+        trig(.hbsCreated, .{});
+        cond_eval2(Source.statusId, .@">=", @intFromEnum(start));
+        cond_eval2(Source.statusId, .@"<=", @intFromEnum(start));
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+        qpat(.hb_reset_statchange, .{});
 
-    trig(.hbsCreated, .{});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.hex));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.hex_poison));
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.hbsDestroyed, .{});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
-    qpat(.hb_reset_statchange, .{});
-
-    trig(.hbsDestroyed, .{});
-    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.hex));
-    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.hex_poison));
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
-    qpat(.hb_reset_statchange, .{});
+        trig(.hbsCreated, .{});
+        cond_eval2(Source.statusId, .@">=", @intFromEnum(start));
+        cond_eval2(Source.statusId, .@"<=", @intFromEnum(end));
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+        qpat(.hb_reset_statchange, .{});
+    }
 
     trig(.strCalc1c, .{});
     cond(.hb_check_square_var, .{ 0, 0 });
