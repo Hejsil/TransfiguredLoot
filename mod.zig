@@ -496,6 +496,8 @@ fn transfiguredNightSet() !void {
     ttrg(.hotbarslots_current_players, .{});
     ttrg(.hotbarslots_prune_self, .{});
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
+    ttrg_hotbarslots_prune(TargetHotbars.resettable, .@"==", 1);
+    qpat(.hb_flash_item, .{});
     qpat(.hb_add_cooldown, .{ .amount = -pajama_hat_cd_reduction });
 
     const stuffed_rabbit_activate_count = 10;
