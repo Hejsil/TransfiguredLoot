@@ -699,8 +699,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Metronome Boots",
         },
         .description = .{
-            .english = "Every [CD], switch between gaining [HASTE-2] and [SMITE-3] for " ++
-                "[VAR0_SECONDS].",
+            .english = "Every [CD], switch between having [HASTE-2] and [SMITE-3].",
         },
         .color = color,
         .type = .loot,
@@ -709,7 +708,7 @@ fn transfiguredTimespaceSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 10 * std.time.ms_per_s,
+        .cooldown = metronome_boots_hbs_len,
         .hbInput = .auto,
 
         .hbsLength = metronome_boots_hbs_len,
