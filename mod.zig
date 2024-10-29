@@ -470,7 +470,7 @@ fn transfiguredNightSet() !void {
     tset(.uservar_random_range, .{ "u_y", moon_pendant_radius, 1000 - moon_pendant_radius });
     apat(.meteor_staff, .{ .fxStr = "u_x", .fyStr = "u_y" });
 
-    const pajama_hat_cd_reduction = 1 * std.time.ms_per_s;
+    const pajama_hat_cd_reduction = 2 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_pajama_hat",
         .name = .{
