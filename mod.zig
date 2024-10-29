@@ -4233,6 +4233,7 @@ fn transfiguredSwiftflightSet() !void {
 
         .delay = 250,
         .radius = 1800,
+        .hitNumber = 1,
         .strMult = hermes_bow_dmg_per_leap,
     });
     trig(.autoStart, .{.hb_auto_pl});
