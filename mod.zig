@@ -721,7 +721,6 @@ fn transfiguredTimespaceSet() !void {
         .hbVar0 = metronome_boots_hbs_len,
     });
     trig(.autoStart, .{.hb_auto_pl});
-    qpat(.hb_run_cooldown, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     trig(.hotbarUsed, .{.hb_self});
