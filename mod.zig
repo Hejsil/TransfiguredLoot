@@ -92,7 +92,7 @@ fn transfiguredArcaneSet() !void {
     for ([_]Hbs{ .curse_0, .hex }, [_]Hbs{ .curse_5, .hex_poison }) |start, end| {
         trig(.hbsCreated, .{});
         cond_eval2(Source.statusId, .@">=", @intFromEnum(start));
-        cond_eval2(Source.statusId, .@"<=", @intFromEnum(start));
+        cond_eval2(Source.statusId, .@"<=", @intFromEnum(end));
         qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
         qpat(.hb_reset_statchange, .{});
 
