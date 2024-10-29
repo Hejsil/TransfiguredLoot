@@ -83,7 +83,6 @@ fn transfiguredArcaneSet() !void {
         .lootHbDispType = .glowing,
 
         .glowSqVar0 = true,
-        .showSqVar = true,
         .autoOffSqVar0 = 0,
 
         .hbVar0 = blackwing_staff_mult,
@@ -96,10 +95,10 @@ fn transfiguredArcaneSet() !void {
         qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
         qpat(.hb_reset_statchange, .{});
 
-        trig(.hbsCreated, .{});
+        trig(.hbsDestroyed, .{});
         cond_eval2(Source.statusId, .@">=", @intFromEnum(start));
         cond_eval2(Source.statusId, .@"<=", @intFromEnum(end));
-        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
         qpat(.hb_reset_statchange, .{});
     }
 
