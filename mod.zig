@@ -1754,27 +1754,18 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const amethyst_bracelet_mult = 0.25;
     item(.{
         .id = "it_transfigured_amethyst_bracelet",
         .name = .{
             .english = "Transfigured Amethyst Bracelet",
         },
         .description = .{
-            .english = "You deal [VAR0_PERCENT] more damage. You cannot inflict debuffs.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .red,
-
-        .allMult = amethyst_bracelet_mult,
-        .hbVar0 = amethyst_bracelet_mult,
     });
-    trig(.hbsCreated, .{.hbs_selfcast});
-    cond(.false, .{Source.isBuff});
-    ttrg(.hbstatus_source, .{});
-    qpat(.hbs_destroy, .{});
 
     item(.{
         .id = "it_transfigured_topaz_charm",
@@ -2221,27 +2212,18 @@ fn transfiguredShrineSet() !void {
         .amountStr = "u_allMult",
     });
 
-    const redwhite_ribbon_mult = 0.25;
     item(.{
         .id = "it_transfigured_redwhite_ribbon",
         .name = .{
             .english = "Transfigured Redwhite Ribbon",
         },
         .description = .{
-            .english = "You deal [VAR0_PERCENT] more damage. You cannot gain buffs.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .yellow,
-
-        .allMult = redwhite_ribbon_mult,
-        .hbVar0 = redwhite_ribbon_mult,
     });
-    trig(.hbsCreated, .{.hbs_selfafl});
-    cond(.true, .{Source.isBuff});
-    ttrg(.hbstatus_source, .{});
-    qpat(.hbs_destroy, .{});
 
     item(.{
         .id = "it_transfigured_divine_mirror",
@@ -3462,15 +3444,15 @@ fn transfiguredYoukaiSet() !void {
     });
     defer rns.end();
 
-    const kyou_no_omikuji_dmg_mult = 0.5;
+    const kyou_no_omikuji_dmg_mult = 0.30;
     item(.{
         .id = "it_transfigured_kyou_no_omikuji",
         .name = .{
             .english = "Transfigured Kyou No Omikuji",
         },
         .description = .{
-            .english = "All damage you deal increased by [VAR0_PERCENT]. You cannot use " ++
-                "your Primary and Special.",
+            .english = "All damage you deal increased by [VAR0_PERCENT]. You cannot gain " ++
+                "buffs or inflict debuffs.",
         },
         .color = color_dark,
         .type = .loot,
@@ -3479,12 +3461,16 @@ fn transfiguredYoukaiSet() !void {
 
         .allMult = kyou_no_omikuji_dmg_mult,
         .hbVar0 = kyou_no_omikuji_dmg_mult,
-
-        .hbShineFlag = .{
-            .cross_primary = true,
-            .cross_special = true,
-        },
     });
+    trig(.hbsCreated, .{.hbs_selfcast});
+    cond(.false, .{Source.isBuff});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
+
+    trig(.hbsCreated, .{.hbs_selfafl});
+    cond(.true, .{Source.isBuff});
+    ttrg(.hbstatus_source, .{});
+    qpat(.hbs_destroy, .{});
 
     item(.{
         .id = "it_transfigured_youkai_bracelet",
