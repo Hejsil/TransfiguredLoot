@@ -2831,8 +2831,8 @@ fn transfiguredPoisonSet() !void {
     });
     defer rns.end();
 
-    const snakefang_dagger_str = 10;
-    const snakefang_dagger_num_poisons = 4;
+    const snakefang_dagger_str = 20;
+    const snakefang_dagger_num_poisons = 3;
     item(.{
         .id = "it_transfigured_snakefang_dagger",
         .name = .{
@@ -2853,7 +2853,7 @@ fn transfiguredPoisonSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
 
         .hbVar0 = 0.5,
-        .secondaryMult = -0.5,
+        .secondaryMult = -0.25,
 
         .hbColor0 = rgb(0x0a, 0x51, 0x00),
         .hbColor1 = rgb(0x17, 0x7f, 0x00),
