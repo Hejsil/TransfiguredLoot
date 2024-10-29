@@ -1110,7 +1110,7 @@ fn transfiguredBloodwolfSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 20 * std.time.ms_per_s,
+        .cooldown = 15 * std.time.ms_per_s,
         .hbInput = .auto,
 
         .hbsStrMult = 20,
