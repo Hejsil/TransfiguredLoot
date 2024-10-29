@@ -2221,7 +2221,7 @@ fn transfiguredShrineSet() !void {
         .amountStr = "u_allMult",
     });
 
-    const redwhite_ribbon_mult = 0.3;
+    const redwhite_ribbon_mult = 0.25;
     item(.{
         .id = "it_transfigured_redwhite_ribbon",
         .name = .{
