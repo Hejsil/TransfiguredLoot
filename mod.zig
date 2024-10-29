@@ -66,15 +66,15 @@ fn transfiguredArcaneSet() !void {
     qpat(.hb_cdloot_proc, .{});
     qpat(.hb_flash_item, .{});
 
-    const blackwing_staff_mult = 0.5;
+    const blackwing_staff_mult = 0.15;
     item(.{
         .id = "it_transfigured_blackwing_staff",
         .name = .{
             .english = "Transfigured Blackwing Staff",
         },
         .description = .{
-            .english = "Your Primary deals [VAR0_PERCENT] more damage if an enemy is cursed " ++
-                "or hexed.",
+            .english = "Your Primary deals [VAR0_PERCENT] more damage. If an enemy is cursed " ++
+                "or hexed this value is tripled.",
         },
         .color = color,
         .type = .loot,
@@ -89,22 +89,39 @@ fn transfiguredArcaneSet() !void {
         .hbVar0 = blackwing_staff_mult,
     });
 
-    for (Hbs.curses ++ Hbs.hexes) |hbs| {
-        trig(.hbsCreated, .{});
-        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs));
-        qpat(.hb_reset_statchange, .{});
-        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    trig(.hbsCreated, .{});
+    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
+    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
 
-        trig(.hbsDestroyed, .{});
-        cond_eval2(Source.statusId, .@"==", @intFromEnum(hbs));
-        qpat(.hb_reset_statchange, .{});
-        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
-    }
+    trig(.hbsCreated, .{});
+    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.hex));
+    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.hex_poison));
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.hbsDestroyed, .{});
+    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.curse_0));
+    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.hbsDestroyed, .{});
+    cond_eval2(Source.statusId, .@">=", @intFromEnum(Hbs.hex));
+    cond_eval2(Source.statusId, .@"<=", @intFromEnum(Hbs.hex_poison));
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
+    qpat(.hb_reset_statchange, .{});
+
+    trig(.strCalc1c, .{});
+    cond(.hb_check_square_var, .{ 0, 0 });
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
+    qpat(.hb_add_strcalcbuff, .{ .amount = blackwing_staff_mult });
 
     trig(.strCalc1c, .{});
     cond(.hb_check_square_var_gte, .{ 0, 1 });
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
-    qpat(.hb_add_strcalcbuff, .{ .amount = blackwing_staff_mult });
+    qpat(.hb_add_strcalcbuff, .{ .amount = blackwing_staff_mult * 3 });
 
     item(.{
         .id = "it_transfigured_curse_talon",
