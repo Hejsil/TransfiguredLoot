@@ -1991,7 +1991,7 @@ fn transfiguredLightningSet() !void {
         .hbInput = .auto,
 
         .procChance = 0.3,
-        .strMult = 200,
+        .strMult = 300,
         .delay = 150,
     });
     trig(.hotbarUsed, .{.hb_self});
