@@ -559,6 +559,7 @@ fn transfiguredNightSet() !void {
         trig(.hotbarUsed2, .{.hb_self});
         ttrg(.hotbarslots_self_weapontype, .{weapon_type});
         cond(.hb_check_chargeable0, .{});
+        cond_eval2(TargetHotbar0.strengthMult, .@">", 0);
         qpat(.hb_charge, .{ .type = .omegacharge });
     }
 
