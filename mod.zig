@@ -3018,8 +3018,8 @@ fn transfiguredDepthSet() !void {
         .weaponType = .loot,
     });
 
-    const tidal_greatsword_dmg_mult = 0.02;
-    const tidal_greatsword_aoe_mult = 0.01;
+    const tidal_greatsword_dmg_mult = 0.04;
+    const tidal_greatsword_aoe_mult = 0.02;
     item(.{
         .id = "it_transfigured_tidal_greatsword",
         .name = .{
