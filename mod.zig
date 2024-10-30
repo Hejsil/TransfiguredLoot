@@ -1804,20 +1804,16 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
     });
 
-    const ruby_circlet_stocks = 1;
-    const ruby_circlet_primary_secondary_dmg_mult = 0.20;
-    const ruby_circlet_special_dmg_mult = 0.60;
-    const ruby_circlet_def_dmg_mult = 1.8;
+    const ruby_circlet_start = 4;
+    const ruby_circlet_dmg_per_stock = 0.1;
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
             .english = "Transfigured Ruby Circlet",
         },
         .description = .{
-            .english = "Your Primary and Secondary deals [VAR0_PERCENT] more damage.#" ++
-                "Your Special deals [VAR1_PERCENT] more damage.#" ++
-                "Your Defensive deals [VAR2_PERCENT] more damage.#" ++
-                "Breaks if you take damage once.",
+            .english = "You deal [VAR0_PERCENT] more damage.#" ++
+                "When you take damage, permanently deal [VAR1_PERCENT] less damage.",
         },
         .color = color,
         .type = .loot,
@@ -1825,43 +1821,25 @@ fn transfiguredGemSet() !void {
         .treasureType = .red,
 
         .showSqVar = true,
-        .greySqVar0 = true,
-        .glowSqVar0 = true,
-        .lootHbDispType = .glowing,
 
-        .hbVar0 = ruby_circlet_primary_secondary_dmg_mult,
-        .hbVar1 = ruby_circlet_special_dmg_mult,
-        .hbVar2 = ruby_circlet_def_dmg_mult,
+        .hbVar0 = ruby_circlet_start * ruby_circlet_dmg_per_stock,
+        .hbVar1 = ruby_circlet_dmg_per_stock,
     });
     trig(.onSquarePickup, .{.square_self});
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = ruby_circlet_stocks });
+    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = ruby_circlet_start });
+
+    trig(.onDamage, .{.pl_self});
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
+    qpat(.hb_reset_statchange, .{});
+    qpat(.hb_flash_item, .{ .message = .broken });
 
     trig(.strCalc0, .{});
     qpat(.hb_reset_statchange_norefresh, .{});
-    cond(.hb_check_square_var_false, .{ 0, 0 });
+    tset_uservar2("u_mult", Receiver.sqVar0, .@"*", ruby_circlet_dmg_per_stock);
     qpat(.hb_add_statchange_norefresh, .{
-        .stat = .primaryMult,
-        .amount = ruby_circlet_primary_secondary_dmg_mult,
+        .stat = .allMult,
+        .amountStr = "u_mult",
     });
-    qpat(.hb_add_statchange_norefresh, .{
-        .stat = .secondaryMult,
-        .amount = ruby_circlet_primary_secondary_dmg_mult,
-    });
-    qpat(.hb_add_statchange_norefresh, .{
-        .stat = .specialMult,
-        .amount = ruby_circlet_special_dmg_mult,
-    });
-    qpat(.hb_add_statchange_norefresh, .{
-        .stat = .defensiveMult,
-        .amount = ruby_circlet_def_dmg_mult,
-    });
-
-    trig(.onDamage, .{.pl_self});
-    cond(.hb_check_square_var_false, .{ 0, 0 });
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
-    qpat(.hb_reset_statchange, .{});
-    cond(.hb_check_square_var, .{ 0, 0 });
-    qpat(.hb_flash_item, .{ .message = .broken });
 }
 
 fn transfiguredLightningSet() !void {
