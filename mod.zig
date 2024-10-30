@@ -1578,18 +1578,34 @@ fn transfiguredFlameSet() !void {
     trig(.hbsCreated, .{.hbs_thishbcast});
     qpat(.hb_flash_item, .{});
 
+    const phoenix_charm_hp = 1;
+    const phoenix_charm_chance = 0.5;
     item(.{
         .id = "it_transfigured_phoenix_charm",
         .name = .{
             .english = "Transfigured Phoenix Charm",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Has a [LUCK] chance to shield you from damage when you are at [VAR0] HP.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .red,
+
+        .hbsFlag = .{ .shield = true },
+
+        .procChance = phoenix_charm_chance,
+        .hbVar0 = phoenix_charm_hp,
     });
+    trig(.hbsShield5, .{.pl_self});
+    cond_eval2(Source.hp, .@"==", 1);
+    cond(.random_def, .{});
+    apat(.phoenix_charm, .{});
+    ttrg(.player_self, .{});
+    apat(.apply_invuln, .{});
+    qpat(.player_shield, .{});
+    qpat(.hb_flash_item, .{ .message = .shield });
 
     item(.{
         .id = "it_transfigured_firescale_corset",
