@@ -13,6 +13,10 @@ var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
 var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
 var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
 
+const JsonWriteStream = std.json.WriteStream(std.ArrayList(u8).Writer, .assumed_correct);
+var items_json_string: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
+var items_json: JsonWriteStream = undefined;
+
 pub const Mod = struct {
     name: []const u8,
     image_path: []const u8,
@@ -42,6 +46,10 @@ fn start2(m: Mod) !void {
         \\key,level,English,Japanese,Chinese
         \\
     );
+    items_json = JsonWriteStream.init(gpa, items_json_string.writer(), .{
+        .whitespace = .indent_4,
+    });
+    try items_json.beginObject();
 
     mod = m;
     written_items = 0;
@@ -99,11 +107,20 @@ fn end2() !void {
         .data = item_descriptions.items,
     });
 
+    try items_json.endObject();
+    try output_dir.writeFile(.{
+        .sub_path = "Items.json",
+        .data = items_json_string.items,
+    });
+
+    items_json.deinit();
+
     sheetlist.shrinkRetainingCapacity(0);
     item_csv.shrinkRetainingCapacity(0);
     item_ini.shrinkRetainingCapacity(0);
     item_names.shrinkRetainingCapacity(0);
     item_descriptions.shrinkRetainingCapacity(0);
+    items_json_string.shrinkRetainingCapacity(0);
     generating_mod = false;
 }
 
@@ -528,6 +545,185 @@ fn item2(opt: Item) !void {
     ,
         .{ opt.id, written_items },
     );
+
+    var arena_state = std.heap.ArenaAllocator.init(gpa);
+    const arena = arena_state.allocator();
+    defer arena_state.deinit();
+
+    const replacements = [_][2][]const u8{
+        .{ "[VAR0]", try std.fmt.allocPrint(arena, "{d}", .{opt.hbVar0 orelse 0}) },
+        .{ "[VAR1]", try std.fmt.allocPrint(arena, "{d}", .{opt.hbVar1 orelse 0}) },
+        .{ "[VAR2]", try std.fmt.allocPrint(arena, "{d}", .{opt.hbVar2 orelse 0}) },
+        .{ "[VAR3]", try std.fmt.allocPrint(arena, "{d}", .{opt.hbVar3 orelse 0}) },
+        .{ "[VAR0_SECONDS]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.hbVar0 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR1_SECONDS]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.hbVar1 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR2_SECONDS]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.hbVar2 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR3_SECONDS]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.hbVar3 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR0_SECOND]", try std.fmt.allocPrint(arena, "{d} second", .{(opt.hbVar0 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR1_SECOND]", try std.fmt.allocPrint(arena, "{d} second", .{(opt.hbVar1 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR2_SECOND]", try std.fmt.allocPrint(arena, "{d} second", .{(opt.hbVar2 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR3_SECOND]", try std.fmt.allocPrint(arena, "{d} second", .{(opt.hbVar3 orelse 0) / std.time.ms_per_s}) },
+        .{ "[VAR0_PERCENT]", try std.fmt.allocPrint(arena, "{d}%", .{(opt.hbVar0 orelse 0) * 100}) },
+        .{ "[VAR1_PERCENT]", try std.fmt.allocPrint(arena, "{d}%", .{(opt.hbVar1 orelse 0) * 100}) },
+        .{ "[VAR2_PERCENT]", try std.fmt.allocPrint(arena, "{d}%", .{(opt.hbVar2 orelse 0) * 100}) },
+        .{ "[VAR3_PERCENT]", try std.fmt.allocPrint(arena, "{d}%", .{(opt.hbVar3 orelse 0) * 100}) },
+        .{ "[VAR0_TIMES]", try std.fmt.allocPrint(arena, "{d} times", .{opt.hbVar0 orelse 0}) },
+        .{ "[VAR1_TIMES]", try std.fmt.allocPrint(arena, "{d} times", .{opt.hbVar1 orelse 0}) },
+        .{ "[VAR2_TIMES]", try std.fmt.allocPrint(arena, "{d} times", .{opt.hbVar2 orelse 0}) },
+        .{ "[VAR3_TIMES]", try std.fmt.allocPrint(arena, "{d} times", .{opt.hbVar3 orelse 0}) },
+        .{ "[STR]", try std.fmt.allocPrint(arena, "{d}", .{opt.strMult orelse 0}) },
+        .{ "[HBSSTR]", try std.fmt.allocPrint(arena, "{d}", .{opt.hbsStrMult orelse 0}) },
+        .{ "[HBSL]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.hbsLength orelse 0) / std.time.ms_per_s}) },
+        .{ "[CD]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.cooldown orelse 0) / std.time.ms_per_s}) },
+        .{ "[GCD]", try std.fmt.allocPrint(arena, "{d} seconds", .{(opt.gcdLength orelse 0) / std.time.ms_per_s}) },
+        .{ "[LUCK]", try std.fmt.allocPrint(arena, "{d}%", .{(opt.procChance orelse 0) * 100}) },
+        .{ "[CHARGE]", "Charge" },
+        .{ "[CHARGES]", "Charges" },
+        .{ "[SUPERCHARGE]", "SUPERCHARGE" },
+        .{ "[SUPERCHARGES]", "SUPERCHARGES" },
+        .{ "[ULTRACHARGE]", "ULTRACHARGE" },
+        .{ "[ULTRACHARGES]", "ULTRACHARGES" },
+        .{ "[OMEGACHARGE]", "OMEGACHARGE" },
+        .{ "[OMEGACHARGES]", "OMEGACHARGES" },
+        .{ "[DARKSPELL]", "DARKSPELL" },
+        .{ "[VANISH]", "VANISH" },
+        .{ "[GHOST]", "GHOST" },
+        .{ "[ASTRA]", "ASTRA" },
+        .{ "[NOVA]", "NOVA" },
+        .{ "[WARCRY]", "WARCRY" },
+        .{ "[FLUTTERSTEP]", "FLUTTERSTEP" },
+        .{ "[LUCKY]", "LUCKY" },
+        .{ "[STONESKIN]", "STONESKIN" },
+        .{ "[GRANITESKIN]", "GRANITESKIN" },
+        .{ "[SUPER]", "SUPER" },
+        .{ "[BERSERK]", "BERSERK" },
+        .{ "[ABYSSRAGE]", "ABYSSRAGE" },
+        .{ "[HEX]", "HEX" },
+        .{ "[HEXS]", "HEXS" },
+        .{ "[HEXP]", "HEXP" },
+        .{ "[ANTIHEX]", "ANTIHEX" },
+        .{ "[BLACKSTRIKE]", "BLACKSTRIKE" },
+        .{ "[STILLNESS]", "STILLNESS" },
+        .{ "[QUICKNESS]", "QUICKNESS" },
+        .{ "[REPEAT]", "REPEAT" },
+        .{ "[FLOW-STR]", "FLOW-STR" },
+        .{ "[FLOW-DEX]", "FLOW-DEX" },
+        .{ "[FLOW-INT]", "FLOW-INT" },
+        .{ "[FLASH-STR]", "FLASH-STR" },
+        .{ "[FLASH-DEX]", "FLASH-DEX" },
+        .{ "[FLASH-INT]", "FLASH-INT" },
+        .{ "[SNARE-X]", "SNARE-X" },
+        .{ "[SNARE-X]", "SNARE-X" },
+        .{ "[HASTE-0]", "HASTE" },
+        .{ "[HASTE-1]", "HASTE" },
+        .{ "[SMITE-0]", "SMITE" },
+        .{ "[SMITE-1]", "SMITE" },
+        .{ "[COUNTER-0]", "COUNTER" },
+        .{ "[COUNTER-1]", "COUNTER" },
+        .{ "[COUNTER-2]", "COUNTER" },
+        .{ "[COUNTER-3]", "COUNTER" },
+        .{ "[COUNTER-4]", "COUNTER" },
+        .{ "[COUNTER-5]", "COUNTER" },
+        .{ "[COUNTER-6]", "COUNTER" },
+        .{ "[COUNTER-7]", "COUNTER" },
+        .{ "[COUNTER-8]", "COUNTER" },
+        .{ "[COUNTER-9]", "COUNTER" },
+        .{ "[POISON-0]", "POISON" },
+        .{ "[POISON-1]", "POISON" },
+        .{ "[POISON-2]", "POISON" },
+        .{ "[POISON-3]", "POISON" },
+        .{ "[POISON-4]", "POISON" },
+        .{ "[POISON-5]", "POISON" },
+        .{ "[POISON-6]", "POISON" },
+        .{ "[POISON-7]", "POISON" },
+        .{ "[POISON-8]", "POISON" },
+        .{ "[POISON-9]", "POISON" },
+        .{ "[DECAY-0]", "DECAY" },
+        .{ "[DECAY-1]", "DECAY" },
+        .{ "[DECAY-2]", "DECAY" },
+        .{ "[DECAY-3]", "DECAY" },
+        .{ "[DECAY-4]", "DECAY" },
+        .{ "[DECAY-5]", "DECAY" },
+        .{ "[DECAY-6]", "DECAY" },
+        .{ "[DECAY-7]", "DECAY" },
+        .{ "[DECAY-8]", "DECAY" },
+        .{ "[DECAY-9]", "DECAY" },
+        .{ "[BURN-0]", "BURN" },
+        .{ "[BURN-1]", "BURN" },
+        .{ "[BURN-2]", "BURN" },
+        .{ "[BURN-3]", "BURN" },
+        .{ "[BURN-4]", "BURN" },
+        .{ "[BURN-5]", "BURN" },
+        .{ "[BURN-6]", "BURN" },
+        .{ "[BURN-7]", "BURN" },
+        .{ "[BURN-8]", "BURN" },
+        .{ "[BURN-9]", "BURN" },
+        .{ "[CURSE-0]", "CURSE" },
+        .{ "[CURSE-1]", "CURSE" },
+        .{ "[CURSE-2]", "CURSE" },
+        .{ "[CURSE-3]", "CURSE" },
+        .{ "[CURSE-4]", "CURSE" },
+        .{ "[CURSE-5]", "CURSE" },
+        .{ "[CURSE-6]", "CURSE" },
+        .{ "[CURSE-7]", "CURSE" },
+        .{ "[CURSE-8]", "CURSE" },
+        .{ "[CURSE-9]", "CURSE" },
+        .{ "[BLEED-0]", "BLEED" },
+        .{ "[BLEED-1]", "BLEED" },
+        .{ "[BLEED-2]", "BLEED" },
+        .{ "[BLEED-3]", "BLEED" },
+        .{ "[BLEED-4]", "BLEED" },
+        .{ "[BLEED-5]", "BLEED" },
+        .{ "[BLEED-6]", "BLEED" },
+        .{ "[BLEED-7]", "BLEED" },
+        .{ "[BLEED-8]", "BLEED" },
+        .{ "[BLEED-9]", "BLEED" },
+        .{ "[SPARK-0]", "SPARK" },
+        .{ "[SPARK-1]", "SPARK" },
+        .{ "[SPARK-2]", "SPARK" },
+        .{ "[SPARK-3]", "SPARK" },
+        .{ "[SPARK-4]", "SPARK" },
+        .{ "[SPARK-5]", "SPARK" },
+        .{ "[SPARK-6]", "SPARK" },
+        .{ "[SPARK-7]", "SPARK" },
+        .{ "[SPARK-8]", "SPARK" },
+        .{ "[SPARK-9]", "SPARK" },
+        .{ "[GHOSTFLAME-0]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-1]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-2]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-3]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-4]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-5]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-6]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-7]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-8]", "GHOSTFLAME" },
+        .{ "[GHOSTFLAME-9]", "GHOSTFLAME" },
+        .{ "[ELEGY-0]", "ELEGY" },
+        .{ "[ELEGY-1]", "ELEGY" },
+        .{ "[ELEGY-2]", "ELEGY" },
+        .{ "[ELEGY-3]", "ELEGY" },
+        .{ "[ELEGY-4]", "ELEGY" },
+        .{ "[ELEGY-5]", "ELEGY" },
+        .{ "[ELEGY-6]", "ELEGY" },
+        .{ "[ELEGY-7]", "ELEGY" },
+        .{ "[ELEGY-8]", "ELEGY" },
+        .{ "[ELEGY-9]", "ELEGY" },
+        .{ "[SAP]", "SAP" },
+    };
+
+    var description: []const u8 = opt.description.english;
+    for (replacements) |replacement| {
+        description = try std.mem.replaceOwned(
+            u8,
+            arena,
+            description,
+            replacement[0],
+            replacement[1],
+        );
+    }
+
+    try items_json.objectField(opt.name.english);
+    try items_json.write(description);
 
     written_items += 1;
     have_trigger = false;
