@@ -1037,21 +1037,19 @@ pub const Trigger = enum {
     }
 };
 
-const TriggerOpt = struct { ?Condition = null };
-
-pub fn trig(trigger: Trigger, opt: TriggerOpt) void {
-    trig2(trigger, opt) catch |err| @panic(@errorName(err));
+pub fn trig0(trigger: Trigger) void {
+    trig1(trigger, null);
 }
 
-fn trig2(trigger: Trigger, opt: TriggerOpt) !void {
-    try item_csv.writer().print(
+pub fn trig1(trigger: Trigger, condition: ?Condition) void {
+    item_csv.writer().print(
         \\,,,,,
         \\trigger,{s},{s},,,
         \\
     , .{
         trigger.toCsvString(),
-        if (opt[0]) |condition| condition.toCsvString() else "",
-    });
+        if (condition) |c| c.toCsvString() else "",
+    }) catch |err| @panic(@errorName(err));
     have_trigger = true;
 }
 
