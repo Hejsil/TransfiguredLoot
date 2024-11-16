@@ -4625,12 +4625,50 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Golem's Claymore",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], using your Secondary will [STONESKIN] for [HBSL].#" ++
+                "When [STONESKIN] or [GRANITESKIN] shields you from damage slice the air " ++
+                "around you, dealing [STR] damage to nearby enemies.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 5 * std.time.ms_per_s,
+
+        .hbsType = .stoneskin,
+        .hbsLength = 0.5 * std.time.ms_per_s,
+
+        .delay = 150,
+        .radius = 400,
+        .strMult = 500,
     });
+    trig1(.hotbarUsed, .hb_secondary);
+    cond(.hb_available, .{});
+    ttrg(.player_self, .{});
+    qpat(.hb_run_cooldown, .{});
+    qpat(.hb_flash_item, .{});
+    qpat(.hb_cdloot_proc, .{});
+    tset(.hbs_def, .{});
+    apat(.apply_hbs, .{});
+
+    trig1(.hbsShield2, .pl_self);
+    ttrg(.player_self, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
+    tset(.uservar_hbscount, .{"u_stoneskins"});
+    tset_uservar1("u_count", "u_stoneskins");
+    ttrg(.player_self, .{});
+    ttrg(.hbstatus_target, .{});
+    ttrg_hbstatus_prune(TargetStatuses.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
+    tset(.uservar_hbscount, .{"u_graniteskins"});
+    tset_uservar2("u_count", "u_count", .@"+", "u_graniteskins");
+    cond_eval2("u_count", .@">", 0);
+    qpat(.hb_flash_item, .{});
+    ttrg(.players_opponent, .{});
+    tset(.strength_def, .{});
+    apat(.darkmagic_blade, .{});
 
     const stoneplate_armor_dmg_mult = 0.04;
     item(.{
