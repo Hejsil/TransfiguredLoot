@@ -1601,7 +1601,6 @@ fn transfiguredFlameSet() !void {
     trig1(.hbsShield5, .pl_self);
     cond_eval2(Source.hp, .@"==", 1);
     cond(.random_def, .{});
-    apat(.phoenix_charm, .{});
     ttrg(.player_self, .{});
     apat(.apply_invuln, .{});
     qpat(.player_shield, .{});
