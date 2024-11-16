@@ -947,7 +947,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Sparrow Feather",
         },
         .description = .{
-            .english = "Deals [VAR0] damage to all enemies when your Primary.#" ++
+            .english = "Deals [VAR0] damage to all enemies when you use your Primary.#" ++
                 "When you use your Secondary, this damage is increased by [VAR1] until the end " ++
                 "of the fight.",
         },
@@ -966,7 +966,7 @@ fn transfiguredWindSet() !void {
     trig0(.battleStart0);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    trig1(.hotbarUsed, .hb_primary);
+    trig1(.hotbarUsedProc, .hb_primary);
     tset_uservar2("u_str", Receiver.sqVar0, .@"*", sparrow_feather_dmg_inc);
     tset_uservar2("u_str", "u_str", .@"+", sparrow_feather_dmg);
     qpat(.hb_flash_item, .{});
@@ -975,7 +975,7 @@ fn transfiguredWindSet() !void {
     tset(.strength, .{"u_str"});
     apat(.crown_of_storms, .{});
 
-    trig1(.hotbarUsed, .hb_secondary);
+    trig1(.hotbarUsedProc, .hb_secondary);
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
 
     item(.{
