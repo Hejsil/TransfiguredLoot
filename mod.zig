@@ -286,7 +286,7 @@ fn transfiguredArcaneSet() !void {
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     qpat(.hb_add_cooldown_permanent, .{ .amount = opal_necklace_extra_cd });
 
-    trig1(.hotbarUsed, .hb_defensive);
+    trig1(.hotbarUsedProc, .hb_defensive);
     ttrg(.players_opponent, .{});
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
 
@@ -468,7 +468,7 @@ fn transfiguredNightSet() !void {
         .radius = moon_pendant_radius,
         .strMult = 300,
     });
-    trig1(.hotbarUsed, .hb_special);
+    trig1(.hotbarUsedProc, .hb_special);
     qpat(.hb_flash_item, .{});
     tset(.strength_def, .{});
     ttrg(.players_opponent, .{});
@@ -927,7 +927,7 @@ fn transfiguredWindSet() !void {
     trig0(.battleStart0);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
-    trig1(.hotbarUsed, .hb_defensive);
+    trig1(.hotbarUsedProc, .hb_defensive);
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_reset_statchange, .{});
 
@@ -1045,7 +1045,7 @@ fn transfiguredBloodwolfSet() !void {
         .hbsType = .bleed_1,
         .hbsLength = 10 * std.time.ms_per_s,
     });
-    trig1(.hotbarUsed, .hb_defensive);
+    trig1(.hotbarUsedProc, .hb_defensive);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
     ttrg(.players_opponent_backstab, .{});
     tset(.hbs_def, .{});
@@ -1249,7 +1249,7 @@ fn transfiguredAssasinSet() !void {
         .hbVar0 = ninjutsu_scroll_max_hits,
         .hbVar1 = 1.0 - ninjutsu_scroll_proc_chance,
     });
-    trig1(.hotbarUsed, .hb_special);
+    trig1(.hotbarUsedProc, .hb_special);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 
     for (0..ninjutsu_scroll_max_hits) |_| {
@@ -2650,7 +2650,7 @@ fn transfiguredLifeSet() !void {
     trig1(.onDamage, .pl_self);
     qpat(.hb_reset_statchange, .{});
 
-    trig1(.hotbarUsed, .hb_primary);
+    trig1(.hotbarUsedProc, .hb_primary);
     cond(.hb_available, .{});
     qpat(.hb_run_cooldown, .{});
     qpat(.hb_cdloot_proc, .{});
@@ -3897,7 +3897,7 @@ fn transfiguredGladiatorSet() !void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = hb_stats.len });
 
     for (hb_conditions, hb_stats, 0..) |hotbar, exclude, i| {
-        trig1(.hotbarUsed, hotbar);
+        trig1(.hotbarUsedProc, hotbar);
         cond(.hb_check_square_var_false, .{ 0, i });
         qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = @floatFromInt(i) });
         qpat(.hb_reset_statchange, .{});
@@ -4027,7 +4027,7 @@ fn transfiguredSparkbladeSet() !void {
         .strMult = 1200,
         .delay = 150,
     });
-    trig1(.hotbarUsed, .hb_defensive);
+    trig1(.hotbarUsedProc, .hb_defensive);
     qpat(.hb_flash_item, .{});
     ttrg(.players_opponent, .{});
     tset(.hbs_def, .{});
@@ -4486,7 +4486,7 @@ fn transfiguredSacredflameSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
     });
     for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
-        trig1(.hotbarUsed, c);
+        trig1(.hotbarUsedProc, c);
         qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     }
     trig0(.hotbarUsed2);
@@ -4644,7 +4644,7 @@ fn transfiguredRuinsSet() !void {
         .radius = 400,
         .strMult = 500,
     });
-    trig1(.hotbarUsed, .hb_secondary);
+    trig1(.hotbarUsedProc, .hb_secondary);
     cond(.hb_available, .{});
     ttrg(.player_self, .{});
     qpat(.hb_run_cooldown, .{});
