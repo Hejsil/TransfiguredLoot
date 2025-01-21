@@ -245,18 +245,25 @@ fn transfiguredArcaneSet() !void {
     tset(.strength_def, .{});
     apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
+    const redblack_ribbon_mult_length_hbs = 1.0;
     item(.{
         .id = "it_transfigured_redblack_ribbon",
         .name = .{
             .english = "Transfigured Redblack Ribbon",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Debuffs you place last [VAR0_PERCENT] longer.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+
+        .hbVar0 = redblack_ribbon_mult_length_hbs,
     });
+    trig0(.cdCalc2b);
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg(.hotbarslots_prune_bufftype, .{0});
+    qpat(.hb_mult_length_hbs, .{ .mult = redblack_ribbon_mult_length_hbs + 1 });
 
     const opal_necklace_extra_cd = 10 * std.time.ms_per_s;
     const opal_necklace_num_curses = 4;
