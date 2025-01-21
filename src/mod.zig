@@ -4901,10 +4901,14 @@ fn transfiguredLakeshrineSet() !void {
         .weaponType = .loot,
         .treasureType = .yellowgreen,
 
-        .hbVar0 = std.time.ms_per_min,
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbsType = .smite_0,
         .hbsLength = std.time.ms_per_min,
+
+        .hbVar0 = std.time.ms_per_min,
     });
     trig0(.battleStart3);
+    qpat(.hb_flash_item, .{});
     ttrg(.player_self, .{});
     tset(.hbs_randombuff, .{});
     apat(.apply_hbs, .{});
