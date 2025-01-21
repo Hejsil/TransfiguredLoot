@@ -4493,6 +4493,8 @@ fn transfiguredSacredflameSet() !void {
         .autoOffSqVar0 = 0,
         .hbVar0 = sun_pendant_times,
 
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbsType = .flashstr,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
