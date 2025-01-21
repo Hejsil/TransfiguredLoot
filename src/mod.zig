@@ -1727,6 +1727,7 @@ fn transfiguredGemSet() !void {
         .lootHbDispType = .cooldownVarAm,
         .hbInput = .auto,
 
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
         .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
@@ -2151,6 +2152,7 @@ fn transfiguredShrineSet() !void {
         .autoOffSqVar0 = 0,
         .showSqVar = true,
 
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
         .hbsType = .smite_0,
         .hbsLength = 2 * std.time.ms_per_s,
 
@@ -4103,6 +4105,8 @@ fn transfiguredSparkbladeSet() !void {
         .showSqVar = true,
         .autoOffSqVar0 = 0,
 
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
         .hbVar0 = stormdance_gown_times_dmg_dealt,
