@@ -4557,6 +4557,8 @@ fn transfiguredSacredflameSet() !void {
         .weaponType = .loot,
         .treasureType = .redyellow,
 
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     for (Hbs.buffs) |buff| {
