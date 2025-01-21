@@ -2579,6 +2579,9 @@ fn transfiguredLuckySet() !void {
         .treasureType = .yellow,
 
         .hbsStrMult = mimick_rabbitfoot_hbs_str_mult,
+
+        // Redwhite Ribbon doesn't work if an items `hbsType` is not a debuff
+        .hbsType = .curse_0,
         .hbsLength = 13 * std.time.ms_per_s,
 
         .hbVar0 = @abs(mimick_rabbitfoot_all_mult),
