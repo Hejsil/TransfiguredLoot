@@ -8,10 +8,11 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    b.installArtifact(exe);
 
     const run_exe_step = b.addRunArtifact(exe);
     run_exe_step.addArgs(b.args orelse &.{});
+    run_exe_step.stdio = .inherit;
+
     b.default_step.dependOn(&run_exe_step.step);
 }
 
