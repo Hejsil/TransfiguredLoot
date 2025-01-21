@@ -2149,6 +2149,8 @@ fn transfiguredShrineSet() !void {
 
         .autoOffSqVar0 = 0,
         .showSqVar = true,
+
+        .hbsType = .smite_0,
         .hbsLength = 2 * std.time.ms_per_s,
 
         .hbVar0 = ornamental_bell_fizz * std.time.ms_per_s,
@@ -2169,7 +2171,7 @@ fn transfiguredShrineSet() !void {
     qpat(.hb_cdloot_proc, .{});
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ Hbs.smite_0, Receiver.hbsLength });
-    apat(.apply_hbs, .{});
+    apat(.ornamental_bell, .{});
 
     trig1(.hotbarUsed2, .hb_self);
     for (0..ornamental_bell_fizzbuzz) |i| {
@@ -2180,7 +2182,7 @@ fn transfiguredShrineSet() !void {
     qpat(.hb_cdloot_proc, .{});
     ttrg(.players_ally, .{});
     tset(.hbskey, .{ Hbs.elegy_0, Receiver.hbsLength });
-    apat(.apply_hbs, .{});
+    apat(.ornamental_bell, .{});
 
     const shrinemaidens_kosode_mult = 0.1;
     const shrinemaidens_kosode_mult_per_buff = 0.1;
