@@ -720,6 +720,8 @@ fn transfiguredTimespaceSet() !void {
         .cooldown = metronome_boots_hbs_len,
         .hbInput = .auto,
 
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbsType = .haste_2,
         .hbsLength = metronome_boots_hbs_len,
         .hbVar0 = metronome_boots_hbs_len,
     });
