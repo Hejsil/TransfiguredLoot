@@ -1727,6 +1727,7 @@ fn transfiguredGemSet() !void {
         .lootHbDispType = .cooldownVarAm,
         .hbInput = .auto,
 
+        .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
         .cooldownType = .time,
@@ -1753,7 +1754,7 @@ fn transfiguredGemSet() !void {
     ttrg(.players_ally, .{});
     for (0..sapphire_violin_num_buffs) |_| {
         tset(.hbs_randombuff, .{});
-        apat(.apply_hbs, .{});
+        apat(.ornamental_bell, .{});
     }
 
     trig0(.strCalc0);
