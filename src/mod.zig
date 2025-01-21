@@ -4641,7 +4641,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Golem's Claymore",
         },
         .description = .{
-            .english = "Every [CD], using your Secondary will [STONESKIN] for [HBSL].#" ++
+            .english = "Every [CD], using your Secondary grants you [STONESKIN] for [HBSL].#" ++
                 "When [STONESKIN] or [GRANITESKIN] shields you from damage slice the air " ++
                 "around you, dealing [STR] damage to nearby enemies.",
         },
