@@ -4187,6 +4187,9 @@ fn transfiguredSwiftflightSet() !void {
         .autoOffSqVar0 = 0,
 
         .hbVar0 = tornado_staff_dist,
+
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig1(.distanceTickBattle, .pl_self);
