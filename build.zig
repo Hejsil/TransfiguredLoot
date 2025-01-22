@@ -7,6 +7,7 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/mod.zig"),
         .target = target,
         .optimize = optimize,
+        .use_llvm = false,
     });
 
     const run_exe_step = b.addRunArtifact(exe);
