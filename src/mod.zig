@@ -4658,6 +4658,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .redgreen,
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
