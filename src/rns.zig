@@ -713,6 +713,7 @@ fn item2(opt: Item) !void {
 
     var description: []const u8 = opt.description.english;
     for (replacements) |replacement| {
+        _ = std.mem.indexOfScalar(u8, description, '[') orelse break;
         description = try std.mem.replaceOwned(
             u8,
             arena,
