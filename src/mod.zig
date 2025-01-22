@@ -257,6 +257,7 @@ fn transfiguredArcaneSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purple,
 
         .hbVar0 = redblack_ribbon_mult_length_hbs,
     });
@@ -659,6 +660,7 @@ fn transfiguredTimespaceSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purple,
     });
 
     item(.{
@@ -816,6 +818,7 @@ fn transfiguredTimespaceSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purple,
     });
 }
 
@@ -861,6 +864,7 @@ fn transfiguredWindSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     const pidgeon_bow_num_proj = 3;
@@ -911,6 +915,7 @@ fn transfiguredWindSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     const eaglewing_charm_extra_dmg = 5;
@@ -998,6 +1003,7 @@ fn transfiguredWindSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1011,6 +1017,7 @@ fn transfiguredWindSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 }
 
@@ -1034,6 +1041,7 @@ fn transfiguredBloodwolfSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1082,6 +1090,7 @@ fn transfiguredBloodwolfSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1095,6 +1104,7 @@ fn transfiguredBloodwolfSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1108,6 +1118,7 @@ fn transfiguredBloodwolfSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     const bloodflower_brooch_hits = 3;
@@ -1169,6 +1180,7 @@ fn transfiguredBloodwolfSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1182,6 +1194,7 @@ fn transfiguredBloodwolfSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 }
 
@@ -1218,6 +1231,7 @@ fn transfiguredAssasinSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1231,6 +1245,7 @@ fn transfiguredAssasinSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     const ninjutsu_scroll_max_hits = 9;
@@ -1306,6 +1321,7 @@ fn transfiguredAssasinSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1319,6 +1335,7 @@ fn transfiguredAssasinSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1376,6 +1393,7 @@ fn transfiguredRockdragonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1450,6 +1468,7 @@ fn transfiguredRockdragonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1463,6 +1482,7 @@ fn transfiguredRockdragonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1476,6 +1496,7 @@ fn transfiguredRockdragonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1489,6 +1510,7 @@ fn transfiguredRockdragonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1502,6 +1524,7 @@ fn transfiguredRockdragonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 }
 
@@ -1525,6 +1548,7 @@ fn transfiguredFlameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1538,6 +1562,7 @@ fn transfiguredFlameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1551,6 +1576,7 @@ fn transfiguredFlameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     const meteor_staff_cd = 10 * std.time.ms_per_s;
@@ -1626,6 +1652,7 @@ fn transfiguredFlameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1639,6 +1666,7 @@ fn transfiguredFlameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1652,6 +1680,7 @@ fn transfiguredFlameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 }
 
@@ -1675,6 +1704,7 @@ fn transfiguredGemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1688,6 +1718,7 @@ fn transfiguredGemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     const garnet_staff_dmg_per_erase = 0.05;
@@ -1786,6 +1817,7 @@ fn transfiguredGemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1799,6 +1831,7 @@ fn transfiguredGemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     item(.{
@@ -1812,6 +1845,7 @@ fn transfiguredGemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .red,
     });
 
     const ruby_circlet_start = 4;
@@ -1872,6 +1906,7 @@ fn transfiguredLightningSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     item(.{
@@ -1885,6 +1920,7 @@ fn transfiguredLightningSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     item(.{
@@ -1898,6 +1934,7 @@ fn transfiguredLightningSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     item(.{
@@ -2134,6 +2171,7 @@ fn transfiguredShrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     const ornamental_bell_fizz = 3;
@@ -2238,6 +2276,7 @@ fn transfiguredShrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     item(.{
@@ -2251,6 +2290,7 @@ fn transfiguredShrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     item(.{
@@ -2264,6 +2304,7 @@ fn transfiguredShrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 }
 
@@ -2407,6 +2448,7 @@ fn transfiguredLuckySet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellow,
     });
 
     const royal_staff_crit_dmg_buff = 0.02;
@@ -2641,6 +2683,7 @@ fn transfiguredLifeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2715,6 +2758,7 @@ fn transfiguredLifeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2728,6 +2772,7 @@ fn transfiguredLifeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     const sunflower_crown_hp = 3;
@@ -2905,6 +2950,7 @@ fn transfiguredPoisonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2918,6 +2964,7 @@ fn transfiguredPoisonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2931,6 +2978,7 @@ fn transfiguredPoisonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2944,6 +2992,7 @@ fn transfiguredPoisonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2980,6 +3029,7 @@ fn transfiguredPoisonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -2993,6 +3043,7 @@ fn transfiguredPoisonSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 }
 
@@ -3016,6 +3067,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -3029,6 +3081,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     const tidal_greatsword_dmg_mult = 0.04;
@@ -3106,6 +3159,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -3119,6 +3173,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -3132,6 +3187,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -3145,6 +3201,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 
     item(.{
@@ -3158,6 +3215,7 @@ fn transfiguredDepthSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .green,
     });
 }
 
@@ -3181,6 +3239,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 
     item(.{
@@ -3194,6 +3253,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 
     item(.{
@@ -3207,6 +3267,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 
     item(.{
@@ -3220,6 +3281,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 
     const nightguard_gloves_dmg_mult = 0.35;
@@ -3292,6 +3354,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 
     item(.{
@@ -3305,6 +3368,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 
     item(.{
@@ -3318,6 +3382,7 @@ fn transfiguredDarkbiteSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleblue,
     });
 }
 
@@ -3372,6 +3437,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 
     item(.{
@@ -3385,6 +3451,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 
     item(.{
@@ -3398,6 +3465,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 
     item(.{
@@ -3411,6 +3479,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 
     item(.{
@@ -3424,6 +3493,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 
     item(.{
@@ -3437,6 +3507,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 
     item(.{
@@ -3450,6 +3521,7 @@ fn transfiguredTimegemSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 }
 
@@ -3532,6 +3604,7 @@ fn transfiguredYoukaiSet() !void {
         .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
+        .treasureType = .purpleyellow,
 
         .specialMult = oni_staff_mult,
         .hbVar0 = oni_staff_mult,
@@ -3553,6 +3626,7 @@ fn transfiguredYoukaiSet() !void {
         .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleyellow,
     });
 
     item(.{
@@ -3622,6 +3696,7 @@ fn transfiguredYoukaiSet() !void {
         .color = color_light,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleyellow,
     });
 
     item(.{
@@ -3635,6 +3710,7 @@ fn transfiguredYoukaiSet() !void {
         .color = color_light,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purpleyellow,
     });
 }
 
@@ -3658,6 +3734,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3671,6 +3748,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3684,6 +3762,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3697,6 +3776,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3710,6 +3790,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3723,6 +3804,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3736,6 +3818,7 @@ fn transfiguredHauntedSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 
     item(.{
@@ -3791,6 +3874,7 @@ fn transfiguredGladiatorSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluered,
     });
 
     item(.{
@@ -3804,6 +3888,7 @@ fn transfiguredGladiatorSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluered,
     });
 
     const tactician_rod_mult = -0.2;
@@ -3839,6 +3924,7 @@ fn transfiguredGladiatorSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluered,
     });
 
     item(.{
@@ -3852,6 +3938,7 @@ fn transfiguredGladiatorSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluered,
     });
 
     const gladiator_helmet_dmg_mult = 0.2;
@@ -3944,6 +4031,7 @@ fn transfiguredGladiatorSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluered,
     });
 }
 
@@ -3967,6 +4055,7 @@ fn transfiguredSparkbladeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blueyellow,
     });
 
     item(.{
@@ -3980,6 +4069,7 @@ fn transfiguredSparkbladeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blueyellow,
     });
 
     item(.{
@@ -4097,6 +4187,7 @@ fn transfiguredSparkbladeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blueyellow,
     });
 
     const stormdance_gown_times_dmg_dealt = 40;
@@ -4143,6 +4234,7 @@ fn transfiguredSparkbladeSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blueyellow,
     });
 }
 
@@ -4166,6 +4258,7 @@ fn transfiguredSwiftflightSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluegreen,
     });
 
     item(.{
@@ -4179,6 +4272,7 @@ fn transfiguredSwiftflightSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluegreen,
     });
 
     const tornado_staff_dist = 15;
@@ -4224,6 +4318,7 @@ fn transfiguredSwiftflightSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .bluegreen,
     });
 
     const hermes_bow_dmg_per_leap = 25;
@@ -4484,6 +4579,7 @@ fn transfiguredSacredflameSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redyellow,
     });
 
     const sun_pendant_times = 10;
@@ -4604,6 +4700,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redgreen,
     });
 
     item(.{
@@ -4617,6 +4714,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redgreen,
     });
 
     item(.{
@@ -4630,6 +4728,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redgreen,
     });
 
     item(.{
@@ -4643,6 +4742,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redgreen,
     });
 
     item(.{
@@ -4770,6 +4870,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redgreen,
     });
 
     item(.{
@@ -4783,6 +4884,7 @@ fn transfiguredRuinsSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .redgreen,
     });
 }
 
@@ -4806,6 +4908,7 @@ fn transfiguredLakeshrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellowgreen,
     });
 
     item(.{
@@ -4819,6 +4922,7 @@ fn transfiguredLakeshrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellowgreen,
     });
 
     item(.{
@@ -4832,6 +4936,7 @@ fn transfiguredLakeshrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellowgreen,
     });
 
     item(.{
@@ -4872,6 +4977,7 @@ fn transfiguredLakeshrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellowgreen,
     });
 
     item(.{
@@ -4885,6 +4991,7 @@ fn transfiguredLakeshrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellowgreen,
     });
 
     item(.{
@@ -4898,6 +5005,7 @@ fn transfiguredLakeshrineSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .yellowgreen,
     });
 
     item(.{
