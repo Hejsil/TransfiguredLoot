@@ -3446,13 +3446,40 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Timespace Dagger",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your Secondary's GCD becomes the GCD of your Primary.#" ++
+                "Your Secondary's total strength becomes the total strength of your Special.#" ++
+                "Your Secondary's cooldown becomes half the cooldown of your Defensive.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purplered,
+        .treasureType = .purplered,
     });
+    trig0(.strCalc1b);
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.special});
+    tset_uservar2("u_str", TargetHotbar0.strength, .@"*", TargetHotbar0.number);
+
+    // Some abilities that hit onces will have `number` as 0. To counteract this, we filter for
+    // it and adds the strenght back as `u_str` will be one in that case
+    ttrg_hotbarslots_prune(TargetHotbar0.number, .@"==", 0);
+    tset_uservar2("u_str", "u_str", .@"+", TargetHotbar0.strength);
+
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
+    qpat(.hb_set_strength, .{ .amountStr = "u_str" });
+
+    // Same here. If `number` is 0, we exit early and don't do the divide
+    cond_eval2(TargetHotbar0.number, .@">", 0);
+    tset_uservar2("u_str", "u_str", .@"/", TargetHotbar0.number);
+    qpat(.hb_set_strength, .{ .amountStr = "u_str" });
+
+    trig0(.cdCalc5);
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
+    tset_uservar1("u_gcd", TargetHotbar0.gcd);
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
+    tset_uservar2("u_cooldown", TargetHotbar0.cooldown, .@"/", 2);
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
+    qpat(.hb_set_gcd_permanent, .{ .amountStr = "u_gcd" });
+    qpat(.hb_set_cooldown_permanent, .{ .timeStr = "u_cooldown" });
 
     item(.{
         .id = "it_transfigured_quartz_shield",
