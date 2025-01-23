@@ -1861,8 +1861,9 @@ fn transfiguredGemSet() !void {
         // .treasureType = .red,
     });
 
-    const ruby_circlet_start = 4;
-    const ruby_circlet_dmg_per_stock = 0.1;
+    const ruby_circlet_start = 5;
+    const ruby_circlet_stop = 0;
+    const ruby_circlet_dmg_per_stock = 0.9;
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
@@ -1870,7 +1871,8 @@ fn transfiguredGemSet() !void {
         },
         .description = .{
             .english = "You deal [VAR0_PERCENT] more damage.#" ++
-                "When you take damage, permanently deal [VAR1_PERCENT] less damage.",
+                "When you take damage, permanently reduce this value by [VAR1_PERCENT] " ++
+                "(minimum [VAR2_PERCENT]).",
         },
         .color = color,
         .type = .loot,
@@ -1881,11 +1883,13 @@ fn transfiguredGemSet() !void {
 
         .hbVar0 = ruby_circlet_start * ruby_circlet_dmg_per_stock,
         .hbVar1 = ruby_circlet_dmg_per_stock,
+        .hbVar2 = ruby_circlet_stop * ruby_circlet_dmg_per_stock,
     });
     trig1(.onSquarePickup, .square_self);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = ruby_circlet_start });
 
     trig1(.onDamage, .pl_self);
+    cond(.hb_check_square_var_false, .{ .varIndex = 0, .amount = ruby_circlet_stop });
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
     qpat(.hb_reset_statchange, .{});
     qpat(.hb_flash_item, .{ .message = .broken });
