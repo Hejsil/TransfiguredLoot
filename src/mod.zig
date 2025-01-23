@@ -1892,7 +1892,7 @@ fn transfiguredGemSet() !void {
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = ruby_circlet_start });
 
     trig1(.onDamage, .pl_self);
-    cond(.hb_check_square_var_false, .{ .varIndex = 0, .amount = ruby_circlet_stop });
+    cond(.hb_check_square_var_false, .{ 0, ruby_circlet_stop });
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -1 });
     qpat(.hb_reset_statchange, .{});
     qpat(.hb_flash_item, .{ .message = .broken });
@@ -3147,7 +3147,7 @@ fn transfiguredDepthSet() !void {
     });
 
     const hydrous_blob_secondary_stacks = 1;
-    const hydrous_blob_special_stacks = 1;
+    const hydrous_blob_special_stacks = 2;
     item(.{
         .id = "it_transfigured_hydrous_blob",
         .name = .{
@@ -3156,8 +3156,8 @@ fn transfiguredDepthSet() !void {
         .description = .{
             .english = "Every [CD], consume a stack to fire an eldritch beast towards your " ++
                 "target, dealing [STR] damage.#" ++
-                "Gains [VAR0] stack" ++ (if (hydrous_blob_secondary_stacks != 1) "s" else "") ++ "when you use your Secondary.#" ++
-                "Gains [VAR1] stack" ++ (if (hydrous_blob_special_stacks != 1) "s" else "") ++ "when you use your Special.",
+                "Gains [VAR0] stack" ++ (if (hydrous_blob_secondary_stacks != 1) "s" else "") ++ " when you use your Secondary.#" ++
+                "Gains [VAR1] stack" ++ (if (hydrous_blob_special_stacks != 1) "s" else "") ++ " when you use your Special.",
         },
         .color = color,
         .type = .loot,
@@ -3170,7 +3170,8 @@ fn transfiguredDepthSet() !void {
         .cooldown = 2 * std.time.ms_per_s,
 
         .strMult = 100,
-        .delay = 150,
+        .delay = std.time.ms_per_s,
+        .radius = 350,
 
         .showSqVar = true,
         .autoOffSqVar0 = 0,
@@ -3181,7 +3182,7 @@ fn transfiguredDepthSet() !void {
     trig1(.autoStart, .hb_auto_pl);
     qpat(.hb_run_cooldown, .{});
 
-    trig1(.hotbarUsedProc, .hb_secon);
+    trig1(.hotbarUsedProc, .hb_secondary);
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = hydrous_blob_secondary_stacks });
 
     trig1(.hotbarUsedProc, .hb_special);
