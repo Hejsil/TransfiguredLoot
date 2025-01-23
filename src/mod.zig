@@ -599,11 +599,11 @@ fn transfiguredTimespaceSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 12 * std.time.ms_per_s,
+        .cooldown = 20 * std.time.ms_per_s,
         .hbInput = .auto,
 
         .hbsType = Hbs.berserk,
-        .hbsLength = 4 * std.time.ms_per_s,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
     trig1(.autoStart, .hb_auto_pl);
     qpat(.hb_run_cooldown, .{});
