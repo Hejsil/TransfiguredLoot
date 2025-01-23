@@ -1316,13 +1316,26 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Ninja Robe",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your abilities have a [LUCK] chance of giving you [VANISH].",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blue,
+        .treasureType = .blue,
+
+        .procChance = 0.2,
+
+        .hbsType = .vanish,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
+        trig1(.hotbarUsed, c);
+        cond(.random_def, .{});
+        qpat(.hb_flash_item, .{});
+        qpat(.hb_lucky_proc, .{});
+        tset(.hbs_def, .{});
+        apat(.apply_hbs, .{});
+    }
 
     item(.{
         .id = "it_transfigured_kunoichi_hood",
