@@ -2598,69 +2598,19 @@ fn transfiguredLuckySet() !void {
     tset(.strength_def, .{});
     apat(.curse_talon, .{});
 
-    const mimick_rabbitfoot_all_mult = -0.13;
-    const mimick_rabbitfoot_hbs_str_mult = 30;
-    const mimick_rabbitfoot_cd = 4 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_mimick_rabbitfoot",
         .name = .{
             .english = "Transfigured Mimick Rabbitfoot",
         },
         .description = .{
-            .english = "It's a real rabbit foot.#" ++
-                "Negative emotions consume you.#" ++
-                " #" ++
-                "You are unlucky.#" ++
-                "You deal [VAR0_PERCENT] less damage.#" ++
-                "You have [BERSERK].#" ++
-                "Every [CD], inflict a [HBSL] debuff to all enemies.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .yellow,
-
-        .hbsStrMult = mimick_rabbitfoot_hbs_str_mult,
-
-        // Redwhite Ribbon doesn't work if an items `hbsType` is not a debuff
-        .hbsType = .curse_0,
-        .hbsLength = 13 * std.time.ms_per_s,
-
-        .hbVar0 = @abs(mimick_rabbitfoot_all_mult),
-        .allMult = mimick_rabbitfoot_all_mult,
-        .luck = -13,
-
-        .lootHbDispType = .cooldown,
-        .cooldownType = .time,
-        .cooldown = mimick_rabbitfoot_cd,
-        .hbInput = .auto,
+        // .treasureType = .yellow,
     });
-    var random_state = std.Random.DefaultPrng.init(1);
-    const random = random_state.random();
-    var debuffs = rns.Hbs.debuffs;
-    random.shuffle(Hbs, &debuffs);
-
-    for (debuffs, 0..) |debuff, i| {
-        trig1(.hotbarUsed, .hb_self);
-        cond(.hb_check_square_var, .{ 0, i });
-        ttrg(.players_opponent, .{});
-        tset(.hbskey, .{ debuff, Receiver.hbsLength });
-        tset(.hbsstr, .{mimick_rabbitfoot_hbs_str_mult});
-        apat(.poisonfrog_charm, .{});
-    }
-
-    trig1(.hotbarUsed2, .hb_self);
-    qpat(.hb_flash_item, .{});
-    qpat(.hb_cdloot_proc, .{});
-    qpat(.hb_run_cooldown, .{});
-    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
-    ttrg(.player_self, .{});
-    tset(.hbskey, .{ Hbs.berserk, mimick_rabbitfoot_cd });
-    apat(.apply_hbs, .{});
-
-    trig1(.hotbarUsed3, .hb_self);
-    cond(.hb_check_square_var, .{ 0, debuffs.len });
-    qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 0 });
 }
 
 fn transfiguredLifeSet() !void {
