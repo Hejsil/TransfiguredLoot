@@ -245,6 +245,7 @@ fn transfiguredArcaneSet() !void {
     tset(.strength_def, .{});
     apat(.melee_hit, .{ .numberStr = "u_hbs_matching" });
 
+    const redblack_ribbon_dmg_mult = 0.05;
     const redblack_ribbon_mult_length_hbs = 1.0;
     item(.{
         .id = "it_transfigured_redblack_ribbon",
@@ -252,14 +253,16 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Redblack Ribbon",
         },
         .description = .{
-            .english = "Debuffs you place last [VAR0_PERCENT] longer.",
+            .english = "You deal [VAR1_PERCENT] more damage. Debuffs you place last [VAR0_PERCENT] longer.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .purple,
 
+        .allMult = redblack_ribbon_dmg_mult,
         .hbVar0 = redblack_ribbon_mult_length_hbs,
+        .hbVar1 = redblack_ribbon_dmg_mult,
     });
     trig0(.cdCalc2b);
     ttrg(.hotbarslots_current_players, .{});
