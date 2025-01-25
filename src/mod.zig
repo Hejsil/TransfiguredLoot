@@ -1757,7 +1757,7 @@ fn transfiguredGemSet() !void {
 
         .hbVar0 = garnet_staff_dmg_per_erase,
     });
-    trig0(.onEraseDone);
+    trig1(.onEraseDone, .pl_self);
     qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
     qpat(.hb_reset_statchange, .{});
 
