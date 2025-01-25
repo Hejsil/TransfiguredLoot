@@ -1866,7 +1866,7 @@ fn transfiguredGemSet() !void {
 
     const ruby_circlet_start = 5;
     const ruby_circlet_stop = 0;
-    const ruby_circlet_dmg_per_stock = 0.9;
+    const ruby_circlet_dmg_per_stock = 0.09;
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
