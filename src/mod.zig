@@ -733,6 +733,7 @@ fn transfiguredTimespaceSet() !void {
         .hbInput = .auto,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .haste_2,
         .hbsLength = metronome_boots_hbs_len,
         .hbVar0 = metronome_boots_hbs_len,
@@ -1792,7 +1793,10 @@ fn transfiguredGemSet() !void {
 
         .hbVar0 = sapphire_violin_num_buffs,
         .greySqVar0 = true,
-        .hbFlags = .{ .var0req = true },
+        .hbFlags = .{
+            .var0req = true,
+            .hidehbs = true,
+        },
     });
     trig1(.onSquarePickup, .square_self);
     qpat(.hb_square_set_var, .{ .varIndex = 0, .amount = 1 });
@@ -2220,6 +2224,7 @@ fn transfiguredShrineSet() !void {
         .showSqVar = true,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = 2 * std.time.ms_per_s,
 
@@ -4243,6 +4248,7 @@ fn transfiguredSparkbladeSet() !void {
         .autoOffSqVar0 = 0,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
 
@@ -4329,6 +4335,7 @@ fn transfiguredSwiftflightSet() !void {
         .hbVar0 = tornado_staff_dist,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -4636,6 +4643,7 @@ fn transfiguredSacredflameSet() !void {
         .hbVar0 = sun_pendant_times,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .flashstr,
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -4700,6 +4708,7 @@ fn transfiguredSacredflameSet() !void {
         .treasureType = .redyellow,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -4988,6 +4997,7 @@ fn transfiguredLakeshrineSet() !void {
         .treasureType = .yellowgreen,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = 5 * std.time.ms_per_s,
     });
@@ -5057,6 +5067,7 @@ fn transfiguredLakeshrineSet() !void {
         .treasureType = .yellowgreen,
 
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = std.time.ms_per_min,
 
