@@ -3045,19 +3045,47 @@ fn transfiguredDepthSet() !void {
         // .treasureType = .green,
     });
 
+    const necronomicon_stacks_consumed = 3;
     item(.{
         .id = "it_transfigured_necronomicon",
         .name = .{
             .english = "Transfigured Necronomicon",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every time you use your secondary, gain a stack.#" ++
+                "Activating an ability with a cooldown consumes [VAR0] stack" ++
+                (if (necronomicon_stacks_consumed != 1) "s" else "") ++
+                " to reset its cooldown instantly.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .green,
+        .treasureType = .green,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+        .hbVar0 = necronomicon_stacks_consumed,
     });
+    trig1(.hotbarUsedProc, .hb_secondary);
+    qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = 1 });
+
+    const hb_conditions = [_]Condition{
+        .hb_primary,
+        .hb_secondary,
+        .hb_special,
+        .hb_defensive,
+    };
+
+    for (hb_conditions, WeaponType.abilities) |c, weapon| {
+        trig1(.hotbarUsedProc, c);
+        cond(.hb_check_square_var_gte, .{ 0, necronomicon_stacks_consumed });
+        ttrg(.hotbarslots_self_weapontype, .{weapon});
+        cond(.hb_check_resettable0, .{});
+        qpat(.hb_reset_cooldown, .{});
+        ttrg(.hotbarslots_self_loot, .{});
+        qpat(.hb_square_add_var, .{ .varIndex = 0, .amount = -necronomicon_stacks_consumed });
+        qpat(.hb_flash_item, .{});
+    }
 
     const tidal_greatsword_dmg_mult = 0.04;
     const tidal_greatsword_aoe_mult = 0.02;
