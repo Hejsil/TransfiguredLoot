@@ -3944,19 +3944,37 @@ fn transfiguredGladiatorSet() !void {
         // .treasureType = .bluered,
     });
 
+    const teacher_knife_per_sec_mult = 0.01;
     item(.{
         .id = "it_transfigured_teacher_knife",
         .name = .{
             .english = "Transfigured Teacher Knife",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "For each second of cooldown on your abilities your secondary deals " ++
+                "[VAR0_PERCENT] more damage.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .bluered,
+        .treasureType = .bluered,
+
+        .hbVar0 = teacher_knife_per_sec_mult,
     });
+    trig0(.strCalc1c);
+    ttrg(.hotbarslots_current_players, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.potion);
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.loot);
+    ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
+
+    inline for (.{ TargetHotbar0, TargetHotbar1, TargetHotbar2, TargetHotbar3 }) |TargetHotbar| {
+        tset_uservar2("u_mult_temp", TargetHotbar.cooldown, .@"/", std.time.ms_per_s);
+        tset_uservar2("u_mult_temp", "u_mult_temp", .@"*", teacher_knife_per_sec_mult);
+        tset_uservar2("u_mult", "u_mult", .@"+", "u_mult_temp");
+    }
+
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
+    qpat(.hb_add_strcalcbuff, .{ .amountStr = "u_mult" });
 
     const tactician_rod_mult = -0.2;
     item(.{
