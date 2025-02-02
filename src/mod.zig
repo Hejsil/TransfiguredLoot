@@ -505,7 +505,7 @@ fn transfiguredNightSet() !void {
     });
     trig1(.hotbarUsedProc, .hb_defensive);
     ttrg(.hotbarslots_current_players, .{});
-    ttrg(.hotbarslots_prune_self, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.weaponType, .@"!=", WeaponType.defensive);
     ttrg_hotbarslots_prune(TargetHotbars.cooldown, .@">", 0);
     ttrg_hotbarslots_prune(TargetHotbars.resettable, .@"==", 1);
     qpat(.hb_flash_item, .{});
