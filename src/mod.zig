@@ -3515,10 +3515,13 @@ fn transfiguredTimegemSet() !void {
     trig0(.cdCalc5);
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.primary});
     tset_uservar1("u_gcd", TargetHotbar0.gcd);
+    ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
+    qpat(.hb_set_gcd_permanent, .{ .amountStr = "u_gcd" });
+
+    trig0(.cdCalc6);
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.defensive});
     tset_uservar2("u_cooldown", TargetHotbar0.cooldown, .@"/", 2);
     ttrg(.hotbarslots_self_weapontype, .{WeaponType.secondary});
-    qpat(.hb_set_gcd_permanent, .{ .amountStr = "u_gcd" });
     qpat(.hb_set_cooldown_permanent, .{ .timeStr = "u_cooldown" });
 
     item(.{
