@@ -2720,6 +2720,7 @@ fn transfiguredLifeSet() !void {
     trig1(.hotbarUsed, .hb_self);
     qpat(.hb_run_cooldown, .{});
     ttrg(.hotbarslots_self_abilities, .{});
+    ttrg_hotbarslots_prune(TargetHotbars.maxStock, .@">", 1);
     qpat(.hb_increase_stock, .{ .amount = 1 });
 
     item(.{
