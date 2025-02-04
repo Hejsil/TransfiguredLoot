@@ -3053,7 +3053,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Necronomicon",
         },
         .description = .{
-            .english = "Every time you use your secondary, gain a stack.#" ++
+            .english = "Every time you use your Secondary, gain a stack.#" ++
                 "Activating an ability with a cooldown consumes [VAR0] stack" ++
                 (if (necronomicon_stacks_consumed != 1) "s" else "") ++
                 " to reset its cooldown instantly.",
