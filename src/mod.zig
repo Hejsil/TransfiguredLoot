@@ -3955,7 +3955,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Teacher Knife",
         },
         .description = .{
-            .english = "For each second of cooldown on your abilities your secondary deals " ++
+            .english = "For each second of cooldown on your abilities your Secondary deals " ++
                 "[VAR0_PERCENT] more damage.",
         },
         .color = color,
