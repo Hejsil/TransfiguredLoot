@@ -2896,9 +2896,9 @@ fn transfiguredPoisonSet() !void {
         .poison_5,
         .poison_6,
     };
+    tset(.hbs_def, .{});
     inline for (poisons[0..snakefang_dagger_num_poisons]) |hbs| {
-        tset(.hbskey, .{ hbs, Receiver.hbsLength });
-        tset(.hbsstr, .{snakefang_dagger_str});
+        tset(.hbskey, .{hbs});
         apat(.apply_hbs, .{});
     }
 
