@@ -3358,8 +3358,8 @@ fn transfiguredDarkbiteSet() !void {
         // Ok, we now know how many slots we need to perform checks for to isolate the ability with
         // the lowest stength. First, we save each abilities strength in a uservar. The strength
         // of all abilities will be gone once we start pruning.
-        var buf1: [std.mem.page_size]u8 = undefined;
-        var buf2: [std.mem.page_size]u8 = undefined;
+        var buf1: [128]u8 = undefined;
+        var buf2: [128]u8 = undefined;
         for (0..slot_count) |i| {
             tset_uservar1(
                 try std.fmt.bufPrint(&buf1, "u_ths{}_strength", .{i}),
