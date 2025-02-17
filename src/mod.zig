@@ -1517,19 +1517,35 @@ fn transfiguredRockdragonSet() !void {
         // .treasureType = .red,
     });
 
+    const rockdragon_mail_every_nth_hit = 2;
     item(.{
         .id = "it_transfigured_rockdragon_mail",
         .name = .{
             .english = "Transfigured Rockdragon Mail",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Shields you from every other hit.#" ++
+                "Your movement speed is slightly reduced.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .showSqVar = true,
+        .charspeed = -charspeed.slightly,
     });
+    trig.onSquarePickup(&.{.square_self});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+
+    trig.hbsShield0(&.{cond.pl_self});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    cond.hb_check_square_var(.{ .varIndex = 0, .amount = rockdragon_mail_every_nth_hit });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+    qpat.hb_flash_item(.{});
+    qpat.player_shield(.{});
+    ttrg.player_self(.{});
+    apat.apply_invuln(.{});
 
     item(.{
         .id = "it_transfigured_obsidian_hairpin",
