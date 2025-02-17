@@ -1534,6 +1534,7 @@ fn transfiguredRockdragonSet() !void {
 
         .showSqVar = true,
         .charspeed = -charspeed.slightly,
+        .hbsFlag = .{ .shield = true },
     });
     trig.onSquarePickup(&.{.square_self});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
