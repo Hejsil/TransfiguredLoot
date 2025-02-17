@@ -1473,6 +1473,13 @@ pub const QuickPattern = enum {
     /// Make the targeted player's trinket flash/sparkle/animate
     player_trinket_flash,
 
+    player_add_hp,
+    player_set_hp,
+    player_add_gold,
+    player_set_gold,
+    player_add_level,
+    player_set_level,
+
     /// "amount" (a number, in milliseconds)
     /// Adds (or subtracts, if amount is negative) an amount from targeted hotbarslot's
     /// current cooldown.
@@ -1763,6 +1770,12 @@ pub const QuickPattern = enum {
             .player_trinket_counter_randomize => "tpat_player_trinket_counter_randomize",
             .player_trinket_counter_set => "tpat_player_trinket_counter_set",
             .player_trinket_flash => "tpat_player_trinket_flash",
+            .player_add_hp => "tpat_player_add_hp",
+            .player_set_hp => "tpat_player_set_hp",
+            .player_add_gold => "tpat_player_add_gold",
+            .player_set_gold => "tpat_player_set_gold",
+            .player_add_level => "tpat_player_add_level",
+            .player_set_level => "tpat_player_set_level",
             .hb_add_cooldown => "tpat_hb_add_cooldown",
             .hb_add_cooldown_permanent => "tpat_hb_add_cooldown_permanent",
             .hb_add_flag => "tpat_hb_add_flag",
@@ -3042,6 +3055,23 @@ pub const Set = enum {
     /// Saves a random number between the minimum and maximum amount to a uservar.
     uservar_random_range,
 
+    /// key (string)
+    /// minimumAmount (number)
+    /// maximumAmount (number)
+    ///
+    /// Saves a random number between the minimum and maximum amount to a uservar.
+    userver_random_range_int,
+
+    uservar_switch,
+    uservar_difficulty,
+    uservar_hallwaycount,
+    uservar_stage,
+    uservar_hb_cooldownvar,
+    uservar_hb_hitboxvar,
+    uservar_hb_itemvar,
+    uservar_hb_stat,
+    uservar_player_stat,
+
     uservar_slotcount,
     uservar_hbscount,
     uservar_playercount,
@@ -3076,6 +3106,16 @@ pub const Set = enum {
             .uservar_slotcount => "tset_uservar_slotcount",
             .uservar_hbscount => "tset_uservar_hbscount",
             .uservar_playercount => "tset_uservar_playercount",
+            .userver_random_range_int => "tset_userver_random_range_int",
+            .uservar_switch => "tset_uservar_switch",
+            .uservar_difficulty => "tset_uservar_difficulty",
+            .uservar_hallwaycount => "tset_uservar_hallwaycount",
+            .uservar_stage => "tset_uservar_stage",
+            .uservar_hb_cooldownvar => "tset_uservar_hb_cooldownvar",
+            .uservar_hb_hitboxvar => "tset_uservar_hb_hitboxvar",
+            .uservar_hb_itemvar => "tset_uservar_hb_itemvar",
+            .uservar_hb_stat => "tset_uservar_hb_stat",
+            .uservar_player_stat => "tset_uservar_player_stat",
         };
     }
 };
@@ -3837,6 +3877,64 @@ pub const FlashMessage = enum {
     }
 };
 
+pub const Difficulty = enum {
+    cute,
+    normal,
+    hard,
+    lunar,
+
+    pub fn toCsvString(difficulty: Difficulty) []const u8 {
+        return switch (difficulty) {
+            .cute => "difficulty.cute",
+            .normal => "difficulty.normal",
+            .hard => "difficulty.hard",
+            .lunar => "difficulty.lunar",
+        };
+    }
+};
+
+pub const Stage = enum {
+    @"test",
+    outskirts,
+    nest,
+    arsenal,
+    lighthouse,
+    streets,
+    lakeside,
+    keep,
+    pinnacle,
+
+    pub fn toCsvString(difficulty: Difficulty) []const u8 {
+        return switch (difficulty) {
+            .@"test" => "stage.test",
+            .outskirts => "stage.outskirts",
+            .nest => "stage.nest",
+            .arsenal => "stage.arsenal",
+            .lighthouse => "stage.lighthouse",
+            .streets => "stage.streets",
+            .lakeside => "stage.lakeside",
+            .keep => "stage.keep",
+            .pinnacle => "stage.pinnacle",
+        };
+    }
+};
+
+pub const GoldSource = enum {
+    battleRewards,
+    store,
+    loot,
+    debug,
+
+    pub fn toCsvString(difficulty: Difficulty) []const u8 {
+        return switch (difficulty) {
+            .battleRewards => "goldSource.battleRewards",
+            .store => "goldSource.store",
+            .loot => "goldSource.loot",
+            .debug => "goldSource.debug",
+        };
+    }
+};
+
 pub const MathSign = enum {
     @"*",
     @"+",
@@ -4068,6 +4166,11 @@ fn TriggerVariable(comptime prefix: []const u8) type {
         /// hit, changing it to a ruffled Floof Ball
         counter,
 
+        changeAmount,
+        newAmount,
+        sourceType,
+        sourceHb,
+
         pub fn toCsvString(variable: @This()) []const u8 {
             return switch (variable) {
                 .teamId => prefix ++ "teamId",
@@ -4120,6 +4223,10 @@ fn TriggerVariable(comptime prefix: []const u8) type {
                 .isBuff => prefix ++ "isBuff",
                 .isCrit => prefix ++ "isCrit",
                 .counter => prefix ++ "counter",
+                .changeAmount => prefix ++ "changeAmount",
+                .newAmount => prefix ++ "newAmount",
+                .sourceType => prefix ++ "sourceType",
+                .sourceHb => prefix ++ "sourceHb",
             };
         }
     };
