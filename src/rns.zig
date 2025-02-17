@@ -1756,116 +1756,179 @@ pub const cond = opaque {
 ///
 /// quickPattern,tpat_hb_square_set_var,varIndex,0,amount,5,
 ///
-///https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1513724686#gid=1513724686
-pub const QuickPattern = enum {
+/// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1513724686#gid=1513724686
+pub const qpat = opaque {
     /// Does nothing
-    nothing,
+    pub fn nothing(args: Args) void {
+        write("tpat_nothing", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Adds the current list of targets to your debug log.
-    debug_targets,
+    pub fn debug_targets(args: Args) void {
+        write("tpat_debug_targets", args) catch |err| @panic(@errorName(err));
+    }
 
-    /// "To be used during strCalc.
+    /// To be used during strCalc.
     /// Adds to the player's hitbox size.
-    /// The default hitbox size is 5 pixels."
-    player_add_radius,
+    /// The default hitbox size is 5 pixels.
+    pub fn player_add_radius(args: Args) void {
+        write("tpat_player_add_radius", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "stat" (a stat to add, see "STAT" in enum reference)
     /// "amount" (a number to add)
     /// Adds some stat amount to targetted players.
-    player_add_stat,
+    pub fn player_add_stat(args: Args) void {
+        write("tpat_player_add_stat", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Randomizes your levitation ring color (used on the Paintbrush trinket)
-    player_change_color_rand,
+    pub fn player_change_color_rand(args: Args) void {
+        write("tpat_player_change_color_rand", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Resets the distance ticker for targeted players to 0 (used for the "Tranquility" status
     /// effect to accurately measure 1 rabbitleap)
-    player_distcounter_reset,
+    pub fn player_distcounter_reset(args: Args) void {
+        write("tpat_player_distcounter_reset", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "length" (time in milliseconds)
     /// Locks targeted players in place for the specified length of time.
     /// NOTE: This function currently doesn't work correctly online.
-    player_movelock,
+    pub fn player_movelock(args: Args) void {
+        write("tpat_player_movelock", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "mult" (move speed multiplier)
     /// "length" (time in milliseconds)
     /// Slows/speeds up players for a brief amount of time.
     /// NOTE: This function currently doesn't work correctly online.
-    player_movemult,
+    pub fn player_movemult(args: Args) void {
+        write("tpat_player_movemult", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "length" (time in milliseconds)
     /// Runs GCD for specified amount of time
-    player_run_gcd,
+    pub fn player_run_gcd(args: Args) void {
+        write("tpat_player_run_gcd", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (size in pixels)
     /// Sets hitbox size for players; meant to be used in strCalc
-    player_set_radius,
+    pub fn player_set_radius(args: Args) void {
+        write("tpat_player_set_radius", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "stat" (a stat to add, see "STAT" in enum reference)
     /// "amount" (a number to add)
     /// Sets a base stat for targeted players to an amount.
-    player_set_stat,
+    pub fn player_set_stat(args: Args) void {
+        write("tpat_player_set_stat", args) catch |err| @panic(@errorName(err));
+    }
 
     /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
     /// from damage. Use this trigger for loot/ability effects.
-    player_shield,
+    pub fn player_shield(args: Args) void {
+        write("tpat_player_shield", args) catch |err| @panic(@errorName(err));
+    }
 
     /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
     /// from damage. Use this trigger for status effects (like Stoneskin).
-    player_shield_hbs,
+    pub fn player_shield_hbs(args: Args) void {
+        write("tpat_player_shield_hbs", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// Add to the targeted player's hidden trinket counter.
-    player_trinket_counter_add,
+    pub fn player_trinket_counter_add(args: Args) void {
+        write("tpat_player_trinket_counter_add", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// "minAm" (a number, default 0)
     /// "maxAm" (a number, default 1000)
     /// Add to the targeted player's hidden trinket counter, but keep the counter inbetween the
     /// specified values.
-    player_trinket_counter_add_bounded,
+    pub fn player_trinket_counter_add_bounded(args: Args) void {
+        write("tpat_player_trinket_counter_add_bounded", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "minAm" (a number, default 0)
     /// "maxAm" (a number, default 5)
     /// Randomize the hidden trinket counter between the two values
-    player_trinket_counter_randomize,
+    pub fn player_trinket_counter_randomize(args: Args) void {
+        write("tpat_player_trinket_counter_randomize", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// Set the target player's hidden trinket counter
-    player_trinket_counter_set,
+    pub fn player_trinket_counter_set(args: Args) void {
+        write("tpat_player_trinket_counter_set", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Make the targeted player's trinket flash/sparkle/animate
-    player_trinket_flash,
+    pub fn player_trinket_flash(args: Args) void {
+        write("tpat_player_trinket_flash", args) catch |err| @panic(@errorName(err));
+    }
 
-    player_add_hp,
-    player_set_hp,
-    player_add_gold,
-    player_set_gold,
-    player_add_level,
-    player_set_level,
+    pub fn player_add_hp(args: Args) void {
+        write("tpat_player_add_hp", args) catch |err| @panic(@errorName(err));
+    }
+
+    pub fn player_set_hp(args: Args) void {
+        write("tpat_player_set_hp", args) catch |err| @panic(@errorName(err));
+    }
+
+    pub fn player_add_gold(args: Args) void {
+        write("tpat_player_add_gold", args) catch |err| @panic(@errorName(err));
+    }
+
+    pub fn player_set_gold(args: Args) void {
+        write("tpat_player_set_gold", args) catch |err| @panic(@errorName(err));
+    }
+
+    pub fn player_add_level(args: Args) void {
+        write("tpat_player_add_level", args) catch |err| @panic(@errorName(err));
+    }
+
+    pub fn player_set_level(args: Args) void {
+        write("tpat_player_set_level", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number, in milliseconds)
     /// Adds (or subtracts, if amount is negative) an amount from targeted hotbarslot's
     /// current cooldown.
-    hb_add_cooldown,
+    pub fn hb_add_cooldown(args: Args) void {
+        write("tpat_hb_add_cooldown", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number, in milliseconds)
     /// To be used during cdCalc, adds (or subtracts) an amount from targeted hotbarslot's
     /// overall cooldown
-    hb_add_cooldown_permanent,
+    pub fn hb_add_cooldown_permanent(args: Args) void {
+        write("tpat_hb_add_cooldown_permanent", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "flag" (a binary)
     /// Adds a hitbox flag to a hotbarslot (see hbFlags on the "Stats" sheet)
-    hb_add_flag,
-
-    /// ""varIndex" (an integer from 0-3)
-    /// "amount" (a number)"
-    /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
-    hb_add_hitbox_var,
+    pub fn hb_add_flag(args: Args) void {
+        write("tpat_hb_add_flag", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer from 0-3)
     /// "amount" (a number)
     /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
-    hb_add_statchange,
+    pub fn hb_add_hitbox_var(args: Args) void {
+        write("tpat_hb_add_hitbox_var", args) catch |err| @panic(@errorName(err));
+    }
+
+    /// "varIndex" (an integer from 0-3)
+    /// "amount" (a number)
+    /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
+    pub fn hb_add_statchange(args: Args) void {
+        write("tpat_hb_add_statchange", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "stat" (a stat enum, see STAT in enum reference)
     /// "amount" (a number)
@@ -1874,7 +1937,9 @@ pub const QuickPattern = enum {
     /// DO NOT USE IN STRCALC, as you will get an infinite loop of changing the stat, then
     /// recalculating it over and over.
     /// Adds a stat to the item, which will boost the stat on the player who's holding it
-    hb_add_gcd_permanent,
+    pub fn hb_add_gcd_permanent(args: Args) void {
+        write("tpat_hb_add_gcd_permanent", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "stat" (a stat enum, see STAT in enum reference)
     /// "amount" (a number)
@@ -1883,176 +1948,254 @@ pub const QuickPattern = enum {
     /// To be used in strCalc. Adds a stat to the item, which will boost the stat on the player
     /// who's holding it. Added stats are permanent, unless reset with
     /// tpat_hb_reset_statchange_norefresh
-    hb_add_statchange_norefresh,
+    pub fn hb_add_statchange_norefresh(args: Args) void {
+        write("tpat_hb_add_statchange_norefresh", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// To be used in strCalc1a,strCalc1b,strCalc1c, to add a percentage increase in damage to
     /// targeted hotbarslots.
-    hb_add_strcalcbuff,
+    pub fn hb_add_strcalcbuff(args: Args) void {
+        write("tpat_hb_add_strcalcbuff", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// To be used in strCalc2, adds an amount to strength of targeted hotbarslots
-    hb_add_strength,
+    pub fn hb_add_strength(args: Args) void {
+        write("tpat_hb_add_strength", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// To be used in strCalc2, adds an amount to hbsStrength of targeted hotbarslots
-    hb_add_strength_hbs,
+    pub fn hb_add_strength_hbs(args: Args) void {
+        write("tpat_hb_add_strength_hbs", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Must be called whenever a loot item with a cooldown that isn't directly "used" (aka isn't
     /// an auto hotbarslot) is activated.
-    hb_cdloot_proc,
+    pub fn hb_cdloot_proc(args: Args) void {
+        write("tpat_hb_cdloot_proc", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "num" (a number of charges to give)
     /// "maxNum" (maximum number of charges that can be held at once, default 1)
     /// "type" (chargeTypes enum designating the type of Charge)
     /// Gives specified hotbarslots Charge.
-    hb_charge,
+    pub fn hb_charge(args: Args) void {
+        write("tpat_hb_charge", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Clears specified hotbarslots of all Charge.
-    hb_charge_clear,
+    pub fn hb_charge_clear(args: Args) void {
+        write("tpat_hb_charge_clear", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "messageIndex" (hbFlashMessage enum, default "none")
     /// "quiet" (a boolean that, if true, will prevent the flash from making sound. Defaults to false)
     /// Flashes an image of the targeted hotbarslots overhead. I recommend you use this when your
     /// item "activates". If this item procs extremely frequently, I'd recommend setting it to
     /// "quiet" so it isn't annoying to players who pick it up
-    hb_flash_item,
+    pub fn hb_flash_item(args: Args) void {
+        write("tpat_hb_flash_item", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "messageIndex" (hbFlashMessage enum, default "none")
     /// "quiet" (a boolean that, if true, will prevent the flash from making sound. Defaults to false)
     /// Flashes an image of the RECEIVER hotbarslot overhead. Useful if you want to target a bunch
     /// of other hotbarslots to perform other calculations before calling the flash.
-    hb_flash_item_source,
+    pub fn hb_flash_item_source(args: Args) void {
+        write("tpat_hb_flash_item_source", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Must be called whenever an ability, for whatever reason, is activated via some effect
     /// other than activating itself (such as Heavyblade's Garnet Primary, or Druids Sapphire
     /// Primary) so they can proc other items
-    hb_hbuse_proc,
+    pub fn hb_hbuse_proc(args: Args) void {
+        write("tpat_hb_hbuse_proc", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Adds an amount to the hotbar's hidden variables
-    hb_inc_var,
+    pub fn hb_inc_var(args: Args) void {
+        write("tpat_hb_inc_var", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (an integer)
     /// Adds an amount to the uses of stock, stockGCD, and stockOnly hotbarslots that are targeted.
-    hb_increase_stock,
+    pub fn hb_increase_stock(args: Args) void {
+        write("tpat_hb_increase_stock", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Must be called whenever an item "succeeds" in a random proc chance, in order to activate
     /// other items. This will indicate that all hotbars targeted have proc'd."
-    hb_lucky_proc,
+    pub fn hb_lucky_proc(args: Args) void {
+        write("tpat_hb_lucky_proc", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Alternatively, this function can be called. This will indicate that the RECEIVER hotbar
     /// has proc'd.
-    hb_lucky_proc_source,
+    pub fn hb_lucky_proc_source(args: Args) void {
+        write("tpat_hb_lucky_proc_source", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "mult" (a number)
     /// "minimum" (a time in milliseconds, default 200)
     /// To be used during cdCalc, multiplies GCDs of targeted hotbarslots by a certain amount.
-    hb_mult_gcd_permanent,
+    pub fn hb_mult_gcd_permanent(args: Args) void {
+        write("tpat_hb_mult_gcd_permanent", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's hidden variable by a certain amount
-    hb_mult_hitbox_var,
+    pub fn hb_mult_hitbox_var(args: Args) void {
+        write("tpat_hb_mult_hitbox_var", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's hbsLength by a certain amount
-    hb_mult_length_hbs,
+    pub fn hb_mult_length_hbs(args: Args) void {
+        write("tpat_hb_mult_length_hbs", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's strength by a certain amount
-    hb_mult_strength,
+    pub fn hb_mult_strength(args: Args) void {
+        write("tpat_hb_mult_strength", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's hbsStrength by a certain amount
-    hb_mult_strength_hbs,
+    pub fn hb_mult_strength_hbs(args: Args) void {
+        write("tpat_hb_mult_strength_hbs", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Forces a recalculation of color
-    hb_recalc_color,
+    pub fn hb_recalc_color(args: Args) void {
+        write("tpat_hb_recalc_color", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (an integer)
     /// Reduces the stock of stock, stockGcd, and stockOnly hotbarslots targeted.
-    hb_reduce_stock,
+    pub fn hb_reduce_stock(args: Args) void {
+        write("tpat_hb_reduce_stock", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Resets the cooldown of targeted hotbarslots. tcond_hb_check_resettable0 or
     /// ttrg_hotbarslots_prune_noreset should be run before using this to avoid resetting slots
     /// that aren't meant to be resettable.
-    hb_reset_cooldown,
+    pub fn hb_reset_cooldown(args: Args) void {
+        write("tpat_hb_reset_cooldown", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Will
     /// also refresh strCalc. Not to be used during strCalc, or you will get an infinite refresh
     /// loop.
-    hb_reset_statchange,
+    pub fn hb_reset_statchange(args: Args) void {
+        write("tpat_hb_reset_statchange", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Can be
     /// used during strCalc.
-    hb_reset_statchange_norefresh,
+    pub fn hb_reset_statchange_norefresh(args: Args) void {
+        write("tpat_hb_reset_statchange_norefresh", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Runs cooldown of targeted hotbarslots.
-    hb_run_cooldown,
+    pub fn hb_run_cooldown(args: Args) void {
+        write("tpat_hb_run_cooldown", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "length" (time in milliseconds)
     /// Runs cooldown of targeted hotbarslots for a specified amount.
-    hb_run_cooldown_ext,
+    pub fn hb_run_cooldown_ext(args: Args) void {
+        write("tpat_hb_run_cooldown_ext", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "length" (time in milliseconds)
     /// Runs hidden cooldown of targeted hotbarslots for a specified amount.
-    hb_run_cooldown_hidden,
+    pub fn hb_run_cooldown_hidden(args: Args) void {
+        write("tpat_hb_run_cooldown_hidden", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Changes the color of the targeted hotbarslots to the color of the RECEIVER of the original
     /// trigger. If your item upgrades an ability, you should add a colorCalc trigger that calls
     /// this on that ability, to add a bit of flair to your item!
-    hb_set_color_def,
+    pub fn hb_set_color_def(args: Args) void {
+        write("tpat_hb_set_color_def", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "time" (in milliseconds)
     /// To be called during cdCalc, sets the cooldown of targeted hotbarslots to specified amount.
-    hb_set_cooldown_permanent,
+    pub fn hb_set_cooldown_permanent(args: Args) void {
+        write("tpat_hb_set_cooldown_permanent", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (in milliseconds)
     /// "minimum" (in milliseconds, default 200)
     /// To be called during cdCalc, sets the GCD of targeted hotbarslots to specified amount.
-    hb_set_gcd_permanent,
+    pub fn hb_set_gcd_permanent(args: Args) void {
+        write("tpat_hb_set_gcd_permanent", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (an integer)
     /// Sets stock of stock, stockGcd, and stockOnly hotbarslots to a specific amount.
-    hb_set_stock,
+    pub fn hb_set_stock(args: Args) void {
+        write("tpat_hb_set_stock", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (a number)
     /// To be caled during strCalc, sets the strength of hotbarslots to a specific amount.
-    hb_set_strength,
+    pub fn hb_set_strength(args: Args) void {
+        write("tpat_hb_set_strength", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "ratio" (a number)
     /// "maxAmount" (a number)
     /// Special function for Darkglass Spear
-    hb_set_strength_darkglass_spear,
+    pub fn hb_set_strength_darkglass_spear(args: Args) void {
+        write("tpat_hb_set_strength_darkglass_spear", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "ratio" (a number)
     /// "maxAmount" (a number)
     /// Special function for Obsidian Rod
-    hb_set_strength_obsidian_rod,
+    pub fn hb_set_strength_obsidian_rod(args: Args) void {
+        write("tpat_hb_set_strength_obsidian_rod", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "ratio" (a number)
     /// "maxAmount" (a number)
     /// Special function for Timespace Dagger
-    hb_set_strength_timespace_dagger,
+    pub fn hb_set_strength_timespace_dagger(args: Args) void {
+        write("tpat_hb_set_strength_timespace_dagger", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Special function for Tidal Greatsword
-    hb_set_tidalgreatsword,
+    pub fn hb_set_tidalgreatsword(args: Args) void {
+        write("tpat_hb_set_tidalgreatsword", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Special function for Tidal Greatsword
-    hb_set_tidalgreatsword_start,
+    pub fn hb_set_tidalgreatsword_start(args: Args) void {
+        write("tpat_hb_set_tidalgreatsword_start", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Sets targeted hotbarslot's hidden variable to a specific amount
-    hb_set_var,
+    pub fn hb_set_var(args: Args) void {
+        write("tpat_hb_set_var", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "minAmount" (a number)
     /// "maxAmount" (a number)
     /// Sets targeted hotbarslot's hidden variable to a random number between the two parameters
-    hb_set_var_random_range,
+    pub fn hb_set_var_random_range(args: Args) void {
+        write("tpat_hb_set_var_random_range", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
@@ -2064,24 +2207,34 @@ pub const QuickPattern = enum {
     /// others in your lobby, by only pinging every X increases. If you make an item like those
     /// in the Sparkblade set that changes sqVar0 constantly, you might want to set
     /// netcallThreshold to 5 or so.
-    hb_square_add_var,
+    pub fn hb_square_add_var(args: Args) void {
+        write("tpat_hb_square_add_var", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Sets the targeted hotbarslot's sqVar.
-    hb_square_set_var,
+    pub fn hb_square_set_var(args: Args) void {
+        write("tpat_hb_square_set_var", args) catch |err| @panic(@errorName(err));
+    }
 
     /// For stock, stockGcd and stockOnly hotbarslots, zeros out stock and starts the slot's
     /// cooldown.
-    hb_zero_stock,
+    pub fn hb_zero_stock(args: Args) void {
+        write("tpat_hb_zero_stock", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "flag" (a binary number representing an hbsFlag)
     /// Adds an HBS flag to targeted status effects (see hbsFlag on the "Stats" sheet)
-    hbs_add_hbsflag,
+    pub fn hbs_add_hbsflag(args: Args) void {
+        write("tpat_hbs_add_hbsflag", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "flag" (a binary number representing an hbsShineFlag)
     /// Adds an HBS shine flag to targeted status effects (see hbShineFlag on the "Stats" sheet)
-    hbs_add_shineflag,
+    pub fn hbs_add_shineflag(args: Args) void {
+        write("tpat_hbs_add_shineflag", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "stat" (a stat enum, see STAT in enum reference)
     /// "amount" (a number)
@@ -2089,390 +2242,48 @@ pub const QuickPattern = enum {
     ///         statChangerCalc.addFlag)
     /// Adds a stat to the targeted status effect, which will boost the stat on the player who's
     /// holding it (Recommend that you use this during hbsCreatedSelf trigger)
-    hbs_add_statchange,
+    pub fn hbs_add_statchange(args: Args) void {
+        write("tpat_hbs_add_statchange", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "playerId" (an integer repesenting a playerID)
     /// "amount" (an amount of bleed)
     /// Adds appropriate damagePlus stats to a status effect for Bleed status
-    hbs_add_statchange_bleed,
+    pub fn hbs_add_statchange_bleed(args: Args) void {
+        write("tpat_hbs_add_statchange_bleed", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "amount" (an amount of bleed)
     /// Adds appropriate damagePlus stats to a status effect for Sap status
-    hbs_add_statchange_sap,
+    pub fn hbs_add_statchange_sap(args: Args) void {
+        write("tpat_hbs_add_statchange_sap", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Destroys targeted status effects
-    hbs_destroy,
+    pub fn hbs_destroy(args: Args) void {
+        write("tpat_hbs_destroy", args) catch |err| @panic(@errorName(err));
+    }
 
     /// "mult" (a number)
     /// Multiplies strength of status effects targeted by specified number
-    hbs_mult_str,
+    pub fn hbs_mult_str(args: Args) void {
+        write("tpat_hbs_mult_str", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Resets stats added to targeted status effects via tpat_hbs_add_statchange
-    hbs_reset_statchange,
+    pub fn hbs_reset_statchange(args: Args) void {
+        write("tpat_hbs_reset_statchange", args) catch |err| @panic(@errorName(err));
+    }
 
     /// Don't use this
-    bookofcheats_set_random,
-
-    pub fn toCsvString(pat: QuickPattern) []const u8 {
-        return switch (pat) {
-            .nothing => "tpat_nothing",
-            .debug_targets => "tpat_debug_targets",
-            .player_add_radius => "tpat_player_add_radius",
-            .player_add_stat => "tpat_player_add_stat",
-            .player_change_color_rand => "tpat_player_change_color_rand",
-            .player_distcounter_reset => "tpat_player_distcounter_reset",
-            .player_movelock => "tpat_player_movelock",
-            .player_movemult => "tpat_player_movemult",
-            .player_run_gcd => "tpat_player_run_gcd",
-            .player_set_radius => "tpat_player_set_radius",
-            .player_set_stat => "tpat_player_set_stat",
-            .player_shield => "tpat_player_shield",
-            .player_shield_hbs => "tpat_player_shield_hbs",
-            .player_trinket_counter_add => "tpat_player_trinket_counter_add",
-            .player_trinket_counter_add_bounded => "tpat_player_trinket_counter_add_bounded",
-            .player_trinket_counter_randomize => "tpat_player_trinket_counter_randomize",
-            .player_trinket_counter_set => "tpat_player_trinket_counter_set",
-            .player_trinket_flash => "tpat_player_trinket_flash",
-            .player_add_hp => "tpat_player_add_hp",
-            .player_set_hp => "tpat_player_set_hp",
-            .player_add_gold => "tpat_player_add_gold",
-            .player_set_gold => "tpat_player_set_gold",
-            .player_add_level => "tpat_player_add_level",
-            .player_set_level => "tpat_player_set_level",
-            .hb_add_cooldown => "tpat_hb_add_cooldown",
-            .hb_add_cooldown_permanent => "tpat_hb_add_cooldown_permanent",
-            .hb_add_flag => "tpat_hb_add_flag",
-            .hb_add_hitbox_var => "tpat_hb_add_hitbox_var",
-            .hb_add_statchange => "tpat_hb_add_statchange",
-            .hb_add_gcd_permanent => "tpat_hb_add_gcd_permanent",
-            .hb_add_statchange_norefresh => "tpat_hb_add_statchange_norefresh",
-            .hb_add_strcalcbuff => "tpat_hb_add_strcalcbuff",
-            .hb_add_strength => "tpat_hb_add_strength",
-            .hb_add_strength_hbs => "tpat_hb_add_strength_hbs",
-            .hb_cdloot_proc => "tpat_hb_cdloot_proc",
-            .hb_charge => "tpat_hb_charge",
-            .hb_charge_clear => "tpat_hb_charge_clear",
-            .hb_flash_item => "tpat_hb_flash_item",
-            .hb_flash_item_source => "tpat_hb_flash_item_source",
-            .hb_hbuse_proc => "tpat_hb_hbuse_proc",
-            .hb_inc_var => "tpat_hb_inc_var",
-            .hb_increase_stock => "tpat_hb_increase_stock",
-            .hb_lucky_proc => "tpat_hb_lucky_proc",
-            .hb_lucky_proc_source => "tpat_hb_lucky_proc_source",
-            .hb_mult_gcd_permanent => "tpat_hb_mult_gcd_permanent",
-            .hb_mult_hitbox_var => "tpat_hb_mult_hitbox_var",
-            .hb_mult_length_hbs => "tpat_hb_mult_length_hbs",
-            .hb_mult_strength => "tpat_hb_mult_strength",
-            .hb_mult_strength_hbs => "tpat_hb_mult_strength_hbs",
-            .hb_recalc_color => "tpat_hb_recalc_color",
-            .hb_reduce_stock => "tpat_hb_reduce_stock",
-            .hb_reset_cooldown => "tpat_hb_reset_cooldown",
-            .hb_reset_statchange => "tpat_hb_reset_statchange",
-            .hb_reset_statchange_norefresh => "tpat_hb_reset_statchange_norefresh",
-            .hb_run_cooldown => "tpat_hb_run_cooldown",
-            .hb_run_cooldown_ext => "tpat_hb_run_cooldown_ext",
-            .hb_run_cooldown_hidden => "tpat_hb_run_cooldown_hidden",
-            .hb_set_color_def => "tpat_hb_set_color_def",
-            .hb_set_cooldown_permanent => "tpat_hb_set_cooldown_permanent",
-            .hb_set_gcd_permanent => "tpat_hb_set_gcd_permanent",
-            .hb_set_stock => "tpat_hb_set_stock",
-            .hb_set_strength => "tpat_hb_set_strength",
-            .hb_set_strength_darkglass_spear => "tpat_hb_set_strength_darkglass_spear",
-            .hb_set_strength_obsidian_rod => "tpat_hb_set_strength_obsidian_rod",
-            .hb_set_strength_timespace_dagger => "tpat_hb_set_strength_timespace_dagger",
-            .hb_set_tidalgreatsword => "tpat_hb_set_tidalgreatsword",
-            .hb_set_tidalgreatsword_start => "tpat_hb_set_tidalgreatsword_start",
-            .hb_set_var => "tpat_hb_set_var",
-            .hb_set_var_random_range => "tpat_hb_set_var_random_range",
-            .hb_square_add_var => "tpat_hb_square_add_var",
-            .hb_square_set_var => "tpat_hb_square_set_var",
-            .hb_zero_stock => "tpat_hb_zero_stock",
-            .hbs_add_hbsflag => "tpat_hbs_add_hbsflag",
-            .hbs_add_shineflag => "tpat_hbs_add_shineflag",
-            .hbs_add_statchange => "tpat_hbs_add_statchange",
-            .hbs_add_statchange_bleed => "tpat_hbs_add_statchange_bleed",
-            .hbs_add_statchange_sap => "tpat_hbs_add_statchange_sap",
-            .hbs_destroy => "tpat_hbs_destroy",
-            .hbs_mult_str => "tpat_hbs_mult_str",
-            .hbs_reset_statchange => "tpat_hbs_reset_statchange",
-            .bookofcheats_set_random => "tpat_bookofcheats_set_random",
-        };
-    }
-};
-
-pub const QuickPatternArgs = struct {
-    varIndex: ?usize = null,
-    hitboxVar: ?Hitbox = null,
-    stat: ?Stat = null,
-    type: ?ChargeType = null,
-    message: ?FlashMessage = null,
-    time: ?usize = null,
-    timeStr: ?[]const u8 = null,
-    length: ?usize = null,
-    mult: ?f64 = null,
-    multStr: ?[]const u8 = null,
-    amount: ?f64 = null,
-    amountStr: ?[]const u8 = null,
-
-    pub fn notNullFieldCount(args: QuickPatternArgs) usize {
-        var res: usize = 0;
-        inline for (@typeInfo(QuickPatternArgs).@"struct".fields) |field| {
-            res += @intFromBool(@field(args, field.name) != null);
-        }
-
-        return res;
-    }
-};
-
-pub const qpat = opaque {
-    pub fn nothing(args: QuickPatternArgs) void {
-        qpat2(.nothing, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn debug_targets(args: QuickPatternArgs) void {
-        qpat2(.debug_targets, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_add_radius(args: QuickPatternArgs) void {
-        qpat2(.player_add_radius, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_add_stat(args: QuickPatternArgs) void {
-        qpat2(.player_add_stat, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_change_color_rand(args: QuickPatternArgs) void {
-        qpat2(.player_change_color_rand, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_distcounter_reset(args: QuickPatternArgs) void {
-        qpat2(.player_distcounter_reset, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_movelock(args: QuickPatternArgs) void {
-        qpat2(.player_movelock, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_movemult(args: QuickPatternArgs) void {
-        qpat2(.player_movemult, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_run_gcd(args: QuickPatternArgs) void {
-        qpat2(.player_run_gcd, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_set_radius(args: QuickPatternArgs) void {
-        qpat2(.player_set_radius, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_set_stat(args: QuickPatternArgs) void {
-        qpat2(.player_set_stat, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_shield(args: QuickPatternArgs) void {
-        qpat2(.player_shield, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_shield_hbs(args: QuickPatternArgs) void {
-        qpat2(.player_shield_hbs, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_trinket_counter_add(args: QuickPatternArgs) void {
-        qpat2(.player_trinket_counter_add, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_trinket_counter_add_bounded(args: QuickPatternArgs) void {
-        qpat2(.player_trinket_counter_add_bounded, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_trinket_counter_randomize(args: QuickPatternArgs) void {
-        qpat2(.player_trinket_counter_randomize, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_trinket_counter_set(args: QuickPatternArgs) void {
-        qpat2(.player_trinket_counter_set, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_trinket_flash(args: QuickPatternArgs) void {
-        qpat2(.player_trinket_flash, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_add_hp(args: QuickPatternArgs) void {
-        qpat2(.player_add_hp, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_set_hp(args: QuickPatternArgs) void {
-        qpat2(.player_set_hp, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_add_gold(args: QuickPatternArgs) void {
-        qpat2(.player_add_gold, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_set_gold(args: QuickPatternArgs) void {
-        qpat2(.player_set_gold, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_add_level(args: QuickPatternArgs) void {
-        qpat2(.player_add_level, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn player_set_level(args: QuickPatternArgs) void {
-        qpat2(.player_set_level, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_cooldown(args: QuickPatternArgs) void {
-        qpat2(.hb_add_cooldown, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_cooldown_permanent(args: QuickPatternArgs) void {
-        qpat2(.hb_add_cooldown_permanent, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_flag(args: QuickPatternArgs) void {
-        qpat2(.hb_add_flag, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_hitbox_var(args: QuickPatternArgs) void {
-        qpat2(.hb_add_hitbox_var, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_statchange(args: QuickPatternArgs) void {
-        qpat2(.hb_add_statchange, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_gcd_permanent(args: QuickPatternArgs) void {
-        qpat2(.hb_add_gcd_permanent, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_statchange_norefresh(args: QuickPatternArgs) void {
-        qpat2(.hb_add_statchange_norefresh, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_strcalcbuff(args: QuickPatternArgs) void {
-        qpat2(.hb_add_strcalcbuff, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_strength(args: QuickPatternArgs) void {
-        qpat2(.hb_add_strength, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_add_strength_hbs(args: QuickPatternArgs) void {
-        qpat2(.hb_add_strength_hbs, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_cdloot_proc(args: QuickPatternArgs) void {
-        qpat2(.hb_cdloot_proc, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_charge(args: QuickPatternArgs) void {
-        qpat2(.hb_charge, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_charge_clear(args: QuickPatternArgs) void {
-        qpat2(.hb_charge_clear, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_flash_item(args: QuickPatternArgs) void {
-        qpat2(.hb_flash_item, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_flash_item_source(args: QuickPatternArgs) void {
-        qpat2(.hb_flash_item_source, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_hbuse_proc(args: QuickPatternArgs) void {
-        qpat2(.hb_hbuse_proc, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_inc_var(args: QuickPatternArgs) void {
-        qpat2(.hb_inc_var, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_increase_stock(args: QuickPatternArgs) void {
-        qpat2(.hb_increase_stock, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_lucky_proc(args: QuickPatternArgs) void {
-        qpat2(.hb_lucky_proc, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_lucky_proc_source(args: QuickPatternArgs) void {
-        qpat2(.hb_lucky_proc_source, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_mult_gcd_permanent(args: QuickPatternArgs) void {
-        qpat2(.hb_mult_gcd_permanent, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_mult_hitbox_var(args: QuickPatternArgs) void {
-        qpat2(.hb_mult_hitbox_var, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_mult_length_hbs(args: QuickPatternArgs) void {
-        qpat2(.hb_mult_length_hbs, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_mult_strength(args: QuickPatternArgs) void {
-        qpat2(.hb_mult_strength, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_mult_strength_hbs(args: QuickPatternArgs) void {
-        qpat2(.hb_mult_strength_hbs, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_recalc_color(args: QuickPatternArgs) void {
-        qpat2(.hb_recalc_color, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_reduce_stock(args: QuickPatternArgs) void {
-        qpat2(.hb_reduce_stock, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_reset_cooldown(args: QuickPatternArgs) void {
-        qpat2(.hb_reset_cooldown, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_reset_statchange(args: QuickPatternArgs) void {
-        qpat2(.hb_reset_statchange, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_reset_statchange_norefresh(args: QuickPatternArgs) void {
-        qpat2(.hb_reset_statchange_norefresh, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_run_cooldown(args: QuickPatternArgs) void {
-        qpat2(.hb_run_cooldown, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_run_cooldown_ext(args: QuickPatternArgs) void {
-        qpat2(.hb_run_cooldown_ext, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_run_cooldown_hidden(args: QuickPatternArgs) void {
-        qpat2(.hb_run_cooldown_hidden, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_color_def(args: QuickPatternArgs) void {
-        qpat2(.hb_set_color_def, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_cooldown_permanent(args: QuickPatternArgs) void {
-        qpat2(.hb_set_cooldown_permanent, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_gcd_permanent(args: QuickPatternArgs) void {
-        qpat2(.hb_set_gcd_permanent, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_stock(args: QuickPatternArgs) void {
-        qpat2(.hb_set_stock, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_strength(args: QuickPatternArgs) void {
-        qpat2(.hb_set_strength, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_strength_darkglass_spear(args: QuickPatternArgs) void {
-        qpat2(.hb_set_strength_darkglass_spear, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_strength_obsidian_rod(args: QuickPatternArgs) void {
-        qpat2(.hb_set_strength_obsidian_rod, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_strength_timespace_dagger(args: QuickPatternArgs) void {
-        qpat2(.hb_set_strength_timespace_dagger, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_tidalgreatsword(args: QuickPatternArgs) void {
-        qpat2(.hb_set_tidalgreatsword, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_tidalgreatsword_start(args: QuickPatternArgs) void {
-        qpat2(.hb_set_tidalgreatsword_start, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_var(args: QuickPatternArgs) void {
-        qpat2(.hb_set_var, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_set_var_random_range(args: QuickPatternArgs) void {
-        qpat2(.hb_set_var_random_range, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_square_add_var(args: QuickPatternArgs) void {
-        qpat2(.hb_square_add_var, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_square_set_var(args: QuickPatternArgs) void {
-        qpat2(.hb_square_set_var, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hb_zero_stock(args: QuickPatternArgs) void {
-        qpat2(.hb_zero_stock, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_add_hbsflag(args: QuickPatternArgs) void {
-        qpat2(.hbs_add_hbsflag, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_add_shineflag(args: QuickPatternArgs) void {
-        qpat2(.hbs_add_shineflag, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_add_statchange(args: QuickPatternArgs) void {
-        qpat2(.hbs_add_statchange, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_add_statchange_bleed(args: QuickPatternArgs) void {
-        qpat2(.hbs_add_statchange_bleed, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_add_statchange_sap(args: QuickPatternArgs) void {
-        qpat2(.hbs_add_statchange_sap, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_destroy(args: QuickPatternArgs) void {
-        qpat2(.hbs_destroy, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_mult_str(args: QuickPatternArgs) void {
-        qpat2(.hbs_mult_str, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn hbs_reset_statchange(args: QuickPatternArgs) void {
-        qpat2(.hbs_reset_statchange, args) catch |err| @panic(@errorName(err));
-    }
-    pub fn bookofcheats_set_random(args: QuickPatternArgs) void {
-        qpat2(.bookofcheats_set_random, args) catch |err| @panic(@errorName(err));
+    pub fn bookofcheats_set_random(args: Args) void {
+        write("tpat_bookofcheats_set_random", args) catch |err| @panic(@errorName(err));
     }
 
-    fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
+    fn write(pat: []const u8, args: Args) !void {
         std.debug.assert(have_trigger);
         const writer = item_csv.writer();
-        try writer.print("quickPattern,{s}", .{pat.toCsvString()});
+        try writer.print("quickPattern,{s}", .{pat});
 
         if (args.varIndex) |varIndex|
             try writer.print(",varIndex,{d}", .{varIndex});
@@ -2502,6 +2313,30 @@ pub const qpat = opaque {
         try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
         try writer.writeAll("\n");
     }
+
+    pub const Args = struct {
+        varIndex: ?usize = null,
+        hitboxVar: ?Hitbox = null,
+        stat: ?Stat = null,
+        type: ?ChargeType = null,
+        message: ?FlashMessage = null,
+        time: ?usize = null,
+        timeStr: ?[]const u8 = null,
+        length: ?usize = null,
+        mult: ?f64 = null,
+        multStr: ?[]const u8 = null,
+        amount: ?f64 = null,
+        amountStr: ?[]const u8 = null,
+
+        pub fn notNullFieldCount(args: Args) usize {
+            var res: usize = 0;
+            inline for (@typeInfo(Args).@"struct".fields) |field| {
+                res += @intFromBool(@field(args, field.name) != null);
+            }
+
+            return res;
+        }
+    };
 };
 
 /// "Attack" patterns are things that are placed into the game, to take place over time. They
