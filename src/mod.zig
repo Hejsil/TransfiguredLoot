@@ -1950,19 +1950,37 @@ fn transfiguredLightningSet() !void {
     });
     defer rns.end();
 
+    const brightstorm_spear_proc_chance = 0.30;
+    const brightstorm_spear_strength = 100;
     item(.{
         .id = "it_transfigured_brightstorm_spear",
         .name = .{
             .english = "Transfigured Brightstorm Spear",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Has a [LUCK] chance of dealing [STR] damage to all enemies when your " ++
+                "other loot does damage.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .yellow,
+        .treasureType = .yellow,
+
+        .procChance = brightstorm_spear_proc_chance,
+        .strMult = brightstorm_spear_strength,
     });
+    trig.onDamageDone(&.{.pl_self});
+    cond.false(.{Condition.dmg_self_primary});
+    cond.false(.{Condition.dmg_self_secondary});
+    cond.false(.{Condition.dmg_self_special});
+    cond.false(.{Condition.dmg_self_defensive});
+    cond.false(.{Condition.dmg_self_thishb});
+    cond.random_def(.{});
+    qpat.hb_lucky_proc(.{});
+    qpat.hb_flash_item(.{});
+    ttrg.players_opponent(.{});
+    tset.strength_def(.{});
+    apat.crown_of_storms(.{});
 
     item(.{
         .id = "it_transfigured_bolt_staff",
