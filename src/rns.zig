@@ -3025,8 +3025,8 @@ pub const apat = opaque {
         duration: ?u16 = null,
         number: ?u16 = null,
         numberStr: ?[]const u8 = null,
-        numberR: ?Receiver = null,
-        numberS: ?Source = null,
+        numberR: ?r = null,
+        numberS: ?s = null,
         radius: ?u16 = null,
         amount: ?u16 = null,
 
@@ -3672,9 +3672,9 @@ pub const tset = opaque {
         write("tset_uservar_playercount", args) catch |err| @panic(@errorName(err));
     }
 
-    fn write(s: []const u8, args: anytype) !void {
+    fn write(set: []const u8, args: anytype) !void {
         std.debug.assert(have_trigger);
-        try item_csv.writer().print("set,{s}", .{s});
+        try item_csv.writer().print("set,{s}", .{set});
         try writeArgs(item_csv.writer(), args);
     }
 };
@@ -3712,8 +3712,8 @@ pub const Color = struct {
     b: u8,
 };
 
-pub fn rgb(r: u8, g: u8, b: u8) Color {
-    return .{ .r = r, .g = g, .b = b };
+pub fn rgb(red: u8, green: u8, blue: u8) Color {
+    return .{ .r = red, .g = green, .b = blue };
 }
 
 /// https://docs.google.com/spreadsheets/d/1Mcj2EbtQD15Aq-lIVE6_GeW_w7_N_aDKhgZzWg4vx54/edit?gid=68441595#gid=68441595
@@ -4767,23 +4767,23 @@ fn TriggerVariable(comptime prefix: []const u8) type {
     };
 }
 
-pub const Source = TriggerVariable("s_");
-pub const Receiver = TriggerVariable("r_");
-pub const TargetPlayers = TriggerVariable("tp#_");
-pub const TargetPlayer0 = TriggerVariable("tp0_");
-pub const TargetPlayer1 = TriggerVariable("tp1_");
-pub const TargetPlayer2 = TriggerVariable("tp2_");
-pub const TargetPlayer3 = TriggerVariable("tp3_");
-pub const TargetHotbars = TriggerVariable("ths#_");
-pub const TargetHotbar0 = TriggerVariable("ths0_");
-pub const TargetHotbar1 = TriggerVariable("ths1_");
-pub const TargetHotbar2 = TriggerVariable("ths2_");
-pub const TargetHotbar3 = TriggerVariable("ths3_");
-pub const TargetStatuses = TriggerVariable("thbs#_");
-pub const TargetStatus0 = TriggerVariable("thbs0_");
-pub const TargetStatus1 = TriggerVariable("thbs1_");
-pub const TargetStatus2 = TriggerVariable("thbs2_");
-pub const TargetStatus3 = TriggerVariable("thbs3_");
+pub const s = TriggerVariable("s_");
+pub const r = TriggerVariable("r_");
+pub const tps = TriggerVariable("tp#_");
+pub const tp0 = TriggerVariable("tp0_");
+pub const tp1 = TriggerVariable("tp1_");
+pub const tp2 = TriggerVariable("tp2_");
+pub const tp3 = TriggerVariable("tp3_");
+pub const thss = TriggerVariable("ths#_");
+pub const ths0 = TriggerVariable("ths0_");
+pub const ths1 = TriggerVariable("ths1_");
+pub const ths2 = TriggerVariable("ths2_");
+pub const ths3 = TriggerVariable("ths3_");
+pub const thbss = TriggerVariable("thbs#_");
+pub const thbs0 = TriggerVariable("thbs0_");
+pub const thbs1 = TriggerVariable("thbs1_");
+pub const thbs2 = TriggerVariable("thbs2_");
+pub const thbs3 = TriggerVariable("thbs3_");
 
 pub const charspeed = struct {
     pub const slightly = 1;
