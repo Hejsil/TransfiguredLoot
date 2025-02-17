@@ -1016,13 +1016,20 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Thief's Coat",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Using your Defensive will grant you [VANISH].",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blue,
+        .treasureType = .blue,
+
+        .hbsType = .vanish,
+        .hbsLength = 3 * std.time.ms_per_s,
     });
+    trig.hotbarUsedProc(&.{.hb_defensive});
+    qpat.hb_flash_item(.{});
+    tset.hbs_def(.{});
+    apat.apply_hbs(.{});
 }
 
 fn transfiguredBloodwolfSet() !void {
