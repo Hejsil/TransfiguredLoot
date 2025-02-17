@@ -1038,21 +1038,233 @@ pub const Trigger = enum {
     }
 };
 
-pub fn trig0(trigger: Trigger) void {
-    trig1(trigger, null);
-}
+pub const trig = opaque {
+    pub fn none(conds: []const Condition) void {
+        trig2(.none, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc0(conds: []const Condition) void {
+        trig2(.cdCalc0, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc0(conds: []const Condition) void {
+        trig2(.strCalc0, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc1(conds: []const Condition) void {
+        trig2(.cdCalc1, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc2a(conds: []const Condition) void {
+        trig2(.cdCalc2a, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc2b(conds: []const Condition) void {
+        trig2(.cdCalc2b, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc3(conds: []const Condition) void {
+        trig2(.cdCalc3, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc4a(conds: []const Condition) void {
+        trig2(.cdCalc4a, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc4b(conds: []const Condition) void {
+        trig2(.cdCalc4b, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc5(conds: []const Condition) void {
+        trig2(.cdCalc5, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdCalc6(conds: []const Condition) void {
+        trig2(.cdCalc6, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc1a(conds: []const Condition) void {
+        trig2(.strCalc1a, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc1b(conds: []const Condition) void {
+        trig2(.strCalc1b, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc1c(conds: []const Condition) void {
+        trig2(.strCalc1c, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc2(conds: []const Condition) void {
+        trig2(.strCalc2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc3(conds: []const Condition) void {
+        trig2(.strCalc3, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc4(conds: []const Condition) void {
+        trig2(.strCalc4, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc5(conds: []const Condition) void {
+        trig2(.strCalc5, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn strCalc6(conds: []const Condition) void {
+        trig2(.strCalc6, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn finalCalc(conds: []const Condition) void {
+        trig2(.finalCalc, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn colorCalc(conds: []const Condition) void {
+        trig2(.colorCalc, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn colorCalc2(conds: []const Condition) void {
+        trig2(.colorCalc2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn adventureStart(conds: []const Condition) void {
+        trig2(.adventureStart, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hallwayStart(conds: []const Condition) void {
+        trig2(.hallwayStart, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleStart0(conds: []const Condition) void {
+        trig2(.battleStart0, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleStart2(conds: []const Condition) void {
+        trig2(.battleStart2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleStart3(conds: []const Condition) void {
+        trig2(.battleStart3, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleEnd0(conds: []const Condition) void {
+        trig2(.battleEnd0, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleEnd1(conds: []const Condition) void {
+        trig2(.battleEnd1, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleEnd2(conds: []const Condition) void {
+        trig2(.battleEnd2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleEnd3(conds: []const Condition) void {
+        trig2(.battleEnd3, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn battleEnd4(conds: []const Condition) void {
+        trig2(.battleEnd4, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsCreated(conds: []const Condition) void {
+        trig2(.hbsCreated, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsCreatedSelf(conds: []const Condition) void {
+        trig2(.hbsCreatedSelf, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsRefreshed(conds: []const Condition) void {
+        trig2(.hbsRefreshed, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsDestroyed(conds: []const Condition) void {
+        trig2(.hbsDestroyed, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsFlagTrigger(conds: []const Condition) void {
+        trig2(.hbsFlagTrigger, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsShield0(conds: []const Condition) void {
+        trig2(.hbsShield0, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsShield1(conds: []const Condition) void {
+        trig2(.hbsShield1, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsShield2(conds: []const Condition) void {
+        trig2(.hbsShield2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsShield3(conds: []const Condition) void {
+        trig2(.hbsShield3, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsShield4(conds: []const Condition) void {
+        trig2(.hbsShield4, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsShield5(conds: []const Condition) void {
+        trig2(.hbsShield5, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarUsed(conds: []const Condition) void {
+        trig2(.hotbarUsed, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarUsedProc(conds: []const Condition) void {
+        trig2(.hotbarUsedProc, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarUsed2(conds: []const Condition) void {
+        trig2(.hotbarUsed2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarUsedProc2(conds: []const Condition) void {
+        trig2(.hotbarUsedProc2, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarUsed3(conds: []const Condition) void {
+        trig2(.hotbarUsed3, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onDamage(conds: []const Condition) void {
+        trig2(.onDamage, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onHealed(conds: []const Condition) void {
+        trig2(.onHealed, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onInvuln(conds: []const Condition) void {
+        trig2(.onInvuln, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onDamageDone(conds: []const Condition) void {
+        trig2(.onDamageDone, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onHealDone(conds: []const Condition) void {
+        trig2(.onHealDone, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onEraseDone(conds: []const Condition) void {
+        trig2(.onEraseDone, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn regenTick(conds: []const Condition) void {
+        trig2(.regenTick, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn distanceTick(conds: []const Condition) void {
+        trig2(.distanceTick, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn standingStill(conds: []const Condition) void {
+        trig2(.standingStill, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn distanceTickBattle(conds: []const Condition) void {
+        trig2(.distanceTickBattle, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn standingStillBattle(conds: []const Condition) void {
+        trig2(.standingStillBattle, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn luckyProc(conds: []const Condition) void {
+        trig2(.luckyProc, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn cdLootProc(conds: []const Condition) void {
+        trig2(.cdLootProc, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn autoStart(conds: []const Condition) void {
+        trig2(.autoStart, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn autoEnd(conds: []const Condition) void {
+        trig2(.autoEnd, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onSpecialCond0(conds: []const Condition) void {
+        trig2(.onSpecialCond0, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onSpecialCond1(conds: []const Condition) void {
+        trig2(.onSpecialCond1, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onSquarePickup(conds: []const Condition) void {
+        trig2(.onSquarePickup, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onGoldChange(conds: []const Condition) void {
+        trig2(.onGoldChange, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn onLevelup(conds: []const Condition) void {
+        trig2(.onLevelup, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn enrageStart(conds: []const Condition) void {
+        trig2(.enrageStart, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn patternSpecial(conds: []const Condition) void {
+        trig2(.patternSpecial, conds) catch |err| @panic(@errorName(err));
+    }
+    pub fn trig2(trigger: Trigger, conds: []const Condition) !void {
+        const item_csv_writer = item_csv.writer();
+        try item_csv_writer.print(
+            \\,,,,,
+            \\trigger,{s}
+        , .{trigger.toCsvString()});
 
-pub fn trig1(trigger: Trigger, condition: ?Condition) void {
-    item_csv.writer().print(
-        \\,,,,,
-        \\trigger,{s},{s},,,
-        \\
-    , .{
-        trigger.toCsvString(),
-        if (condition) |c| c.toCsvString() else "",
-    }) catch |err| @panic(@errorName(err));
-    have_trigger = true;
-}
+        for (conds) |c|
+            try item_csv_writer.print(",{s}", .{c.toCsvString()});
+        for (conds.len..4) |_|
+            try item_csv_writer.writeAll(",");
+        try item_csv_writer.writeAll("\n");
+
+        have_trigger = true;
+    }
+};
 
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=75351937#gid=75351937
 pub const Condition = enum {
@@ -1356,24 +1568,175 @@ pub const Condition = enum {
     }
 };
 
-pub fn cond(condition: Condition, args: anytype) void {
-    switch (condition) {
-        .eval => unreachable, // Call cond_eval2 instead
-        else => {},
+pub const cond = opaque {
+    pub fn none(args: anytype) void {
+        cond2(.none, args) catch |err| @panic(@errorName(err));
     }
-    cond2(condition, args) catch |err| @panic(@errorName(err));
-}
-
-fn cond2(condition: Condition, args: anytype) !void {
-    std.debug.assert(have_trigger);
-    try item_csv.writer().print("condition,{s}", .{condition.toCsvString()});
-    try writeArgs(item_csv.writer(), args);
-}
-
-/// Typesafe wrapper around `cond(.eval, .{a, op, b})`
-pub fn cond_eval2(a: anytype, op: Compare, b: anytype) void {
-    cond2(.eval, .{ a, op, b }) catch |err| @panic(@errorName(err));
-}
+    pub fn check_flag(args: anytype) void {
+        cond2(.check_flag, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn check_no_flag(args: anytype) void {
+        cond2(.check_no_flag, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dmg_islarge(args: anytype) void {
+        cond2(.dmg_islarge, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dmg_self_defensive(args: anytype) void {
+        cond2(.dmg_self_defensive, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dmg_self_primary(args: anytype) void {
+        cond2(.dmg_self_primary, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dmg_self_secondary(args: anytype) void {
+        cond2(.dmg_self_secondary, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dmg_self_special(args: anytype) void {
+        cond2(.dmg_self_special, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dmg_self_thishb(args: anytype) void {
+        cond2(.dmg_self_thishb, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn equal(args: anytype) void {
+        cond2(.equal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn unequal(args: anytype) void {
+        cond2(.unequal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn eval(a: anytype, op: Compare, b: anytype) void {
+        cond2(.eval, .{ a, op, b }) catch |err| @panic(@errorName(err));
+    }
+    pub fn @"false"(args: anytype) void {
+        cond2(.false, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn @"true"(args: anytype) void {
+        cond2(.true, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_auto_pl(args: anytype) void {
+        cond2(.hb_auto_pl, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_available(args: anytype) void {
+        cond2(.hb_available, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_check_square_var(args: anytype) void {
+        cond2(.hb_check_square_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_check_square_var_false(args: anytype) void {
+        cond2(.hb_check_square_var_false, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_check_square_var_gte(args: anytype) void {
+        cond2(.hb_check_square_var_gte, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_check_square_var_lte(args: anytype) void {
+        cond2(.hb_check_square_var_lte, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_primary(args: anytype) void {
+        cond2(.hb_primary, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_secondary(args: anytype) void {
+        cond2(.hb_secondary, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_special(args: anytype) void {
+        cond2(.hb_special, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_defensive(args: anytype) void {
+        cond2(.hb_defensive, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_loot(args: anytype) void {
+        cond2(.hb_loot, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_not_self(args: anytype) void {
+        cond2(.hb_not_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_self(args: anytype) void {
+        cond2(.hb_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_self_attack(args: anytype) void {
+        cond2(.hb_self_attack, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_self_weapon(args: anytype) void {
+        cond2(.hb_self_weapon, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_selfcast(args: anytype) void {
+        cond2(.hb_selfcast, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_team(args: anytype) void {
+        cond2(.hb_team, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_type_weapon(args: anytype) void {
+        cond2(.hb_type_weapon, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_aflplayer(args: anytype) void {
+        cond2(.hbs_aflplayer, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_aflplayer_attack(args: anytype) void {
+        cond2(.hbs_aflplayer_attack, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_self(args: anytype) void {
+        cond2(.hbs_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_thishbcast(args: anytype) void {
+        cond2(.hbs_thishbcast, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_not_thishbcast(args: anytype) void {
+        cond2(.hbs_not_thishbcast, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_selfafl(args: anytype) void {
+        cond2(.hbs_selfafl, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_selfcast(args: anytype) void {
+        cond2(.hbs_selfcast, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_check_chargeable0(args: anytype) void {
+        cond2(.hb_check_chargeable0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_check_resettable0(args: anytype) void {
+        cond2(.hb_check_resettable0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn missing_health(args: anytype) void {
+        cond2(.missing_health, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn pl_autocheck(args: anytype) void {
+        cond2(.pl_autocheck, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn pl_self(args: anytype) void {
+        cond2(.pl_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_target_count(args: anytype) void {
+        cond2(.player_target_count, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_target_count(args: anytype) void {
+        cond2(.hbs_target_count, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn slot_target_count(args: anytype) void {
+        cond2(.slot_target_count, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn random(args: anytype) void {
+        cond2(.random, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn random_def(args: anytype) void {
+        cond2(.random_def, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn square_self(args: anytype) void {
+        cond2(.square_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn tick_every(args: anytype) void {
+        cond2(.tick_every, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn trinket_counter_equal(args: anytype) void {
+        cond2(.trinket_counter_equal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn trinket_counter_greaterequal(args: anytype) void {
+        cond2(.trinket_counter_greaterequal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bookofcheats_varcheck(args: anytype) void {
+        cond2(.bookofcheats_varcheck, args) catch |err| @panic(@errorName(err));
+    }
+    fn cond2(condition: Condition, args: anytype) !void {
+        std.debug.assert(have_trigger);
+        try item_csv.writer().print("condition,{s}", .{condition.toCsvString()});
+        try writeArgs(item_csv.writer(), args);
+    }
+};
 
 /// "Quick" patterns are functions that are called immediately, in line. They include things like
 /// resetting cooldowns, running GCDs, changing variables, etc..
@@ -1861,43 +2224,285 @@ pub const QuickPatternArgs = struct {
     }
 };
 
-pub fn qpat(pat: QuickPattern, args: QuickPatternArgs) void {
-    qpat2(pat, args) catch |err| @panic(@errorName(err));
-}
+pub const qpat = opaque {
+    pub fn nothing(args: QuickPatternArgs) void {
+        qpat2(.nothing, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn debug_targets(args: QuickPatternArgs) void {
+        qpat2(.debug_targets, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_add_radius(args: QuickPatternArgs) void {
+        qpat2(.player_add_radius, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_add_stat(args: QuickPatternArgs) void {
+        qpat2(.player_add_stat, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_change_color_rand(args: QuickPatternArgs) void {
+        qpat2(.player_change_color_rand, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_distcounter_reset(args: QuickPatternArgs) void {
+        qpat2(.player_distcounter_reset, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_movelock(args: QuickPatternArgs) void {
+        qpat2(.player_movelock, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_movemult(args: QuickPatternArgs) void {
+        qpat2(.player_movemult, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_run_gcd(args: QuickPatternArgs) void {
+        qpat2(.player_run_gcd, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_set_radius(args: QuickPatternArgs) void {
+        qpat2(.player_set_radius, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_set_stat(args: QuickPatternArgs) void {
+        qpat2(.player_set_stat, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_shield(args: QuickPatternArgs) void {
+        qpat2(.player_shield, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_shield_hbs(args: QuickPatternArgs) void {
+        qpat2(.player_shield_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_trinket_counter_add(args: QuickPatternArgs) void {
+        qpat2(.player_trinket_counter_add, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_trinket_counter_add_bounded(args: QuickPatternArgs) void {
+        qpat2(.player_trinket_counter_add_bounded, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_trinket_counter_randomize(args: QuickPatternArgs) void {
+        qpat2(.player_trinket_counter_randomize, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_trinket_counter_set(args: QuickPatternArgs) void {
+        qpat2(.player_trinket_counter_set, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_trinket_flash(args: QuickPatternArgs) void {
+        qpat2(.player_trinket_flash, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_add_hp(args: QuickPatternArgs) void {
+        qpat2(.player_add_hp, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_set_hp(args: QuickPatternArgs) void {
+        qpat2(.player_set_hp, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_add_gold(args: QuickPatternArgs) void {
+        qpat2(.player_add_gold, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_set_gold(args: QuickPatternArgs) void {
+        qpat2(.player_set_gold, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_add_level(args: QuickPatternArgs) void {
+        qpat2(.player_add_level, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_set_level(args: QuickPatternArgs) void {
+        qpat2(.player_set_level, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_cooldown(args: QuickPatternArgs) void {
+        qpat2(.hb_add_cooldown, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_cooldown_permanent(args: QuickPatternArgs) void {
+        qpat2(.hb_add_cooldown_permanent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_flag(args: QuickPatternArgs) void {
+        qpat2(.hb_add_flag, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_hitbox_var(args: QuickPatternArgs) void {
+        qpat2(.hb_add_hitbox_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_statchange(args: QuickPatternArgs) void {
+        qpat2(.hb_add_statchange, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_gcd_permanent(args: QuickPatternArgs) void {
+        qpat2(.hb_add_gcd_permanent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_statchange_norefresh(args: QuickPatternArgs) void {
+        qpat2(.hb_add_statchange_norefresh, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_strcalcbuff(args: QuickPatternArgs) void {
+        qpat2(.hb_add_strcalcbuff, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_strength(args: QuickPatternArgs) void {
+        qpat2(.hb_add_strength, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_add_strength_hbs(args: QuickPatternArgs) void {
+        qpat2(.hb_add_strength_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_cdloot_proc(args: QuickPatternArgs) void {
+        qpat2(.hb_cdloot_proc, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_charge(args: QuickPatternArgs) void {
+        qpat2(.hb_charge, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_charge_clear(args: QuickPatternArgs) void {
+        qpat2(.hb_charge_clear, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_flash_item(args: QuickPatternArgs) void {
+        qpat2(.hb_flash_item, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_flash_item_source(args: QuickPatternArgs) void {
+        qpat2(.hb_flash_item_source, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_hbuse_proc(args: QuickPatternArgs) void {
+        qpat2(.hb_hbuse_proc, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_inc_var(args: QuickPatternArgs) void {
+        qpat2(.hb_inc_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_increase_stock(args: QuickPatternArgs) void {
+        qpat2(.hb_increase_stock, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_lucky_proc(args: QuickPatternArgs) void {
+        qpat2(.hb_lucky_proc, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_lucky_proc_source(args: QuickPatternArgs) void {
+        qpat2(.hb_lucky_proc_source, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_mult_gcd_permanent(args: QuickPatternArgs) void {
+        qpat2(.hb_mult_gcd_permanent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_mult_hitbox_var(args: QuickPatternArgs) void {
+        qpat2(.hb_mult_hitbox_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_mult_length_hbs(args: QuickPatternArgs) void {
+        qpat2(.hb_mult_length_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_mult_strength(args: QuickPatternArgs) void {
+        qpat2(.hb_mult_strength, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_mult_strength_hbs(args: QuickPatternArgs) void {
+        qpat2(.hb_mult_strength_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_recalc_color(args: QuickPatternArgs) void {
+        qpat2(.hb_recalc_color, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_reduce_stock(args: QuickPatternArgs) void {
+        qpat2(.hb_reduce_stock, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_reset_cooldown(args: QuickPatternArgs) void {
+        qpat2(.hb_reset_cooldown, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_reset_statchange(args: QuickPatternArgs) void {
+        qpat2(.hb_reset_statchange, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_reset_statchange_norefresh(args: QuickPatternArgs) void {
+        qpat2(.hb_reset_statchange_norefresh, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_run_cooldown(args: QuickPatternArgs) void {
+        qpat2(.hb_run_cooldown, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_run_cooldown_ext(args: QuickPatternArgs) void {
+        qpat2(.hb_run_cooldown_ext, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_run_cooldown_hidden(args: QuickPatternArgs) void {
+        qpat2(.hb_run_cooldown_hidden, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_color_def(args: QuickPatternArgs) void {
+        qpat2(.hb_set_color_def, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_cooldown_permanent(args: QuickPatternArgs) void {
+        qpat2(.hb_set_cooldown_permanent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_gcd_permanent(args: QuickPatternArgs) void {
+        qpat2(.hb_set_gcd_permanent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_stock(args: QuickPatternArgs) void {
+        qpat2(.hb_set_stock, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_strength(args: QuickPatternArgs) void {
+        qpat2(.hb_set_strength, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_strength_darkglass_spear(args: QuickPatternArgs) void {
+        qpat2(.hb_set_strength_darkglass_spear, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_strength_obsidian_rod(args: QuickPatternArgs) void {
+        qpat2(.hb_set_strength_obsidian_rod, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_strength_timespace_dagger(args: QuickPatternArgs) void {
+        qpat2(.hb_set_strength_timespace_dagger, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_tidalgreatsword(args: QuickPatternArgs) void {
+        qpat2(.hb_set_tidalgreatsword, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_tidalgreatsword_start(args: QuickPatternArgs) void {
+        qpat2(.hb_set_tidalgreatsword_start, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_var(args: QuickPatternArgs) void {
+        qpat2(.hb_set_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_set_var_random_range(args: QuickPatternArgs) void {
+        qpat2(.hb_set_var_random_range, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_square_add_var(args: QuickPatternArgs) void {
+        qpat2(.hb_square_add_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_square_set_var(args: QuickPatternArgs) void {
+        qpat2(.hb_square_set_var, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hb_zero_stock(args: QuickPatternArgs) void {
+        qpat2(.hb_zero_stock, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_add_hbsflag(args: QuickPatternArgs) void {
+        qpat2(.hbs_add_hbsflag, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_add_shineflag(args: QuickPatternArgs) void {
+        qpat2(.hbs_add_shineflag, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_add_statchange(args: QuickPatternArgs) void {
+        qpat2(.hbs_add_statchange, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_add_statchange_bleed(args: QuickPatternArgs) void {
+        qpat2(.hbs_add_statchange_bleed, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_add_statchange_sap(args: QuickPatternArgs) void {
+        qpat2(.hbs_add_statchange_sap, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_destroy(args: QuickPatternArgs) void {
+        qpat2(.hbs_destroy, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_mult_str(args: QuickPatternArgs) void {
+        qpat2(.hbs_mult_str, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_reset_statchange(args: QuickPatternArgs) void {
+        qpat2(.hbs_reset_statchange, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bookofcheats_set_random(args: QuickPatternArgs) void {
+        qpat2(.bookofcheats_set_random, args) catch |err| @panic(@errorName(err));
+    }
 
-fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
-    std.debug.assert(have_trigger);
-    const writer = item_csv.writer();
-    try writer.print("quickPattern,{s}", .{pat.toCsvString()});
+    fn qpat2(pat: QuickPattern, args: QuickPatternArgs) !void {
+        std.debug.assert(have_trigger);
+        const writer = item_csv.writer();
+        try writer.print("quickPattern,{s}", .{pat.toCsvString()});
 
-    if (args.varIndex) |varIndex|
-        try writer.print(",varIndex,{d}", .{varIndex});
-    if (args.hitboxVar) |hitboxVar|
-        try writer.print(",varIndex,{s}", .{hitboxVar.toCsvString()});
-    if (args.stat) |stat|
-        try writer.print(",stat,{s}", .{stat.toCsvString()});
-    if (args.type) |typ|
-        try writer.print(",type,{s}", .{typ.toCsvString()});
-    if (args.message) |message|
-        try writer.print(",messageIndex,{s}", .{message.toCsvString()});
-    if (args.time) |time|
-        try writer.print(",time,{d}", .{time});
-    if (args.timeStr) |time|
-        try writer.print(",time,{s}", .{time});
-    if (args.length) |length|
-        try writer.print(",length,{d}", .{length});
-    if (args.mult) |mult|
-        try writer.print(",mult,{d}", .{mult});
-    if (args.multStr) |mult|
-        try writer.print(",mult,{s}", .{mult});
-    if (args.amount) |amount|
-        try writer.print(",amount,{d}", .{amount});
-    if (args.amountStr) |amount|
-        try writer.print(",amount,{s}", .{amount});
+        if (args.varIndex) |varIndex|
+            try writer.print(",varIndex,{d}", .{varIndex});
+        if (args.hitboxVar) |hitboxVar|
+            try writer.print(",varIndex,{s}", .{hitboxVar.toCsvString()});
+        if (args.stat) |stat|
+            try writer.print(",stat,{s}", .{stat.toCsvString()});
+        if (args.type) |typ|
+            try writer.print(",type,{s}", .{typ.toCsvString()});
+        if (args.message) |message|
+            try writer.print(",messageIndex,{s}", .{message.toCsvString()});
+        if (args.time) |time|
+            try writer.print(",time,{d}", .{time});
+        if (args.timeStr) |time|
+            try writer.print(",time,{s}", .{time});
+        if (args.length) |length|
+            try writer.print(",length,{d}", .{length});
+        if (args.mult) |mult|
+            try writer.print(",mult,{d}", .{mult});
+        if (args.multStr) |mult|
+            try writer.print(",mult,{s}", .{mult});
+        if (args.amount) |amount|
+            try writer.print(",amount,{d}", .{amount});
+        if (args.amountStr) |amount|
+            try writer.print(",amount,{s}", .{amount});
 
-    try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
-    try writer.writeAll("\n");
-}
+        try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
+        try writer.writeAll("\n");
+    }
+};
 
 /// "Attack" patterns are things that are placed into the game, to take place over time. They
 /// include things like most attacks, healing, or other things that "happen" in the game.
@@ -2495,37 +3100,522 @@ pub const AttackPatternArgs = struct {
     }
 };
 
-pub fn apat(pat: AttackPattern, args: AttackPatternArgs) void {
-    apat2(pat, args) catch |err| @panic(@errorName(err));
-}
+pub const apat = opaque {
+    pub fn bleed(args: AttackPatternArgs) void {
+        apat2(.bleed, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn burn(args: AttackPatternArgs) void {
+        apat2(.burn, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn curse(args: AttackPatternArgs) void {
+        apat2(.curse, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn poison(args: AttackPatternArgs) void {
+        apat2(.poison, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spark(args: AttackPatternArgs) void {
+        apat2(.spark, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn starflash_hbs(args: AttackPatternArgs) void {
+        apat2(.starflash_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn erase_area_hbs(args: AttackPatternArgs) void {
+        apat2(.erase_area_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn apply_hbs(args: AttackPatternArgs) void {
+        apat2(.apply_hbs, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn apply_hbs_starflash(args: AttackPatternArgs) void {
+        apat2(.apply_hbs_starflash, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn apply_invuln(args: AttackPatternArgs) void {
+        apat2(.apply_invuln, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn black_wakizashi(args: AttackPatternArgs) void {
+        apat2(.black_wakizashi, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn blackhole_charm(args: AttackPatternArgs) void {
+        apat2(.blackhole_charm, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn blue_rose(args: AttackPatternArgs) void {
+        apat2(.blue_rose, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn butterly_ocarina(args: AttackPatternArgs) void {
+        apat2(.butterly_ocarina, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn crown_of_storms(args: AttackPatternArgs) void {
+        apat2(.crown_of_storms, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn curse_talon(args: AttackPatternArgs) void {
+        apat2(.curse_talon, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn darkmagic_blade(args: AttackPatternArgs) void {
+        apat2(.darkmagic_blade, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn divine_mirror(args: AttackPatternArgs) void {
+        apat2(.divine_mirror, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn floral_bow(args: AttackPatternArgs) void {
+        apat2(.floral_bow, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn garnet_staff(args: AttackPatternArgs) void {
+        apat2(.garnet_staff, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn heal_light(args: AttackPatternArgs) void {
+        apat2(.heal_light, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn heal_light_maxhealth(args: AttackPatternArgs) void {
+        apat2(.heal_light_maxhealth, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn heal_revive(args: AttackPatternArgs) void {
+        apat2(.heal_revive, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hydrous_blob(args: AttackPatternArgs) void {
+        apat2(.hydrous_blob, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn lullaby_harp(args: AttackPatternArgs) void {
+        apat2(.lullaby_harp, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn magic_hit(args: AttackPatternArgs) void {
+        apat2(.magic_hit, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn melee_hit(args: AttackPatternArgs) void {
+        apat2(.melee_hit, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn meteor_staff(args: AttackPatternArgs) void {
+        apat2(.meteor_staff, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn moon_pendant(args: AttackPatternArgs) void {
+        apat2(.moon_pendant, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn nightstar_grimoire(args: AttackPatternArgs) void {
+        apat2(.nightstar_grimoire, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ornamental_bell(args: AttackPatternArgs) void {
+        apat2(.ornamental_bell, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn phoenix_charm(args: AttackPatternArgs) void {
+        apat2(.phoenix_charm, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn poisonfrog_charm(args: AttackPatternArgs) void {
+        apat2(.poisonfrog_charm, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn potion_throw(args: AttackPatternArgs) void {
+        apat2(.potion_throw, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn pulse_damage(args: AttackPatternArgs) void {
+        apat2(.pulse_damage, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn reaper_cloak(args: AttackPatternArgs) void {
+        apat2(.reaper_cloak, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn red_tanzaku(args: AttackPatternArgs) void {
+        apat2(.red_tanzaku, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sleeping_greatbow(args: AttackPatternArgs) void {
+        apat2(.sleeping_greatbow, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sparrow_feather(args: AttackPatternArgs) void {
+        apat2(.sparrow_feather, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn starflash(args: AttackPatternArgs) void {
+        apat2(.starflash, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn starflash_failure(args: AttackPatternArgs) void {
+        apat2(.starflash_failure, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn thiefs_coat(args: AttackPatternArgs) void {
+        apat2(.thiefs_coat, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn timewarp_wand(args: AttackPatternArgs) void {
+        apat2(.timewarp_wand, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn topaz_charm(args: AttackPatternArgs) void {
+        apat2(.topaz_charm, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn winged_cap(args: AttackPatternArgs) void {
+        apat2(.winged_cap, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn light_shield(args: AttackPatternArgs) void {
+        apat2(.light_shield, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dark_shield(args: AttackPatternArgs) void {
+        apat2(.dark_shield, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn none_0(args: AttackPatternArgs) void {
+        apat2(.none_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn none_1(args: AttackPatternArgs) void {
+        apat2(.none_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn none_2(args: AttackPatternArgs) void {
+        apat2(.none_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn none_3(args: AttackPatternArgs) void {
+        apat2(.none_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_0(args: AttackPatternArgs) void {
+        apat2(.ancient_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_0_petonly(args: AttackPatternArgs) void {
+        apat2(.ancient_0_petonly, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_0_pt2(args: AttackPatternArgs) void {
+        apat2(.ancient_0_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_0_rabbitonly(args: AttackPatternArgs) void {
+        apat2(.ancient_0_rabbitonly, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_1(args: AttackPatternArgs) void {
+        apat2(.ancient_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_1_auto(args: AttackPatternArgs) void {
+        apat2(.ancient_1_auto, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_1_pt2(args: AttackPatternArgs) void {
+        apat2(.ancient_1_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_2(args: AttackPatternArgs) void {
+        apat2(.ancient_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_2_auto(args: AttackPatternArgs) void {
+        apat2(.ancient_2_auto, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_2_pt2(args: AttackPatternArgs) void {
+        apat2(.ancient_2_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_3(args: AttackPatternArgs) void {
+        apat2(.ancient_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_3_emerald(args: AttackPatternArgs) void {
+        apat2(.ancient_3_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_3_emerald_pt2(args: AttackPatternArgs) void {
+        apat2(.ancient_3_emerald_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn ancient_3_emerald_pt3(args: AttackPatternArgs) void {
+        apat2(.ancient_3_emerald_pt3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_0(args: AttackPatternArgs) void {
+        apat2(.assassin_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_0_ruby(args: AttackPatternArgs) void {
+        apat2(.assassin_0_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_1(args: AttackPatternArgs) void {
+        apat2(.assassin_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_1_garnet(args: AttackPatternArgs) void {
+        apat2(.assassin_1_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_1_ruby(args: AttackPatternArgs) void {
+        apat2(.assassin_1_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_1_sapphire(args: AttackPatternArgs) void {
+        apat2(.assassin_1_sapphire, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_2(args: AttackPatternArgs) void {
+        apat2(.assassin_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_2_opal(args: AttackPatternArgs) void {
+        apat2(.assassin_2_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_3(args: AttackPatternArgs) void {
+        apat2(.assassin_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_3_opal(args: AttackPatternArgs) void {
+        apat2(.assassin_3_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn assassin_3_ruby(args: AttackPatternArgs) void {
+        apat2(.assassin_3_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_0(args: AttackPatternArgs) void {
+        apat2(.bruiser_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_0_saph(args: AttackPatternArgs) void {
+        apat2(.bruiser_0_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_1(args: AttackPatternArgs) void {
+        apat2(.bruiser_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_2(args: AttackPatternArgs) void {
+        apat2(.bruiser_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_3(args: AttackPatternArgs) void {
+        apat2(.bruiser_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_3_pt2(args: AttackPatternArgs) void {
+        apat2(.bruiser_3_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn bruiser_3_ruby(args: AttackPatternArgs) void {
+        apat2(.bruiser_3_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_0(args: AttackPatternArgs) void {
+        apat2(.dancer_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_0_opal(args: AttackPatternArgs) void {
+        apat2(.dancer_0_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_1(args: AttackPatternArgs) void {
+        apat2(.dancer_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_1_emerald(args: AttackPatternArgs) void {
+        apat2(.dancer_1_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_2(args: AttackPatternArgs) void {
+        apat2(.dancer_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_2_saph(args: AttackPatternArgs) void {
+        apat2(.dancer_2_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_3(args: AttackPatternArgs) void {
+        apat2(.dancer_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn dancer_3_emerald(args: AttackPatternArgs) void {
+        apat2(.dancer_3_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_0(args: AttackPatternArgs) void {
+        apat2(.defender_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_0_fast(args: AttackPatternArgs) void {
+        apat2(.defender_0_fast, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_0_ruby(args: AttackPatternArgs) void {
+        apat2(.defender_0_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_1(args: AttackPatternArgs) void {
+        apat2(.defender_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_1_opal(args: AttackPatternArgs) void {
+        apat2(.defender_1_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_1_saph(args: AttackPatternArgs) void {
+        apat2(.defender_1_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_2(args: AttackPatternArgs) void {
+        apat2(.defender_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_2_emerald(args: AttackPatternArgs) void {
+        apat2(.defender_2_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_3(args: AttackPatternArgs) void {
+        apat2(.defender_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn defender_3_pt2(args: AttackPatternArgs) void {
+        apat2(.defender_3_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_0(args: AttackPatternArgs) void {
+        apat2(.druid_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_0_emerald(args: AttackPatternArgs) void {
+        apat2(.druid_0_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_0_ruby(args: AttackPatternArgs) void {
+        apat2(.druid_0_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_0_saph(args: AttackPatternArgs) void {
+        apat2(.druid_0_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_1(args: AttackPatternArgs) void {
+        apat2(.druid_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_1_emerald(args: AttackPatternArgs) void {
+        apat2(.druid_1_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_1_garnet(args: AttackPatternArgs) void {
+        apat2(.druid_1_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_1_ruby(args: AttackPatternArgs) void {
+        apat2(.druid_1_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_2(args: AttackPatternArgs) void {
+        apat2(.druid_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_2_2(args: AttackPatternArgs) void {
+        apat2(.druid_2_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_2_2_garnet(args: AttackPatternArgs) void {
+        apat2(.druid_2_2_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_2_garnet(args: AttackPatternArgs) void {
+        apat2(.druid_2_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_2_ruby(args: AttackPatternArgs) void {
+        apat2(.druid_2_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_3(args: AttackPatternArgs) void {
+        apat2(.druid_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_3_emerald(args: AttackPatternArgs) void {
+        apat2(.druid_3_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_3_opal(args: AttackPatternArgs) void {
+        apat2(.druid_3_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_3_ruby(args: AttackPatternArgs) void {
+        apat2(.druid_3_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn druid_3_saph(args: AttackPatternArgs) void {
+        apat2(.druid_3_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_0(args: AttackPatternArgs) void {
+        apat2(.hblade_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_0_garnet(args: AttackPatternArgs) void {
+        apat2(.hblade_0_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_0_garnet_pt2(args: AttackPatternArgs) void {
+        apat2(.hblade_0_garnet_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_1(args: AttackPatternArgs) void {
+        apat2(.hblade_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_1_garnet(args: AttackPatternArgs) void {
+        apat2(.hblade_1_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_1_ruby(args: AttackPatternArgs) void {
+        apat2(.hblade_1_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_1_saph(args: AttackPatternArgs) void {
+        apat2(.hblade_1_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_2(args: AttackPatternArgs) void {
+        apat2(.hblade_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_2_emerald(args: AttackPatternArgs) void {
+        apat2(.hblade_2_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_2_pt2(args: AttackPatternArgs) void {
+        apat2(.hblade_2_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_3(args: AttackPatternArgs) void {
+        apat2(.hblade_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_3_garnet(args: AttackPatternArgs) void {
+        apat2(.hblade_3_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_3_opal(args: AttackPatternArgs) void {
+        apat2(.hblade_3_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hblade_3_ruby(args: AttackPatternArgs) void {
+        apat2(.hblade_3_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_0(args: AttackPatternArgs) void {
+        apat2(.sniper_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_0_emerald(args: AttackPatternArgs) void {
+        apat2(.sniper_0_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_0_garnet(args: AttackPatternArgs) void {
+        apat2(.sniper_0_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_0_saph(args: AttackPatternArgs) void {
+        apat2(.sniper_0_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_1(args: AttackPatternArgs) void {
+        apat2(.sniper_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_1_ruby(args: AttackPatternArgs) void {
+        apat2(.sniper_1_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_2(args: AttackPatternArgs) void {
+        apat2(.sniper_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_2_emerald(args: AttackPatternArgs) void {
+        apat2(.sniper_2_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn sniper_3(args: AttackPatternArgs) void {
+        apat2(.sniper_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_0(args: AttackPatternArgs) void {
+        apat2(.spsword_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_0_pt2(args: AttackPatternArgs) void {
+        apat2(.spsword_0_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_1(args: AttackPatternArgs) void {
+        apat2(.spsword_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_1_emerald(args: AttackPatternArgs) void {
+        apat2(.spsword_1_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_1_pt2(args: AttackPatternArgs) void {
+        apat2(.spsword_1_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_2(args: AttackPatternArgs) void {
+        apat2(.spsword_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_2_pt2(args: AttackPatternArgs) void {
+        apat2(.spsword_2_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_3(args: AttackPatternArgs) void {
+        apat2(.spsword_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn spsword_3_pt2(args: AttackPatternArgs) void {
+        apat2(.spsword_3_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_0(args: AttackPatternArgs) void {
+        apat2(.wizard_0, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_0_ruby(args: AttackPatternArgs) void {
+        apat2(.wizard_0_ruby, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_1(args: AttackPatternArgs) void {
+        apat2(.wizard_1, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_1_garnet(args: AttackPatternArgs) void {
+        apat2(.wizard_1_garnet, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_1_garnet_pt2(args: AttackPatternArgs) void {
+        apat2(.wizard_1_garnet_pt2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_1_opal(args: AttackPatternArgs) void {
+        apat2(.wizard_1_opal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_2(args: AttackPatternArgs) void {
+        apat2(.wizard_2, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_2_saph(args: AttackPatternArgs) void {
+        apat2(.wizard_2_saph, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_3(args: AttackPatternArgs) void {
+        apat2(.wizard_3, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_3_emerald(args: AttackPatternArgs) void {
+        apat2(.wizard_3_emerald, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn wizard_3_opal(args: AttackPatternArgs) void {
+        apat2(.wizard_3_opal, args) catch |err| @panic(@errorName(err));
+    }
 
-fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
-    std.debug.assert(have_trigger);
-    const writer = item_csv.writer();
-    try writer.print("addPattern,{s}", .{pat.toCsvString()});
+    fn apat2(pat: AttackPattern, args: AttackPatternArgs) !void {
+        std.debug.assert(have_trigger);
+        const writer = item_csv.writer();
+        try writer.print("addPattern,{s}", .{pat.toCsvString()});
 
-    if (args.fxStr) |fxStr|
-        try writer.print(",fx,{s}", .{fxStr});
-    if (args.fyStr) |fyStr|
-        try writer.print(",fy,{s}", .{fyStr});
-    if (args.duration) |duration|
-        try writer.print(",duration,{d}", .{duration});
-    if (args.number) |number|
-        try writer.print(",number,{d}", .{number});
-    if (args.numberStr) |number|
-        try writer.print(",number,{s}", .{number});
-    if (args.numberR) |number|
-        try writer.print(",number,{s}", .{number.toCsvString()});
-    if (args.numberS) |number|
-        try writer.print(",number,{s}", .{number.toCsvString()});
-    if (args.radius) |radius|
-        try writer.print(",radius,{d}", .{radius});
-    if (args.amount) |amount|
-        try writer.print(",amount,{d}", .{amount});
+        if (args.fxStr) |fxStr|
+            try writer.print(",fx,{s}", .{fxStr});
+        if (args.fyStr) |fyStr|
+            try writer.print(",fy,{s}", .{fyStr});
+        if (args.duration) |duration|
+            try writer.print(",duration,{d}", .{duration});
+        if (args.number) |number|
+            try writer.print(",number,{d}", .{number});
+        if (args.numberStr) |number|
+            try writer.print(",number,{s}", .{number});
+        if (args.numberR) |number|
+            try writer.print(",number,{s}", .{number.toCsvString()});
+        if (args.numberS) |number|
+            try writer.print(",number,{s}", .{number.toCsvString()});
+        if (args.radius) |radius|
+            try writer.print(",radius,{d}", .{radius});
+        if (args.amount) |amount|
+            try writer.print(",amount,{d}", .{amount});
 
-    try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
-    try writer.writeAll("\n");
-}
+        try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
+        try writer.writeAll("\n");
+    }
+};
 
 /// When a trigger is running, it has 3 lists of "targets".
 /// 1) A list of players/enemies
@@ -2853,30 +3943,158 @@ pub const Target = enum {
     }
 };
 
-pub fn ttrg(targ: Target, args: anytype) void {
-    switch (targ) {
-        .hotbarslots_prune => unreachable, // Call ttrg_hotbarslots_prune instead
-        .hbstatus_prune => unreachable, // Call ttrg_hbstatus_prune instead
-        else => {},
+pub const ttrg = opaque {
+    pub fn none(args: anytype) void {
+        ttrg2(.none, args) catch |err| @panic(@errorName(err));
     }
-    ttrg2(targ, args) catch |err| @panic(@errorName(err));
-}
+    pub fn player_afflicted(args: anytype) void {
+        ttrg2(.player_afflicted, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_afflicted_source(args: anytype) void {
+        ttrg2(.player_afflicted_source, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_damaged(args: anytype) void {
+        ttrg2(.player_damaged, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_prune_hbsflag(args: anytype) void {
+        ttrg2(.player_prune_hbsflag, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn player_self(args: anytype) void {
+        ttrg2(.player_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_all(args: anytype) void {
+        ttrg2(.players_all, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_ally(args: anytype) void {
+        ttrg2(.players_ally, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_ally_exclude(args: anytype) void {
+        ttrg2(.players_ally_exclude, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_ally_include_ko(args: anytype) void {
+        ttrg2(.players_ally_include_ko, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_ally_lowest_hp(args: anytype) void {
+        ttrg2(.players_ally_lowest_hp, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_ally_random(args: anytype) void {
+        ttrg2(.players_ally_random, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_none(args: anytype) void {
+        ttrg2(.players_none, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_opponent(args: anytype) void {
+        ttrg2(.players_opponent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_opponent_backstab(args: anytype) void {
+        ttrg2(.players_opponent_backstab, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_opponent_binary(args: anytype) void {
+        ttrg2(.players_opponent_binary, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_opponent_exclude(args: anytype) void {
+        ttrg2(.players_opponent_exclude, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_opponent_focus(args: anytype) void {
+        ttrg2(.players_opponent_focus, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_opponent_random(args: anytype) void {
+        ttrg2(.players_opponent_random, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_prune(args: anytype) void {
+        ttrg2(.players_prune, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_prune_self(args: anytype) void {
+        ttrg2(.players_prune_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_source(args: anytype) void {
+        ttrg2(.players_source, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_target_random(args: anytype) void {
+        ttrg2(.players_target_random, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn players_team_binary(args: anytype) void {
+        ttrg2(.players_team_binary, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslot_self(args: anytype) void {
+        ttrg2(.hotbarslot_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_all(args: anytype) void {
+        ttrg2(.hotbarslots_all, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_ally(args: anytype) void {
+        ttrg2(.hotbarslots_ally, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_current_players(args: anytype) void {
+        ttrg2(.hotbarslots_current_players, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_opponent(args: anytype) void {
+        ttrg2(.hotbarslots_opponent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune(a: anytype, op: Compare, b: anytype) void {
+        ttrg2(.hotbarslots_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune_base_has_str(args: anytype) void {
+        ttrg2(.hotbarslots_prune_base_has_str, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune_bool(args: anytype) void {
+        ttrg2(.hotbarslots_prune_bool, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune_bufftype(args: anytype) void {
+        ttrg2(.hotbarslots_prune_bufftype, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune_cdtype(args: anytype) void {
+        ttrg2(.hotbarslots_prune_cdtype, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune_noreset(args: anytype) void {
+        ttrg2(.hotbarslots_prune_noreset, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_prune_self(args: anytype) void {
+        ttrg2(.hotbarslots_prune_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_self_abilities(args: anytype) void {
+        ttrg2(.hotbarslots_self_abilities, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_self_higheststrweapon(args: anytype) void {
+        ttrg2(.hotbarslots_self_higheststrweapon, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_self_loot(args: anytype) void {
+        ttrg2(.hotbarslots_self_loot, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_self_weapontype(args: anytype) void {
+        ttrg2(.hotbarslots_self_weapontype, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hotbarslots_self_weapontype_withstr(args: anytype) void {
+        ttrg2(.hotbarslots_self_weapontype_withstr, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_all(args: anytype) void {
+        ttrg2(.hbstatus_all, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_ally(args: anytype) void {
+        ttrg2(.hbstatus_ally, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_opponent(args: anytype) void {
+        ttrg2(.hbstatus_opponent, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_prune(a: anytype, op: Compare, b: anytype) void {
+        ttrg2(.hbstatus_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_self(args: anytype) void {
+        ttrg2(.hbstatus_self, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_source(args: anytype) void {
+        ttrg2(.hbstatus_source, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbstatus_target(args: anytype) void {
+        ttrg2(.hbstatus_target, args) catch |err| @panic(@errorName(err));
+    }
 
-fn ttrg2(targ: Target, args: anytype) !void {
-    std.debug.assert(have_trigger);
-    try item_csv.writer().print("target,{s}", .{targ.toCsvString()});
-    try writeArgs(item_csv.writer(), args);
-}
-
-/// Typesafe wrapper for `ttrg(.hotbarslots_prune, .{a, op, b})`
-pub fn ttrg_hotbarslots_prune(a: anytype, op: Compare, b: anytype) void {
-    ttrg2(.hotbarslots_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
-}
-
-/// Typesafe wrapper for `ttrg(.hbstatus_prune, .{a, op, b})`
-pub fn ttrg_hbstatus_prune(a: anytype, op: Compare, b: anytype) void {
-    ttrg2(.hbstatus_prune, .{ a, op, b }) catch |err| @panic(@errorName(err));
-}
+    fn ttrg2(targ: Target, args: anytype) !void {
+        std.debug.assert(have_trigger);
+        try item_csv.writer().print("target,{s}", .{targ.toCsvString()});
+        try writeArgs(item_csv.writer(), args);
+    }
+};
 
 /// Set functions can be used to setup different variables, as well as set parameters for Attack
 /// patterns.
@@ -3120,29 +4338,131 @@ pub const Set = enum {
     }
 };
 
-pub fn tset(s: Set, args: anytype) void {
-    switch (s) {
-        .uservar => unreachable, // Call tset_uservar1 or tset_uservar2 instead
-        else => {},
+pub const tset = opaque {
+    pub fn animation(args: anytype) void {
+        tset2(.animation, args) catch |err| @panic(@errorName(err));
     }
-    tset2(s, args) catch |err| @panic(@errorName(err));
-}
+    pub fn critratio(args: anytype) void {
+        tset2(.critratio, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn damage_flags(args: anytype) void {
+        tset2(.damage_flags, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn debug(args: anytype) void {
+        tset2(.debug, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_burnhit(args: anytype) void {
+        tset2(.hbs_burnhit, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_def(args: anytype) void {
+        tset2(.hbs_def, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbs_randombuff(args: anytype) void {
+        tset2(.hbs_randombuff, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbskey(args: anytype) void {
+        tset2(.hbskey, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn hbsstr(args: anytype) void {
+        tset2(.hbsstr, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn randomness(args: anytype) void {
+        tset2(.randomness, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn strength(args: anytype) void {
+        tset2(.strength, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn strength_chargecount(args: anytype) void {
+        tset2(.strength_chargecount, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn strength_def(args: anytype) void {
+        tset2(.strength_def, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn strength_loot(args: anytype) void {
+        tset2(.strength_loot, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn strmult_backstab(args: anytype) void {
+        tset2(.strmult_backstab, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn strmult_debuffcount(args: anytype) void {
+        tset2(.strmult_debuffcount, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar1(name: []const u8, v: anytype) void {
+        tset2(.uservar, .{ name, v }) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar2(name: []const u8, a: anytype, op: MathSign, b: anytype) void {
+        tset2(.uservar, .{ name, a, op, b }) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_aflplayer_pos(args: anytype) void {
+        tset2(.uservar_aflplayer_pos, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_blackhole_charm_calc(args: anytype) void {
+        tset2(.uservar_blackhole_charm_calc, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_cond_squarevar_equal(args: anytype) void {
+        tset2(.uservar_cond_squarevar_equal, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_darkflame(args: anytype) void {
+        tset2(.uservar_darkflame, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_each_target_player(args: anytype) void {
+        tset2(.uservar_each_target_player, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_gold(args: anytype) void {
+        tset2(.uservar_gold, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_random(args: anytype) void {
+        tset2(.uservar_random, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_random_range(args: anytype) void {
+        tset2(.uservar_random_range, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn userver_random_range_int(args: anytype) void {
+        tset2(.userver_random_range_int, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_switch(args: anytype) void {
+        tset2(.uservar_switch, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_difficulty(args: anytype) void {
+        tset2(.uservar_difficulty, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_hallwaycount(args: anytype) void {
+        tset2(.uservar_hallwaycount, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_stage(args: anytype) void {
+        tset2(.uservar_stage, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_hb_cooldownvar(args: anytype) void {
+        tset2(.uservar_hb_cooldownvar, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_hb_hitboxvar(args: anytype) void {
+        tset2(.uservar_hb_hitboxvar, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_hb_itemvar(args: anytype) void {
+        tset2(.uservar_hb_itemvar, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_hb_stat(args: anytype) void {
+        tset2(.uservar_hb_stat, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_player_stat(args: anytype) void {
+        tset2(.uservar_player_stat, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_slotcount(args: anytype) void {
+        tset2(.uservar_slotcount, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_hbscount(args: anytype) void {
+        tset2(.uservar_hbscount, args) catch |err| @panic(@errorName(err));
+    }
+    pub fn uservar_playercount(args: anytype) void {
+        tset2(.uservar_playercount, args) catch |err| @panic(@errorName(err));
+    }
 
-fn tset2(s: Set, args: anytype) !void {
-    std.debug.assert(have_trigger);
-    try item_csv.writer().print("set,{s}", .{s.toCsvString()});
-    try writeArgs(item_csv.writer(), args);
-}
-
-/// Typesafe wrapper for `tset(.uservar, .{name, v})`
-pub fn tset_uservar1(name: []const u8, v: anytype) void {
-    tset2(.uservar, .{ name, v }) catch |err| @panic(@errorName(err));
-}
-
-/// Typesafe wrapper for `tset(.uservar, .{name, a, op, b})`
-pub fn tset_uservar2(name: []const u8, a: anytype, op: MathSign, b: anytype) void {
-    tset2(.uservar, .{ name, a, op, b }) catch |err| @panic(@errorName(err));
-}
+    fn tset2(s: Set, args: anytype) !void {
+        std.debug.assert(have_trigger);
+        try item_csv.writer().print("set,{s}", .{s.toCsvString()});
+        try writeArgs(item_csv.writer(), args);
+    }
+};
 
 fn writeArgs(writer: anytype, args: anytype) !void {
     inline for (args) |arg| {
