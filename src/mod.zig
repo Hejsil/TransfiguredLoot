@@ -1229,6 +1229,7 @@ fn transfiguredAssasinSet() !void {
         .color = color,
         .type = .loot,
         .weaponType = .loot,
+        // .treasureType = .blue,
     });
 
     item(.{
@@ -1459,13 +1460,15 @@ fn transfiguredRockdragonSet() !void {
     apat.darkmagic_blade(.{});
 
     const greysteel_shield_aoe = 1;
+    const greysteel_shield_cd_reduction = -1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_greysteel_shield",
         .name = .{
             .english = "Transfigured Greysteel Shield",
         },
         .description = .{
-            .english = "Your Defensive has a [VAR0_PERCENT] larger radius.",
+            .english = "Your Defensive has a [VAR0_PERCENT] larger radius and a [VAR1_SECOND] " ++
+                "shorter cooldown.",
         },
         .color = color,
         .type = .loot,
@@ -1473,6 +1476,7 @@ fn transfiguredRockdragonSet() !void {
         .treasureType = .red,
 
         .hbVar0 = greysteel_shield_aoe,
+        .hbVar1 = @abs(greysteel_shield_cd_reduction),
     });
     trig.strCalc2(&.{});
     ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
@@ -1480,6 +1484,10 @@ fn transfiguredRockdragonSet() !void {
         .hitboxVar = .radius,
         .mult = 1 + greysteel_shield_aoe,
     });
+
+    trig.cdCalc2b(&.{});
+    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
+    qpat.hb_add_cooldown_permanent(.{ .amount = greysteel_shield_cd_reduction });
 
     item(.{
         .id = "it_transfigured_stonebreaker_staff",
