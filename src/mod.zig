@@ -2551,7 +2551,7 @@ fn transfiguredLuckySet() !void {
     });
     qpat(.hb_add_strength, .{ .amount = ballroom_gown_buff });
 
-    const silver_coin_dmg_mult = 0.3;
+    const silver_coin_dmg_mult = 0.35;
     item(.{
         .id = "it_transfigured_silver_coin",
         .name = .{
