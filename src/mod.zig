@@ -1538,9 +1538,9 @@ fn transfiguredRockdragonSet() !void {
     trig.onSquarePickup(&.{.square_self});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 
-    trig.hbsShield0(&.{cond.pl_self});
+    trig.hbsShield0(&.{.pl_self});
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
-    cond.hb_check_square_var(.{ .varIndex = 0, .amount = rockdragon_mail_every_nth_hit });
+    cond.hb_check_square_var(.{ 0, rockdragon_mail_every_nth_hit });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
     qpat.player_shield(.{});
