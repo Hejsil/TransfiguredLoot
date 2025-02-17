@@ -30,6 +30,14 @@ pub fn start(m: Mod) void {
 fn start2(m: Mod) !void {
     std.debug.assert(!generating_mod);
 
+    const initial_capacity = 1024 * 8;
+    try sheetlist.ensureTotalCapacity(initial_capacity);
+    try item_csv.ensureTotalCapacity(initial_capacity);
+    try item_ini.ensureTotalCapacity(initial_capacity);
+    try item_names.ensureTotalCapacity(initial_capacity);
+    try item_descriptions.ensureTotalCapacity(initial_capacity);
+    try items_json_string.ensureTotalCapacity(initial_capacity);
+
     try sheetlist.writer().writeAll(
         \\Sheet Type,filename
         \\NameSheet,Items_Names
