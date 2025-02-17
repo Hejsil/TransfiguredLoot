@@ -1951,8 +1951,8 @@ fn transfiguredLightningSet() !void {
     });
     defer rns.end();
 
-    const brightstorm_spear_proc_chance = 0.30;
-    const brightstorm_spear_strength = 100;
+    const brightstorm_spear_proc_chance = 0.10;
+    const brightstorm_spear_strength = 200;
     item(.{
         .id = "it_transfigured_brightstorm_spear",
         .name = .{
