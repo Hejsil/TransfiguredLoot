@@ -3136,7 +3136,7 @@ fn transfiguredDepthSet() !void {
         ttrg.hotbarslots_self_weapontype(.{weapon});
         cond.hb_check_resettable0(.{});
         qpat.hb_reset_cooldown(.{});
-        ttrg.hotbarslots_self_loot(.{});
+        ttrg.hotbarslot_self(.{});
         qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -necronomicon_stacks_consumed });
         qpat.hb_flash_item(.{});
     }
