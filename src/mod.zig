@@ -1971,11 +1971,11 @@ fn transfiguredLightningSet() !void {
         .strMult = brightstorm_spear_strength,
     });
     trig.onDamageDone(&.{.pl_self});
+    cond.eval(s.originHbId, .@"!=", r.hbId);
     cond.false(.{Condition.dmg_self_primary});
     cond.false(.{Condition.dmg_self_secondary});
     cond.false(.{Condition.dmg_self_special});
     cond.false(.{Condition.dmg_self_defensive});
-    cond.false(.{Condition.dmg_self_thishb});
     cond.random_def(.{});
     qpat.hb_lucky_proc(.{});
     qpat.hb_flash_item(.{});
