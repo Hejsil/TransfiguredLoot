@@ -414,7 +414,7 @@ fn transfiguredNightSet() !void {
     qpat.hb_run_cooldown(.{});
     ttrg.players_ally(.{});
     ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
-    cond.hb_check_resettable0(.{});
+    ttrg.hotbarslots_prune_noreset(.{});
     qpat.hb_reset_cooldown(.{});
     ttrg.hotbarslot_self(.{});
     qpat.hb_flash_item(.{});
