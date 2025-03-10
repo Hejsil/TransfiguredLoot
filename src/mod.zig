@@ -1951,7 +1951,7 @@ fn transfiguredLightningSet() !void {
     });
     defer rns.end();
 
-    const brightstorm_spear_proc_chance = 0.10;
+    const brightstorm_spear_proc_chance = 1.0;
     const brightstorm_spear_strength = 200;
     item(.{
         .id = "it_transfigured_brightstorm_spear",
@@ -1971,11 +1971,9 @@ fn transfiguredLightningSet() !void {
         .strMult = brightstorm_spear_strength,
     });
     trig.onDamageDone(&.{.pl_self});
+    // 1,2,3,4 is the abilities. Negative ids are status effects
+    cond.eval(s.originHbId, .@">", 4);
     cond.eval(s.originHbId, .@"!=", r.hbId);
-    cond.false(.{Condition.dmg_self_primary});
-    cond.false(.{Condition.dmg_self_secondary});
-    cond.false(.{Condition.dmg_self_special});
-    cond.false(.{Condition.dmg_self_defensive});
     cond.random_def(.{});
     qpat.hb_lucky_proc(.{});
     qpat.hb_flash_item(.{});
