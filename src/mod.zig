@@ -438,7 +438,6 @@ fn transfiguredNightSet() !void {
         .strMult = 900,
     });
     trig.hotbarUsed(&.{.hb_self});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown(.{});
     tset.strength_def(.{});
