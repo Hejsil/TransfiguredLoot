@@ -1086,13 +1086,22 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Leech Staff",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "When a % chance succeeds, inflict [BLEED-3] to a random enemy.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blue,
+        .treasureType = .blue,
+
+        .hbsStrMult = 20,
+        .hbsType = .bleed_3,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    trig.luckyProc(&.{});
+    qpat.hb_flash_item(.{});
+    ttrg.players_opponent_random(.{});
+    tset.hbs_def(.{});
+    apat.poisonfrog_charm(.{});
 
     item(.{
         .id = "it_transfigured_bloodhound_greatsword",
