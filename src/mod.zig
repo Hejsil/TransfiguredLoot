@@ -2676,8 +2676,8 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Mimick Rabbitfoot",
         },
         .description = .{
-            .english = "Makes you slightly luckier. Not a real rabbit's foot.#" ++
-                "Every [CD], % chance succeeds.",
+            .english = "Every [CD], proc as a % chance success.#" ++
+                "Makes you slightly luckier. Also not a real rabbit's foot.",
         },
         .color = color,
         .type = .loot,
@@ -2694,7 +2694,6 @@ fn transfiguredLuckySet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_lucky_proc(.{});
 }
 
