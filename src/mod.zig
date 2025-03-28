@@ -2676,13 +2676,26 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Mimick Rabbitfoot",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Makes you slightly luckier. Not a real rabbit's foot.#" ++
+                "Every [CD], % chance succeeds.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .yellow,
+        .treasureType = .yellow,
+
+        .luck = luck.slightly,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 3 * std.time.ms_per_s,
+        .hbInput = .auto,
     });
+    trig.hotbarUsed(&.{.hb_self});
+    qpat.hb_run_cooldown(.{});
+    qpat.hb_flash_item(.{});
+    qpat.hb_cdloot_proc(.{});
+    qpat.hb_lucky_proc(.{});
 }
 
 fn transfiguredLifeSet() !void {
