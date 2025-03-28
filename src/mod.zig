@@ -2168,7 +2168,6 @@ fn transfiguredShrineSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_run_cooldown(.{});
     ttrg.players_opponent(.{});
     tset.strength_def(.{});
