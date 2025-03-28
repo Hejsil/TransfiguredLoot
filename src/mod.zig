@@ -88,16 +88,16 @@ fn transfiguredArcaneSet() !void {
         .hbVar0 = blackwing_staff_mult,
     });
 
-    for ([_]Hbs{ .curse_0, .hex }, [_]Hbs{ .curse_5, .hex_poison }) |start, end| {
+    for ([_][]const Hbs{ &Hbs.curses, &Hbs.hexes }) |hbs| {
         trig.hbsCreated(&.{});
-        cond.eval(s.statusId, .@">=", @intFromEnum(start));
-        cond.eval(s.statusId, .@"<=", @intFromEnum(end));
+        cond.eval(s.statusId, .@">=", @intFromEnum(hbs[0]));
+        cond.eval(s.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
         qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
         qpat.hb_reset_statchange(.{});
 
         trig.hbsDestroyed(&.{});
-        cond.eval(s.statusId, .@">=", @intFromEnum(start));
-        cond.eval(s.statusId, .@"<=", @intFromEnum(end));
+        cond.eval(s.statusId, .@">=", @intFromEnum(hbs[0]));
+        cond.eval(s.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
         qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
         qpat.hb_reset_statchange(.{});
     }
@@ -168,18 +168,13 @@ fn transfiguredArcaneSet() !void {
     trig.autoStart(&.{.hb_auto_pl});
     qpat.hb_run_cooldown(.{});
 
-    for ([_]Hbs{ .hex, .hex_super, .hex_poison }) |hbs| {
+    for ([_][]const Hbs{ &Hbs.curses, &Hbs.hexes }) |hbs| {
         trig.hbsCreated(&.{.hbs_selfcast});
-        cond.eval(s.statusId, .@"==", @intFromEnum(hbs));
+        cond.eval(s.statusId, .@">=", @intFromEnum(hbs[0]));
+        cond.eval(s.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
         ttrg.hotbarslot_self(.{});
         qpat.hb_reset_cooldown(.{});
     }
-
-    trig.hbsCreated(&.{.hbs_selfcast});
-    cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.curse_0));
-    cond.eval(s.statusId, .@"<=", @intFromEnum(Hbs.curse_5));
-    ttrg.hotbarslot_self(.{});
-    qpat.hb_reset_cooldown(.{});
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
@@ -234,9 +229,10 @@ fn transfiguredArcaneSet() !void {
         .strMult = 35,
     });
     trig.onDamageDone(&.{.dmg_self_special});
-    for (Hbs.curses ++ Hbs.hexes) |hbs| {
+    for ([_][]const Hbs{ &Hbs.curses, &Hbs.hexes }) |hbs| {
         ttrg.hbstatus_target(.{});
-        ttrg.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(hbs));
+        ttrg.hbstatus_prune(thbss.statusId, .@">=", @intFromEnum(hbs[0]));
+        ttrg.hbstatus_prune(thbss.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
         tset.uservar_hbscount(.{"u_hbscount"});
         tset.uservar2("u_hbs_matching", "u_hbs_matching", .@"+", "u_hbscount");
     }

@@ -3943,6 +3943,86 @@ pub const Hbs = enum(u8) {
         .hex_anti,
     };
 
+    pub const bleeds = [_]Hbs{
+        .bleed,
+        .bleed_0,
+        .bleed_1,
+        .bleed_2,
+        .bleed_3,
+    };
+
+    comptime {
+        for (bleeds, @intFromEnum(bleeds[0])..) |bleed, i|
+            std.debug.assert(@intFromEnum(bleed) == i);
+    }
+
+    pub const sparks = [_]Hbs{
+        .spark,
+        .spark_0,
+        .spark_1,
+        .spark_2,
+        .spark_3,
+        .spark_4,
+        .spark_5,
+        .spark_6,
+    };
+
+    comptime {
+        for (sparks, @intFromEnum(sparks[0])..) |spark, i|
+            std.debug.assert(@intFromEnum(spark) == i);
+    }
+
+    pub const decays = [_]Hbs{
+        .decay,
+        .decay_0,
+        .decay_1,
+        .decay_2,
+        .decay_3,
+        .decay_4,
+        .decay_5,
+        .decay_6,
+        .decay_7,
+        .decay_8,
+        .decay_9,
+    };
+
+    comptime {
+        for (decays, @intFromEnum(decays[0])..) |decay, i|
+            std.debug.assert(@intFromEnum(decay) == i);
+    }
+
+    pub const burns = [_]Hbs{
+        .burn,
+        .burn_0,
+        .burn_1,
+        .burn_2,
+        .burn_3,
+        .burn_4,
+        .burn_5,
+        .burn_6,
+    };
+
+    comptime {
+        for (burns, @intFromEnum(burns[0])..) |burn, i|
+            std.debug.assert(@intFromEnum(burn) == i);
+    }
+
+    pub const poisons = [_]Hbs{
+        .poison,
+        .poison_0,
+        .poison_1,
+        .poison_2,
+        .poison_3,
+        .poison_4,
+        .poison_5,
+        .poison_6,
+    };
+
+    comptime {
+        for (poisons, @intFromEnum(poisons[0])..) |poison, i|
+            std.debug.assert(@intFromEnum(poison) == i);
+    }
+
     pub const curses = [_]Hbs{
         .curse,
         .curse_0,
@@ -3953,11 +4033,21 @@ pub const Hbs = enum(u8) {
         .curse_5,
     };
 
+    comptime {
+        for (curses, @intFromEnum(curses[0])..) |curse, i|
+            std.debug.assert(@intFromEnum(curse) == i);
+    }
+
     pub const hexes = [_]Hbs{
         .hex,
-        .hex_poison,
         .hex_super,
+        .hex_poison,
     };
+
+    comptime {
+        for (hexes, @intFromEnum(hexes[0])..) |hex, i|
+            std.debug.assert(@intFromEnum(hex) == i);
+    }
 
     pub const toCsvString = toString;
     pub const toIniString = toString;
