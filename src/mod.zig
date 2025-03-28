@@ -555,7 +555,6 @@ fn transfiguredNightSet() !void {
     });
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
 
     for ([_]WeaponType{ .secondary, .defensive }) |weapon_type| {
