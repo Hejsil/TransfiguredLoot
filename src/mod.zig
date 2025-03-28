@@ -4863,19 +4863,31 @@ fn transfiguredRuinsSet() !void {
         // .treasureType = .redgreen,
     });
 
+    const mountain_staff_mult_per_gcd = 0.03;
+    const mountain_staff_per_gcd = 0.2 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_mountain_staff",
         .name = .{
             .english = "Transfigured Mountain Staff",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Each ability deal [VAR0_PERCENT] more damage per [VAR1_SECONDS] GCD.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .redgreen,
+        .treasureType = .redgreen,
+
+        .hbVar0 = mountain_staff_mult_per_gcd,
+        .hbVar1 = mountain_staff_per_gcd,
     });
+    trig.strCalc1c(&.{});
+    for (WeaponType.abilities_with_gcd) |weapon| {
+        ttrg.hotbarslots_self_weapontype(.{weapon});
+        tset.uservar2("u_mult", ths0.gcd, .@"/", mountain_staff_per_gcd);
+        tset.uservar2("u_mult", "u_mult", .@"*", mountain_staff_mult_per_gcd);
+        qpat.hb_add_strcalcbuff(.{ .amountStr = "u_mult" });
+    }
 
     item(.{
         .id = "it_transfigured_boulder_shield",
