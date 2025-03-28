@@ -608,7 +608,6 @@ fn transfiguredTimespaceSet() !void {
     qpat.hb_run_cooldown(.{});
 
     trig.hotbarUsed(&.{.hb_self});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_run_cooldown(.{});
     ttrg.players_ally(.{});
     tset.hbs_def(.{});
@@ -900,7 +899,6 @@ fn transfiguredWindSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     ttrg.players_opponent(.{});
     tset.strength_def(.{});
@@ -1841,7 +1839,6 @@ fn transfiguredGemSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     cond.hb_check_square_var_false(.{ 0, 0 });
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     ttrg.players_ally(.{});
     for (0..sapphire_violin_num_buffs) |_| {
@@ -2218,7 +2215,6 @@ fn transfiguredShrineSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     ttrg.player_self(.{});
     ttrg.hbstatus_target(.{});
@@ -2783,8 +2779,6 @@ fn transfiguredLifeSet() !void {
     });
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
-    qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     ttrg.hotbarslots_self_abilities(.{});
     ttrg.hotbarslots_prune(thss.maxStock, .@">", 1);
     qpat.hb_increase_stock(.{ .amount = 1 });
@@ -3292,7 +3286,6 @@ fn transfiguredDepthSet() !void {
     cond.hb_check_square_var_false(.{ 0, 0 });
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     ttrg.players_opponent(.{});
     tset.strength_def(.{});
@@ -4255,7 +4248,6 @@ fn transfiguredSparkbladeSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     ttrg.players_opponent(.{});
     tset.hbs_def(.{});
@@ -4517,7 +4509,6 @@ fn transfiguredSwiftflightSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     ttrg.players_opponent(.{});
     tset.uservar2("u_str", r.sqVar0, .@"*", hermes_bow_dmg_per_leap);
