@@ -2277,7 +2277,6 @@ fn transfiguredShrineSet() !void {
             cond.hb_check_square_var_false(.{ 0, i });
     }
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     ttrg.players_ally(.{});
     tset.hbskey(.{ Hbs.smite_0, r.hbsLength });
     apat.ornamental_bell(.{});
@@ -2288,7 +2287,6 @@ fn transfiguredShrineSet() !void {
             cond.hb_check_square_var_false(.{ 0, i });
     }
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     ttrg.players_ally(.{});
     tset.hbskey(.{ Hbs.elegy_0, r.hbsLength });
     apat.ornamental_bell(.{});
