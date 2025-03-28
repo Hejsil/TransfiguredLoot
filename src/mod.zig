@@ -2099,7 +2099,6 @@ fn transfiguredLightningSet() !void {
     cond.random_def(.{});
     qpat.hb_flash_item(.{});
     qpat.hb_lucky_proc(.{});
-    qpat.hb_cdloot_proc(.{});
     ttrg.players_opponent(.{});
     tset.strength_def(.{});
     apat.crown_of_storms(.{});
