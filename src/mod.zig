@@ -2488,7 +2488,6 @@ fn transfiguredLuckySet() !void {
     qpat.hb_run_cooldown(.{});
     cond.random_def(.{});
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_lucky_proc(.{});
     ttrg.players_opponent(.{});
     tset.strength_def(.{});
