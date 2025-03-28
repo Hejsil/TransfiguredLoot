@@ -4796,7 +4796,6 @@ fn transfiguredSacredflameSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown(.{});
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     ttrg.players_opponent(.{});
     tset.strength_def(.{});
     apat.crown_of_storms(.{});
