@@ -747,7 +747,6 @@ fn transfiguredTimespaceSet() !void {
     trig.hotbarUsed2(&.{.hb_self});
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
     qpat.hb_run_cooldown(.{});
-    qpat.hb_cdloot_proc(.{});
     qpat.hb_flash_item(.{});
     cond.hb_check_square_var(.{ 0, 2 });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
