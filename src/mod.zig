@@ -412,7 +412,6 @@ fn transfiguredNightSet() !void {
     qpat.hb_reset_cooldown(.{});
     ttrg.hotbarslot_self(.{});
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
 
     const nightstar_grimoire_radius = 200;
     item(.{
