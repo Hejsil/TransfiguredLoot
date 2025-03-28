@@ -4984,7 +4984,6 @@ fn transfiguredRuinsSet() !void {
     ttrg.player_self(.{});
     qpat.hb_run_cooldown(.{});
     qpat.hb_flash_item(.{});
-    qpat.hb_cdloot_proc(.{});
     tset.hbs_def(.{});
     apat.apply_hbs(.{});
 
