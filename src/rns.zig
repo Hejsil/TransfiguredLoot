@@ -3065,24 +3065,24 @@ pub const apat = opaque {
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1880256260#gid=1880256260
 pub const ttrg = opaque {
     /// Clears all lists.
-    pub fn none(args: anytype) void {
-        write("ttrg_none", args) catch |err| @panic(@errorName(err));
+    pub fn none() void {
+        write("ttrg_none", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// From a status effect receiving a trigger, target only the player afflicted with this
     /// status.
-    pub fn player_afflicted(args: anytype) void {
-        write("ttrg_player_afflicted", args) catch |err| @panic(@errorName(err));
+    pub fn player_afflicted() void {
+        write("ttrg_player_afflicted", .{}) catch |err| @panic(@errorName(err));
     }
-    pub fn player_afflicted_source(args: anytype) void {
-        write("ttrg_player_afflicted_source", args) catch |err| @panic(@errorName(err));
+    pub fn player_afflicted_source() void {
+        write("ttrg_player_afflicted_source", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// When a status effect is the SOURCE of the trigger, target the player afflicted by that
     /// status effect.
     /// From an "onDamageDone" trigger, target the player that was damaged.
-    pub fn player_damaged(args: anytype) void {
-        write("ttrg_player_damaged", args) catch |err| @panic(@errorName(err));
+    pub fn player_damaged() void {
+        write("ttrg_player_damaged", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// flag (a binary number)
@@ -3094,20 +3094,20 @@ pub const ttrg = opaque {
 
     /// Target the player receiving this trigger; if the trigger is received by a hotbar slot, it
     /// will target the player who owns that slot.
-    pub fn player_self(args: anytype) void {
-        write("ttrg_player_self", args) catch |err| @panic(@errorName(err));
+    pub fn player_self() void {
+        write("ttrg_player_self", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all "players" (meaning, both allies and enemies).
-    pub fn players_all(args: anytype) void {
-        write("ttrg_players_all", args) catch |err| @panic(@errorName(err));
+    pub fn players_all() void {
+        write("ttrg_players_all", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all the players that are on the same team as the person receiving this trigger.
     /// For loot items, this means all of the rabbit players, but if an enemy were to call this,
     /// it would target all the enemies. Also, this excludes KO'd players.
-    pub fn players_ally(args: anytype) void {
-        write("ttrg_players_ally", args) catch |err| @panic(@errorName(err));
+    pub fn players_ally() void {
+        write("ttrg_players_ally", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// excludeID (an integer)
@@ -3119,15 +3119,15 @@ pub const ttrg = opaque {
     }
 
     /// Targets all players on the same team. Includes KO'd players.
-    pub fn players_ally_include_ko(args: anytype) void {
-        write("ttrg_players_ally_include_ko", args) catch |err| @panic(@errorName(err));
+    pub fn players_ally_include_ko() void {
+        write("ttrg_players_ally_include_ko", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Despite the name, this actually targets the player who's MISSING the most HP, not the
     /// actual lowest HP player. I must have written this a long time ago. Also, it excludes KO'd
     /// players.
-    pub fn players_ally_lowest_hp(args: anytype) void {
-        write("ttrg_players_ally_lowest_hp", args) catch |err| @panic(@errorName(err));
+    pub fn players_ally_lowest_hp() void {
+        write("ttrg_players_ally_lowest_hp", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// numberOfPlayers (an integer; this is an optional parameter)
@@ -3139,19 +3139,19 @@ pub const ttrg = opaque {
     }
 
     /// Clears player list.
-    pub fn players_none(args: anytype) void {
-        write("ttrg_players_none", args) catch |err| @panic(@errorName(err));
+    pub fn players_none() void {
+        write("ttrg_players_none", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all the players that are on the OPPOSITE team as the person receiving this trigger.
     /// For loot items, this means all of your enemies.
-    pub fn players_opponent(args: anytype) void {
-        write("ttrg_players_opponent", args) catch |err| @panic(@errorName(err));
+    pub fn players_opponent() void {
+        write("ttrg_players_opponent", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all of your enemies that are facing away from you.
-    pub fn players_opponent_backstab(args: anytype) void {
-        write("ttrg_players_opponent_backstab", args) catch |err| @panic(@errorName(err));
+    pub fn players_opponent_backstab() void {
+        write("ttrg_players_opponent_backstab", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// trgBinary (a binary number representing player IDs)
@@ -3175,8 +3175,8 @@ pub const ttrg = opaque {
     }
 
     /// Targets whatever player this player is currently targetting.
-    pub fn players_opponent_focus(args: anytype) void {
-        write("ttrg_players_opponent_focus", args) catch |err| @panic(@errorName(err));
+    pub fn players_opponent_focus() void {
+        write("ttrg_players_opponent_focus", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// numberOfPlayers (an integer; this is an optional parameter)
@@ -3204,13 +3204,13 @@ pub const ttrg = opaque {
     }
 
     /// Removes the player receiving this trigger from the player list, if it is in there.
-    pub fn players_prune_self(args: anytype) void {
-        write("ttrg_players_prune_self", args) catch |err| @panic(@errorName(err));
+    pub fn players_prune_self() void {
+        write("ttrg_players_prune_self", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets the player who is the source of this trigger.
-    pub fn players_source(args: anytype) void {
-        write("ttrg_players_source", args) catch |err| @panic(@errorName(err));
+    pub fn players_source() void {
+        write("ttrg_players_source", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// numberOfPlayers (an integer; this is an optional parameter)
@@ -3236,28 +3236,28 @@ pub const ttrg = opaque {
     }
 
     /// Targets the hotbar slot receiving this trigger
-    pub fn hotbarslot_self(args: anytype) void {
-        write("ttrg_hotbarslot_self", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslot_self() void {
+        write("ttrg_hotbarslot_self", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets ALL active hotbar slots
-    pub fn hotbarslots_all(args: anytype) void {
-        write("ttrg_hotbarslots_all", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_all() void {
+        write("ttrg_hotbarslots_all", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all hotbar slots on your team
-    pub fn hotbarslots_ally(args: anytype) void {
-        write("ttrg_hotbarslots_ally", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_ally() void {
+        write("ttrg_hotbarslots_ally", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all the hotbar slots of the players in the "players" list
-    pub fn hotbarslots_current_players(args: anytype) void {
-        write("ttrg_hotbarslots_current_players", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_current_players() void {
+        write("ttrg_hotbarslots_current_players", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all the hotbar slots on your enemy's team
-    pub fn hotbarslots_opponent(args: anytype) void {
-        write("ttrg_hotbarslots_opponent", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_opponent() void {
+        write("ttrg_hotbarslots_opponent", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// param0 (any number)
@@ -3279,8 +3279,8 @@ pub const ttrg = opaque {
     }
 
     /// Prune the current list of hotbar slots to only include items that have strength.
-    pub fn hotbarslots_prune_base_has_str(args: anytype) void {
-        write("ttrg_hotbarslots_prune_base_has_str", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_prune_base_has_str() void {
+        write("ttrg_hotbarslots_prune_base_has_str", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// param0 (a variable that differs per target)
@@ -3313,30 +3313,30 @@ pub const ttrg = opaque {
     }
 
     /// Prune the current list of hotbar slots to only include items that can be reset.
-    pub fn hotbarslots_prune_noreset(args: anytype) void {
-        write("ttrg_hotbarslots_prune_noreset", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_prune_noreset() void {
+        write("ttrg_hotbarslots_prune_noreset", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Removes the hotbar slot receiving this trigger from the list of hotbar slots, if it's in
     /// there.
-    pub fn hotbarslots_prune_self(args: anytype) void {
-        write("ttrg_hotbarslots_prune_self", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_prune_self() void {
+        write("ttrg_hotbarslots_prune_self", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets the abilities of the player receiving this trigger.
-    pub fn hotbarslots_self_abilities(args: anytype) void {
-        write("ttrg_hotbarslots_self_abilities", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_self_abilities() void {
+        write("ttrg_hotbarslots_self_abilities", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets the ability of the player receiving this trigger with the highest strength number
     /// (if it's tied, multiple abilities will be targeted)
-    pub fn hotbarslots_self_higheststrweapon(args: anytype) void {
-        write("ttrg_hotbarslots_self_higheststrweapon", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_self_higheststrweapon() void {
+        write("ttrg_hotbarslots_self_higheststrweapon", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets the loot of the player receiving this trigger
-    pub fn hotbarslots_self_loot(args: anytype) void {
-        write("ttrg_hotbarslots_self_loot", args) catch |err| @panic(@errorName(err));
+    pub fn hotbarslots_self_loot() void {
+        write("ttrg_hotbarslots_self_loot", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// wpType (an integer representing a weapon type)
@@ -3360,18 +3360,18 @@ pub const ttrg = opaque {
     }
 
     /// Targets all status effects that are currently active
-    pub fn hbstatus_all(args: anytype) void {
-        write("ttrg_hbstatus_all", args) catch |err| @panic(@errorName(err));
+    pub fn hbstatus_all() void {
+        write("ttrg_hbstatus_all", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all status effects that have been APPLIED by your allies
-    pub fn hbstatus_ally(args: anytype) void {
-        write("ttrg_hbstatus_ally", args) catch |err| @panic(@errorName(err));
+    pub fn hbstatus_ally() void {
+        write("ttrg_hbstatus_ally", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all status effects that have been APPLIED by your opponent
-    pub fn hbstatus_opponent(args: anytype) void {
-        write("ttrg_hbstatus_opponent", args) catch |err| @panic(@errorName(err));
+    pub fn hbstatus_opponent() void {
+        write("ttrg_hbstatus_opponent", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Prunes current list of status effects to only include those that match the equation given.
@@ -3388,18 +3388,18 @@ pub const ttrg = opaque {
     }
 
     /// Targets the status effect receiving this trigger.
-    pub fn hbstatus_self(args: anytype) void {
-        write("ttrg_hbstatus_self", args) catch |err| @panic(@errorName(err));
+    pub fn hbstatus_self() void {
+        write("ttrg_hbstatus_self", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets the status effect that was the source of this trigger.
-    pub fn hbstatus_source(args: anytype) void {
-        write("ttrg_hbstatus_source", args) catch |err| @panic(@errorName(err));
+    pub fn hbstatus_source() void {
+        write("ttrg_hbstatus_source", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Targets all of the status effects that have been applied by the current list of players.
-    pub fn hbstatus_target(args: anytype) void {
-        write("ttrg_hbstatus_target", args) catch |err| @panic(@errorName(err));
+    pub fn hbstatus_target() void {
+        write("ttrg_hbstatus_target", .{}) catch |err| @panic(@errorName(err));
     }
 
     fn write(targ: []const u8, args: anytype) !void {
