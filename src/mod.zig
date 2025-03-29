@@ -801,19 +801,33 @@ fn transfiguredTimespaceSet() !void {
     trig.hbsCreated(&.{.hbs_thishbcast});
     qpat.hb_flash_item(.{});
 
+    const gemini_necklace_proc_chance = 0.25;
     item(.{
         .id = "it_transfigured_gemini_necklace",
         .name = .{
             .english = "Transfigured Gemini Necklace",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your loot have a [LUCK] chance of instantly resetting when used.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purple,
+        .treasureType = .purple,
+
+        .procChance = gemini_necklace_proc_chance,
     });
+    trig.hotbarUsedProc(&.{});
+    // 1,2,3,4 is the abilities. Negative ids are status effects
+    cond.eval(s.hbId, .@">", 4);
+    cond.random_def(.{});
+    ttrg.hotbarslots_current_players(.{});
+    ttrg.hotbarslots_prune(thss.hbId, .@"==", s.hbId);
+    cond.hb_check_resettable0(.{});
+    qpat.hb_reset_cooldown(.{});
+    ttrg.hotbarslot_self(.{});
+    qpat.hb_flash_item(.{});
+    qpat.hb_lucky_proc(.{});
 }
 
 fn transfiguredWindSet() !void {
