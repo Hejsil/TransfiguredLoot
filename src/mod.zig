@@ -387,7 +387,7 @@ fn transfiguredNightSet() !void {
     qpat.hb_cdloot_proc(.{});
 
     item(.{
-        .id = "it_transfigured_lullaby_harb",
+        .id = "it_transfigured_lullaby_harp",
         .name = .{
             .english = "Transfigured Lullaby Harp",
         },
@@ -3041,7 +3041,7 @@ fn transfiguredPoisonSet() !void {
     });
 
     item(.{
-        .id = "it_transfigured_cursed_poisonfrog_charm",
+        .id = "it_transfigured_poisonfrog_charm",
         .name = .{
             .english = "Transfigured Poisonfrog Charm",
         },
