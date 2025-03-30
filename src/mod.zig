@@ -264,50 +264,19 @@ fn transfiguredArcaneSet() !void {
     ttrg.hotbarslots_prune_bufftype(.{0});
     qpat.hb_mult_length_hbs(.{ .mult = redblack_ribbon_mult_length_hbs + 1 });
 
-    const opal_necklace_extra_cd = 10 * std.time.ms_per_s;
-    const opal_necklace_num_curses = 4;
     item(.{
         .id = "it_transfigured_opal_necklace",
         .name = .{
             .english = "Transfigured Opal Necklace",
         },
         .description = .{
-            .english = "Your Defensive applies [VAR0] curses to all enemies, but its cooldown is " ++
-                "increased by [VAR1_SECONDS].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purple,
-
-        .hbsType = .curse_0,
-        .hbsLength = 5 * std.time.ms_per_s,
-
-        .hbVar0 = opal_necklace_num_curses,
-        .hbVar1 = opal_necklace_extra_cd,
-
-        .autoOffSqVar0 = 0,
+        // .treasureType = .purple,
     });
-    trig.cdCalc2a(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
-    qpat.hb_add_cooldown_permanent(.{ .amount = opal_necklace_extra_cd });
-
-    trig.hotbarUsedProc(&.{.hb_defensive});
-    ttrg.players_opponent();
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
-
-    for (Hbs.curses[0..opal_necklace_num_curses]) |curse| {
-        tset.hbskey(.{ curse, r.hbsLength });
-        apat.apply_hbs(.{});
-    }
-
-    // Flash item when debuff was applied
-    trig.hbsCreated(&.{.hbs_thishbcast});
-    // To avoid flashing for every debuff applied, instead keep track of if the defensive was used.
-    // If so, flash once, and set the used flag to 0, so we don't flash again.
-    cond.hb_check_square_var(.{ 0, 1 });
-    qpat.hb_flash_item(.{});
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 }
 
 fn transfiguredNightSet() !void {
@@ -2921,68 +2890,20 @@ fn transfiguredPoisonSet() !void {
     });
     defer rns.end();
 
-    const snakefang_dagger_secondary_mult = -0.25;
-    const snakefang_dagger_str = 20;
-    const snakefang_dagger_num_poisons = 3;
     item(.{
         .id = "it_transfigured_snakefang_dagger",
         .name = .{
             .english = "Transfigured Snakefang Dagger",
         },
         .description = .{
-            .english = "Your Secondary deals [VAR0_PERCENT] less damage, and applies " ++
-                "[VAR1] [POISON-0].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .green,
+        // .treasureType = .green,
 
-        .delay = 250,
-        .hbsType = .poison_0,
-        .hbsStrMult = snakefang_dagger_str,
-        .hbsLength = 5 * std.time.ms_per_s,
-
-        .hbVar0 = @abs(snakefang_dagger_secondary_mult),
-        .secondaryMult = snakefang_dagger_secondary_mult,
-
-        .hbColor0 = rgb(0x0a, 0x51, 0x00),
-        .hbColor1 = rgb(0x17, 0x7f, 0x00),
-
-        .hbVar1 = snakefang_dagger_num_poisons,
-        .autoOffSqVar0 = 0,
     });
-    trig.onDamageDone(&.{.dmg_self_secondary});
-    ttrg.player_damaged();
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
-
-    const poisons = [_]Hbs{
-        .poison_0,
-        .poison_1,
-        .poison_2,
-        .poison_3,
-        .poison_4,
-        .poison_5,
-        .poison_6,
-    };
-    tset.hbs_def(.{});
-    inline for (poisons[0..snakefang_dagger_num_poisons]) |hbs| {
-        tset.hbskey(.{hbs});
-        apat.apply_hbs(.{});
-    }
-
-    // Flash item when debuff was applied
-    trig.hbsCreated(&.{.hbs_thishbcast});
-    // To avoid flashing for every debuff applied, instead keep track of if the secondary has done
-    // damage. If so, flash once, and set the damage flag to 0, so we don't flash again.
-    cond.hb_check_square_var(.{ 0, 1 });
-    qpat.hb_flash_item(.{});
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
-
-    // Set color of special to hbColor0/1
-    trig.colorCalc(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
-    qpat.hb_set_color_def(.{});
 
     item(.{
         .id = "it_transfigured_ivy_staff",
