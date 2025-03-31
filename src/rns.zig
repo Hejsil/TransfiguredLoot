@@ -491,6 +491,12 @@ pub fn item(opt: Item) void {
 }
 
 fn item2(opt: Item) !void {
+    const is_not_implemented = std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
+    std.debug.assert(
+        (is_not_implemented and opt.treasureType == null) or
+            (!is_not_implemented and opt.treasureType != null),
+    );
+
     const item_names_w = item_names.writer();
     try item_names_w.print("{s},0,", .{opt.id});
     try writeCsvString(item_names_w, opt.name.english);
