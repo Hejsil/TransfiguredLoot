@@ -3397,7 +3397,7 @@ fn transfiguredDarkbiteSet() !void {
         // .treasureType = .purpleblue,
     });
 
-    const darkmage_charm_mult = 2;
+    const darkmage_charm_mult = 5;
     item(.{
         .id = "it_transfigured_darkmage_charm",
         .name = .{
