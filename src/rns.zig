@@ -1691,13 +1691,13 @@ pub const cond = opaque {
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1513724686#gid=1513724686
 pub const qpat = opaque {
     /// Does nothing
-    pub fn nothing(args: Args) void {
-        write("tpat_nothing", args) catch |err| @panic(@errorName(err));
+    pub fn nothing() void {
+        write("tpat_nothing", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Adds the current list of targets to your debug log.
-    pub fn debug_targets(args: Args) void {
-        write("tpat_debug_targets", args) catch |err| @panic(@errorName(err));
+    pub fn debug_targets() void {
+        write("tpat_debug_targets", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// To be used during strCalc.
@@ -1715,14 +1715,14 @@ pub const qpat = opaque {
     }
 
     /// Randomizes your levitation ring color (used on the Paintbrush trinket)
-    pub fn player_change_color_rand(args: Args) void {
-        write("tpat_player_change_color_rand", args) catch |err| @panic(@errorName(err));
+    pub fn player_change_color_rand() void {
+        write("tpat_player_change_color_rand", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Resets the distance ticker for targeted players to 0 (used for the "Tranquility" status
     /// effect to accurately measure 1 rabbitleap)
-    pub fn player_distcounter_reset(args: Args) void {
-        write("tpat_player_distcounter_reset", args) catch |err| @panic(@errorName(err));
+    pub fn player_distcounter_reset() void {
+        write("tpat_player_distcounter_reset", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "length" (time in milliseconds)
@@ -1761,14 +1761,14 @@ pub const qpat = opaque {
 
     /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
     /// from damage. Use this trigger for loot/ability effects.
-    pub fn player_shield(args: Args) void {
-        write("tpat_player_shield", args) catch |err| @panic(@errorName(err));
+    pub fn player_shield() void {
+        write("tpat_player_shield", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
     /// from damage. Use this trigger for status effects (like Stoneskin).
-    pub fn player_shield_hbs(args: Args) void {
-        write("tpat_player_shield_hbs", args) catch |err| @panic(@errorName(err));
+    pub fn player_shield_hbs() void {
+        write("tpat_player_shield_hbs", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "amount" (a number)
@@ -1800,8 +1800,8 @@ pub const qpat = opaque {
     }
 
     /// Make the targeted player's trinket flash/sparkle/animate
-    pub fn player_trinket_flash(args: Args) void {
-        write("tpat_player_trinket_flash", args) catch |err| @panic(@errorName(err));
+    pub fn player_trinket_flash() void {
+        write("tpat_player_trinket_flash", .{}) catch |err| @panic(@errorName(err));
     }
 
     pub fn player_add_hp(args: Args) void {
@@ -1905,8 +1905,8 @@ pub const qpat = opaque {
 
     /// Must be called whenever a loot item with a cooldown that isn't directly "used" (aka isn't
     /// an auto hotbarslot) is activated.
-    pub fn hb_cdloot_proc(args: Args) void {
-        write("tpat_hb_cdloot_proc", args) catch |err| @panic(@errorName(err));
+    pub fn hb_cdloot_proc() void {
+        write("tpat_hb_cdloot_proc", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "num" (a number of charges to give)
@@ -1918,8 +1918,8 @@ pub const qpat = opaque {
     }
 
     /// Clears specified hotbarslots of all Charge.
-    pub fn hb_charge_clear(args: Args) void {
-        write("tpat_hb_charge_clear", args) catch |err| @panic(@errorName(err));
+    pub fn hb_charge_clear() void {
+        write("tpat_hb_charge_clear", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "messageIndex" (hbFlashMessage enum, default "none")
@@ -1942,8 +1942,8 @@ pub const qpat = opaque {
     /// Must be called whenever an ability, for whatever reason, is activated via some effect
     /// other than activating itself (such as Heavyblade's Garnet Primary, or Druids Sapphire
     /// Primary) so they can proc other items
-    pub fn hb_hbuse_proc(args: Args) void {
-        write("tpat_hb_hbuse_proc", args) catch |err| @panic(@errorName(err));
+    pub fn hb_hbuse_proc() void {
+        write("tpat_hb_hbuse_proc", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
@@ -1961,14 +1961,14 @@ pub const qpat = opaque {
 
     /// Must be called whenever an item "succeeds" in a random proc chance, in order to activate
     /// other items. This will indicate that all hotbars targeted have proc'd."
-    pub fn hb_lucky_proc(args: Args) void {
-        write("tpat_hb_lucky_proc", args) catch |err| @panic(@errorName(err));
+    pub fn hb_lucky_proc() void {
+        write("tpat_hb_lucky_proc", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Alternatively, this function can be called. This will indicate that the RECEIVER hotbar
     /// has proc'd.
-    pub fn hb_lucky_proc_source(args: Args) void {
-        write("tpat_hb_lucky_proc_source", args) catch |err| @panic(@errorName(err));
+    pub fn hb_lucky_proc_source() void {
+        write("tpat_hb_lucky_proc_source", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "mult" (a number)
@@ -2004,8 +2004,8 @@ pub const qpat = opaque {
     }
 
     /// Forces a recalculation of color
-    pub fn hb_recalc_color(args: Args) void {
-        write("tpat_hb_recalc_color", args) catch |err| @panic(@errorName(err));
+    pub fn hb_recalc_color() void {
+        write("tpat_hb_recalc_color", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "amount" (an integer)
@@ -2017,26 +2017,26 @@ pub const qpat = opaque {
     /// Resets the cooldown of targeted hotbarslots. tcond_hb_check_resettable0 or
     /// ttrg_hotbarslots_prune_noreset should be run before using this to avoid resetting slots
     /// that aren't meant to be resettable.
-    pub fn hb_reset_cooldown(args: Args) void {
-        write("tpat_hb_reset_cooldown", args) catch |err| @panic(@errorName(err));
+    pub fn hb_reset_cooldown() void {
+        write("tpat_hb_reset_cooldown", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Will
     /// also refresh strCalc. Not to be used during strCalc, or you will get an infinite refresh
     /// loop.
-    pub fn hb_reset_statchange(args: Args) void {
-        write("tpat_hb_reset_statchange", args) catch |err| @panic(@errorName(err));
+    pub fn hb_reset_statchange() void {
+        write("tpat_hb_reset_statchange", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Can be
     /// used during strCalc.
-    pub fn hb_reset_statchange_norefresh(args: Args) void {
-        write("tpat_hb_reset_statchange_norefresh", args) catch |err| @panic(@errorName(err));
+    pub fn hb_reset_statchange_norefresh() void {
+        write("tpat_hb_reset_statchange_norefresh", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Runs cooldown of targeted hotbarslots.
-    pub fn hb_run_cooldown(args: Args) void {
-        write("tpat_hb_run_cooldown", args) catch |err| @panic(@errorName(err));
+    pub fn hb_run_cooldown() void {
+        write("tpat_hb_run_cooldown", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "length" (time in milliseconds)
@@ -2054,8 +2054,8 @@ pub const qpat = opaque {
     /// Changes the color of the targeted hotbarslots to the color of the RECEIVER of the original
     /// trigger. If your item upgrades an ability, you should add a colorCalc trigger that calls
     /// this on that ability, to add a bit of flair to your item!
-    pub fn hb_set_color_def(args: Args) void {
-        write("tpat_hb_set_color_def", args) catch |err| @panic(@errorName(err));
+    pub fn hb_set_color_def() void {
+        write("tpat_hb_set_color_def", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "time" (in milliseconds)
@@ -2105,13 +2105,13 @@ pub const qpat = opaque {
     }
 
     /// Special function for Tidal Greatsword
-    pub fn hb_set_tidalgreatsword(args: Args) void {
-        write("tpat_hb_set_tidalgreatsword", args) catch |err| @panic(@errorName(err));
+    pub fn hb_set_tidalgreatsword() void {
+        write("tpat_hb_set_tidalgreatsword", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Special function for Tidal Greatsword
-    pub fn hb_set_tidalgreatsword_start(args: Args) void {
-        write("tpat_hb_set_tidalgreatsword_start", args) catch |err| @panic(@errorName(err));
+    pub fn hb_set_tidalgreatsword_start() void {
+        write("tpat_hb_set_tidalgreatsword_start", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
@@ -2152,8 +2152,8 @@ pub const qpat = opaque {
 
     /// For stock, stockGcd and stockOnly hotbarslots, zeros out stock and starts the slot's
     /// cooldown.
-    pub fn hb_zero_stock(args: Args) void {
-        write("tpat_hb_zero_stock", args) catch |err| @panic(@errorName(err));
+    pub fn hb_zero_stock() void {
+        write("tpat_hb_zero_stock", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "flag" (a binary number representing an hbsFlag)
@@ -2192,8 +2192,8 @@ pub const qpat = opaque {
     }
 
     /// Destroys targeted status effects
-    pub fn hbs_destroy(args: Args) void {
-        write("tpat_hbs_destroy", args) catch |err| @panic(@errorName(err));
+    pub fn hbs_destroy() void {
+        write("tpat_hbs_destroy", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// "mult" (a number)
@@ -2203,13 +2203,13 @@ pub const qpat = opaque {
     }
 
     /// Resets stats added to targeted status effects via tpat_hbs_add_statchange
-    pub fn hbs_reset_statchange(args: Args) void {
-        write("tpat_hbs_reset_statchange", args) catch |err| @panic(@errorName(err));
+    pub fn hbs_reset_statchange() void {
+        write("tpat_hbs_reset_statchange", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Don't use this
-    pub fn bookofcheats_set_random(args: Args) void {
-        write("tpat_bookofcheats_set_random", args) catch |err| @panic(@errorName(err));
+    pub fn bookofcheats_set_random() void {
+        write("tpat_bookofcheats_set_random", .{}) catch |err| @panic(@errorName(err));
     }
 
     fn write(pat: []const u8, args: Args) !void {
@@ -3448,26 +3448,26 @@ pub const tset = opaque {
     /// param (any number or variable)
     /// Will print out that number. Currently doesn't do anything, but I will add it to the mod
     /// debug log in the next update.
-    pub fn debug(args: anytype) void {
-        write("tset_debug", args) catch |err| @panic(@errorName(err));
+    pub fn debug(param: anytype) void {
+        write("tset_debug", .{param}) catch |err| @panic(@errorName(err));
     }
 
     /// Will set the appropriate strength for applying Burn. Must be used from an onDamageDone
     /// trigger before Burn is applied.
-    pub fn hbs_burnhit(args: anytype) void {
-        write("tset_hbs_burnhit", args) catch |err| @panic(@errorName(err));
+    pub fn hbs_burnhit() void {
+        write("tset_hbs_burnhit", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Will set the appropriate strength/length for a Buff or Debuff, based on the item's stats.
     /// Should be used before a buff or debuff is applied. The next Attack pattern will apply that
     /// Buff/Debuff on hit.
-    pub fn hbs_def(args: anytype) void {
-        write("tset_hbs_def", args) catch |err| @panic(@errorName(err));
+    pub fn hbs_def() void {
+        write("tset_hbs_def", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Similar to tset_hbs_def, but will pick a random buff (for effects like Usagi Kamen)
-    pub fn hbs_randombuff(args: anytype) void {
-        write("tset_hbs_randombuff", args) catch |err| @panic(@errorName(err));
+    pub fn hbs_randombuff() void {
+        write("tset_hbs_randombuff", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// hbsKey (a string that is a key to a status effect)
@@ -3497,14 +3497,14 @@ pub const tset = opaque {
 
     /// Exculsively used for Defender's Ruby Secondary; sets a strength based off number of
     /// charges the move has.
-    pub fn strength_chargecount(args: anytype) void {
-        write("tset_strength_chargecount", args) catch |err| @panic(@errorName(err));
+    pub fn strength_chargecount() void {
+        write("tset_strength_chargecount", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// Sets the default strength for the move, based on the hotbar slot. You should usually use
     /// this before adding attack patterns that deal damage.
-    pub fn strength_def(args: anytype) void {
-        write("tset_strength_def", args) catch |err| @panic(@errorName(err));
+    pub fn strength_def() void {
+        write("tset_strength_def", .{}) catch |err| @panic(@errorName(err));
     }
 
     /// amount (an integer)
