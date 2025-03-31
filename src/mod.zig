@@ -3397,19 +3397,45 @@ fn transfiguredDarkbiteSet() !void {
         // .treasureType = .purpleblue,
     });
 
+    const darkmage_charm_mult = 2;
     item(.{
         .id = "it_transfigured_darkmage_charm",
         .name = .{
             .english = "Transfigured Darkmage Charm",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "The first ability you use in each battle deals [VAR0_PERCENT] more " ++
+                "damage.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purpleblue,
+        .treasureType = .purpleblue,
+
+        .lootHbDispType = .glowing,
+        .glowSqVar0 = true,
+        .greySqVar0 = true,
+
+        .hbVar0 = darkmage_charm_mult,
     });
+    trig.battleStart0(&.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
+    trig.hotbarUsedProc(&.{});
+    cond.eval(s.hbId, .@">=", 1);
+    cond.eval(s.hbId, .@"<=", 4); // 1,2,3,4 is the abilities
+    cond.hb_check_square_var(.{ 0, 1 });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+    qpat.hb_reset_statchange();
+
+    trig.strCalc0(&.{});
+    tset.uservar2("u_mult", r.sqVar0, .@"*", darkmage_charm_mult);
+    qpat.hb_reset_statchange_norefresh();
+    qpat.hb_add_statchange_norefresh(.{ .stat = .primaryMult, .amountStr = "u_mult" });
+    qpat.hb_add_statchange_norefresh(.{ .stat = .secondaryMult, .amountStr = "u_mult" });
+    qpat.hb_add_statchange_norefresh(.{ .stat = .specialMult, .amountStr = "u_mult" });
+    qpat.hb_add_statchange_norefresh(.{ .stat = .defensiveMult, .amountStr = "u_mult" });
 
     item(.{
         .id = "it_transfigured_firststrike_bracelet",
