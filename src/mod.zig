@@ -1481,21 +1481,31 @@ fn transfiguredRockdragonSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .red,
+
     });
 
+    const tough_gauntlet_dmg = 80;
     item(.{
         .id = "it_transfigured_tough_gauntlet",
         .name = .{
             .english = "Transfigured Tough Gauntlet",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Abilities and loot that hit once deal [VAR0] more damage.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .hbVar0 = tough_gauntlet_dmg,
     });
+    trig.strCalc2(&.{});
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
+    ttrg.hotbarslots_prune(thss.number, .@"<=", 1);
+    ttrg.hotbarslots_prune(thss.strength, .@"!=", 0);
+    qpat.hb_add_strength(.{ .amount = tough_gauntlet_dmg });
 
     const rockdragon_mail_every_nth_hit = 2;
     item(.{
