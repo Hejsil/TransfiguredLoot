@@ -1895,18 +1895,43 @@ fn transfiguredGemSet() !void {
         // .treasureType = .red,
     });
 
+    const topaz_charm_haste_per_gold = -0.01;
+    const topaz_charm_gold_per_haste = 4;
     item(.{
         .id = "it_transfigured_topaz_charm",
         .name = .{
             .english = "Transfigured Topaz Charm",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Hastens GCD actions by [VAR0_PERCENT] for every [VAR1] gold you have. " ++
+                "If you take damage, this effect is lost until the end of battle.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .hbVar0 = @abs(topaz_charm_haste_per_gold),
+        .hbVar1 = topaz_charm_gold_per_haste,
+    });
+    trig.battleStart0(&.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
+    trig.onDamage(&.{});
+    cond.hb_check_square_var(.{ 0, 1 });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+    qpat.hb_reset_statchange();
+
+    trig.strCalc0(&.{});
+    qpat.hb_reset_statchange_norefresh();
+    cond.hb_check_square_var(.{ 0, 1 });
+    tset.uservar_gold(.{"u_gold"});
+    tset.uservar2("u_haste", "u_gold", .@"*", topaz_charm_haste_per_gold);
+    tset.uservar2("u_haste", "u_haste", .@"/", topaz_charm_gold_per_haste);
+    qpat.hb_add_statchange_norefresh(.{
+        .stat = .haste,
+        .amountStr = "u_haste",
     });
 
     const ruby_circlet_start = 5;
