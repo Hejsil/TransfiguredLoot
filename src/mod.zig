@@ -1330,19 +1330,38 @@ fn transfiguredAssasinSet() !void {
         apat.apply_hbs(.{});
     }
 
+    const kunoichi_hood_str_per_potions = 15;
+    const kunoichi_hood_potion_str_mult = 2;
     item(.{
         .id = "it_transfigured_kunoichi_hood",
         .name = .{
             .english = "Transfigured Kunoichi Hood",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your abilities do [VAR0] more damage per potion you have. Your " ++
+                "potions deal [VAR1_PERCENT] more damage. Slightly increases movement speed.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blue,
+        .treasureType = .blue,
+
+        .charspeed = charspeed.slightly,
+
+        .hbVar0 = kunoichi_hood_str_per_potions,
+        .hbVar1 = kunoichi_hood_potion_str_mult,
     });
+    trig.strCalc2(&.{});
+    ttrg.hotbarslots_self_weapontype(.{WeaponType.potion});
+    tset.uservar_slotcount(.{"u_count"});
+    tset.uservar2("u_count", "u_count", .@"*", kunoichi_hood_str_per_potions);
+    ttrg.hotbarslots_self_abilities();
+    ttrg.hotbarslots_prune_base_has_str();
+    qpat.hb_add_strength(.{ .amountStr = "u_count" });
+
+    trig.strCalc1c(&.{});
+    ttrg.hotbarslots_self_weapontype(.{WeaponType.potion});
+    qpat.hb_add_strcalcbuff(.{ .amount = kunoichi_hood_potion_str_mult });
 
     item(.{
         .id = "it_transfigured_shinobi_tabi",
