@@ -1330,7 +1330,8 @@ fn transfiguredAssasinSet() !void {
         apat.apply_hbs(.{});
     }
 
-    const kunoichi_hood_str_per_potions = 15;
+    const kunoichi_hood_str = 15;
+    const kunoichi_hood_str_per_potions = 10;
     const kunoichi_hood_potion_str_mult = 2;
     item(.{
         .id = "it_transfigured_kunoichi_hood",
@@ -1338,8 +1339,10 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Kunoichi Hood",
         },
         .description = .{
-            .english = "Your abilities do [VAR0] more damage per potion you have. Your " ++
-                "potions deal [VAR1_PERCENT] more damage. Slightly increases movement speed.",
+            .english = "Your abilities do [VAR2] more damage and [VAR0] more " ++
+                "damage per potion you have.#" ++
+                "Your potions deal [VAR1_PERCENT] more damage.#" ++
+                "Slightly increases movement speed.",
         },
         .color = color,
         .type = .loot,
@@ -1350,17 +1353,21 @@ fn transfiguredAssasinSet() !void {
 
         .hbVar0 = kunoichi_hood_str_per_potions,
         .hbVar1 = kunoichi_hood_potion_str_mult,
+        .hbVar2 = kunoichi_hood_str,
     });
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.potion});
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.potion);
     tset.uservar_slotcount(.{"u_count"});
-    tset.uservar2("u_count", "u_count", .@"*", kunoichi_hood_str_per_potions);
+    tset.uservar2("u_str", "u_count", .@"*", kunoichi_hood_str_per_potions);
+    tset.uservar2("u_str", "u_str", .@"+", kunoichi_hood_str);
     ttrg.hotbarslots_self_abilities();
     ttrg.hotbarslots_prune_base_has_str();
-    qpat.hb_add_strength(.{ .amountStr = "u_count" });
+    qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
     trig.strCalc1c(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.potion});
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.potion);
     qpat.hb_add_strcalcbuff(.{ .amount = kunoichi_hood_potion_str_mult });
 
     item(.{
