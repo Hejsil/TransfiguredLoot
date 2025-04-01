@@ -71,13 +71,12 @@ fn generateChangelogModEntry(
         const item_name = transfigured_item_name[transfigured_prefix.len..];
         if (!std.mem.eql(u8, old_items_descs[i].string, new_items_descs[i].string)) {
             if (print_mod_name) {
-                try writer.print("# {s}\n\n", .{mod_name});
+                try writer.print("\n# {s}\n\n", .{mod_name});
                 print_mod_name = false;
             }
             try writer.print("- {s}\n", .{item_name});
             try writer.print("  - old: {s}\n", .{old_items_descs[i].string});
             try writer.print("  - new: {s}\n", .{new_items_descs[i].string});
-            try writer.print("\n", .{});
             continue;
         }
 
@@ -102,13 +101,12 @@ fn generateChangelogModEntry(
         const new_item_csv = new_items_csv[new_item_csv_start..new_item_csv_end];
         if (std.mem.indexOfDiff(u8, old_item_csv, new_item_csv)) |diff_idx| {
             if (print_mod_name) {
-                try writer.print("# {s}\n\n", .{mod_name});
+                try writer.print("\n# {s}\n\n", .{mod_name});
                 print_mod_name = false;
             }
             try writer.print("- {s}\n", .{item_name});
             try writer.print("  - old: {s}\n", .{getLineContainingIndex(old_item_csv, diff_idx)});
             try writer.print("  - new: {s}\n", .{getLineContainingIndex(new_item_csv, diff_idx)});
-            try writer.print("\n", .{});
             continue;
         }
 
@@ -121,13 +119,12 @@ fn generateChangelogModEntry(
         const new_item_ini = new_items_ini[new_item_ini_start..new_item_ini_end];
         if (std.mem.indexOfDiff(u8, old_item_ini, new_item_ini)) |diff_idx| {
             if (print_mod_name) {
-                try writer.print("# {s}\n\n", .{mod_name});
+                try writer.print("\n# {s}\n\n", .{mod_name});
                 print_mod_name = false;
             }
             try writer.print("- {s}\n", .{item_name});
             try writer.print("  - old: {s}\n", .{getLineContainingIndex(old_item_ini, diff_idx)});
             try writer.print("  - new: {s}\n", .{getLineContainingIndex(new_item_ini, diff_idx)});
-            try writer.print("\n", .{});
             continue;
         }
     }
