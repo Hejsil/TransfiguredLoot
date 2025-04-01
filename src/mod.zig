@@ -3455,11 +3455,25 @@ fn transfiguredDarkbiteSet() !void {
         // .treasureType = .purpleblue,
     });
 
-    const darkmage_charm_mult = 5;
     item(.{
         .id = "it_transfigured_darkmage_charm",
         .name = .{
             .english = "Transfigured Darkmage Charm",
+        },
+        .description = .{
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    const firststrike_bracelet_mult = 6;
+    item(.{
+        .id = "it_transfigured_firststrike_bracelet",
+        .name = .{
+            .english = "Transfigured Firststrike Bracelet",
         },
         .description = .{
             .english = "The first ability you use in each battle deals [VAR0_PERCENT] more " ++
@@ -3474,10 +3488,15 @@ fn transfiguredDarkbiteSet() !void {
         .glowSqVar0 = true,
         .greySqVar0 = true,
 
-        .hbVar0 = darkmage_charm_mult,
+        .hbVar0 = firststrike_bracelet_mult,
     });
+    trig.onSquarePickup(&.{.square_self});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
     trig.battleStart0(&.{});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_flash_item(.{});
     qpat.hb_reset_statchange();
 
     trig.hotbarUsedProc(&.{});
@@ -3488,26 +3507,12 @@ fn transfiguredDarkbiteSet() !void {
     qpat.hb_reset_statchange();
 
     trig.strCalc0(&.{});
-    tset.uservar2("u_mult", r.sqVar0, .@"*", darkmage_charm_mult);
+    tset.uservar2("u_mult", r.sqVar0, .@"*", firststrike_bracelet_mult);
     qpat.hb_reset_statchange_norefresh();
     qpat.hb_add_statchange_norefresh(.{ .stat = .primaryMult, .amountStr = "u_mult" });
     qpat.hb_add_statchange_norefresh(.{ .stat = .secondaryMult, .amountStr = "u_mult" });
     qpat.hb_add_statchange_norefresh(.{ .stat = .specialMult, .amountStr = "u_mult" });
     qpat.hb_add_statchange_norefresh(.{ .stat = .defensiveMult, .amountStr = "u_mult" });
-
-    item(.{
-        .id = "it_transfigured_firststrike_bracelet",
-        .name = .{
-            .english = "Transfigured Firststrike Bracelet",
-        },
-        .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
-        },
-        .color = color,
-        .type = .loot,
-        .weaponType = .loot,
-        // .treasureType = .purpleblue,
-    });
 }
 
 fn transfiguredTimegemSet() !void {
