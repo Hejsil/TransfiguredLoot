@@ -6,7 +6,7 @@ A set of Rabbit and Steel mods that adds alternate versions of existing loot. In
 https://steamcommunity.com/sharedfiles/filedetails/?id=3354085327
 
 The mods are work in progress. Currently a little over 90 pieces of loot have been
-implemented, but none of them have art unique art.
+implemented, but none of them have unique art.
 
 ## Build
 
