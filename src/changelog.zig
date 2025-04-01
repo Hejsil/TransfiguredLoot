@@ -87,10 +87,6 @@ fn generateChangelogModEntry(
             const no_tick = try std.mem.replaceOwned(u8, arena, underscore, "'", "");
             break :blk try std.fmt.allocPrint(arena, "{s}{s}", .{ id_prefix, no_tick });
         };
-        if (std.mem.eql(u8, item_id, "it_transfigured_lullaby_harp"))
-            continue; // Skip. The id is spelled wrong...
-        if (std.mem.eql(u8, item_id, "it_transfigured_poisonfrog_charm"))
-            continue; // Skip. The id is spelled wrong...
 
         const old_item_csv_start = std.mem.indexOf(u8, old_items_csv, item_id).? + item_id.len;
         const new_item_csv_start = std.mem.indexOf(u8, new_items_csv, item_id).? + item_id.len;
