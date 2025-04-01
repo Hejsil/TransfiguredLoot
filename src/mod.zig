@@ -1916,6 +1916,10 @@ fn transfiguredGemSet() !void {
         .hbVar0 = @abs(topaz_charm_haste_per_gold),
         .hbVar1 = topaz_charm_gold_per_haste,
     });
+    trig.onSquarePickup(&.{.square_self});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
     trig.battleStart0(&.{});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
     qpat.hb_reset_statchange();
