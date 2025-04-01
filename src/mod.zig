@@ -1911,6 +1911,8 @@ fn transfiguredGemSet() !void {
         .weaponType = .loot,
         .treasureType = .red,
 
+        .greySqVar0 = true,
+
         .hbVar0 = @abs(topaz_charm_haste_per_gold),
         .hbVar1 = topaz_charm_gold_per_haste,
     });
@@ -1920,6 +1922,7 @@ fn transfiguredGemSet() !void {
 
     trig.onDamage(&.{});
     cond.hb_check_square_var(.{ 0, 1 });
+    qpat.hb_flash_item(.{ .message = .broken });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_reset_statchange();
 
