@@ -2882,7 +2882,7 @@ fn transfiguredLifeSet() !void {
     apat.heal_light(.{ .amount = sunflower_crown_hp });
 
     const midsummer_dress_hp = 1;
-    const midsummer_dress_mult_per_hp = 0.05;
+    const midsummer_dress_mult_per_hp = 0.04;
     item(.{
         .id = "it_transfigured_midsummer_dress",
         .name = .{
@@ -2890,7 +2890,7 @@ fn transfiguredLifeSet() !void {
         },
         .description = .{
             .english = "Your max HP is increased by [VAR0]. You deal [VAR1_PERCENT] more " ++
-                "damage per HP. Slightly increases movement speed.",
+                "damage per max HP. Slightly increases movement speed.",
         },
         .color = color,
         .type = .loot,
@@ -2907,7 +2907,7 @@ fn transfiguredLifeSet() !void {
     apat.heal_light(.{ .amount = midsummer_dress_hp });
 
     trig.strCalc0(&.{});
-    tset.uservar2("u_allMult", r.hp, .@"*", midsummer_dress_mult_per_hp);
+    tset.uservar2("u_allMult", r.hpMax, .@"*", midsummer_dress_mult_per_hp);
     qpat.hb_reset_statchange_norefresh();
     qpat.hb_add_statchange_norefresh(.{
         .stat = .allMult,
