@@ -2915,7 +2915,7 @@ fn transfiguredLifeSet() !void {
     });
 
     const grasswoven_bracelet_hp = 1;
-    const grasswoven_bracelet_aoe_per_hp = 0.1;
+    const grasswoven_bracelet_aoe_per_hp = 0.08;
     item(.{
         .id = "it_transfigured_grasswoven_bracelet",
         .name = .{
@@ -2923,7 +2923,7 @@ fn transfiguredLifeSet() !void {
         },
         .description = .{
             .english = "Your max HP is increased by [VAR0]. All abilities and loot's hitboxes " ++
-                "are [VAR1_PERCENT] larger per HP. Slightly increases movement speed.",
+                "are [VAR1_PERCENT] larger per max HP. Slightly increases movement speed.",
         },
         .color = color,
         .type = .loot,
@@ -2941,7 +2941,7 @@ fn transfiguredLifeSet() !void {
 
     trig.strCalc2(&.{});
     ttrg.hotbarslots_current_players();
-    tset.uservar2("u_aoeMult", r.hp, .@"*", grasswoven_bracelet_aoe_per_hp);
+    tset.uservar2("u_aoeMult", r.hpMax, .@"*", grasswoven_bracelet_aoe_per_hp);
     tset.uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat.hb_mult_hitbox_var(.{
         .hitboxVar = .radius,
