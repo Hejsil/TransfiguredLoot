@@ -5179,13 +5179,24 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Butterfly Hairpin",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "When you inflict a debuff gain a random buff for 5s.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .yellowgreen,
+        .treasureType = .yellowgreen,
+
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
+        .hbsType = .smite_0,
+        .hbsLength = std.time.ms_per_min,
     });
+    trig.hbsCreated(&.{});
+    cond.false(.{s.isBuff});
+    qpat.hb_flash_item(.{});
+    ttrg.player_self();
+    tset.hbs_randombuff();
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_watermage_pendant",
