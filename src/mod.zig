@@ -1680,13 +1680,15 @@ fn transfiguredFlameSet() !void {
 
     const phoenix_charm_hp = 1;
     const phoenix_charm_chance = 0.5;
+    const phoenix_charm_dmg_per_missing_hp = 0.05;
     item(.{
         .id = "it_transfigured_phoenix_charm",
         .name = .{
             .english = "Transfigured Phoenix Charm",
         },
         .description = .{
-            .english = "Has a [LUCK] chance to shield you from damage when you are at [VAR0] HP.",
+            .english = "Has a [LUCK] chance to shield you from damage when you are at [VAR0] HP.#" ++
+                "You deal [VAR1_PERCENT] more damage per missing HP.",
         },
         .color = color,
         .type = .loot,
@@ -1697,6 +1699,7 @@ fn transfiguredFlameSet() !void {
 
         .procChance = phoenix_charm_chance,
         .hbVar0 = phoenix_charm_hp,
+        .hbVar1 = phoenix_charm_dmg_per_missing_hp,
     });
     trig.hbsShield5(&.{.pl_self});
     cond.eval(s.hp, .@"==", 1);
@@ -1705,6 +1708,18 @@ fn transfiguredFlameSet() !void {
     apat.apply_invuln(.{});
     qpat.player_shield();
     qpat.hb_flash_item(.{ .message = .shield });
+
+    trig.onDamage(&.{.pl_self});
+    qpat.hb_reset_statchange();
+
+    trig.strCalc0(&.{});
+    tset.uservar2("u_hpMiss", r.hpMax, .@"-", r.hp);
+    tset.uservar2("u_allMult", "u_hpMiss", .@"*", phoenix_charm_dmg_per_missing_hp);
+    qpat.hb_reset_statchange_norefresh();
+    qpat.hb_add_statchange_norefresh(.{
+        .stat = .allMult,
+        .amountStr = "u_allMult",
+    });
 
     item(.{
         .id = "it_transfigured_firescale_corset",
