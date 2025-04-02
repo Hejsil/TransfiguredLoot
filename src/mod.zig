@@ -4296,7 +4296,7 @@ fn transfiguredSparkbladeSet() !void {
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
-    const battery_shield_sparks = 10;
+    const battery_shield_sparks = 8;
     const battery_shield_invul_dur = 5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_battery_shield",
@@ -4323,7 +4323,7 @@ fn transfiguredSparkbladeSet() !void {
         .showSqVar = true,
         .autoOffSqVar0 = 0,
 
-        .strMult = 1200,
+        .strMult = 1300,
         .delay = 150,
     });
     trig.hotbarUsedProc(&.{.hb_defensive});
