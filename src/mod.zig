@@ -2497,31 +2497,13 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Golden Katana",
         },
         .description = .{
-            .english = "Every [CD] have a [LUCK] chance to slices the air around you dealing " ++
-                "[STR] damage.",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .yellow,
-
-        .lootHbDispType = .cooldown,
-        .cooldownType = .time,
-        .cooldown = 1 * std.time.ms_per_s,
-        .hbInput = .auto,
-
-        .procChance = 0.05,
-        .radius = 400,
-        .strMult = 500,
+        // .treasureType = .yellow,
     });
-    trig.hotbarUsed(&.{.hb_self});
-    qpat.hb_run_cooldown();
-    cond.random_def(.{});
-    qpat.hb_flash_item(.{});
-    qpat.hb_lucky_proc();
-    ttrg.players_opponent();
-    tset.strength_def();
-    apat.darkmagic_blade(.{});
 
     item(.{
         .id = "it_transfigured_glittering_trumpet",
