@@ -2100,7 +2100,7 @@ fn transfiguredLightningSet() !void {
         apat.crown_of_storms(.{});
     }
 
-    const darkcloud_necklace_ability_mult = -0.5;
+    const darkcloud_necklace_ability_mult = -0.25;
     const darkcloud_necklace_loot_mult = 1.5;
     item(.{
         .id = "it_transfigured_darkcloud_necklace",
