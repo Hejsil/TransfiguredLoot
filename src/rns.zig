@@ -3949,6 +3949,18 @@ pub const Hbs = enum(u8) {
         .hex_anti,
     };
 
+    pub const hastes = [_]Hbs{
+        .haste,
+        .haste_0,
+        .haste_1,
+        .haste_2,
+    };
+
+    comptime {
+        for (hastes, @intFromEnum(hastes[0])..) |haste, i|
+            std.debug.assert(@intFromEnum(haste) == i);
+    }
+
     pub const bleeds = [_]Hbs{
         .bleed,
         .bleed_0,

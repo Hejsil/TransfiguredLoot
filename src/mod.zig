@@ -603,8 +603,8 @@ fn transfiguredTimespaceSet() !void {
         qpat.hb_add_gcd_permanent(.{ .amount = timewarp_wand_gcd_shorting });
     }
     ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.statusId, .@">=", @intFromEnum(Hbs.haste_0));
-    ttrg.hbstatus_prune(thbss.statusId, .@"<=", @intFromEnum(Hbs.haste_2));
+    ttrg.hbstatus_prune(thbss.statusId, .@">=", @intFromEnum(Hbs.hastes[0]));
+    ttrg.hbstatus_prune(thbss.statusId, .@"<=", @intFromEnum(Hbs.hastes[Hbs.hastes.len - 1]));
     tset.uservar_hbscount(.{"u_hastes"});
     cond.unequal(.{ "u_hastes", 0 });
     for (WeaponType.abilities_with_gcd) |weapontype| {
@@ -1154,8 +1154,8 @@ fn transfiguredBloodwolfSet() !void {
     apat.poisonfrog_charm(.{});
 
     trig.hbsCreated(&.{.hbs_selfcast});
-    cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.bleed_0));
-    cond.eval(s.statusId, .@"<=", @intFromEnum(Hbs.bleed_3));
+    cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.bleeds[0]));
+    cond.eval(s.statusId, .@"<=", @intFromEnum(Hbs.bleeds[Hbs.bleeds.len - 1]));
     qpat.hb_flash_item(.{});
     ttrg.player_afflicted_source();
     tset.strength_def();
@@ -4333,8 +4333,8 @@ fn transfiguredSparkbladeSet() !void {
     apat.poisonfrog_charm(.{});
 
     trig.hbsCreated(&.{.hbs_selfcast});
-    cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.spark_0));
-    cond.eval(s.statusId, .@"<=", @intFromEnum(Hbs.spark_6));
+    cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.sparks[0]));
+    cond.eval(s.statusId, .@"<=", @intFromEnum(Hbs.sparks[Hbs.sparks.len - 1]));
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
     cond.hb_check_square_var(.{ 0, battery_shield_sparks });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
