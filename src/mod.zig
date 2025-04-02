@@ -3821,43 +3821,19 @@ fn transfiguredYoukaiSet() !void {
     cond.hb_check_resettable0(.{});
     qpat.hb_reset_cooldown();
 
-    const red_tanzaku_dmg = 7;
     item(.{
         .id = "it_transfigured_red_tanzaku",
         .name = .{
             .english = "Transfigured Red Tanzaku",
         },
         .description = .{
-            .english = "Your abilities deal 7 damage. You have [LUCKY].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_light,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purpleyellow,
-
-        .lootHbDispType = .cooldown,
-        .hbInput = .auto,
-
-        .hbsType = .lucky,
-        .hbsLength = std.time.ms_per_min,
-
-        .cooldownType = .time,
-        .cooldown = std.time.ms_per_min,
-
-        .hbVar0 = red_tanzaku_dmg,
+        // .treasureType = .purpleyellow,
     });
-    trig.hotbarUsed(&.{.hb_self});
-    qpat.hb_run_cooldown();
-    ttrg.player_self();
-    tset.hbs_def();
-    apat.apply_hbs(.{});
-
-    trig.strCalc1a(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune_base_has_str();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.loot);
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
-    qpat.hb_set_strength(.{ .amount = red_tanzaku_dmg });
 
     item(.{
         .id = "it_transfigured_vega_spear",
