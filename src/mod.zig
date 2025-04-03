@@ -5092,7 +5092,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Butterfly Hairpin",
         },
         .description = .{
-            .english = "When you inflict a debuff gain a random buff for 5s.",
+            .english = "When you inflict a debuff gain a random buff for [HBSL].",
         },
         .color = color,
         .type = .loot,
@@ -5102,7 +5102,7 @@ fn transfiguredLakeshrineSet() !void {
         // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
         .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
-        .hbsLength = std.time.ms_per_min,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
     trig.hbsCreated(&.{});
     cond.false(.{s.isBuff});
