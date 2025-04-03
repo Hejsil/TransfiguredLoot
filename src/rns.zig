@@ -4801,6 +4801,18 @@ fn TriggerVariable(comptime prefix: []const u8) type {
         /// True if it's a buff, false if it's a debuff
         isBuff,
 
+        /// The damage flags of the attack that hit (see tset_damage_flags)
+        damageFlags,
+
+        /// The team ID of the damaged player
+        dmgTeamId,
+
+        /// The player ID of the damaged player
+        dmgPlayerId,
+
+        /// The amount of damage dealt
+        amount,
+
         /// True if it's a crit
         isCrit,
 
@@ -4808,6 +4820,24 @@ fn TriggerVariable(comptime prefix: []const u8) type {
         /// Floof Ball is 'perfect' while its counter is 0; and its counter increments when you're
         /// hit, changing it to a ruffled Floof Ball
         counter,
+
+        /// The length of invuln, in milliseconds
+        invulnTime,
+
+        /// The "tick" count since the start of the last battle
+        tickNum,
+
+        /// a binary number specifying which players started attacking; to be used with tcond_hb_auto_pl
+        autoBinary,
+
+        /// Square ID of the item that was picked up (a "Square" is a specific instance of an item, held by one player)
+        sqId,
+
+        /// The data ID of the Square (the ID matching to a particular kind of item, like "Necronomicon")
+        dtId,
+
+        /// The level that was reached
+        level,
 
         changeAmount,
         newAmount,
@@ -4864,8 +4894,18 @@ fn TriggerVariable(comptime prefix: []const u8) type {
                 .aflTeamId => prefix ++ "aflTeamId",
                 .aflPlayerId => prefix ++ "aflPlayerId",
                 .isBuff => prefix ++ "isBuff",
+                .damageFlags => prefix ++ "damageFlags",
+                .dmgTeamId => prefix ++ "dmgTeamId",
+                .dmgPlayerId => prefix ++ "dmgPlayerId",
+                .amount => prefix ++ "amount",
                 .isCrit => prefix ++ "isCrit",
                 .counter => prefix ++ "counter",
+                .invulnTime => prefix ++ "invulnTime",
+                .tickNum => prefix ++ "tickNum",
+                .autoBinary => prefix ++ "autoBinary",
+                .sqId => prefix ++ "sqId",
+                .dtId => prefix ++ "dtId",
+                .level => prefix ++ "level",
                 .changeAmount => prefix ++ "changeAmount",
                 .newAmount => prefix ++ "newAmount",
                 .sourceType => prefix ++ "sourceType",
