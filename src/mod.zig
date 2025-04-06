@@ -4885,7 +4885,7 @@ fn transfiguredRuinsSet() !void {
         .cooldown = 5 * std.time.ms_per_s,
 
         .hbsType = .stoneskin,
-        .hbsLength = 0.5 * std.time.ms_per_s,
+        .hbsLength = 0.7 * std.time.ms_per_s,
 
         .delay = 150,
         .radius = 400,
