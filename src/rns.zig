@@ -181,14 +181,7 @@ pub const Item = struct {
 
     /// Special flags for the item. This is a binary number, the values in the
     /// "accepted values" can be combined to give an item multiple properties
-    ///
-    /// A number, combined from all of the flags below you want to give the item:
-    /// 1: ITM_FLAG_FULLHEAL - For the ""Full Heal"" item in the shop, does nothing on other items
-    /// 2: ITM_FLAG_LEVELUP - For the ""Level Up"" item in the shop, does nothing on other items
-    /// 4: Currently unused
-    /// 8: ITM_FLAG_NO_LASTCHEST - This item will not appear in the last stage, either in stores or in chests
-    /// 16: ITM_FLAG_NO_LASTCHEST_TWO - This item will not appear in the last two stages
-    itemFlags: ?u32 = null,
+    itemFlags: ?ItemFlags = null,
 
     /// Shows the saved "Square" variable (sqVar0) for this item (the small counter on items
     /// like Butterfly Ocarina or Emerald Chestplate)
@@ -322,7 +315,7 @@ pub const Item = struct {
 
     /// Special flags for the item. This is a binary number, the values in the
     /// "accepted values" can be combined to give a hitbox multiple properties
-    hbFlags: ?HbFlag = null,
+    hbFlags: ?HbFlags = null,
 
     /// Variable that can be set to any number; will replace [VAR0] in item descriptions
     hbVar0: ?f64 = null,
@@ -477,13 +470,13 @@ pub const Item = struct {
 
     /// Special flags that affect your character in various ways.
     /// This is a binary number, so multiple values can be combined to have multiple effects.
-    hbsFlag: ?HbsFlag = null,
+    hbsFlag: ?HbsFlags = null,
 
     /// Makes abilities on the mini-hotbar shine, indicating that they're stronger. Used on status
     /// effects like Flash-Int, Flow-Str or Super.
     /// Can also be used to cross them out and make them unusable.
     /// This is a binary number, so multiple values can be combined to have multiple effects.
-    hbShineFlag: ?ShineFlag = null,
+    hbShineFlag: ?ShineFlags = null,
 };
 
 pub fn item(opt: Item) void {
@@ -4944,6 +4937,40 @@ pub const luck = struct {
     pub const significantly = 0.15;
 };
 
+/// A number, combined from all of the flags below you want to give the item:
+/// 1   ITM_FLAG_FULLHEAL - For the "Full Heal" item in the shop, does nothing on other items
+/// 2   ITM_FLAG_LEVELUP - For the "Level Up" item in the shop, does nothing on other items
+/// 4   Currently unused
+/// 8   ITM_FLAG_NO_LASTCHEST - This item will not appear in the last stage, either in stores
+///     or in chests
+/// 16  ITM_FLAG_NO_LASTCHEST_TWO - This item will not appear in the last two stages
+/// 32  ITM_FLAG_STARTINGITEM - Players will start the run with this item
+/// 64  ITM_FLAG_STARTINGITEMCLASS - Players will start the run with this item depending on
+///     their chosen class/palette and itemFlagSp0 and itemFlagSp1
+pub const ItemFlags = packed struct(u8) {
+    full_heal: bool = false,
+    level_up: bool = false,
+    unused1: bool = false,
+    no_last_chest: bool = false,
+    no_last_chest_two: bool = false,
+    starting_item: bool = false,
+    starting_item_class: bool = false,
+    unused2: bool = false,
+
+    pub fn toIniInt(flags: ItemFlags) u8 {
+        return @bitCast(flags);
+    }
+};
+
+comptime {
+    std.debug.assert((ItemFlags{ .full_heal = true }).toIniInt() == 1);
+    std.debug.assert((ItemFlags{ .level_up = true }).toIniInt() == 2);
+    std.debug.assert((ItemFlags{ .no_last_chest = true }).toIniInt() == 8);
+    std.debug.assert((ItemFlags{ .no_last_chest_two = true }).toIniInt() == 16);
+    std.debug.assert((ItemFlags{ .starting_item = true }).toIniInt() == 32);
+    std.debug.assert((ItemFlags{ .starting_item_class = true }).toIniInt() == 64);
+}
+
 /// 1   HBSHINE_PRIMARY   - Makes Primary shine
 /// 2   HBSHINE_SECONDARY - Makes Secondary shine
 /// 4   HBSHINE_SPECIAL   - Makes Special shine
@@ -4952,7 +4979,7 @@ pub const luck = struct {
 /// 32  HBCROSS_SECONDARY - Makes Secondary unusable
 /// 64  HBCROSS_SPECIAL   - Makes Special unusable
 /// 128 HBCROSS_DEFENSIVE - Makes Defensive unusable
-pub const ShineFlag = packed struct(u8) {
+pub const ShineFlags = packed struct(u8) {
     shine_primary: bool = false,
     shine_secondary: bool = false,
     shine_special: bool = false,
@@ -4962,20 +4989,20 @@ pub const ShineFlag = packed struct(u8) {
     cross_special: bool = false,
     cross_defensive: bool = false,
 
-    pub fn toIniInt(flags: ShineFlag) u8 {
+    pub fn toIniInt(flags: ShineFlags) u8 {
         return @bitCast(flags);
     }
 };
 
 comptime {
-    std.debug.assert((ShineFlag{ .shine_primary = true }).toIniInt() == 1);
-    std.debug.assert((ShineFlag{ .shine_secondary = true }).toIniInt() == 2);
-    std.debug.assert((ShineFlag{ .shine_special = true }).toIniInt() == 4);
-    std.debug.assert((ShineFlag{ .shine_defensive = true }).toIniInt() == 8);
-    std.debug.assert((ShineFlag{ .cross_primary = true }).toIniInt() == 16);
-    std.debug.assert((ShineFlag{ .cross_secondary = true }).toIniInt() == 32);
-    std.debug.assert((ShineFlag{ .cross_special = true }).toIniInt() == 64);
-    std.debug.assert((ShineFlag{ .cross_defensive = true }).toIniInt() == 128);
+    std.debug.assert((ShineFlags{ .shine_primary = true }).toIniInt() == 1);
+    std.debug.assert((ShineFlags{ .shine_secondary = true }).toIniInt() == 2);
+    std.debug.assert((ShineFlags{ .shine_special = true }).toIniInt() == 4);
+    std.debug.assert((ShineFlags{ .shine_defensive = true }).toIniInt() == 8);
+    std.debug.assert((ShineFlags{ .cross_primary = true }).toIniInt() == 16);
+    std.debug.assert((ShineFlags{ .cross_secondary = true }).toIniInt() == 32);
+    std.debug.assert((ShineFlags{ .cross_special = true }).toIniInt() == 64);
+    std.debug.assert((ShineFlags{ .cross_defensive = true }).toIniInt() == 128);
 }
 
 /// 1  HTB_FLAG_STEALTHY     - Using item doesn't break Vanish/Ghost
@@ -4987,7 +5014,7 @@ comptime {
 /// 32 HTB_FLAG_VAR0REQ      - Item will not activate unless sqVar0 is greater than 0
 ///                            (like for items that break)
 /// 64 HTB_FLAG_HIDESTR      - Item's strength won't be shown in the window
-pub const HbFlag = packed struct(u8) {
+pub const HbFlags = packed struct(u8) {
     stealthy: bool = false,
     unresettable: bool = false,
     hidehbs: bool = false,
@@ -4997,19 +5024,19 @@ pub const HbFlag = packed struct(u8) {
     hidestr: bool = false,
     __pad: bool = false,
 
-    pub fn toIniInt(flags: HbFlag) u8 {
+    pub fn toIniInt(flags: HbFlags) u8 {
         return @bitCast(flags);
     }
 };
 
 comptime {
-    std.debug.assert((HbFlag{ .stealthy = true }).toIniInt() == 1);
-    std.debug.assert((HbFlag{ .unresettable = true }).toIniInt() == 2);
-    std.debug.assert((HbFlag{ .hidehbs = true }).toIniInt() == 4);
-    std.debug.assert((HbFlag{ .unchargeable = true }).toIniInt() == 8);
-    std.debug.assert((HbFlag{ .combatreq = true }).toIniInt() == 16);
-    std.debug.assert((HbFlag{ .var0req = true }).toIniInt() == 32);
-    std.debug.assert((HbFlag{ .hidestr = true }).toIniInt() == 64);
+    std.debug.assert((HbFlags{ .stealthy = true }).toIniInt() == 1);
+    std.debug.assert((HbFlags{ .unresettable = true }).toIniInt() == 2);
+    std.debug.assert((HbFlags{ .hidehbs = true }).toIniInt() == 4);
+    std.debug.assert((HbFlags{ .unchargeable = true }).toIniInt() == 8);
+    std.debug.assert((HbFlags{ .combatreq = true }).toIniInt() == 16);
+    std.debug.assert((HbFlags{ .var0req = true }).toIniInt() == 32);
+    std.debug.assert((HbFlags{ .hidestr = true }).toIniInt() == 64);
 }
 
 /// 1     HBS_FLAG_VANISH        - attacks are dodged, char invisible
@@ -5028,7 +5055,7 @@ comptime {
 /// 8192  HBS_FLAG_EXTRACRIT     - Crits deal 175% instead of 75% more damage (Royal Crown effect)
 /// 16384 HBS_FLAG_SUPERLUCKY    - Lucky procs always happen (Rabbitluck effect)
 /// 32768 HBS_FLAG_EXTRADEADZONE - Adds an extra deadzone to people playing with the mouse (for Turbulent Winds)
-pub const HbsFlag = packed struct(u16) {
+pub const HbsFlags = packed struct(u16) {
     vanish: bool = false,
     shield: bool = false,
     frozen: bool = false,
@@ -5046,28 +5073,28 @@ pub const HbsFlag = packed struct(u16) {
     superlucky: bool = false,
     extradeadzone: bool = false,
 
-    pub fn toIniInt(flags: HbsFlag) u16 {
+    pub fn toIniInt(flags: HbsFlags) u16 {
         return @bitCast(flags);
     }
 };
 
 comptime {
-    std.debug.assert((HbsFlag{ .vanish = true }).toIniInt() == 1);
-    std.debug.assert((HbsFlag{ .shield = true }).toIniInt() == 2);
-    std.debug.assert((HbsFlag{ .frozen = true }).toIniInt() == 4);
-    std.debug.assert((HbsFlag{ .stablespeed = true }).toIniInt() == 8);
-    std.debug.assert((HbsFlag{ .bind = true }).toIniInt() == 16);
-    std.debug.assert((HbsFlag{ .super = true }).toIniInt() == 32);
-    std.debug.assert((HbsFlag{ .fade = true }).toIniInt() == 64);
-    std.debug.assert((HbsFlag{ .nolucky = true }).toIniInt() == 128);
-    std.debug.assert((HbsFlag{ .stabledamage = true }).toIniInt() == 256);
-    std.debug.assert((HbsFlag{ .holyshield = true }).toIniInt() == 512);
-    std.debug.assert((HbsFlag{ .noinvuln = true }).toIniInt() == 1024);
-    std.debug.assert((HbsFlag{ .stilldisplay = true }).toIniInt() == 2048);
-    std.debug.assert((HbsFlag{ .nocrit = true }).toIniInt() == 4096);
-    std.debug.assert((HbsFlag{ .extracrit = true }).toIniInt() == 8192);
-    std.debug.assert((HbsFlag{ .superlucky = true }).toIniInt() == 16384);
-    std.debug.assert((HbsFlag{ .extradeadzone = true }).toIniInt() == 32768);
+    std.debug.assert((HbsFlags{ .vanish = true }).toIniInt() == 1);
+    std.debug.assert((HbsFlags{ .shield = true }).toIniInt() == 2);
+    std.debug.assert((HbsFlags{ .frozen = true }).toIniInt() == 4);
+    std.debug.assert((HbsFlags{ .stablespeed = true }).toIniInt() == 8);
+    std.debug.assert((HbsFlags{ .bind = true }).toIniInt() == 16);
+    std.debug.assert((HbsFlags{ .super = true }).toIniInt() == 32);
+    std.debug.assert((HbsFlags{ .fade = true }).toIniInt() == 64);
+    std.debug.assert((HbsFlags{ .nolucky = true }).toIniInt() == 128);
+    std.debug.assert((HbsFlags{ .stabledamage = true }).toIniInt() == 256);
+    std.debug.assert((HbsFlags{ .holyshield = true }).toIniInt() == 512);
+    std.debug.assert((HbsFlags{ .noinvuln = true }).toIniInt() == 1024);
+    std.debug.assert((HbsFlags{ .stilldisplay = true }).toIniInt() == 2048);
+    std.debug.assert((HbsFlags{ .nocrit = true }).toIniInt() == 4096);
+    std.debug.assert((HbsFlags{ .extracrit = true }).toIniInt() == 8192);
+    std.debug.assert((HbsFlags{ .superlucky = true }).toIniInt() == 16384);
+    std.debug.assert((HbsFlags{ .extradeadzone = true }).toIniInt() == 32768);
 }
 
 const std = @import("std");
