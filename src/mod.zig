@@ -786,9 +786,7 @@ fn transfiguredTimespaceSet() !void {
 
         .procChance = gemini_necklace_proc_chance,
     });
-    trig.hotbarUsedProc(&.{});
-    // 1,2,3,4 is the abilities. Negative ids are status effects
-    cond.eval(s.hbId, .@">", 4);
+    trig.hotbarUsedProc(&.{.hb_loot});
     cond.random_def(.{});
     ttrg.hotbarslots_current_players();
     ttrg.hotbarslots_prune(thss.hbId, .@"==", s.hbId);
