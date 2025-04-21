@@ -3452,12 +3452,19 @@ fn transfiguredDarkbiteSet() !void {
     qpat.hb_flash_item(.{});
     qpat.hb_reset_statchange();
 
-    trig.hotbarUsedProc(&.{});
-    cond.eval(s.hbId, .@">=", 1);
-    cond.eval(s.hbId, .@"<=", 4); // 1,2,3,4 is the abilities
-    cond.hb_check_square_var(.{ 0, 1 });
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
-    qpat.hb_reset_statchange();
+    const hb_conditions = [_]Condition{
+        .hb_primary,
+        .hb_secondary,
+        .hb_special,
+        .hb_defensive,
+    };
+
+    for (hb_conditions) |hotbar| {
+        trig.hotbarUsedProc(&.{hotbar});
+        cond.hb_check_square_var(.{ 0, 1 });
+        qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+        qpat.hb_reset_statchange();
+    }
 
     trig.strCalc0(&.{});
     tset.uservar2("u_mult", r.sqVar0, .@"*", firststrike_bracelet_mult);
