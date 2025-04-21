@@ -2032,9 +2032,12 @@ fn transfiguredLightningSet() !void {
         .strMult = brightstorm_spear_strength,
     });
     trig.onDamageDone(&.{.pl_self});
-    // 1,2,3,4 is the abilities. Negative ids are status effects
-    cond.eval(s.originHbId, .@">", 4);
-    cond.eval(s.originHbId, .@"!=", r.hbId);
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune(thss.hbId, .@"==", s.originHbId);
+    ttrg.hotbarslots_prune(thss.hbId, .@"!=", r.hbId);
+    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+    tset.uservar_slotcount(.{"u_count"});
+    cond.eval("u_count", .@">", 0);
     cond.random_def(.{});
     qpat.hb_lucky_proc();
     qpat.hb_flash_item(.{});
