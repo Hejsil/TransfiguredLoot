@@ -3,9 +3,10 @@ pub fn build(b: *std.Build) void {
 
     const mod_exe = b.addExecutable(.{
         .name = "TransfiguredLoot",
-        .root_source_file = b.path("src/mod.zig"),
-        .target = target,
-        .use_llvm = false,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/mod.zig"),
+            .target = target,
+        }),
     });
 
     const run_mod_exe_step = b.addRunArtifact(mod_exe);
@@ -16,9 +17,10 @@ pub fn build(b: *std.Build) void {
 
     const changelog_exe = b.addExecutable(.{
         .name = "changelog",
-        .root_source_file = b.path("src/changelog.zig"),
-        .target = target,
-        .use_llvm = false,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/changelog.zig"),
+            .target = target,
+        }),
     });
     const run_changelog_exe_step = b.addRunArtifact(changelog_exe);
     run_changelog_exe_step.addArgs(b.args orelse &.{});
