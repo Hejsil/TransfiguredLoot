@@ -1,12 +1,10 @@
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
-    const optimize = b.standardOptimizeOption(.{});
 
     const mod_exe = b.addExecutable(.{
         .name = "TransfiguredLoot",
         .root_source_file = b.path("src/mod.zig"),
         .target = target,
-        .optimize = optimize,
         .use_llvm = false,
     });
 
@@ -20,7 +18,6 @@ pub fn build(b: *std.Build) void {
         .name = "changelog",
         .root_source_file = b.path("src/changelog.zig"),
         .target = target,
-        .optimize = optimize,
         .use_llvm = false,
     });
     const run_changelog_exe_step = b.addRunArtifact(changelog_exe);
