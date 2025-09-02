@@ -2120,11 +2120,15 @@ fn transfiguredLightningSet() !void {
     });
 
     for ([_]Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |hb| {
-        inline for (.{ ths0, ths1, ths2, ths3, ths4 }) |target_hotbar| {
-            trig.hotbarUsedProc(&.{hb});
+        trig.hotbarUsedProc(&.{hb});
+        inline for (.{ ths0, ths1, ths2, ths3, ths4 }, 0..) |target_hotbar, i| {
             ttrg.hotbarslots_current_players();
             ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
             ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+
+            tset.uservar_slotcount(.{"u_slots"});
+            cond.eval("u_slots", .@">", i);
+
             ttrg.hotbarslots_prune(thss.hbId, .@"==", target_hotbar.hbId);
             tset.uservar2("u_new_cd", ths0.cdSecLeft, .@"-", darkcloud_necklace_cooldown_reduction);
             qpat.hb_run_cooldown_ext(.{ .lengthStr = "u_new_cd" });
