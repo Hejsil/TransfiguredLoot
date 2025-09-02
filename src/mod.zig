@@ -2101,31 +2101,39 @@ fn transfiguredLightningSet() !void {
         apat.crown_of_storms(.{});
     }
 
-    const darkcloud_necklace_ability_mult = -0.25;
-    const darkcloud_necklace_loot_mult = 1.5;
+    const darkcloud_necklace_cooldown_reduction = 1 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_darkcloud_necklace",
         .name = .{
             .english = "Transfigured Darkcloud Necklace",
         },
         .description = .{
-            .english = "Damage from abilities is reduced by [VAR0_PERCENT].#" ++
-                "Damage from loot is increased by [VAR1_PERCENT].",
+            .english = "Every time you use an ability, reduce the cooldown left on items by [VAR0_SECONDS].",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
         .treasureType = .yellow,
 
-        .hbVar0 = @abs(darkcloud_necklace_ability_mult),
-        .primaryMult = darkcloud_necklace_ability_mult,
-        .secondaryMult = darkcloud_necklace_ability_mult,
-        .specialMult = darkcloud_necklace_ability_mult,
-        .defensiveMult = darkcloud_necklace_ability_mult,
-
-        .hbVar1 = darkcloud_necklace_loot_mult,
-        .lootMult = darkcloud_necklace_loot_mult,
+        .hbVar0 = darkcloud_necklace_cooldown_reduction,
     });
+
+    for ([_]Condition{
+        .hb_primary,
+        .hb_secondary,
+        .hb_special,
+        .hb_defensive,
+    }) |hb| {
+        inline for (.{ ths0, ths1, ths2, ths3, ths4 }) |target_hotbar| {
+            trig.hotbarUsedProc(&.{hb});
+            ttrg.hotbarslots_current_players();
+            ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
+            ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+            ttrg.hotbarslots_prune(thss.hbId, .@"==", target_hotbar.hbId);
+            tset.uservar2("u_new_cd", ths0.cdSecLeft, .@"-", darkcloud_necklace_cooldown_reduction);
+            qpat.hb_run_cooldown_ext(.{ .lengthStr = "u_new_cd" });
+        }
+    }
 
     const crown_of_storms_mult = 0.25;
     item(.{
@@ -5213,6 +5221,7 @@ const ths0 = rns.ths0;
 const ths1 = rns.ths1;
 const ths2 = rns.ths2;
 const ths3 = rns.ths3;
+const ths4 = rns.ths4;
 const thbss = rns.thbss;
 const thbs0 = rns.thbs0;
 const thbs1 = rns.thbs1;

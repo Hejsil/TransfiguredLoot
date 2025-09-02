@@ -2236,6 +2236,8 @@ pub const qpat = opaque {
             try writer.print(",time,{s}", .{time});
         if (args.length) |length|
             try writer.print(",length,{d}", .{length});
+        if (args.lengthStr) |length|
+            try writer.print(",length,{s}", .{length});
         if (args.mult) |mult|
             try writer.print(",mult,{d}", .{mult});
         if (args.multStr) |mult|
@@ -2258,6 +2260,7 @@ pub const qpat = opaque {
         time: ?usize = null,
         timeStr: ?[]const u8 = null,
         length: ?usize = null,
+        lengthStr: ?[]const u8 = null,
         mult: ?f64 = null,
         multStr: ?[]const u8 = null,
         amount: ?f64 = null,
@@ -4924,6 +4927,7 @@ pub const ths0 = TriggerVariable("ths0_");
 pub const ths1 = TriggerVariable("ths1_");
 pub const ths2 = TriggerVariable("ths2_");
 pub const ths3 = TriggerVariable("ths3_");
+pub const ths4 = TriggerVariable("ths4_");
 pub const thbss = TriggerVariable("thbs#_");
 pub const thbs0 = TriggerVariable("thbs0_");
 pub const thbs1 = TriggerVariable("thbs1_");
