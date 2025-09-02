@@ -2118,12 +2118,7 @@ fn transfiguredLightningSet() !void {
         .hbVar0 = darkcloud_necklace_cooldown_reduction,
     });
 
-    for ([_]Condition{
-        .hb_primary,
-        .hb_secondary,
-        .hb_special,
-        .hb_defensive,
-    }) |hb| {
+    for ([_]Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |hb| {
         inline for (.{ ths0, ths1, ths2, ths3, ths4 }) |target_hotbar| {
             trig.hotbarUsedProc(&.{hb});
             ttrg.hotbarslots_current_players();
