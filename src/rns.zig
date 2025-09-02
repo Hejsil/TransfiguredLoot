@@ -4928,6 +4928,7 @@ pub const ths1 = TriggerVariable("ths1_");
 pub const ths2 = TriggerVariable("ths2_");
 pub const ths3 = TriggerVariable("ths3_");
 pub const ths4 = TriggerVariable("ths4_");
+pub const ths5 = TriggerVariable("ths5_");
 pub const thbss = TriggerVariable("thbs#_");
 pub const thbs0 = TriggerVariable("thbs0_");
 pub const thbs1 = TriggerVariable("thbs1_");

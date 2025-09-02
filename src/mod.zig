@@ -2476,7 +2476,6 @@ fn transfiguredLuckySet() !void {
     tset.uservar_random_range(.{ "u_pick", 1, 9 });
     // `uservar_random_range` generates a float, I just want an int between 1 and 8
     // TODO: Figure out a better way
-    cond.eval("u_pick", .@"<=", 9);
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 8 });
     cond.eval("u_pick", .@"<=", 8);
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 7 });
@@ -3556,13 +3555,29 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Darkglass Spear",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your Secondary's strength becomes the same as the loot item " ++
+                "with the highest strength, divided by the times it hits your target",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purplered,
+        .treasureType = .purplered,
+
+        .strMult = 200,
     });
+    trig.strCalc1b(&.{});
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+    inline for (.{ ths5, ths4, ths3, ths2, ths1, ths0 }) |ths|
+        ttrg.hotbarslots_prune(thss.strengthMult, .@">=", ths.strengthMult);
+
+    tset.uservar1("u_str", ths0.strengthMult);
+
+    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
+    qpat.hb_set_strength(.{ .amountStr = "u_str" });
+    cond.eval(ths0.number, .@">", 1);
+    tset.uservar2("u_str", "u_str", .@"/", ths0.number);
+    qpat.hb_set_strength(.{ .amountStr = "u_str" });
 
     item(.{
         .id = "it_transfigured_timespace_dagger",
@@ -3581,12 +3596,12 @@ fn transfiguredTimegemSet() !void {
     });
     trig.strCalc1b(&.{});
     ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
-    tset.uservar2("u_str", ths0.strength, .@"*", ths0.number);
+    tset.uservar2("u_str", ths0.strengthMult, .@"*", ths0.number);
 
     // Some abilities that hit onces will have `number` as 0. To counteract this, we filter for
     // it and adds the strenght back as `u_str` will be one in that case
     ttrg.hotbarslots_prune(ths0.number, .@"==", 0);
-    tset.uservar2("u_str", "u_str", .@"+", ths0.strength);
+    tset.uservar2("u_str", "u_str", .@"+", ths0.strengthMult);
 
     ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
     qpat.hb_set_strength(.{ .amountStr = "u_str" });
@@ -5249,6 +5264,7 @@ const ths1 = rns.ths1;
 const ths2 = rns.ths2;
 const ths3 = rns.ths3;
 const ths4 = rns.ths4;
+const ths5 = rns.ths5;
 const thbss = rns.thbss;
 const thbs0 = rns.thbs0;
 const thbs1 = rns.thbs1;
