@@ -4600,66 +4600,47 @@ fn transfiguredSacredflameSet() !void {
     });
     defer rns.end();
 
-    const flame_to_flow_mult = 0.1;
-    for ([_]rns.Item{
-        .{
-            .id = "it_transfigured_sandpriestess_spear",
-            .name = .{
-                .english = "Transfigured Sandpriestess Spear",
-            },
-            .description = .{
-                .english = "You deal [VAR0_PERCENT] more damage.#" ++
-                    "Every time you gain [FLASH-STR], gain [FLOW-STR].",
-            },
-            .hbsType = .flowstr,
+    item(.{
+        .id = "it_transfigured_sandpriestess_spear",
+        .name = .{
+            .english = "Transfigured Sandpriestess Spear",
         },
-        .{
-            .id = "it_transfigured_flamedancer_dagger",
-            .name = .{
-                .english = "Transfigured Flamedancer Dagger",
-            },
-            .description = .{
-                .english = "You deal [VAR0_PERCENT] more damage.#" ++
-                    "Every time you gain [FLASH-DEX], gain [FLOW-DEX].",
-            },
-            .hbsType = .flowdex,
+        .description = .{
+            .english = "Not Implemented. Should not appear in a run.",
         },
-        .{
-            .id = "it_transfigured_whiteflame_staff",
-            .name = .{
-                .english = "Transfigured Whiteflame Staff",
-            },
-            .description = .{
-                .english = "You deal [VAR0_PERCENT] more damage.#" ++
-                    "Every time you gain [FLASH-INT], gain [FLOW-INT].",
-            },
-            .hbsType = .flowint,
-        },
-    }) |_item| {
-        var i = _item;
-        i.color = color;
-        i.type = .loot;
-        i.weaponType = .loot;
-        i.treasureType = .redyellow;
-        i.hbsLength = 5 * std.time.ms_per_s;
-        i.allMult = flame_to_flow_mult;
-        i.hbVar0 = flame_to_flow_mult;
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
 
-        const flash_hbs: Hbs = switch (_item.hbsType.?) {
-            .flowstr => .flashstr,
-            .flowdex => .flashdex,
-            .flowint => .flashint,
-            else => unreachable,
-        };
+    item(.{
+        .id = "it_transfigured_flamedancer_dagger",
+        .name = .{
+            .english = "Transfigured Flamedancer Dagger",
+        },
+        .description = .{
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
 
-        item(i);
-        trig.hbsCreated(&.{.hbs_selfafl});
-        cond.eval(s.statusId, .@"==", @intFromEnum(flash_hbs));
-        qpat.hb_flash_item(.{});
-        ttrg.player_afflicted_source();
-        tset.hbs_def();
-        apat.apply_hbs(.{});
-    }
+    item(.{
+        .id = "it_transfigured_whiteflame_staff",
+        .name = .{
+            .english = "Transfigured Whiteflame Staff",
+        },
+        .description = .{
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
 
     item(.{
         .id = "it_transfigured_sacred_shield",
@@ -4683,19 +4664,44 @@ fn transfiguredSacredflameSet() !void {
     tset.hbs_def();
     apat.apply_hbs(.{});
 
+    const marble_clasp_mult = 0.15;
     item(.{
         .id = "it_transfigured_marble_clasp",
         .name = .{
             .english = "Transfigured Marble Clasp",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "You deal [VAR0_PERCENT] more damage.#" ++
+                "Every time you gain [FLASH-STR], gain [FLOW-STR].#" ++
+                "Every time you gain [FLASH-DEX], gain [FLOW-DEX].#" ++
+                "Every time you gain [FLASH-INT], gain [FLOW-INT].",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .redyellow,
+        .treasureType = .redyellow,
+
+        .allMult = marble_clasp_mult,
+        .hbVar0 = marble_clasp_mult,
+
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
+        .hbsType = .flashstr,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+
+    for ([_][2]Hbs{
+        .{ .flashstr, .flowstr },
+        .{ .flashdex, .flowdex },
+        .{ .flashint, .flowint },
+    }) |hbs| {
+        trig.hbsCreated(&.{.hbs_selfafl});
+        cond.eval(s.statusId, .@"==", @intFromEnum(hbs[0]));
+        qpat.hb_flash_item(.{});
+        ttrg.player_afflicted_source();
+        tset.hbskey(.{ hbs[1], r.hbsLength });
+        apat.apply_hbs(.{});
+    }
 
     const sun_pendant_times = 10;
     item(.{
