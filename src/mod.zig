@@ -2108,7 +2108,8 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Darkcloud Necklace",
         },
         .description = .{
-            .english = "Every time you use an ability, reduce the cooldown left on items by [VAR0_SECONDS].",
+            .english = "Every time you use an ability, reduce the cooldown left on your loot " ++
+                "by [VAR0_SECONDS].",
         },
         .color = color,
         .type = .loot,
