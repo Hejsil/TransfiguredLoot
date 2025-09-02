@@ -619,8 +619,11 @@ fn item2(opt: Item) !void {
         .{ "[SNARE-X]", "SNARE-X" },
         .{ "[HASTE-0]", "HASTE" },
         .{ "[HASTE-1]", "HASTE" },
+        .{ "[HASTE-2]", "HASTE" },
         .{ "[SMITE-0]", "SMITE" },
         .{ "[SMITE-1]", "SMITE" },
+        .{ "[SMITE-2]", "SMITE" },
+        .{ "[SMITE-3]", "SMITE" },
         .{ "[COUNTER-0]", "COUNTER" },
         .{ "[COUNTER-1]", "COUNTER" },
         .{ "[COUNTER-2]", "COUNTER" },
@@ -717,23 +720,19 @@ fn item2(opt: Item) !void {
     const desc = opt.description.english;
     var new_desc = try std.io.Writer.Allocating.initCapacity(arena, desc.len * 2);
 
-    var prefix_start: usize = 0;
-    var i: usize = 0;
-    while (i < desc.len) switch (desc[i]) {
-        '[' => for (replacements) |replacement| {
-            if (std.mem.startsWith(u8, desc[i..], replacement[0])) {
-                try new_desc.writer.writeAll(desc[prefix_start..i]);
-                try new_desc.writer.writeAll(replacement[1]);
-                i += replacement[0].len;
-                prefix_start = i;
-                break;
-            }
-        } else {
-            i += 1;
-        },
-        else => i += 1,
-    };
-    try new_desc.writer.writeAll(desc[prefix_start..i]);
+    var pos: usize = 0;
+    while (std.mem.indexOfScalarPos(u8, desc, pos, '[')) |i| {
+        for (replacements) |replacement| {
+            if (!std.mem.startsWith(u8, desc[i..], replacement[0]))
+                continue;
+
+            try new_desc.writer.writeAll(desc[pos..i]);
+            try new_desc.writer.writeAll(replacement[1]);
+            pos = i + replacement[0].len;
+            break;
+        } else unreachable;
+    }
+    try new_desc.writer.writeAll(desc[pos..]);
 
     try items_json.objectField(opt.name.english);
     try items_json.write(new_desc.written());
