@@ -248,7 +248,8 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Redblack Ribbon",
         },
         .description = .{
-            .english = "You deal [VAR1_PERCENT] more damage. Debuffs you place last [VAR0_PERCENT] longer.",
+            .english = "You deal [VAR1_PERCENT] more damage. Debuffs you place last " ++
+                "[VAR0_PERCENT] longer.",
         },
         .color = color,
         .type = .loot,
