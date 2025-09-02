@@ -2108,7 +2108,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Darkcloud Necklace",
         },
         .description = .{
-            .english = "Every time you use an ability, reduce the cooldown left on your loot " ++
+            .english = "When you use an ability, reduce the cooldown left on your loot " ++
                 "by [VAR0_SECONDS].",
         },
         .color = color,
@@ -3072,7 +3072,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Necronomicon",
         },
         .description = .{
-            .english = "Every time you use your Secondary, gain a stack.#" ++
+            .english = "When you use your Secondary, gain a stack.#" ++
                 "Activating an ability with a cooldown consumes [VAR0] stack" ++
                 (if (necronomicon_stacks_consumed != 1) "s" else "") ++
                 " to reset its cooldown instantly.",
@@ -4786,7 +4786,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Desert Earrings",
         },
         .description = .{
-            .english = "Every time your allies gain a buff, you gain a buff of the same type " ++
+            .english = "When your allies gain a buff, you gain a buff of the same type " ++
                 "for [HBSL].",
         },
         .color = color,
@@ -5086,7 +5086,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Reflection Shield",
         },
         .description = .{
-            .english = "Every time you gain a buff, allies gain a buff of the same type for " ++
+            .english = "When you gain a buff, allies gain a buff of the same type for " ++
                 "[HBSL].",
         },
         .color = color,
