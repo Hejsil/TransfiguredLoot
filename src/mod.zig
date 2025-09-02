@@ -4387,19 +4387,57 @@ fn transfiguredSparkbladeSet() !void {
     tset.hbs_randombuff();
     apat.apply_hbs(.{});
 
+    const blackbolt_ribbon_dmg = 100;
     item(.{
         .id = "it_transfigured_blackbolt_ribbon",
         .name = .{
             .english = "Transfigured Blackbolt Ribbon",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "After [CD], break and deal [STR] damage to all enemies.#" ++
+                "This is increased by [VAR0] every time you or debuffs " ++
+                "you apply deal damage. Resets at the start of each fight.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blueyellow,
+        .treasureType = .blueyellow,
+
+        .lootHbDispType = .cooldownVarAm,
+        .cooldownType = .time,
+        .cooldown = 20 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbFlags = .{ .var0req = true },
+        .showSqVar = true,
+        .greySqVar0 = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = blackbolt_ribbon_dmg,
+        .strMult = blackbolt_ribbon_dmg,
+        .delay = 150,
     });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_run_cooldown();
+
+    trig.enrageStart(&.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_run_cooldown();
+
+    trig.onDamageDone(&.{});
+    cond.hb_check_square_var_false(.{ 0, 0 });
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+
+    trig.hotbarUsed(&.{.hb_self});
+    cond.hb_check_square_var_false(.{ 0, 0 });
+    qpat.hb_flash_item(.{ .message = .broken });
+    ttrg.players_opponent();
+    tset.uservar2("u_str", r.sqVar0, .@"*", blackbolt_ribbon_dmg);
+    tset.strength_def();
+    tset.strength(.{"u_str"});
+    apat.crown_of_storms(.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 }
 
 fn transfiguredSwiftflightSet() !void {
