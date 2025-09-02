@@ -714,20 +714,29 @@ fn item2(opt: Item) !void {
         .{ "[SAP]", "SAP" },
     };
 
-    var description: []const u8 = opt.description.english;
-    for (replacements) |replacement| {
-        _ = std.mem.indexOfScalar(u8, description, '[') orelse break;
-        description = try std.mem.replaceOwned(
-            u8,
-            arena,
-            description,
-            replacement[0],
-            replacement[1],
-        );
-    }
+    const desc = opt.description.english;
+    var new_desc = try std.io.Writer.Allocating.initCapacity(arena, desc.len * 2);
+
+    var prefix_start: usize = 0;
+    var i: usize = 0;
+    while (i < desc.len) switch (desc[i]) {
+        '[' => for (replacements) |replacement| {
+            if (std.mem.startsWith(u8, desc[i..], replacement[0])) {
+                try new_desc.writer.writeAll(desc[prefix_start..i]);
+                try new_desc.writer.writeAll(replacement[1]);
+                i += replacement[0].len;
+                prefix_start = i;
+                break;
+            }
+        } else {
+            i += 1;
+        },
+        else => i += 1,
+    };
+    try new_desc.writer.writeAll(desc[prefix_start..i]);
 
     try items_json.objectField(opt.name.english);
-    try items_json.write(description);
+    try items_json.write(new_desc.written());
 
     written_items += 1;
     have_trigger = false;
