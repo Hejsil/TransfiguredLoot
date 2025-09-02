@@ -264,18 +264,44 @@ fn transfiguredArcaneSet() !void {
     ttrg.hotbarslots_prune_bufftype(.{0});
     qpat.hb_mult_length_hbs(.{ .mult = redblack_ribbon_mult_length_hbs + 1 });
 
+    const opal_necklace_dmg_per_debuff = 0.20;
     item(.{
         .id = "it_transfigured_opal_necklace",
         .name = .{
             .english = "Transfigured Opal Necklace",
         },
         .description = .{
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "For every debuff on enemies, you deal [VAR0_PERCENT] more damage.",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purple,
+        .treasureType = .purple,
+        .lootHbDispType = .glowing,
+
+        .showSqVar = true,
+        .glowSqVar0 = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = opal_necklace_dmg_per_debuff,
+    });
+
+    trig.hbsCreated(&.{});
+    cond.false(.{s.isBuff});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
+    trig.hbsDestroyed(&.{});
+    cond.false(.{s.isBuff});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
+    qpat.hb_reset_statchange();
+
+    trig.strCalc1c(&.{});
+    tset.uservar2("u_hpMiss", r.sqVar0, .@"*", opal_necklace_dmg_per_debuff);
+    qpat.hb_reset_statchange_norefresh();
+    qpat.hb_add_statchange_norefresh(.{
+        .stat = .allMult,
+        .amountStr = "u_allMult",
     });
 }
 
