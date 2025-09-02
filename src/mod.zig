@@ -4672,9 +4672,9 @@ fn transfiguredSacredflameSet() !void {
         },
         .description = .{
             .english = "You deal [VAR0_PERCENT] more damage.#" ++
-                "Every time you gain [FLASH-STR], gain [FLOW-STR].#" ++
-                "Every time you gain [FLASH-DEX], gain [FLOW-DEX].#" ++
-                "Every time you gain [FLASH-INT], gain [FLOW-INT].",
+                "When you gain [FLASH-STR], gain [FLOW-STR].#" ++
+                "When you gain [FLASH-DEX], gain [FLOW-DEX].#" ++
+                "When you gain [FLASH-INT], gain [FLOW-INT].",
         },
         .color = color,
         .type = .loot,
