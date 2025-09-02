@@ -7,15 +7,14 @@ var have_trigger: bool = false;
 var m_args: ?[][:0]u8 = null;
 
 var mod: Mod = undefined;
-var sheetlist: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
-var item_csv: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
-var item_ini: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
-var item_names: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
-var item_descriptions: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
+var sheetlist: std.io.Writer.Allocating = .init(gpa);
+var item_csv: std.io.Writer.Allocating = .init(gpa);
+var item_ini: std.io.Writer.Allocating = .init(gpa);
+var item_names: std.io.Writer.Allocating = .init(gpa);
+var item_descriptions: std.io.Writer.Allocating = .init(gpa);
 
-const JsonWriteStream = std.json.WriteStream(std.ArrayList(u8).Writer, .assumed_correct);
-var items_json_string: std.ArrayList(u8) = std.ArrayList(u8).init(gpa);
-var items_json: JsonWriteStream = undefined;
+var items_json_string: std.io.Writer.Allocating = .init(gpa);
+var items_json: std.json.Stringify = undefined;
 
 pub const Mod = struct {
     name: []const u8,
@@ -38,7 +37,7 @@ fn start2(m: Mod) !void {
     try item_descriptions.ensureTotalCapacity(initial_capacity);
     try items_json_string.ensureTotalCapacity(initial_capacity);
 
-    try sheetlist.writer().writeAll(
+    try sheetlist.writer.writeAll(
         \\Sheet Type,filename
         \\NameSheet,Items_Names
         \\DescriptionSheet,Items_Descriptions
@@ -46,17 +45,19 @@ fn start2(m: Mod) !void {
         \\
     );
 
-    try item_names.writer().writeAll(
+    try item_names.writer.writeAll(
         \\key,level,English,Japanese,Chinese
         \\
     );
-    try item_descriptions.writer().writeAll(
+    try item_descriptions.writer.writeAll(
         \\key,level,English,Japanese,Chinese
         \\
     );
-    items_json = JsonWriteStream.init(gpa, items_json_string.writer(), .{
-        .whitespace = .indent_4,
-    });
+
+    items_json = .{
+        .writer = &items_json_string.writer,
+        .options = .{ .whitespace = .indent_4 },
+    };
     try items_json.beginObject();
 
     mod = m;
@@ -93,35 +94,33 @@ fn end2() !void {
     try cwd.copyFile(mod.thumbnail_path, output_dir, "thumbnail.png", .{});
     try output_dir.writeFile(.{
         .sub_path = "SheetList.csv",
-        .data = sheetlist.items,
+        .data = sheetlist.written(),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items.csv",
         .data = try std.fmt.allocPrint(gpa,
             \\spriteNumber,{},,,,
             \\{s}
-        , .{ written_items, item_csv.items }),
+        , .{ written_items, item_csv.written() }),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items.ini",
-        .data = item_ini.items,
+        .data = item_ini.written(),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items_Names.csv",
-        .data = item_names.items,
+        .data = item_names.written(),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items_Descriptions.csv",
-        .data = item_descriptions.items,
+        .data = item_descriptions.written(),
     });
 
     try items_json.endObject();
     try output_dir.writeFile(.{
         .sub_path = "Items.json",
-        .data = items_json_string.items,
+        .data = items_json_string.written(),
     });
-
-    items_json.deinit();
 
     sheetlist.shrinkRetainingCapacity(0);
     item_csv.shrinkRetainingCapacity(0);
@@ -490,26 +489,23 @@ fn item2(opt: Item) !void {
             (!is_not_implemented and opt.treasureType != null),
     );
 
-    const item_names_w = item_names.writer();
-    try item_names_w.print("{s},0,", .{opt.id});
-    try writeCsvString(item_names_w, opt.name.english);
-    try item_names_w.writeAll(",");
-    try writeCsvString(item_names_w, opt.name.japanese orelse opt.name.english);
-    try item_names_w.writeAll(",");
-    try writeCsvString(item_names_w, opt.name.chinese orelse opt.name.english);
-    try item_names_w.writeAll("\n");
+    try item_names.writer.print("{s},0,", .{opt.id});
+    try writeCsvString(&item_names.writer, opt.name.english);
+    try item_names.writer.writeAll(",");
+    try writeCsvString(&item_names.writer, opt.name.japanese orelse opt.name.english);
+    try item_names.writer.writeAll(",");
+    try writeCsvString(&item_names.writer, opt.name.chinese orelse opt.name.english);
+    try item_names.writer.writeAll("\n");
 
-    const item_desc_w = item_descriptions.writer();
-    try item_desc_w.print("{s},0,", .{opt.id});
-    try writeCsvString(item_desc_w, opt.description.english);
-    try item_desc_w.writeAll(",");
-    try writeCsvString(item_desc_w, opt.description.japanese orelse opt.description.english);
-    try item_desc_w.writeAll(",");
-    try writeCsvString(item_desc_w, opt.description.chinese orelse opt.description.english);
-    try item_desc_w.writeAll("\n");
+    try item_descriptions.writer.print("{s},0,", .{opt.id});
+    try writeCsvString(&item_descriptions.writer, opt.description.english);
+    try item_descriptions.writer.writeAll(",");
+    try writeCsvString(&item_descriptions.writer, opt.description.japanese orelse opt.description.english);
+    try item_descriptions.writer.writeAll(",");
+    try writeCsvString(&item_descriptions.writer, opt.description.chinese orelse opt.description.english);
+    try item_descriptions.writer.writeAll("\n");
 
-    const item_ini_w = item_ini.writer();
-    try item_ini_w.print("[{s}]\n", .{opt.id});
+    try item_ini.writer.print("[{s}]\n", .{opt.id});
     inline for (@typeInfo(@TypeOf(opt)).@"struct".fields) |field| continue_blk: {
         if (comptime std.mem.eql(u8, field.name, "id"))
             break :continue_blk;
@@ -522,30 +518,30 @@ fn item2(opt: Item) !void {
 
         if (@field(opt, field.name)) |value| {
             const T = @TypeOf(value);
-            try item_ini_w.print("{s}=\"", .{field.name});
+            try item_ini.writer.print("{s}=\"", .{field.name});
             if (T == Color) {
-                try item_ini_w.print("#{x:02}{x:02}{x:02}", .{
+                try item_ini.writer.print("#{x:02}{x:02}{x:02}", .{
                     value.r,
                     value.g,
                     value.b,
                 });
             } else switch (@typeInfo(T)) {
-                .bool => try item_ini_w.print("{d}", .{@intFromBool(value)}),
-                .int, .float => try item_ini_w.print("{d}", .{value}),
+                .bool => try item_ini.writer.print("{d}", .{@intFromBool(value)}),
+                .int, .float => try item_ini.writer.print("{d}", .{value}),
                 .@"enum", .@"struct", .@"union" => if (@hasDecl(@TypeOf(value), "toIniString")) {
-                    try item_ini_w.writeAll(value.toIniString());
+                    try item_ini.writer.writeAll(value.toIniString());
                 } else if (@hasDecl(@TypeOf(value), "toIniInt")) {
-                    try item_ini_w.print("{d}", .{value.toIniInt()});
+                    try item_ini.writer.print("{d}", .{value.toIniInt()});
                 } else {
-                    try item_ini_w.writeAll(@tagName(value));
+                    try item_ini.writer.writeAll(@tagName(value));
                 },
-                else => try item_ini_w.writeAll(value),
+                else => try item_ini.writer.writeAll(value),
             }
-            try item_ini_w.writeAll("\"\n");
+            try item_ini.writer.writeAll("\"\n");
         }
     }
 
-    try item_csv.writer().print(
+    try item_csv.writer.print(
         \\,,,,,
         \\{s},{},,,,
         \\
@@ -1181,17 +1177,17 @@ pub const trig = opaque {
     }
 
     pub fn write(trigger: []const u8, conds: []const Condition) !void {
-        const item_csv_writer = item_csv.writer();
-        try item_csv_writer.print(
+        const writer = &item_csv.writer;
+        try writer.print(
             \\,,,,,
             \\trigger,{s}
         , .{trigger});
 
         for (conds) |c|
-            try item_csv_writer.print(",{s}", .{c.toCsvString()});
+            try writer.print(",{s}", .{c.toCsvString()});
         for (conds.len..4) |_|
-            try item_csv_writer.writeAll(",");
-        try item_csv_writer.writeAll("\n");
+            try writer.writeAll(",");
+        try writer.writeAll("\n");
 
         have_trigger = true;
     }
@@ -1664,8 +1660,8 @@ pub const cond = opaque {
     }
     fn cond2(condition: Condition, args: anytype) !void {
         std.debug.assert(have_trigger);
-        try item_csv.writer().print("condition,{s}", .{condition.toCsvString()});
-        try writeArgs(item_csv.writer(), args);
+        try item_csv.writer.print("condition,{s}", .{condition.toCsvString()});
+        try writeArgs(&item_csv.writer, args);
     }
 };
 
@@ -2213,7 +2209,7 @@ pub const qpat = opaque {
 
     fn write(pat: []const u8, args: Args) !void {
         std.debug.assert(have_trigger);
-        const writer = item_csv.writer();
+        const writer = &item_csv.writer;
         try writer.print("quickPattern,{s}", .{pat});
 
         if (args.varIndex) |varIndex|
@@ -2241,7 +2237,7 @@ pub const qpat = opaque {
         if (args.amountStr) |amount|
             try writer.print(",amount,{s}", .{amount});
 
-        try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
+        try writer.splatByteAll(',', 4 - args.notNullFieldCount() * 2);
         try writer.writeAll("\n");
     }
 
@@ -2992,7 +2988,7 @@ pub const apat = opaque {
 
     fn write(pat: []const u8, args: Args) !void {
         std.debug.assert(have_trigger);
-        const writer = item_csv.writer();
+        const writer = &item_csv.writer;
         try writer.print("addPattern,{s}", .{pat});
 
         if (args.fxStr) |fxStr|
@@ -3014,7 +3010,7 @@ pub const apat = opaque {
         if (args.amount) |amount|
             try writer.print(",amount,{d}", .{amount});
 
-        try writer.writeByteNTimes(',', 4 - args.notNullFieldCount() * 2);
+        try writer.splatByteAll(',', 4 - args.notNullFieldCount() * 2);
         try writer.writeAll("\n");
     }
 
@@ -3403,8 +3399,8 @@ pub const ttrg = opaque {
 
     fn write(targ: []const u8, args: anytype) !void {
         std.debug.assert(have_trigger);
-        try item_csv.writer().print("target,{s}", .{targ});
-        try writeArgs(item_csv.writer(), args);
+        try item_csv.writer.print("target,{s}", .{targ});
+        try writeArgs(&item_csv.writer, args);
     }
 };
 
@@ -3673,12 +3669,12 @@ pub const tset = opaque {
 
     fn write(set: []const u8, args: anytype) !void {
         std.debug.assert(have_trigger);
-        try item_csv.writer().print("set,{s}", .{set});
-        try writeArgs(item_csv.writer(), args);
+        try item_csv.writer.print("set,{s}", .{set});
+        try writeArgs(&item_csv.writer, args);
     }
 };
 
-fn writeArgs(writer: anytype, args: anytype) !void {
+fn writeArgs(writer: *std.io.Writer, args: anytype) !void {
     inline for (args) |arg| {
         const T = @TypeOf(arg);
         switch (@typeInfo(T)) {
@@ -3692,7 +3688,7 @@ fn writeArgs(writer: anytype, args: anytype) !void {
         }
     }
 
-    try writer.writeByteNTimes(',', 4 - args.len);
+    try writer.splatByteAll(',', 4 - args.len);
     try writer.writeAll("\n");
 }
 
