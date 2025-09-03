@@ -9,7 +9,7 @@ pub fn main() !void {
 
 fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: []const u8) !void {
     const cwd = std.fs.cwd();
-    var changelog = std.ArrayList(u8).init(arena);
+    var changelog = std.io.Writer.Allocating.init(arena);
     const old_dir = try cwd.openDir(old_path, .{});
     const new_dir = try cwd.openDir(new_path, .{ .iterate = true });
 
@@ -20,7 +20,7 @@ fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: [
         const new_mod_dir = try new_dir.openDir(entry.name, .{});
         try generateChangelogModEntry(
             arena,
-            changelog.writer(),
+            &changelog.writer,
             entry.name,
             old_mod_dir,
             new_mod_dir,
@@ -29,13 +29,13 @@ fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: [
 
     try cwd.writeFile(.{
         .sub_path = "zig-out/changelog.md",
-        .data = changelog.items,
+        .data = changelog.written(),
     });
 }
 
 fn generateChangelogModEntry(
     arena: std.mem.Allocator,
-    writer: anytype,
+    writer: *std.io.Writer,
     transfigured_mod_name: []const u8,
     old_dir: std.fs.Dir,
     new_dir: std.fs.Dir,
