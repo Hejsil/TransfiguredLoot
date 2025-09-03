@@ -56,7 +56,7 @@ fn transfiguredArcaneSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig.onDamageDone(&.{.dmg_self_special});
-    cond.hb_available(.{});
+    cond.hb_available();
     ttrg.player_damaged();
     tset.hbs_def();
     apat.apply_hbs(.{});
@@ -134,7 +134,7 @@ fn transfiguredArcaneSet() !void {
         .hbsStrMult = 40,
     });
     trig.onDamageDone(&.{.dmg_self_secondary});
-    cond.hb_available(.{});
+    cond.hb_available();
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
     qpat.hb_run_cooldown();
@@ -373,7 +373,7 @@ fn transfiguredNightSet() !void {
         .strMult = 130,
     });
     trig.onDamageDone(&.{.dmg_self_primary});
-    cond.hb_available(.{});
+    cond.hb_available();
     qpat.hb_run_cooldown();
     ttrg.player_damaged();
     tset.strength_def();
@@ -1422,7 +1422,7 @@ fn transfiguredAssasinSet() !void {
     qpat.hb_run_cooldown();
 
     trig.standingStill(&.{.pl_self});
-    cond.hb_available(.{});
+    cond.hb_available();
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
@@ -1692,7 +1692,7 @@ fn transfiguredFlameSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
     });
     trig.onDamageDone(&.{.dmg_islarge});
-    cond.hb_available(.{});
+    cond.hb_available();
     qpat.hb_run_cooldown();
     ttrg.player_damaged();
     tset.hbs_def();
@@ -2779,7 +2779,7 @@ fn transfiguredLifeSet() !void {
     qpat.hb_reset_statchange();
 
     trig.hotbarUsedProc(&.{.hb_primary});
-    cond.hb_available(.{});
+    cond.hb_available();
     qpat.hb_run_cooldown();
     qpat.hb_cdloot_proc();
     ttrg.players_opponent();
@@ -4990,7 +4990,7 @@ fn transfiguredRuinsSet() !void {
         .strMult = 500,
     });
     trig.hotbarUsedProc(&.{.hb_secondary});
-    cond.hb_available(.{});
+    cond.hb_available();
     ttrg.player_self();
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});

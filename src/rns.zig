@@ -1553,8 +1553,8 @@ pub const cond = opaque {
     pub fn hb_auto_pl(args: anytype) void {
         write(.hb_auto_pl, args);
     }
-    pub fn hb_available(args: anytype) void {
-        write(.hb_available, args);
+    pub fn hb_available() void {
+        write(.hb_available, .{});
     }
     pub fn hb_check_square_var(args: anytype) void {
         write(.hb_check_square_var, args);
