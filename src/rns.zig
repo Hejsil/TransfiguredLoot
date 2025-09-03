@@ -749,7 +749,7 @@ fn item2(opt: Item) !void {
 pub const trig = opaque {
     /// Never called
     pub fn none(conds: []const Condition) void {
-        write("none", conds) catch |err| @panic(@errorName(err));
+        write("none", conds);
     }
 
     // The following are stat calculations, that are called in the order listed.
@@ -761,212 +761,212 @@ pub const trig = opaque {
     /// Called before any other stat calculations (for Cooldowns).
     /// Currently unused
     pub fn cdCalc0(conds: []const Condition) void {
-        write("cdCalc0", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc0", conds);
     }
 
     /// Called before any other stat calculations (for Strength).
     /// - Demon Horns, Royal Staff, Flamewalker Boots, Amethyst Bracelet
     pub fn strCalc0(conds: []const Condition) void {
-        write("strCalc0", conds) catch |err| @panic(@errorName(err));
+        write("strCalc0", conds);
     }
 
     // ----"Stats" that loot items give you are added here----
 
     /// Currently unused
     pub fn cdCalc1(conds: []const Condition) void {
-        write("cdCalc1", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc1", conds);
     }
 
     /// Additions to cooldown/GCD (bad)
     /// - Mountain Staff, Tough Gauntlet, Teacher Knife, Dragonhead Spear
     pub fn cdCalc2a(conds: []const Condition) void {
-        write("cdCalc2a", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc2a", conds);
     }
 
     /// Additions to cooldown/GCD (good)
     /// - Kappa Shield, Hawkfeather Fan, Mermaid Scale
     pub fn cdCalc2b(conds: []const Condition) void {
-        write("cdCalc2b", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc2b", conds);
     }
 
     /// Currently only used for Altair Dagger
     pub fn cdCalc3(conds: []const Condition) void {
-        write("cdCalc3", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc3", conds);
     }
 
     /// Set cooldown/GCD to a fixed value (bad)
     /// - Twinstar Earrings, Nova Crown
     pub fn cdCalc4a(conds: []const Condition) void {
-        write("cdCalc4a", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc4a", conds);
     }
 
     /// Set cooldown/GCD to a fixed value (good)
     /// - Starry Cloak, Windbite Dagger
     pub fn cdCalc4b(conds: []const Condition) void {
-        write("cdCalc4b", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc4b", conds);
     }
 
     /// Set cooldown/GCD to a fixed value (overwrites previous calculations)
     /// - Haste Boots, Timemage Cap
     pub fn cdCalc5(conds: []const Condition) void {
-        write("cdCalc5", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc5", conds);
     }
 
     /// Set cooldown/GCD to a fixed value (overwrites previous calculations, again)
     /// - "Berserk" Status, Bruiser Emerald Special, Sniper Emerald Primary
     pub fn cdCalc6(conds: []const Condition) void {
-        write("cdCalc6", conds) catch |err| @panic(@errorName(err));
+        write("cdCalc6", conds);
     }
 
     /// Strength calculations that happen before the % boost from your levels
     /// - Cursed Candlestaff, Ghost Spear, Phantom Dagger
     pub fn strCalc1a(conds: []const Condition) void {
-        write("strCalc1a", conds) catch |err| @panic(@errorName(err));
+        write("strCalc1a", conds);
     }
 
     /// - Timespace Dagger, Darkglass Spear, Obsidian Rod
     pub fn strCalc1b(conds: []const Condition) void {
-        write("strCalc1b", conds) catch |err| @panic(@errorName(err));
+        write("strCalc1b", conds);
     }
 
     /// - Nightguard Gloves, Sacredstone Charm, Pocketwatch, Gladiator Helmet
     pub fn strCalc1c(conds: []const Condition) void {
-        write("strCalc1c", conds) catch |err| @panic(@errorName(err));
+        write("strCalc1c", conds);
     }
 
     // ----% boost from levels happen here----
 
     /// - Shadow Bracelet, Kunoichi Hood, Killing Note, Grasswoven Bracelet
     pub fn strCalc2(conds: []const Condition) void {
-        write("strCalc2", conds) catch |err| @panic(@errorName(err));
+        write("strCalc2", conds);
     }
 
     /// Currently unused
     pub fn strCalc3(conds: []const Condition) void {
-        write("strCalc3", conds) catch |err| @panic(@errorName(err));
+        write("strCalc3", conds);
     }
 
     /// Currently unused
     pub fn strCalc4(conds: []const Condition) void {
-        write("strCalc4", conds) catch |err| @panic(@errorName(err));
+        write("strCalc4", conds);
     }
 
     /// Set strength to a fixed value
     /// - Old Bonnet, Haunted Gloves
     pub fn strCalc5(conds: []const Condition) void {
-        write("strCalc5", conds) catch |err| @panic(@errorName(err));
+        write("strCalc5", conds);
     }
 
     /// Mostly unused "Heavy" Status
     pub fn strCalc6(conds: []const Condition) void {
-        write("strCalc6", conds) catch |err| @panic(@errorName(err));
+        write("strCalc6", conds);
     }
 
     /// Currently only used to adjust for edge-cases with Altair Dagger and Shinsoku Katana when
     /// you gain Rabbitluck
     /// - Shinsoku Katana, Altair Dagger
     pub fn finalCalc(conds: []const Condition) void {
-        write("finalCalc", conds) catch |err| @panic(@errorName(err));
+        write("finalCalc", conds);
     }
 
     /// Certain loot can change the color of your abilities. These two triggers are used to do
     /// that.
     /// - Lots of items
     pub fn colorCalc(conds: []const Condition) void {
-        write("colorCalc", conds) catch |err| @panic(@errorName(err));
+        write("colorCalc", conds);
     }
 
     /// If there is one loot that should override the color of any other loot, it should use this
     /// instead
     /// - Shrinemaiden's Kosode, Sniper's Eyeglasses, Shinsoku Katana (when successful)
     pub fn colorCalc2(conds: []const Condition) void {
-        write("colorCalc2", conds) catch |err| @panic(@errorName(err));
+        write("colorCalc2", conds);
     }
 
     /// Called when you leave the first screen
     /// - Currently only used for unlocks
     pub fn adventureStart(conds: []const Condition) void {
-        write("adventureStart", conds) catch |err| @panic(@errorName(err));
+        write("adventureStart", conds);
     }
 
     /// Called when you begin a stage
     /// - Currently only used for unlocks
     pub fn hallwayStart(conds: []const Condition) void {
-        write("hallwayStart", conds) catch |err| @panic(@errorName(err));
+        write("hallwayStart", conds);
     }
 
     /// Called at the start of a fight, before you character is able to attack
     /// - Currently unused
     pub fn battleStart0(conds: []const Condition) void {
-        write("battleStart0", conds) catch |err| @panic(@errorName(err));
+        write("battleStart0", conds);
     }
 
     /// Called at the start of a fight, *just* before you character is able to attack (before
     /// autoStart)
     /// - Blood Vial, Lost Pendant "autoStart" trigger explanation is below
     pub fn battleStart2(conds: []const Condition) void {
-        write("battleStart2", conds) catch |err| @panic(@errorName(err));
+        write("battleStart2", conds);
     }
 
     /// Called at the start of a fight, *just* after your character is able to attack (after
     /// autoStart)
     /// - Stoneplate Armor, Mermaid Scale
     pub fn battleStart3(conds: []const Condition) void {
-        write("battleStart3", conds) catch |err| @panic(@errorName(err));
+        write("battleStart3", conds);
     }
 
     /// Called as soon as battle ends in victory Currently only used for unlocks
     pub fn battleEnd0(conds: []const Condition) void {
-        write("battleEnd0", conds) catch |err| @panic(@errorName(err));
+        write("battleEnd0", conds);
     }
 
     /// Called a little bit after battle, as your DPS scores are appearing
     /// - Topaz Charm, Blue Rose, Red Tanzaku (Healing effect)
     pub fn battleEnd1(conds: []const Condition) void {
-        write("battleEnd1", conds) catch |err| @panic(@errorName(err));
+        write("battleEnd1", conds);
     }
 
     /// - Red Tanzaku (Experience gift)
     pub fn battleEnd2(conds: []const Condition) void {
-        write("battleEnd2", conds) catch |err| @panic(@errorName(err));
+        write("battleEnd2", conds);
     }
 
     /// - Regen Potion (heal 2)
     pub fn battleEnd3(conds: []const Condition) void {
-        write("battleEnd3", conds) catch |err| @panic(@errorName(err));
+        write("battleEnd3", conds);
     }
 
     /// - Regen Potion (heal 1)
     pub fn battleEnd4(conds: []const Condition) void {
-        write("battleEnd4", conds) catch |err| @panic(@errorName(err));
+        write("battleEnd4", conds);
     }
 
     /// Called when a status effect is created
     /// - Crowfeather Hairpin, Sacred Bow
     pub fn hbsCreated(conds: []const Condition) void {
-        write("hbsCreated", conds) catch |err| @panic(@errorName(err));
+        write("hbsCreated", conds);
     }
 
     /// This trigger should ONLY be called and used by the status effect that is created
     pub fn hbsCreatedSelf(conds: []const Condition) void {
-        write("hbsCreatedSelf", conds) catch |err| @panic(@errorName(err));
+        write("hbsCreatedSelf", conds);
     }
 
     /// Called when a status effect is overwritten by an instance of the same status
     /// - Currently unused
     pub fn hbsRefreshed(conds: []const Condition) void {
-        write("hbsRefreshed", conds) catch |err| @panic(@errorName(err));
+        write("hbsRefreshed", conds);
     }
 
     /// Called when a status effect is destroyed
     /// - Stoneskin, Ghostflame, Snare, Burn
     pub fn hbsDestroyed(conds: []const Condition) void {
-        write("hbsDestroyed", conds) catch |err| @panic(@errorName(err));
+        write("hbsDestroyed", conds);
     }
 
     /// - Currently unused
     pub fn hbsFlagTrigger(conds: []const Condition) void {
-        write("hbsFlagTrigger", conds) catch |err| @panic(@errorName(err));
+        write("hbsFlagTrigger", conds);
     }
 
     /// The following are shield checks. If your character is hit while they have the
@@ -974,53 +974,53 @@ pub const trig = opaque {
     /// in order, and stop if the character is shielded
     /// - Rockdragon Mail
     pub fn hbsShield0(conds: []const Condition) void {
-        write("hbsShield0", conds) catch |err| @panic(@errorName(err));
+        write("hbsShield0", conds);
     }
 
     /// - Red Tanzaku
     pub fn hbsShield1(conds: []const Condition) void {
-        write("hbsShield1", conds) catch |err| @panic(@errorName(err));
+        write("hbsShield1", conds);
     }
 
     /// Additions to strength/radius
     /// - Stoneskin
     pub fn hbsShield2(conds: []const Condition) void {
-        write("hbsShield2", conds) catch |err| @panic(@errorName(err));
+        write("hbsShield2", conds);
     }
 
     /// - Graniteskin
     pub fn hbsShield3(conds: []const Condition) void {
-        write("hbsShield3", conds) catch |err| @panic(@errorName(err));
+        write("hbsShield3", conds);
     }
 
     /// - Emerald chestplate
     pub fn hbsShield4(conds: []const Condition) void {
-        write("hbsShield4", conds) catch |err| @panic(@errorName(err));
+        write("hbsShield4", conds);
     }
 
     /// - Phoenix charm
     pub fn hbsShield5(conds: []const Condition) void {
-        write("hbsShield5", conds) catch |err| @panic(@errorName(err));
+        write("hbsShield5", conds);
     }
 
     /// Called when any item (ability, loot, potion) is used. This particular trigger should
     /// typically only be used by the item that was used.
     /// - Most items and abilities that do things
     pub fn hotbarUsed(conds: []const Condition) void {
-        write("hotbarUsed", conds) catch |err| @panic(@errorName(err));
+        write("hotbarUsed", conds);
     }
 
     /// Called when an item is used. This particular trigger should be used for items like "When
     /// your Defensive is used, do X" or "When an ability with a cooldown is used, do X" effects
     /// - Gemini Necklace, Necronomicon, Whiteflame Staff
     pub fn hotbarUsedProc(conds: []const Condition) void {
-        write("hotbarUsedProc", conds) catch |err| @panic(@errorName(err));
+        write("hotbarUsedProc", conds);
     }
 
     /// Called when an item is used. Should be used for secondary effects of an item being used
     /// (that need to happen after hotbarUsed)
     pub fn hotbarUsed2(conds: []const Condition) void {
-        write("hotbarUsed2", conds) catch |err| @panic(@errorName(err));
+        write("hotbarUsed2", conds);
     }
 
     /// Called when an item is used. This particular trigger should be used for items like "When
@@ -1028,33 +1028,33 @@ pub const trig = opaque {
     /// Will happen after "hotbarUsed2"
     /// - Battlemaiden Armor, Lion Charm, Moss Shield
     pub fn hotbarUsedProc2(conds: []const Condition) void {
-        write("hotbarUsedProc2", conds) catch |err| @panic(@errorName(err));
+        write("hotbarUsedProc2", conds);
     }
 
     /// Last trigger to be called when an ability is used. Typically used to delete statuses that
     /// disappear when you use an ability etc..
     /// - "Flash-Int", "Vanish", etc..
     pub fn hotbarUsed3(conds: []const Condition) void {
-        write("hotbarUsed3", conds) catch |err| @panic(@errorName(err));
+        write("hotbarUsed3", conds);
     }
 
     /// Called when a character takes damage. Currently only used on the items that break when you
     /// take damage
     /// - Amethyst Bracelet, Ruby Circlet
     pub fn onDamage(conds: []const Condition) void {
-        write("onDamage", conds) catch |err| @panic(@errorName(err));
+        write("onDamage", conds);
     }
 
     /// Called when a character is healed
     /// - Currently unused
     pub fn onHealed(conds: []const Condition) void {
-        write("onHealed", conds) catch |err| @panic(@errorName(err));
+        write("onHealed", conds);
     }
 
     /// Called when a character gains invulnerability
     /// - Obsidian Hairpin, Storm Petticoat, Butterfly Hairpin
     pub fn onInvuln(conds: []const Condition) void {
-        write("onInvuln", conds) catch |err| @panic(@errorName(err));
+        write("onInvuln", conds);
     }
 
     /// Called when your character deals damage to an enemy. If an item does something like "Your
@@ -1063,24 +1063,24 @@ pub const trig = opaque {
     /// - Staticshock Earrings, Ivy Staff, Darkstorm Knife, basically every item that makes your
     ///   attacks afflict status effects
     pub fn onDamageDone(conds: []const Condition) void {
-        write("onDamageDone", conds) catch |err| @panic(@errorName(err));
+        write("onDamageDone", conds);
     }
 
     /// - Currently unused
     pub fn onHealDone(conds: []const Condition) void {
-        write("onHealDone", conds) catch |err| @panic(@errorName(err));
+        write("onHealDone", conds);
     }
 
     /// Called when your character erases an area of bullets
     /// - Reflection Shield, Spiked Shield
     pub fn onEraseDone(conds: []const Condition) void {
-        write("onEraseDone", conds) catch |err| @panic(@errorName(err));
+        write("onEraseDone", conds);
     }
 
     /// Called once per second
     /// - Poison, Spark, Decay Statuses
     pub fn regenTick(conds: []const Condition) void {
-        write("regenTick", conds) catch |err| @panic(@errorName(err));
+        write("regenTick", conds);
     }
 
     /// Called each time your character moves a Rabbitleap (even out of battle). When I say "in
@@ -1088,32 +1088,32 @@ pub const trig = opaque {
     /// using attacks
     /// - Tranquility Status
     pub fn distanceTick(conds: []const Condition) void {
-        write("distanceTick", conds) catch |err| @panic(@errorName(err));
+        write("distanceTick", conds);
     }
 
     /// Called every 200ms when your character is standing still (even out of battle)
     /// - Shinobi Tabi, Iron Grieves
     pub fn standingStill(conds: []const Condition) void {
-        write("standingStill", conds) catch |err| @panic(@errorName(err));
+        write("standingStill", conds);
     }
 
     /// Called each time your character moves a Rabbitleap (in battle)
     /// - Tornado Staff, Cloud Guard, Talon Charm
     pub fn distanceTickBattle(conds: []const Condition) void {
-        write("distanceTickBattle", conds) catch |err| @panic(@errorName(err));
+        write("distanceTickBattle", conds);
     }
 
     /// Called every 200ms when your character is standing still (in battle)
     /// - Floral Bow, Raindrop Earrings, Clay Rabbit
     pub fn standingStillBattle(conds: []const Condition) void {
-        write("standingStillBattle", conds) catch |err| @panic(@errorName(err));
+        write("standingStillBattle", conds);
     }
 
     /// Happens when a % chance succeeds (Note: NOT AUTOMATIC, if you make loot with a random
     /// activation chance, please add a tpat_hb_luck_proc Quick Pattern when it activates)
     /// - Usagi Kamen, Lightning Bow, Poisonfrog Charm
     pub fn luckyProc(conds: []const Condition) void {
-        write("luckyProc", conds) catch |err| @panic(@errorName(err));
+        write("luckyProc", conds);
     }
 
     /// Happens when loot with a cooldown activates (Note: NOT AUTOMATIC, if you make loot with
@@ -1121,7 +1121,7 @@ pub const trig = opaque {
     /// when it activates)
     /// - Blackhole Charm, Quartz Shield, Lion Charm
     pub fn cdLootProc(conds: []const Condition) void {
-        write("cdLootProc", conds) catch |err| @panic(@errorName(err));
+        write("cdLootProc", conds);
     }
 
     /// Happens when a player starts attacking, or when a combat encounter starts.
@@ -1131,25 +1131,25 @@ pub const trig = opaque {
     /// Claymore, every item that starts on cooldown tbh Loot/Abilities that "start on cooldown"
     /// should have an autoStart trigger that runs the cooldown
     pub fn autoStart(conds: []const Condition) void {
-        write("autoStart", conds) catch |err| @panic(@errorName(err));
+        write("autoStart", conds);
     }
 
     /// Happens 5 seconds after a player stops attacking, or when a combat encounter ends
     /// - Currently only used to reset the counter on Defender's Special
     pub fn autoEnd(conds: []const Condition) void {
-        write("autoEnd", conds) catch |err| @panic(@errorName(err));
+        write("autoEnd", conds);
     }
 
     /// These two are currently unavailable to use with mods; lets me code up a special condition
     /// for which an item should be activated/deactivated
     /// - Feathered Overcoat, Shrinemaiden's Kosode
     pub fn onSpecialCond0(conds: []const Condition) void {
-        write("onSpecialCond0", conds) catch |err| @panic(@errorName(err));
+        write("onSpecialCond0", conds);
     }
 
     ///
     pub fn onSpecialCond1(conds: []const Condition) void {
-        write("onSpecialCond1", conds) catch |err| @panic(@errorName(err));
+        write("onSpecialCond1", conds);
     }
 
     /// Activates when the item is first picked up from a Treasure. Items like Ruby Circlet and
@@ -1158,33 +1158,37 @@ pub const trig = opaque {
     /// Vitality Potion that boost your Max HP use this trigger to heal you for 1 HP on pickup
     /// - Butterfly Ocarina, Silver Coin, Ruby Circlet, Midsummer Dress
     pub fn onSquarePickup(conds: []const Condition) void {
-        write("onSquarePickup", conds) catch |err| @panic(@errorName(err));
+        write("onSquarePickup", conds);
     }
 
     /// Activates when you gain/lose gold
     /// - Royal Staff (calls for a recalculation of your stats when trigger is called)
     pub fn onGoldChange(conds: []const Condition) void {
-        write("onGoldChange", conds) catch |err| @panic(@errorName(err));
+        write("onGoldChange", conds);
     }
 
     /// Activates when you level up
     /// - Currently only used for Small Rabbit trinket
     pub fn onLevelup(conds: []const Condition) void {
-        write("onLevelup", conds) catch |err| @panic(@errorName(err));
+        write("onLevelup", conds);
     }
 
     /// Activates when an enemy starts their Enrage cast
     /// - Currently only used for one of Red Tanzaku's effects
     pub fn enrageStart(conds: []const Condition) void {
-        write("enrageStart", conds) catch |err| @panic(@errorName(err));
+        write("enrageStart", conds);
     }
 
     /// Used for certain boss fights (probably best not to use this)
     pub fn patternSpecial(conds: []const Condition) void {
-        write("patternSpecial", conds) catch |err| @panic(@errorName(err));
+        write("patternSpecial", conds);
     }
 
-    pub fn write(trigger: []const u8, conds: []const Condition) !void {
+    fn write(trigger: []const u8, conds: []const Condition) void {
+        return writeInner(trigger, conds) catch |err| @panic(@errorName(err));
+    }
+
+    fn writeInner(trigger: []const u8, conds: []const Condition) !void {
         const writer = &item_csv.writer;
         try writer.print(
             \\,,,,,
@@ -1505,171 +1509,172 @@ pub const Condition = enum {
 
 pub const cond = opaque {
     pub fn none(args: anytype) void {
-        cond2(.none, args) catch |err| @panic(@errorName(err));
+        write(.none, args);
     }
     pub fn check_flag(args: anytype) void {
-        cond2(.check_flag, args) catch |err| @panic(@errorName(err));
+        write(.check_flag, args);
     }
     pub fn check_no_flag(args: anytype) void {
-        cond2(.check_no_flag, args) catch |err| @panic(@errorName(err));
+        write(.check_no_flag, args);
     }
     pub fn dmg_islarge(args: anytype) void {
-        cond2(.dmg_islarge, args) catch |err| @panic(@errorName(err));
+        write(.dmg_islarge, args);
     }
     pub fn dmg_self_defensive(args: anytype) void {
-        cond2(.dmg_self_defensive, args) catch |err| @panic(@errorName(err));
+        write(.dmg_self_defensive, args);
     }
     pub fn dmg_self_primary(args: anytype) void {
-        cond2(.dmg_self_primary, args) catch |err| @panic(@errorName(err));
+        write(.dmg_self_primary, args);
     }
     pub fn dmg_self_secondary(args: anytype) void {
-        cond2(.dmg_self_secondary, args) catch |err| @panic(@errorName(err));
+        write(.dmg_self_secondary, args);
     }
     pub fn dmg_self_special(args: anytype) void {
-        cond2(.dmg_self_special, args) catch |err| @panic(@errorName(err));
+        write(.dmg_self_special, args);
     }
     pub fn dmg_self_thishb(args: anytype) void {
-        cond2(.dmg_self_thishb, args) catch |err| @panic(@errorName(err));
+        write(.dmg_self_thishb, args);
     }
     pub fn equal(args: anytype) void {
-        cond2(.equal, args) catch |err| @panic(@errorName(err));
+        write(.equal, args);
     }
     pub fn unequal(args: anytype) void {
-        cond2(.unequal, args) catch |err| @panic(@errorName(err));
+        write(.unequal, args);
     }
     pub fn eval(a: anytype, op: Compare, b: anytype) void {
-        cond2(.eval, .{ a, op, b }) catch |err| @panic(@errorName(err));
+        write(.eval, .{ a, op, b });
     }
     pub fn @"false"(args: anytype) void {
-        cond2(.false, args) catch |err| @panic(@errorName(err));
+        write(.false, args);
     }
     pub fn @"true"(args: anytype) void {
-        cond2(.true, args) catch |err| @panic(@errorName(err));
+        write(.true, args);
     }
     pub fn hb_auto_pl(args: anytype) void {
-        cond2(.hb_auto_pl, args) catch |err| @panic(@errorName(err));
+        write(.hb_auto_pl, args);
     }
     pub fn hb_available(args: anytype) void {
-        cond2(.hb_available, args) catch |err| @panic(@errorName(err));
+        write(.hb_available, args);
     }
     pub fn hb_check_square_var(args: anytype) void {
-        cond2(.hb_check_square_var, args) catch |err| @panic(@errorName(err));
+        write(.hb_check_square_var, args);
     }
     pub fn hb_check_square_var_false(args: anytype) void {
-        cond2(.hb_check_square_var_false, args) catch |err| @panic(@errorName(err));
+        write(.hb_check_square_var_false, args);
     }
     pub fn hb_check_square_var_gte(args: anytype) void {
-        cond2(.hb_check_square_var_gte, args) catch |err| @panic(@errorName(err));
+        write(.hb_check_square_var_gte, args);
     }
     pub fn hb_check_square_var_lte(args: anytype) void {
-        cond2(.hb_check_square_var_lte, args) catch |err| @panic(@errorName(err));
+        write(.hb_check_square_var_lte, args);
     }
     pub fn hb_primary(args: anytype) void {
-        cond2(.hb_primary, args) catch |err| @panic(@errorName(err));
+        write(.hb_primary, args);
     }
     pub fn hb_secondary(args: anytype) void {
-        cond2(.hb_secondary, args) catch |err| @panic(@errorName(err));
+        write(.hb_secondary, args);
     }
     pub fn hb_special(args: anytype) void {
-        cond2(.hb_special, args) catch |err| @panic(@errorName(err));
+        write(.hb_special, args);
     }
     pub fn hb_defensive(args: anytype) void {
-        cond2(.hb_defensive, args) catch |err| @panic(@errorName(err));
+        write(.hb_defensive, args);
     }
     pub fn hb_loot(args: anytype) void {
-        cond2(.hb_loot, args) catch |err| @panic(@errorName(err));
+        write(.hb_loot, args);
     }
     pub fn hb_not_self(args: anytype) void {
-        cond2(.hb_not_self, args) catch |err| @panic(@errorName(err));
+        write(.hb_not_self, args);
     }
     pub fn hb_self(args: anytype) void {
-        cond2(.hb_self, args) catch |err| @panic(@errorName(err));
+        write(.hb_self, args);
     }
     pub fn hb_self_attack(args: anytype) void {
-        cond2(.hb_self_attack, args) catch |err| @panic(@errorName(err));
+        write(.hb_self_attack, args);
     }
     pub fn hb_self_weapon(args: anytype) void {
-        cond2(.hb_self_weapon, args) catch |err| @panic(@errorName(err));
+        write(.hb_self_weapon, args);
     }
     pub fn hb_selfcast(args: anytype) void {
-        cond2(.hb_selfcast, args) catch |err| @panic(@errorName(err));
+        write(.hb_selfcast, args);
     }
     pub fn hb_team(args: anytype) void {
-        cond2(.hb_team, args) catch |err| @panic(@errorName(err));
+        write(.hb_team, args);
     }
     pub fn hb_type_weapon(args: anytype) void {
-        cond2(.hb_type_weapon, args) catch |err| @panic(@errorName(err));
+        write(.hb_type_weapon, args);
     }
     pub fn hbs_aflplayer(args: anytype) void {
-        cond2(.hbs_aflplayer, args) catch |err| @panic(@errorName(err));
+        write(.hbs_aflplayer, args);
     }
     pub fn hbs_aflplayer_attack(args: anytype) void {
-        cond2(.hbs_aflplayer_attack, args) catch |err| @panic(@errorName(err));
+        write(.hbs_aflplayer_attack, args);
     }
     pub fn hbs_self(args: anytype) void {
-        cond2(.hbs_self, args) catch |err| @panic(@errorName(err));
+        write(.hbs_self, args);
     }
     pub fn hbs_thishbcast(args: anytype) void {
-        cond2(.hbs_thishbcast, args) catch |err| @panic(@errorName(err));
+        write(.hbs_thishbcast, args);
     }
     pub fn hbs_not_thishbcast(args: anytype) void {
-        cond2(.hbs_not_thishbcast, args) catch |err| @panic(@errorName(err));
+        write(.hbs_not_thishbcast, args);
     }
     pub fn hbs_selfafl(args: anytype) void {
-        cond2(.hbs_selfafl, args) catch |err| @panic(@errorName(err));
+        write(.hbs_selfafl, args);
     }
     pub fn hbs_selfcast(args: anytype) void {
-        cond2(.hbs_selfcast, args) catch |err| @panic(@errorName(err));
+        write(.hbs_selfcast, args);
     }
     pub fn hb_check_chargeable0(args: anytype) void {
-        cond2(.hb_check_chargeable0, args) catch |err| @panic(@errorName(err));
+        write(.hb_check_chargeable0, args);
     }
     pub fn hb_check_resettable0(args: anytype) void {
-        cond2(.hb_check_resettable0, args) catch |err| @panic(@errorName(err));
+        write(.hb_check_resettable0, args);
     }
     pub fn missing_health(args: anytype) void {
-        cond2(.missing_health, args) catch |err| @panic(@errorName(err));
+        write(.missing_health, args);
     }
     pub fn pl_autocheck(args: anytype) void {
-        cond2(.pl_autocheck, args) catch |err| @panic(@errorName(err));
+        write(.pl_autocheck, args);
     }
     pub fn pl_self(args: anytype) void {
-        cond2(.pl_self, args) catch |err| @panic(@errorName(err));
+        write(.pl_self, args);
     }
     pub fn player_target_count(args: anytype) void {
-        cond2(.player_target_count, args) catch |err| @panic(@errorName(err));
+        write(.player_target_count, args);
     }
     pub fn hbs_target_count(args: anytype) void {
-        cond2(.hbs_target_count, args) catch |err| @panic(@errorName(err));
+        write(.hbs_target_count, args);
     }
     pub fn slot_target_count(args: anytype) void {
-        cond2(.slot_target_count, args) catch |err| @panic(@errorName(err));
+        write(.slot_target_count, args);
     }
     pub fn random(args: anytype) void {
-        cond2(.random, args) catch |err| @panic(@errorName(err));
+        write(.random, args);
     }
     pub fn random_def(args: anytype) void {
-        cond2(.random_def, args) catch |err| @panic(@errorName(err));
+        write(.random_def, args);
     }
     pub fn square_self(args: anytype) void {
-        cond2(.square_self, args) catch |err| @panic(@errorName(err));
+        write(.square_self, args);
     }
     pub fn tick_every(args: anytype) void {
-        cond2(.tick_every, args) catch |err| @panic(@errorName(err));
+        write(.tick_every, args);
     }
     pub fn trinket_counter_equal(args: anytype) void {
-        cond2(.trinket_counter_equal, args) catch |err| @panic(@errorName(err));
+        write(.trinket_counter_equal, args);
     }
     pub fn trinket_counter_greaterequal(args: anytype) void {
-        cond2(.trinket_counter_greaterequal, args) catch |err| @panic(@errorName(err));
+        write(.trinket_counter_greaterequal, args);
     }
     pub fn bookofcheats_varcheck(args: anytype) void {
-        cond2(.bookofcheats_varcheck, args) catch |err| @panic(@errorName(err));
+        write(.bookofcheats_varcheck, args);
     }
-    fn cond2(condition: Condition, args: anytype) !void {
+
+    fn write(condition: Condition, args: anytype) void {
         std.debug.assert(have_trigger);
-        try item_csv.writer.print("condition,{s}", .{condition.toCsvString()});
-        try writeArgs(&item_csv.writer, args);
+        item_csv.writer.print("condition,{s}", .{condition.toCsvString()}) catch |err| @panic(@errorName(err));
+        writeArgs(&item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
 
@@ -1695,44 +1700,44 @@ pub const cond = opaque {
 pub const qpat = opaque {
     /// Does nothing
     pub fn nothing() void {
-        write("tpat_nothing", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_nothing", .{});
     }
 
     /// Adds the current list of targets to your debug log.
     pub fn debug_targets() void {
-        write("tpat_debug_targets", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_debug_targets", .{});
     }
 
     /// To be used during strCalc.
     /// Adds to the player's hitbox size.
     /// The default hitbox size is 5 pixels.
     pub fn player_add_radius(args: Args) void {
-        write("tpat_player_add_radius", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_add_radius", args);
     }
 
     /// "stat" (a stat to add, see "STAT" in enum reference)
     /// "amount" (a number to add)
     /// Adds some stat amount to targetted players.
     pub fn player_add_stat(args: Args) void {
-        write("tpat_player_add_stat", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_add_stat", args);
     }
 
     /// Randomizes your levitation ring color (used on the Paintbrush trinket)
     pub fn player_change_color_rand() void {
-        write("tpat_player_change_color_rand", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_player_change_color_rand", .{});
     }
 
     /// Resets the distance ticker for targeted players to 0 (used for the "Tranquility" status
     /// effect to accurately measure 1 rabbitleap)
     pub fn player_distcounter_reset() void {
-        write("tpat_player_distcounter_reset", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_player_distcounter_reset", .{});
     }
 
     /// "length" (time in milliseconds)
     /// Locks targeted players in place for the specified length of time.
     /// NOTE: This function currently doesn't work correctly online.
     pub fn player_movelock(args: Args) void {
-        write("tpat_player_movelock", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_movelock", args);
     }
 
     /// "mult" (move speed multiplier)
@@ -1740,44 +1745,44 @@ pub const qpat = opaque {
     /// Slows/speeds up players for a brief amount of time.
     /// NOTE: This function currently doesn't work correctly online.
     pub fn player_movemult(args: Args) void {
-        write("tpat_player_movemult", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_movemult", args);
     }
 
     /// "length" (time in milliseconds)
     /// Runs GCD for specified amount of time
     pub fn player_run_gcd(args: Args) void {
-        write("tpat_player_run_gcd", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_run_gcd", args);
     }
 
     /// "amount" (size in pixels)
     /// Sets hitbox size for players; meant to be used in strCalc
     pub fn player_set_radius(args: Args) void {
-        write("tpat_player_set_radius", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_set_radius", args);
     }
 
     /// "stat" (a stat to add, see "STAT" in enum reference)
     /// "amount" (a number to add)
     /// Sets a base stat for targeted players to an amount.
     pub fn player_set_stat(args: Args) void {
-        write("tpat_player_set_stat", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_set_stat", args);
     }
 
     /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
     /// from damage. Use this trigger for loot/ability effects.
     pub fn player_shield() void {
-        write("tpat_player_shield", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_player_shield", .{});
     }
 
     /// To be used during "hbsShield" triggers to indicate the player was successfully shielded
     /// from damage. Use this trigger for status effects (like Stoneskin).
     pub fn player_shield_hbs() void {
-        write("tpat_player_shield_hbs", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_player_shield_hbs", .{});
     }
 
     /// "amount" (a number)
     /// Add to the targeted player's hidden trinket counter.
     pub fn player_trinket_counter_add(args: Args) void {
-        write("tpat_player_trinket_counter_add", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_trinket_counter_add", args);
     }
 
     /// "amount" (a number)
@@ -1786,83 +1791,83 @@ pub const qpat = opaque {
     /// Add to the targeted player's hidden trinket counter, but keep the counter inbetween the
     /// specified values.
     pub fn player_trinket_counter_add_bounded(args: Args) void {
-        write("tpat_player_trinket_counter_add_bounded", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_trinket_counter_add_bounded", args);
     }
 
     /// "minAm" (a number, default 0)
     /// "maxAm" (a number, default 5)
     /// Randomize the hidden trinket counter between the two values
     pub fn player_trinket_counter_randomize(args: Args) void {
-        write("tpat_player_trinket_counter_randomize", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_trinket_counter_randomize", args);
     }
 
     /// "amount" (a number)
     /// Set the target player's hidden trinket counter
     pub fn player_trinket_counter_set(args: Args) void {
-        write("tpat_player_trinket_counter_set", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_trinket_counter_set", args);
     }
 
     /// Make the targeted player's trinket flash/sparkle/animate
     pub fn player_trinket_flash() void {
-        write("tpat_player_trinket_flash", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_player_trinket_flash", .{});
     }
 
     pub fn player_add_hp(args: Args) void {
-        write("tpat_player_add_hp", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_add_hp", args);
     }
 
     pub fn player_set_hp(args: Args) void {
-        write("tpat_player_set_hp", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_set_hp", args);
     }
 
     pub fn player_add_gold(args: Args) void {
-        write("tpat_player_add_gold", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_add_gold", args);
     }
 
     pub fn player_set_gold(args: Args) void {
-        write("tpat_player_set_gold", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_set_gold", args);
     }
 
     pub fn player_add_level(args: Args) void {
-        write("tpat_player_add_level", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_add_level", args);
     }
 
     pub fn player_set_level(args: Args) void {
-        write("tpat_player_set_level", args) catch |err| @panic(@errorName(err));
+        write("tpat_player_set_level", args);
     }
 
     /// "amount" (a number, in milliseconds)
     /// Adds (or subtracts, if amount is negative) an amount from targeted hotbarslot's
     /// current cooldown.
     pub fn hb_add_cooldown(args: Args) void {
-        write("tpat_hb_add_cooldown", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_cooldown", args);
     }
 
     /// "amount" (a number, in milliseconds)
     /// To be used during cdCalc, adds (or subtracts) an amount from targeted hotbarslot's
     /// overall cooldown
     pub fn hb_add_cooldown_permanent(args: Args) void {
-        write("tpat_hb_add_cooldown_permanent", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_cooldown_permanent", args);
     }
 
     /// "flag" (a binary)
     /// Adds a hitbox flag to a hotbarslot (see hbFlags on the "Stats" sheet)
     pub fn hb_add_flag(args: Args) void {
-        write("tpat_hb_add_flag", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_flag", args);
     }
 
     /// "varIndex" (an integer from 0-3)
     /// "amount" (a number)
     /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
     pub fn hb_add_hitbox_var(args: Args) void {
-        write("tpat_hb_add_hitbox_var", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_hitbox_var", args);
     }
 
     /// "varIndex" (an integer from 0-3)
     /// "amount" (a number)
     /// Adds the amount to the indicated hidden variable on the targeted hotbarslots.
     pub fn hb_add_statchange(args: Args) void {
-        write("tpat_hb_add_statchange", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_statchange", args);
     }
 
     /// "stat" (a stat enum, see STAT in enum reference)
@@ -1873,7 +1878,7 @@ pub const qpat = opaque {
     /// recalculating it over and over.
     /// Adds a stat to the item, which will boost the stat on the player who's holding it
     pub fn hb_add_gcd_permanent(args: Args) void {
-        write("tpat_hb_add_gcd_permanent", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_gcd_permanent", args);
     }
 
     /// "stat" (a stat enum, see STAT in enum reference)
@@ -1884,32 +1889,32 @@ pub const qpat = opaque {
     /// who's holding it. Added stats are permanent, unless reset with
     /// tpat_hb_reset_statchange_norefresh
     pub fn hb_add_statchange_norefresh(args: Args) void {
-        write("tpat_hb_add_statchange_norefresh", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_statchange_norefresh", args);
     }
 
     /// "amount" (a number)
     /// To be used in strCalc1a,strCalc1b,strCalc1c, to add a percentage increase in damage to
     /// targeted hotbarslots.
     pub fn hb_add_strcalcbuff(args: Args) void {
-        write("tpat_hb_add_strcalcbuff", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_strcalcbuff", args);
     }
 
     /// "amount" (a number)
     /// To be used in strCalc2, adds an amount to strength of targeted hotbarslots
     pub fn hb_add_strength(args: Args) void {
-        write("tpat_hb_add_strength", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_strength", args);
     }
 
     /// "amount" (a number)
     /// To be used in strCalc2, adds an amount to hbsStrength of targeted hotbarslots
     pub fn hb_add_strength_hbs(args: Args) void {
-        write("tpat_hb_add_strength_hbs", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_add_strength_hbs", args);
     }
 
     /// Must be called whenever a loot item with a cooldown that isn't directly "used" (aka isn't
     /// an auto hotbarslot) is activated.
     pub fn hb_cdloot_proc() void {
-        write("tpat_hb_cdloot_proc", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_cdloot_proc", .{});
     }
 
     /// "num" (a number of charges to give)
@@ -1917,12 +1922,12 @@ pub const qpat = opaque {
     /// "type" (chargeTypes enum designating the type of Charge)
     /// Gives specified hotbarslots Charge.
     pub fn hb_charge(args: Args) void {
-        write("tpat_hb_charge", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_charge", args);
     }
 
     /// Clears specified hotbarslots of all Charge.
     pub fn hb_charge_clear() void {
-        write("tpat_hb_charge_clear", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_charge_clear", .{});
     }
 
     /// "messageIndex" (hbFlashMessage enum, default "none")
@@ -1931,7 +1936,7 @@ pub const qpat = opaque {
     /// item "activates". If this item procs extremely frequently, I'd recommend setting it to
     /// "quiet" so it isn't annoying to players who pick it up
     pub fn hb_flash_item(args: Args) void {
-        write("tpat_hb_flash_item", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_flash_item", args);
     }
 
     /// "messageIndex" (hbFlashMessage enum, default "none")
@@ -1939,189 +1944,189 @@ pub const qpat = opaque {
     /// Flashes an image of the RECEIVER hotbarslot overhead. Useful if you want to target a bunch
     /// of other hotbarslots to perform other calculations before calling the flash.
     pub fn hb_flash_item_source(args: Args) void {
-        write("tpat_hb_flash_item_source", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_flash_item_source", args);
     }
 
     /// Must be called whenever an ability, for whatever reason, is activated via some effect
     /// other than activating itself (such as Heavyblade's Garnet Primary, or Druids Sapphire
     /// Primary) so they can proc other items
     pub fn hb_hbuse_proc() void {
-        write("tpat_hb_hbuse_proc", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_hbuse_proc", .{});
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Adds an amount to the hotbar's hidden variables
     pub fn hb_inc_var(args: Args) void {
-        write("tpat_hb_inc_var", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_inc_var", args);
     }
 
     /// "amount" (an integer)
     /// Adds an amount to the uses of stock, stockGCD, and stockOnly hotbarslots that are targeted.
     pub fn hb_increase_stock(args: Args) void {
-        write("tpat_hb_increase_stock", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_increase_stock", args);
     }
 
     /// Must be called whenever an item "succeeds" in a random proc chance, in order to activate
     /// other items. This will indicate that all hotbars targeted have proc'd."
     pub fn hb_lucky_proc() void {
-        write("tpat_hb_lucky_proc", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_lucky_proc", .{});
     }
 
     /// Alternatively, this function can be called. This will indicate that the RECEIVER hotbar
     /// has proc'd.
     pub fn hb_lucky_proc_source() void {
-        write("tpat_hb_lucky_proc_source", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_lucky_proc_source", .{});
     }
 
     /// "mult" (a number)
     /// "minimum" (a time in milliseconds, default 200)
     /// To be used during cdCalc, multiplies GCDs of targeted hotbarslots by a certain amount.
     pub fn hb_mult_gcd_permanent(args: Args) void {
-        write("tpat_hb_mult_gcd_permanent", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_mult_gcd_permanent", args);
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's hidden variable by a certain amount
     pub fn hb_mult_hitbox_var(args: Args) void {
-        write("tpat_hb_mult_hitbox_var", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_mult_hitbox_var", args);
     }
 
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's hbsLength by a certain amount
     pub fn hb_mult_length_hbs(args: Args) void {
-        write("tpat_hb_mult_length_hbs", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_mult_length_hbs", args);
     }
 
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's strength by a certain amount
     pub fn hb_mult_strength(args: Args) void {
-        write("tpat_hb_mult_strength", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_mult_strength", args);
     }
 
     /// "mult" (a number)
     /// Multiplies the targeted hotbar's hbsStrength by a certain amount
     pub fn hb_mult_strength_hbs(args: Args) void {
-        write("tpat_hb_mult_strength_hbs", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_mult_strength_hbs", args);
     }
 
     /// Forces a recalculation of color
     pub fn hb_recalc_color() void {
-        write("tpat_hb_recalc_color", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_recalc_color", .{});
     }
 
     /// "amount" (an integer)
     /// Reduces the stock of stock, stockGcd, and stockOnly hotbarslots targeted.
     pub fn hb_reduce_stock(args: Args) void {
-        write("tpat_hb_reduce_stock", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_reduce_stock", args);
     }
 
     /// Resets the cooldown of targeted hotbarslots. tcond_hb_check_resettable0 or
     /// ttrg_hotbarslots_prune_noreset should be run before using this to avoid resetting slots
     /// that aren't meant to be resettable.
     pub fn hb_reset_cooldown() void {
-        write("tpat_hb_reset_cooldown", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_reset_cooldown", .{});
     }
 
     /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Will
     /// also refresh strCalc. Not to be used during strCalc, or you will get an infinite refresh
     /// loop.
     pub fn hb_reset_statchange() void {
-        write("tpat_hb_reset_statchange", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_reset_statchange", .{});
     }
 
     /// Removes stat changes added via "tpat_hb_add_statchange" from targeted hotbarslots. Can be
     /// used during strCalc.
     pub fn hb_reset_statchange_norefresh() void {
-        write("tpat_hb_reset_statchange_norefresh", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_reset_statchange_norefresh", .{});
     }
 
     /// Runs cooldown of targeted hotbarslots.
     pub fn hb_run_cooldown() void {
-        write("tpat_hb_run_cooldown", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_run_cooldown", .{});
     }
 
     /// "length" (time in milliseconds)
     /// Runs cooldown of targeted hotbarslots for a specified amount.
     pub fn hb_run_cooldown_ext(args: Args) void {
-        write("tpat_hb_run_cooldown_ext", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_run_cooldown_ext", args);
     }
 
     /// "length" (time in milliseconds)
     /// Runs hidden cooldown of targeted hotbarslots for a specified amount.
     pub fn hb_run_cooldown_hidden(args: Args) void {
-        write("tpat_hb_run_cooldown_hidden", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_run_cooldown_hidden", args);
     }
 
     /// Changes the color of the targeted hotbarslots to the color of the RECEIVER of the original
     /// trigger. If your item upgrades an ability, you should add a colorCalc trigger that calls
     /// this on that ability, to add a bit of flair to your item!
     pub fn hb_set_color_def() void {
-        write("tpat_hb_set_color_def", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_color_def", .{});
     }
 
     /// "time" (in milliseconds)
     /// To be called during cdCalc, sets the cooldown of targeted hotbarslots to specified amount.
     pub fn hb_set_cooldown_permanent(args: Args) void {
-        write("tpat_hb_set_cooldown_permanent", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_cooldown_permanent", args);
     }
 
     /// "amount" (in milliseconds)
     /// "minimum" (in milliseconds, default 200)
     /// To be called during cdCalc, sets the GCD of targeted hotbarslots to specified amount.
     pub fn hb_set_gcd_permanent(args: Args) void {
-        write("tpat_hb_set_gcd_permanent", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_gcd_permanent", args);
     }
 
     /// "amount" (an integer)
     /// Sets stock of stock, stockGcd, and stockOnly hotbarslots to a specific amount.
     pub fn hb_set_stock(args: Args) void {
-        write("tpat_hb_set_stock", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_stock", args);
     }
 
     /// "amount" (a number)
     /// To be caled during strCalc, sets the strength of hotbarslots to a specific amount.
     pub fn hb_set_strength(args: Args) void {
-        write("tpat_hb_set_strength", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_strength", args);
     }
 
     /// "ratio" (a number)
     /// "maxAmount" (a number)
     /// Special function for Darkglass Spear
     pub fn hb_set_strength_darkglass_spear(args: Args) void {
-        write("tpat_hb_set_strength_darkglass_spear", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_strength_darkglass_spear", args);
     }
 
     /// "ratio" (a number)
     /// "maxAmount" (a number)
     /// Special function for Obsidian Rod
     pub fn hb_set_strength_obsidian_rod(args: Args) void {
-        write("tpat_hb_set_strength_obsidian_rod", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_strength_obsidian_rod", args);
     }
 
     /// "ratio" (a number)
     /// "maxAmount" (a number)
     /// Special function for Timespace Dagger
     pub fn hb_set_strength_timespace_dagger(args: Args) void {
-        write("tpat_hb_set_strength_timespace_dagger", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_strength_timespace_dagger", args);
     }
 
     /// Special function for Tidal Greatsword
     pub fn hb_set_tidalgreatsword() void {
-        write("tpat_hb_set_tidalgreatsword", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_tidalgreatsword", .{});
     }
 
     /// Special function for Tidal Greatsword
     pub fn hb_set_tidalgreatsword_start() void {
-        write("tpat_hb_set_tidalgreatsword_start", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_tidalgreatsword_start", .{});
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Sets targeted hotbarslot's hidden variable to a specific amount
     pub fn hb_set_var(args: Args) void {
-        write("tpat_hb_set_var", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_var", args);
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
@@ -2129,7 +2134,7 @@ pub const qpat = opaque {
     /// "maxAmount" (a number)
     /// Sets targeted hotbarslot's hidden variable to a random number between the two parameters
     pub fn hb_set_var_random_range(args: Args) void {
-        write("tpat_hb_set_var_random_range", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_set_var_random_range", args);
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
@@ -2143,32 +2148,32 @@ pub const qpat = opaque {
     /// in the Sparkblade set that changes sqVar0 constantly, you might want to set
     /// netcallThreshold to 5 or so.
     pub fn hb_square_add_var(args: Args) void {
-        write("tpat_hb_square_add_var", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_square_add_var", args);
     }
 
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Sets the targeted hotbarslot's sqVar.
     pub fn hb_square_set_var(args: Args) void {
-        write("tpat_hb_square_set_var", args) catch |err| @panic(@errorName(err));
+        write("tpat_hb_square_set_var", args);
     }
 
     /// For stock, stockGcd and stockOnly hotbarslots, zeros out stock and starts the slot's
     /// cooldown.
     pub fn hb_zero_stock() void {
-        write("tpat_hb_zero_stock", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hb_zero_stock", .{});
     }
 
     /// "flag" (a binary number representing an hbsFlag)
     /// Adds an HBS flag to targeted status effects (see hbsFlag on the "Stats" sheet)
     pub fn hbs_add_hbsflag(args: Args) void {
-        write("tpat_hbs_add_hbsflag", args) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_add_hbsflag", args);
     }
 
     /// "flag" (a binary number representing an hbsShineFlag)
     /// Adds an HBS shine flag to targeted status effects (see hbShineFlag on the "Stats" sheet)
     pub fn hbs_add_shineflag(args: Args) void {
-        write("tpat_hbs_add_shineflag", args) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_add_shineflag", args);
     }
 
     /// "stat" (a stat enum, see STAT in enum reference)
@@ -2178,44 +2183,48 @@ pub const qpat = opaque {
     /// Adds a stat to the targeted status effect, which will boost the stat on the player who's
     /// holding it (Recommend that you use this during hbsCreatedSelf trigger)
     pub fn hbs_add_statchange(args: Args) void {
-        write("tpat_hbs_add_statchange", args) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_add_statchange", args);
     }
 
     /// "playerId" (an integer repesenting a playerID)
     /// "amount" (an amount of bleed)
     /// Adds appropriate damagePlus stats to a status effect for Bleed status
     pub fn hbs_add_statchange_bleed(args: Args) void {
-        write("tpat_hbs_add_statchange_bleed", args) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_add_statchange_bleed", args);
     }
 
     /// "amount" (an amount of bleed)
     /// Adds appropriate damagePlus stats to a status effect for Sap status
     pub fn hbs_add_statchange_sap(args: Args) void {
-        write("tpat_hbs_add_statchange_sap", args) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_add_statchange_sap", args);
     }
 
     /// Destroys targeted status effects
     pub fn hbs_destroy() void {
-        write("tpat_hbs_destroy", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_destroy", .{});
     }
 
     /// "mult" (a number)
     /// Multiplies strength of status effects targeted by specified number
     pub fn hbs_mult_str(args: Args) void {
-        write("tpat_hbs_mult_str", args) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_mult_str", args);
     }
 
     /// Resets stats added to targeted status effects via tpat_hbs_add_statchange
     pub fn hbs_reset_statchange() void {
-        write("tpat_hbs_reset_statchange", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_hbs_reset_statchange", .{});
     }
 
     /// Don't use this
     pub fn bookofcheats_set_random() void {
-        write("tpat_bookofcheats_set_random", .{}) catch |err| @panic(@errorName(err));
+        write("tpat_bookofcheats_set_random", .{});
     }
 
-    fn write(pat: []const u8, args: Args) !void {
+    fn write(pat: []const u8, args: Args) void {
+        return writeInner(pat, args) catch |err| @panic(@errorName(err));
+    }
+
+    fn writeInner(pat: []const u8, args: Args) !void {
         std.debug.assert(have_trigger);
         const writer = &item_csv.writer;
         try writer.print("quickPattern,{s}", .{pat});
@@ -2321,39 +2330,39 @@ pub const apat = opaque {
     /// status's ID. It's probably best not to use these functions unless I add in custom status
     /// effects in later.
     pub fn bleed(args: Args) void {
-        write("ipat_bleed", args) catch |err| @panic(@errorName(err));
+        write("ipat_bleed", args);
     }
 
     /// "hbsColorInd" (an integer representing a color palette)
     pub fn burn(args: Args) void {
-        write("ipat_burn", args) catch |err| @panic(@errorName(err));
+        write("ipat_burn", args);
     }
 
     /// "hbsColorInd" (an integer representing a color palette)
     pub fn curse(args: Args) void {
-        write("ipat_curse", args) catch |err| @panic(@errorName(err));
+        write("ipat_curse", args);
     }
 
     /// "hbsColorInd" (an integer representing a color palette)
     pub fn poison(args: Args) void {
-        write("ipat_poison", args) catch |err| @panic(@errorName(err));
+        write("ipat_poison", args);
     }
 
     /// "hbsColorInd" (an integer representing a color palette)
     pub fn spark(args: Args) void {
-        write("ipat_spark", args) catch |err| @panic(@errorName(err));
+        write("ipat_spark", args);
     }
 
     /// "hbsColorInd" (an integer representing a color palette)
     /// Makes a flash effect based off the color of the status ID passed in.
     pub fn starflash_hbs(args: Args) void {
-        write("ipat_starflash_hbs", args) catch |err| @panic(@errorName(err));
+        write("ipat_starflash_hbs", args);
     }
 
     /// "hbsColorInd" (an integer representing a color palette)
     /// Erases an area, with color based off the status ID passed in.
     pub fn erase_area_hbs(args: Args) void {
-        write("ipat_erase_area_hbs", args) catch |err| @panic(@errorName(err));
+        write("ipat_erase_area_hbs", args);
     }
 
     /// "displayNumber" (an integer representing a hotbar slot; default 10)
@@ -2361,35 +2370,35 @@ pub const apat = opaque {
     /// this will add a timer to the corresponding character's hotbarslot matching the debuff
     /// timer. (Similar to Sniper's Secondary)
     pub fn apply_hbs(args: Args) void {
-        write("ipat_apply_hbs", args) catch |err| @panic(@errorName(err));
+        write("ipat_apply_hbs", args);
     }
 
     /// "displayNumber" (an integer representing a hotbar slot; default 10)
     /// Applies a status effect set by tset_hbs or tset_hbs_def. (with a bit of a "flash" to
-    /// indicate something happened). If displayNumber is 0-3, then this will add a timer to the
+    /// inde
     /// corresponding character's hotbarslot matching the debuff timer. (Similar to Sniper's
     /// Secondary)
     pub fn apply_hbs_starflash(args: Args) void {
-        write("ipat_apply_hbs_starflash", args) catch |err| @panic(@errorName(err));
+        write("ipat_apply_hbs_starflash", args);
     }
 
     /// "duration" (length of invuln, in milliseconds, default 3000)
     /// Applies invulnerability for the specified duration.
     pub fn apply_invuln(args: Args) void {
-        write("ipat_apply_invuln", args) catch |err| @panic(@errorName(err));
+        write("ipat_apply_invuln", args);
     }
 
     /// "number"
     /// "radius"
     /// Hits with a slashing effect at your targeted position
     pub fn black_wakizashi(args: Args) void {
-        write("ipat_black_wakizashi", args) catch |err| @panic(@errorName(err));
+        write("ipat_black_wakizashi", args);
     }
 
     /// "number"
     /// Hits all enemies the specified number of times.
     pub fn blackhole_charm(args: Args) void {
-        write("ipat_blackhole_charm", args) catch |err| @panic(@errorName(err));
+        write("ipat_blackhole_charm", args);
     }
 
     /// "amount" (an integer representing an xp amount, default 0)
@@ -2402,24 +2411,24 @@ pub const apat = opaque {
     /// variable each time you hit the enemy, then call this once at the end of battle to give
     /// the character their xp.
     pub fn blue_rose(args: Args) void {
-        write("ipat_blue_rose", args) catch |err| @panic(@errorName(err));
+        write("ipat_blue_rose", args);
     }
 
     /// "amount" (an integer representing an amount to heal, default 0)
     /// Heals targeted players for the specified amount.
     pub fn butterly_ocarina(args: Args) void {
-        write("ipat_butterly_ocarina", args) catch |err| @panic(@errorName(err));
+        write("ipat_butterly_ocarina", args);
     }
 
     /// Deals damage to all enemies, with the "spark" effect.
     pub fn crown_of_storms(args: Args) void {
-        write("ipat_crown_of_storms", args) catch |err| @panic(@errorName(err));
+        write("ipat_crown_of_storms", args);
     }
 
     /// Deals damage to targeted enemies. Despite the name, this is actually the Crescentmoon
     /// Dagger effect.
     pub fn curse_talon(args: Args) void {
-        write("ipat_curse_talon", args) catch |err| @panic(@errorName(err));
+        write("ipat_curse_talon", args);
     }
 
     /// "x"
@@ -2427,7 +2436,7 @@ pub const apat = opaque {
     /// "radius"
     /// Deals damage in a radius around the player.
     pub fn darkmagic_blade(args: Args) void {
-        write("ipat_darkmagic_blade", args) catch |err| @panic(@errorName(err));
+        write("ipat_darkmagic_blade", args);
     }
 
     /// "x"
@@ -2436,7 +2445,7 @@ pub const apat = opaque {
     /// Erases area in a radius around the player. Despite the name, Divine Mirror doesn't do this
     /// anymore; but items like Peridot Rapier do.
     pub fn divine_mirror(args: Args) void {
-        write("ipat_divine_mirror", args) catch |err| @panic(@errorName(err));
+        write("ipat_divine_mirror", args);
     }
 
     /// "fx"
@@ -2446,19 +2455,19 @@ pub const apat = opaque {
     /// Fires a bow shot at your target. NOTE: "radius" here is actually the maximum distance the
     /// bow shot will travel, not the size of the impact.
     pub fn floral_bow(args: Args) void {
-        write("ipat_floral_bow", args) catch |err| @panic(@errorName(err));
+        write("ipat_floral_bow", args);
     }
 
     /// "time" (length of invuln, in milliseconds, default 0)
     /// Makes the player using the item invulnerable for the specified length of time.
     pub fn garnet_staff(args: Args) void {
-        write("ipat_garnet_staff", args) catch |err| @panic(@errorName(err));
+        write("ipat_garnet_staff", args);
     }
 
     /// "amount" (an integer representing an amount to heal, default 0)
     /// Heals targeted players for the specified amount.
     pub fn heal_light(args: Args) void {
-        write("ipat_heal_light", args) catch |err| @panic(@errorName(err));
+        write("ipat_heal_light", args);
     }
 
     /// "amount" (an integer representing an amount to heal, default 0)
@@ -2467,14 +2476,14 @@ pub const apat = opaque {
     /// instance, on one client a player heals before their max HP increases, resulting in
     /// mismatched health)
     pub fn heal_light_maxhealth(args: Args) void {
-        write("ipat_heal_light_maxhealth", args) catch |err| @panic(@errorName(err));
+        write("ipat_heal_light_maxhealth", args);
     }
 
     /// "amount" (an integer representing an amount to heal, default 0)
     /// "duration" (length of invuln, in milliseconds, default 3000)
     /// Heals targeted players AND grants them invulnerability for a specified length of time.
     pub fn heal_revive(args: Args) void {
-        write("ipat_heal_revive", args) catch |err| @panic(@errorName(err));
+        write("ipat_heal_revive", args);
     }
 
     /// "fx"
@@ -2482,7 +2491,7 @@ pub const apat = opaque {
     /// "radius"
     /// Hydrous blob attack
     pub fn hydrous_blob(args: Args) void {
-        write("ipat_hydrous_blob", args) catch |err| @panic(@errorName(err));
+        write("ipat_hydrous_blob", args);
     }
 
     /// "type" (a weaponType enum, see enum reference)
@@ -2490,21 +2499,21 @@ pub const apat = opaque {
     /// Runs specified cooldown. If type is "weaponType.none", it will run ALL your ability
     /// cooldowns for the specified amount."
     pub fn lullaby_harp(args: Args) void {
-        write("ipat_lullaby_harp", args) catch |err| @panic(@errorName(err));
+        write("ipat_lullaby_harp", args);
     }
 
     /// "number"
     ///
     /// Hits the targeted enemies the specified number of times.
     pub fn magic_hit(args: Args) void {
-        write("ipat_magic_hit", args) catch |err| @panic(@errorName(err));
+        write("ipat_magic_hit", args);
     }
 
     /// "number"
     ///
     /// Hits the targeted enemies the specified number of times.
     pub fn melee_hit(args: Args) void {
-        write("ipat_melee_hit", args) catch |err| @panic(@errorName(err));
+        write("ipat_melee_hit", args);
     }
 
     /// "fx"
@@ -2512,7 +2521,7 @@ pub const apat = opaque {
     /// "radius"
     /// Deals damage once in a radius around your target (old Meteor Staff effect)
     pub fn meteor_staff(args: Args) void {
-        write("ipat_meteor_staff", args) catch |err| @panic(@errorName(err));
+        write("ipat_meteor_staff", args);
     }
 
     /// "x"
@@ -2520,7 +2529,7 @@ pub const apat = opaque {
     /// "radius"
     /// Deals damage once in a radius around the player
     pub fn moon_pendant(args: Args) void {
-        write("ipat_moon_pendant", args) catch |err| @panic(@errorName(err));
+        write("ipat_moon_pendant", args);
     }
 
     /// "fx"
@@ -2528,25 +2537,25 @@ pub const apat = opaque {
     /// "radius"
     /// Deals damage once in a radius around your target (old Nightstar Grimoire effect)
     pub fn nightstar_grimoire(args: Args) void {
-        write("ipat_nightstar_grimoire", args) catch |err| @panic(@errorName(err));
+        write("ipat_nightstar_grimoire", args);
     }
 
     /// Applies status effect to all targeted players. Generally used for party buffs (uses
     /// "important" network alpha setting)
     pub fn ornamental_bell(args: Args) void {
-        write("ipat_ornamental_bell", args) catch |err| @panic(@errorName(err));
+        write("ipat_ornamental_bell", args);
     }
 
     /// "amount" (an integer representing an amount to heal, default 0)
     /// Heals targeted players for the specified amount. Looks fancier than other heal effects.
     pub fn phoenix_charm(args: Args) void {
-        write("ipat_phoenix_charm", args) catch |err| @panic(@errorName(err));
+        write("ipat_phoenix_charm", args);
     }
 
     /// Applies status effect to all targeted players. Generally used for applying debuffs (uses
     /// player's network alpha setting)
     pub fn poisonfrog_charm(args: Args) void {
-        write("ipat_poisonfrog_charm", args) catch |err| @panic(@errorName(err));
+        write("ipat_poisonfrog_charm", args);
     }
 
     /// "fx"
@@ -2554,57 +2563,57 @@ pub const apat = opaque {
     /// "radius"
     /// Deals damage once in a radius around your target
     pub fn potion_throw(args: Args) void {
-        write("ipat_potion_throw", args) catch |err| @panic(@errorName(err));
+        write("ipat_potion_throw", args);
     }
 
     /// "x"
     /// "y"
     /// Deals damage to all enemies. Effect is centered on specified position.
     pub fn pulse_damage(args: Args) void {
-        write("ipat_pulse_damage", args) catch |err| @panic(@errorName(err));
+        write("ipat_pulse_damage", args);
     }
 
     /// "number"
     /// Deals damage to targeted enemies, with a "backstab" effect on the text.
     pub fn reaper_cloak(args: Args) void {
-        write("ipat_reaper_cloak", args) catch |err| @panic(@errorName(err));
+        write("ipat_reaper_cloak", args);
     }
 
     /// Makes a big flashy effect, that does nothing by itself.
     pub fn red_tanzaku(args: Args) void {
-        write("ipat_red_tanzaku", args) catch |err| @panic(@errorName(err));
+        write("ipat_red_tanzaku", args);
     }
 
     /// Deals damage once in a radius around your target. Projectile is similar to Wizard's
     /// Primary
     pub fn sleeping_greatbow(args: Args) void {
-        write("ipat_sleeping_greatbow", args) catch |err| @panic(@errorName(err));
+        write("ipat_sleeping_greatbow", args);
     }
 
     /// Deals damage to all enemies. Visual effect is very subtle, lending itself well to items
     /// that trigger frequently.
     pub fn sparrow_feather(args: Args) void {
-        write("ipat_sparrow_feather", args) catch |err| @panic(@errorName(err));
+        write("ipat_sparrow_feather", args);
     }
 
-    /// Makes a flash effect around the player, indicating something has happened.
+    /// Makes a flash effect around the player, ind.
     pub fn starflash(args: Args) void {
-        write("ipat_starflash", args) catch |err| @panic(@errorName(err));
+        write("ipat_starflash", args);
     }
 
-    /// Makes a dark-red flash effect around the player, indicating something has happened.
+    /// Makes a dark-red flash effect around the player, ind.
     pub fn starflash_failure(args: Args) void {
-        write("ipat_starflash_failure", args) catch |err| @panic(@errorName(err));
+        write("ipat_starflash_failure", args);
     }
 
     /// Adds a status effect and speeds up player's movement.
     pub fn thiefs_coat(args: Args) void {
-        write("ipat_thiefs_coat", args) catch |err| @panic(@errorName(err));
+        write("ipat_thiefs_coat", args);
     }
 
     /// Adds a status effect to targeted players. Recommended for buffs that target only yourself.
     pub fn timewarp_wand(args: Args) void {
-        write("ipat_timewarp_wand", args) catch |err| @panic(@errorName(err));
+        write("ipat_timewarp_wand", args);
     }
 
     /// "amount" (an integer representing a gold amount)
@@ -2617,14 +2626,14 @@ pub const apat = opaque {
     /// hidden variable each time you hit the enemy, then call this once at the end of battle to
     /// give the character their gold.
     pub fn topaz_charm(args: Args) void {
-        write("ipat_topaz_charm", args) catch |err| @panic(@errorName(err));
+        write("ipat_topaz_charm", args);
     }
 
     /// "speedMult" (a number representing a multiplier to character speed)
     /// "speedDuration" (duration of speed increase)
     /// Increases speed by a multiplier for the specified duration.
     pub fn winged_cap(args: Args) void {
-        write("ipat_winged_cap", args) catch |err| @panic(@errorName(err));
+        write("ipat_winged_cap", args);
     }
 
     /// "x"
@@ -2634,7 +2643,7 @@ pub const apat = opaque {
     ///
     /// Creates a shield similar to Defender's Defensive that erases bullets and makes allies invulnerable.
     pub fn light_shield(args: Args) void {
-        write("ipat_light_shield", args) catch |err| @panic(@errorName(err));
+        write("ipat_light_shield", args);
     }
 
     /// "x"
@@ -2644,7 +2653,7 @@ pub const apat = opaque {
     ///
     /// Creates a shield similar to Heavyblade's Defensive that erases bullets and makes allies invulnerable.
     pub fn dark_shield(args: Args) void {
-        write("ipat_dark_shield", args) catch |err| @panic(@errorName(err));
+        write("ipat_dark_shield", args);
     }
 
     // Below this point are functions for Abilities. Currently, invulnerability times and
@@ -2652,352 +2661,356 @@ pub const apat = opaque {
     // you'll be able to specify them for custom abilities. This might take me a bit. For now, I'm
     // leaving the below parts blank, and will fill them in at a later date.
     pub fn none_0(args: Args) void {
-        write("ipat_none_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_none_0", args);
     }
     pub fn none_1(args: Args) void {
-        write("ipat_none_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_none_1", args);
     }
     pub fn none_2(args: Args) void {
-        write("ipat_none_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_none_2", args);
     }
     pub fn none_3(args: Args) void {
-        write("ipat_none_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_none_3", args);
     }
     pub fn ancient_0(args: Args) void {
-        write("ipat_ancient_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_0", args);
     }
     pub fn ancient_0_petonly(args: Args) void {
-        write("ipat_ancient_0_petonly", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_0_petonly", args);
     }
     pub fn ancient_0_pt2(args: Args) void {
-        write("ipat_ancient_0_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_0_pt2", args);
     }
     pub fn ancient_0_rabbitonly(args: Args) void {
-        write("ipat_ancient_0_rabbitonly", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_0_rabbitonly", args);
     }
     pub fn ancient_1(args: Args) void {
-        write("ipat_ancient_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_1", args);
     }
     pub fn ancient_1_auto(args: Args) void {
-        write("ipat_ancient_1_auto", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_1_auto", args);
     }
     pub fn ancient_1_pt2(args: Args) void {
-        write("ipat_ancient_1_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_1_pt2", args);
     }
     pub fn ancient_2(args: Args) void {
-        write("ipat_ancient_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_2", args);
     }
     pub fn ancient_2_auto(args: Args) void {
-        write("ipat_ancient_2_auto", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_2_auto", args);
     }
     pub fn ancient_2_pt2(args: Args) void {
-        write("ipat_ancient_2_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_2_pt2", args);
     }
     pub fn ancient_3(args: Args) void {
-        write("ipat_ancient_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_3", args);
     }
     pub fn ancient_3_emerald(args: Args) void {
-        write("ipat_ancient_3_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_3_emerald", args);
     }
     pub fn ancient_3_emerald_pt2(args: Args) void {
-        write("ipat_ancient_3_emerald_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_3_emerald_pt2", args);
     }
     pub fn ancient_3_emerald_pt3(args: Args) void {
-        write("ipat_ancient_3_emerald_pt3", args) catch |err| @panic(@errorName(err));
+        write("ipat_ancient_3_emerald_pt3", args);
     }
     pub fn assassin_0(args: Args) void {
-        write("ipat_assassin_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_0", args);
     }
     pub fn assassin_0_ruby(args: Args) void {
-        write("ipat_assassin_0_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_0_ruby", args);
     }
     pub fn assassin_1(args: Args) void {
-        write("ipat_assassin_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_1", args);
     }
     pub fn assassin_1_garnet(args: Args) void {
-        write("ipat_assassin_1_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_1_garnet", args);
     }
     pub fn assassin_1_ruby(args: Args) void {
-        write("ipat_assassin_1_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_1_ruby", args);
     }
     pub fn assassin_1_sapphire(args: Args) void {
-        write("ipat_assassin_1_sapphire", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_1_sapphire", args);
     }
     pub fn assassin_2(args: Args) void {
-        write("ipat_assassin_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_2", args);
     }
     pub fn assassin_2_opal(args: Args) void {
-        write("ipat_assassin_2_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_2_opal", args);
     }
     pub fn assassin_3(args: Args) void {
-        write("ipat_assassin_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_3", args);
     }
     pub fn assassin_3_opal(args: Args) void {
-        write("ipat_assassin_3_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_3_opal", args);
     }
     pub fn assassin_3_ruby(args: Args) void {
-        write("ipat_assassin_3_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_assassin_3_ruby", args);
     }
     pub fn bruiser_0(args: Args) void {
-        write("ipat_bruiser_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_0", args);
     }
     pub fn bruiser_0_saph(args: Args) void {
-        write("ipat_bruiser_0_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_0_saph", args);
     }
     pub fn bruiser_1(args: Args) void {
-        write("ipat_bruiser_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_1", args);
     }
     pub fn bruiser_2(args: Args) void {
-        write("ipat_bruiser_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_2", args);
     }
     pub fn bruiser_3(args: Args) void {
-        write("ipat_bruiser_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_3", args);
     }
     pub fn bruiser_3_pt2(args: Args) void {
-        write("ipat_bruiser_3_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_3_pt2", args);
     }
     pub fn bruiser_3_ruby(args: Args) void {
-        write("ipat_bruiser_3_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_bruiser_3_ruby", args);
     }
     pub fn dancer_0(args: Args) void {
-        write("ipat_dancer_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_0", args);
     }
     pub fn dancer_0_opal(args: Args) void {
-        write("ipat_dancer_0_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_0_opal", args);
     }
     pub fn dancer_1(args: Args) void {
-        write("ipat_dancer_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_1", args);
     }
     pub fn dancer_1_emerald(args: Args) void {
-        write("ipat_dancer_1_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_1_emerald", args);
     }
     pub fn dancer_2(args: Args) void {
-        write("ipat_dancer_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_2", args);
     }
     pub fn dancer_2_saph(args: Args) void {
-        write("ipat_dancer_2_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_2_saph", args);
     }
     pub fn dancer_3(args: Args) void {
-        write("ipat_dancer_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_3", args);
     }
     pub fn dancer_3_emerald(args: Args) void {
-        write("ipat_dancer_3_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_dancer_3_emerald", args);
     }
     pub fn defender_0(args: Args) void {
-        write("ipat_defender_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_0", args);
     }
     pub fn defender_0_fast(args: Args) void {
-        write("ipat_defender_0_fast", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_0_fast", args);
     }
     pub fn defender_0_ruby(args: Args) void {
-        write("ipat_defender_0_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_0_ruby", args);
     }
     pub fn defender_1(args: Args) void {
-        write("ipat_defender_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_1", args);
     }
     pub fn defender_1_opal(args: Args) void {
-        write("ipat_defender_1_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_1_opal", args);
     }
     pub fn defender_1_saph(args: Args) void {
-        write("ipat_defender_1_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_1_saph", args);
     }
     pub fn defender_2(args: Args) void {
-        write("ipat_defender_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_2", args);
     }
     pub fn defender_2_emerald(args: Args) void {
-        write("ipat_defender_2_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_2_emerald", args);
     }
     pub fn defender_3(args: Args) void {
-        write("ipat_defender_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_3", args);
     }
     pub fn defender_3_pt2(args: Args) void {
-        write("ipat_defender_3_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_defender_3_pt2", args);
     }
     pub fn druid_0(args: Args) void {
-        write("ipat_druid_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_0", args);
     }
     pub fn druid_0_emerald(args: Args) void {
-        write("ipat_druid_0_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_0_emerald", args);
     }
     pub fn druid_0_ruby(args: Args) void {
-        write("ipat_druid_0_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_0_ruby", args);
     }
     pub fn druid_0_saph(args: Args) void {
-        write("ipat_druid_0_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_0_saph", args);
     }
     pub fn druid_1(args: Args) void {
-        write("ipat_druid_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_1", args);
     }
     pub fn druid_1_emerald(args: Args) void {
-        write("ipat_druid_1_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_1_emerald", args);
     }
     pub fn druid_1_garnet(args: Args) void {
-        write("ipat_druid_1_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_1_garnet", args);
     }
     pub fn druid_1_ruby(args: Args) void {
-        write("ipat_druid_1_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_1_ruby", args);
     }
     pub fn druid_2(args: Args) void {
-        write("ipat_druid_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_2", args);
     }
     pub fn druid_2_2(args: Args) void {
-        write("ipat_druid_2_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_2_2", args);
     }
     pub fn druid_2_2_garnet(args: Args) void {
-        write("ipat_druid_2_2_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_2_2_garnet", args);
     }
     pub fn druid_2_garnet(args: Args) void {
-        write("ipat_druid_2_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_2_garnet", args);
     }
     pub fn druid_2_ruby(args: Args) void {
-        write("ipat_druid_2_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_2_ruby", args);
     }
     pub fn druid_3(args: Args) void {
-        write("ipat_druid_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_3", args);
     }
     pub fn druid_3_emerald(args: Args) void {
-        write("ipat_druid_3_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_3_emerald", args);
     }
     pub fn druid_3_opal(args: Args) void {
-        write("ipat_druid_3_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_3_opal", args);
     }
     pub fn druid_3_ruby(args: Args) void {
-        write("ipat_druid_3_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_3_ruby", args);
     }
     pub fn druid_3_saph(args: Args) void {
-        write("ipat_druid_3_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_druid_3_saph", args);
     }
     pub fn hblade_0(args: Args) void {
-        write("ipat_hblade_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_0", args);
     }
     pub fn hblade_0_garnet(args: Args) void {
-        write("ipat_hblade_0_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_0_garnet", args);
     }
     pub fn hblade_0_garnet_pt2(args: Args) void {
-        write("ipat_hblade_0_garnet_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_0_garnet_pt2", args);
     }
     pub fn hblade_1(args: Args) void {
-        write("ipat_hblade_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_1", args);
     }
     pub fn hblade_1_garnet(args: Args) void {
-        write("ipat_hblade_1_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_1_garnet", args);
     }
     pub fn hblade_1_ruby(args: Args) void {
-        write("ipat_hblade_1_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_1_ruby", args);
     }
     pub fn hblade_1_saph(args: Args) void {
-        write("ipat_hblade_1_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_1_saph", args);
     }
     pub fn hblade_2(args: Args) void {
-        write("ipat_hblade_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_2", args);
     }
     pub fn hblade_2_emerald(args: Args) void {
-        write("ipat_hblade_2_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_2_emerald", args);
     }
     pub fn hblade_2_pt2(args: Args) void {
-        write("ipat_hblade_2_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_2_pt2", args);
     }
     pub fn hblade_3(args: Args) void {
-        write("ipat_hblade_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_3", args);
     }
     pub fn hblade_3_garnet(args: Args) void {
-        write("ipat_hblade_3_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_3_garnet", args);
     }
     pub fn hblade_3_opal(args: Args) void {
-        write("ipat_hblade_3_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_3_opal", args);
     }
     pub fn hblade_3_ruby(args: Args) void {
-        write("ipat_hblade_3_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_hblade_3_ruby", args);
     }
     pub fn sniper_0(args: Args) void {
-        write("ipat_sniper_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_0", args);
     }
     pub fn sniper_0_emerald(args: Args) void {
-        write("ipat_sniper_0_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_0_emerald", args);
     }
     pub fn sniper_0_garnet(args: Args) void {
-        write("ipat_sniper_0_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_0_garnet", args);
     }
     pub fn sniper_0_saph(args: Args) void {
-        write("ipat_sniper_0_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_0_saph", args);
     }
     pub fn sniper_1(args: Args) void {
-        write("ipat_sniper_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_1", args);
     }
     pub fn sniper_1_ruby(args: Args) void {
-        write("ipat_sniper_1_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_1_ruby", args);
     }
     pub fn sniper_2(args: Args) void {
-        write("ipat_sniper_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_2", args);
     }
     pub fn sniper_2_emerald(args: Args) void {
-        write("ipat_sniper_2_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_2_emerald", args);
     }
     pub fn sniper_3(args: Args) void {
-        write("ipat_sniper_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_sniper_3", args);
     }
     pub fn spsword_0(args: Args) void {
-        write("ipat_spsword_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_0", args);
     }
     pub fn spsword_0_pt2(args: Args) void {
-        write("ipat_spsword_0_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_0_pt2", args);
     }
     pub fn spsword_1(args: Args) void {
-        write("ipat_spsword_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_1", args);
     }
     pub fn spsword_1_emerald(args: Args) void {
-        write("ipat_spsword_1_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_1_emerald", args);
     }
     pub fn spsword_1_pt2(args: Args) void {
-        write("ipat_spsword_1_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_1_pt2", args);
     }
     pub fn spsword_2(args: Args) void {
-        write("ipat_spsword_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_2", args);
     }
     pub fn spsword_2_pt2(args: Args) void {
-        write("ipat_spsword_2_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_2_pt2", args);
     }
     pub fn spsword_3(args: Args) void {
-        write("ipat_spsword_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_3", args);
     }
     pub fn spsword_3_pt2(args: Args) void {
-        write("ipat_spsword_3_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_spsword_3_pt2", args);
     }
     pub fn wizard_0(args: Args) void {
-        write("ipat_wizard_0", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_0", args);
     }
     pub fn wizard_0_ruby(args: Args) void {
-        write("ipat_wizard_0_ruby", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_0_ruby", args);
     }
     pub fn wizard_1(args: Args) void {
-        write("ipat_wizard_1", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_1", args);
     }
     pub fn wizard_1_garnet(args: Args) void {
-        write("ipat_wizard_1_garnet", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_1_garnet", args);
     }
     pub fn wizard_1_garnet_pt2(args: Args) void {
-        write("ipat_wizard_1_garnet_pt2", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_1_garnet_pt2", args);
     }
     pub fn wizard_1_opal(args: Args) void {
-        write("ipat_wizard_1_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_1_opal", args);
     }
     pub fn wizard_2(args: Args) void {
-        write("ipat_wizard_2", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_2", args);
     }
     pub fn wizard_2_saph(args: Args) void {
-        write("ipat_wizard_2_saph", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_2_saph", args);
     }
     pub fn wizard_3(args: Args) void {
-        write("ipat_wizard_3", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_3", args);
     }
     pub fn wizard_3_emerald(args: Args) void {
-        write("ipat_wizard_3_emerald", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_3_emerald", args);
     }
     pub fn wizard_3_opal(args: Args) void {
-        write("ipat_wizard_3_opal", args) catch |err| @panic(@errorName(err));
+        write("ipat_wizard_3_opal", args);
     }
 
-    fn write(pat: []const u8, args: Args) !void {
+    fn write(pat: []const u8, args: Args) void {
+        return writeInner(pat, args) catch |err| @panic(@errorName(err));
+    }
+
+    fn writeInner(pat: []const u8, args: Args) !void {
         std.debug.assert(have_trigger);
         const writer = &item_csv.writer;
         try writer.print("addPattern,{s}", .{pat});
@@ -3072,48 +3085,48 @@ pub const apat = opaque {
 pub const ttrg = opaque {
     /// Clears all lists.
     pub fn none() void {
-        write("ttrg_none", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_none", .{});
     }
 
     /// From a status effect receiving a trigger, target only the player afflicted with this
     /// status.
     pub fn player_afflicted() void {
-        write("ttrg_player_afflicted", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_player_afflicted", .{});
     }
     pub fn player_afflicted_source() void {
-        write("ttrg_player_afflicted_source", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_player_afflicted_source", .{});
     }
 
     /// When a status effect is the SOURCE of the trigger, target the player afflicted by that
     /// status effect.
     /// From an "onDamageDone" trigger, target the player that was damaged.
     pub fn player_damaged() void {
-        write("ttrg_player_damaged", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_player_damaged", .{});
     }
 
     /// flag (a binary number)
     ///
     /// Prune the current list of players to include only those that have a certain hbsFlag.
     pub fn player_prune_hbsflag(args: anytype) void {
-        write("ttrg_player_prune_hbsflag", args) catch |err| @panic(@errorName(err));
+        write("ttrg_player_prune_hbsflag", args);
     }
 
     /// Target the player receiving this trigger; if the trigger is received by a hotbar slot, it
     /// will target the player who owns that slot.
     pub fn player_self() void {
-        write("ttrg_player_self", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_player_self", .{});
     }
 
     /// Targets all "players" (meaning, both allies and enemies).
     pub fn players_all() void {
-        write("ttrg_players_all", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_all", .{});
     }
 
     /// Targets all the players that are on the same team as the person receiving this trigger.
     /// For loot items, this means all of the rabbit players, but if an enemy were to call this,
     /// it would target all the enemies. Also, this excludes KO'd players.
     pub fn players_ally() void {
-        write("ttrg_players_ally", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_ally", .{});
     }
 
     /// excludeID (an integer)
@@ -3121,19 +3134,19 @@ pub const ttrg = opaque {
     /// Targets all players on the same team, excluding KO'd players, and excluding the playerID
     /// passed in.
     pub fn players_ally_exclude(args: anytype) void {
-        write("ttrg_players_ally_exclude", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_ally_exclude", args);
     }
 
     /// Targets all players on the same team. Includes KO'd players.
     pub fn players_ally_include_ko() void {
-        write("ttrg_players_ally_include_ko", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_ally_include_ko", .{});
     }
 
     /// Despite the name, this actually targets the player who's MISSING the most HP, not the
     /// actual lowest HP player. I must have written this a long time ago. Also, it excludes KO'd
     /// players.
     pub fn players_ally_lowest_hp() void {
-        write("ttrg_players_ally_lowest_hp", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_ally_lowest_hp", .{});
     }
 
     /// numberOfPlayers (an integer; this is an optional parameter)
@@ -3141,23 +3154,23 @@ pub const ttrg = opaque {
     /// Targets a random selection of your teammates. If a number is passed in, it will try to
     /// target that many players. If no number is passed in, it will target 1.
     pub fn players_ally_random(args: anytype) void {
-        write("ttrg_players_ally_random", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_ally_random", args);
     }
 
     /// Clears player list.
     pub fn players_none() void {
-        write("ttrg_players_none", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_none", .{});
     }
 
     /// Targets all the players that are on the OPPOSITE team as the person receiving this trigger.
     /// For loot items, this means all of your enemies.
     pub fn players_opponent() void {
-        write("ttrg_players_opponent", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_opponent", .{});
     }
 
     /// Targets all of your enemies that are facing away from you.
     pub fn players_opponent_backstab() void {
-        write("ttrg_players_opponent_backstab", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_opponent_backstab", .{});
     }
 
     /// trgBinary (a binary number representing player IDs)
@@ -3169,7 +3182,7 @@ pub const ttrg = opaque {
     /// 5 : 0101 : Player 0 and Player 2
     /// etc..
     pub fn players_opponent_binary(args: anytype) void {
-        write("ttrg_players_opponent_binary", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_opponent_binary", args);
     }
 
     /// excludeID (an integer)
@@ -3177,12 +3190,12 @@ pub const ttrg = opaque {
     /// Targets all players on the enemy team, excluding KO'd players, and excluding the playerID
     /// passed in.
     pub fn players_opponent_exclude(args: anytype) void {
-        write("ttrg_players_opponent_exclude", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_opponent_exclude", args);
     }
 
     /// Targets whatever player this player is currently targetting.
     pub fn players_opponent_focus() void {
-        write("ttrg_players_opponent_focus", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_opponent_focus", .{});
     }
 
     /// numberOfPlayers (an integer; this is an optional parameter)
@@ -3190,7 +3203,7 @@ pub const ttrg = opaque {
     /// Targets a random selection of your enemies.  If a number is passed in, it will try to
     /// target that many players.  If no number is passed in, it will target 1.
     pub fn players_opponent_random(args: anytype) void {
-        write("ttrg_players_opponent_random", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_opponent_random", args);
     }
 
     /// param0 (any number)
@@ -3206,17 +3219,17 @@ pub const ttrg = opaque {
     /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
     /// in the target list.
     pub fn players_prune(args: anytype) void {
-        write("ttrg_players_prune", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_prune", args);
     }
 
     /// Removes the player receiving this trigger from the player list, if it is in there.
     pub fn players_prune_self() void {
-        write("ttrg_players_prune_self", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_prune_self", .{});
     }
 
     /// Targets the player who is the source of this trigger.
     pub fn players_source() void {
-        write("ttrg_players_source", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_players_source", .{});
     }
 
     /// numberOfPlayers (an integer; this is an optional parameter)
@@ -3225,7 +3238,7 @@ pub const ttrg = opaque {
     /// passed in, it will try to target that many players. If no number is passed in, it will
     /// target 1.
     pub fn players_target_random(args: anytype) void {
-        write("ttrg_players_target_random", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_target_random", args);
     }
 
     /// allyBin (a binary number representing player IDs)
@@ -3238,32 +3251,32 @@ pub const ttrg = opaque {
     /// 5 : 0101 : Player 0 and Player 2
     /// etc..
     pub fn players_team_binary(args: anytype) void {
-        write("ttrg_players_team_binary", args) catch |err| @panic(@errorName(err));
+        write("ttrg_players_team_binary", args);
     }
 
     /// Targets the hotbar slot receiving this trigger
     pub fn hotbarslot_self() void {
-        write("ttrg_hotbarslot_self", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslot_self", .{});
     }
 
     /// Targets ALL active hotbar slots
     pub fn hotbarslots_all() void {
-        write("ttrg_hotbarslots_all", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_all", .{});
     }
 
     /// Targets all hotbar slots on your team
     pub fn hotbarslots_ally() void {
-        write("ttrg_hotbarslots_ally", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_ally", .{});
     }
 
     /// Targets all the hotbar slots of the players in the "players" list
     pub fn hotbarslots_current_players() void {
-        write("ttrg_hotbarslots_current_players", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_current_players", .{});
     }
 
     /// Targets all the hotbar slots on your enemy's team
     pub fn hotbarslots_opponent() void {
-        write("ttrg_hotbarslots_opponent", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_opponent", .{});
     }
 
     /// param0 (any number)
@@ -3281,12 +3294,12 @@ pub const ttrg = opaque {
     /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
     /// in the target list."
     pub fn hotbarslots_prune(a: anytype, op: Compare, b: anytype) void {
-        write("ttrg_hotbarslots_prune", .{ a, op, b }) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune", .{ a, op, b });
     }
 
     /// Prune the current list of hotbar slots to only include items that have strength.
     pub fn hotbarslots_prune_base_has_str() void {
-        write("ttrg_hotbarslots_prune_base_has_str", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune_base_has_str", .{});
     }
 
     /// param0 (a variable that differs per target)
@@ -3294,7 +3307,7 @@ pub const ttrg = opaque {
     ///
     /// Prune the current list of hotbar slots to only include items for which a boolean matches.
     pub fn hotbarslots_prune_bool(args: anytype) void {
-        write("ttrg_hotbarslots_prune_bool", args) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune_bool", args);
     }
 
     /// isBuff (if true, gets slots with buffs, if false, gets slots with debuffs)
@@ -3302,7 +3315,7 @@ pub const ttrg = opaque {
     /// Prune the current list of hotbar slots to include items that have a Buff or Debuff they
     /// apply.
     pub fn hotbarslots_prune_bufftype(args: anytype) void {
-        write("ttrg_hotbarslots_prune_bufftype", args) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune_bufftype", args);
     }
 
     /// type (an integer representing a cooldown type)
@@ -3315,34 +3328,34 @@ pub const ttrg = opaque {
     /// 4 : StockGCD (Multiple uses + a GCD, like Heavyblade Special)
     /// 5 : StockOnly (Cooldown doesn't make it gain stock, like Defender Special)
     pub fn hotbarslots_prune_cdtype(args: anytype) void {
-        write("ttrg_hotbarslots_prune_cdtype", args) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune_cdtype", args);
     }
 
     /// Prune the current list of hotbar slots to only include items that can be reset.
     pub fn hotbarslots_prune_noreset() void {
-        write("ttrg_hotbarslots_prune_noreset", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune_noreset", .{});
     }
 
     /// Removes the hotbar slot receiving this trigger from the list of hotbar slots, if it's in
     /// there.
     pub fn hotbarslots_prune_self() void {
-        write("ttrg_hotbarslots_prune_self", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_prune_self", .{});
     }
 
     /// Targets the abilities of the player receiving this trigger.
     pub fn hotbarslots_self_abilities() void {
-        write("ttrg_hotbarslots_self_abilities", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_self_abilities", .{});
     }
 
     /// Targets the ability of the player receiving this trigger with the highest strength number
     /// (if it's tied, multiple abilities will be targeted)
     pub fn hotbarslots_self_higheststrweapon() void {
-        write("ttrg_hotbarslots_self_higheststrweapon", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_self_higheststrweapon", .{});
     }
 
     /// Targets the loot of the player receiving this trigger
     pub fn hotbarslots_self_loot() void {
-        write("ttrg_hotbarslots_self_loot", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_self_loot", .{});
     }
 
     /// wpType (an integer representing a weapon type)
@@ -3354,7 +3367,7 @@ pub const ttrg = opaque {
     /// 3 : Special
     /// 4 : Defensive
     pub fn hotbarslots_self_weapontype(args: anytype) void {
-        write("ttrg_hotbarslots_self_weapontype", args) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_self_weapontype", args);
     }
 
     /// wpType (an integer representing a weapon type)
@@ -3362,22 +3375,22 @@ pub const ttrg = opaque {
     /// Same as ttrg_hotbarslots_self_weapontype, but will only target the ability if it has a base
     /// strength; otherwise it will simply result in an empty list.
     pub fn hotbarslots_self_weapontype_withstr(args: anytype) void {
-        write("ttrg_hotbarslots_self_weapontype_withstr", args) catch |err| @panic(@errorName(err));
+        write("ttrg_hotbarslots_self_weapontype_withstr", args);
     }
 
     /// Targets all status effects that are currently active
     pub fn hbstatus_all() void {
-        write("ttrg_hbstatus_all", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_all", .{});
     }
 
     /// Targets all status effects that have been APPLIED by your allies
     pub fn hbstatus_ally() void {
-        write("ttrg_hbstatus_ally", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_ally", .{});
     }
 
     /// Targets all status effects that have been APPLIED by your opponent
     pub fn hbstatus_opponent() void {
-        write("ttrg_hbstatus_opponent", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_opponent", .{});
     }
 
     /// Prunes current list of status effects to only include those that match the equation given.
@@ -3390,28 +3403,28 @@ pub const ttrg = opaque {
     /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
     /// in the target list.
     pub fn hbstatus_prune(a: anytype, op: Compare, b: anytype) void {
-        write("ttrg_hbstatus_prune", .{ a, op, b }) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_prune", .{ a, op, b });
     }
 
     /// Targets the status effect receiving this trigger.
     pub fn hbstatus_self() void {
-        write("ttrg_hbstatus_self", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_self", .{});
     }
 
     /// Targets the status effect that was the source of this trigger.
     pub fn hbstatus_source() void {
-        write("ttrg_hbstatus_source", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_source", .{});
     }
 
     /// Targets all of the status effects that have been applied by the current list of players.
     pub fn hbstatus_target() void {
-        write("ttrg_hbstatus_target", .{}) catch |err| @panic(@errorName(err));
+        write("ttrg_hbstatus_target", .{});
     }
 
-    fn write(targ: []const u8, args: anytype) !void {
+    fn write(targ: []const u8, args: anytype) void {
         std.debug.assert(have_trigger);
-        try item_csv.writer.print("target,{s}", .{targ});
-        try writeArgs(&item_csv.writer, args);
+        item_csv.writer.print("target,{s}", .{targ}) catch |err| @panic(@errorName(err));
+        writeArgs(&item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
 
@@ -3424,7 +3437,7 @@ pub const ttrg = opaque {
 pub const tset = opaque {
     /// Currently non-functional; but I will make it work soon-ish
     pub fn animation(args: anytype) void {
-        write("tset_animation", args) catch |err| @panic(@errorName(err));
+        write("tset_animation", args);
     }
 
     /// percent (a number between 0 - 1)
@@ -3435,7 +3448,7 @@ pub const tset = opaque {
     /// 1 : 100%
     /// 0.5 : 50%
     pub fn critratio(args: anytype) void {
-        write("tset_critratio", args) catch |err| @panic(@errorName(err));
+        write("tset_critratio", args);
     }
 
     /// flags (a binary representing a number of damage flags)
@@ -3448,76 +3461,76 @@ pub const tset = opaque {
     /// 4 : DMG_FLAG_INVULNPIERCE (This damage will go through invulnerability)
     /// 8 : DMG_FLAG_DARKFLAME (Special flag for Spellsword Rabbit)
     pub fn damage_flags(args: anytype) void {
-        write("tset_damage_flags", args) catch |err| @panic(@errorName(err));
+        write("tset_damage_flags", args);
     }
 
     /// param (any number or variable)
     /// Will print out that number. Currently doesn't do anything, but I will add it to the mod
     /// debug log in the next update.
     pub fn debug(param: anytype) void {
-        write("tset_debug", .{param}) catch |err| @panic(@errorName(err));
+        write("tset_debug", .{param});
     }
 
     /// Will set the appropriate strength for applying Burn. Must be used from an onDamageDone
     /// trigger before Burn is applied.
     pub fn hbs_burnhit() void {
-        write("tset_hbs_burnhit", .{}) catch |err| @panic(@errorName(err));
+        write("tset_hbs_burnhit", .{});
     }
 
     /// Will set the appropriate strength/length for a Buff or Debuff, based on the item's stats.
     /// Should be used before a buff or debuff is applied. The next Attack pattern will apply that
     /// Buff/Debuff on hit.
     pub fn hbs_def() void {
-        write("tset_hbs_def", .{}) catch |err| @panic(@errorName(err));
+        write("tset_hbs_def", .{});
     }
 
     /// Similar to tset_hbs_def, but will pick a random buff (for effects like Usagi Kamen)
     pub fn hbs_randombuff() void {
-        write("tset_hbs_randombuff", .{}) catch |err| @panic(@errorName(err));
+        write("tset_hbs_randombuff", .{});
     }
 
     /// hbsKey (a string that is a key to a status effect)
     /// Will set a custom debuff to be applied.
     pub fn hbskey(args: anytype) void {
-        write("tset_hbskey", args) catch |err| @panic(@errorName(err));
+        write("tset_hbskey", args);
     }
 
     /// amount (an integer)
     /// Will set a custom debuff strength.
     pub fn hbsstr(args: anytype) void {
-        write("tset_hbsstr", args) catch |err| @panic(@errorName(err));
+        write("tset_hbsstr", args);
     }
 
     /// percent (a number between 0 - 1 )
     /// Will set a custom hit variation. Usually used to set it to 0, in the case you want
     /// something to hit for a consistent amount each time. (Like Fire Potion, or Burn)
     pub fn randomness(args: anytype) void {
-        write("tset_randomness", args) catch |err| @panic(@errorName(err));
+        write("tset_randomness", args);
     }
 
     /// amount (an integer)
     /// Will set a custom strength for Attack patterns.
     pub fn strength(args: anytype) void {
-        write("tset_strength", args) catch |err| @panic(@errorName(err));
+        write("tset_strength", args);
     }
 
     /// Exculsively used for Defender's Ruby Secondary; sets a strength based off number of
     /// charges the move has.
     pub fn strength_chargecount() void {
-        write("tset_strength_chargecount", .{}) catch |err| @panic(@errorName(err));
+        write("tset_strength_chargecount", .{});
     }
 
     /// Sets the default strength for the move, based on the hotbar slot. You should usually use
     /// this before adding attack patterns that deal damage.
     pub fn strength_def() void {
-        write("tset_strength_def", .{}) catch |err| @panic(@errorName(err));
+        write("tset_strength_def", .{});
     }
 
     /// amount (an integer)
     /// Will set a custom strength for Attack patterns; this will take into account bonus damage
     /// that loot gets from items like Darkcloud Necklace
     pub fn strength_loot(args: anytype) void {
-        write("tset_strength_loot", args) catch |err| @panic(@errorName(err));
+        write("tset_strength_loot", args);
     }
 
     /// amount (any number)
@@ -3526,26 +3539,26 @@ pub const tset = opaque {
     /// 1.3 : 1.3x multiplier (Assassin Special)
     /// 1.5 : 1.5x multiplier (Assassin Emerald Special)
     pub fn strmult_backstab(args: anytype) void {
-        write("tset_strmult_backstab", args) catch |err| @panic(@errorName(err));
+        write("tset_strmult_backstab", args);
     }
 
     /// amount (any number)
     /// Will add a percentage bonus for every debuff the target has on them. This used to be one
     /// of Assassin's upgrades, but it sucked so I removed it.
     pub fn strmult_debuffcount(args: anytype) void {
-        write("tset_strmult_debuffcount", args) catch |err| @panic(@errorName(err));
+        write("tset_strmult_debuffcount", args);
     }
     pub fn uservar1(name: []const u8, v: anytype) void {
-        write("tset_uservar", .{ name, v }) catch |err| @panic(@errorName(err));
+        write("tset_uservar", .{ name, v });
     }
     pub fn uservar2(name: []const u8, a: anytype, op: MathSign, b: anytype) void {
-        write("tset_uservar", .{ name, a, op, b }) catch |err| @panic(@errorName(err));
+        write("tset_uservar", .{ name, a, op, b });
     }
 
     /// For hotbar statuses, creates two uservariables "u_aflX" and "u_aflY" based on the position
     /// of the afflicted player.
     pub fn uservar_aflplayer_pos(args: anytype) void {
-        write("tset_uservar_aflplayer_pos", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_aflplayer_pos", args);
     }
 
     /// key (string)
@@ -3556,7 +3569,7 @@ pub const tset = opaque {
     /// A set function specifically to make Blackhole Charm work (saves a variable based off how
     /// long a cooldown is)
     pub fn uservar_blackhole_charm_calc(args: anytype) void {
-        write("tset_uservar_blackhole_charm_calc", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_blackhole_charm_calc", args);
     }
 
     /// "key (string)
@@ -3567,7 +3580,7 @@ pub const tset = opaque {
     /// If the squareVar indicated by checkVarNum is equal to checkVarAm, saves "onEqual" to the
     /// key provided. Otherwise, saves "onUnequal" to the key provided.
     pub fn uservar_cond_squarevar_equal(args: anytype) void {
-        write("tset_uservar_cond_squarevar_equal", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_cond_squarevar_equal", args);
     }
 
     /// maxAm (integer)
@@ -3575,7 +3588,7 @@ pub const tset = opaque {
     /// If an ability consumes 4 darkflame normally, and you have more than 4 darkflame, it will
     /// be set to 4.  If it normally consumes 4 and you only have 2 darkflame, it will be set to 2.
     pub fn uservar_darkflame(args: anytype) void {
-        write("tset_uservar_darkflame", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_darkflame", args);
     }
 
     /// key (string)
@@ -3602,14 +3615,14 @@ pub const tset = opaque {
     /// is replaced with their position in the list)
     /// set,tset_uservar_each_target_player,u_amount#,s_hpMax,-,s_hp
     pub fn uservar_each_target_player(args: anytype) void {
-        write("tset_uservar_each_target_player", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_each_target_player", args);
     }
 
     /// key (string)
     /// playerId (integer)
     /// Creates a user variable from that key, representing the player's gold
     pub fn uservar_gold(args: anytype) void {
-        write("tset_uservar_gold", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_gold", args);
     }
 
     /// percentChance (number between 0 and 1)
@@ -3620,7 +3633,7 @@ pub const tset = opaque {
     /// Flips a weighted coin based on the percentChance and the player's luck stat, and saves the
     /// result to a uservar based on whether or not it succeeded.
     pub fn uservar_random(args: anytype) void {
-        write("tset_uservar_random", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_random", args);
     }
 
     /// key (string)
@@ -3629,7 +3642,7 @@ pub const tset = opaque {
     ///
     /// Saves a random number between the minimum and maximum amount to a uservar.
     pub fn uservar_random_range(args: anytype) void {
-        write("tset_uservar_random_range", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_random_range", args);
     }
 
     /// key (string)
@@ -3638,50 +3651,50 @@ pub const tset = opaque {
     ///
     /// Saves a random number between the minimum and maximum amount to a uservar.
     pub fn userver_random_range_int(args: anytype) void {
-        write("tset_userver_random_range_int", args) catch |err| @panic(@errorName(err));
+        write("tset_userver_random_range_int", args);
     }
 
     pub fn uservar_switch(args: anytype) void {
-        write("tset_uservar_switch", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_switch", args);
     }
     pub fn uservar_difficulty(args: anytype) void {
-        write("tset_uservar_difficulty", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_difficulty", args);
     }
     pub fn uservar_hallwaycount(args: anytype) void {
-        write("tset_uservar_hallwaycount", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_hallwaycount", args);
     }
     pub fn uservar_stage(args: anytype) void {
-        write("tset_uservar_stage", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_stage", args);
     }
     pub fn uservar_hb_cooldownvar(args: anytype) void {
-        write("tset_uservar_hb_cooldownvar", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_hb_cooldownvar", args);
     }
     pub fn uservar_hb_hitboxvar(args: anytype) void {
-        write("tset_uservar_hb_hitboxvar", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_hb_hitboxvar", args);
     }
     pub fn uservar_hb_itemvar(args: anytype) void {
-        write("tset_uservar_hb_itemvar", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_hb_itemvar", args);
     }
     pub fn uservar_hb_stat(args: anytype) void {
-        write("tset_uservar_hb_stat", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_hb_stat", args);
     }
     pub fn uservar_player_stat(args: anytype) void {
-        write("tset_uservar_player_stat", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_player_stat", args);
     }
     pub fn uservar_slotcount(args: anytype) void {
-        write("tset_uservar_slotcount", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_slotcount", args);
     }
     pub fn uservar_hbscount(args: anytype) void {
-        write("tset_uservar_hbscount", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_hbscount", args);
     }
     pub fn uservar_playercount(args: anytype) void {
-        write("tset_uservar_playercount", args) catch |err| @panic(@errorName(err));
+        write("tset_uservar_playercount", args);
     }
 
-    fn write(set: []const u8, args: anytype) !void {
+    fn write(set: []const u8, args: anytype) void {
         std.debug.assert(have_trigger);
-        try item_csv.writer.print("set,{s}", .{set});
-        try writeArgs(&item_csv.writer, args);
+        item_csv.writer.print("set,{s}", .{set}) catch |err| @panic(@errorName(err));
+        writeArgs(&item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
 
