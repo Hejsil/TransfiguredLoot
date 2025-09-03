@@ -4421,10 +4421,6 @@ fn transfiguredSparkbladeSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
     qpat.hb_run_cooldown();
 
-    trig.enrageStart(&.{});
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
-    qpat.hb_run_cooldown();
-
     trig.onDamageDone(&.{});
     cond.hb_check_square_var_false(.{ 0, 0 });
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
