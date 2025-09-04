@@ -38,6 +38,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_raven_grimoire",
         .name = .{
+            .original = "Raven Grimoire",
             .english = "Transfigured Raven Grimoire",
         },
         .description = .{
@@ -70,6 +71,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_blackwing_staff",
         .name = .{
+            .original = "Blackwing Staff",
             .english = "Transfigured Blackwing Staff",
         },
         .description = .{
@@ -115,6 +117,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_curse_talon",
         .name = .{
+            .original = "Curse Talon",
             .english = "Transfigured Curse Talon",
         },
         .description = .{
@@ -145,6 +148,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_darkmagic_blade",
         .name = .{
+            .original = "Darkmagic Blade",
             .english = "Transfigured Darkmagic Blade",
         },
         .description = .{
@@ -188,6 +192,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_witchs_cloak",
         .name = .{
+            .original = "Witch's Cloak",
             .english = "Transfigured Witch's Cloak",
         },
         .description = .{
@@ -214,6 +219,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_crowfeather_hairpin",
         .name = .{
+            .original = "Crowfeather Hairpin",
             .english = "Transfigured Crowfeather Hairpin",
         },
         .description = .{
@@ -245,6 +251,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_redblack_ribbon",
         .name = .{
+            .original = "Redblack Ribbon",
             .english = "Transfigured Redblack Ribbon",
         },
         .description = .{
@@ -269,6 +276,7 @@ fn transfiguredArcaneSet() !void {
     item(.{
         .id = "it_transfigured_opal_necklace",
         .name = .{
+            .original = "Opal Necklace",
             .english = "Transfigured Opal Necklace",
         },
         .description = .{
@@ -319,6 +327,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_sleeping_greatbow",
         .name = .{
+            .original = "Sleeping Greatbow",
             .english = "Transfigured Sleeping Greatbow",
         },
         .description = .{
@@ -352,6 +361,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_crescentmoon_dagger",
         .name = .{
+            .original = "Crescentmoon Dagger",
             .english = "Transfigured Crescentmoon Dagger",
         },
         .description = .{
@@ -385,6 +395,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_lullaby_harp",
         .name = .{
+            .original = "Lullaby Harp",
             .english = "Transfigured Lullaby Harp",
         },
         .description = .{
@@ -413,6 +424,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_nightstar_grimoire",
         .name = .{
+            .original = "Nightstar Grimoire",
             .english = "Transfigured Nightstar Grimoire",
         },
         .description = .{
@@ -452,6 +464,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_moon_pendant",
         .name = .{
+            .original = "Moon Pendant",
             .english = "Transfigured Moon Pendant",
         },
         .description = .{
@@ -479,6 +492,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_pajama_hat",
         .name = .{
+            .original = "Pajama Hat",
             .english = "Transfigured Pajama Hat",
         },
         .description = .{
@@ -504,6 +518,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_stuffed_rabbit",
         .name = .{
+            .original = "Stuffed Rabbit",
             .english = "Transfigured Stuffed Rabbit",
         },
         .description = .{
@@ -532,6 +547,7 @@ fn transfiguredNightSet() !void {
     item(.{
         .id = "it_transfigured_nightingale_gown",
         .name = .{
+            .original = "Nightingale Gown",
             .english = "Transfigured Nightingale Gown",
         },
         .description = .{
@@ -577,6 +593,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_eternity_flute",
         .name = .{
+            .original = "Eternity Flute",
             .english = "Transfigured Eternity Flute",
         },
         .description = .{
@@ -608,6 +625,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_timewarp_wand",
         .name = .{
+            .original = "Timewarp Wand",
             .english = "Transfigured Timewarp Wand",
         },
         .description = .{
@@ -642,6 +660,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_chrome_shield",
         .name = .{
+            .original = "Chrome Shield",
             .english = "Transfigured Chrome Shield",
         },
         .description = .{
@@ -656,6 +675,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_clockwork_tome",
         .name = .{
+            .original = "Clockwork Tome",
             .english = "Transfigured Clockwork Tome",
         },
         .description = .{
@@ -704,6 +724,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_metronome_boots",
         .name = .{
+            .original = "Metronome Boots",
             .english = "Transfigured Metronome Boots",
         },
         .description = .{
@@ -751,6 +772,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_timemage_cap",
         .name = .{
+            .original = "Timemage Cap",
             .english = "Transfigured Timemage Cap",
         },
         .description = .{
@@ -772,6 +794,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_starry_cloak",
         .name = .{
+            .original = "Starry Cloak",
             .english = "Transfigured Starry Cloak",
         },
         .description = .{
@@ -801,6 +824,7 @@ fn transfiguredTimespaceSet() !void {
     item(.{
         .id = "it_transfigured_gemini_necklace",
         .name = .{
+            .original = "Gemini Necklace",
             .english = "Transfigured Gemini Necklace",
         },
         .description = .{
@@ -837,6 +861,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_hawkfeather_fan",
         .name = .{
+            .original = "Hawkfeather Fan",
             .english = "Transfigured Hawkfeather Fan",
         },
         .description = .{
@@ -858,6 +883,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_windbite_dagger",
         .name = .{
+            .original = "Windbite Dagger",
             .english = "Transfigured Windbite Dagger",
         },
         .description = .{
@@ -873,6 +899,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_pidgeon_bow",
         .name = .{
+            .original = "Pidgeon Bow",
             .english = "Transfigured Pidgeon Bow",
         },
         .description = .{
@@ -909,6 +936,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_shinsoku_katana",
         .name = .{
+            .original = "Shinsoku Katana",
             .english = "Transfigured Shinsoku Katana",
         },
         .description = .{
@@ -924,6 +952,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_eaglewing_charm",
         .name = .{
+            .original = "Eaglewing Charm",
             .english = "Transfigured Eaglewing Charm",
         },
         .description = .{
@@ -960,6 +989,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_sparrow_feather",
         .name = .{
+            .original = "Sparrow Feather",
             .english = "Transfigured Sparrow Feather",
         },
         .description = .{
@@ -997,6 +1027,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_winged_cap",
         .name = .{
+            .original = "Winged Cap",
             .english = "Transfigured Winged Cap",
         },
         .description = .{
@@ -1011,6 +1042,7 @@ fn transfiguredWindSet() !void {
     item(.{
         .id = "it_transfigured_thiefs_coat",
         .name = .{
+            .original = "Thief's Coat",
             .english = "Transfigured Thief's Coat",
         },
         .description = .{
@@ -1042,6 +1074,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_vampiric_dagger",
         .name = .{
+            .original = "Vampiric Dagger",
             .english = "Transfigured Vampiric Dagger",
         },
         .description = .{
@@ -1056,6 +1089,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_bloody_bandage",
         .name = .{
+            .original = "Bloody Bandage",
             .english = "Transfigured Bloody Bandage",
         },
         .description = .{
@@ -1091,6 +1125,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_leech_staff",
         .name = .{
+            .original = "Leech Staff",
             .english = "Transfigured Leech Staff",
         },
         .description = .{
@@ -1114,6 +1149,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_bloodhound_greatsword",
         .name = .{
+            .original = "Bloodhound Greatsword",
             .english = "Transfigured Bloodhound Greatsword",
         },
         .description = .{
@@ -1128,6 +1164,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_reaper_cloak",
         .name = .{
+            .original = "Reaper Cloak",
             .english = "Transfigured Reaper Cloak",
         },
         .description = .{
@@ -1143,6 +1180,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_bloodflower_brooch",
         .name = .{
+            .original = "Bloodflower Brooch",
             .english = "Transfigured Bloodflower Brooch",
         },
         .description = .{
@@ -1189,6 +1227,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_wolf_hood",
         .name = .{
+            .original = "Wolf Hood",
             .english = "Transfigured Wolf Hood",
         },
         .description = .{
@@ -1203,6 +1242,7 @@ fn transfiguredBloodwolfSet() !void {
     item(.{
         .id = "it_transfigured_blood_vial",
         .name = .{
+            .original = "Blood Vial",
             .english = "Transfigured Blood Vial",
         },
         .description = .{
@@ -1227,6 +1267,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_black_wakizashi",
         .name = .{
+            .original = "Black Wakizashi",
             .english = "Transfigured Black Wakizashi",
         },
         .description = .{
@@ -1241,6 +1282,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_throwing_dagger",
         .name = .{
+            .original = "Throwing Dagger",
             .english = "Transfigured Throwing Dagger",
         },
         .description = .{
@@ -1255,6 +1297,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_assassins_knife",
         .name = .{
+            .original = "Assassin's Knife",
             .english = "Transfigured Assassin's Knife",
         },
         .description = .{
@@ -1271,6 +1314,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_ninjutsu_scroll",
         .name = .{
+            .original = "Ninjutsu Scroll",
             .english = "Transfigured Ninjutsu Scroll",
         },
         .description = .{
@@ -1310,6 +1354,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_shadow_bracelet",
         .name = .{
+            .original = "Shadow Bracelet",
             .english = "Transfigured Shadow Bracelet",
         },
         .description = .{
@@ -1331,6 +1376,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_ninja_robe",
         .name = .{
+            .original = "Ninja Robe",
             .english = "Transfigured Ninja Robe",
         },
         .description = .{
@@ -1361,6 +1407,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_kunoichi_hood",
         .name = .{
+            .original = "Kunoichi Hood",
             .english = "Transfigured Kunoichi Hood",
         },
         .description = .{
@@ -1398,6 +1445,7 @@ fn transfiguredAssasinSet() !void {
     item(.{
         .id = "it_transfigured_shinobi_tabi",
         .name = .{
+            .original = "Shinobi Tabi",
             .english = "Transfigured Shinobi Tabi",
         },
         .description = .{
@@ -1442,6 +1490,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_dragonhead_spear",
         .name = .{
+            .original = "Dragonhead Spear",
             .english = "Transfigured Dragonhead Spear",
         },
         .description = .{
@@ -1456,6 +1505,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_granite_greatsword",
         .name = .{
+            .original = "Granite Greatsword",
             .english = "Transfigured Granite Greatsword",
         },
         .description = .{
@@ -1495,6 +1545,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_greysteel_shield",
         .name = .{
+            .original = "Greysteel Shield",
             .english = "Transfigured Greysteel Shield",
         },
         .description = .{
@@ -1523,6 +1574,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_stonebreaker_staff",
         .name = .{
+            .original = "Stonebreaker Staff",
             .english = "Transfigured Stonebreaker Staff",
         },
         .description = .{
@@ -1539,6 +1591,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_tough_gauntlet",
         .name = .{
+            .original = "Tough Gauntlet",
             .english = "Transfigured Tough Gauntlet",
         },
         .description = .{
@@ -1562,6 +1615,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_rockdragon_mail",
         .name = .{
+            .original = "Rockdragon Mail",
             .english = "Transfigured Rockdragon Mail",
         },
         .description = .{
@@ -1592,6 +1646,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_obsidian_hairpin",
         .name = .{
+            .original = "Obsidian Hairpin",
             .english = "Transfigured Obsidian Hairpin",
         },
         .description = .{
@@ -1606,6 +1661,7 @@ fn transfiguredRockdragonSet() !void {
     item(.{
         .id = "it_transfigured_iron_greaves",
         .name = .{
+            .original = "Iron Greaves",
             .english = "Transfigured Iron Greaves",
         },
         .description = .{
@@ -1630,6 +1686,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_volcano_spear",
         .name = .{
+            .original = "Volcano Spear",
             .english = "Transfigured Volcano Spear",
         },
         .description = .{
@@ -1644,6 +1701,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_reddragon_blade",
         .name = .{
+            .original = "Reddragon Blade",
             .english = "Transfigured Reddragon Blade",
         },
         .description = .{
@@ -1658,6 +1716,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_flame_bow",
         .name = .{
+            .original = "Flame Bow",
             .english = "Transfigured Flame Bow",
         },
         .description = .{
@@ -1673,6 +1732,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_meteor_staff",
         .name = .{
+            .original = "Meteor Staff",
             .english = "Transfigured Meteor Staff",
         },
         .description = .{
@@ -1709,6 +1769,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_phoenix_charm",
         .name = .{
+            .original = "Phoenix Charm",
             .english = "Transfigured Phoenix Charm",
         },
         .description = .{
@@ -1749,6 +1810,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_firescale_corset",
         .name = .{
+            .original = "Firescale Corset",
             .english = "Transfigured Firescale Corset",
         },
         .description = .{
@@ -1763,6 +1825,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_demon_horns",
         .name = .{
+            .original = "Demon Horns",
             .english = "Transfigured Demon Horns",
         },
         .description = .{
@@ -1777,6 +1840,7 @@ fn transfiguredFlameSet() !void {
     item(.{
         .id = "it_transfigured_flamewalker_boots",
         .name = .{
+            .original = "Flamewalker Boots",
             .english = "Transfigured Flamewalker Boots",
         },
         .description = .{
@@ -1801,6 +1865,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_diamond_shield",
         .name = .{
+            .original = "Diamond Shield",
             .english = "Transfigured Diamond Shield",
         },
         .description = .{
@@ -1815,6 +1880,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_peridot_rapier",
         .name = .{
+            .original = "Peridot Rapier",
             .english = "Transfigured Peridot Rapier",
         },
         .description = .{
@@ -1830,6 +1896,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_garnet_staff",
         .name = .{
+            .original = "Garnet Staff",
             .english = "Transfigured Garnet Staff",
         },
         .description = .{
@@ -1859,6 +1926,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_sapphire_violin",
         .name = .{
+            .original = "Sapphire Violin",
             .english = "Transfigured Sapphire Violin",
         },
         .description = .{
@@ -1917,6 +1985,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_emerald_chestplate",
         .name = .{
+            .original = "Emerald Chestplate",
             .english = "Transfigured Emerald Chestplate",
         },
         .description = .{
@@ -1931,6 +2000,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_amethyst_bracelet",
         .name = .{
+            .original = "Amethyst Bracelet",
             .english = "Transfigured Amethyst Bracelet",
         },
         .description = .{
@@ -1947,6 +2017,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_topaz_charm",
         .name = .{
+            .original = "Topaz Charm",
             .english = "Transfigured Topaz Charm",
         },
         .description = .{
@@ -1994,6 +2065,7 @@ fn transfiguredGemSet() !void {
     item(.{
         .id = "it_transfigured_ruby_circlet",
         .name = .{
+            .original = "Ruby Circlet",
             .english = "Transfigured Ruby Circlet",
         },
         .description = .{
@@ -2044,6 +2116,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_brightstorm_spear",
         .name = .{
+            .original = "Brightstorm Spear",
             .english = "Transfigured Brightstorm Spear",
         },
         .description = .{
@@ -2075,6 +2148,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_bolt_staff",
         .name = .{
+            .original = "Bolt Staff",
             .english = "Transfigured Bolt Staff",
         },
         .description = .{
@@ -2089,6 +2163,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_lightning_bow",
         .name = .{
+            .original = "Lightning Bow",
             .english = "Transfigured Lightning Bow",
         },
         .description = .{
@@ -2103,6 +2178,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_darkstorm_knife",
         .name = .{
+            .original = "Darkstorm Knife",
             .english = "Transfigured Darkstorm Knife",
         },
         .description = .{
@@ -2132,6 +2208,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_darkcloud_necklace",
         .name = .{
+            .original = "Darkcloud Necklace",
             .english = "Transfigured Darkcloud Necklace",
         },
         .description = .{
@@ -2166,6 +2243,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_crown_of_storms",
         .name = .{
+            .original = "Crown of Storms",
             .english = "Transfigured Crown of Storms",
         },
         .description = .{
@@ -2186,6 +2264,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_thunderclap_gloves",
         .name = .{
+            .original = "Thunderclap Gloves",
             .english = "Transfigured Thunderclap Gloves",
         },
         .description = .{
@@ -2217,6 +2296,7 @@ fn transfiguredLightningSet() !void {
     item(.{
         .id = "it_transfigured_storm_petticoat",
         .name = .{
+            .original = "Storm Petticoat",
             .english = "Transfigured Storm Petticoat",
         },
         .description = .{
@@ -2249,6 +2329,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_holy_greatsword",
         .name = .{
+            .original = "Holy Greatsword",
             .english = "Transfigured Holy Greatsword",
         },
         .description = .{
@@ -2289,6 +2370,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_sacred_bow",
         .name = .{
+            .original = "Sacred Bow",
             .english = "Transfigured Sacred Bow",
         },
         .description = .{
@@ -2332,6 +2414,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_purification_rod",
         .name = .{
+            .original = "Purification Rod",
             .english = "Transfigured Purification Rod",
         },
         .description = .{
@@ -2346,6 +2429,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_ornamental_bell",
         .name = .{
+            .original = "Ornamental Bell",
             .english = "Transfigured Ornamental Bell",
         },
         .description = .{
@@ -2362,6 +2446,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_shrinemaidens_kosode",
         .name = .{
+            .original = "Shrinemaiden's Kosode",
             .english = "Transfigured Shrinemaiden's Kosode",
         },
         .description = .{
@@ -2391,6 +2476,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_redwhite_ribbon",
         .name = .{
+            .original = "Redwhite Ribbon",
             .english = "Transfigured Redwhite Ribbon",
         },
         .description = .{
@@ -2405,6 +2491,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_divine_mirror",
         .name = .{
+            .original = "Divine Mirror",
             .english = "Transfigured Divine Mirror",
         },
         .description = .{
@@ -2419,6 +2506,7 @@ fn transfiguredShrineSet() !void {
     item(.{
         .id = "it_transfigured_golden_chime",
         .name = .{
+            .original = "Golden Chime",
             .english = "Transfigured Golden Chime",
         },
         .description = .{
@@ -2447,6 +2535,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_book_of_cheats",
         .name = .{
+            .original = "Book of Cheats",
             .english = "Transfigured Book of Cheats",
         },
         .description = .{
@@ -2529,6 +2618,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_golden_katana",
         .name = .{
+            .original = "Golden Katana",
             .english = "Transfigured Golden Katana",
         },
         .description = .{
@@ -2543,6 +2633,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_glittering_trumpet",
         .name = .{
+            .original = "Glittering Trumpet",
             .english = "Transfigured Glittering Trumpet",
         },
         .description = .{
@@ -2561,6 +2652,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_royal_staff",
         .name = .{
+            .original = "Royal Staff",
             .english = "Transfigured Royal Staff",
         },
         .description = .{
@@ -2605,6 +2697,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_ballroom_gown",
         .name = .{
+            .original = "Ballroom Gown",
             .english = "Transfigured Ballroom Gown",
         },
         .description = .{
@@ -2636,6 +2729,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_silver_coin",
         .name = .{
+            .original = "Silver Coin",
             .english = "Transfigured Silver Coin",
         },
         .description = .{
@@ -2681,6 +2775,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_queens_crown",
         .name = .{
+            .original = "Queen's Crown",
             .english = "Transfigured Queen's Crown",
         },
         .description = .{
@@ -2707,6 +2802,7 @@ fn transfiguredLuckySet() !void {
     item(.{
         .id = "it_transfigured_mimick_rabbitfoot",
         .name = .{
+            .original = "Mimick Rabbitfoot",
             .english = "Transfigured Mimick Rabbitfoot",
         },
         .description = .{
@@ -2743,6 +2839,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_butterfly_ocarina",
         .name = .{
+            .original = "Butterfly Ocarina",
             .english = "Transfigured Butterfly Ocarina",
         },
         .description = .{
@@ -2757,6 +2854,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_fairy_spear",
         .name = .{
+            .original = "Fairy Spear",
             .english = "Transfigured Fairy Spear",
         },
         .description = .{
@@ -2795,6 +2893,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_moss_shield",
         .name = .{
+            .original = "Moss Shield",
             .english = "Transfigured Moss Shield",
         },
         .description = .{
@@ -2819,6 +2918,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_floral_bow",
         .name = .{
+            .original = "Floral Bow",
             .english = "Transfigured Floral Bow",
         },
         .description = .{
@@ -2833,6 +2933,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_blue_rose",
         .name = .{
+            .original = "Blue Rose",
             .english = "Transfigured Blue Rose",
         },
         .description = .{
@@ -2848,6 +2949,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_sunflower_crown",
         .name = .{
+            .original = "Sunflower Crown",
             .english = "Transfigured Sunflower Crown",
         },
         .description = .{
@@ -2873,6 +2975,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_midsummer_dress",
         .name = .{
+            .original = "Midsummer Dress",
             .english = "Transfigured Midsummer Dress",
         },
         .description = .{
@@ -2906,6 +3009,7 @@ fn transfiguredLifeSet() !void {
     item(.{
         .id = "it_transfigured_grasswoven_bracelet",
         .name = .{
+            .original = "Grasswoven Bracelet",
             .english = "Transfigured Grasswoven Bracelet",
         },
         .description = .{
@@ -2948,6 +3052,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_snakefang_dagger",
         .name = .{
+            .original = "Snakefang Dagger",
             .english = "Transfigured Snakefang Dagger",
         },
         .description = .{
@@ -2963,6 +3068,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_ivy_staff",
         .name = .{
+            .original = "Ivy Staff",
             .english = "Transfigured Ivy Staff",
         },
         .description = .{
@@ -2977,6 +3083,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_deathcap_tome",
         .name = .{
+            .original = "Deathcap Tome",
             .english = "Transfigured Deathcap Tome",
         },
         .description = .{
@@ -2991,6 +3098,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_spiderbite_bow",
         .name = .{
+            .original = "Spiderbite Bow",
             .english = "Transfigured Spiderbite Bow",
         },
         .description = .{
@@ -3005,6 +3113,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_compound_gloves",
         .name = .{
+            .original = "Compound Gloves",
             .english = "Transfigured Compound Gloves",
         },
         .description = .{
@@ -3019,6 +3128,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_poisonfrog_charm",
         .name = .{
+            .original = "Poisonfrog Charm",
             .english = "Transfigured Poisonfrog Charm",
         },
         .description = .{
@@ -3042,6 +3152,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_venom_hood",
         .name = .{
+            .original = "Venom Hood",
             .english = "Transfigured Venom Hood",
         },
         .description = .{
@@ -3056,6 +3167,7 @@ fn transfiguredPoisonSet() !void {
     item(.{
         .id = "it_transfigured_chemists_coat",
         .name = .{
+            .original = "Chemist's Coat",
             .english = "Transfigured Chemist's Coat",
         },
         .description = .{
@@ -3080,6 +3192,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_seashell_shield",
         .name = .{
+            .original = "Seashell Shield",
             .english = "Transfigured Seashell Shield",
         },
         .description = .{
@@ -3095,6 +3208,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_necronomicon",
         .name = .{
+            .original = "Necronomicon",
             .english = "Transfigured Necronomicon",
         },
         .description = .{
@@ -3138,6 +3252,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_tidal_greatsword",
         .name = .{
+            .original = "Tidal Greatsword",
             .english = "Transfigured Tidal Greatsword",
         },
         .description = .{
@@ -3199,6 +3314,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_occult_dagger",
         .name = .{
+            .original = "Occult Dagger",
             .english = "Transfigured Occult Dagger",
         },
         .description = .{
@@ -3213,6 +3329,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_mermaid_scalemail",
         .name = .{
+            .original = "Mermaid Scalemail",
             .english = "Transfigured Mermaid Scalemail",
         },
         .description = .{
@@ -3229,6 +3346,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_hydrous_blob",
         .name = .{
+            .original = "Hydrous Blob",
             .english = "Transfigured Hydrous Blob",
         },
         .description = .{
@@ -3278,6 +3396,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_abyss_artifact",
         .name = .{
+            .original = "Abyss Artifact",
             .english = "Transfigured Abyss Artifact",
         },
         .description = .{
@@ -3292,6 +3411,7 @@ fn transfiguredDepthSet() !void {
     item(.{
         .id = "it_transfigured_lost_pendant",
         .name = .{
+            .original = "Lost Pendant",
             .english = "Transfigured Lost Pendant",
         },
         .description = .{
@@ -3316,6 +3436,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_sawtooth_cleaver",
         .name = .{
+            .original = "Sawtooth Cleaver",
             .english = "Transfigured Sawtooth Cleaver",
         },
         .description = .{
@@ -3330,6 +3451,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_ravens_dagger",
         .name = .{
+            .original = "Raven's Dagger",
             .english = "Transfigured Raven's Dagger",
         },
         .description = .{
@@ -3344,6 +3466,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_killing_note",
         .name = .{
+            .original = "Killing Note",
             .english = "Transfigured Killing Note",
         },
         .description = .{
@@ -3358,6 +3481,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_blacksteel_buckler",
         .name = .{
+            .original = "Blacksteel Buckler",
             .english = "Transfigured Blacksteel Buckler",
         },
         .description = .{
@@ -3373,6 +3497,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_nightguard_gloves",
         .name = .{
+            .original = "Nightguard Gloves",
             .english = "Transfigured Nightguard Gloves",
         },
         .description = .{
@@ -3431,6 +3556,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_snipers_eyeglasses",
         .name = .{
+            .original = "Sniper's Eyeglasses",
             .english = "Transfigured Sniper's Eyeglasses",
         },
         .description = .{
@@ -3445,6 +3571,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_darkmage_charm",
         .name = .{
+            .original = "Darkmage Charm",
             .english = "Transfigured Darkmage Charm",
         },
         .description = .{
@@ -3460,6 +3587,7 @@ fn transfiguredDarkbiteSet() !void {
     item(.{
         .id = "it_transfigured_firststrike_bracelet",
         .name = .{
+            .original = "Firststrike Bracelet",
             .english = "Transfigured Firststrike Bracelet",
         },
         .description = .{
@@ -3522,6 +3650,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_obsidian_rod",
         .name = .{
+            .original = "Obsidian Rod",
             .english = "Transfigured Obsidian Rod",
         },
         .description = .{
@@ -3552,6 +3681,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_darkglass_spear",
         .name = .{
+            .original = "Darkglass Spear",
             .english = "Transfigured Darkglass Spear",
         },
         .description = .{
@@ -3582,6 +3712,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_timespace_dagger",
         .name = .{
+            .original = "Timespace Dagger",
             .english = "Transfigured Timespace Dagger",
         },
         .description = .{
@@ -3626,6 +3757,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_quartz_shield",
         .name = .{
+            .original = "Quartz Shield",
             .english = "Transfigured Quartz Shield",
         },
         .description = .{
@@ -3640,6 +3772,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_pocketwatch",
         .name = .{
+            .original = "Pocketwatch",
             .english = "Transfigured Pocketwatch",
         },
         .description = .{
@@ -3654,6 +3787,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_nova_crown",
         .name = .{
+            .original = "Nova Crown",
             .english = "Transfigured Nova Crown",
         },
         .description = .{
@@ -3668,6 +3802,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_blackhole_charm",
         .name = .{
+            .original = "Blackhole Charm",
             .english = "Transfigured Blackhole Charm",
         },
         .description = .{
@@ -3682,6 +3817,7 @@ fn transfiguredTimegemSet() !void {
     item(.{
         .id = "it_transfigured_twinstar_earrings",
         .name = .{
+            .original = "Twinstar Earrings",
             .english = "Transfigured Twinstar Earrings",
         },
         .description = .{
@@ -3708,6 +3844,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_kyou_no_omikuji",
         .name = .{
+            .original = "Kyou No Omikuji",
             .english = "Transfigured Kyou No Omikuji",
         },
         .description = .{
@@ -3735,6 +3872,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_youkai_bracelet",
         .name = .{
+            .original = "Youkai Bracelet",
             .english = "Transfigured Youkai Bracelet",
         },
         .description = .{
@@ -3763,6 +3901,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_oni_staff",
         .name = .{
+            .original = "Oni Staff",
             .english = "Transfigured Oni Staff",
         },
         .description = .{
@@ -3787,6 +3926,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_kappa_shield",
         .name = .{
+            .original = "Kappa Shield",
             .english = "Transfigured Kappa Shield",
         },
         .description = .{
@@ -3801,6 +3941,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_usagi_kamen",
         .name = .{
+            .original = "Usagi Kamen",
             .english = "Transfigured Usagi Kamen",
         },
         .description = .{
@@ -3819,6 +3960,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_red_tanzaku",
         .name = .{
+            .original = "Red Tanzaku",
             .english = "Transfigured Red Tanzaku",
         },
         .description = .{
@@ -3833,6 +3975,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_vega_spear",
         .name = .{
+            .original = "Vega Spear",
             .english = "Transfigured Vega Spear",
         },
         .description = .{
@@ -3847,6 +3990,7 @@ fn transfiguredYoukaiSet() !void {
     item(.{
         .id = "it_transfigured_altair_dagger",
         .name = .{
+            .original = "Altair Dagger",
             .english = "Transfigured Altair Dagger",
         },
         .description = .{
@@ -3871,6 +4015,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_ghost_spear",
         .name = .{
+            .original = "Ghost Spear",
             .english = "Transfigured Ghost Spear",
         },
         .description = .{
@@ -3885,6 +4030,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_phantom_dagger",
         .name = .{
+            .original = "Phantom Dagger",
             .english = "Transfigured Phantom Dagger",
         },
         .description = .{
@@ -3899,6 +4045,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_cursed_candlestaff",
         .name = .{
+            .original = "Cursed Candlestaff",
             .english = "Transfigured Cursed Candlestaff",
         },
         .description = .{
@@ -3913,6 +4060,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_smoke_shield",
         .name = .{
+            .original = "Smoke Shield",
             .english = "Transfigured Smoke Shield",
         },
         .description = .{
@@ -3927,6 +4075,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_haunted_gloves",
         .name = .{
+            .original = "Haunted Gloves",
             .english = "Transfigured Haunted Gloves",
         },
         .description = .{
@@ -3941,6 +4090,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_old_bonnet",
         .name = .{
+            .original = "Old Bonnet",
             .english = "Transfigured Old Bonnet",
         },
         .description = .{
@@ -3955,6 +4105,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_maid_outfit",
         .name = .{
+            .original = "Maid Outfit",
             .english = "Transfigured Maid Outfit",
         },
         .description = .{
@@ -3969,6 +4120,7 @@ fn transfiguredHauntedSet() !void {
     item(.{
         .id = "it_transfigured_calling_bell",
         .name = .{
+            .original = "Calling Bell",
             .english = "Transfigured Calling Bell",
         },
         .description = .{
@@ -4011,6 +4163,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_grandmaster_spear",
         .name = .{
+            .original = "Grandmaster Spear",
             .english = "Transfigured Grandmaster Spear",
         },
         .description = .{
@@ -4026,6 +4179,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_teacher_knife",
         .name = .{
+            .original = "Teacher Knife",
             .english = "Transfigured Teacher Knife",
         },
         .description = .{
@@ -4058,6 +4212,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_tactician_rod",
         .name = .{
+            .original = "Tactician Rod",
             .english = "Transfigured Tactician Rod",
         },
         .description = .{
@@ -4079,6 +4234,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_spiked_shield",
         .name = .{
+            .original = "Spiked Shield",
             .english = "Transfigured Spiked Shield",
         },
         .description = .{
@@ -4093,6 +4249,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_battlemaiden_armor",
         .name = .{
+            .original = "Battlemaiden Armor",
             .english = "Transfigured Battlemaiden Armor",
         },
         .description = .{
@@ -4108,6 +4265,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_gladiator_helmet",
         .name = .{
+            .original = "Gladiator Helmet",
             .english = "Transfigured Gladiator Helmet",
         },
         .description = .{
@@ -4131,6 +4289,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_lancer_gauntlets",
         .name = .{
+            .original = "Lancer Gauntlets",
             .english = "Transfigured Lancer Gauntlets",
         },
         .description = .{
@@ -4186,6 +4345,7 @@ fn transfiguredGladiatorSet() !void {
     item(.{
         .id = "it_transfigured_lion_charm",
         .name = .{
+            .original = "Lion Charm",
             .english = "Transfigured Lion Charm",
         },
         .description = .{
@@ -4210,6 +4370,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_bluebolt_staff",
         .name = .{
+            .original = "Bluebolt Staff",
             .english = "Transfigured Bluebolt Staff",
         },
         .description = .{
@@ -4224,6 +4385,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_lapis_sword",
         .name = .{
+            .original = "Lapis Sword",
             .english = "Transfigured Lapis Sword",
         },
         .description = .{
@@ -4238,6 +4400,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_shockwave_tome",
         .name = .{
+            .original = "Shockwave Tome",
             .english = "Transfigured Shockwave Tome",
         },
         .description = .{
@@ -4272,6 +4435,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_battery_shield",
         .name = .{
+            .original = "Battery Shield",
             .english = "Transfigured Battery Shield",
         },
         .description = .{
@@ -4319,6 +4483,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_raiju_crown",
         .name = .{
+            .original = "Raiju Crown",
             .english = "Transfigured Raiju Crown",
         },
         .description = .{
@@ -4342,6 +4507,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_staticshock_earrings",
         .name = .{
+            .original = "Staticshock Earrings",
             .english = "Transfigured Staticshock Earrings",
         },
         .description = .{
@@ -4357,6 +4523,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_stormdance_gown",
         .name = .{
+            .original = "Stormdance Gown",
             .english = "Transfigured Stormdance Gown",
         },
         .description = .{
@@ -4391,6 +4558,7 @@ fn transfiguredSparkbladeSet() !void {
     item(.{
         .id = "it_transfigured_blackbolt_ribbon",
         .name = .{
+            .original = "Blackbolt Ribbon",
             .english = "Transfigured Blackbolt Ribbon",
         },
         .description = .{
@@ -4448,6 +4616,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_crane_katana",
         .name = .{
+            .original = "Crane Katana",
             .english = "Transfigured Crane Katana",
         },
         .description = .{
@@ -4462,6 +4631,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_falconfeather_dagger",
         .name = .{
+            .original = "Falconfeather Dagger",
             .english = "Transfigured Falconfeather Dagger",
         },
         .description = .{
@@ -4477,6 +4647,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_tornado_staff",
         .name = .{
+            .original = "Tornado Staff",
             .english = "Transfigured Tornado Staff",
         },
         .description = .{
@@ -4509,6 +4680,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_cloud_guard",
         .name = .{
+            .original = "Cloud Guard",
             .english = "Transfigured Cloud Guard",
         },
         .description = .{
@@ -4524,6 +4696,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_hermes_bow",
         .name = .{
+            .original = "Hermes Bow",
             .english = "Transfigured Hermes Bow",
         },
         .description = .{
@@ -4570,6 +4743,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_talon_charm",
         .name = .{
+            .original = "Talon Charm",
             .english = "Transfigured Talon Charm",
         },
         .description = .{
@@ -4602,6 +4776,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_tiny_wings",
         .name = .{
+            .original = "Tiny Wings",
             .english = "Transfigured Tiny Wings",
         },
         .description = .{
@@ -4638,6 +4813,7 @@ fn transfiguredSwiftflightSet() !void {
     item(.{
         .id = "it_transfigured_feathered_overcoat",
         .name = .{
+            .original = "Feathered Overcoat",
             .english = "Transfigured Feathered Overcoat",
         },
         .description = .{
@@ -4687,6 +4863,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_sandpriestess_spear",
         .name = .{
+            .original = "Sandpriestess Spear",
             .english = "Transfigured Sandpriestess Spear",
         },
         .description = .{
@@ -4701,6 +4878,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_flamedancer_dagger",
         .name = .{
+            .original = "Flamedancer Dagger",
             .english = "Transfigured Flamedancer Dagger",
         },
         .description = .{
@@ -4715,6 +4893,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_whiteflame_staff",
         .name = .{
+            .original = "Whiteflame Staff",
             .english = "Transfigured Whiteflame Staff",
         },
         .description = .{
@@ -4729,6 +4908,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_sacred_shield",
         .name = .{
+            .original = "Sacred Shield",
             .english = "Transfigured Sacred Shield",
         },
         .description = .{
@@ -4752,6 +4932,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_marble_clasp",
         .name = .{
+            .original = "Marble Clasp",
             .english = "Transfigured Marble Clasp",
         },
         .description = .{
@@ -4791,6 +4972,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_sun_pendant",
         .name = .{
+            .original = "Sun Pendant",
             .english = "Transfigured Sun Pendant",
         },
         .description = .{
@@ -4828,6 +5010,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_tiny_hourglass",
         .name = .{
+            .original = "Tiny Hourglass",
             .english = "Transfigured Tiny Hourglass",
         },
         .description = .{
@@ -4859,6 +5042,7 @@ fn transfiguredSacredflameSet() !void {
     item(.{
         .id = "it_transfigured_desert_earrings",
         .name = .{
+            .original = "Desert Earrings",
             .english = "Transfigured Desert Earrings",
         },
         .description = .{
@@ -4898,6 +5082,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_giant_stone_club",
         .name = .{
+            .original = "Giant Stone Club",
             .english = "Transfigured Giant Stone Club",
         },
         .description = .{
@@ -4912,6 +5097,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_ruins_sword",
         .name = .{
+            .original = "Ruins Sword",
             .english = "Transfigured Ruins Sword",
         },
         .description = .{
@@ -4928,6 +5114,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_mountain_staff",
         .name = .{
+            .original = "Mountain Staff",
             .english = "Transfigured Mountain Staff",
         },
         .description = .{
@@ -4952,6 +5139,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_boulder_shield",
         .name = .{
+            .original = "Boulder Shield",
             .english = "Transfigured Boulder Shield",
         },
         .description = .{
@@ -4966,6 +5154,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_golems_claymore",
         .name = .{
+            .original = "Golem's Claymore",
             .english = "Transfigured Golem's Claymore",
         },
         .description = .{
@@ -5019,6 +5208,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_stoneplate_armor",
         .name = .{
+            .original = "Stoneplate Armor",
             .english = "Transfigured Stoneplate Armor",
         },
         .description = .{
@@ -5079,6 +5269,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_sacredstone_charm",
         .name = .{
+            .original = "Sacredstone Charm",
             .english = "Transfigured Sacredstone Charm",
         },
         .description = .{
@@ -5093,6 +5284,7 @@ fn transfiguredRuinsSet() !void {
     item(.{
         .id = "it_transfigured_clay_rabbit",
         .name = .{
+            .original = "Clay Rabbit",
             .english = "Transfigured Clay Rabbit",
         },
         .description = .{
@@ -5117,6 +5309,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_waterfall_polearm",
         .name = .{
+            .original = "Waterfall Polearm",
             .english = "Transfigured Waterfall Polearm",
         },
         .description = .{
@@ -5131,6 +5324,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_vorpal_dao",
         .name = .{
+            .original = "Vorpal Dao",
             .english = "Transfigured Vorpal Dao",
         },
         .description = .{
@@ -5145,6 +5339,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_jade_staff",
         .name = .{
+            .original = "Jade Staff",
             .english = "Transfigured Jade Staff",
         },
         .description = .{
@@ -5159,6 +5354,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_reflection_shield",
         .name = .{
+            .original = "Reflection Shield",
             .english = "Transfigured Reflection Shield",
         },
         .description = .{
@@ -5187,6 +5383,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_butterfly_hairpin",
         .name = .{
+            .original = "Butterfly Hairpin",
             .english = "Transfigured Butterfly Hairpin",
         },
         .description = .{
@@ -5212,6 +5409,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_watermage_pendant",
         .name = .{
+            .original = "Watermage Pendant",
             .english = "Transfigured Watermage Pendant",
         },
         .description = .{
@@ -5226,6 +5424,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_raindrop_earrings",
         .name = .{
+            .original = "Raindrop Earrings",
             .english = "Transfigured Raindrop Earrings",
         },
         .description = .{
@@ -5240,6 +5439,7 @@ fn transfiguredLakeshrineSet() !void {
     item(.{
         .id = "it_transfigured_aquamarine_bracelet",
         .name = .{
+            .original = "Aquamarine Bracelet",
             .english = "Transfigured Aquamarine Bracelet",
         },
         .description = .{

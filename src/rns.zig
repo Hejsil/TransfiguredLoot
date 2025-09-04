@@ -79,6 +79,7 @@ fn end2() !void {
 
     const cwd = std.fs.cwd();
     const output_dir_path = if (args.len >= 2) args[1] else blk: {
+        std.debug.assert(builtin.target.os.tag == .linux);
         const home = try std.process.getEnvVarOwned(gpa, "HOME");
         break :blk try std.fs.path.join(gpa, &.{
             home, ".local/share/Steam/steamapps/common/Rabbit and Steel/Mods",
@@ -135,11 +136,13 @@ fn end2() !void {
 pub const Item = struct {
     id: []const u8,
     name: struct {
+        original: []const u8,
         english: []const u8,
         japanese: ?[]const u8 = null,
         chinese: ?[]const u8 = null,
     },
     description: struct {
+        original: ?[]const u8 = null,
         english: []const u8,
         japanese: ?[]const u8 = null,
         chinese: ?[]const u8 = null,
@@ -488,6 +491,7 @@ fn item2(opt: Item) !void {
         (is_not_implemented and opt.treasureType == null) or
             (!is_not_implemented and opt.treasureType != null),
     );
+    std.debug.assert(std.mem.endsWith(u8, opt.name.english, opt.name.original));
 
     try item_names.writer.print("{s},0,", .{opt.id});
     try writeCsvString(&item_names.writer, opt.name.english);
@@ -5120,3 +5124,4 @@ comptime {
 }
 
 const std = @import("std");
+const builtin = @import("builtin");
