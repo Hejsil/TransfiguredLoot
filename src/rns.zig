@@ -142,7 +142,7 @@ pub const Item = struct {
         chinese: ?[]const u8 = null,
     },
     description: struct {
-        original: ?[]const u8 = null,
+        original: []const u8,
         english: []const u8,
         japanese: ?[]const u8 = null,
         chinese: ?[]const u8 = null,

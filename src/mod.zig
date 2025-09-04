@@ -42,6 +42,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Raven Grimoire",
         },
         .description = .{
+            .original = "Your Special applies CURSE.",
             .english = "Every [CD], your Special applies [HEXS].",
         },
         .color = color,
@@ -75,6 +76,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Blackwing Staff",
         },
         .description = .{
+            .original = "Your Primary applies CURSE.",
             .english = "Your Primary deals [VAR0_PERCENT] more damage. If an enemy is cursed " ++
                 "or hexed this value is tripled.",
         },
@@ -121,6 +123,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Curse Talon",
         },
         .description = .{
+            .original = "Your Secondary applies CURSE.",
             .english = "Every [CD], your Secondary applies [HEXP].",
         },
         .color = color,
@@ -152,6 +155,8 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Darkmagic Blade",
         },
         .description = .{
+            .original = "Every 10s, slices the air around you dealing 300 damage and applying " ++
+                "CURSE to nearby enemies.",
             .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
                 "Cooldown resets every time you inflict a curse or hex.",
         },
@@ -196,6 +201,8 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Witch's Cloak",
         },
         .description = .{
+            .original = "Your Secondary deals 10% more damage. Debuffs you place deal 70% " ++
+                "more damage. Slightly increases movement speed.",
             .english = "Your abilities deals [VAR0_PERCENT] less damage. Debuffs you place " ++
                 "deal [VAR1_PERCENT] more damage. Slightly increases movement speed.",
         },
@@ -223,6 +230,8 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Crowfeather Hairpin",
         },
         .description = .{
+            .original = "Increases Special damage by 20%. When you place a debuff on an " ++
+                "opponent, your Special has a 50% chance of resetting.",
             .english = "When your Special hits a cursed or hexed enemy, deal an additional hit " ++
                 "per curse or hex of [STR] damage.",
         },
@@ -255,6 +264,8 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Redblack Ribbon",
         },
         .description = .{
+            .original = "You deal 5% more damage. When you place a debuff on an opponent, " ++
+                "your Defensive has a 50% chance of resetting.",
             .english = "You deal [VAR1_PERCENT] more damage. Debuffs you place last " ++
                 "[VAR0_PERCENT] longer.",
         },
@@ -280,6 +291,7 @@ fn transfiguredArcaneSet() !void {
             .english = "Transfigured Opal Necklace",
         },
         .description = .{
+            .original = "When you use your Defensive, apply CURSE to all enemies.",
             .english = "For every debuff on enemies, you deal [VAR0_PERCENT] more damage.",
         },
         .color = color,
@@ -331,6 +343,8 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Sleeping Greatbow",
         },
         .description = .{
+            .original = "Every 6s, fires a slow-moving projectile at your targeted enemy that " ++
+                "deals 200 damage.",
             .english = "Every [VAR0_SECONDS], fire a very slow-moving projectile at your " ++
                 "targeted enemy that deals [STR] damage.",
         },
@@ -365,6 +379,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Crescentmoon Dagger",
         },
         .description = .{
+            .original = "Every 10s, your Secondary will deal an additional 400 damage on hit.",
             .english = "Every [CD], your Primary will deal an additional [VAR0] hits of " ++
                 "[STR] damage on hit.#" ++
                 "These hits always crit.",
@@ -399,6 +414,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Lullaby Harp",
         },
         .description = .{
+            .original = "Every 10s, resets Defensive cooldowns for you and all allies.",
             .english = "Every [CD], resets Special cooldowns for you and all allies.",
         },
         .color = color,
@@ -428,6 +444,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Nightstar Grimoire",
         },
         .description = .{
+            .original = "Every 25s, deal 900 damage to all enemies.",
             .english = "Every [CD], hit a random area of the arena, dealing [STR] damage. If " ++
                 "an enemy gets hit, the cooldown is reset.",
         },
@@ -468,6 +485,8 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Moon Pendant",
         },
         .description = .{
+            .original = "Every 12s, using your Special will deal 400 damage to enemies in a " ++
+                "moderate radius around you.",
             .english = "Deals [STR] damage to a random area of the arena when you use your " ++
                 "Special.",
         },
@@ -496,6 +515,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Pajama Hat",
         },
         .description = .{
+            .original = "Defensive and loot cooldowns are shortened by 2s.",
             .english = "Using your Defensive decreases all other cooldowns by [VAR0_SECONDS].",
         },
         .color = color,
@@ -522,6 +542,8 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Stuffed Rabbit",
         },
         .description = .{
+            .original = "Increases Special damage by 20%. Every 12s, using your Special will " ++
+                "grant you invulnerability for 3s. Starts battle on cooldown.",
             .english = "Every [VAR0] times an ability or loot with a cooldown is activated, " ++
                 "gain invulnerability for [VAR1_SECONDS].",
         },
@@ -551,6 +573,7 @@ fn transfiguredNightSet() !void {
             .english = "Transfigured Nightingale Gown",
         },
         .description = .{
+            .original = "Every 15s, OMEGACHARGE your Special.",
             .english = "Every [CD] seconds, [OMEGACHARGE] your Secondary and Defensive.",
         },
         .color = color,
@@ -597,6 +620,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Eternity Flute",
         },
         .description = .{
+            .original = "Every 12s, grants HASTE to all allies.",
             .english = "Every [CD], grant [BERSERK] to all allies.",
         },
         .color = color,
@@ -629,6 +653,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Timewarp Wand",
         },
         .description = .{
+            .original = "Your Secondary has a 40% chance of giving you HASTE.",
             .english = "Your GCDs are [VAR0_SECONDS] shorter.#" ++
                 "When you have [HASTE-0] this value is doubled.",
         },
@@ -664,6 +689,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Chrome Shield",
         },
         .description = .{
+            .original = "Using your Defensive will grant you HASTE.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -679,6 +705,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Clockwork Tome",
         },
         .description = .{
+            .original = "Your Special has a 50% chance of giving you HASTE.",
             .english = "Your abilities have a [LUCK] chance of giving a random haste buff.",
         },
         .color = color,
@@ -728,6 +755,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Metronome Boots",
         },
         .description = .{
+            .original = "Your GCDs become 1.1s. Also moderately increases movement speed.",
             .english = "Every [CD], switch between having [HASTE-2] and [SMITE-3].",
         },
         .color = color,
@@ -776,6 +804,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Timemage Cap",
         },
         .description = .{
+            .original = "Cooldowns less than or equal to 10s become 5s.",
             .english = "Cooldowns greater than [VAR0_SECONDS] become [VAR0_SECONDS].",
         },
         .color = color,
@@ -798,6 +827,7 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Starry Cloak",
         },
         .description = .{
+            .original = "Your Defensive's cooldown becomes 10s. Slightly increases movement speed.",
             .english = "When an ability or loot with a cooldown greater than or equal to " ++
                 "[VAR0_SECONDS] is activated, gain [HASTE-2].",
         },
@@ -828,6 +858,8 @@ fn transfiguredTimespaceSet() !void {
             .english = "Transfigured Gemini Necklace",
         },
         .description = .{
+            .original = "Your Special and Defensive have a 30% chance of instantly resetting " ++
+                "when used.",
             .english = "Your loot have a [LUCK] chance of instantly resetting when used.",
         },
         .color = color,
@@ -865,6 +897,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Hawkfeather Fan",
         },
         .description = .{
+            .original = "Reduces your Special's cooldown by 2s.",
             .english = "All of your cooldowns are reduced by [VAR0_SECONDS].",
         },
         .color = color,
@@ -887,6 +920,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Windbite Dagger",
         },
         .description = .{
+            .original = "Your Secondary's GCD becomes 0.5s, but its damage is reduced by 60%.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -903,6 +937,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Pidgeon Bow",
         },
         .description = .{
+            .original = "Every 3s, fires a projectile at your targeted enemy that deals 70 damage.",
             .english = "Every [CD], fires [VAR0] projectiles at your targeted enemy that deals " ++
                 "[STR] damage.",
         },
@@ -940,6 +975,8 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Shinsoku Katana",
         },
         .description = .{
+            .original = "Your Primary's GCD has a 50% chance to be 0.8s instead of its " ++
+                "normal amount.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -956,6 +993,8 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Eaglewing Charm",
         },
         .description = .{
+            .original = "All your abilities deal 20 more damage. Significantly increases " ++
+                "movement speed.",
             .english = "All your abilities deal [VAR0] more damage for every defensive used " ++
                 "this battle. Slightly increases movement speed.",
         },
@@ -993,6 +1032,7 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Sparrow Feather",
         },
         .description = .{
+            .original = "Deals 50 damage to all enemies when your Primary or Secondary is used.",
             .english = "Deals [VAR0] damage to all enemies when you use your Primary.#" ++
                 "When you use your Secondary, this damage is increased by [VAR1] until the end " ++
                 "of the fight.",
@@ -1031,6 +1071,8 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Winged Cap",
         },
         .description = .{
+            .original = "Grants a brief speed boost when your Secondary is used. Moderately " ++
+                "increases movement speed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1046,6 +1088,8 @@ fn transfiguredWindSet() !void {
             .english = "Transfigured Thief's Coat",
         },
         .description = .{
+            .original = "Every 10s, Gain VANISH and gain a brief speed boost when you use " ++
+                "your Special. Moderately increases movement speed.",
             .english = "Using your Defensive will grant you [VANISH].",
         },
         .color = color,
@@ -1078,6 +1122,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Vampiric Dagger",
         },
         .description = .{
+            .original = "Your Secondary inflicts Bleed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1093,6 +1138,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloody Bandage",
         },
         .description = .{
+            .original = "When you use your Defensive, apply BLEED to all enemies.",
             .english = "When you used your Defensive, apply [BLEED-1] and [SAP] to enemies " ++
                 "facing away from you.",
         },
@@ -1129,6 +1175,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Leech Staff",
         },
         .description = .{
+            .original = "Your Primary inflicts BLEED.",
             .english = "When a % chance succeeds, inflict [BLEED-3] to a random enemy.",
         },
         .color = color,
@@ -1153,6 +1200,8 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloodhound Greatsword",
         },
         .description = .{
+            .original = "Every 12s, slices the air around you dealing 380 damage and applying " ++
+                "BLEED to nearby enemies.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1168,6 +1217,8 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Reaper Cloak",
         },
         .description = .{
+            .original = "Your Defensive additionally deals 100 damage 3 times to enemies " ++
+                "facing away from you. Slightly increases movement speed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1184,6 +1235,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Bloodflower Brooch",
         },
         .description = .{
+            .original = "All abilities deal 40 damage 2 times to enemies facing away from you.",
             .english = "Every [CD], apply [BLEED-1] to all enemies. Deal [STR] damage " ++
                 "[VAR0_TIMES] to enemies you inflict with bleed.",
         },
@@ -1231,6 +1283,8 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Wolf Hood",
         },
         .description = .{
+            .original = "Every 6 seconds when you use your Primary, deal 250 damage to " ++
+                "enemies facing away from you. Slightly increases movement speed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1246,6 +1300,7 @@ fn transfiguredBloodwolfSet() !void {
             .english = "Transfigured Blood Vial",
         },
         .description = .{
+            .original = "At the start of each fight, inflict all enemies with SAP.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1271,6 +1326,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Black Wakizashi",
         },
         .description = .{
+            .original = "Your Primary has a 30% chance of dealing an additional 3 blows, " ++
+                "dealing 50 damage each, in a radius around your target enemy.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1286,6 +1343,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Throwing Dagger",
         },
         .description = .{
+            .original = "Every 5s, fires a projectile at your targeted enemy that deals 120 " ++
+                "damage. Cooldown resets every time you use your Special.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1301,6 +1360,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Assassin's Knife",
         },
         .description = .{
+            .original = "Your Secondary has a 30% chance of dealing an additional 2 blows, " ++
+                "dealing 50 damage each, in a radius around your target enemy.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1318,6 +1379,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Ninjutsu Scroll",
         },
         .description = .{
+            .original = "Your Special has a 30% chance of dealing an additional 3 blows, " ++
+                "dealing 150 damage each, in a radius around your target enemy.",
             .english = "Your Special can deal up to [VAR0] additional blows, dealing [STR] " ++
                 "damage each, in a radius around your target enemy.#" ++
                 "Starting at [LUCK], each extra blow is [VAR1_PERCENT] less likely to happen " ++
@@ -1358,6 +1421,7 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Shadow Bracelet",
         },
         .description = .{
+            .original = "Abilities and loot that hit more than once deal 30 more damage.",
             .english = "Abilities and loot that hit more than twice hits and additional time.",
         },
         .color = color,
@@ -1380,6 +1444,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Ninja Robe",
         },
         .description = .{
+            .original = "When a % chance succeeds, erase projectiles around you and VANISH. " ++
+                "Slightly increases movement speed.",
             .english = "Your abilities have a [LUCK] chance of giving you [VANISH].",
         },
         .color = color,
@@ -1411,6 +1477,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Kunoichi Hood",
         },
         .description = .{
+            .original = "Your abilities do 15 more damage. Your loot does 50 more damage. " ++
+                "Slightly increases movement speed.",
             .english = "Your abilities do [VAR2] more damage and [VAR0] more " ++
                 "damage per potion you have.#" ++
                 "Your potions deal [VAR1_PERCENT] more damage.#" ++
@@ -1449,6 +1517,8 @@ fn transfiguredAssasinSet() !void {
             .english = "Transfigured Shinobi Tabi",
         },
         .description = .{
+            .original = "Standing still will cause you to VANISH and resets your Special. " ++
+                "Available every 8s. Starts battle on cooldown. Slightly increases movement speed.",
             .english = "Standing still will cause you to [VANISH] for 2s. " ++
                 "Available every [CD]. Slightly increases movement speed.",
         },
@@ -1494,6 +1564,8 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Dragonhead Spear",
         },
         .description = .{
+            .original = "Your Primary is 40% more powerful, but gains a cooldown of 3s. Also " ++
+                "slightly reduces movement speed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1509,6 +1581,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Granite Greatsword",
         },
         .description = .{
+            .original = "Every 16s, slices a large radius around you dealing 700 damage.",
             .english = "Every [CD], slices a HUGE radius around you dealing [STR] damage.#" ++
                 "Moving a rabbitleap puts the item on cooldown.#" ++
                 "Also slightly reduces movement speed.",
@@ -1549,6 +1622,8 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Greysteel Shield",
         },
         .description = .{
+            .original = "Your Defensive has a 30% larger radius. Invulnerability effects " ++
+                "last 1s longer.",
             .english = "Your Defensive has a [VAR0_PERCENT] larger radius and a [VAR1_SECOND] " ++
                 "shorter cooldown.",
         },
@@ -1578,6 +1653,7 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Stonebreaker Staff",
         },
         .description = .{
+            .original = "Your Special's cooldown is increased by 2s, but deals 40% more damage.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1595,6 +1671,8 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Tough Gauntlet",
         },
         .description = .{
+            .original = "Your abilities and loot all deal 30% more damage, but all GCDs are " ++
+                "0.2s longer.",
             .english = "Abilities and loot that hit once deal [VAR0] more damage.",
         },
         .color = color,
@@ -1619,6 +1697,9 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Rockdragon Mail",
         },
         .description = .{
+            .original = "Your movement speed is significantly reduced.#" ++
+                "Will shield you from damage for 2 seconds every 45 seconds.#" ++
+                "Starts battle on a 5 second cooldown.",
             .english = "Shields you from every other hit.#" ++
                 "Your movement speed is slightly reduced.",
         },
@@ -1650,6 +1731,8 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Obsidian Hairpin",
         },
         .description = .{
+            .original = "Increases Special damage by 20%. Whenever you gain invulnerability, " ++
+                "your Special has a 50% chance of resetting.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1665,6 +1748,8 @@ fn transfiguredRockdragonSet() !void {
             .english = "Transfigured Iron Greaves",
         },
         .description = .{
+            .original = "Every 12s, standing still will grant brief invulnerability and reset " ++
+                "your Defensive. Movement speed is slightly reduced. Starts battle on cooldown.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1690,6 +1775,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Volcano Spear",
         },
         .description = .{
+            .original = "Your Primary inflicts BURN.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1705,6 +1791,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Reddragon Blade",
         },
         .description = .{
+            .original = "Your Secondary inflicts BURN.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1720,6 +1807,8 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Flame Bow",
         },
         .description = .{
+            .original = "Every 10s, fires a projectile at your targeted enemy that deals 180 " ++
+                "damage and applies BURN.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1736,6 +1825,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Meteor Staff",
         },
         .description = .{
+            .original = "Your Special inflicts BURN.",
             .english = "Every [VAR0_SECONDS], your next large hit inflict [BURN-3].",
         },
         .color = color,
@@ -1773,6 +1863,7 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Phoenix Charm",
         },
         .description = .{
+            .original = "If you perish in battle, restore to full HP instead. Only works once.",
             .english = "Has a [LUCK] chance to shield you from damage when you are at [VAR0] HP.#" ++
                 "You deal [VAR1_PERCENT] more damage per missing HP.",
         },
@@ -1814,6 +1905,8 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Firescale Corset",
         },
         .description = .{
+            .original = "All of your cooldowns are reduced by 3s. If you use your Defensive, " ++
+                "this effect ends until the end of battle.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1829,6 +1922,8 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Demon Horns",
         },
         .description = .{
+            .original = "All your abilities and loot deal 30% more damage. If you use your " ++
+                "Defensive, this effect ends until the end of battle.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1844,6 +1939,8 @@ fn transfiguredFlameSet() !void {
             .english = "Transfigured Flamewalker Boots",
         },
         .description = .{
+            .original = "All GCDs are shortened by 15% and your movement speed is increased " ++
+                "significantly. If you use your Defensive, this effect ends until the end of battle.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1869,6 +1966,9 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Diamond Shield",
         },
         .description = .{
+            .original = "Every 25s, using your Defensive will place down a small field for 3 " ++
+                "seconds that erases projectiles. While standing in the field, allies don't " ++
+                "take damage. Starts battle on 5 second cooldown.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1884,6 +1984,9 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Peridot Rapier",
         },
         .description = .{
+            .original = "Increases Secondary damage by 20%. Every 8s, using your Secondary " ++
+                "will grant you brief invulnerability and erase projectiles in a large radius " ++
+                "around you.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -1900,6 +2003,8 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Garnet Staff",
         },
         .description = .{
+            .original = "Increases Special damage by 20%. Your Special will erase projectiles " ++
+                "in a radius around you and grant brief invulnerability.",
             .english = "When an ability or loot effect erases projectiles in a radius around " ++
                 "you, you deal [VAR0_PERCENT] more damage. Resets at the start of each battle.",
         },
@@ -1930,6 +2035,8 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Sapphire Violin",
         },
         .description = .{
+            .original = "Every 18s, grants ELEGY to all allies. Breaks if you take damage " ++
+                "2 times. Starts battle on cooldown.",
             .english = "Every [CD] seconds, grant [VAR0] random buffs to all allies for " ++
                 "[HBSL]. Breaks if you take damage. Starts the battle on cooldown.",
         },
@@ -1989,6 +2096,8 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Emerald Chestplate",
         },
         .description = .{
+            .original = "The counter on this item will decrease instead of you taking damage. " ++
+                "The counter starts at 3 on pickup.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2004,6 +2113,7 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Amethyst Bracelet",
         },
         .description = .{
+            .original = "Deal 30% more damage. Breaks if you take damage 3 times.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2021,6 +2131,8 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Topaz Charm",
         },
         .description = .{
+            .original = "Gain 8 extra Gold at the end of each fight. Breaks if you take " ++
+                "damage 3 times.",
             .english = "Hastens GCD actions by [VAR0_PERCENT] for every [VAR1] gold you have. " ++
                 "If you take damage, this effect is lost until the end of battle.",
         },
@@ -2069,6 +2181,7 @@ fn transfiguredGemSet() !void {
             .english = "Transfigured Ruby Circlet",
         },
         .description = .{
+            .original = "Your Special deals 80% more damage. Breaks if you take damage once.",
             .english = "You deal [VAR0_PERCENT] more damage.#" ++
                 "When you take damage, permanently reduce this value by [VAR1_PERCENT] " ++
                 "(minimum [VAR2_PERCENT]).",
@@ -2120,6 +2233,8 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Brightstorm Spear",
         },
         .description = .{
+            .original = "Has a 30% chance of dealing 100 damage to all enemies when your " ++
+                "Primary does damage.",
             .english = "Has a [LUCK] chance of dealing [STR] damage to all enemies when your " ++
                 "other loot does damage.",
         },
@@ -2152,6 +2267,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Bolt Staff",
         },
         .description = .{
+            .original = "Deals 150 damage to all enemies when you use your Special.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2167,6 +2283,8 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Lightning Bow",
         },
         .description = .{
+            .original = "Every 12s, fires a projectile at your targeted enemy that deals " ++
+                "300 damage. Cooldown instantly resets when a % chance succeeds.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2182,6 +2300,8 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Darkstorm Knife",
         },
         .description = .{
+            .original = "Has a 30% chance of dealing 100 damage to all enemies when your " ++
+                "Secondary does damage.",
             .english = "Deals [STR] damage to all enemies when your abilities deal damage.",
         },
         .color = color,
@@ -2212,6 +2332,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Darkcloud Necklace",
         },
         .description = .{
+            .original = "Damage from loot is increased 50%.",
             .english = "When you use an ability, reduce the cooldown left on your loot " ++
                 "by [VAR0_SECONDS].",
         },
@@ -2247,6 +2368,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Crown of Storms",
         },
         .description = .{
+            .original = "When a % chance succeeds, deal 200 damage to all enemies.",
             .english = "Your abilities and loot with a % chance deals [VAR0_PERCENT] more damage.",
         },
         .color = color,
@@ -2268,6 +2390,8 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Thunderclap Gloves",
         },
         .description = .{
+            .original = "All abilities have a 20% chance of dealing 200 damage to all enemies " ++
+                "when used.",
             .english = "Every [CD] have a [LUCK] chance of dealing [STR] damage to all enemies.",
         },
         .color = color,
@@ -2300,6 +2424,7 @@ fn transfiguredLightningSet() !void {
             .english = "Transfigured Storm Petticoat",
         },
         .description = .{
+            .original = "Do 250 damage to all enemies when you gain invulnerability.",
             .english = "Do [STR] damage to all enemies when you take damage.",
         },
         .color = color,
@@ -2333,6 +2458,8 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Holy Greatsword",
         },
         .description = .{
+            .original = "Every 10s, grants you SMITE and then slices the air around you, " ++
+                "dealing 200 damage to nearby enemies.",
             .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
                 "Cooldown resets every time you gain a buff.",
         },
@@ -2374,6 +2501,8 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Sacred Bow",
         },
         .description = .{
+            .original = "Every 10s, fires a projectile at your targeted enemy that deals " ++
+                "250 damage. Cooldown instantly resets when you gain a buff.",
             .english = "Every [CD], fires a projectile at your targeted enemy that deals " ++
                 "[STR] damage.#Deals [VAR0_PERCENT] more damage for each buff on you.",
         },
@@ -2418,6 +2547,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Purification Rod",
         },
         .description = .{
+            .original = "Every 18s, using your Primary will give you ELEGY.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2433,6 +2563,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Ornamental Bell",
         },
         .description = .{
+            .original = "Every 15s, grants SMITE to all allies.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2450,6 +2581,8 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Shrinemaiden's Kosode",
         },
         .description = .{
+            .original = "When you have a buff, your movement speed increases significantly " ++
+                "and you deal 25% more damage.",
             .english = "You deal [VAR0_PERCENT] more damage.#" ++
                 "You deal [VAR1_PERCENT] more damage for each buff on you.",
         },
@@ -2480,6 +2613,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Redwhite Ribbon",
         },
         .description = .{
+            .original = "You deal 5% more damage. Buffs you place last 50% longer.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2495,6 +2629,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Divine Mirror",
         },
         .description = .{
+            .original = "Every 10 times you use an ability, deal 500 damage to all enemies.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2510,6 +2645,7 @@ fn transfiguredShrineSet() !void {
             .english = "Transfigured Golden Chime",
         },
         .description = .{
+            .original = "Every 2 times you use your Defensive, gain ELEGY.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2539,6 +2675,7 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Book of Cheats",
         },
         .description = .{
+            .original = "Your Special will have random, chaotic effects.",
             .english = "At the start of each battle and until it ends, gain one of the " ++
                 "following:#" ++
                 " #" ++
@@ -2622,6 +2759,8 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Golden Katana",
         },
         .description = .{
+            .original = "Your Primary and Secondary have a 5% chance to deal 100 damage 5 " ++
+                "times to a large radius around your targeted enemy when used.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2637,6 +2776,8 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Glittering Trumpet",
         },
         .description = .{
+            .original = "Every 20s, grant RABBITLUCK to all allies. Cooldown cannot be reset " ++
+                "by ability or loot effects.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2656,6 +2797,8 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Royal Staff",
         },
         .description = .{
+            .original = "Your Special deals extra damage based on how much gold you have " ++
+                "(1% for every 1 gold).",
             .english = "Critical hits deal [VAR0_PERCENT] extra damage per [VAR1] Gold.#" ++
                 "All abilities and loot's hitboxes are [VAR2_PERCENT] larger per [VAR3] Gold.",
         },
@@ -2701,6 +2844,7 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Ballroom Gown",
         },
         .description = .{
+            .original = "Makes you slightly luckier and slightly increases your movement speed.",
             .english = "Makes everything very slightly better.",
         },
         .color = color,
@@ -2733,6 +2877,7 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Silver Coin",
         },
         .description = .{
+            .original = "On pickup, gain 30 gold.",
             .english = "On pickup, flip the coin. 0 is heads, 1 is tails.#" ++
                 " #" ++
                 "On heads: Your Primary, Special and Debuffs deals [VAR0_PERCENT] more damage. " ++
@@ -2779,6 +2924,8 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Queen's Crown",
         },
         .description = .{
+            .original = "Critical hits now deal 175% extra damage, instead of their normal " ++
+                "75% extra damage.",
             .english = "Your crits have a [LUCK] chance to deal an additional [STR] damage.",
         },
         .color = color,
@@ -2806,6 +2953,7 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Mimick Rabbitfoot",
         },
         .description = .{
+            .original = "Makes you significantly luckier. Not a real rabbit's foot.",
             .english = "Every [CD], proc as a % chance success.#" ++
                 "Makes you slightly luckier. Also not a real rabbit's foot.",
         },
@@ -2843,6 +2991,8 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Butterfly Ocarina",
         },
         .description = .{
+            .original = "On pickup, heal all allies for 1. Heals all allies for 1 HP " ++
+                "every 2 fights.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2858,6 +3008,8 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Fairy Spear",
         },
         .description = .{
+            .original = "Your Primary has a 30% larger radius and deals 40% more damage, but " ++
+                "stops movement when used.",
             .english = "Every [CD], using your Primary will summon an ethereal ally that " ++
                 "fires at your target, dealing [STR] damage each time.#The number of of times " ++
                 "each ally will fire is equal to you HP.",
@@ -2897,6 +3049,7 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Moss Shield",
         },
         .description = .{
+            .original = "Every 12s, using your Defensive will reset its cooldown instantly.",
             .english = "Every [CD], abilities with multiple uses gains a use.",
         },
         .color = color,
@@ -2922,6 +3075,8 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Floral Bow",
         },
         .description = .{
+            .original = "Every 6s, fires a projectile at your targeted enemy that deals 250 " ++
+                "damage. Only activates while standing still.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2937,6 +3092,8 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Blue Rose",
         },
         .description = .{
+            .original = "Your max HP is increased by 1. Has a 50% chance of healing you for 1 " ++
+                "and granting you 100 XP at the end of each fight.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -2953,6 +3110,8 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Sunflower Crown",
         },
         .description = .{
+            .original = "Your max HP is increased by 1. You become able to graze slightly " ++
+                "into a projectile without taking damage. Slightly increases movement speed.",
             .english = "Your max HP is increased by [VAR0]. You are easier to hit. Slightly " ++
                 "increases movement speed.",
         },
@@ -2979,6 +3138,9 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Midsummer Dress",
         },
         .description = .{
+            .original = "Your max HP is increased by 1. Ability or loot effects that " ++
+                "temporarily slow your movement no longer affect you. Slightly increases " ++
+                "movement speed.",
             .english = "Your max HP is increased by [VAR0]. You deal [VAR1_PERCENT] more " ++
                 "damage per max HP. Slightly increases movement speed.",
         },
@@ -3013,6 +3175,8 @@ fn transfiguredLifeSet() !void {
             .english = "Transfigured Grasswoven Bracelet",
         },
         .description = .{
+            .original = "Your max HP is increased by 1. All abilities and loot's hitboxes are " ++
+                "30% larger. Slightly increases movement speed.",
             .english = "Your max HP is increased by [VAR0]. All abilities and loot's hitboxes " ++
                 "are [VAR1_PERCENT] larger per max HP. Slightly increases movement speed.",
         },
@@ -3056,6 +3220,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Snakefang Dagger",
         },
         .description = .{
+            .original = "Your Secondary applies POISON.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3072,6 +3237,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Ivy Staff",
         },
         .description = .{
+            .original = "Your Primary applies POISON.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3087,6 +3253,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Deathcap Tome",
         },
         .description = .{
+            .original = "Your Special applies POISON.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3102,6 +3269,8 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Spiderbite Bow",
         },
         .description = .{
+            .original = "Every 10s fires a projectile at your targeted enemy that deals 50 " ++
+                "damage and applies Poison.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3117,6 +3286,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Compound Gloves",
         },
         .description = .{
+            .original = "When you deal damage, has a 10% chance to apply DECAY.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3132,6 +3302,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Poisonfrog Charm",
         },
         .description = .{
+            .original = "When a % chance succeeds, apply POISON to all enemies.",
             .english = "When a % chance succeeds, apply [HEXP] to all enemies for [HBSL].",
         },
         .color = color,
@@ -3156,6 +3327,7 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Venom Hood",
         },
         .description = .{
+            .original = "Your abilities do 15 more damage. Debuffs you place deal 50 more damage.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3171,6 +3343,8 @@ fn transfiguredPoisonSet() !void {
             .english = "Transfigured Chemist's Coat",
         },
         .description = .{
+            .original = "Your Defensive applies Poison to nearby enemies. Slightly increases " ++
+                "movement speed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3196,6 +3370,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Seashell Shield",
         },
         .description = .{
+            .original = "Your Defensive has a random cooldown between 1s and 15s every time " ++
+                "you use it.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3212,6 +3388,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Necronomicon",
         },
         .description = .{
+            .original = "Every 8s, using your Special will reset its cooldown instantly and " ++
+                "gains CHARGE.",
             .english = "When you use your Secondary, gain a stack.#" ++
                 "Activating an ability with a cooldown consumes [VAR0] stack" ++
                 (if (necronomicon_stacks_consumed != 1) "s" else "") ++
@@ -3256,6 +3434,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Tidal Greatsword",
         },
         .description = .{
+            .original = "Every 12s slices a large radius around you dealing 200 damage. Slowly " ++
+                "gets larger and deals more damage as a fight drags on.",
             .english = "Every [CD] slices a large radius around you dealing [STR] damage.#" ++
                 "For each enemy hit, your abilities and loot deal [VAR0_PERCENT] more damage " ++
                 "and has a [VAR1_PERCENT] larger hitbox until the end of battle.",
@@ -3318,6 +3498,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Occult Dagger",
         },
         .description = .{
+            .original = "Your Secondary is 80% more powerful. 5s of cooldown is added to your " ++
+                "Secondary.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3333,6 +3515,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Mermaid Scalemail",
         },
         .description = .{
+            .original = "All cooldowns are reduced by 2s. All loot and abilities with " ++
+                "cooldowns start battles on a 8s cooldown.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3350,6 +3534,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Hydrous Blob",
         },
         .description = .{
+            .original = "Every 8s, using your Secondary will fire an eldritch beast towards " ++
+                "your target, dealing 300 damage. Starts battles on cooldown.",
             .english = "Every [CD], consume a stack to fire an eldritch beast towards your " ++
                 "target, dealing [STR] damage.#" ++
                 "Gains [VAR0] stack" ++ (if (hydrous_blob_secondary_stacks != 1) "s" else "") ++ " when you use your Secondary.#" ++
@@ -3400,6 +3586,8 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Abyss Artifact",
         },
         .description = .{
+            .original = "Every 30s, using your Defensive will grant you SUPER. Starts on a 15s " ++
+                "cooldown.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3415,6 +3603,7 @@ fn transfiguredDepthSet() !void {
             .english = "Transfigured Lost Pendant",
         },
         .description = .{
+            .original = "At the start of each fight, inflict all enemies with DECAY.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3440,6 +3629,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Sawtooth Cleaver",
         },
         .description = .{
+            .original = "Increases your Primary's damage by 30%, but decreases its radius by 20%.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3455,6 +3645,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Raven's Dagger",
         },
         .description = .{
+            .original = "Increases your Secondary's damage by 50%, but decreases its radius by 40%.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3470,6 +3661,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Killing Note",
         },
         .description = .{
+            .original = "Increases your Special's damage by 30%, but decreases its radius by 20%.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3485,6 +3677,8 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Blacksteel Buckler",
         },
         .description = .{
+            .original = "Your Defensive's range decreases by 30%, but now has a 2s shorter " ++
+                "cooldown and grants COUNTER.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3501,6 +3695,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Nightguard Gloves",
         },
         .description = .{
+            .original = "Whichever ability has the highest base damage value deals 20% more damage.",
             .english = "Whichever ability has the lowest base damage value deals " ++
                 "[VAR0_PERCENT] more damage.",
         },
@@ -3560,6 +3755,8 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Sniper's Eyeglasses",
         },
         .description = .{
+            .original = "You deal 30% more damage when you are separated from your target by " ++
+                "at least 3 rabbitleaps.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3575,6 +3772,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Darkmage Charm",
         },
         .description = .{
+            .original = "When you've been standing still for 1s, your Special deals 40% more damage.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3591,6 +3789,7 @@ fn transfiguredDarkbiteSet() !void {
             .english = "Transfigured Firststrike Bracelet",
         },
         .description = .{
+            .original = "Every 15s, gain BLACKSTRIKE when you use your Secondary.",
             .english = "The first ability you use in each battle deals [VAR0_PERCENT] more " ++
                 "damage.",
         },
@@ -3654,6 +3853,9 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Obsidian Rod",
         },
         .description = .{
+            .original = "Your Special's strength becomes the total cooldown time of all your " ++
+                "abilities and loot, in seconds, multiplied by 10, divided by the times it hits " ++
+                "your target (Maximum of 1000 total).",
             .english = "Your Special's strength becomes the total GCD of all your abilities, " ++
                 "in seconds, multiplied by [VAR0], divided by the times it hits your target.",
         },
@@ -3685,6 +3887,9 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Darkglass Spear",
         },
         .description = .{
+            .original = "Your Primary's strength becomes your Special's cooldown, multiplied " ++
+                "by 30, minus your Secondary's strength, divided by the times your Primary " ++
+                "hits your target (Maximum of 500 total).",
             .english = "Your Secondary's strength becomes the same as the loot item " ++
                 "with the highest strength, divided by the times it hits your target",
         },
@@ -3716,6 +3921,9 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Timespace Dagger",
         },
         .description = .{
+            .original = "Your Secondary's strength becomes your Special and Defensive's " ++
+                "cooldown added together, multiplied by 10, divided by the times your " ++
+                "Secondary hits your target. (Maximum of 500 total).",
             .english = "Your Secondary's GCD becomes the GCD of your Primary.#" ++
                 "Your Secondary's total strength becomes the total strength of your Special.#" ++
                 "Your Secondary's cooldown becomes half the cooldown of your Defensive.",
@@ -3761,6 +3969,8 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Quartz Shield",
         },
         .description = .{
+            .original = "Your Defensive's cooldown becomes 30. When a loot item with a " ++
+                "cooldown activates, the remaining timer on your Defensive is reduced by that amount.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3776,6 +3986,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Pocketwatch",
         },
         .description = .{
+            .original = "Abilities with a GCD less than or equal to 1.1s deal 30% more damage.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3791,6 +4002,8 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Nova Crown",
         },
         .description = .{
+            .original = "Your Special's cooldown becomes 30s. Every 8s, this loot item " ++
+                "reduces your Special's cooldown timer to 1s and CHARGEs it.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3806,6 +4019,9 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Blackhole Charm",
         },
         .description = .{
+            .original = "Deal 200 damage to all enemies when you use an ability or loot " ++
+                "item with a cooldown of 10s or more. Hits one extra time for every 10s longer " ++
+                "the cooldown is than that, up to 5 times.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3821,6 +4037,7 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Twinstar Earrings",
         },
         .description = .{
+            .original = "Your Primary and Secondary now have a 2s GCD, and deal 70% more damage.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -3848,6 +4065,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Kyou No Omikuji",
         },
         .description = .{
+            .original = "All damage you deal increases by 50%. % chance triggers no longer " ++
+                "happen, and you no longer hit for critical damage.",
             .english = "All damage you deal increased by [VAR0_PERCENT]. You cannot gain " ++
                 "buffs or inflict debuffs.",
         },
@@ -3876,6 +4095,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Youkai Bracelet",
         },
         .description = .{
+            .original = "All damage you deal increases by 40%. Your attacks will no longer " ++
+                "have randomized damage, or hit for critical damage.",
             .english = "Your abilities base damage value becomes the average base damage " ++
                 "value of all your abilities.",
         },
@@ -3905,6 +4126,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Oni Staff",
         },
         .description = .{
+            .original = "Your Special deals 30% more damage. When a % chance succeeds, your " ++
+                "Special goes on an 8s cooldown.",
             .english = "Your Special deals [VAR0_PERCENT] more damage.#" ++
                 "When you use your Special, abilities or loot with a cooldown goes on a " ++
                 "[VAR1_SECONDS] cooldown.",
@@ -3930,6 +4153,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Kappa Shield",
         },
         .description = .{
+            .original = "Your Defensive has a 3s shorter cooldown, but can no longer be reset " ++
+                "by ability or loot effects.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_dark,
@@ -3945,6 +4170,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Usagi Kamen",
         },
         .description = .{
+            .original = "When a % chance succeeds, gain a random buff for 5s.",
             .english = "When a % chance succeeds, your Special resets.",
         },
         .color = color_light,
@@ -3964,6 +4190,7 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Red Tanzaku",
         },
         .description = .{
+            .original = "Miracles occasionally happen.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_light,
@@ -3979,6 +4206,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Vega Spear",
         },
         .description = .{
+            .original = "Your Primary deals 70% more damage, but gains a 7s cooldown. When a % " ++
+                "chance succeeds, its cooldown resets.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_light,
@@ -3994,6 +4223,8 @@ fn transfiguredYoukaiSet() !void {
             .english = "Transfigured Altair Dagger",
         },
         .description = .{
+            .original = "Your Secondary deals 30% more damage, but its GCD becomes 3s. When " ++
+                "you use your Secondary, it has a 90% chance to have a GCD of 1s instead.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color_light,
@@ -4019,6 +4250,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Ghost Spear",
         },
         .description = .{
+            .original = "Your Primary now only deals 10 damage, and applies GHOSTFLAME.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4034,6 +4266,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Phantom Dagger",
         },
         .description = .{
+            .original = "Your Secondary now only deals 10 damage, and applies GHOSTFLAME.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4049,6 +4282,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Cursed Candlestaff",
         },
         .description = .{
+            .original = "Your Special now only deals 10 damage, and applies GHOSTFLAME.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4064,6 +4298,9 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Smoke Shield",
         },
         .description = .{
+            .original = "Every 24s, your Defensive now grants GHOST. Your Secondary no longer " ++
+                "breaks VANISH or GHOST.#" ++
+                "Starts battle on a 5 second cooldown.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4079,6 +4316,8 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Haunted Gloves",
         },
         .description = .{
+            .original = "Abilities and loot that hit for 100 damage or less now hit for " ++
+                "100 damage, regardless of other loot effects.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4094,6 +4333,8 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Old Bonnet",
         },
         .description = .{
+            .original = "Abilities and loot that hit once now deal 250 damage, regardless of " ++
+                "other loot effects or ability effects.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4109,6 +4350,8 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Maid Outfit",
         },
         .description = .{
+            .original = "Afflicts surrounding enemies with GHOSTFLAME when you gain " ++
+                "invulnerability. Slightly increases movement speed.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4124,6 +4367,7 @@ fn transfiguredHauntedSet() !void {
             .english = "Transfigured Calling Bell",
         },
         .description = .{
+            .original = "Every 12s, afflicts surrounding enemies with GHOSTFLAME.",
             .english = "Afflicts all enemies with [GHOSTFLAME-4] when an ability or " ++
                 "loot with a cooldown is activated.",
         },
@@ -4167,6 +4411,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Grandmaster Spear",
         },
         .description = .{
+            .original = "Your Primary's damage increases by 40%. Your Special's cooldown  " ++
+                "increases by 4s.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4183,6 +4429,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Teacher Knife",
         },
         .description = .{
+            .original = "Your Secondary's damage increases by 40%. 2s of cooldown is added to " ++
+                "your Primary.",
             .english = "For each second of cooldown on your abilities your Secondary deals " ++
                 "[VAR0_PERCENT] more damage.",
         },
@@ -4216,6 +4464,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Tactician Rod",
         },
         .description = .{
+            .original = "Your Special's damage increases by 30%. 2s of cooldown is added to " ++
+                "your Secondary.",
             .english = "Your Special no longer has a cooldown, but deals [VAR0_PERCENT] less " ++
                 "damage.",
         },
@@ -4238,6 +4488,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Spiked Shield",
         },
         .description = .{
+            .original = "When an ability or loot effect erases projectiles in a radius around " ++
+                "you, deal 300 damage to that radius as well.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4253,6 +4505,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Battlemaiden Armor",
         },
         .description = .{
+            .original = "Using your Defensive will reset loot and ability cooldowns with less " ++
+                "than 8s left on their timer.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4269,6 +4523,7 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Gladiator Helmet",
         },
         .description = .{
+            .original = "Abilities and loot that have cooldowns deal 20% more damage.",
             .english = "Abilities and loot that doesn't have cooldowns deal [VAR0_PERCENT] " ++
                 "more damage.",
         },
@@ -4293,6 +4548,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Lancer Gauntlets",
         },
         .description = .{
+            .original = "All damage is increased by 30%. Your Primary and Secondary gain " ++
+                "cooldowns of 2s.",
             .english = "Abilities different from the one you used last deal [VAR0_PERCENT] " ++
                 "more damage.",
         },
@@ -4349,6 +4606,8 @@ fn transfiguredGladiatorSet() !void {
             .english = "Transfigured Lion Charm",
         },
         .description = .{
+            .original = "Deal 180 damage to nearby enemies when an ability or loot with a " ++
+                "cooldown is activated.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4374,6 +4633,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Bluebolt Staff",
         },
         .description = .{
+            .original = "Your Primary applies SPARK.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4389,6 +4649,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Lapis Sword",
         },
         .description = .{
+            .original = "Your Secondary applies SPARK.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4404,6 +4665,7 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Shockwave Tome",
         },
         .description = .{
+            .original = "Your Special applies SPARK.",
             .english = "Every [CD], apply [SPARK-5] to all enemies.",
         },
         .color = color,
@@ -4439,6 +4701,8 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Battery Shield",
         },
         .description = .{
+            .original = "Every 30 times you or debuffs you apply deal damage to an enemy, " ++
+                "your Defensive's cooldown resets.",
             .english = "When you use your Defensive, apply [SPARK-5] to all enemies.#" ++
                 "Every [VAR0_TIMES] you inflict spark, deal [STR] damage to all enemies and " ++
                 "gain invulnerability for [VAR1_SECONDS].",
@@ -4487,6 +4751,8 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Raiju Crown",
         },
         .description = .{
+            .original = "Every 20 times you or debuffs you apply deal damage to an enemy, " ++
+                "apply SPARK to all enemies.",
             .english = "At the start of each fight, inflict all enemies with [SPARK-6]",
         },
         .color = color,
@@ -4511,6 +4777,8 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Staticshock Earrings",
         },
         .description = .{
+            .original = "Every 10 times you or debuffs you apply deal damage to an enemy, " ++
+                "deal 150 damage to all enemies.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4527,6 +4795,8 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Stormdance Gown",
         },
         .description = .{
+            .original = "Every 40 times you or debuffs you apply deal damage to an enemy, " ++
+                "gain invulnerability for 5s.",
             .english = "Every [VAR0] times you or debuffs you apply deal damage to an enemy, " ++
                 "gain a random buff for [HBSL].",
         },
@@ -4562,6 +4832,8 @@ fn transfiguredSparkbladeSet() !void {
             .english = "Transfigured Blackbolt Ribbon",
         },
         .description = .{
+            .original = "Every 50 times you or debuffs you apply deal damage to an enemy, " ++
+                "deal 1200 damage to all enemies.",
             .english = "After [CD], break and deal [STR] damage to all enemies.#" ++
                 "This is increased by [VAR0] every time you or debuffs " ++
                 "you apply deal damage. Resets at the start of each fight.",
@@ -4620,6 +4892,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Crane Katana",
         },
         .description = .{
+            .original = "Gain FLOW-STR every time you move 15 rabbitleaps.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4635,6 +4908,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Falconfeather Dagger",
         },
         .description = .{
+            .original = "Gain FLOW-DEX every time you move 15 rabbitleaps.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4651,6 +4925,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Tornado Staff",
         },
         .description = .{
+            .original = "Gain FLOW-INT every time you move 15 rabbitleaps.",
             .english = "Gain a random buff every time you move [VAR0] rabbitleaps.",
         },
         .color = color,
@@ -4684,6 +4959,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Cloud Guard",
         },
         .description = .{
+            .original = "Gain invulnerability for 5s every time you move 25 rabbitleaps.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4700,6 +4976,8 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Hermes Bow",
         },
         .description = .{
+            .original = "Every 10s, fires a projectile at your targeted enemy that deals 250 " ++
+                "damage. Cooldown resets every time you move 10 rabbitleaps.",
             .english = "Every [CD], fires a projectile at your targeted enemy that deals " ++
                 "[VAR0] damage per rabbitleap moved since last fired.",
         },
@@ -4747,6 +5025,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Talon Charm",
         },
         .description = .{
+            .original = "Deals 150 damage to all enemies every time you move 5 rabbitleaps.",
             .english = "Decreases all cooldowns by [VAR0_SECONDS] every time you move [VAR1] " ++
                 "rabbitleaps.",
         },
@@ -4780,6 +5059,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Tiny Wings",
         },
         .description = .{
+            .original = "Dramatically increases movement speed.",
             .english = "You deal [VAR0_PERCENT] more damage per [VAR1] rabbitleaps moved since " ++
                 "the start of each battle.",
         },
@@ -4817,6 +5097,7 @@ fn transfiguredSwiftflightSet() !void {
             .english = "Transfigured Feathered Overcoat",
         },
         .description = .{
+            .original = "Maxes out your movement speed while you're invulnerable.",
             .english = "You deal [VAR0_PERCENT] more damage while moving.",
         },
         .color = color,
@@ -4867,6 +5148,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Sandpriestess Spear",
         },
         .description = .{
+            .original = "Your Primary has a 40% chance to grant you FLASH-DEX.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4882,6 +5164,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Flamedancer Dagger",
         },
         .description = .{
+            .original = "Your Secondary has a 40% chance to grant you FLASH-STR.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4897,6 +5180,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Whiteflame Staff",
         },
         .description = .{
+            .original = "Every 2 times you use your Special, gain FLASH-STR.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -4912,6 +5196,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Sacred Shield",
         },
         .description = .{
+            .original = "Every 2 times you use your Defensive, gain FLASH-INT.",
             .english = "Whenever you gain invulnerability, gain [FLASH-INT].",
         },
         .color = color,
@@ -4936,6 +5221,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Marble Clasp",
         },
         .description = .{
+            .original = "Every 5 times you use an ability, gain FLASH-DEX.",
             .english = "You deal [VAR0_PERCENT] more damage.#" ++
                 "When you gain [FLASH-STR], gain [FLOW-STR].#" ++
                 "When you gain [FLASH-DEX], gain [FLOW-DEX].#" ++
@@ -4976,6 +5262,8 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Sun Pendant",
         },
         .description = .{
+            .original = "Every 10 times you use an ability, reset your Special's cooldown and " ++
+                "gain FLASH-INT.",
             .english = "Every [VAR0_TIMES] you use an ability, gain [FLASH-STR], [FLASH-DEX] " ++
                 "and [FLASH-INT].",
         },
@@ -5014,6 +5302,8 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Tiny Hourglass",
         },
         .description = .{
+            .original = "Every 12s, deal 120 damage to all enemies. Damage increase by 120 " ++
+                "each time it activates.",
             .english = "Every [CD], deal [STR] damage to all enemies.",
         },
         .color = color,
@@ -5046,6 +5336,7 @@ fn transfiguredSacredflameSet() !void {
             .english = "Transfigured Desert Earrings",
         },
         .description = .{
+            .original = "Every time you gain a buff, gain another random buff for 5s.",
             .english = "When your allies gain a buff, you gain a buff of the same type " ++
                 "for [HBSL].",
         },
@@ -5086,6 +5377,8 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Giant Stone Club",
         },
         .description = .{
+            .original = "Your Primary deals 70% more damage. Its GCD is increased by 0.6s. " ++
+                "Your movement speed is also moderately reduced.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5101,6 +5394,8 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Ruins Sword",
         },
         .description = .{
+            .original = "Your Secondary deals 100% more damage. Its GCD is increased by 0.8s. " ++
+                "Your movement speed is also slightly reduced.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5118,6 +5413,8 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Mountain Staff",
         },
         .description = .{
+            .original = "Your Special deals 200% more damage. Its GCD is increased by 2.5s. " ++
+                "Your movement speed is also moderately reduced.",
             .english = "Each ability deal [VAR0_PERCENT] more damage per [VAR1_SECONDS] GCD.",
         },
         .color = color,
@@ -5143,6 +5440,8 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Boulder Shield",
         },
         .description = .{
+            .original = "Every 30s, using your Defensive will grant all allies STONESKIN. " ++
+                "Starts battle off cooldown. Reduces your movement speed slightly.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5158,6 +5457,8 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Golem's Claymore",
         },
         .description = .{
+            .original = "Every 20s, grants you Stoneskin and then slices the air around you, " ++
+                "dealing 500 damage to nearby enemies. Also slows your movement speed slightly.",
             .english = "Every [CD], using your Secondary grants you [STONESKIN] for [HBSL].#" ++
                 "When [STONESKIN] or [GRANITESKIN] shields you from damage slice the air " ++
                 "around you, dealing [STR] damage to nearby enemies.",
@@ -5212,6 +5513,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Stoneplate Armor",
         },
         .description = .{
+            .original = "Start each battle with GRANITESKIN.",
             .english = "Every [CD], grants you [STONESKIN]. Starts battle off cooldown.#" ++
                 "When [STONESKIN] or [GRANITESKIN] shields you from damage you permanently " ++
                 "deal [VAR0_PERCENT] more damage.",
@@ -5273,6 +5575,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Sacredstone Charm",
         },
         .description = .{
+            .original = "Abilities with a GCD equal to or higher than 1.5s deal 50% more damage.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5288,6 +5591,7 @@ fn transfiguredRuinsSet() !void {
             .english = "Transfigured Clay Rabbit",
         },
         .description = .{
+            .original = "Every 12s, standing still will grant you STONESKIN",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5313,6 +5617,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Waterfall Polearm",
         },
         .description = .{
+            .original = "Every 10s, when you use your Primary, gain FLOW-STR",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5328,6 +5633,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Vorpal Dao",
         },
         .description = .{
+            .original = "Every 10s, when you use your Secondary, gain FLOW-DEX.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5343,6 +5649,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Jade Staff",
         },
         .description = .{
+            .original = "Every 2 times you use your Special, gain TRANQUILITY.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5358,6 +5665,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Reflection Shield",
         },
         .description = .{
+            .original = "When you erase projectiles in a radius around you, gain COUNTER.",
             .english = "When you gain a buff, allies gain a buff of the same type for " ++
                 "[HBSL].",
         },
@@ -5387,6 +5695,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Butterfly Hairpin",
         },
         .description = .{
+            .original = "When you gain invincibility, gain a random buff for 5s.",
             .english = "When you inflict a debuff gain a random buff for [HBSL].",
         },
         .color = color,
@@ -5413,6 +5722,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Watermage Pendant",
         },
         .description = .{
+            .original = "Every 12s, when you stand still, gain FLOW-INT.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5428,6 +5738,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Raindrop Earrings",
         },
         .description = .{
+            .original = "Every 18s, when you stand still, gain REPEAT.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         .color = color,
@@ -5443,6 +5754,7 @@ fn transfiguredLakeshrineSet() !void {
             .english = "Transfigured Aquamarine Bracelet",
         },
         .description = .{
+            .original = "Every 12s, gain a random buff for 10s.",
             .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] " ++
                 "seconds.",
         },
