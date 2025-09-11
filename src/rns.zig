@@ -16,10 +16,13 @@ var item_descriptions: std.io.Writer.Allocating = .init(gpa);
 var items_json_string: std.io.Writer.Allocating = .init(gpa);
 var items_json: std.json.Stringify = undefined;
 
+var items_steam_txt: std.io.Writer.Allocating = .init(gpa);
+
 pub const Mod = struct {
     name: []const u8,
     image_path: []const u8,
     thumbnail_path: []const u8,
+    steam_description_header: []const u8,
 };
 
 pub fn start(m: Mod) void {
@@ -36,6 +39,7 @@ fn start2(m: Mod) !void {
     try item_names.ensureTotalCapacity(initial_capacity);
     try item_descriptions.ensureTotalCapacity(initial_capacity);
     try items_json_string.ensureTotalCapacity(initial_capacity);
+    try items_steam_txt.ensureTotalCapacity(initial_capacity);
 
     try sheetlist.writer.writeAll(
         \\Sheet Type,filename
@@ -59,6 +63,13 @@ fn start2(m: Mod) !void {
         .options = .{ .whitespace = .indent_4 },
     };
     try items_json.beginObject();
+
+    try items_steam_txt.writer.writeAll(m.steam_description_header);
+    try items_steam_txt.writer.writeAll(
+        \\
+        \\[table]
+        \\
+    );
 
     mod = m;
     written_items = 0;
@@ -123,12 +134,25 @@ fn end2() !void {
         .data = items_json_string.written(),
     });
 
+    try items_steam_txt.writer.writeAll(
+        \\    [tr]
+        \\        [td]----------------------------------------------------------[/td]
+        \\        [td]----------------------------------------------------------[/td]
+        \\    [/tr]
+        \\[/table]
+    );
+    try output_dir.writeFile(.{
+        .sub_path = "Items.steam.txt",
+        .data = items_steam_txt.written(),
+    });
+
     sheetlist.shrinkRetainingCapacity(0);
     item_csv.shrinkRetainingCapacity(0);
     item_ini.shrinkRetainingCapacity(0);
     item_names.shrinkRetainingCapacity(0);
     item_descriptions.shrinkRetainingCapacity(0);
     items_json_string.shrinkRetainingCapacity(0);
+    items_steam_txt.shrinkRetainingCapacity(0);
     generating_mod = false;
 }
 
@@ -722,7 +746,7 @@ fn item2(opt: Item) !void {
     };
 
     const desc = opt.description.english;
-    var new_desc = try std.io.Writer.Allocating.initCapacity(arena, desc.len * 2);
+    var new_desc_writer = try std.io.Writer.Allocating.initCapacity(arena, desc.len * 2);
 
     var pos: usize = 0;
     while (std.mem.indexOfScalarPos(u8, desc, pos, '[')) |i| {
@@ -730,19 +754,51 @@ fn item2(opt: Item) !void {
             if (!std.mem.startsWith(u8, desc[i..], replacement[0]))
                 continue;
 
-            try new_desc.writer.writeAll(desc[pos..i]);
-            try new_desc.writer.writeAll(replacement[1]);
+            try new_desc_writer.writer.writeAll(desc[pos..i]);
+            try new_desc_writer.writer.writeAll(replacement[1]);
             pos = i + replacement[0].len;
             break;
         } else unreachable;
     }
-    try new_desc.writer.writeAll(desc[pos..]);
+    try new_desc_writer.writer.writeAll(desc[pos..]);
 
+    const new_desc = new_desc_writer.written();
     try items_json.objectField(opt.name.english);
-    try items_json.write(new_desc.written());
+    try items_json.write(new_desc);
+
+    try items_steam_txt.writer.writeAll(
+        \\    [tr]
+        \\
+    );
+    try steamEntry(&items_steam_txt.writer, opt.name.original, opt.description.original);
+    try steamEntry(&items_steam_txt.writer, opt.name.english, new_desc);
+    try items_steam_txt.writer.writeAll(
+        \\    [/tr]
+        \\
+    );
 
     written_items += 1;
     have_trigger = false;
+}
+
+fn steamEntry(writer: *std.Io.Writer, name: []const u8, desc: []const u8) !void {
+    try writer.print(
+        \\        [td][b]{s}[/b]
+        \\            
+    ,
+        .{name},
+    );
+    var pos: usize = 0;
+    while (std.mem.indexOfScalarPos(u8, desc, pos, '#')) |i| {
+        try writer.writeAll(desc[pos..i]);
+        try writer.writeAll("\n            ");
+        pos = i + 1;
+    }
+    try writer.writeAll(desc[pos..]);
+    try writer.writeAll(
+        \\[/td]
+        \\
+    );
 }
 
 /// When certain things in the game happen (everything from you gaining gold, to using an ability,

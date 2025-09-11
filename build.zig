@@ -8,12 +8,13 @@ pub fn build(b: *std.Build) void {
             .target = target,
         }),
     });
-    b.installArtifact(mod_exe);
+    const install_mod_exe = b.addInstallArtifact(mod_exe, .{});
 
     const run_mod_exe_step = b.addRunArtifact(mod_exe);
     run_mod_exe_step.addArgs(b.args orelse &.{});
     run_mod_exe_step.stdio = .inherit;
 
+    run_mod_exe_step.step.dependOn(&install_mod_exe.step);
     b.default_step.dependOn(&run_mod_exe_step.step);
 
     const changelog_exe = b.addExecutable(.{

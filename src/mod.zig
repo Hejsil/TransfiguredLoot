@@ -1,3 +1,10 @@
+const steam_description_header =
+    \\Part of the Transfigured Loot collection https://steamcommunity.com/sharedfiles/filedetails/?id=3354085327
+    \\
+    \\Comparison between original loot and their Transfigured version:
+    \\
+;
+
 pub fn main() !void {
     try transfiguredArcaneSet();
     try transfiguredNightSet();
@@ -32,6 +39,7 @@ fn transfiguredArcaneSet() !void {
         .name = "Transfigured Arcane Set",
         .image_path = "images/arcane.png",
         .thumbnail_path = "images/arcane_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -332,6 +340,7 @@ fn transfiguredNightSet() !void {
         .name = "Transfigured Night Set",
         .image_path = "images/night.png",
         .thumbnail_path = "images/night_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -610,6 +619,7 @@ fn transfiguredTimespaceSet() !void {
         .name = "Transfigured Timespace Set",
         .image_path = "images/timespace.png",
         .thumbnail_path = "images/timespace_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -886,6 +896,7 @@ fn transfiguredWindSet() !void {
         .name = "Transfigured Wind Set",
         .image_path = "images/wind.png",
         .thumbnail_path = "images/wind_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -1112,6 +1123,7 @@ fn transfiguredBloodwolfSet() !void {
         .name = "Transfigured Bloodwolf Set",
         .image_path = "images/bloodwolf.png",
         .thumbnail_path = "images/bloodwolf_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -1316,6 +1328,7 @@ fn transfiguredAssasinSet() !void {
         .name = "Transfigured Assasin Set",
         .image_path = "images/assasin.png",
         .thumbnail_path = "images/assasin_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -1554,6 +1567,7 @@ fn transfiguredRockdragonSet() !void {
         .name = "Transfigured Rockdragon Set",
         .image_path = "images/rockdragon.png",
         .thumbnail_path = "images/rockdragon_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -1765,6 +1779,7 @@ fn transfiguredFlameSet() !void {
         .name = "Transfigured Flame Set",
         .image_path = "images/flame.png",
         .thumbnail_path = "images/flame_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -1956,6 +1971,7 @@ fn transfiguredGemSet() !void {
         .name = "Transfigured Gem Set",
         .image_path = "images/gem.png",
         .thumbnail_path = "images/gem_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -2221,6 +2237,7 @@ fn transfiguredLightningSet() !void {
         .name = "Transfigured Lightning Set",
         .image_path = "images/lightning.png",
         .thumbnail_path = "images/lightning_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -2448,6 +2465,7 @@ fn transfiguredShrineSet() !void {
         .name = "Transfigured Shrine Set",
         .image_path = "images/shrine.png",
         .thumbnail_path = "images/shrine_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -2661,6 +2679,7 @@ fn transfiguredLuckySet() !void {
         .name = "Transfigured Lucky Set",
         .image_path = "images/lucky.png",
         .thumbnail_path = "images/lucky_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -2981,6 +3000,7 @@ fn transfiguredLifeSet() !void {
         .name = "Transfigured Life Set",
         .image_path = "images/life.png",
         .thumbnail_path = "images/life_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -3210,6 +3230,7 @@ fn transfiguredPoisonSet() !void {
         .name = "Transfigured Poison Set",
         .image_path = "images/poison.png",
         .thumbnail_path = "images/poison_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -3360,6 +3381,7 @@ fn transfiguredDepthSet() !void {
         .name = "Transfigured Depth Set",
         .image_path = "images/depth.png",
         .thumbnail_path = "images/depth_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -3619,6 +3641,7 @@ fn transfiguredDarkbiteSet() !void {
         .name = "Transfigured Darkbite Set",
         .image_path = "images/darkbite.png",
         .thumbnail_path = "images/darkbite_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -3842,6 +3865,7 @@ fn transfiguredTimegemSet() !void {
         .name = "Transfigured Timegem Set",
         .image_path = "images/timegem.png",
         .thumbnail_path = "images/timegem_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -4054,6 +4078,7 @@ fn transfiguredYoukaiSet() !void {
         .name = "Transfigured Youkai Set",
         .image_path = "images/youkai.png",
         .thumbnail_path = "images/youkai_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -4240,6 +4265,7 @@ fn transfiguredHauntedSet() !void {
         .name = "Transfigured Haunted Set",
         .image_path = "images/haunted.png",
         .thumbnail_path = "images/haunted_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -4401,6 +4427,7 @@ fn transfiguredGladiatorSet() !void {
         .name = "Transfigured Gladiator Set",
         .image_path = "images/gladiator.png",
         .thumbnail_path = "images/gladiator_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -4623,6 +4650,7 @@ fn transfiguredSparkbladeSet() !void {
         .name = "Transfigured Sparkblade Set",
         .image_path = "images/sparkblade.png",
         .thumbnail_path = "images/sparkblade_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -4882,6 +4910,7 @@ fn transfiguredSwiftflightSet() !void {
         .name = "Transfigured Swiftflight Set",
         .image_path = "images/swiftflight.png",
         .thumbnail_path = "images/swiftflight_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -5138,6 +5167,7 @@ fn transfiguredSacredflameSet() !void {
         .name = "Transfigured Sacredflame Set",
         .image_path = "images/sacredflame.png",
         .thumbnail_path = "images/sacredflame_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -5367,6 +5397,7 @@ fn transfiguredRuinsSet() !void {
         .name = "Transfigured Ruins Set",
         .image_path = "images/ruins.png",
         .thumbnail_path = "images/ruins_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
@@ -5607,6 +5638,7 @@ fn transfiguredLakeshrineSet() !void {
         .name = "Transfigured Lakeshrine Set",
         .image_path = "images/lakeshrine.png",
         .thumbnail_path = "images/lakeshrine_thumbnail.png",
+        .steam_description_header = steam_description_header,
     });
     defer rns.end();
 
