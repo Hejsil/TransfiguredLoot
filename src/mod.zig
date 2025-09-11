@@ -11,7 +11,7 @@ pub fn main() !void {
     try transfiguredTimespaceSet();
     try transfiguredWindSet();
     try transfiguredBloodwolfSet();
-    try transfiguredAssasinSet();
+    try transfiguredAssassinSet();
     try transfiguredRockdragonSet();
     try transfiguredFlameSet();
     try transfiguredGemSet();
@@ -1322,12 +1322,12 @@ fn transfiguredBloodwolfSet() !void {
     });
 }
 
-fn transfiguredAssasinSet() !void {
+fn transfiguredAssassinSet() !void {
     const color = rgb(0x36, 0x50, 0xcf);
     rns.start(.{
-        .name = "Transfigured Assasin Set",
-        .image_path = "images/assasin.png",
-        .thumbnail_path = "images/assasin_thumbnail.png",
+        .name = "Transfigured Assassin Set",
+        .image_path = "images/assassin.png",
+        .thumbnail_path = "images/assassin_thumbnail.png",
         .steam_description_header = steam_description_header,
     });
     defer rns.end();
