@@ -1,6 +1,6 @@
 .{
     .name = .TransfiguredLoot,
-    .version = "0.10.0",
+    .version = "0.11.0",
     .minimum_zig_version = "0.15.1",
     .fingerprint = 0xc90368d588ad010b,
     .paths = .{"."},
