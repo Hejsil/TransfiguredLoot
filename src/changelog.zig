@@ -78,12 +78,20 @@ fn generateChangelogModEntry(
                 print_mod_name = false;
             }
             try writer.print("- {s}\n", .{item_name});
-            try writer.writeAll("  - old: ");
-            try writeDescription(writer, old_items_descs[i].string);
-            try writer.writeAll("\n");
-            try writer.writeAll("  - new: ");
-            try writeDescription(writer, new_items_descs[i].string);
-            try writer.writeAll("\n");
+            if (std.mem.startsWith(u8, new_items_descs[i].string, "Not Implemented")) {
+                try writer.writeAll("  - Has been removed\n");
+            } else {
+                if (std.mem.startsWith(u8, old_items_descs[i].string, "Not Implemented")) {
+                    try writer.writeAll("  - Has been added\n");
+                } else {
+                    try writer.writeAll("  - old: ");
+                    try writeDescription(writer, old_items_descs[i].string);
+                    try writer.writeAll("\n");
+                }
+                try writer.writeAll("  - new: ");
+                try writeDescription(writer, new_items_descs[i].string);
+                try writer.writeAll("\n");
+            }
             continue;
         }
 
