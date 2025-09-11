@@ -1,6 +1,8 @@
 const gpa = std.heap.page_allocator;
 
 var generating_mod: bool = false;
+var is_implemented: bool = false;
+var add_to_steam_txt: bool = false;
 var written_items: usize = 0;
 var have_trigger: bool = false;
 
@@ -510,10 +512,10 @@ pub fn item(opt: Item) void {
 }
 
 fn item2(opt: Item) !void {
-    const is_not_implemented = std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
+    is_implemented = !std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
     std.debug.assert(
-        (is_not_implemented and opt.treasureType == null) or
-            (!is_not_implemented and opt.treasureType != null),
+        (!is_implemented and opt.treasureType == null) or
+            (is_implemented and opt.treasureType != null),
     );
     std.debug.assert(std.mem.endsWith(u8, opt.name.english, opt.name.original));
 
@@ -766,16 +768,18 @@ fn item2(opt: Item) !void {
     try items_json.objectField(opt.name.english);
     try items_json.write(new_desc);
 
-    try items_steam_txt.writer.writeAll(
-        \\    [tr]
-        \\
-    );
-    try steamEntry(&items_steam_txt.writer, opt.name.original, opt.description.original);
-    try steamEntry(&items_steam_txt.writer, opt.name.english, new_desc);
-    try items_steam_txt.writer.writeAll(
-        \\    [/tr]
-        \\
-    );
+    if (is_implemented) {
+        try items_steam_txt.writer.writeAll(
+            \\    [tr]
+            \\
+        );
+        try steamEntry(&items_steam_txt.writer, opt.name.original, opt.description.original);
+        try steamEntry(&items_steam_txt.writer, opt.name.english, new_desc);
+        try items_steam_txt.writer.writeAll(
+            \\    [/tr]
+            \\
+        );
+    }
 
     written_items += 1;
     have_trigger = false;
