@@ -10,14 +10,17 @@ pub fn main() !void {
 fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: []const u8) !void {
     const cwd = std.fs.cwd();
     var changelog = std.io.Writer.Allocating.init(arena);
-    const old_dir = try cwd.openDir(old_path, .{});
-    const new_dir = try cwd.openDir(new_path, .{ .iterate = true });
+    const old_dir = try cwd.openDir(old_path, .{ .iterate = true });
+    const new_dir = try cwd.openDir(new_path, .{});
 
-    var mod_folders = new_dir.iterate();
+    var mod_folders = old_dir.iterate();
     while (try mod_folders.next()) |entry| {
         std.debug.assert(entry.kind == .directory);
         const old_mod_dir = try old_dir.openDir(entry.name, .{});
-        const new_mod_dir = try new_dir.openDir(entry.name, .{});
+        const new_mod_dir = new_dir.openDir(entry.name, .{}) catch |err| switch (err) {
+            error.FileNotFound => try new_dir.openDir("Transfigured Assasin Set", .{}), // TODO: Remove after 0.11.0
+            else => return err,
+        };
         try generateChangelogModEntry(
             arena,
             &changelog.writer,
