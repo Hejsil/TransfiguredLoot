@@ -78,8 +78,12 @@ fn generateChangelogModEntry(
                 print_mod_name = false;
             }
             try writer.print("- {s}\n", .{item_name});
-            try writer.print("  - old: {s}\n", .{old_items_descs[i].string});
-            try writer.print("  - new: {s}\n", .{new_items_descs[i].string});
+            try writer.writeAll("  - old: ");
+            try writeDescription(writer, old_items_descs[i].string);
+            try writer.writeAll("\n");
+            try writer.writeAll("  - new: ");
+            try writeDescription(writer, new_items_descs[i].string);
+            try writer.writeAll("\n");
             continue;
         }
 
@@ -137,6 +141,16 @@ fn getLineContainingIndex(str: []const u8, idx: usize) []const u8 {
 
     const end = std.mem.indexOfScalarPos(u8, str, idx, '\n') orelse str.len;
     return str[start..end];
+}
+
+fn writeDescription(writer: *std.Io.Writer, desc: []const u8) !void {
+    var pos: usize = 0;
+    while (std.mem.indexOfScalarPos(u8, desc, pos, '#')) |i| {
+        try writer.writeAll(desc[pos..i]);
+        try writer.writeAll(" ");
+        pos = i + 1;
+    }
+    try writer.writeAll(desc[pos..]);
 }
 
 const std = @import("std");
