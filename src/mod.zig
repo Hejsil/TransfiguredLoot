@@ -2449,7 +2449,7 @@ fn transfiguredLightningSet() !void {
         .weaponType = .loot,
         .treasureType = .yellow,
 
-        .strMult = 2000,
+        .strMult = 3000,
         .delay = 150,
     });
     trig.onDamage(&.{.pl_self});
