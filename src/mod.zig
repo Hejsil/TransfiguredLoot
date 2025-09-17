@@ -5179,13 +5179,46 @@ fn transfiguredSacredflameSet() !void {
         },
         .description = .{
             .original = "Your Primary has a 40% chance to grant you FLASH-DEX.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], gain [FLASH-STR].#" ++
+                "When you lose [FLASH-STR], gain [FLASH-DEX].#" ++
+                "When you lose [FLASH-DEX], gain [FLASH-INT].",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .redyellow,
+        .treasureType = .redyellow,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 15 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsType = .flashstr,
     });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_run_cooldown();
+
+    trig.hotbarUsed(&.{.hb_self});
+    qpat.hb_run_cooldown();
+    qpat.hb_flash_item(.{});
+    ttrg.player_self();
+    tset.hbskey(.{ Hbs.flashstr, r.hbsLength });
+    apat.apply_hbs(.{});
+
+    trig.hbsDestroyed(&.{.pl_self});
+    cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashstr));
+    qpat.hb_flash_item(.{});
+    ttrg.player_self();
+    tset.hbskey(.{ Hbs.flashdex, r.hbsLength });
+    apat.apply_hbs(.{});
+
+    trig.hbsDestroyed(&.{.pl_self});
+    cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashdex));
+    qpat.hb_flash_item(.{});
+    ttrg.player_self();
+    tset.hbskey(.{ Hbs.flashint, r.hbsLength });
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_flamedancer_dagger",
