@@ -5227,7 +5227,7 @@ fn transfiguredSacredflameSet() !void {
         },
         .description = .{
             .original = "Every 2 times you use your Defensive, gain FLASH-INT.",
-            .english = "Whenever you gain invulnerability, gain [FLASH-INT].",
+            .english = "Whenever you gain invulnerability, gain [FLASH-DEX].",
         },
         .color = color,
         .type = .loot,
@@ -5235,7 +5235,7 @@ fn transfiguredSacredflameSet() !void {
         .treasureType = .redyellow,
 
         .hbsLength = 5 * std.time.ms_per_s,
-        .hbsType = .flashint,
+        .hbsType = .flashdex,
     });
     trig.onInvuln(&.{.pl_self});
     qpat.hb_flash_item(.{});
