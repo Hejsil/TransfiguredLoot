@@ -3282,8 +3282,8 @@ pub const ttrg = opaque {
     ///
     /// When using "prune" functions, "#" is replaced with the appropriate variable for that item
     /// in the target list.
-    pub fn players_prune(args: anytype) void {
-        write("ttrg_players_prune", args);
+    pub fn players_prune(a: anytype, op: Compare, b: anytype) void {
+        write("ttrg_players_prune", .{ a, op, b });
     }
 
     /// Removes the player receiving this trigger from the player list, if it is in there.
