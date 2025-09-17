@@ -5180,8 +5180,7 @@ fn transfiguredSacredflameSet() !void {
         .description = .{
             .original = "Your Primary has a 40% chance to grant you FLASH-DEX.",
             .english = "Every [CD], gain [FLASH-STR].#" ++
-                "When you lose [FLASH-STR], gain [FLASH-DEX].#" ++
-                "When you lose [FLASH-DEX], gain [FLASH-INT].",
+                "When you lose [FLASH-STR], gain [FLASH-DEX].",
         },
         .color = color,
         .type = .loot,
@@ -5190,7 +5189,7 @@ fn transfiguredSacredflameSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 15 * std.time.ms_per_s,
+        .cooldown = 8 * std.time.ms_per_s,
         .hbInput = .auto,
 
         .hbsLength = 5 * std.time.ms_per_s,
@@ -5203,7 +5202,7 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
     ttrg.player_self();
-    tset.hbskey(.{ Hbs.flashstr, r.hbsLength });
+    tset.hbs_def();
     apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
@@ -5211,13 +5210,6 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbskey(.{ Hbs.flashdex, r.hbsLength });
-    apat.apply_hbs(.{});
-
-    trig.hbsDestroyed(&.{.pl_self});
-    cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashdex));
-    qpat.hb_flash_item(.{});
-    ttrg.player_self();
-    tset.hbskey(.{ Hbs.flashint, r.hbsLength });
     apat.apply_hbs(.{});
 
     item(.{
