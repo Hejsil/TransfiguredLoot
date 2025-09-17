@@ -5805,13 +5805,40 @@ fn transfiguredLakeshrineSet() !void {
         },
         .description = .{
             .original = "Every 12s, when you stand still, gain FLOW-INT.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], rotate between gaining [FLOW-STR], [FLOW-DEX] or [FLOW-INT].",
         },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .yellowgreen,
+        .treasureType = .yellowgreen,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 5 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .autoOffSqVar0 = 0,
+
+        // Vanilla Redwhite Ribbon doesn't work if an items `hbsType` is not a buff
+        .hbFlags = .{ .hidehbs = true },
+        .hbsType = .flashstr,
+        .hbsLength = 5 * std.time.ms_per_s,
     });
+    const watermage_pendant_buffs = [_]Hbs{ .flowstr, .flowdex, .flowint };
+    for (watermage_pendant_buffs, 0..) |hbs, i| {
+        trig.hotbarUsed(&.{.hb_self});
+        cond.hb_check_square_var(.{ 0, i });
+        qpat.hb_run_cooldown();
+        qpat.hb_flash_item(.{});
+        ttrg.player_self();
+        tset.hbskey(.{ hbs, r.hbsLength });
+        apat.apply_hbs(.{});
+    }
+
+    trig.hotbarUsed2(&.{.hb_self});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    cond.hb_check_square_var(.{ 0, watermage_pendant_buffs.len });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 
     item(.{
         .id = "it_transfigured_raindrop_earrings",
