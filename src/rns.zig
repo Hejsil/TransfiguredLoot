@@ -3089,10 +3089,6 @@ pub const apat = opaque {
             try writer.print(",number,{d}", .{number});
         if (args.numberStr) |number|
             try writer.print(",number,{s}", .{number});
-        if (args.numberR) |number|
-            try writer.print(",number,{s}", .{number.toCsvString()});
-        if (args.numberS) |number|
-            try writer.print(",number,{s}", .{number.toCsvString()});
         if (args.radius) |radius|
             try writer.print(",radius,{d}", .{radius});
         if (args.amount) |amount|
@@ -3108,8 +3104,6 @@ pub const apat = opaque {
         duration: ?u16 = null,
         number: ?u16 = null,
         numberStr: ?[]const u8 = null,
-        numberR: ?r = null,
-        numberS: ?s = null,
         radius: ?u16 = null,
         amount: ?u16 = null,
 
@@ -4729,288 +4723,286 @@ pub const Compare = enum {
 /// what I mean, the Loot and Abilities on your character's hud at the bottom that do things
 ///
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1235653286#gid=1235653286
-fn TriggerVariable(comptime prefix: []const u8) type {
-    return enum {
-        /// 0: Allies
-        /// 1: Enemies
-        teamId,
+pub const TriggerVariables = struct {
+    /// 0: Allies
+    /// 1: Enemies
+    teamId: []const u8,
 
-        /// A number 0-3
-        /// Player IDs are assigned in the order that they FINISH selecting their character, not
-        /// the order in which they're displayed at the bottom. Enemies also have IDs from 0-9,
-        /// with 0 being the first enemy that spawns in any given battle.
-        playerId,
+    /// A number 0-3
+    /// Player IDs are assigned in the order that they FINISH selecting their character, not
+    /// the order in which they're displayed at the bottom. Enemies also have IDs from 0-9,
+    /// with 0 being the first enemy that spawns in any given battle.
+    playerId: []const u8,
 
-        /// The player ID of the enemy that this player is focused on
-        focusId,
+    /// The player ID of the enemy that this player is focused on
+    focusId: []const u8,
 
-        /// The current HP of the player
-        hp,
+    /// The current HP of the player
+    hp: []const u8,
 
-        /// The Max HP of the player
-        hpMax,
+    /// The Max HP of the player
+    hpMax: []const u8,
 
-        /// A binary number, combined from all the items or statuses that give them the hbsFlag
-        /// Stat (see Item Variable sheet)
-        hbsFlag,
+    /// A binary number, combined from all the items or statuses that give them the hbsFlag
+    /// Stat (see Item Variable sheet)
+    hbsFlag: []const u8,
 
-        /// The current number of buffs on this player
-        hbsBuffCount,
+    /// The current number of buffs on this player
+    hbsBuffCount: []const u8,
 
-        /// The current number of debuffs on this player
-        hbsDebuffCount,
+    /// The current number of debuffs on this player
+    hbsDebuffCount: []const u8,
 
-        /// The player's current x position (measured in pixels)
-        xpos,
+    /// The player's current x position (measured in pixels)
+    xpos: []const u8,
 
-        /// The player's current y position (measured in pixels)
-        ypos,
+    /// The player's current y position (measured in pixels)
+    ypos: []const u8,
 
-        /// The unique ID of this hotbar slot, numbered 0-80ish (each player has 20 I think)
-        hbId,
+    /// The unique ID of this hotbar slot, numbered 0-80ish (each player has 20 I think)
+    hbId: []const u8,
 
-        /// The "type" of the item
-        /// 0: Character
-        /// 1: "Weapon" (Which really means Ability)
-        /// 2: Loot
-        /// 3: Potion
-        /// 4: Pickup (Full Heals + Level Ups in the store)
-        /// 5: Upgrade (The upgrade gems in the store)
-        type,
+    /// The "type" of the item
+    /// 0: Character
+    /// 1: "Weapon" (Which really means Ability)
+    /// 2: Loot
+    /// 3: Potion
+    /// 4: Pickup (Full Heals + Level Ups in the store)
+    /// 5: Upgrade (The upgrade gems in the store)
+    type: []const u8,
 
-        /// The item ID of this hotbar slot (determined by the Item it is, like Obsidian Hairpin's
-        /// ID is different from Mountain Staff)
-        dataId,
+    /// The item ID of this hotbar slot (determined by the Item it is, like Obsidian Hairpin's
+    /// ID is different from Mountain Staff)
+    dataId: []const u8,
 
-        /// The amount of milliseconds before this particular item can be used again (the max of
-        /// cooldown, hidden cooldown, GCD, etc..)
-        milSecLeft,
+    /// The amount of milliseconds before this particular item can be used again (the max of
+    /// cooldown, hidden cooldown, GCD, etc..)
+    milSecLeft: []const u8,
 
-        /// The amount of milliseconds left on its cooldown (disregarding GCD etc..)
-        cdSecLeft,
+    /// The amount of milliseconds left on its cooldown (disregarding GCD etc..)
+    cdSecLeft: []const u8,
 
-        /// Whether or not this item can be "reset" (will be false if cdSecLeft is less than 600ms
-        /// or if it's an unresettable item)
-        resettable,
+    /// Whether or not this item can be "reset" (will be false if cdSecLeft is less than 600ms
+    /// or if it's an unresettable item)
+    resettable: []const u8,
 
-        /// The cooldown type of this item, compare using "cdType" enum
-        cooldownType,
+    /// The cooldown type of this item, compare using "cdType" enum
+    cooldownType: []const u8,
 
-        /// The cooldown of this item, in milliseconds
-        cooldown,
+    /// The cooldown of this item, in milliseconds
+    cooldown: []const u8,
 
-        /// The GCD of this item, in milliseconds
-        gcd,
+    /// The GCD of this item, in milliseconds
+    gcd: []const u8,
 
-        /// The current number of uses on this item
-        stock,
+    /// The current number of uses on this item
+    stock: []const u8,
 
-        /// The maximum number of uses on this item
-        maxStock,
+    /// The maximum number of uses on this item
+    maxStock: []const u8,
 
-        /// The number of Charges on this item
-        chargeCount,
+    /// The number of Charges on this item
+    chargeCount: []const u8,
 
-        /// The strength of this item (Charge bonus is counted in)
-        strength,
+    /// The strength of this item (Charge bonus is counted in)
+    strength: []const u8,
 
-        /// The strength of the status effect on this item
-        hbsStrength,
+    /// The strength of the status effect on this item
+    hbsStrength: []const u8,
 
-        /// The status effect ID of this item
-        hbsType,
+    /// The status effect ID of this item
+    hbsType: []const u8,
 
-        hbsLength,
+    hbsLength: []const u8,
 
-        /// The weapon type of this item, compare using "weaponType" enum
-        weaponType,
+    /// The weapon type of this item, compare using "weaponType" enum
+    weaponType: []const u8,
 
-        /// The strength of this item before calculations (I think, you probably shouldn't use
-        /// this tbh)
-        strengthMult,
+    /// The strength of this item before calculations (I think, you probably shouldn't use
+    /// this tbh)
+    strengthMult: []const u8,
 
-        /// The radius of this item
-        radius,
+    /// The radius of this item
+    radius: []const u8,
 
-        /// The number of times this item deals damage per use (Like Assassin's Primary is 2,
-        /// Golden Katana is 5)
-        number,
+    /// The number of times this item deals damage per use (Like Assassin's Primary is 2,
+    /// Golden Katana is 5)
+    number: []const u8,
 
-        /// The delay between activation and hit for this item
-        delay,
+    /// The delay between activation and hit for this item
+    delay: []const u8,
 
-        /// The input type of this item, compare using "hitboxInput" enum
-        hbInput,
+    /// The input type of this item, compare using "hitboxInput" enum
+    hbInput: []const u8,
 
-        /// The item's proc chance ("procChance" on the Item Variable page, NOT "luck")
-        luck,
+    /// The item's proc chance ("procChance" on the Item Variable page, NOT "luck")
+    luck: []const u8,
 
-        /// The item's hitbox flags ("hbFlags" on the Item Variable page, NOT "flags")
-        flags,
+    /// The item's hitbox flags ("hbFlags" on the Item Variable page, NOT "flags")
+    flags: []const u8,
 
-        // These are hidden variables on the hotbar slots you can set
-        vars0,
-        vars1,
-        vars2,
-        vars3,
+    // These are hidden variables on the hotbar slots you can set
+    vars0: []const u8,
+    vars1: []const u8,
+    vars2: []const u8,
+    vars3: []const u8,
 
-        sqVar0,
-        sqVar1,
-        sqVar2,
-        sqVar3,
+    sqVar0: []const u8,
+    sqVar1: []const u8,
+    sqVar2: []const u8,
+    sqVar3: []const u8,
 
-        /// The unique ID of the item that applied the status
-        originHbId,
+    /// The unique ID of the item that applied the status
+    originHbId: []const u8,
 
-        /// The status ID (As in, Curse's ID is different from Vanish's ID)
-        statusId,
+    /// The status ID (As in, Curse's ID is different from Vanish's ID)
+    statusId: []const u8,
 
-        /// A unique number given to this particular instance of a status effect; starts at 0,
-        /// increments with each new status application, and resets when the run resets
-        uniqueId,
+    /// A unique number given to this particular instance of a status effect; starts at 0,
+    /// increments with each new status application, and resets when the run resets
+    uniqueId: []const u8,
 
-        /// The team ID of the player AFFLICTED with the status
-        aflTeamId,
+    /// The team ID of the player AFFLICTED with the status
+    aflTeamId: []const u8,
 
-        /// The player ID of the player AFFLICTED with the status
-        aflPlayerId,
+    /// The player ID of the player AFFLICTED with the status
+    aflPlayerId: []const u8,
 
-        /// True if it's a buff, false if it's a debuff
-        isBuff,
+    /// True if it's a buff, false if it's a debuff
+    isBuff: []const u8,
 
-        /// The damage flags of the attack that hit (see tset_damage_flags)
-        damageFlags,
+    /// The damage flags of the attack that hit (see tset_damage_flags)
+    damageFlags: []const u8,
 
-        /// The team ID of the damaged player
-        dmgTeamId,
+    /// The team ID of the damaged player
+    dmgTeamId: []const u8,
 
-        /// The player ID of the damaged player
-        dmgPlayerId,
+    /// The player ID of the damaged player
+    dmgPlayerId: []const u8,
 
-        /// The amount of damage dealt
-        amount,
+    /// The amount of damage dealt
+    amount: []const u8,
 
-        /// True if it's a crit
-        isCrit,
+    /// True if it's a crit
+    isCrit: []const u8,
 
-        /// A saved number on this trinket that can be used for various things. For instance, the
-        /// Floof Ball is 'perfect' while its counter is 0; and its counter increments when you're
-        /// hit, changing it to a ruffled Floof Ball
-        counter,
+    /// A saved number on this trinket that can be used for various things. For instance, the
+    /// Floof Ball is 'perfect' while its counter is 0; and its counter increments when you're
+    /// hit, changing it to a ruffled Floof Ball
+    counter: []const u8,
 
-        /// The length of invuln, in milliseconds
-        invulnTime,
+    /// The length of invuln, in milliseconds
+    invulnTime: []const u8,
 
-        /// The "tick" count since the start of the last battle
-        tickNum,
+    /// The "tick" count since the start of the last battle
+    tickNum: []const u8,
 
-        /// a binary number specifying which players started attacking; to be used with tcond_hb_auto_pl
-        autoBinary,
+    /// a binary number specifying which players started attacking; to be used with tcond_hb_auto_pl
+    autoBinary: []const u8,
 
-        /// Square ID of the item that was picked up (a "Square" is a specific instance of an item, held by one player)
-        sqId,
+    /// Square ID of the item that was picked up (a "Square" is a specific instance of an item, held by one player)
+    sqId: []const u8,
 
-        /// The data ID of the Square (the ID matching to a particular kind of item, like "Necronomicon")
-        dtId,
+    /// The data ID of the Square (the ID matching to a particular kind of item, like "Necronomicon")
+    dtId: []const u8,
 
-        /// The level that was reached
-        level,
+    /// The level that was reached
+    level: []const u8,
 
-        changeAmount,
-        newAmount,
-        sourceType,
-        sourceHb,
+    changeAmount: []const u8,
+    newAmount: []const u8,
+    sourceType: []const u8,
+    sourceHb: []const u8,
 
-        pub fn toCsvString(variable: @This()) []const u8 {
-            return switch (variable) {
-                .teamId => prefix ++ "teamId",
-                .playerId => prefix ++ "playerId",
-                .focusId => prefix ++ "focusId",
-                .hp => prefix ++ "hp",
-                .hpMax => prefix ++ "hpMax",
-                .hbsFlag => prefix ++ "hbsFlag",
-                .hbsBuffCount => prefix ++ "hbsBuffCount",
-                .hbsDebuffCount => prefix ++ "hbsDebuffCount",
-                .xpos => prefix ++ "xpos",
-                .ypos => prefix ++ "ypos",
-                .hbId => prefix ++ "hbId",
-                .type => prefix ++ "type",
-                .dataId => prefix ++ "dataId",
-                .milSecLeft => prefix ++ "milSecLeft",
-                .cdSecLeft => prefix ++ "cdSecLeft",
-                .resettable => prefix ++ "resettable",
-                .cooldownType => prefix ++ "cooldownType",
-                .cooldown => prefix ++ "cooldown",
-                .gcd => prefix ++ "gcd",
-                .stock => prefix ++ "stock",
-                .maxStock => prefix ++ "maxStock",
-                .chargeCount => prefix ++ "chargeCount",
-                .strength => prefix ++ "strength",
-                .hbsStrength => prefix ++ "hbsStrength",
-                .hbsType => prefix ++ "hbsType",
-                .hbsLength => prefix ++ "hbsLength",
-                .weaponType => prefix ++ "weaponType",
-                .strengthMult => prefix ++ "strengthMult",
-                .radius => prefix ++ "radius",
-                .number => prefix ++ "number",
-                .delay => prefix ++ "delay",
-                .hbInput => prefix ++ "hbInput",
-                .luck => prefix ++ "luck",
-                .flags => prefix ++ "flags",
-                .vars0 => prefix ++ "vars0",
-                .vars1 => prefix ++ "vars1",
-                .vars2 => prefix ++ "vars2",
-                .vars3 => prefix ++ "vars3",
-                .sqVar0 => prefix ++ "sqVar0",
-                .sqVar1 => prefix ++ "sqVar1",
-                .sqVar2 => prefix ++ "sqVar2",
-                .sqVar3 => prefix ++ "sqVar3",
-                .originHbId => prefix ++ "originHbId",
-                .statusId => prefix ++ "statusId",
-                .uniqueId => prefix ++ "uniqueId",
-                .aflTeamId => prefix ++ "aflTeamId",
-                .aflPlayerId => prefix ++ "aflPlayerId",
-                .isBuff => prefix ++ "isBuff",
-                .damageFlags => prefix ++ "damageFlags",
-                .dmgTeamId => prefix ++ "dmgTeamId",
-                .dmgPlayerId => prefix ++ "dmgPlayerId",
-                .amount => prefix ++ "amount",
-                .isCrit => prefix ++ "isCrit",
-                .counter => prefix ++ "counter",
-                .invulnTime => prefix ++ "invulnTime",
-                .tickNum => prefix ++ "tickNum",
-                .autoBinary => prefix ++ "autoBinary",
-                .sqId => prefix ++ "sqId",
-                .dtId => prefix ++ "dtId",
-                .level => prefix ++ "level",
-                .changeAmount => prefix ++ "changeAmount",
-                .newAmount => prefix ++ "newAmount",
-                .sourceType => prefix ++ "sourceType",
-                .sourceHb => prefix ++ "sourceHb",
-            };
-        }
-    };
-}
+    pub fn fromPrefix(comptime prefix: []const u8) TriggerVariables {
+        return .{
+            .teamId = prefix ++ "teamId",
+            .playerId = prefix ++ "playerId",
+            .focusId = prefix ++ "focusId",
+            .hp = prefix ++ "hp",
+            .hpMax = prefix ++ "hpMax",
+            .hbsFlag = prefix ++ "hbsFlag",
+            .hbsBuffCount = prefix ++ "hbsBuffCount",
+            .hbsDebuffCount = prefix ++ "hbsDebuffCount",
+            .xpos = prefix ++ "xpos",
+            .ypos = prefix ++ "ypos",
+            .hbId = prefix ++ "hbId",
+            .type = prefix ++ "type",
+            .dataId = prefix ++ "dataId",
+            .milSecLeft = prefix ++ "milSecLeft",
+            .cdSecLeft = prefix ++ "cdSecLeft",
+            .resettable = prefix ++ "resettable",
+            .cooldownType = prefix ++ "cooldownType",
+            .cooldown = prefix ++ "cooldown",
+            .gcd = prefix ++ "gcd",
+            .stock = prefix ++ "stock",
+            .maxStock = prefix ++ "maxStock",
+            .chargeCount = prefix ++ "chargeCount",
+            .strength = prefix ++ "strength",
+            .hbsStrength = prefix ++ "hbsStrength",
+            .hbsType = prefix ++ "hbsType",
+            .hbsLength = prefix ++ "hbsLength",
+            .weaponType = prefix ++ "weaponType",
+            .strengthMult = prefix ++ "strengthMult",
+            .radius = prefix ++ "radius",
+            .number = prefix ++ "number",
+            .delay = prefix ++ "delay",
+            .hbInput = prefix ++ "hbInput",
+            .luck = prefix ++ "luck",
+            .flags = prefix ++ "flags",
+            .vars0 = prefix ++ "vars0",
+            .vars1 = prefix ++ "vars1",
+            .vars2 = prefix ++ "vars2",
+            .vars3 = prefix ++ "vars3",
+            .sqVar0 = prefix ++ "sqVar0",
+            .sqVar1 = prefix ++ "sqVar1",
+            .sqVar2 = prefix ++ "sqVar2",
+            .sqVar3 = prefix ++ "sqVar3",
+            .originHbId = prefix ++ "originHbId",
+            .statusId = prefix ++ "statusId",
+            .uniqueId = prefix ++ "uniqueId",
+            .aflTeamId = prefix ++ "aflTeamId",
+            .aflPlayerId = prefix ++ "aflPlayerId",
+            .isBuff = prefix ++ "isBuff",
+            .damageFlags = prefix ++ "damageFlags",
+            .dmgTeamId = prefix ++ "dmgTeamId",
+            .dmgPlayerId = prefix ++ "dmgPlayerId",
+            .amount = prefix ++ "amount",
+            .isCrit = prefix ++ "isCrit",
+            .counter = prefix ++ "counter",
+            .invulnTime = prefix ++ "invulnTime",
+            .tickNum = prefix ++ "tickNum",
+            .autoBinary = prefix ++ "autoBinary",
+            .sqId = prefix ++ "sqId",
+            .dtId = prefix ++ "dtId",
+            .level = prefix ++ "level",
+            .changeAmount = prefix ++ "changeAmount",
+            .newAmount = prefix ++ "newAmount",
+            .sourceType = prefix ++ "sourceType",
+            .sourceHb = prefix ++ "sourceHb",
+        };
+    }
+};
 
-pub const s = TriggerVariable("s_");
-pub const r = TriggerVariable("r_");
-pub const tps = TriggerVariable("tp#_");
-pub const tp0 = TriggerVariable("tp0_");
-pub const tp1 = TriggerVariable("tp1_");
-pub const tp2 = TriggerVariable("tp2_");
-pub const tp3 = TriggerVariable("tp3_");
-pub const thss = TriggerVariable("ths#_");
-pub const ths0 = TriggerVariable("ths0_");
-pub const ths1 = TriggerVariable("ths1_");
-pub const ths2 = TriggerVariable("ths2_");
-pub const ths3 = TriggerVariable("ths3_");
-pub const ths4 = TriggerVariable("ths4_");
-pub const ths5 = TriggerVariable("ths5_");
-pub const thbss = TriggerVariable("thbs#_");
-pub const thbs0 = TriggerVariable("thbs0_");
-pub const thbs1 = TriggerVariable("thbs1_");
-pub const thbs2 = TriggerVariable("thbs2_");
-pub const thbs3 = TriggerVariable("thbs3_");
+pub const s = TriggerVariables.fromPrefix("s_");
+pub const r = TriggerVariables.fromPrefix("r_");
+pub const tps = TriggerVariables.fromPrefix("tp#_");
+pub const tp0 = TriggerVariables.fromPrefix("tp0_");
+pub const tp1 = TriggerVariables.fromPrefix("tp1_");
+pub const tp2 = TriggerVariables.fromPrefix("tp2_");
+pub const tp3 = TriggerVariables.fromPrefix("tp3_");
+pub const thss = TriggerVariables.fromPrefix("ths#_");
+pub const ths0 = TriggerVariables.fromPrefix("ths0_");
+pub const ths1 = TriggerVariables.fromPrefix("ths1_");
+pub const ths2 = TriggerVariables.fromPrefix("ths2_");
+pub const ths3 = TriggerVariables.fromPrefix("ths3_");
+pub const ths4 = TriggerVariables.fromPrefix("ths4_");
+pub const ths5 = TriggerVariables.fromPrefix("ths5_");
+pub const thbss = TriggerVariables.fromPrefix("thbs#_");
+pub const thbs0 = TriggerVariables.fromPrefix("thbs0_");
+pub const thbs1 = TriggerVariables.fromPrefix("thbs1_");
+pub const thbs2 = TriggerVariables.fromPrefix("thbs2_");
+pub const thbs3 = TriggerVariables.fromPrefix("thbs3_");
 
 pub const charspeed = struct {
     pub const slightly = 1;

@@ -1425,7 +1425,7 @@ fn transfiguredAssassinSet() !void {
     qpat.hb_lucky_proc();
     ttrg.players_opponent();
     tset.strength_def();
-    apat.black_wakizashi(.{ .numberR = .sqVar0 });
+    apat.black_wakizashi(.{ .numberStr = r.sqVar0 });
 
     item(.{
         .id = "it_transfigured_shadow_bracelet",
@@ -2363,7 +2363,7 @@ fn transfiguredLightningSet() !void {
 
     for ([_]Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |hb| {
         trig.hotbarUsedProc(&.{hb});
-        inline for (.{ ths0, ths1, ths2, ths3, ths4 }, 0..) |target_hotbar, i| {
+        for ([_]TriggerVariables{ ths0, ths1, ths2, ths3, ths4 }, 0..) |target_hotbar, i| {
             ttrg.hotbarslots_current_players();
             ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
             ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
@@ -3059,7 +3059,7 @@ fn transfiguredLifeSet() !void {
     trig.strCalc2(&.{});
     qpat.hb_add_hitbox_var(.{
         .hitboxVar = .number,
-        .amountStr = r.hp.toCsvString(),
+        .amountStr = r.hp,
     });
 
     item(.{
@@ -3927,7 +3927,7 @@ fn transfiguredTimegemSet() !void {
     trig.strCalc1b(&.{});
     ttrg.hotbarslots_current_players();
     ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
-    inline for (.{ ths5, ths4, ths3, ths2, ths1, ths0 }) |ths|
+    for ([_]TriggerVariables{ ths5, ths4, ths3, ths2, ths1, ths0 }) |ths|
         ttrg.hotbarslots_prune(thss.strengthMult, .@">=", ths.strengthMult);
 
     tset.uservar1("u_str", ths0.strengthMult);
@@ -4474,7 +4474,7 @@ fn transfiguredGladiatorSet() !void {
     ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.loot);
     ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
 
-    inline for (.{ ths0, ths1, ths2, ths3 }) |ths| {
+    for ([_]TriggerVariables{ ths0, ths1, ths2, ths3 }) |ths| {
         tset.uservar2("u_mult_temp", ths.cooldown, .@"/", std.time.ms_per_s);
         tset.uservar2("u_mult_temp", "u_mult_temp", .@"*", teacher_knife_per_sec_mult);
         tset.uservar2("u_mult", "u_mult", .@"+", "u_mult_temp");
@@ -5904,6 +5904,7 @@ const Condition = rns.Condition;
 const Hbs = rns.Hbs;
 const Stat = rns.Stat;
 const Trigger = rns.Trigger;
+const TriggerVariables = rns.TriggerVariables;
 const WeaponType = rns.WeaponType;
 
 const s = rns.s;
