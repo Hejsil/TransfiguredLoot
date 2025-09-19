@@ -5513,6 +5513,7 @@ fn transfiguredRuinsSet() !void {
         tset.uservar2("u_mult", "u_mult", .@"*", mountain_staff_mult_per_gcd);
         qpat.hb_add_strcalcbuff(.{ .amountStr = "u_mult" });
     }
+    //
 
     item(.{
         .id = "it_transfigured_boulder_shield",
@@ -5926,6 +5927,10 @@ const thbs0 = rns.thbs0;
 const thbs1 = rns.thbs1;
 const thbs2 = rns.thbs2;
 const thbs3 = rns.thbs3;
+
+test {
+    _ = &main;
+}
 
 const rns = @import("rns.zig");
 const std = @import("std");
