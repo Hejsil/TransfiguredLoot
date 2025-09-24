@@ -248,7 +248,7 @@ fn transfiguredArcaneSet() !void {
             .english = "When your Special hits a debuffed enemy, deal an additional hit per " ++
                 "debuff of [STR] damage.",
         },
-        .itemFlags = .{ .starting_item = true },
+        // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
