@@ -86,8 +86,8 @@ fn transfiguredArcaneSet() !void {
         },
         .description = .{
             .original = "Your Primary applies CURSE.",
-            .english = "Your Primary deals [VAR0_PERCENT] more damage. If an enemy is cursed " ++
-                "or hexed this value is tripled.",
+            .english = "Your Primary deals [VAR0_PERCENT] more damage. If an enemy is debuffed " ++
+                "this value is tripled.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
@@ -101,20 +101,10 @@ fn transfiguredArcaneSet() !void {
 
         .hbVar0 = blackwing_staff_mult,
     });
-
-    for ([_][]const Hbs{ &Hbs.curses, &Hbs.hexes }) |hbs| {
-        trig.hbsCreated(&.{});
-        cond.eval(s.statusId, .@">=", @intFromEnum(hbs[0]));
-        cond.eval(s.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
-        qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
-        qpat.hb_reset_statchange();
-
-        trig.hbsDestroyed(&.{});
-        cond.eval(s.statusId, .@">=", @intFromEnum(hbs[0]));
-        cond.eval(s.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
-        qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
-        qpat.hb_reset_statchange();
-    }
+    trig.hbsCreated(&.{});
+    cond.false(.{s.isBuff});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
 
     trig.strCalc1c(&.{});
     cond.hb_check_square_var(.{ 0, 0 });
