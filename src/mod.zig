@@ -245,10 +245,10 @@ fn transfiguredArcaneSet() !void {
         .description = .{
             .original = "Increases Special damage by 20%. When you place a debuff on an " ++
                 "opponent, your Special has a 50% chance of resetting.",
-            .english = "When your Special hits a cursed or hexed enemy, deal an additional hit " ++
-                "per curse or hex of [STR] damage.",
+            .english = "When your Special hits a debuffed enemy, deal an additional hit per " ++
+                "debuff of [STR] damage.",
         },
-        // .itemFlags = .{ .starting_item = true },
+        .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
@@ -257,17 +257,13 @@ fn transfiguredArcaneSet() !void {
         .strMult = 35,
     });
     trig.onDamageDone(&.{.dmg_self_special});
-    for ([_][]const Hbs{ &Hbs.curses, &Hbs.hexes }) |hbs| {
-        ttrg.hbstatus_target();
-        ttrg.hbstatus_prune(thbss.statusId, .@">=", @intFromEnum(hbs[0]));
-        ttrg.hbstatus_prune(thbss.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
-        tset.uservar_hbscount(.{"u_hbscount"});
-        tset.uservar2("u_hbs_matching", "u_hbs_matching", .@"+", "u_hbscount");
-    }
-    cond.eval("u_hbs_matching", .@"!=", 0);
+    ttrg.hbstatus_target();
+    ttrg.hbstatus_prune(thbss.isBuff, .@"==", 0);
+    tset.uservar_hbscount(.{"u_debuff_count"});
+    cond.eval("u_debuff_count", .@"!=", 0);
     ttrg.player_damaged();
     tset.strength_def();
-    apat.melee_hit(.{ .numberStr = "u_hbs_matching" });
+    apat.melee_hit(.{ .numberStr = "u_debuff_count" });
 
     const redblack_ribbon_dmg_mult = 0.05;
     const redblack_ribbon_mult_length_hbs = 1.0;
