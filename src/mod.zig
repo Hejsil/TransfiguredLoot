@@ -315,8 +315,8 @@ fn transfiguredArcaneSet() !void {
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
     qpat.hb_reset_statchange();
 
-    trig.strCalc1c(&.{});
-    tset.uservar2("u_hpMiss", r.sqVar0, .@"*", opal_necklace_dmg_per_debuff);
+    trig.strCalc0(&.{});
+    tset.uservar2("u_allMult", r.sqVar0, .@"*", opal_necklace_dmg_per_debuff);
     qpat.hb_reset_statchange_norefresh();
     qpat.hb_add_statchange_norefresh(.{
         .stat = .allMult,
