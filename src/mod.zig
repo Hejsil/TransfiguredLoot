@@ -159,7 +159,7 @@ fn transfiguredArcaneSet() !void {
             .original = "Every 10s, slices the air around you dealing 300 damage and applying " ++
                 "CURSE to nearby enemies.",
             .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
-                "Cooldown resets every time you inflict a curse or hex.",
+                "Cooldown resets every time you inflict a debuff.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
@@ -179,13 +179,10 @@ fn transfiguredArcaneSet() !void {
     trig.autoStart(&.{.hb_auto_pl});
     qpat.hb_run_cooldown();
 
-    for ([_][]const Hbs{ &Hbs.curses, &Hbs.hexes }) |hbs| {
-        trig.hbsCreated(&.{.hbs_selfcast});
-        cond.eval(s.statusId, .@">=", @intFromEnum(hbs[0]));
-        cond.eval(s.statusId, .@"<=", @intFromEnum(hbs[hbs.len - 1]));
-        ttrg.hotbarslot_self();
-        qpat.hb_reset_cooldown();
-    }
+    trig.hbsCreated(&.{.hbs_selfcast});
+    cond.false(.{s.isBuff});
+    ttrg.hotbarslot_self();
+    qpat.hb_reset_cooldown();
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
@@ -308,7 +305,6 @@ fn transfiguredArcaneSet() !void {
 
         .hbVar0 = opal_necklace_dmg_per_debuff,
     });
-
     trig.hbsCreated(&.{});
     cond.false(.{s.isBuff});
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
