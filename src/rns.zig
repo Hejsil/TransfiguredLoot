@@ -1,24 +1,26 @@
 const gpa = std.heap.page_allocator;
 
-var generating_mod: bool = false;
-var is_implemented: bool = false;
-var add_to_steam_txt: bool = false;
-var written_items: usize = 0;
-var have_trigger: bool = false;
+var g: struct {
+    args: ?[][:0]u8 = null,
 
-var m_args: ?[][:0]u8 = null;
+    generating_mod: bool = false,
+    is_implemented: bool = false,
+    add_to_steam_txt: bool = false,
+    have_trigger: bool = false,
+    written_items: usize = 0,
 
-var mod: Mod = undefined;
-var sheetlist: std.io.Writer.Allocating = .init(gpa);
-var item_csv: std.io.Writer.Allocating = .init(gpa);
-var item_ini: std.io.Writer.Allocating = .init(gpa);
-var item_names: std.io.Writer.Allocating = .init(gpa);
-var item_descriptions: std.io.Writer.Allocating = .init(gpa);
+    mod: Mod = undefined,
+    sheetlist: std.io.Writer.Allocating = .init(gpa),
+    item_csv: std.io.Writer.Allocating = .init(gpa),
+    item_ini: std.io.Writer.Allocating = .init(gpa),
+    item_names: std.io.Writer.Allocating = .init(gpa),
+    item_descriptions: std.io.Writer.Allocating = .init(gpa),
 
-var items_json_string: std.io.Writer.Allocating = .init(gpa);
-var items_json: std.json.Stringify = undefined;
+    items_json_string: std.io.Writer.Allocating = .init(gpa),
+    items_json: std.json.Stringify = undefined,
 
-var items_steam_txt: std.io.Writer.Allocating = .init(gpa);
+    items_steam_txt: std.io.Writer.Allocating = .init(gpa),
+} = .{};
 
 pub const Mod = struct {
     name: []const u8,
@@ -27,23 +29,23 @@ pub const Mod = struct {
     steam_description_header: []const u8,
 };
 
-pub fn start(m: Mod) void {
-    start2(m) catch |err| @panic(@errorName(err));
+pub fn start(mod: Mod) void {
+    start2(mod) catch |err| @panic(@errorName(err));
 }
 
-fn start2(m: Mod) !void {
-    std.debug.assert(!generating_mod);
+fn start2(mod: Mod) !void {
+    std.debug.assert(!g.generating_mod);
 
     const initial_capacity = 1024 * 8;
-    try sheetlist.ensureTotalCapacity(initial_capacity);
-    try item_csv.ensureTotalCapacity(initial_capacity);
-    try item_ini.ensureTotalCapacity(initial_capacity);
-    try item_names.ensureTotalCapacity(initial_capacity);
-    try item_descriptions.ensureTotalCapacity(initial_capacity);
-    try items_json_string.ensureTotalCapacity(initial_capacity);
-    try items_steam_txt.ensureTotalCapacity(initial_capacity);
+    try g.sheetlist.ensureTotalCapacity(initial_capacity);
+    try g.item_csv.ensureTotalCapacity(initial_capacity);
+    try g.item_ini.ensureTotalCapacity(initial_capacity);
+    try g.item_names.ensureTotalCapacity(initial_capacity);
+    try g.item_descriptions.ensureTotalCapacity(initial_capacity);
+    try g.items_json_string.ensureTotalCapacity(initial_capacity);
+    try g.items_steam_txt.ensureTotalCapacity(initial_capacity);
 
-    try sheetlist.writer.writeAll(
+    try g.sheetlist.writer.writeAll(
         \\Sheet Type,filename
         \\NameSheet,Items_Names
         \\DescriptionSheet,Items_Descriptions
@@ -51,31 +53,31 @@ fn start2(m: Mod) !void {
         \\
     );
 
-    try item_names.writer.writeAll(
+    try g.item_names.writer.writeAll(
         \\key,level,English,Japanese,Chinese
         \\
     );
-    try item_descriptions.writer.writeAll(
+    try g.item_descriptions.writer.writeAll(
         \\key,level,English,Japanese,Chinese
         \\
     );
 
-    items_json = .{
-        .writer = &items_json_string.writer,
+    g.items_json = .{
+        .writer = &g.items_json_string.writer,
         .options = .{ .whitespace = .indent_4 },
     };
-    try items_json.beginObject();
+    try g.items_json.beginObject();
 
-    try items_steam_txt.writer.writeAll(m.steam_description_header);
-    try items_steam_txt.writer.writeAll(
+    try g.items_steam_txt.writer.writeAll(mod.steam_description_header);
+    try g.items_steam_txt.writer.writeAll(
         \\
         \\[table]
         \\
     );
 
-    mod = m;
-    written_items = 0;
-    generating_mod = true;
+    g.mod = mod;
+    g.written_items = 0;
+    g.generating_mod = true;
 }
 
 pub fn end() void {
@@ -83,11 +85,11 @@ pub fn end() void {
 }
 
 fn end2() !void {
-    std.debug.assert(generating_mod);
+    std.debug.assert(g.generating_mod);
 
-    const args = m_args orelse blk: {
-        m_args = try std.process.argsAlloc(gpa);
-        break :blk m_args.?;
+    const args = g.args orelse blk: {
+        g.args = try std.process.argsAlloc(gpa);
+        break :blk g.args.?;
     };
 
     const cwd = std.fs.cwd();
@@ -101,42 +103,42 @@ fn end2() !void {
     var output_parent_dir = try cwd.makeOpenPath(output_dir_path, .{});
     defer output_parent_dir.close();
 
-    var output_dir = try output_parent_dir.makeOpenPath(mod.name, .{});
+    var output_dir = try output_parent_dir.makeOpenPath(g.mod.name, .{});
     defer output_dir.close();
 
-    try cwd.copyFile(mod.image_path, output_dir, "items.png", .{});
-    try cwd.copyFile(mod.thumbnail_path, output_dir, "thumbnail.png", .{});
+    try cwd.copyFile(g.mod.image_path, output_dir, "items.png", .{});
+    try cwd.copyFile(g.mod.thumbnail_path, output_dir, "thumbnail.png", .{});
     try output_dir.writeFile(.{
         .sub_path = "SheetList.csv",
-        .data = sheetlist.written(),
+        .data = g.sheetlist.written(),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items.csv",
         .data = try std.fmt.allocPrint(gpa,
             \\spriteNumber,{},,,,
             \\{s}
-        , .{ written_items, item_csv.written() }),
+        , .{ g.written_items, g.item_csv.written() }),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items.ini",
-        .data = item_ini.written(),
+        .data = g.item_ini.written(),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items_Names.csv",
-        .data = item_names.written(),
+        .data = g.item_names.written(),
     });
     try output_dir.writeFile(.{
         .sub_path = "Items_Descriptions.csv",
-        .data = item_descriptions.written(),
+        .data = g.item_descriptions.written(),
     });
 
-    try items_json.endObject();
+    try g.items_json.endObject();
     try output_dir.writeFile(.{
         .sub_path = "Items.json",
-        .data = items_json_string.written(),
+        .data = g.items_json_string.written(),
     });
 
-    try items_steam_txt.writer.writeAll(
+    try g.items_steam_txt.writer.writeAll(
         \\    [tr]
         \\        [td]----------------------------------------------------------[/td]
         \\        [td]----------------------------------------------------------[/td]
@@ -145,17 +147,17 @@ fn end2() !void {
     );
     try output_dir.writeFile(.{
         .sub_path = "Items.steam.txt",
-        .data = items_steam_txt.written(),
+        .data = g.items_steam_txt.written(),
     });
 
-    sheetlist.shrinkRetainingCapacity(0);
-    item_csv.shrinkRetainingCapacity(0);
-    item_ini.shrinkRetainingCapacity(0);
-    item_names.shrinkRetainingCapacity(0);
-    item_descriptions.shrinkRetainingCapacity(0);
-    items_json_string.shrinkRetainingCapacity(0);
-    items_steam_txt.shrinkRetainingCapacity(0);
-    generating_mod = false;
+    g.sheetlist.shrinkRetainingCapacity(0);
+    g.item_csv.shrinkRetainingCapacity(0);
+    g.item_ini.shrinkRetainingCapacity(0);
+    g.item_names.shrinkRetainingCapacity(0);
+    g.item_descriptions.shrinkRetainingCapacity(0);
+    g.items_json_string.shrinkRetainingCapacity(0);
+    g.items_steam_txt.shrinkRetainingCapacity(0);
+    g.generating_mod = false;
 }
 
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=0#gid=0
@@ -189,7 +191,7 @@ pub const Item = struct {
 
     /// Used for upgraded versions of character abilities. A number 0-6
     /// 0: None
-    /// 1: Diamond (unused in the unmodded game)
+    /// 1: Diamond (unused in the ung.modded game)
     /// 2: Opal
     /// 3: Sapphire
     /// 4: Ruby
@@ -199,7 +201,7 @@ pub const Item = struct {
 
     /// Used for Upgrade Gems in the shop, to specify what upgrade they give. A number 0-6
     /// 0: None
-    /// 1: Diamond (unused in the unmodded game)
+    /// 1: Diamond (unused in the ung.modded game)
     /// 2: Opal
     /// 3: Sapphire
     /// 4: Ruby
@@ -474,7 +476,7 @@ pub const Item = struct {
     /// -0.75 : Critical hits will deal 1x damage (and will no longer count as "critical" hits)
     critDamage: ?f64 = null,
 
-    /// Makes your character START with more gold. This is only used in toybox mode to make
+    /// Makes your character START with more gold. This is only used in toybox g.mode to make
     /// Silver Coin work there. It won't affect anything mid-run.
     startingGold: ?u32 = null,
 
@@ -512,30 +514,30 @@ pub fn item(opt: Item) void {
 }
 
 fn item2(opt: Item) !void {
-    is_implemented = !std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
+    g.is_implemented = !std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
     std.debug.assert(
-        (!is_implemented and opt.treasureType == null) or
-            (is_implemented and opt.treasureType != null),
+        (!g.is_implemented and opt.treasureType == null) or
+            (g.is_implemented and opt.treasureType != null),
     );
     std.debug.assert(std.mem.endsWith(u8, opt.name.english, opt.name.original));
 
-    try item_names.writer.print("{s},0,", .{opt.id});
-    try writeCsvString(&item_names.writer, opt.name.english);
-    try item_names.writer.writeAll(",");
-    try writeCsvString(&item_names.writer, opt.name.japanese orelse opt.name.english);
-    try item_names.writer.writeAll(",");
-    try writeCsvString(&item_names.writer, opt.name.chinese orelse opt.name.english);
-    try item_names.writer.writeAll("\n");
+    try g.item_names.writer.print("{s},0,", .{opt.id});
+    try writeCsvString(&g.item_names.writer, opt.name.english);
+    try g.item_names.writer.writeAll(",");
+    try writeCsvString(&g.item_names.writer, opt.name.japanese orelse opt.name.english);
+    try g.item_names.writer.writeAll(",");
+    try writeCsvString(&g.item_names.writer, opt.name.chinese orelse opt.name.english);
+    try g.item_names.writer.writeAll("\n");
 
-    try item_descriptions.writer.print("{s},0,", .{opt.id});
-    try writeCsvString(&item_descriptions.writer, opt.description.english);
-    try item_descriptions.writer.writeAll(",");
-    try writeCsvString(&item_descriptions.writer, opt.description.japanese orelse opt.description.english);
-    try item_descriptions.writer.writeAll(",");
-    try writeCsvString(&item_descriptions.writer, opt.description.chinese orelse opt.description.english);
-    try item_descriptions.writer.writeAll("\n");
+    try g.item_descriptions.writer.print("{s},0,", .{opt.id});
+    try writeCsvString(&g.item_descriptions.writer, opt.description.english);
+    try g.item_descriptions.writer.writeAll(",");
+    try writeCsvString(&g.item_descriptions.writer, opt.description.japanese orelse opt.description.english);
+    try g.item_descriptions.writer.writeAll(",");
+    try writeCsvString(&g.item_descriptions.writer, opt.description.chinese orelse opt.description.english);
+    try g.item_descriptions.writer.writeAll("\n");
 
-    try item_ini.writer.print("[{s}]\n", .{opt.id});
+    try g.item_ini.writer.print("[{s}]\n", .{opt.id});
     inline for (@typeInfo(@TypeOf(opt)).@"struct".fields) |field| continue_blk: {
         if (comptime std.mem.eql(u8, field.name, "id"))
             break :continue_blk;
@@ -548,35 +550,35 @@ fn item2(opt: Item) !void {
 
         if (@field(opt, field.name)) |value| {
             const T = @TypeOf(value);
-            try item_ini.writer.print("{s}=\"", .{field.name});
+            try g.item_ini.writer.print("{s}=\"", .{field.name});
             if (T == Color) {
-                try item_ini.writer.print("#{x:02}{x:02}{x:02}", .{
+                try g.item_ini.writer.print("#{x:02}{x:02}{x:02}", .{
                     value.r,
                     value.g,
                     value.b,
                 });
             } else switch (@typeInfo(T)) {
-                .bool => try item_ini.writer.print("{d}", .{@intFromBool(value)}),
-                .int, .float => try item_ini.writer.print("{d}", .{value}),
+                .bool => try g.item_ini.writer.print("{d}", .{@intFromBool(value)}),
+                .int, .float => try g.item_ini.writer.print("{d}", .{value}),
                 .@"enum", .@"struct", .@"union" => if (@hasDecl(@TypeOf(value), "toIniString")) {
-                    try item_ini.writer.writeAll(value.toIniString());
+                    try g.item_ini.writer.writeAll(value.toIniString());
                 } else if (@hasDecl(@TypeOf(value), "toIniInt")) {
-                    try item_ini.writer.print("{d}", .{value.toIniInt()});
+                    try g.item_ini.writer.print("{d}", .{value.toIniInt()});
                 } else {
-                    try item_ini.writer.writeAll(@tagName(value));
+                    try g.item_ini.writer.writeAll(@tagName(value));
                 },
-                else => try item_ini.writer.writeAll(value),
+                else => try g.item_ini.writer.writeAll(value),
             }
-            try item_ini.writer.writeAll("\"\n");
+            try g.item_ini.writer.writeAll("\"\n");
         }
     }
 
-    try item_csv.writer.print(
+    try g.item_csv.writer.print(
         \\,,,,,
         \\{s},{},,,,
         \\
     ,
-        .{ opt.id, written_items },
+        .{ opt.id, g.written_items },
     );
 
     var arena_state = std.heap.ArenaAllocator.init(gpa);
@@ -765,24 +767,24 @@ fn item2(opt: Item) !void {
     try new_desc_writer.writer.writeAll(desc[pos..]);
 
     const new_desc = new_desc_writer.written();
-    try items_json.objectField(opt.name.english);
-    try items_json.write(new_desc);
+    try g.items_json.objectField(opt.name.english);
+    try g.items_json.write(new_desc);
 
-    if (is_implemented) {
-        try items_steam_txt.writer.writeAll(
+    if (g.is_implemented) {
+        try g.items_steam_txt.writer.writeAll(
             \\    [tr]
             \\
         );
-        try steamEntry(&items_steam_txt.writer, opt.name.original, opt.description.original);
-        try steamEntry(&items_steam_txt.writer, opt.name.english, new_desc);
-        try items_steam_txt.writer.writeAll(
+        try steamEntry(&g.items_steam_txt.writer, opt.name.original, opt.description.original);
+        try steamEntry(&g.items_steam_txt.writer, opt.name.english, new_desc);
+        try g.items_steam_txt.writer.writeAll(
             \\    [/tr]
             \\
         );
     }
 
-    written_items += 1;
-    have_trigger = false;
+    g.written_items += 1;
+    g.have_trigger = false;
 }
 
 fn steamEntry(writer: *std.Io.Writer, name: []const u8, desc: []const u8) !void {
@@ -1204,7 +1206,7 @@ pub const trig = opaque {
         write("autoEnd", conds);
     }
 
-    /// These two are currently unavailable to use with mods; lets me code up a special condition
+    /// These two are currently unavailable to use with g.mods; lets me code up a special condition
     /// for which an item should be activated/deactivated
     /// - Feathered Overcoat, Shrinemaiden's Kosode
     pub fn onSpecialCond0(conds: []const Condition) void {
@@ -1253,7 +1255,7 @@ pub const trig = opaque {
     }
 
     fn writeInner(trigger: []const u8, conds: []const Condition) !void {
-        const writer = &item_csv.writer;
+        const writer = &g.item_csv.writer;
         try writer.print(
             \\,,,,,
             \\trigger,{s}
@@ -1265,7 +1267,7 @@ pub const trig = opaque {
             try writer.writeAll(",");
         try writer.writeAll("\n");
 
-        have_trigger = true;
+        g.have_trigger = true;
     }
 };
 
@@ -1736,9 +1738,9 @@ pub const cond = opaque {
     }
 
     fn write(condition: Condition, args: anytype) void {
-        std.debug.assert(have_trigger);
-        item_csv.writer.print("condition,{s}", .{condition.toCsvString()}) catch |err| @panic(@errorName(err));
-        writeArgs(&item_csv.writer, args) catch |err| @panic(@errorName(err));
+        std.debug.assert(g.have_trigger);
+        g.item_csv.writer.print("condition,{s}", .{condition.toCsvString()}) catch |err| @panic(@errorName(err));
+        writeArgs(&g.item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
 
@@ -2289,8 +2291,8 @@ pub const qpat = opaque {
     }
 
     fn writeInner(pat: []const u8, args: Args) !void {
-        std.debug.assert(have_trigger);
-        const writer = &item_csv.writer;
+        std.debug.assert(g.have_trigger);
+        const writer = &g.item_csv.writer;
         try writer.print("quickPattern,{s}", .{pat});
 
         if (args.varIndex) |varIndex|
@@ -3075,8 +3077,8 @@ pub const apat = opaque {
     }
 
     fn writeInner(pat: []const u8, args: Args) !void {
-        std.debug.assert(have_trigger);
-        const writer = &item_csv.writer;
+        std.debug.assert(g.have_trigger);
+        const writer = &g.item_csv.writer;
         try writer.print("addPattern,{s}", .{pat});
 
         if (args.fxStr) |fxStr|
@@ -3480,9 +3482,9 @@ pub const ttrg = opaque {
     }
 
     fn write(targ: []const u8, args: anytype) void {
-        std.debug.assert(have_trigger);
-        item_csv.writer.print("target,{s}", .{targ}) catch |err| @panic(@errorName(err));
-        writeArgs(&item_csv.writer, args) catch |err| @panic(@errorName(err));
+        std.debug.assert(g.have_trigger);
+        g.item_csv.writer.print("target,{s}", .{targ}) catch |err| @panic(@errorName(err));
+        writeArgs(&g.item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
 
@@ -3523,7 +3525,7 @@ pub const tset = opaque {
     }
 
     /// param (any number or variable)
-    /// Will print out that number. Currently doesn't do anything, but I will add it to the mod
+    /// Will print out that number. Currently doesn't do anything, but I will add it to the g.mod
     /// debug log in the next update.
     pub fn debug(param: anytype) void {
         write("tset_debug", .{param});
@@ -3750,9 +3752,9 @@ pub const tset = opaque {
     }
 
     fn write(set: []const u8, args: anytype) void {
-        std.debug.assert(have_trigger);
-        item_csv.writer.print("set,{s}", .{set}) catch |err| @panic(@errorName(err));
-        writeArgs(&item_csv.writer, args) catch |err| @panic(@errorName(err));
+        std.debug.assert(g.have_trigger);
+        g.item_csv.writer.print("set,{s}", .{set}) catch |err| @panic(@errorName(err));
+        writeArgs(&g.item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
 
@@ -4471,7 +4473,7 @@ pub const Stat = enum {
     /// Makes the character luckier by a percentage. Use wisely.
     luck,
 
-    /// Makes your character START with more gold. This is only used in toybox mode to make Silver
+    /// Makes your character START with more gold. This is only used in toybox g.mode to make Silver
     /// Coin work there. It won't affect anything mid-run.
     startingGold,
 
