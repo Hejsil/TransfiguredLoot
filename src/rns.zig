@@ -3793,8 +3793,7 @@ pub fn rgb(red: u8, green: u8, blue: u8) Color {
     return .{ .r = red, .g = green, .b = blue };
 }
 
-/// https://docs.google.com/spreadsheets/d/1Mcj2EbtQD15Aq-lIVE6_GeW_w7_N_aDKhgZzWg4vx54/edit?gid=68441595#gid=68441595
-/// https://canary.discord.com/channels/496640298844422149/1239731124952105100/1340341730775662613
+/// https://discord.com/channels/496640298844422149/1239731124952105100/1340341730775662613
 pub const Hbs = enum(u8) {
     none = 0,
     smite = 1,
