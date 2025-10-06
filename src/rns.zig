@@ -493,7 +493,7 @@ pub const Item = struct {
     /// milliseconds. Any number -15000 to 15000 (but should probably be kept in the -3000 to
     /// 3000 range).  Note that invulnerability effects have a hard cap of 7.5 seconds, no
     /// matter what stats you have
-    invulnPlus: ?u32 = null,
+    invulnPlus: ?i16 = null,
 
     /// Currently does nothing
     stockPlus: ?f64 = null,
