@@ -931,6 +931,8 @@ fn transfiguredWindSet() !void {
     ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
     qpat.hb_add_cooldown_permanent(.{ .amount = hawkfeather_fan_cd_reduction });
 
+    const windbite_dagger_mult = -0.2;
+    const windbite_dagger_gcd = 0.5 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_windbite_dagger",
         .name = .{
@@ -939,14 +941,22 @@ fn transfiguredWindSet() !void {
         },
         .description = .{
             .original = "Your Secondary's GCD becomes 0.5s, but its damage is reduced by 60%.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Your Special's GCD becomes [VAR0_SECONDS], but its damage is reduced " ++
+                "by [VAR1_PERCENT].",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blue,
+        .treasureType = .blue,
+
+        .specialMult = windbite_dagger_mult,
+        .hbVar0 = windbite_dagger_gcd,
+        .hbVar1 = @abs(windbite_dagger_mult),
     });
+    trig.cdCalc4b(&.{});
+    ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
+    qpat.hb_set_gcd_permanent(.{ .amount = windbite_dagger_gcd });
 
     const pidgeon_bow_num_proj = 3;
     item(.{
