@@ -3265,7 +3265,7 @@ fn transfiguredLifeSet() !void {
     apat.heal_light(.{ .amount = sunflower_crown_hp });
 
     const midsummer_dress_hp = 1;
-    const midsummer_dress_mult_per_hp = 0.04;
+    const midsummer_dress_mult_per_hp = 0.05;
     item(.{
         .id = "it_transfigured_midsummer_dress",
         .name = .{
