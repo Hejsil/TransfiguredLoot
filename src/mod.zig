@@ -2031,6 +2031,7 @@ fn transfiguredGemSet() !void {
     });
     defer rns.end();
 
+    const diamond_shield_radius = 150;
     item(.{
         .id = "it_transfigured_diamond_shield",
         .name = .{
@@ -2041,14 +2042,34 @@ fn transfiguredGemSet() !void {
             .original = "Every 25s, using your Defensive will place down a small field for 3 " ++
                 "seconds that erases projectiles. While standing in the field, allies don't " ++
                 "take damage. Starts battle on 5 second cooldown.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Using you Defensive puts this on cooldown. While this is on cooldown, " ++
+                "moving a rabbitleap will erase projectiles in a small radius, dealing [STR] " ++
+                "damage.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 3 * std.time.ms_per_s,
+
+        .strMult = 20,
+        .radius = diamond_shield_radius,
+        .delay = 125,
     });
+    trig.hotbarUsedProc(&.{.hb_defensive});
+    qpat.hb_flash_item(.{});
+    qpat.hb_run_cooldown();
+
+    trig.distanceTickBattle(&.{.pl_self});
+    cond.eval(r.cdSecLeft, .@"!=", 0);
+    ttrg.players_opponent();
+    tset.strength_def();
+    apat.darkmagic_blade(.{});
+    apat.dark_shield(.{ .duration = 0, .radius = diamond_shield_radius });
 
     item(.{
         .id = "it_transfigured_peridot_rapier",
