@@ -1922,7 +1922,7 @@ fn transfiguredFlameSet() !void {
 
     const phoenix_charm_hp = 1;
     const phoenix_charm_chance = 0.5;
-    const phoenix_charm_dmg_per_missing_hp = 0.05;
+    const phoenix_charm_dmg_per_missing_hp = 0.1;
     item(.{
         .id = "it_transfigured_phoenix_charm",
         .name = .{
