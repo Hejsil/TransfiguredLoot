@@ -5058,9 +5058,12 @@ fn transfiguredSparkbladeSet() !void {
         .strMult = blackbolt_ribbon_dmg,
         .delay = 150,
     });
-    trig.autoStart(&.{.hb_auto_pl});
+    trig.battleStart3(&.{});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
     qpat.hb_run_cooldown();
+
+    trig.battleEnd0(&.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 
     trig.onDamageDone(&.{});
     cond.hb_check_square_var_false(.{ 0, 0 });
