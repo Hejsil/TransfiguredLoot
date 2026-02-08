@@ -31,6 +31,7 @@ pub fn main() !void {
     try transfiguredSacredflameSet();
     try transfiguredRuinsSet();
     try transfiguredLakeshrineSet();
+    try transfiguredTestSet();
 }
 
 fn transfiguredArcaneSet() !void {
@@ -6095,6 +6096,194 @@ fn transfiguredLakeshrineSet() !void {
     apat.apply_hbs(.{});
     tset.hbs_randombuff();
     apat.apply_hbs(.{});
+}
+
+fn transfiguredTestSet() !void {
+    const color = rgb(0, 0, 0);
+    rns.start(.{
+        .name = "X Transfigured Test Set",
+        .image_path = "images/lakeshrine.png",
+        .thumbnail_path = "images/lakeshrine_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_test_hbs",
+        .name = .{
+            .original = "Test HBS",
+            .english = "Test HBS",
+        },
+        .description = .{
+            .original = "",
+            .english = "Checks that the HBS enum has the correct status ID for all buffs and " ++
+                "debuffs",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 500,
+        .hbInput = .auto,
+
+        .showSqVar = true,
+    });
+
+    var i: usize = 0;
+    for (Hbs.buffs) |buff| {
+        trig.hotbarUsed(&.{.hb_self});
+        cond.hb_check_square_var(.{ 1, i });
+        qpat.hb_square_set_var(.{ .varIndex = 0, .amount = @floatFromInt(@intFromEnum(buff)) });
+        ttrg.player_self();
+        tset.hbskey(.{ buff, std.time.ms_per_s });
+        apat.apply_hbs(.{});
+        i += 1;
+    }
+
+    for (Hbs.debuffs) |debuff| {
+        trig.hotbarUsed(&.{.hb_self});
+        cond.hb_check_square_var(.{ 1, i });
+        qpat.hb_square_set_var(.{ .varIndex = 0, .amount = @floatFromInt(@intFromEnum(debuff)) });
+        ttrg.players_opponent();
+        tset.hbskey(.{ debuff, std.time.ms_per_s });
+        apat.apply_hbs(.{});
+        i += 1;
+    }
+
+    trig.hotbarUsed2(&.{.hb_self});
+    qpat.hb_square_add_var(.{ .varIndex = 1, .amount = 1 });
+    qpat.hb_run_cooldown();
+
+    trig.hbsCreated(&.{});
+    cond.eval(s.statusId, .@"!=", r.sqVar0);
+    ttrg.player_self();
+    apat.red_tanzaku(.{});
+    tset.debug(r.teamId);
+    tset.debug(s.statusId);
+    tset.debug(r.sqVar0);
+
+    item(.{
+        .id = "it_transfigured_test_nothing_1",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
+
+    item(.{
+        .id = "it_transfigured_test_nothing_2",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
+
+    item(.{
+        .id = "it_transfigured_test_nothing_3",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
+
+    item(.{
+        .id = "it_transfigured_test_nothing_4",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
+
+    item(.{
+        .id = "it_transfigured_test_nothing_5",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
+
+    item(.{
+        .id = "it_transfigured_test_nothing_6",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
+
+    item(.{
+        .id = "it_transfigured_test_nothing_7",
+        .name = .{
+            .original = "",
+            .english = "",
+        },
+        .description = .{
+            .original = "",
+            .english = "",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        .sanity_checks = false,
+    });
 }
 
 const charspeed = rns.charspeed;

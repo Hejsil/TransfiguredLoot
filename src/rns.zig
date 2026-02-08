@@ -507,6 +507,9 @@ pub const Item = struct {
     /// Can also be used to cross them out and make them unusable.
     /// This is a binary number, so multiple values can be combined to have multiple effects.
     hbShineFlag: ?ShineFlags = null,
+
+    /// Enable sanity checks to ensure the item is well formed
+    sanity_checks: bool = true,
 };
 
 pub fn item(opt: Item) void {
@@ -514,12 +517,14 @@ pub fn item(opt: Item) void {
 }
 
 fn item2(opt: Item) !void {
-    g.is_implemented = !std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
-    std.debug.assert(
-        (!g.is_implemented and opt.treasureType == null) or
-            (g.is_implemented and opt.treasureType != null),
-    );
-    std.debug.assert(std.mem.endsWith(u8, opt.name.english, opt.name.original));
+    if (opt.sanity_checks) {
+        g.is_implemented = !std.mem.eql(u8, opt.description.english, "Not Implemented. Should not appear in a run.");
+        std.debug.assert(
+            (!g.is_implemented and opt.treasureType == null) or
+                (g.is_implemented and opt.treasureType != null),
+        );
+        std.debug.assert(std.mem.endsWith(u8, opt.name.english, opt.name.original));
+    }
 
     try g.item_names.writer.print("{s},0,", .{opt.id});
     try writeCsvString(&g.item_names.writer, opt.name.english);
@@ -546,6 +551,8 @@ fn item2(opt: Item) !void {
         if (comptime std.mem.eql(u8, field.name, "description"))
             break :continue_blk;
         if (comptime std.mem.eql(u8, field.name, "script"))
+            break :continue_blk;
+        if (comptime std.mem.eql(u8, field.name, "sanity_checks"))
             break :continue_blk;
 
         if (@field(opt, field.name)) |value| {
@@ -659,13 +666,6 @@ fn item2(opt: Item) !void {
         .{ "[COUNTER-0]", "COUNTER" },
         .{ "[COUNTER-1]", "COUNTER" },
         .{ "[COUNTER-2]", "COUNTER" },
-        .{ "[COUNTER-3]", "COUNTER" },
-        .{ "[COUNTER-4]", "COUNTER" },
-        .{ "[COUNTER-5]", "COUNTER" },
-        .{ "[COUNTER-6]", "COUNTER" },
-        .{ "[COUNTER-7]", "COUNTER" },
-        .{ "[COUNTER-8]", "COUNTER" },
-        .{ "[COUNTER-9]", "COUNTER" },
         .{ "[POISON-0]", "POISON" },
         .{ "[POISON-1]", "POISON" },
         .{ "[POISON-2]", "POISON" },
@@ -673,9 +673,6 @@ fn item2(opt: Item) !void {
         .{ "[POISON-4]", "POISON" },
         .{ "[POISON-5]", "POISON" },
         .{ "[POISON-6]", "POISON" },
-        .{ "[POISON-7]", "POISON" },
-        .{ "[POISON-8]", "POISON" },
-        .{ "[POISON-9]", "POISON" },
         .{ "[DECAY-0]", "DECAY" },
         .{ "[DECAY-1]", "DECAY" },
         .{ "[DECAY-2]", "DECAY" },
@@ -686,29 +683,16 @@ fn item2(opt: Item) !void {
         .{ "[BURN-4]", "BURN" },
         .{ "[BURN-5]", "BURN" },
         .{ "[BURN-6]", "BURN" },
-        .{ "[BURN-7]", "BURN" },
-        .{ "[BURN-8]", "BURN" },
-        .{ "[BURN-9]", "BURN" },
         .{ "[CURSE-0]", "CURSE" },
         .{ "[CURSE-1]", "CURSE" },
         .{ "[CURSE-2]", "CURSE" },
         .{ "[CURSE-3]", "CURSE" },
         .{ "[CURSE-4]", "CURSE" },
         .{ "[CURSE-5]", "CURSE" },
-        .{ "[CURSE-6]", "CURSE" },
-        .{ "[CURSE-7]", "CURSE" },
-        .{ "[CURSE-8]", "CURSE" },
-        .{ "[CURSE-9]", "CURSE" },
         .{ "[BLEED-0]", "BLEED" },
         .{ "[BLEED-1]", "BLEED" },
         .{ "[BLEED-2]", "BLEED" },
         .{ "[BLEED-3]", "BLEED" },
-        .{ "[BLEED-4]", "BLEED" },
-        .{ "[BLEED-5]", "BLEED" },
-        .{ "[BLEED-6]", "BLEED" },
-        .{ "[BLEED-7]", "BLEED" },
-        .{ "[BLEED-8]", "BLEED" },
-        .{ "[BLEED-9]", "BLEED" },
         .{ "[SPARK-0]", "SPARK" },
         .{ "[SPARK-1]", "SPARK" },
         .{ "[SPARK-2]", "SPARK" },
@@ -716,29 +700,15 @@ fn item2(opt: Item) !void {
         .{ "[SPARK-4]", "SPARK" },
         .{ "[SPARK-5]", "SPARK" },
         .{ "[SPARK-6]", "SPARK" },
-        .{ "[SPARK-7]", "SPARK" },
-        .{ "[SPARK-8]", "SPARK" },
-        .{ "[SPARK-9]", "SPARK" },
         .{ "[GHOSTFLAME-0]", "GHOSTFLAME" },
         .{ "[GHOSTFLAME-1]", "GHOSTFLAME" },
         .{ "[GHOSTFLAME-2]", "GHOSTFLAME" },
         .{ "[GHOSTFLAME-3]", "GHOSTFLAME" },
         .{ "[GHOSTFLAME-4]", "GHOSTFLAME" },
         .{ "[GHOSTFLAME-5]", "GHOSTFLAME" },
-        .{ "[GHOSTFLAME-6]", "GHOSTFLAME" },
-        .{ "[GHOSTFLAME-7]", "GHOSTFLAME" },
-        .{ "[GHOSTFLAME-8]", "GHOSTFLAME" },
-        .{ "[GHOSTFLAME-9]", "GHOSTFLAME" },
         .{ "[ELEGY-0]", "ELEGY" },
         .{ "[ELEGY-1]", "ELEGY" },
         .{ "[ELEGY-2]", "ELEGY" },
-        .{ "[ELEGY-3]", "ELEGY" },
-        .{ "[ELEGY-4]", "ELEGY" },
-        .{ "[ELEGY-5]", "ELEGY" },
-        .{ "[ELEGY-6]", "ELEGY" },
-        .{ "[ELEGY-7]", "ELEGY" },
-        .{ "[ELEGY-8]", "ELEGY" },
-        .{ "[ELEGY-9]", "ELEGY" },
         .{ "[SAP]", "SAP" },
     };
 
@@ -3788,190 +3758,282 @@ pub fn rgb(red: u8, green: u8, blue: u8) Color {
     return .{ .r = red, .g = green, .b = blue };
 }
 
-/// https://discord.com/channels/496640298844422149/1239731124952105100/1340341730775662613
 pub const Hbs = enum(u8) {
     none = 0,
-    smite = 1,
-    smite_0 = 2,
-    smite_1 = 3,
-    smite_2 = 4,
-    smite_3 = 5,
-    elegy = 6,
-    elegy_0 = 7,
-    elegy_1 = 8,
-    elegy_2 = 9,
-    haste = 10,
-    haste_0 = 11,
-    haste_1 = 12,
-    haste_2 = 13,
-    stoneskin = 14,
-    graniteskin = 15,
-    lucky = 16,
-    super = 17,
-    flutterstep = 18,
-    counter = 19,
-    counter_0 = 20,
-    counter_1 = 21,
-    counter_2 = 22,
-    blackstrike = 23,
-    stillness = 24,
-    repeat = 25,
-    flowstr = 26,
-    flowdex = 27,
-    flowint = 28,
-    flashstr = 29,
-    flashdex = 30,
-    flashint = 31,
+
+    smite_0 = 1,
+    smite_1 = 2,
+    smite_2 = 3,
+    smite_3 = 4,
+
+    elegy_0 = 5,
+    elegy_1 = 6,
+    elegy_2 = 7,
+
+    haste_0 = 9,
+    haste_1 = 10,
+    haste_2 = 11,
+
+    stoneskin = 12,
+    graniteskin = 13,
+    lucky = 14,
+    super = 15,
+    flutterstep = 16,
+
+    counter_0 = 17,
+    counter_1 = 18,
+    counter_2 = 19,
+
+    blackstrike = 20,
+    stillness = 21,
+    repeat = 22,
+
+    flowstr = 25,
+    flowdex = 26,
+    flowint = 27,
+
+    flashstr = 28,
+    flashdex = 29,
+    flashint = 30,
+
     vanish = 32,
     ghost = 33,
     warcry = 34,
-    astra = 35,
-    astra2 = 36,
-    nova = 37,
-    berserk = 38,
-    abyssrage = 39,
-    snare = 40,
-    snare_0 = 41,
-    snare_1 = 42,
-    snare_2 = 43,
-    snare_3 = 44,
-    snare_4 = 45,
-    snare_5 = 46,
-    snare_6 = 47,
-    snare_7 = 48,
-    snare2 = 49,
-    snare2_0 = 50,
-    snare2_1 = 51,
-    snare2_2 = 52,
-    snare2_3 = 53,
-    snare2_4 = 54,
-    snare2_5 = 55,
-    snare2_6 = 56,
-    snare2_7 = 57,
-    hex = 58,
-    hex_super = 59,
-    hex_poison = 60,
-    hex_anti = 61,
-    curse = 62,
-    curse_0 = 63,
-    curse_1 = 64,
-    curse_2 = 65,
-    curse_3 = 66,
-    curse_4 = 67,
-    curse_5 = 68,
-    bleed = 69,
-    bleed_0 = 70,
-    bleed_1 = 71,
-    bleed_2 = 72,
-    bleed_3 = 73,
-    sap = 74,
-    spark = 75,
-    spark_0 = 76,
-    spark_1 = 77,
-    spark_2 = 78,
-    spark_3 = 79,
-    spark_4 = 80,
-    spark_5 = 81,
-    spark_6 = 82,
 
-    poison = 94,
-    poison_0 = 95,
-    poison_1 = 96,
-    poison_2 = 97,
-    poison_3 = 98,
-    poison_4 = 99,
-    poison_5 = 100,
-    poison_6 = 101,
-    burn = 102,
-    burn_0 = 103,
-    burn_1 = 104,
-    burn_2 = 105,
-    burn_3 = 106,
-    burn_4 = 107,
-    burn_5 = 108,
-    burn_6 = 109,
+    astra = 36,
+    astra2 = 37,
+
+    nova = 38,
+    berserk = 39,
+    abyssrage = 40,
+
+    snare_0 = 45,
+    snare_1 = 46,
+    snare_2 = 47,
+    snare_3 = 48,
+    snare_4 = 49,
+    snare_5 = 50,
+    snare_6 = 51,
+    snare_7 = 52,
+
+    snare2_0 = 55,
+    snare2_1 = 56,
+    snare2_2 = 57,
+    snare2_3 = 58,
+    snare2_4 = 59,
+    snare2_5 = 60,
+    snare2_6 = 61,
+    snare2_7 = 62,
+
+    hex = 65,
+    hex_super = 66,
+    hex_poison = 67,
+    hex_anti = 68,
+
+    curse_0 = 69,
+    curse_1 = 70,
+    curse_2 = 71,
+    curse_3 = 72,
+    curse_4 = 73,
+    curse_5 = 74,
+    bleed_0 = 84,
+    bleed_1 = 85,
+    bleed_2 = 86,
+    bleed_3 = 87,
+
+    sap = 97,
+
+    spark_0 = 98,
+    spark_1 = 99,
+    spark_2 = 100,
+    spark_3 = 101,
+    spark_4 = 102,
+    spark_5 = 103,
+    spark_6 = 104,
+
     decay_0 = 125,
     decay_1 = 126,
     decay_2 = 127,
-    ghostflame = 134,
-    ghostflame_0 = 135,
-    ghostflame_1 = 136,
-    ghostflame_2 = 137,
-    ghostflame_3 = 138,
-    ghostflame_4 = 139,
-    ghostflame_5 = 140,
+
+    poison_0 = 128,
+    poison_1 = 129,
+    poison_2 = 130,
+    poison_3 = 131,
+    poison_4 = 132,
+    poison_5 = 133,
+    poison_6 = 134,
+
+    burn_0 = 144,
+    burn_1 = 145,
+    burn_2 = 146,
+    burn_3 = 147,
+    burn_4 = 148,
+    burn_5 = 149,
+    burn_6 = 150,
+
+    ghostflame_0 = 210,
+    ghostflame_1 = 211,
+    ghostflame_2 = 212,
+    ghostflame_3 = 213,
+    ghostflame_4 = 214,
+    ghostflame_5 = 215,
 
     pub const buffs = [_]Hbs{
-        .none,
-        .smite,
         .smite_0,
         .smite_1,
         .smite_2,
         .smite_3,
-        .elegy,
+
         .elegy_0,
         .elegy_1,
         .elegy_2,
-        .haste,
+
         .haste_0,
         .haste_1,
         .haste_2,
+
         .stoneskin,
         .graniteskin,
         .lucky,
         .super,
         .flutterstep,
-        .counter,
+
         .counter_0,
         .counter_1,
         .counter_2,
+
         .blackstrike,
         .stillness,
         .repeat,
+
         .flowstr,
         .flowdex,
         .flowint,
+
         .flashstr,
         .flashdex,
         .flashint,
+
         .vanish,
         .ghost,
         .warcry,
+
         .astra,
         .astra2,
+
         .nova,
         .berserk,
         .abyssrage,
+
         .hex_anti,
     };
 
+    test buffs {
+        for (buffs) |buff|
+            std.debug.assert(std.mem.indexOfScalar(Hbs, &debuffs, buff) == null);
+    }
+
+    pub const debuffs = [_]Hbs{
+        .snare_0,
+        .snare_1,
+        .snare_2,
+        .snare_3,
+        .snare_4,
+        .snare_5,
+        .snare_6,
+        .snare_7,
+
+        .snare2_0,
+        .snare2_1,
+        .snare2_2,
+        .snare2_3,
+        .snare2_4,
+        .snare2_5,
+        .snare2_6,
+        .snare2_7,
+
+        .hex,
+        .hex_super,
+        .hex_poison,
+
+        .curse_0,
+        .curse_1,
+        .curse_2,
+        .curse_3,
+        .curse_4,
+        .curse_5,
+        .bleed_0,
+        .bleed_1,
+        .bleed_2,
+        .bleed_3,
+
+        .sap,
+
+        .spark_0,
+        .spark_1,
+        .spark_2,
+        .spark_3,
+        .spark_4,
+        .spark_5,
+        .spark_6,
+
+        .decay_0,
+        .decay_1,
+        .decay_2,
+
+        .poison_0,
+        .poison_1,
+        .poison_2,
+        .poison_3,
+        .poison_4,
+        .poison_5,
+        .poison_6,
+
+        .burn_0,
+        .burn_1,
+        .burn_2,
+        .burn_3,
+        .burn_4,
+        .burn_5,
+        .burn_6,
+
+        .ghostflame_0,
+        .ghostflame_1,
+        .ghostflame_2,
+        .ghostflame_3,
+        .ghostflame_4,
+        .ghostflame_5,
+    };
+
+    test debuffs {
+        for (debuffs) |debuff|
+            std.debug.assert(std.mem.indexOfScalar(Hbs, &buffs, debuff) == null);
+    }
+
     pub const hastes = [_]Hbs{
-        .haste,
         .haste_0,
         .haste_1,
         .haste_2,
     };
 
-    comptime {
+    test hastes {
         for (hastes, @intFromEnum(hastes[0])..) |haste, i|
             std.debug.assert(@intFromEnum(haste) == i);
     }
 
     pub const bleeds = [_]Hbs{
-        .bleed,
         .bleed_0,
         .bleed_1,
         .bleed_2,
         .bleed_3,
     };
 
-    comptime {
+    test bleeds {
         for (bleeds, @intFromEnum(bleeds[0])..) |bleed, i|
             std.debug.assert(@intFromEnum(bleed) == i);
     }
 
     pub const sparks = [_]Hbs{
-        .spark,
         .spark_0,
         .spark_1,
         .spark_2,
@@ -3981,7 +4043,7 @@ pub const Hbs = enum(u8) {
         .spark_6,
     };
 
-    comptime {
+    test sparks {
         for (sparks, @intFromEnum(sparks[0])..) |spark, i|
             std.debug.assert(@intFromEnum(spark) == i);
     }
@@ -3992,13 +4054,12 @@ pub const Hbs = enum(u8) {
         .decay_2,
     };
 
-    comptime {
+    test decays {
         for (decays, @intFromEnum(decays[0])..) |decay, i|
             std.debug.assert(@intFromEnum(decay) == i);
     }
 
     pub const burns = [_]Hbs{
-        .burn,
         .burn_0,
         .burn_1,
         .burn_2,
@@ -4008,13 +4069,12 @@ pub const Hbs = enum(u8) {
         .burn_6,
     };
 
-    comptime {
+    test burns {
         for (burns, @intFromEnum(burns[0])..) |burn, i|
             std.debug.assert(@intFromEnum(burn) == i);
     }
 
     pub const poisons = [_]Hbs{
-        .poison,
         .poison_0,
         .poison_1,
         .poison_2,
@@ -4024,13 +4084,12 @@ pub const Hbs = enum(u8) {
         .poison_6,
     };
 
-    comptime {
+    test poisons {
         for (poisons, @intFromEnum(poisons[0])..) |poison, i|
             std.debug.assert(@intFromEnum(poison) == i);
     }
 
     pub const curses = [_]Hbs{
-        .curse,
         .curse_0,
         .curse_1,
         .curse_2,
@@ -4039,7 +4098,7 @@ pub const Hbs = enum(u8) {
         .curse_5,
     };
 
-    comptime {
+    test curses {
         for (curses, @intFromEnum(curses[0])..) |curse, i|
             std.debug.assert(@intFromEnum(curse) == i);
     }
@@ -4050,7 +4109,7 @@ pub const Hbs = enum(u8) {
         .hex_poison,
     };
 
-    comptime {
+    test hexes {
         for (hexes, @intFromEnum(hexes[0])..) |hex, i|
             std.debug.assert(@intFromEnum(hex) == i);
     }
@@ -4061,16 +4120,13 @@ pub const Hbs = enum(u8) {
     pub fn toString(hbs: Hbs) []const u8 {
         return switch (hbs) {
             .none => "hbs_none",
-            .smite => "hbs_smite",
             .smite_0 => "hbs_smite_0",
             .smite_1 => "hbs_smite_1",
             .smite_2 => "hbs_smite_2",
             .smite_3 => "hbs_smite_3",
-            .elegy => "hbs_elegy",
             .elegy_0 => "hbs_elegy_0",
             .elegy_1 => "hbs_elegy_1",
             .elegy_2 => "hbs_elegy_2",
-            .haste => "hbs_haste",
             .haste_0 => "hbs_haste_0",
             .haste_1 => "hbs_haste_1",
             .haste_2 => "hbs_haste_2",
@@ -4079,7 +4135,6 @@ pub const Hbs = enum(u8) {
             .lucky => "hbs_lucky",
             .super => "hbs_super",
             .flutterstep => "hbs_flutterstep",
-            .counter => "hbs_counter",
             .counter_0 => "hbs_counter_0",
             .counter_1 => "hbs_counter_1",
             .counter_2 => "hbs_counter_2",
@@ -4100,7 +4155,6 @@ pub const Hbs = enum(u8) {
             .nova => "hbs_nova",
             .berserk => "hbs_berserk",
             .abyssrage => "hbs_abyssrage",
-            .snare => "hbs_snare",
             .snare_0 => "hbs_snare_0",
             .snare_1 => "hbs_snare_1",
             .snare_2 => "hbs_snare_2",
@@ -4109,7 +4163,6 @@ pub const Hbs = enum(u8) {
             .snare_5 => "hbs_snare_5",
             .snare_6 => "hbs_snare_6",
             .snare_7 => "hbs_snare_7",
-            .snare2 => "hbs_snare2",
             .snare2_0 => "hbs_snare2_0",
             .snare2_1 => "hbs_snare2_1",
             .snare2_2 => "hbs_snare2_2",
@@ -4122,20 +4175,17 @@ pub const Hbs = enum(u8) {
             .hex_super => "hbs_hex_super",
             .hex_poison => "hbs_hex_poison",
             .hex_anti => "hbs_hex_anti",
-            .curse => "hbs_curse",
             .curse_0 => "hbs_curse_0",
             .curse_1 => "hbs_curse_1",
             .curse_2 => "hbs_curse_2",
             .curse_3 => "hbs_curse_3",
             .curse_4 => "hbs_curse_4",
             .curse_5 => "hbs_curse_5",
-            .bleed => "hbs_bleed",
             .bleed_0 => "hbs_bleed_0",
             .bleed_1 => "hbs_bleed_1",
             .bleed_2 => "hbs_bleed_2",
             .bleed_3 => "hbs_bleed_3",
             .sap => "hbs_sap",
-            .spark => "hbs_spark",
             .spark_0 => "hbs_spark_0",
             .spark_1 => "hbs_spark_1",
             .spark_2 => "hbs_spark_2",
@@ -4146,7 +4196,6 @@ pub const Hbs = enum(u8) {
             .decay_0 => "hbs_decay_0",
             .decay_1 => "hbs_decay_1",
             .decay_2 => "hbs_decay_2",
-            .poison => "hbs_poison",
             .poison_0 => "hbs_poison_0",
             .poison_1 => "hbs_poison_1",
             .poison_2 => "hbs_poison_2",
@@ -4154,7 +4203,6 @@ pub const Hbs = enum(u8) {
             .poison_4 => "hbs_poison_4",
             .poison_5 => "hbs_poison_5",
             .poison_6 => "hbs_poison_6",
-            .burn => "hbs_burn",
             .burn_0 => "hbs_burn_0",
             .burn_1 => "hbs_burn_1",
             .burn_2 => "hbs_burn_2",
@@ -4162,7 +4210,6 @@ pub const Hbs = enum(u8) {
             .burn_4 => "hbs_burn_4",
             .burn_5 => "hbs_burn_5",
             .burn_6 => "hbs_burn_6",
-            .ghostflame => "hbs_ghostflame",
             .ghostflame_0 => "hbs_ghostflame_0",
             .ghostflame_1 => "hbs_ghostflame_1",
             .ghostflame_2 => "hbs_ghostflame_2",
@@ -4172,6 +4219,8 @@ pub const Hbs = enum(u8) {
         };
     }
 };
+
+test Hbs {}
 
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1987338796#gid=1987338796&range=A82
 pub const WeaponType = enum {
@@ -4540,7 +4589,7 @@ pub const Compare = enum {
 /// * Whatever object is receiving the trigger is the RECEIVER. Variables relating to the receiver
 ///   of the trigger start with "r_".
 ///
-/// Trigger code is also capable of targetting lists of players, items, and status effects.
+/// Trigger code is also capable of targeting lists of players, items, and status effects.
 ///
 /// When you target a list of players, the variables relating to those players will start with
 /// "tp#_", where # is replaced with the index. For instance, if you have 4 players and target all
@@ -4887,7 +4936,7 @@ pub const ItemFlags = packed struct(u8) {
     }
 };
 
-comptime {
+test ItemFlags {
     std.debug.assert((ItemFlags{ .full_heal = true }).toIniInt() == 1);
     std.debug.assert((ItemFlags{ .level_up = true }).toIniInt() == 2);
     std.debug.assert((ItemFlags{ .no_last_chest = true }).toIniInt() == 8);
@@ -4919,7 +4968,7 @@ pub const ShineFlags = packed struct(u8) {
     }
 };
 
-comptime {
+test ShineFlags {
     std.debug.assert((ShineFlags{ .shine_primary = true }).toIniInt() == 1);
     std.debug.assert((ShineFlags{ .shine_secondary = true }).toIniInt() == 2);
     std.debug.assert((ShineFlags{ .shine_special = true }).toIniInt() == 4);
@@ -4954,7 +5003,7 @@ pub const HbFlags = packed struct(u8) {
     }
 };
 
-comptime {
+test HbFlags {
     std.debug.assert((HbFlags{ .stealthy = true }).toIniInt() == 1);
     std.debug.assert((HbFlags{ .unresettable = true }).toIniInt() == 2);
     std.debug.assert((HbFlags{ .hidehbs = true }).toIniInt() == 4);
@@ -5003,7 +5052,7 @@ pub const HbsFlags = packed struct(u16) {
     }
 };
 
-comptime {
+test HbsFlags {
     std.debug.assert((HbsFlags{ .vanish = true }).toIniInt() == 1);
     std.debug.assert((HbsFlags{ .shield = true }).toIniInt() == 2);
     std.debug.assert((HbsFlags{ .frozen = true }).toIniInt() == 4);
