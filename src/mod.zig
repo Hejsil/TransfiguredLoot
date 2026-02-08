@@ -6127,7 +6127,7 @@ fn transfiguredTestSet() !void {
 
         .lootHbDispType = .cooldown,
         .cooldownType = .time,
-        .cooldown = 500,
+        .cooldown = std.time.ms_per_s,
         .hbInput = .auto,
 
         .showSqVar = true,
