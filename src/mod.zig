@@ -31,6 +31,7 @@ pub fn main() !void {
     try transfiguredSacredflameSet();
     try transfiguredRuinsSet();
     try transfiguredLakeshrineSet();
+    try transfiguredGlacierSet();
     try transfiguredTestSet();
 }
 
@@ -6336,6 +6337,157 @@ fn transfiguredLakeshrineSet() !void {
     apat.apply_hbs(.{});
     tset.hbs_randombuff();
     apat.apply_hbs(.{});
+}
+
+fn transfiguredGlacierSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Glacier Set",
+        .image_path = "images/glacier.png",
+        .thumbnail_path = "images/glacier_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_glacier_spear",
+        .name = .{
+            .original = "Glacier Spear",
+            .english = "Transfigured Glacier Spear",
+        },
+        .description = .{
+            .original = "Your Primary applies FREEZE.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_frost_dagger",
+        .name = .{
+            .original = "Frost Dagger",
+            .english = "Transfigured Frost Dagger",
+        },
+        .description = .{
+            .original = "Your Secondary applies FREEZE.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_frozen_staff",
+        .name = .{
+            .original = "Frozen Staff",
+            .english = "Transfigured Frozen Staff",
+        },
+        .description = .{
+            .original = "Your Special applies FREEZE.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_coldsteel_shield",
+        .name = .{
+            .original = "Coldsteel Shield",
+            .english = "Transfigured Coldsteel Shield",
+        },
+        .description = .{
+            .original = "When you use your Defensive, deal 70 damage 3 times in a radius " ++
+                "around you, applying FREEZE.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_polar_coat",
+        .name = .{
+            .original = "Polar Coat",
+            .english = "Transfigured Polar Coat",
+        },
+        .description = .{
+            .original = "Slightly increases movement speed. When you gain invincibility, " ++
+                "apply DEEPFREEZE to all enemies.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_icicle_earrings",
+        .name = .{
+            .original = "Icicle Earrings",
+            .english = "Transfigured Icicle Earrings",
+        },
+        .description = .{
+            .original = "When a % chance succeeds, apply DEEPFREEZE to all enemies.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_winter_hat",
+        .name = .{
+            .original = "Winter Hat",
+            .english = "Transfigured Winter Hat",
+        },
+        .description = .{
+            .original = "Abilities with a GCD less than or equal to 1.10 seconds apply FREEZE " ++
+                "on hit.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
+
+    item(.{
+        .id = "it_transfigured_snow_boots",
+        .name = .{
+            .original = "Snow Boots",
+            .english = "Transfigured Snow Boots",
+        },
+        .description = .{
+            .original = "Slightly increases movement speed. When you stand still for 1 second, " ++
+                "apply FREEZE to all enemies once per second.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleblue,
+    });
 }
 
 fn transfiguredTestSet() !void {
