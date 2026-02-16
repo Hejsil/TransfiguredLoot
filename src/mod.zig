@@ -33,6 +33,7 @@ pub fn main() !void {
     try transfiguredLakeshrineSet();
     try transfiguredGlacierSet();
     try transfiguredMemorySet();
+    try transfiguredCultistSet();
     try transfiguredTestSet();
 }
 
@@ -6648,6 +6649,164 @@ fn transfiguredMemorySet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .purplered,
+    });
+}
+
+fn transfiguredCultistSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Cultist Set",
+        .image_path = "images/cultist.png",
+        .thumbnail_path = "images/cultist_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_righthand_cast",
+        .name = .{
+            .original = "Righthand Cast",
+            .english = "Transfigured Righthand Cast",
+        },
+        .description = .{
+            .original = "Deal 40% more damage.#" ++
+                "Your Primary becomes permanently unusable.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_lefthand_cast",
+        .name = .{
+            .original = "Lefthand Cast",
+            .english = "Transfigured Lefthand Cast",
+        },
+        .description = .{
+            .original = "Deal 40% more damage.#" ++
+                "Your Secondary becomes permanently unusable.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_hexed_blindfold",
+        .name = .{
+            .original = "Hexed Blindfold",
+            .english = "Transfigured Hexed Blindfold",
+        },
+        .description = .{
+            .original = "All GCDs are reduced by 0.40 seconds.#" ++
+                "Your Special becomes permanently unusable.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_angels_halo",
+        .name = .{
+            .original = "Angel's Halo",
+            .english = "Transfigured Angel's Halo",
+        },
+        .description = .{
+            .original = "Deal 40% more damage.#" ++
+                "Your Defensive becomes permanently unusable.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_unsacred_pendant",
+        .name = .{
+            .original = "Unsacred Pendant",
+            .english = "Transfigured Unsacred Pendant",
+        },
+        .description = .{
+            .original = "Deal 20% more damage.#" ++
+                "When you use an ability, that ability is disabled until you use another ability.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_whitewing_bracelet",
+        .name = .{
+            .original = "Whitewing Bracelet",
+            .english = "Transfigured Whitewing Bracelet",
+        },
+        .description = .{
+            .original = "The first attack you use each fight will deal 40 more damage " ++
+                "(per hit) for the rest of the fight.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_darkcrystal_rose",
+        .name = .{
+            .original = "Darkcrystal Rose",
+            .english = "Transfigured Darkcrystal Rose",
+        },
+        .description = .{
+            .original = "Your max HP is increased by 1.#" ++
+                "If you win a fight without using your Defensive, heals you for 1 and grants " ++
+                "you 100 XP.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_dark_wings",
+        .name = .{
+            .original = "Dark Wings",
+            .english = "Transfigured Dark Wings",
+        },
+        .description = .{
+            .original = "All of your cooldowns are reduced by 2 seconds and movement speed is " ++
+                "dramatically increased.#" ++
+                "If you use the same ability twice in a row, this effect ends until the end " ++
+                "of battle.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purpleyellow,
     });
 }
 
