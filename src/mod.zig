@@ -32,6 +32,7 @@ pub fn main() !void {
     try transfiguredRuinsSet();
     try transfiguredLakeshrineSet();
     try transfiguredGlacierSet();
+    try transfiguredMemorySet();
     try transfiguredTestSet();
 }
 
@@ -6487,6 +6488,166 @@ fn transfiguredGlacierSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .purpleblue,
+    });
+}
+
+fn transfiguredMemorySet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Memory Set",
+        .image_path = "images/memory.png",
+        .thumbnail_path = "images/memory_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_spear_of_remorse",
+        .name = .{
+            .original = "Spear of Remorse",
+            .english = "Transfigured Spear of Remorse",
+        },
+        .description = .{
+            .original = "Every 7 seconds, using any attack will grant you FLASH-STR.#" ++
+                "Cooldown is set to 20 seconds when you use your Defensive.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_memory_greatsword",
+        .name = .{
+            .original = "Memory Greatsword",
+            .english = "Transfigured Memory Greatsword",
+        },
+        .description = .{
+            .original = "Deals 280 damage in a radius around you every 30 seconds.#" ++
+                "Cooldown is set to 6 seconds when you use your Secondary.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_staff_of_sorrow",
+        .name = .{
+            .original = "Staff of Sorrow",
+            .english = "Transfigured Staff of Sorrow",
+        },
+        .description = .{
+            .original = "Every 30, using any attack will reset your Special and grant you " ++
+                "FLASH-INT.#" ++
+                "Cooldown is set to 7 seconds when you use your Primary.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_shield_of_smiles",
+        .name = .{
+            .original = "Shield of Smiles",
+            .english = "Transfigured Shield of Smiles",
+        },
+        .description = .{
+            .original = "Grants yourself and nearby allies a random buff for 8 seconds every " ++
+                "30 seconds.#" ++
+                "Cooldown is set to 5 seconds when you use your Defensive.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_lonesome_pendant",
+        .name = .{
+            .original = "Lonesome Pendant",
+            .english = "Transfigured Lonesome Pendant",
+        },
+        .description = .{
+            .original = "All cooldowns equal to or over 15 seconds are reduced to 12 seconds.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_spark_of_determination",
+        .name = .{
+            .original = "Spark of Determination",
+            .english = "Transfigured Spark of Determination",
+        },
+        .description = .{
+            .original = "Every time you use an ability, has a 15% chance to reset the " ++
+                "cooldown with the most time remaining.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_crown_of_love",
+        .name = .{
+            .original = "Crown of Love",
+            .english = "Transfigured Crown of Love",
+        },
+        .description = .{
+            .original = "Whenever you activate the longest cooldown among your abilities and " ++
+                "loot, deal 400 damage in a large radius around you.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
+    });
+
+    item(.{
+        .id = "it_transfigured_comforting_coat",
+        .name = .{
+            .original = "Comforting Coat",
+            .english = "Transfigured Comforting Coat",
+        },
+        .description = .{
+            .original = "When you use your Defensive, deals 80 damage in a radius around you " ++
+                "once for every ability or loot that has a cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplered,
     });
 }
 
