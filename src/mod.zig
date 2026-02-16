@@ -308,11 +308,13 @@ fn transfiguredArcaneSet() !void {
     });
     trig.hbsCreated(&.{});
     cond.false(.{s.isBuff});
+    cond.eval(s.aflTeamId, .@"==", 1);
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
     qpat.hb_reset_statchange();
 
     trig.hbsDestroyed(&.{});
     cond.false(.{s.isBuff});
+    cond.eval(s.aflTeamId, .@"==", 1);
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
     qpat.hb_reset_statchange();
 
