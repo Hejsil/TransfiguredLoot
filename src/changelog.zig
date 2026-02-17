@@ -51,6 +51,8 @@ fn generateChangelogModEntry(
     const new_items_csv = try new_dir.readFileAlloc(arena, "Items.csv", std.math.maxInt(usize));
     const old_items_ini = try old_dir.readFileAlloc(arena, "Items.ini", std.math.maxInt(usize));
     const new_items_ini = try new_dir.readFileAlloc(arena, "Items.ini", std.math.maxInt(usize));
+
+    // TODO: Use `Items_Full.json`
     const old_items_str = try old_dir.readFileAlloc(arena, "Items.json", std.math.maxInt(usize));
     const new_items_str = try new_dir.readFileAlloc(arena, "Items.json", std.math.maxInt(usize));
 

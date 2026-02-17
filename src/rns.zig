@@ -19,6 +19,9 @@ var g: struct {
     items_json_string: std.io.Writer.Allocating = .init(gpa),
     items_json: std.json.Stringify = undefined,
 
+    items_full_json_string: std.io.Writer.Allocating = .init(gpa),
+    items_full_json: std.json.Stringify = undefined,
+
     items_steam_txt: std.io.Writer.Allocating = .init(gpa),
 } = .{};
 
@@ -67,6 +70,15 @@ fn start2(mod: Mod) !void {
         .options = .{ .whitespace = .indent_4 },
     };
     try g.items_json.beginObject();
+
+    g.items_full_json = .{
+        .writer = &g.items_full_json_string.writer,
+        .options = .{
+            .whitespace = .indent_4,
+            .emit_null_optional_fields = false,
+        },
+    };
+    try g.items_full_json.beginObject();
 
     try g.items_steam_txt.writer.writeAll(mod.steam_description_header);
     try g.items_steam_txt.writer.writeAll(
@@ -138,6 +150,12 @@ fn end2() !void {
         .data = g.items_json_string.written(),
     });
 
+    try g.items_full_json.endObject();
+    try output_dir.writeFile(.{
+        .sub_path = "Items_Full.json",
+        .data = g.items_full_json_string.written(),
+    });
+
     try g.items_steam_txt.writer.writeAll(
         \\    [tr]
         \\        [td]----------------------------------------------------------[/td]
@@ -174,6 +192,9 @@ pub const Item = struct {
         english: []const u8,
         japanese: ?[]const u8 = null,
         chinese: ?[]const u8 = null,
+
+        // Used internally when outputting Items_Full.json
+        english_expanded: ?[]const u8 = null,
     },
 
     // "ITEM" VARIABLES
@@ -740,6 +761,12 @@ fn item2(opt: Item) !void {
     const new_desc = new_desc_writer.written();
     try g.items_json.objectField(opt.name.english);
     try g.items_json.write(new_desc);
+
+    var opt_json = opt;
+    opt_json.description.english_expanded = new_desc;
+
+    try g.items_full_json.objectField(opt_json.id);
+    try g.items_full_json.write(opt_json);
 
     if (g.is_implemented) {
         try g.items_steam_txt.writer.writeAll(
