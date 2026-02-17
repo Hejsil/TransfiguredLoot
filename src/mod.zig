@@ -1653,8 +1653,9 @@ fn transfiguredRockdragonSet() !void {
         .cooldown = 4 * std.time.ms_per_s,
         .hbInput = .auto,
 
-        .strMult = 700,
+        .delay = 400,
         .radius = 600,
+        .strMult = 700,
         .charspeed = -charspeed.slightly,
     });
     trig.autoStart(&.{.hb_auto_pl});
