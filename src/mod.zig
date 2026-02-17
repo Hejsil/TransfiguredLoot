@@ -1419,7 +1419,7 @@ fn transfiguredAssassinSet() !void {
         // .treasureType = .blue,
     });
 
-    const ninjutsu_scroll_max_hits = 9;
+    const ninjutsu_scroll_max_hits = 6;
     const ninjutsu_scroll_proc_chance = 0.5;
     item(.{
         .id = "it_transfigured_ninjutsu_scroll",
