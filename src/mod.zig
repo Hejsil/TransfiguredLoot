@@ -5775,6 +5775,7 @@ fn transfiguredRuinsSet() !void {
         // .treasureType = .redgreen,
     });
 
+    const ruins_sword_gcd_reset = 2 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_ruins_sword",
         .name = .{
@@ -5784,14 +5785,40 @@ fn transfiguredRuinsSet() !void {
         .description = .{
             .original = "Your Secondary deals 100% more damage. Its GCD is increased by 0.8s. " ++
                 "Your movement speed is also slightly reduced.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
+                "Cooldown resets every time you use an ability with a GCD of [VAR0_SECONDS] or more.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .redgreen,
+        .treasureType = .redgreen,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 20 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .delay = 400,
+        .radius = 400,
+        .strMult = 600,
+
+        .hbVar0 = ruins_sword_gcd_reset,
     });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_run_cooldown();
+
+    trig.hotbarUsed(&.{.hb_self});
+    qpat.hb_flash_item(.{});
+    qpat.hb_run_cooldown();
+    ttrg.players_opponent();
+    tset.strength_def();
+    apat.darkmagic_blade(.{});
+
+    trig.hotbarUsed(&.{.hb_self_weapon});
+    cond.eval(s.gcd, .@">=", ruins_sword_gcd_reset);
+    ttrg.hotbarslot_self();
+    qpat.hb_reset_cooldown();
 
     const mountain_staff_mult_per_gcd = 0.03;
     const mountain_staff_per_gcd = 0.2 * std.time.ms_per_s;
