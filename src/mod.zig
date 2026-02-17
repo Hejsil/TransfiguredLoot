@@ -1785,6 +1785,7 @@ fn transfiguredRockdragonSet() !void {
     ttrg.player_self();
     apat.apply_invuln(.{});
 
+    const obsidian_hairpin_special_dmg = 0.2;
     item(.{
         .id = "it_transfigured_obsidian_hairpin",
         .name = .{
@@ -1794,14 +1795,25 @@ fn transfiguredRockdragonSet() !void {
         .description = .{
             .original = "Increases Special damage by 20%. Whenever you gain invulnerability, " ++
                 "your Special has a 50% chance of resetting.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Increases Special damage by [VAR0_PERCENT]. Using your Special has a " ++
+                "[LUCK] chance to reset your Defensive.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .procChance = 0.25,
+        .specialMult = obsidian_hairpin_special_dmg,
+        .hbVar0 = obsidian_hairpin_special_dmg,
     });
+    trig.hotbarUsedProc(&.{.hb_special});
+    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
+    cond.hb_check_resettable0(.{});
+    cond.random_def(.{});
+    qpat.hb_reset_cooldown();
+    qpat.hb_flash_item(.{});
 
     item(.{
         .id = "it_transfigured_iron_greaves",
