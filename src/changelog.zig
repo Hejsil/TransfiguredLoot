@@ -17,10 +17,7 @@ fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: [
     while (try mod_folders.next()) |entry| {
         std.debug.assert(entry.kind == .directory);
         const old_mod_dir = try old_dir.openDir(entry.name, .{});
-        const new_mod_dir = new_dir.openDir(entry.name, .{}) catch |err| switch (err) {
-            error.FileNotFound => try new_dir.openDir("Transfigured Assassin Set", .{}), // TODO: Remove after 0.11.0
-            else => return err,
-        };
+        const new_mod_dir = try new_dir.openDir(entry.name, .{});
         try generateChangelogModEntry(
             arena,
             &changelog.writer,
