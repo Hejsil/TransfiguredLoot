@@ -2915,6 +2915,10 @@ fn transfiguredLuckySet() !void {
         .amount = book_of_cheats_luck,
     });
 
+    const golden_katana_dmg_per_gold = 10;
+    const golden_katana_gold_per_dmg = 1;
+    const golden_katana_cd_per_gold = -(1 * std.time.ms_per_s);
+    const golden_katana_gold_per_cd = 15;
     item(.{
         .id = "it_transfigured_golden_katana",
         .name = .{
@@ -2924,14 +2928,53 @@ fn transfiguredLuckySet() !void {
         .description = .{
             .original = "Your Primary and Secondary have a 5% chance to deal 100 damage 5 " ++
                 "times to a large radius around your targeted enemy when used.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], slice the air around you dealing [STR] damage.#" ++
+                "Deals [VAR0] more damage per [VAR1] gold.#" ++
+                "Cooldown is reduced by [VAR2_SECONDS] per [VAR3] gold.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .yellow,
+        .treasureType = .yellow,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 16 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .delay = 400,
+        .radius = 450,
+        .strMult = 150,
+
+        .hbVar0 = @abs(golden_katana_dmg_per_gold),
+        .hbVar1 = @abs(golden_katana_gold_per_dmg),
+        .hbVar2 = @abs(golden_katana_cd_per_gold),
+        .hbVar3 = @abs(golden_katana_gold_per_cd),
     });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_run_cooldown();
+
+    trig.hotbarUsed(&.{.hb_self});
+    qpat.hb_flash_item(.{});
+    qpat.hb_run_cooldown();
+    ttrg.players_opponent();
+    tset.strength_def();
+    apat.darkmagic_blade(.{});
+
+    trig.strCalc2(&.{});
+    tset.uservar_gold(.{"u_gold"});
+    tset.uservar2("u_str", "u_gold", .@"*", golden_katana_dmg_per_gold);
+    tset.uservar2("u_str", "u_str", .@"/", golden_katana_gold_per_dmg);
+    ttrg.hotbarslot_self();
+    qpat.hb_add_strength(.{ .amountStr = "u_str" });
+
+    trig.cdCalc2b(&.{});
+    tset.uservar_gold(.{"u_gold"});
+    tset.uservar2("u_cooldown", "u_gold", .@"*", golden_katana_cd_per_gold);
+    tset.uservar2("u_cooldown", "u_cooldown", .@"/", golden_katana_gold_per_cd);
+    ttrg.hotbarslot_self();
+    qpat.hb_add_cooldown_permanent(.{ .amountStr = "u_cooldown" });
 
     item(.{
         .id = "it_transfigured_glittering_trumpet",
