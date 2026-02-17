@@ -3051,8 +3051,8 @@ fn transfiguredLuckySet() !void {
             .english = "Transfigured Queen's Crown",
         },
         .description = .{
-            .original = "Critical hits now deal 175% extra damage, instead of their normal " ++
-                "75% extra damage.",
+            .original = "When you have at least 20 gold, become slightly luckier.#" ++
+                "When you have at least 50 gold, become dramatically luckier.",
             .english = "Your crits have a [LUCK] chance to deal an additional [STR] damage.",
         },
         // .itemFlags = .{ .starting_item = true },
