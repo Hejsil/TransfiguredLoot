@@ -4427,14 +4427,43 @@ fn transfiguredHauntedSet() !void {
         },
         .description = .{
             .original = "Your Primary now only deals 10 damage, and applies GHOSTFLAME.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], your next ability inflicts [GHOSTFLAME-5].#" ++
+                "Your debuffs last half as long.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purplegreen,
+        .treasureType = .purplegreen,
+
+        .cooldownType = .time,
+        .cooldown = 4 * std.time.ms_per_s,
+
+        .hbsType = .ghostflame_5,
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsStrMult = 150,
     });
+    for ([_]Condition{
+        .dmg_self_primary, .dmg_self_secondary,
+        .dmg_self_special, .dmg_self_defensive,
+    }) |trigger| {
+        trig.onDamageDone(&.{trigger});
+        cond.hb_available();
+        ttrg.player_damaged();
+        tset.hbs_def();
+        tset.hbs_burnhit();
+        apat.apply_hbs(.{});
+        qpat.hb_cdloot_proc();
+    }
+
+    trig.hbsCreated(&.{.hbs_thishbcast});
+    qpat.hb_run_cooldown();
+    qpat.hb_flash_item(.{});
+
+    trig.cdCalc2b(&.{});
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune_bufftype(.{0});
+    qpat.hb_mult_length_hbs(.{ .mult = 0.5 });
 
     item(.{
         .id = "it_transfigured_phantom_dagger",
