@@ -4014,6 +4014,7 @@ fn transfiguredDarkbiteSet() !void {
         // .treasureType = .purpleblue,
     });
 
+    const darkmage_charm_dmg_mult = 0.1;
     item(.{
         .id = "it_transfigured_darkmage_charm",
         .name = .{
@@ -4022,14 +4023,34 @@ fn transfiguredDarkbiteSet() !void {
         },
         .description = .{
             .original = "When you've been standing still for 1s, your Special deals 40% more damage.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "You deal [VAR0_PERCENT] more damage for each second you've been " ++
+                "standing still. Resets when you move a rabbitleap.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purpleblue,
+        .treasureType = .purpleblue,
+
+        .hbVar0 = darkmage_charm_dmg_mult,
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
     });
+    trig.standingStill(&.{});
+    qpat.hb_square_add_var(.{ .varIndex = 1, .amount = 1 });
+    cond.hb_check_square_var(.{ 1, 5 }); // `standingStrill` triggers every 200ms, so this check makes sure we only get 1 stack per second.
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_square_set_var(.{ .varIndex = 1, .amount = 0 });
+    qpat.hb_reset_statchange();
+
+    trig.distanceTick(&.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+    qpat.hb_square_set_var(.{ .varIndex = 1, .amount = 0 });
+
+    trig.strCalc0(&.{});
+    tset.uservar2("u_mult", r.sqVar0, .@"*", darkmage_charm_dmg_mult);
+    qpat.hb_reset_statchange_norefresh();
+    qpat.hb_add_statchange_norefresh(.{ .stat = .allMult, .amountStr = "u_mult" });
 
     const firststrike_bracelet_mult = 6;
     item(.{
