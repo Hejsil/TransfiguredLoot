@@ -3919,6 +3919,16 @@ pub const Hbs = enum(u8) {
     ghostflame_4 = 214,
     ghostflame_5 = 215,
 
+    freeze_0 = 226,
+    freeze_1 = 227,
+    freeze_2 = 228,
+    freeze_3 = 229,
+    freeze_4 = 230,
+    freeze_5 = 231,
+
+    deepfreeze_0 = 232,
+    deepfreeze_1 = 233,
+
     paint_0 = 234,
     paint_1 = 235,
     paint_2 = 236,
@@ -4055,6 +4065,16 @@ pub const Hbs = enum(u8) {
         .ghostflame_3,
         .ghostflame_4,
         .ghostflame_5,
+
+        .freeze_0,
+        .freeze_1,
+        .freeze_2,
+        .freeze_3,
+        .freeze_4,
+        .freeze_5,
+
+        .deepfreeze_0,
+        .deepfreeze_1,
 
         .paint_0,
         .paint_1,
@@ -4272,6 +4292,14 @@ pub const Hbs = enum(u8) {
             .burn_5 => "hbs_burn_5",
             .burn_6 => "hbs_burn_6",
             .stickybomb_gunner_0 => "hbs_stickybomb_gunner_0",
+            .freeze_0 => "hbs_freeze_0",
+            .freeze_1 => "hbs_freeze_1",
+            .freeze_2 => "hbs_freeze_2",
+            .freeze_3 => "hbs_freeze_3",
+            .freeze_4 => "hbs_freeze_4",
+            .freeze_5 => "hbs_freeze_5",
+            .deepfreeze_0 => "hbs_deepfreeze_0",
+            .deepfreeze_1 => "hbs_deepfreeze_1",
             .paint_0 => "hbs_paint_0",
             .paint_1 => "hbs_paint_1",
             .paint_2 => "hbs_paint_2",
