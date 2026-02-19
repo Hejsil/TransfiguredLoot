@@ -4956,6 +4956,7 @@ fn transfiguredSparkbladeSet() !void {
     });
     defer rns.end();
 
+    const bluebolt_staff_dmg = 0.1;
     item(.{
         .id = "it_transfigured_bluebolt_staff",
         .name = .{
@@ -4964,14 +4965,28 @@ fn transfiguredSparkbladeSet() !void {
         },
         .description = .{
             .original = "Your Primary applies SPARK.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "You deal [VAR0_PERCENT] more damage per enemy.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .blueyellow,
+        .treasureType = .blueyellow,
+
+        .hbVar0 = bluebolt_staff_dmg,
+        .showSqVar = true,
     });
+    trig.regenTick(&.{});
+    ttrg.players_opponent();
+    tset.uservar_playercount(.{"u_count"});
+    cond.hb_check_square_var_false(.{ 0, "u_count" });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amountStr = "u_count" });
+    qpat.hb_reset_statchange();
+
+    trig.strCalc0(&.{});
+    tset.uservar2("u_mult", r.sqVar0, .@"*", bluebolt_staff_dmg);
+    qpat.hb_reset_statchange_norefresh();
+    qpat.hb_add_statchange_norefresh(.{ .stat = .allMult, .amountStr = "u_mult" });
 
     item(.{
         .id = "it_transfigured_lapis_sword",
