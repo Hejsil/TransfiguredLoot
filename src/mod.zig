@@ -34,6 +34,7 @@ pub fn main() !void {
     try transfiguredGlacierSet();
     try transfiguredMemorySet();
     try transfiguredCultistSet();
+    try transfiguredPaintersSet();
     try transfiguredTestSet();
 }
 
@@ -6807,6 +6808,160 @@ fn transfiguredCultistSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .purpleyellow,
+    });
+}
+
+fn transfiguredPaintersSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Painters Set",
+        .image_path = "images/painters.png",
+        .thumbnail_path = "images/painters_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_giant_paintbrush",
+        .name = .{
+            .original = "Giant Paintbrush",
+            .english = "Transfigured Giant Paintbrush",
+        },
+        .description = .{
+            .original = "Your Primary applies PAINT.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_sewing_sword",
+        .name = .{
+            .original = "Sewing Sword",
+            .english = "Transfigured Sewing Sword",
+        },
+        .description = .{
+            .original = "Your Secondary applies PAINT.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_sketchbook",
+        .name = .{
+            .original = "Sketchbook",
+            .english = "Transfigured Sketchbook",
+        },
+        .description = .{
+            .original = "Your Special applies PAINT.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_palette_shield",
+        .name = .{
+            .original = "Palette Shield",
+            .english = "Transfigured Palette Shield",
+        },
+        .description = .{
+            .original = "Deals 100 damage and applies PAINT to all enemies when you use your " ++
+                "Defensive.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_handmade_charm",
+        .name = .{
+            .original = "Handmade Charm",
+            .english = "Transfigured Handmade Charm",
+        },
+        .description = .{
+            .original = "Every 8 seconds, deal 70 damage and apply a random debuff to all " ++
+                "enemies for 5 seconds.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_painters_beret",
+        .name = .{
+            .original = "Painter's Beret",
+            .english = "Transfigured Painter's Beret",
+        },
+        .description = .{
+            .original = "Deal 5% more damage.#" ++
+                "When a debuff you applied wears off, deal 120 damage in an explosion around " ++
+                "that enemy.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_artist_smock",
+        .name = .{
+            .original = "Artist Smock",
+            .english = "Transfigured Artist Smock",
+        },
+        .description = .{
+            .original = "Moderately increases movement speed.#" ++
+                "When a debuff you applied wears off, has a 50% chance to deal 120 damage and " ++
+                "apply a copy of that debuff.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_colorful_earrings",
+        .name = .{
+            .original = "Colorful Earrings",
+            .english = "Transfigured Colorful Earrings",
+        },
+        .description = .{
+            .original = "When a % chance succeeds, deal 50 damage and apply a random debuff to " ++
+                "all enemies for 5 seconds.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .purplegreen,
     });
 }
 
