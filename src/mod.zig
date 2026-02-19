@@ -36,6 +36,7 @@ pub fn main() !void {
     try transfiguredCultistSet();
     try transfiguredPaintersSet();
     try transfiguredDaynightSet();
+    try transfiguredSharpedgeSet();
     try transfiguredTestSet();
 }
 
@@ -7125,6 +7126,159 @@ fn transfiguredDaynightSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
+    });
+}
+fn transfiguredSharpedgeSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Sharpedge Set",
+        .image_path = "images/sharpedge.png",
+        .thumbnail_path = "images/sharpedge_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_hooked_staffc",
+        .name = .{
+            .original = "Hooked Staff",
+            .english = "Transfigured Hooked Staff",
+        },
+        .description = .{
+            .original = "When you have a buff, your Special will always hit for critical damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_springloaded_scythec",
+        .name = .{
+            .original = "Springloaded Scythe",
+            .english = "Transfigured Springloaded Scythe",
+        },
+        .description = .{
+            .original = "Whenever you use any ability other than your Primary, your next " ++
+                "Primary will always hit for critical damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_hidden_bladec",
+        .name = .{
+            .original = "Hidden Blade",
+            .english = "Transfigured Hidden Blade",
+        },
+        .description = .{
+            .original = "Whenever you use any ability other than your Secondary, your next " ++
+                "Secondary will always hit for critical damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_sharpedged_shieldc",
+        .name = .{
+            .original = "Sharpedged Shield",
+            .english = "Transfigured Sharpedged Shield",
+        },
+        .description = .{
+            .original = "Critical hits deal 20% more damage.#" ++
+                "When you use your Defensive, deal 40 damage 3 times to a large radius around you.#" ++
+                "This attack will always deal critical damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_pointed_ringc",
+        .name = .{
+            .original = "Pointed Ring",
+            .english = "Transfigured Pointed Ring",
+        },
+        .description = .{
+            .original = "Critical hits deal 100% more damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_crown_of_swordsc",
+        .name = .{
+            .original = "Crown of Swords",
+            .english = "Transfigured Crown of Swords",
+        },
+        .description = .{
+            .original = "When abilities or loot items other than this one deal critical " ++
+                "damage, deal 50 damage to all enemies.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_bladed_cloakc",
+        .name = .{
+            .original = "Bladed Cloak",
+            .english = "Transfigured Bladed Cloak",
+        },
+        .description = .{
+            .original = "Critical hits deal 30% more damage.#" ++
+                "Moderately increases movement speed.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_greatsword_pendantc",
+        .name = .{
+            .original = "Greatsword Pendant",
+            .english = "Transfigured Greatsword Pendant",
+        },
+        .description = .{
+            .original = "Critical hits deal 20% more damage.#" ++
+                "Loot will always deal critical damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .blueyellow,
     });
 }
 
