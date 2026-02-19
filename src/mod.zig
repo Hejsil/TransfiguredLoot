@@ -35,6 +35,7 @@ pub fn main() !void {
     try transfiguredMemorySet();
     try transfiguredCultistSet();
     try transfiguredPaintersSet();
+    try transfiguredDaynightSet();
     try transfiguredTestSet();
 }
 
@@ -6962,6 +6963,168 @@ fn transfiguredPaintersSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .purplegreen,
+    });
+}
+
+fn transfiguredDaynightSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Daynight Set",
+        .image_path = "images/daynight.png",
+        .thumbnail_path = "images/daynight_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_sun_sword",
+        .name = .{
+            .original = "Daylight Sword",
+            .english = "Transfigured Daylight Sword",
+        },
+        .description = .{
+            .original = "Every 18 seconds, deals 300 damage to a radius around you.#" ++
+                "Cooldown is reduced by 3 seconds when you use your Primary.#" ++
+                "Transforms into the Nightgleam Sword after it activates.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_night_sword",
+        .name = .{
+            .original = "Nightgleam Sword",
+            .english = "Transfigured Nightgleam Sword",
+        },
+        .description = .{
+            .original = "Every 18 seconds, deals 100 damage 3 times to a radius around you.#" ++
+                "Cooldown is reduced by 3 seconds when you use your Secondary.#" ++
+                "Transforms into the Daylight Sword after it activates.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_wind_spear",
+        .name = .{
+            .original = "Spear of Winds",
+            .english = "Transfigured Spear of Winds",
+        },
+        .description = .{
+            .original = "When you use your Primary, reduce the cooldown of your Special by 2 seconds.#" ++
+                "Transforms into the Spear of Rains after you've used 5 abilities.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_rain_spear",
+        .name = .{
+            .original = "Spear of Rains",
+            .english = "Transfigured Spear of Rains",
+        },
+        .description = .{
+            .original = "Deals 150 damage to all enemies when you use your Special.#" ++
+                "Transforms into the Spear of Winds after you've used 5 abilities.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_heavens_codex",
+        .name = .{
+            .original = "Heaven's Codex",
+            .english = "Transfigured Heaven's Codex",
+        },
+        .description = .{
+            .original = "Your Special deals 20% more damage and instantly resets upon use.#" ++
+                "Transforms into the Hell's Codex after you've used 3 abilities.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_hells_codex",
+        .name = .{
+            .original = "Hell's Codex",
+            .english = "Transfigured Hell's Codex",
+        },
+        .description = .{
+            .original = "Disables your Special.#" ++
+                "Your abilities deal 30 more damage.#" ++
+                "Transforms into the Heaven's Codex after you've used 8 abilities.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_robe_of_light",
+        .name = .{
+            .original = "Robe of Light",
+            .english = "Transfigured Robe of Light",
+        },
+        .description = .{
+            .original = "Moderately decreases movement speed.#" ++
+                "You become significantly luckier, and deal 10% more damage.#" ++
+                "Transforms into the Robe of Dark when you use your Defensive.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
+    });
+
+    item(.{
+        .id = "it_transfigured_robe_of_dark",
+        .name = .{
+            .original = "Robe of Dark",
+            .english = "Transfigured Robe of Dark",
+        },
+        .description = .{
+            .original = "Moderately increases movement speed.#" ++
+                "Debuffs are 40% stronger.#" ++
+                "Transforms into the Robe of Light when you use your Defensive.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluered,
     });
 }
 
