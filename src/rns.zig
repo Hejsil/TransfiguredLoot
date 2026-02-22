@@ -3845,6 +3845,8 @@ pub const Hbs = enum(u8) {
     berserk = 39,
     abyssrage = 40,
     abyssflame = 42,
+    clarity = 43,
+    friendship = 44,
 
     snare_0 = 45,
     snare_1 = 46,
@@ -3984,6 +3986,8 @@ pub const Hbs = enum(u8) {
         .berserk,
         .abyssrage,
         .abyssflame,
+        .clarity,
+        .friendship,
 
         .hex_anti,
     };
@@ -4310,6 +4314,8 @@ pub const Hbs = enum(u8) {
             .ghostflame_3 => "hbs_ghostflame_3",
             .ghostflame_4 => "hbs_ghostflame_4",
             .ghostflame_5 => "hbs_ghostflame_5",
+            .clarity => "hbs_clarity",
+            .friendship => "hbs_friendship",
         };
     }
 };
