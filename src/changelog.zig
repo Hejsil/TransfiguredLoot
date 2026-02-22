@@ -41,9 +41,12 @@ fn generateChangelogModEntry(
     new_dir: std.fs.Dir,
 ) !void {
     const transfigured_prefix = "Transfigured ";
-    std.debug.assert(std.mem.startsWith(u8, transfigured_mod_name, transfigured_prefix));
-    const mod_name = transfigured_mod_name[transfigured_prefix.len..];
+    if (!std.mem.startsWith(u8, transfigured_mod_name, transfigured_prefix)) {
+        std.log.warn("Skipping mod {s}", .{transfigured_mod_name});
+        return;
+    }
 
+    const mod_name = transfigured_mod_name[transfigured_prefix.len..];
     const old_items_csv = try old_dir.readFileAlloc(arena, "Items.csv", std.math.maxInt(usize));
     const new_items_csv = try new_dir.readFileAlloc(arena, "Items.csv", std.math.maxInt(usize));
     const old_items_ini = try old_dir.readFileAlloc(arena, "Items.ini", std.math.maxInt(usize));
