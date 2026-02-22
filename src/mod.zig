@@ -37,6 +37,7 @@ pub fn main() !void {
     try transfiguredPaintersSet();
     try transfiguredDaynightSet();
     try transfiguredSharpedgeSet();
+    try transfiguredOceansSet();
     try transfiguredTestSet();
 }
 
@@ -7279,6 +7280,153 @@ fn transfiguredSharpedgeSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .blueyellow,
+    });
+}
+
+fn transfiguredOceansSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Oceans Set",
+        .image_path = "images/oceans.png",
+        .thumbnail_path = "images/oceans_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_rusted_greatsword",
+        .name = .{
+            .original = "Rusted Greatsword",
+            .english = "Transfigured Rusted Greatsword",
+        },
+        .description = .{
+            .original = "Every 12 seconds, deal 150 damage to a radius around you and grant self and nearby allies WAVESTRIKE.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_sand_shovel",
+        .name = .{
+            .original = "Sand Shovel",
+            .english = "Transfigured Sand Shovel",
+        },
+        .description = .{
+            .original = "Every 6 seconds, your Secondary grants FLASH-CHR to nearby allies.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_saltwater_staff",
+        .name = .{
+            .original = "Saltwater Staff",
+            .english = "Transfigured Saltwater Staff",
+        },
+        .description = .{
+            .original = "Your Special grants FLASH-CHR to nearby allies.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_large_umbrella",
+        .name = .{
+            .original = "Large Umbrella",
+            .english = "Transfigured Large Umbrella",
+        },
+        .description = .{
+            .original = "Every 14 seconds, your Defensive grants WAVESTRIKE to nearby allies, and its radius is significantly increased.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_onepiece_swimsuit",
+        .name = .{
+            .original = "Onepiece Swimsuit",
+            .english = "Transfigured Onepiece Swimsuit",
+        },
+        .description = .{
+            .original = "When a % chance succeeds, grants FLASH-CHR to nearby allies.#Moderately increases movement speed.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_straw_hat",
+        .name = .{
+            .original = "Straw Hat",
+            .english = "Transfigured Straw Hat",
+        },
+        .description = .{
+            .original = "Become dramatically luckier when you have at least one buff.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_large_anchor",
+        .name = .{
+            .original = "Large Anchor",
+            .english = "Transfigured Large Anchor",
+        },
+        .description = .{
+            .original = "Every 7 seconds, using your Primary grants you WAVESTRIKE.#Moderately reduces movement speed.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_beach_sandals",
+        .name = .{
+            .original = "Beach Sandals",
+            .english = "Transfigured Beach Sandals",
+        },
+        .description = .{
+            .original = "Moderately increases movement speed.#Every time you move 8 rabbitleaps, grant FLASH-CHR to nearby allies.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .bluegreen,
     });
 }
 
