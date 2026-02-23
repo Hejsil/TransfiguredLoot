@@ -4582,7 +4582,6 @@ fn transfiguredHauntedSet() !void {
         cond.hb_available();
         ttrg.player_damaged();
         tset.hbs_def();
-        tset.hbs_burnhit();
         apat.apply_hbs(.{});
         qpat.hb_cdloot_proc();
     }
