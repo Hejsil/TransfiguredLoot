@@ -6274,8 +6274,7 @@ fn transfiguredLakeshrineSet() !void {
         },
         .description = .{
             .original = "Every 12s, gain a random buff for 10s.",
-            .english = "At the start of each fight, gain 2 random buffs for [VAR0_SECONDS] " ++
-                "seconds.",
+            .english = "At the start of each fight, gain 2 random buffs for [HBSL].",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
@@ -6287,8 +6286,6 @@ fn transfiguredLakeshrineSet() !void {
         .hbFlags = .{ .hidehbs = true },
         .hbsType = .smite_0,
         .hbsLength = std.time.ms_per_min,
-
-        .hbVar0 = std.time.ms_per_min,
     });
     trig.battleStart3(&.{});
     qpat.hb_flash_item(.{});
