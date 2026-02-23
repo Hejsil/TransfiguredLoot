@@ -38,6 +38,7 @@ pub fn main() !void {
     try transfiguredDaynightSet();
     try transfiguredSharpedgeSet();
     try transfiguredOceansSet();
+    try transfiguredPerformersSet();
     try transfiguredTestSet();
 }
 
@@ -7427,6 +7428,153 @@ fn transfiguredOceansSet() !void {
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluegreen,
+    });
+}
+
+fn transfiguredPerformersSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Performers Set",
+        .image_path = "images/performers.png",
+        .thumbnail_path = "images/performers_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_strongmans_bar",
+        .name = .{
+            .original = "Strongman's Bar",
+            .english = "Transfigured Strongman's Bar",
+        },
+        .description = .{
+            .original = "Whenever you use your Primary directly after your Secondary, deal 200 damage in a radius around you.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_spinning_chakram",
+        .name = .{
+            .original = "Spinning Chakram",
+            .english = "Transfigured Spinning Chakram",
+        },
+        .description = .{
+            .original = "Every 3 times you use an ability, deal 80 damage twice to your left and right.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_ribboned_staff",
+        .name = .{
+            .original = "Ribboned Staff",
+            .english = "Transfigured Ribboned Staff",
+        },
+        .description = .{
+            .original = "Whenever you use your Special directly after your Secondary, deal 350 damage in a large radius around you.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_trick_shield",
+        .name = .{
+            .original = "Trick Shield",
+            .english = "Transfigured Trick Shield",
+        },
+        .description = .{
+            .original = "Whenever you use your Defensive directly after your Secondary, deal 350 damage in a large radius around you.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_rosered_leotard",
+        .name = .{
+            .original = "Rosered Leotard",
+            .english = "Transfigured Rosered Leotard",
+        },
+        .description = .{
+            .original = "Gain Quickdraw when you use your Defensive.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_jesters_hat",
+        .name = .{
+            .original = "Jester's Hat",
+            .english = "Transfigured Jester's Hat",
+        },
+        .description = .{
+            .original = "When you use an ability that doesn't deal damage, deal 200 damage in a radius around you.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_rainbow_cape",
+        .name = .{
+            .original = "Rainbow Cape",
+            .english = "Transfigured Rainbow Cape",
+        },
+        .description = .{
+            .original = "Gives you a copy of the loot item you picked up last.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_performers_shoes",
+        .name = .{
+            .original = "Performer's Shoes",
+            .english = "Transfigured Performer's Shoes",
+        },
+        .description = .{
+            .original = "Significantly increases movement speed.#Every 10 times you use an ability, gain Quickdraw.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
     });
 }
 
