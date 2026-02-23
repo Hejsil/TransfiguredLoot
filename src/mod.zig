@@ -2037,14 +2037,38 @@ fn transfiguredFlameSet() !void {
         .description = .{
             .original = "All your abilities and loot deal 30% more damage. If you use your " ++
                 "Defensive, this effect ends until the end of battle.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every ability inflicts a unique [BURN-0]. If you use your Defensive, " ++
+                "this effect ends until the end of battle.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .hbsType = .burn_0,
+        .hbsLength = 5 * std.time.ms_per_s,
+
+        .greySqVar0 = true,
+        .autoOffSqVar0 = 1,
     });
+    for (
+        [_]Condition{ .dmg_self_primary, .dmg_self_secondary, .dmg_self_special },
+        [_]Hbs{ .burn_0, .burn_1, .burn_2 },
+    ) |condition, burn| {
+        trig.onDamageDone(&.{condition});
+        cond.hb_check_square_var_false(.{ 0, 0 });
+        ttrg.player_damaged();
+        tset.hbs_burnhit();
+        tset.hbskey(.{ burn, r.hbsLength });
+        apat.apply_hbs(.{});
+    }
+
+    trig.hbsCreated(&.{.hbs_thishbcast});
+    qpat.hb_flash_item(.{});
+
+    trig.hotbarUsedProc(&.{.hb_defensive});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 
     item(.{
         .id = "it_transfigured_flamewalker_boots",
