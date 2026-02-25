@@ -5730,9 +5730,9 @@ fn transfiguredSacredflameSet() !void {
         trig.hotbarUsedProc(&.{c});
         qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
     }
-    trig.hotbarUsed2(&.{});
-    cond.hb_check_square_var(.{ 0, sun_pendant_times });
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+    trig.hotbarUsedProc2(&.{});
+    cond.hb_check_square_var_gte(.{ 0, sun_pendant_times });
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -sun_pendant_times });
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     for ([_]Hbs{ .flashdex, .flashint, .flashstr }) |hbs| {
