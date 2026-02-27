@@ -737,7 +737,7 @@ fn transfiguredTimespaceSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 3 });
 
     for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
-        trig.hotbarUsed(&.{c});
+        trig.hotbarUsedProc(&.{c});
         cond.random_def(.{});
         tset.uservar_random_range(.{ "u_haste", 0, 3 });
         // `uservar_random_range` generates a float, I just want an int between 0 and 2
