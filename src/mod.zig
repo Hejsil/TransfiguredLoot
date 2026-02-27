@@ -1513,7 +1513,7 @@ fn transfiguredAssassinSet() !void {
         .hbsLength = 5 * std.time.ms_per_s,
     });
     for ([_]rns.Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |c| {
-        trig.hotbarUsed(&.{c});
+        trig.hotbarUsedProc(&.{c});
         cond.random_def(.{});
         qpat.hb_flash_item(.{});
         qpat.hb_lucky_proc();
