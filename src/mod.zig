@@ -5876,7 +5876,7 @@ fn transfiguredRuinsSet() !void {
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
-    trig.hotbarUsed(&.{.hb_self_weapon});
+    trig.hotbarUsedProc(&.{.hb_self_weapon});
     cond.eval(s.gcd, .@">=", ruins_sword_gcd_reset);
     ttrg.hotbarslot_self();
     qpat.hb_reset_cooldown();
