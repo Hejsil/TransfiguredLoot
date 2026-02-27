@@ -5622,14 +5622,39 @@ fn transfiguredSacredflameSet() !void {
         },
         .description = .{
             .original = "Every 2 times you use your Special, gain FLASH-STR.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD], gain [FLASH-INT].#" ++
+                "When you lose [FLASH-INT], gain [FLASH-CHR].",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .redyellow,
+        .treasureType = .redyellow,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 10 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsType = .flashint,
     });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_run_cooldown();
+
+    trig.hotbarUsed(&.{.hb_self});
+    qpat.hb_run_cooldown();
+    qpat.hb_flash_item(.{});
+    ttrg.player_self();
+    tset.hbs_def();
+    apat.apply_hbs(.{});
+
+    trig.hbsDestroyed(&.{.pl_self});
+    cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashint));
+    qpat.hb_flash_item(.{});
+    ttrg.player_self();
+    tset.hbskey(.{ Hbs.flashchr, r.hbsLength });
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_sacred_shield",
