@@ -4723,7 +4723,7 @@ fn transfiguredHauntedSet() !void {
         .hbsType = .ghostflame_4,
         .hbsLength = 5 * std.time.ms_per_s,
     });
-    trig.hotbarUsed(&.{.hb_selfcast});
+    trig.hotbarUsedProc(&.{.hb_selfcast});
     cond.eval(s.cooldown, .@">", 0);
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
     ttrg.players_opponent();
