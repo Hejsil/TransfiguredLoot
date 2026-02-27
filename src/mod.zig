@@ -566,7 +566,7 @@ fn transfiguredNightSet() !void {
         .hbVar0 = stuffed_rabbit_activate_count,
         .hbVar1 = stuffed_rabbit_invul_dur,
     });
-    trig.hotbarUsed(&.{.hb_selfcast});
+    trig.hotbarUsedProc(&.{.hb_selfcast});
     cond.eval(s.cooldown, .@">", 0);
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
     cond.hb_check_square_var(.{ 0, stuffed_rabbit_activate_count });
