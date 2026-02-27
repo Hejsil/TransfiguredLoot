@@ -174,6 +174,7 @@ fn end2() !void {
     g.item_names.shrinkRetainingCapacity(0);
     g.item_descriptions.shrinkRetainingCapacity(0);
     g.items_json_string.shrinkRetainingCapacity(0);
+    g.items_full_json_string.shrinkRetainingCapacity(0);
     g.items_steam_txt.shrinkRetainingCapacity(0);
     g.generating_mod = false;
 }
