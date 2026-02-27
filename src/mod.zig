@@ -1458,7 +1458,7 @@ fn transfiguredAssassinSet() !void {
         qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
     }
 
-    trig.hotbarUsed2(&.{.hb_special});
+    trig.hotbarUsedProc2(&.{.hb_special});
     cond.hb_check_square_var_gte(.{ 0, 1 });
     qpat.hb_flash_item(.{});
     qpat.hb_lucky_proc();
