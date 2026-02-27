@@ -2139,6 +2139,7 @@ fn transfiguredGemSet() !void {
     apat.darkmagic_blade(.{});
     apat.dark_shield(.{ .duration = 0, .radius = diamond_shield_radius });
 
+    const peridot_rapier_dmg_per_erase = 10;
     item(.{
         .id = "it_transfigured_peridot_rapier",
         .name = .{
@@ -2149,14 +2150,30 @@ fn transfiguredGemSet() !void {
             .original = "Increases Secondary damage by 20%. Every 8s, using your Secondary " ++
                 "will grant you brief invulnerability and erase projectiles in a large radius " ++
                 "around you.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "When an ability or loot effect erases projectiles in a radius around " ++
+                "you, your abilities and loot deal [VAR0] more damage. Resets at the start of " ++
+                "each battle.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .showSqVar = true,
+        .autoOffSqVar0 = 0,
+
+        .hbVar0 = peridot_rapier_dmg_per_erase,
     });
+    trig.onEraseDone(&.{.pl_self});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
+    trig.strCalc2(&.{});
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune_base_has_str();
+    tset.uservar2("u_str", r.sqVar0, .@"*", peridot_rapier_dmg_per_erase);
+    qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
     const garnet_staff_dmg_per_erase = 0.05;
     item(.{
