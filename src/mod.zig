@@ -859,7 +859,7 @@ fn transfiguredTimespaceSet() !void {
 
         .hbVar0 = starry_cloak_cd_threshold,
     });
-    trig.hotbarUsed(&.{.hb_selfcast});
+    trig.hotbarUsedProc(&.{.hb_selfcast});
     cond.eval(s.cooldown, .@">=", starry_cloak_cd_threshold);
     ttrg.player_self();
     tset.hbs_def();
