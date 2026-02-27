@@ -2254,6 +2254,7 @@ fn transfiguredGemSet() !void {
     cond.hb_check_square_var_false(.{ 0, 0 });
     qpat.hb_run_cooldown();
 
+    const emerald_chestplate_dmg_per_counter = 0.1;
     item(.{
         .id = "it_transfigured_emerald_chestplate",
         .name = .{
@@ -2263,13 +2264,50 @@ fn transfiguredGemSet() !void {
         .description = .{
             .original = "The counter on this item will decrease instead of you taking damage. " ++
                 "The counter starts at 3 on pickup.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Every [CD] gain a counter.#" ++
+                "You deal [VAR0_PERCENT] more damage per counter you have.#" ++
+                "The counter on this item will decrease instead of you taking damage.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .red,
+        .treasureType = .red,
+
+        .lootHbDispType = .cooldown,
+        .cooldownType = .time,
+        .cooldown = 120 * std.time.ms_per_s,
+        .hbInput = .auto,
+
+        .showSqVar = true,
+
+        .hbVar0 = emerald_chestplate_dmg_per_counter,
+        .hbsFlag = .{ .shield = true },
+    });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_run_cooldown();
+
+    trig.hotbarUsed(&.{.hb_self});
+    qpat.hb_run_cooldown();
+    qpat.hb_flash_item(.{});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_reset_statchange();
+
+    trig.hbsShield4(&.{.pl_self});
+    cond.hb_check_square_var_false(.{ 0, 0 });
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
+    qpat.hb_flash_item(.{});
+    qpat.player_shield();
+    ttrg.player_self();
+    apat.apply_invuln(.{});
+    qpat.hb_reset_statchange();
+
+    trig.strCalc0(&.{});
+    tset.uservar2("u_allMult", r.sqVar0, .@"*", emerald_chestplate_dmg_per_counter);
+    qpat.hb_reset_statchange_norefresh();
+    qpat.hb_add_statchange_norefresh(.{
+        .stat = .allMult,
+        .amountStr = "u_allMult",
     });
 
     item(.{
