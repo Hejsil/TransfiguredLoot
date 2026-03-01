@@ -39,6 +39,7 @@ pub fn main() !void {
     try transfiguredSharpedgeSet();
     try transfiguredOceansSet();
     try transfiguredPerformersSet();
+    try transfiguredMinersSet();
     try transfiguredTestSet();
 }
 
@@ -7568,6 +7569,164 @@ fn transfiguredPerformersSet() !void {
         },
         .description = .{
             .original = "Significantly increases movement speed.#Every 10 times you use an ability, gain Quickdraw.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+}
+
+fn transfiguredMinersSet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Miners Set",
+        .image_path = "images/miners.png",
+        .thumbnail_path = "images/miners_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_iron_pickaxe",
+        .name = .{
+            .original = "Iron Pickaxe",
+            .english = "Transfigured Iron Pickaxe",
+        },
+        .description = .{
+            .original = "When your Primary deals damage, it has a 20% chance to deal 300 " ++
+                "damage in an explosion at the point of impact.#" ++
+                "This effect has a 5 second cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_dynamite_staff",
+        .name = .{
+            .original = "Dynamite Staff",
+            .english = "Transfigured Dynamite Staff",
+        },
+        .description = .{
+            .original = "Every 15 seconds, using your Special additionally throws a bomb a " ++
+                "fixed distance in front of you, dealing 700 damage.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_fossil_dagger",
+        .name = .{
+            .original = "Fossil Dagger",
+            .english = "Transfigured Fossil Dagger",
+        },
+        .description = .{
+            .original = "Every 4 seconds, using your Secondary additionally slices to your " ++
+                "left and right, dealing 150 damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_drill_shield",
+        .name = .{
+            .original = "Drill Shield",
+            .english = "Transfigured Drill Shield",
+        },
+        .description = .{
+            .original = "Every 10 seconds, using your Defensive additionally fires a " ++
+                "projectile that explodes upon impact, dealing 400 damage to a large area.#" ++
+                "Starts fights on cooldown.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_canary_charm",
+        .name = .{
+            .original = "Canary Charm",
+            .english = "Transfigured Canary Charm",
+        },
+        .description = .{
+            .original = "Increases your damage by 5%.#Every 15 seconds, increases damage by " ++
+                "an additional 5%, to a maximum of 50%.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_pyrite_earrings",
+        .name = .{
+            .original = "Pyrite Earrings",
+            .english = "Transfigured Pyrite Earrings",
+        },
+        .description = .{
+            .original = "Increases your damage by 5%, and by an additional 10% for every " ++
+                "piece of loot that deals damage (including those that apply damaging " ++
+                "status effects).",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_cavers_cloak",
+        .name = .{
+            .original = "Caver's Cloak",
+            .english = "Transfigured Caver's Cloak",
+        },
+        .description = .{
+            .original = "When you use your Defensive, reduce all other cooldowns by 5 seconds.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .redyellow,
+    });
+
+    item(.{
+        .id = "it_transfigured_miners_headlamp",
+        .name = .{
+            .original = "Miner's Headlamp",
+            .english = "Transfigured Miner's Headlamp",
+        },
+        .description = .{
+            .original = "Every 6 seconds, reduce all other cooldowns by 2 seconds.#" ++
+                "Starts fights on cooldown.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
