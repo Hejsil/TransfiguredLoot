@@ -4286,8 +4286,8 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Quartz Shield",
         },
         .description = .{
-            .original = "Your Defensive's cooldown becomes 30. When a loot item with a " ++
-                "cooldown activates, the remaining timer on your Defensive is reduced by that amount.",
+            .original = "Whenever you use your Defensive, deal 180 damage in a radius around " ++
+                "you once for every ability or loot with a cooldown of 10 seconds or more.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
