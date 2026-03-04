@@ -7708,7 +7708,7 @@ fn transfiguredMinersSet() !void {
             .english = "Transfigured Caver's Cloak",
         },
         .description = .{
-            .original = "When you use your Defensive, reduce all other cooldowns by 5 seconds.",
+            .original = "When you gain invulnerability, reduce all cooldowns by 2 seconds.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
