@@ -7738,6 +7738,165 @@ fn transfiguredMinersSet() !void {
     });
 }
 
+fn transfiguredTeapartySet() !void {
+    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    rns.start(.{
+        .name = "Transfigured Teaparty Set",
+        .image_path = "images/teaparty.png",
+        .thumbnail_path = "images/teaparty_thumbnail.png",
+        .steam_description_header = steam_description_header,
+    });
+    defer rns.end();
+
+    item(.{
+        .id = "it_transfigured_tiny_fork",
+        .name = .{
+            .original = "Tiny Fork",
+            .english = "Transfigured Tiny Fork",
+        },
+        .description = .{
+            .original = "While active, your Primary deals 120% more damage.#" ++
+                "Starts fights inactive, and switches between active and inactive every 6 seconds.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_stirring_spoon",
+        .name = .{
+            .original = "Stirring Spoon",
+            .english = "Transfigured Stirring Spoon",
+        },
+        .description = .{
+            .original = "While active, your Secondary deals 120% more damage.#" ++
+                "Starts fights active, and switches between active and inactive every 6 seconds.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_fanciful_book",
+        .name = .{
+            .original = "Fanciful Book",
+            .english = "Transfigured Fanciful Book",
+        },
+        .description = .{
+            .original = "Your Special deals 20% more damage.#" ++
+                "For every loot that is \"spent\" (greyed out with no effect), your Special " ++
+                "deals 40% more damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_apple_plate",
+        .name = .{
+            .original = "Apple Plate",
+            .english = "Transfigured Apple Plate",
+        },
+        .description = .{
+            .original = "Reduces your Defensive's cooldown by 2 seconds.#" ++
+                "For every loot that is \"spent\" (greyed out with no effect), ALL cooldowns " ++
+                "are reduced by 1 second.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_vanilla_wafers",
+        .name = .{
+            .original = "Vanilla Wafers",
+            .english = "Transfigured Vanilla Wafers",
+        },
+        .description = .{
+            .original = "Heals you for 1 and gives you 5 gold when you pick this item, then " ++
+                "again at the end of the next 5 fights.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_caramel_tea",
+        .name = .{
+            .original = "Caramel Tea",
+            .english = "Transfigured Caramel Tea",
+        },
+        .description = .{
+            .original = "Grants ELEGY for 45 seconds at the beginning of each fight.#" ++
+                "Works for 6 fights.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_strawberry_cake",
+        .name = .{
+            .original = "Strawberry Cake",
+            .english = "Transfigured Strawberry Cake",
+        },
+        .description = .{
+            .original = "Heals you for 1, and starts with 2 charges on pickup.#" ++
+                "When you take damage, 1 charge will be expended to heal you.#" ++
+                "All damage is increased by 10% for each charge still remaining.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+
+    item(.{
+        .id = "it_transfigured_sweet_taffy",
+        .name = .{
+            .original = "Sweet Taffy",
+            .english = "Transfigured Sweet Taffy",
+        },
+        .description = .{
+            .original = "For the next 6 fights, heal for 1 and deal 2500 damage to all " ++
+                "enemies at the beginning of the fight.#" ++
+                "This loot cannot hit for critical damage.",
+            .english = "Not Implemented. Should not appear in a run.",
+        },
+        // .itemFlags = .{ .starting_item = true },
+        .color = color,
+        .type = .loot,
+        .weaponType = .loot,
+        // .treasureType = .yellowgreen,
+    });
+}
+
 fn transfiguredTestSet() !void {
     const color = rgb(0, 0, 0);
     rns.start(.{
