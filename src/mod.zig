@@ -4321,8 +4321,8 @@ fn transfiguredTimegemSet() !void {
             .english = "Transfigured Nova Crown",
         },
         .description = .{
-            .original = "Your Special's cooldown becomes 30s. Every 8s, this loot item " ++
-                "reduces your Special's cooldown timer to 1s and CHARGEs it.",
+            .original = "Your Special's cooldown becomes 30s. Every 8s, this loot item resets " ++
+                " your Special and Charge it.",
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
