@@ -746,6 +746,8 @@ fn item2(opt: Item) !void {
         .{ "[ELEGY-0]", "ELEGY" },
         .{ "[ELEGY-1]", "ELEGY" },
         .{ "[ELEGY-2]", "ELEGY" },
+        .{ "[DEEPFREEZE-0]", "DEEP FREEZE" },
+        .{ "[DEEPFREEZE-1]", "DEEP FREEZE" },
         .{ "[SAP]", "SAP" },
     };
 
