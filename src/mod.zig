@@ -5,7 +5,8 @@ const steam_description_header =
     \\
 ;
 
-pub fn main() !void {
+pub fn main(init: std.process.Init) !void {
+    rns.init(init);
     try transfiguredArcaneSet();
     try transfiguredNightSet();
     try transfiguredTimespaceSet();

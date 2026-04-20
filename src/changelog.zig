@@ -1,24 +1,30 @@
-pub fn main() !void {
+pub fn main(init: std.process.Init) !void {
     var arena_state = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     const arena = arena_state.allocator();
     defer arena_state.deinit();
 
-    const args = try std.process.argsAlloc(arena);
-    return generateChangelog(arena, args[1], args[2]);
+    const args = try init.minimal.args.toSlice(arena);
+    return generateChangelog(init.io, arena, args[1], args[2]);
 }
 
-fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: []const u8) !void {
-    const cwd = std.fs.cwd();
-    var changelog = std.io.Writer.Allocating.init(arena);
-    const old_dir = try cwd.openDir(old_path, .{ .iterate = true });
-    const new_dir = try cwd.openDir(new_path, .{});
+fn generateChangelog(
+    io: std.Io,
+    arena: std.mem.Allocator,
+    old_path: []const u8,
+    new_path: []const u8,
+) !void {
+    const cwd = std.Io.Dir.cwd();
+    var changelog = std.Io.Writer.Allocating.init(arena);
+    const old_dir = try cwd.openDir(io, old_path, .{ .iterate = true });
+    const new_dir = try cwd.openDir(io, new_path, .{});
 
     var mod_folders = old_dir.iterate();
-    while (try mod_folders.next()) |entry| {
+    while (try mod_folders.next(io)) |entry| {
         std.debug.assert(entry.kind == .directory);
-        const old_mod_dir = try old_dir.openDir(entry.name, .{});
-        const new_mod_dir = try new_dir.openDir(entry.name, .{});
+        const old_mod_dir = try old_dir.openDir(io, entry.name, .{});
+        const new_mod_dir = try new_dir.openDir(io, entry.name, .{});
         try generateChangelogModEntry(
+            io,
             arena,
             &changelog.writer,
             entry.name,
@@ -27,18 +33,19 @@ fn generateChangelog(arena: std.mem.Allocator, old_path: []const u8, new_path: [
         );
     }
 
-    try cwd.writeFile(.{
+    try cwd.writeFile(io, .{
         .sub_path = "zig-out/changelog.md",
         .data = changelog.written(),
     });
 }
 
 fn generateChangelogModEntry(
+    io: std.Io,
     arena: std.mem.Allocator,
-    writer: *std.io.Writer,
+    writer: *std.Io.Writer,
     transfigured_mod_name: []const u8,
-    old_dir: std.fs.Dir,
-    new_dir: std.fs.Dir,
+    old_dir: std.Io.Dir,
+    new_dir: std.Io.Dir,
 ) !void {
     const transfigured_prefix = "Transfigured ";
     if (!std.mem.startsWith(u8, transfigured_mod_name, transfigured_prefix)) {
@@ -47,14 +54,14 @@ fn generateChangelogModEntry(
     }
 
     const mod_name = transfigured_mod_name[transfigured_prefix.len..];
-    const old_items_csv = try old_dir.readFileAlloc(arena, "Items.csv", std.math.maxInt(usize));
-    const new_items_csv = try new_dir.readFileAlloc(arena, "Items.csv", std.math.maxInt(usize));
-    const old_items_ini = try old_dir.readFileAlloc(arena, "Items.ini", std.math.maxInt(usize));
-    const new_items_ini = try new_dir.readFileAlloc(arena, "Items.ini", std.math.maxInt(usize));
+    const old_items_csv = try old_dir.readFileAlloc(io, "Items.csv", arena, .unlimited);
+    const new_items_csv = try new_dir.readFileAlloc(io, "Items.csv", arena, .unlimited);
+    const old_items_ini = try old_dir.readFileAlloc(io, "Items.ini", arena, .unlimited);
+    const new_items_ini = try new_dir.readFileAlloc(io, "Items.ini", arena, .unlimited);
 
     // TODO: Use `Items_Full.json`
-    const old_items_str = try old_dir.readFileAlloc(arena, "Items.json", std.math.maxInt(usize));
-    const new_items_str = try new_dir.readFileAlloc(arena, "Items.json", std.math.maxInt(usize));
+    const old_items_str = try old_dir.readFileAlloc(io, "Items.json", arena, .unlimited);
+    const new_items_str = try new_dir.readFileAlloc(io, "Items.json", arena, .unlimited);
 
     var old_items_scanner = std.json.Scanner.initCompleteInput(arena, old_items_str);
     var new_items_scanner = std.json.Scanner.initCompleteInput(arena, new_items_str);

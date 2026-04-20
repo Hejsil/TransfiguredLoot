@@ -1,7 +1,7 @@
 const gpa = std.heap.page_allocator;
 
 var g: struct {
-    args: ?[][:0]u8 = null,
+    init: ?std.process.Init = null,
 
     generating_mod: bool = false,
     is_implemented: bool = false,
@@ -10,19 +10,19 @@ var g: struct {
     written_items: usize = 0,
 
     mod: Mod = undefined,
-    sheetlist: std.io.Writer.Allocating = .init(gpa),
-    item_csv: std.io.Writer.Allocating = .init(gpa),
-    item_ini: std.io.Writer.Allocating = .init(gpa),
-    item_names: std.io.Writer.Allocating = .init(gpa),
-    item_descriptions: std.io.Writer.Allocating = .init(gpa),
+    sheetlist: std.Io.Writer.Allocating = .init(gpa),
+    item_csv: std.Io.Writer.Allocating = .init(gpa),
+    item_ini: std.Io.Writer.Allocating = .init(gpa),
+    item_names: std.Io.Writer.Allocating = .init(gpa),
+    item_descriptions: std.Io.Writer.Allocating = .init(gpa),
 
-    items_json_string: std.io.Writer.Allocating = .init(gpa),
+    items_json_string: std.Io.Writer.Allocating = .init(gpa),
     items_json: std.json.Stringify = undefined,
 
-    items_full_json_string: std.io.Writer.Allocating = .init(gpa),
+    items_full_json_string: std.Io.Writer.Allocating = .init(gpa),
     items_full_json: std.json.Stringify = undefined,
 
-    items_steam_txt: std.io.Writer.Allocating = .init(gpa),
+    items_steam_txt: std.Io.Writer.Allocating = .init(gpa),
 } = .{};
 
 pub const Mod = struct {
@@ -31,6 +31,10 @@ pub const Mod = struct {
     thumbnail_path: []const u8,
     steam_description_header: []const u8,
 };
+
+pub fn init(i: std.process.Init) void {
+    g.init = i;
+}
 
 pub fn start(mod: Mod) void {
     start2(mod) catch |err| @panic(@errorName(err));
@@ -99,59 +103,60 @@ pub fn end() void {
 fn end2() !void {
     std.debug.assert(g.generating_mod);
 
-    const args = g.args orelse blk: {
-        g.args = try std.process.argsAlloc(gpa);
-        break :blk g.args.?;
-    };
+    const io = g.init.?.io;
+    var args = try g.init.?.minimal.args.iterateAllocator(gpa);
+    defer args.deinit();
 
-    const cwd = std.fs.cwd();
-    const output_dir_path = if (args.len >= 2) args[1] else blk: {
+    _ = args.skip();
+
+    const cwd = std.Io.Dir.cwd();
+    const output_dir_path = args.next() orelse blk: {
         std.debug.assert(builtin.target.os.tag == .linux);
-        const home = try std.process.getEnvVarOwned(gpa, "HOME");
+        const home = try g.init.?.minimal.environ.getAlloc(gpa, "HOME");
         break :blk try std.fs.path.join(gpa, &.{
             home, ".local/share/Steam/steamapps/common/Rabbit and Steel/Mods",
         });
     };
-    var output_parent_dir = try cwd.makeOpenPath(output_dir_path, .{});
-    defer output_parent_dir.close();
+    var output_parent_dir = try cwd.createDirPathOpen(io, output_dir_path, .{});
+    defer output_parent_dir.close(io);
 
-    var output_dir = try output_parent_dir.makeOpenPath(g.mod.name, .{});
-    defer output_dir.close();
+    var output_dir = try output_parent_dir.createDirPathOpen(io, g.mod.name, .{});
+    defer output_dir.close(io);
 
-    try cwd.copyFile(g.mod.image_path, output_dir, "items.png", .{});
-    try cwd.copyFile(g.mod.thumbnail_path, output_dir, "thumbnail.png", .{});
-    try output_dir.writeFile(.{
+    try cwd.copyFile(g.mod.image_path, output_dir, "items.png", io, .{});
+    try cwd.copyFile(g.mod.thumbnail_path, output_dir, "thumbnail.png", io, .{});
+    try output_dir.writeFile(io, .{
         .sub_path = "SheetList.csv",
         .data = g.sheetlist.written(),
     });
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items.csv",
         .data = try std.fmt.allocPrint(gpa,
             \\spriteNumber,{},,,,
             \\{s}
         , .{ g.written_items, g.item_csv.written() }),
     });
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items.ini",
         .data = g.item_ini.written(),
     });
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items_Names.csv",
         .data = g.item_names.written(),
     });
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items_Descriptions.csv",
         .data = g.item_descriptions.written(),
     });
 
     try g.items_json.endObject();
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items.json",
         .data = g.items_json_string.written(),
     });
 
     try g.items_full_json.endObject();
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items_Full.json",
         .data = g.items_full_json_string.written(),
     });
@@ -163,7 +168,7 @@ fn end2() !void {
         \\    [/tr]
         \\[/table]
     );
-    try output_dir.writeFile(.{
+    try output_dir.writeFile(io, .{
         .sub_path = "Items.steam.txt",
         .data = g.items_steam_txt.written(),
     });
@@ -743,7 +748,7 @@ fn item2(opt: Item) !void {
     };
 
     const desc = opt.description.english;
-    var new_desc_writer = try std.io.Writer.Allocating.initCapacity(arena, desc.len * 2);
+    var new_desc_writer = try std.Io.Writer.Allocating.initCapacity(arena, desc.len * 2);
 
     var pos: usize = 0;
     while (std.mem.indexOfScalarPos(u8, desc, pos, '[')) |i| {
@@ -3757,7 +3762,7 @@ pub const tset = opaque {
     }
 };
 
-fn writeArgs(writer: *std.io.Writer, args: anytype) !void {
+fn writeArgs(writer: *std.Io.Writer, args: anytype) !void {
     inline for (args) |arg| {
         const T = @TypeOf(arg);
         switch (@typeInfo(T)) {
