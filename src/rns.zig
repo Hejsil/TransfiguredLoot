@@ -3565,6 +3565,11 @@ pub const tset = opaque {
         write("tset_hbs_randombuff", .{});
     }
 
+    /// Similar to tset_hbs_def, but will pick a random debuff
+    pub fn hbs_randomdebuff() void {
+        write("tset_hbs_randomdebuff", .{});
+    }
+
     /// hbsKey (a string that is a key to a status effect)
     /// Will set a custom debuff to be applied.
     pub fn hbskey(args: anytype) void {
