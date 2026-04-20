@@ -6490,14 +6490,32 @@ fn transfiguredGlacierSet() !void {
         .description = .{
             .original = "Slightly increases movement speed. When you stand still for 1 second, " ++
                 "apply FREEZE to all enemies once per second.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Apply [DEEPFREEZE-0] every time you move 15 rabbitleaps.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .purpleblue,
+        .treasureType = .purpleblue,
+
+        .showSqVar = true,
+
+        .hbsType = .deepfreeze_0,
+        .hbsLength = 20 * std.time.ms_per_s,
+        .hbsStrMult = 100,
     });
+
+    trig.onSquarePickup(&.{.square_self});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 15 });
+
+    trig.distanceTick(&.{});
+    qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
+    cond.hb_check_square_var(.{ 0, 0 });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 15 });
+    qpat.hb_flash_item(.{});
+    ttrg.players_opponent();
+    tset.hbs_def();
+    apat.poisonfrog_charm(.{});
 }
 
 fn transfiguredMemorySet() !void {
