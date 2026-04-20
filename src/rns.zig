@@ -300,6 +300,8 @@ pub const Item = struct {
         upgradeD, //
     } = null,
 
+    transformKey: ?[]const u8 = null,
+
     /// "HITBOX" VARIABLES
     // Variables relating to the item doing damage, or the effects that the item has. Note
     // that values over what it says you can put in might *look* like they work on your
@@ -1906,6 +1908,10 @@ pub const qpat = opaque {
         write("tpat_player_set_level", args);
     }
 
+    pub fn player_flash_item_transform(args: Args) void {
+        write("tpat_player_flash_item_transform", args);
+    }
+
     /// "amount" (a number, in milliseconds)
     /// Adds (or subtracts, if amount is negative) an amount from targeted hotbarslot's
     /// current cooldown.
@@ -1998,6 +2004,10 @@ pub const qpat = opaque {
     /// Clears specified hotbarslots of all Charge.
     pub fn hb_charge_clear() void {
         write("tpat_hb_charge_clear", .{});
+    }
+
+    pub fn hb_transform_item() void {
+        write("tpat_hb_transform_item", .{});
     }
 
     /// "messageIndex" (hbFlashMessage enum, default "none")
@@ -3563,6 +3573,14 @@ pub const tset = opaque {
     /// Will set a custom debuff strength.
     pub fn hbsstr(args: anytype) void {
         write("tset_hbsstr", args);
+    }
+
+    pub fn transform_key(args: anytype) void {
+        write("tset_transform_key", args);
+    }
+
+    pub fn transform_id(args: anytype) void {
+        write("tset_transform_id", args);
     }
 
     /// percent (a number between 0 - 1 )
