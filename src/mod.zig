@@ -7580,7 +7580,7 @@ fn transfiguredPerformersSet() !void {
         .weaponType = .loot,
         .treasureType = .redyellow,
     });
-    trig.hotbarUsed(&.{});
+    trig.hotbarUsedProc(&.{});
     cond.eval(s.weaponType, .@"==", WeaponType.loot);
     ttrg.hotbarslots_current_players();
     ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
