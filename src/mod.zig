@@ -7554,14 +7554,21 @@ fn transfiguredPerformersSet() !void {
         },
         .description = .{
             .original = "Gives you a copy of the loot item you picked up last.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "Transform all your items into the first item you use.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .redyellow,
+        .treasureType = .redyellow,
     });
+    trig.hotbarUsed(&.{});
+    cond.eval(s.weaponType, .@"==", WeaponType.loot);
+    ttrg.hotbarslots_current_players();
+    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+    tset.transform_id(.{s.dataId});
+    qpat.hb_transform_item();
+    qpat.player_flash_item_transform(.{});
 
     item(.{
         .id = "it_transfigured_performers_shoes",
