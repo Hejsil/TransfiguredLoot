@@ -6350,7 +6350,7 @@ fn transfiguredLakeshrineSet() !void {
 }
 
 fn transfiguredGlacierSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0x59, 0xaa, 0xb8);
     rns.start(.{
         .name = "Transfigured Glacier Set",
         .image_path = "images/glacier.png",
@@ -6519,7 +6519,7 @@ fn transfiguredGlacierSet() !void {
 }
 
 fn transfiguredMemorySet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0xf0, 0x57, 0x97);
     rns.start(.{
         .name = "Transfigured Memory Set",
         .image_path = "images/memory.png",
@@ -6679,7 +6679,7 @@ fn transfiguredMemorySet() !void {
 }
 
 fn transfiguredCultistSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0x81, 0x46, 0xef);
     rns.start(.{
         .name = "Transfigured Cultist Set",
         .image_path = "images/cultist.png",
@@ -6837,7 +6837,7 @@ fn transfiguredCultistSet() !void {
 }
 
 fn transfiguredPaintersSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0xd8, 0xe2, 0xd6);
     rns.start(.{
         .name = "Transfigured Painters Set",
         .image_path = "images/painters.png",
@@ -6991,7 +6991,8 @@ fn transfiguredPaintersSet() !void {
 }
 
 fn transfiguredDaynightSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color_light = rgb(0xff, 0x7d, 0x98);
+    const color_dark = rgb(0x48, 0x63, 0xfa);
     rns.start(.{
         .name = "Transfigured Daynight Set",
         .image_path = "images/daynight.png",
@@ -7014,7 +7015,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7034,7 +7035,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7052,7 +7053,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7070,7 +7071,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7088,7 +7089,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7107,7 +7108,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7126,7 +7127,7 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_light,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
@@ -7145,14 +7146,15 @@ fn transfiguredDaynightSet() !void {
             .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
-        .color = color,
+        .color = color_dark,
         .type = .loot,
         .weaponType = .loot,
         // .treasureType = .bluered,
     });
 }
+
 fn transfiguredSharpedgeSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0x3e, 0x3e, 0x4c);
     rns.start(.{
         .name = "Transfigured Sharpedge Set",
         .image_path = "images/sharpedge.png",
@@ -7306,7 +7308,7 @@ fn transfiguredSharpedgeSet() !void {
 }
 
 fn transfiguredOceansSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0x41, 0xfc, 0xff);
     rns.start(.{
         .name = "Transfigured Oceans Set",
         .image_path = "images/oceans.png",
@@ -7453,7 +7455,7 @@ fn transfiguredOceansSet() !void {
 }
 
 fn transfiguredPerformersSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0xff, 0xe5, 0xbc);
     rns.start(.{
         .name = "Transfigured Performers Set",
         .image_path = "images/performers.png",
@@ -7607,7 +7609,7 @@ fn transfiguredPerformersSet() !void {
 }
 
 fn transfiguredMinersSet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0x76, 0xc4, 0x90);
     rns.start(.{
         .name = "Transfigured Miners Set",
         .image_path = "images/miners.png",
@@ -7765,7 +7767,7 @@ fn transfiguredMinersSet() !void {
 }
 
 fn transfiguredTeapartySet() !void {
-    const color = rgb(0x45, 0xcd, 0x9c); // TODO
+    const color = rgb(0xea, 0xff, 0x90);
     rns.start(.{
         .name = "Transfigured Teaparty Set",
         .image_path = "images/teaparty.png",
