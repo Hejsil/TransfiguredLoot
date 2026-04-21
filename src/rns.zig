@@ -3812,12 +3812,20 @@ fn writeArgs(writer: *std.Io.Writer, args: anytype) !void {
 }
 
 fn writeCsvString(writer: anytype, string: []const u8) !void {
-    if (std.mem.count(u8, string, "\"") != 0)
-        unreachable; // TODO
-    if (std.mem.count(u8, string, ",") != 0)
-        return writer.print("\"{s}\"", .{string});
+    var p: usize = 0;
+    try writer.writeAll("\"");
 
-    return writer.writeAll(string);
+    while (std.mem.indexOfScalarPos(u8, string, p, '"')) |start_idx| {
+        const end_idx = std.mem.indexOfScalarPos(u8, string, start_idx + 1, '"') orelse string.len;
+        try writer.writeAll(string[p..start_idx]);
+        try writer.writeAll("\"\"");
+        try writer.writeAll(string[start_idx + 1 .. end_idx]);
+        try writer.writeAll("\"\"");
+        p = end_idx + 1;
+    }
+
+    try writer.writeAll(string[p..]);
+    try writer.writeAll("\"");
 }
 
 pub const Color = struct {
