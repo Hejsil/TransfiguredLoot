@@ -3779,11 +3779,11 @@ pub const tset = opaque {
     pub fn uservar_playercount(args: anytype) void {
         write("tset_uservar_playercount", args);
     }
-    pub fn uservar_spent_slots(args: anytype) void {
-        write("tset_uservar_spent_slots", args);
+    pub fn uservar_spent_slots(uservar: []const u8) void {
+        write("tset_uservar_spent_slots", .{uservar});
     }
-    pub fn uservar_sqvar(args: anytype) void {
-        write("tset_uservar_sqvar", args);
+    pub fn uservar_sqvar(uservar: []const u8, index: usize) void {
+        write("tset_uservar_sqvar", .{ uservar, index });
     }
 
     fn write(set: []const u8, args: anytype) void {
