@@ -7845,7 +7845,7 @@ fn transfiguredTeapartySet() !void {
     trig.battleStart0(&.{});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
 
-    trig.strCalc0(&.{});
+    trig.regenTick(&.{});
     ttrg.hotbarslots_current_players();
     tset.uservar_spent_slots("u_newSpentSlots");
 
