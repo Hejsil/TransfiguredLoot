@@ -7822,14 +7822,45 @@ fn transfiguredTeapartySet() !void {
             .original = "Your Special deals 20% more damage.#" ++
                 "For every loot that is \"spent\" (greyed out with no effect), your Special " ++
                 "deals 40% more damage.",
-            .english = "Not Implemented. Should not appear in a run.",
+            .english = "The first time you \"spent\" (greyed out with no effect) an item, " ++
+                "deal [STR] to all enemies.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        // .treasureType = .yellowgreen,
+        .treasureType = .yellowgreen,
+
+        .greySqVar0 = true,
+        .strMult = 10000,
+        .delay = 250,
     });
+    trig.onSquarePickup(&.{.square_self});
+    ttrg.hotbarslots_current_players();
+    tset.uservar_spent_slots("u_spentSlots");
+    ttrg.hotbarslot_self();
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    qpat.hb_square_set_var(.{ .varIndex = 1, .amountStr = "u_spentSlots" });
+
+    trig.battleStart0(&.{});
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+
+    trig.strCalc0(&.{});
+    ttrg.hotbarslots_current_players();
+    tset.uservar_spent_slots("u_newSpentSlots");
+
+    ttrg.hotbarslot_self();
+    tset.uservar_sqvar("u_oldSpentSlots", 1);
+    qpat.hb_square_set_var(.{ .varIndex = 1, .amountStr = "u_newSpentSlots" });
+    cond.hb_check_square_var_false(.{ 0, 0 });
+
+    cond.eval("u_oldSpentSlots", .@"<", "u_newSpentSlots");
+
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
+    qpat.hb_flash_item(.{});
+    ttrg.players_opponent();
+    tset.strength_def();
+    apat.crown_of_storms(.{});
 
     item(.{
         .id = "it_transfigured_apple_plate",
