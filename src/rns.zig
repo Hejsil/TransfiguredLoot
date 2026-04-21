@@ -2406,7 +2406,7 @@ pub const qpat = opaque {
 /// "fy"     : The y position of the player's target reticule
 ///
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=258117569#gid=258117569
-pub const ipat = opaque {
+pub const apat = opaque {
     /// "hbsColorInd" (an integer representing a color palette)
     /// These are all status patterns for poison ticks and the like; the hbsColorInd refers to the
     /// status's ID. It's probably best not to use these functions unless I add in custom status

@@ -82,7 +82,7 @@ fn transfiguredArcaneSet() !void {
     cond.hb_available();
     ttrg.player_damaged();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsCreated(&.{.hbs_thishbcast});
     qpat.hb_run_cooldown();
@@ -159,7 +159,7 @@ fn transfiguredArcaneSet() !void {
     qpat.hb_run_cooldown();
     ttrg.player_damaged();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_darkmagic_blade",
@@ -201,7 +201,7 @@ fn transfiguredArcaneSet() !void {
     qpat.hb_run_cooldown();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     const witchs_cloak_hbs_mult = 1.5;
     const witchs_cloak_ability_mult = -0.1;
@@ -262,7 +262,7 @@ fn transfiguredArcaneSet() !void {
     cond.eval("u_debuff_count", .@"!=", 0);
     ttrg.player_damaged();
     tset.strength_def();
-    ipat.melee_hit(.{ .numberStr = "u_debuff_count" });
+    apat.melee_hit(.{ .numberStr = "u_debuff_count" });
 
     const redblack_ribbon_dmg_mult = 0.05;
     const redblack_ribbon_mult_length_hbs = 1.0;
@@ -383,7 +383,7 @@ fn transfiguredNightSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.sleeping_greatbow(.{});
+    apat.sleeping_greatbow(.{});
 
     const transfigured_crescentmoon_dagger_hits = 2;
     item(.{
@@ -418,7 +418,7 @@ fn transfiguredNightSet() !void {
     ttrg.player_damaged();
     tset.strength_def();
     tset.critratio(.{1});
-    ipat.black_wakizashi(.{});
+    apat.black_wakizashi(.{});
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
 
@@ -486,7 +486,7 @@ fn transfiguredNightSet() !void {
     ttrg.players_opponent();
     tset.uservar_random_range(.{ "u_x", nightstar_grimoire_radius, 1800 - nightstar_grimoire_radius });
     tset.uservar_random_range(.{ "u_y", nightstar_grimoire_radius, 1000 - nightstar_grimoire_radius });
-    ipat.meteor_staff(.{ .fxStr = "u_x", .fyStr = "u_y" });
+    apat.meteor_staff(.{ .fxStr = "u_x", .fyStr = "u_y" });
 
     trig.autoStart(&.{.hb_auto_pl});
     qpat.hb_run_cooldown();
@@ -523,7 +523,7 @@ fn transfiguredNightSet() !void {
     ttrg.players_opponent();
     tset.uservar_random_range(.{ "u_x", moon_pendant_radius, 1800 - moon_pendant_radius });
     tset.uservar_random_range(.{ "u_y", moon_pendant_radius, 1000 - moon_pendant_radius });
-    ipat.meteor_staff(.{ .fxStr = "u_x", .fyStr = "u_y" });
+    apat.meteor_staff(.{ .fxStr = "u_x", .fyStr = "u_y" });
 
     const pajama_hat_cd_reduction = 2 * std.time.ms_per_s;
     item(.{
@@ -584,7 +584,7 @@ fn transfiguredNightSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
     ttrg.player_self();
-    ipat.apply_invuln(.{ .duration = stuffed_rabbit_invul_dur });
+    apat.apply_invuln(.{ .duration = stuffed_rabbit_invul_dur });
 
     item(.{
         .id = "it_transfigured_nightingale_gown",
@@ -666,7 +666,7 @@ fn transfiguredTimespaceSet() !void {
     qpat.hb_run_cooldown();
     ttrg.players_ally();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     const timewarp_wand_gcd_shorting = -0.1 * std.time.ms_per_s;
     item(.{
@@ -767,7 +767,7 @@ fn transfiguredTimespaceSet() !void {
         qpat.hb_flash_item(.{});
         qpat.hb_lucky_proc();
         tset.hbskey(.{ hbs, r.hbsLength });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     trig.hotbarUsed3(&.{.hb_selfcast});
@@ -808,13 +808,13 @@ fn transfiguredTimespaceSet() !void {
     cond.hb_check_square_var(.{ 0, 0 });
     ttrg.player_self();
     tset.hbskey(.{ Hbs.haste_2, r.hbsLength });
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hotbarUsed(&.{.hb_self});
     cond.hb_check_square_var(.{ 0, 1 });
     ttrg.player_self();
     tset.hbskey(.{ Hbs.smite_3, r.hbsLength });
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hotbarUsed2(&.{.hb_self});
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
@@ -874,7 +874,7 @@ fn transfiguredTimespaceSet() !void {
     cond.eval(s.cooldown, .@">=", starry_cloak_cd_threshold);
     ttrg.player_self();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsCreated(&.{.hbs_thishbcast});
     qpat.hb_flash_item(.{});
@@ -1010,7 +1010,7 @@ fn transfiguredWindSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.floral_bow(.{});
+    apat.floral_bow(.{});
 
     item(.{
         .id = "it_transfigured_shinsoku_katana",
@@ -1106,7 +1106,7 @@ fn transfiguredWindSet() !void {
     ttrg.players_opponent();
     tset.strength_def();
     tset.strength(.{"u_str"});
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
 
     trig.hotbarUsedProc(&.{.hb_secondary});
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
@@ -1152,7 +1152,7 @@ fn transfiguredWindSet() !void {
     trig.hotbarUsedProc(&.{.hb_defensive});
     qpat.hb_flash_item(.{});
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 }
 
 fn transfiguredBloodwolfSet() !void {
@@ -1208,10 +1208,10 @@ fn transfiguredBloodwolfSet() !void {
     ttrg.players_opponent_backstab();
     tset.hbs_def();
     tset.hbskey(.{ Hbs.bleed_1, r.hbsLength });
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
     tset.hbs_def();
     tset.hbskey(.{ Hbs.sap, r.hbsLength });
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     trig.hbsCreated(&.{.hbs_thishbcast});
     // To avoid flashing for every debuff applied, instead keep track of if the defensive has been
@@ -1244,7 +1244,7 @@ fn transfiguredBloodwolfSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent_random(.{});
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     item(.{
         .id = "it_transfigured_bloodhound_greatsword",
@@ -1322,7 +1322,7 @@ fn transfiguredBloodwolfSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     trig.hbsCreated(&.{.hbs_selfcast});
     cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.bleeds[0]));
@@ -1330,7 +1330,7 @@ fn transfiguredBloodwolfSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_afflicted_source();
     tset.strength_def();
-    ipat.melee_hit(.{});
+    apat.melee_hit(.{});
 
     item(.{
         .id = "it_transfigured_wolf_hood",
@@ -1475,7 +1475,7 @@ fn transfiguredAssassinSet() !void {
     qpat.hb_lucky_proc();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.black_wakizashi(.{ .numberStr = r.sqVar0 });
+    apat.black_wakizashi(.{ .numberStr = r.sqVar0 });
 
     item(.{
         .id = "it_transfigured_shadow_bracelet",
@@ -1529,7 +1529,7 @@ fn transfiguredAssassinSet() !void {
         qpat.hb_flash_item(.{});
         qpat.hb_lucky_proc();
         tset.hbs_def();
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     const kunoichi_hood_str = 15;
@@ -1612,7 +1612,7 @@ fn transfiguredAssassinSet() !void {
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
     tset.hbs_def();
-    ipat.thiefs_coat(.{});
+    apat.thiefs_coat(.{});
 }
 
 fn transfiguredRockdragonSet() !void {
@@ -1682,7 +1682,7 @@ fn transfiguredRockdragonSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     const greysteel_shield_aoe = 1;
     const greysteel_shield_cd_reduction = -1 * std.time.ms_per_s;
@@ -1797,7 +1797,7 @@ fn transfiguredRockdragonSet() !void {
     qpat.hb_flash_item(.{});
     qpat.player_shield();
     ttrg.player_self();
-    ipat.apply_invuln(.{});
+    apat.apply_invuln(.{});
 
     const obsidian_hairpin_special_dmg = 0.2;
     item(.{
@@ -1890,7 +1890,7 @@ fn transfiguredFlameSet() !void {
         ttrg.player_damaged();
         tset.hbs_def();
         tset.hbs_burnhit();
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
         qpat.hb_cdloot_proc();
     }
 
@@ -1969,7 +1969,7 @@ fn transfiguredFlameSet() !void {
     ttrg.player_damaged();
     tset.hbs_def();
     tset.hbs_burnhit();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
     qpat.hb_cdloot_proc();
 
     trig.hbsCreated(&.{.hbs_thishbcast});
@@ -2005,7 +2005,7 @@ fn transfiguredFlameSet() !void {
     cond.eval(s.hp, .@"==", 1);
     cond.random_def(.{});
     ttrg.player_self();
-    ipat.apply_invuln(.{});
+    apat.apply_invuln(.{});
     qpat.player_shield();
     qpat.hb_flash_item(.{ .message = .shield });
 
@@ -2072,7 +2072,7 @@ fn transfiguredFlameSet() !void {
         ttrg.player_damaged();
         tset.hbs_burnhit();
         tset.hbskey(.{ burn, r.hbsLength });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     trig.hbsCreated(&.{.hbs_thishbcast});
@@ -2147,8 +2147,8 @@ fn transfiguredGemSet() !void {
     cond.eval(r.cdSecLeft, .@"!=", 0);
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
-    ipat.dark_shield(.{ .duration = 0, .radius = diamond_shield_radius });
+    apat.darkmagic_blade(.{});
+    apat.dark_shield(.{ .duration = 0, .radius = diamond_shield_radius });
 
     const peridot_rapier_dmg_per_erase = 10;
     item(.{
@@ -2271,7 +2271,7 @@ fn transfiguredGemSet() !void {
     ttrg.players_ally();
     for (0..sapphire_violin_num_buffs) |_| {
         tset.hbs_randombuff();
-        ipat.ornamental_bell(.{});
+        apat.ornamental_bell(.{});
     }
 
     trig.strCalc0(&.{});
@@ -2457,7 +2457,7 @@ fn transfiguredLightningSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
 
     item(.{
         .id = "it_transfigured_bolt_staff",
@@ -2523,7 +2523,7 @@ fn transfiguredLightningSet() !void {
         trig.onDamageDone(&.{trigger});
         ttrg.players_opponent();
         tset.strength_def();
-        ipat.crown_of_storms(.{});
+        apat.crown_of_storms(.{});
     }
 
     const darkcloud_necklace_cooldown_reduction = 1 * std.time.ms_per_s;
@@ -2620,7 +2620,7 @@ fn transfiguredLightningSet() !void {
     qpat.hb_lucky_proc();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
 
     item(.{
         .id = "it_transfigured_storm_petticoat",
@@ -2645,7 +2645,7 @@ fn transfiguredLightningSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
 }
 
 fn transfiguredShrineSet() !void {
@@ -2698,7 +2698,7 @@ fn transfiguredShrineSet() !void {
     qpat.hb_run_cooldown();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     const sacred_bow_mult_per_buff = 1;
     const sacred_bow_dmg = 250;
@@ -2747,7 +2747,7 @@ fn transfiguredShrineSet() !void {
     tset.strength_def();
     tset.strength(.{"u_str"});
     ttrg.players_opponent();
-    ipat.floral_bow(.{});
+    apat.floral_bow(.{});
 
     item(.{
         .id = "it_transfigured_purification_rod",
@@ -3014,7 +3014,7 @@ fn transfiguredLuckySet() !void {
     qpat.hb_run_cooldown();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     trig.strCalc2(&.{});
     tset.uservar_gold(.{"u_gold"});
@@ -3210,7 +3210,7 @@ fn transfiguredLuckySet() !void {
     qpat.hb_lucky_proc();
     ttrg.player_damaged();
     tset.strength_def();
-    ipat.curse_talon(.{});
+    apat.curse_talon(.{});
 
     item(.{
         .id = "it_transfigured_mimick_rabbitfoot",
@@ -3304,7 +3304,7 @@ fn transfiguredLifeSet() !void {
     qpat.hb_cdloot_proc();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.druid_2(.{});
+    apat.druid_2(.{});
 
     trig.strCalc2(&.{});
     qpat.hb_add_hitbox_var(.{
@@ -3401,7 +3401,7 @@ fn transfiguredLifeSet() !void {
     });
     trig.onSquarePickup(&.{.square_self});
     ttrg.player_self();
-    ipat.heal_light(.{ .amount = sunflower_crown_hp });
+    apat.heal_light(.{ .amount = sunflower_crown_hp });
 
     const midsummer_dress_hp = 1;
     const midsummer_dress_mult_per_hp = 0.05;
@@ -3431,7 +3431,7 @@ fn transfiguredLifeSet() !void {
     });
     trig.onSquarePickup(&.{.square_self});
     ttrg.player_self();
-    ipat.heal_light(.{ .amount = midsummer_dress_hp });
+    apat.heal_light(.{ .amount = midsummer_dress_hp });
 
     trig.strCalc0(&.{});
     tset.uservar2("u_allMult", r.hpMax, .@"*", midsummer_dress_mult_per_hp);
@@ -3468,7 +3468,7 @@ fn transfiguredLifeSet() !void {
     });
     trig.onSquarePickup(&.{.square_self});
     ttrg.player_self();
-    ipat.heal_light(.{ .amount = grasswoven_bracelet_hp });
+    apat.heal_light(.{ .amount = grasswoven_bracelet_hp });
 
     trig.strCalc2(&.{});
     ttrg.hotbarslots_current_players();
@@ -3601,7 +3601,7 @@ fn transfiguredPoisonSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_venom_hood",
@@ -3756,7 +3756,7 @@ fn transfiguredDepthSet() !void {
     qpat.hb_run_cooldown();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     trig.onDamageDone(&.{.dmg_self_thishb});
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = 1 });
@@ -3869,7 +3869,7 @@ fn transfiguredDepthSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.hydrous_blob(.{});
+    apat.hydrous_blob(.{});
 
     item(.{
         .id = "it_transfigured_abyss_artifact",
@@ -4610,7 +4610,7 @@ fn transfiguredHauntedSet() !void {
         cond.hb_available();
         ttrg.player_damaged();
         tset.hbs_def();
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
         qpat.hb_cdloot_proc();
     }
 
@@ -4756,7 +4756,7 @@ fn transfiguredHauntedSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     trig.hbsCreated(&.{.hbs_thishbcast});
     // To avoid flashing for every debuff applied, instead keep track of if the loot has been
@@ -5089,7 +5089,7 @@ fn transfiguredSparkbladeSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     const battery_shield_sparks = 8;
     const battery_shield_invul_dur = 5 * std.time.ms_per_s;
@@ -5129,7 +5129,7 @@ fn transfiguredSparkbladeSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     trig.hbsCreated(&.{.hbs_selfcast});
     cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.sparks[0]));
@@ -5139,10 +5139,10 @@ fn transfiguredSparkbladeSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
     ttrg.player_self();
-    ipat.apply_invuln(.{ .duration = battery_shield_invul_dur });
+    apat.apply_invuln(.{ .duration = battery_shield_invul_dur });
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
 
     item(.{
         .id = "it_transfigured_raiju_crown",
@@ -5169,7 +5169,7 @@ fn transfiguredSparkbladeSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 
     item(.{
         .id = "it_transfigured_staticshock_earrings",
@@ -5225,7 +5225,7 @@ fn transfiguredSparkbladeSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_randombuff();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     const blackbolt_ribbon_dmg = 100;
     item(.{
@@ -5279,7 +5279,7 @@ fn transfiguredSparkbladeSet() !void {
     tset.uservar2("u_str", r.sqVar0, .@"*", blackbolt_ribbon_dmg);
     tset.strength_def();
     tset.strength(.{"u_str"});
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 }
 
@@ -5361,7 +5361,7 @@ fn transfiguredSwiftflightSet() !void {
     qpat.hb_flash_item(.{});
     tset.hbs_randombuff();
     ttrg.player_self();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_cloud_guard",
@@ -5426,7 +5426,7 @@ fn transfiguredSwiftflightSet() !void {
     tset.uservar2("u_str", r.sqVar0, .@"*", hermes_bow_dmg_per_leap);
     tset.strength_def();
     tset.strength(.{"u_str"});
-    ipat.floral_bow(.{});
+    apat.floral_bow(.{});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 
     const talon_charm_reduction = -(1 * std.time.ms_per_s);
@@ -5591,14 +5591,14 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
     cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashstr));
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbskey(.{ Hbs.flashdex, r.hbsLength });
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_flamedancer_dagger",
@@ -5633,14 +5633,14 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
     cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashdex));
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbskey(.{ Hbs.flashint, r.hbsLength });
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_whiteflame_staff",
@@ -5675,14 +5675,14 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
     cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashint));
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbskey(.{ Hbs.flashchr, r.hbsLength });
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_sacred_shield",
@@ -5707,7 +5707,7 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     const marble_clasp_mult = 0.15;
     item(.{
@@ -5748,7 +5748,7 @@ fn transfiguredSacredflameSet() !void {
         qpat.hb_flash_item(.{});
         ttrg.player_afflicted_source();
         tset.hbskey(.{ hbs[1], r.hbsLength });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     const sun_pendant_times = 10;
@@ -5790,7 +5790,7 @@ fn transfiguredSacredflameSet() !void {
     ttrg.player_self();
     for ([_]Hbs{ .flashdex, .flashint, .flashstr }) |hbs| {
         tset.hbskey(.{ hbs, r.hbsLength });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     item(.{
@@ -5826,7 +5826,7 @@ fn transfiguredSacredflameSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.crown_of_storms(.{});
+    apat.crown_of_storms(.{});
 
     item(.{
         .id = "it_transfigured_desert_earrings",
@@ -5857,7 +5857,7 @@ fn transfiguredSacredflameSet() !void {
         cond.eval(s.teamId, .@"==", r.teamId);
         tset.hbskey(.{ buff, r.hbsLength });
         ttrg.player_self();
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 }
 
@@ -5927,7 +5927,7 @@ fn transfiguredRuinsSet() !void {
     qpat.hb_run_cooldown();
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     trig.hotbarUsedProc(&.{.hb_self_weapon});
     cond.eval(s.gcd, .@">=", ruins_sword_gcd_reset);
@@ -6020,7 +6020,7 @@ fn transfiguredRuinsSet() !void {
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsShield2(&.{.pl_self});
     ttrg.player_self();
@@ -6037,7 +6037,7 @@ fn transfiguredRuinsSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.strength_def();
-    ipat.darkmagic_blade(.{});
+    apat.darkmagic_blade(.{});
 
     const stoneplate_armor_dmg_mult = 0.04;
     item(.{
@@ -6080,7 +6080,7 @@ fn transfiguredRuinsSet() !void {
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
     tset.hbs_def();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     trig.hbsShield2(&.{.pl_self});
     ttrg.player_self();
@@ -6227,7 +6227,7 @@ fn transfiguredLakeshrineSet() !void {
         tset.hbskey(.{ buff, r.hbsLength });
         ttrg.players_ally();
         ttrg.players_prune_self();
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     item(.{
@@ -6256,7 +6256,7 @@ fn transfiguredLakeshrineSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_randombuff();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 
     item(.{
         .id = "it_transfigured_watermage_pendant",
@@ -6294,7 +6294,7 @@ fn transfiguredLakeshrineSet() !void {
         qpat.hb_flash_item(.{});
         ttrg.player_self();
         tset.hbskey(.{ hbs, r.hbsLength });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
     }
 
     trig.hotbarUsed2(&.{.hb_self});
@@ -6344,9 +6344,9 @@ fn transfiguredLakeshrineSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.player_self();
     tset.hbs_randombuff();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
     tset.hbs_randombuff();
-    ipat.apply_hbs(.{});
+    apat.apply_hbs(.{});
 }
 
 fn transfiguredGlacierSet() !void {
@@ -6515,7 +6515,7 @@ fn transfiguredGlacierSet() !void {
     qpat.hb_flash_item(.{});
     ttrg.players_opponent();
     tset.hbs_def();
-    ipat.poisonfrog_charm(.{});
+    apat.poisonfrog_charm(.{});
 }
 
 fn transfiguredMemorySet() !void {
@@ -7967,7 +7967,7 @@ fn transfiguredTestSet() !void {
         qpat.hb_square_set_var(.{ .varIndex = 0, .amount = @floatFromInt(@intFromEnum(buff)) });
         ttrg.player_self();
         tset.hbskey(.{ buff, std.time.ms_per_s });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
         i += 1;
     }
 
@@ -7977,7 +7977,7 @@ fn transfiguredTestSet() !void {
         qpat.hb_square_set_var(.{ .varIndex = 0, .amount = @floatFromInt(@intFromEnum(debuff)) });
         ttrg.players_opponent();
         tset.hbskey(.{ debuff, std.time.ms_per_s });
-        ipat.apply_hbs(.{});
+        apat.apply_hbs(.{});
         i += 1;
     }
 
@@ -7988,7 +7988,7 @@ fn transfiguredTestSet() !void {
     trig.hbsCreated(&.{});
     cond.eval(s.statusId, .@"!=", r.sqVar0);
     ttrg.player_self();
-    ipat.red_tanzaku(.{});
+    apat.red_tanzaku(.{});
     tset.debug(r.teamId);
     tset.debug(s.statusId);
     tset.debug(r.sqVar0);
@@ -8118,7 +8118,7 @@ const item = rns.item;
 const luck = rns.luck;
 const rgb = rns.rgb;
 
-const ipat = rns.ipat;
+const apat = rns.apat;
 const cond = rns.cond;
 const qpat = rns.qpat;
 const trig = rns.trig;
