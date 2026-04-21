@@ -1720,8 +1720,8 @@ pub const cond = opaque {
     pub fn hbs_target_count(args: anytype) void {
         write(.hbs_target_count, args);
     }
-    pub fn slot_target_count(args: anytype) void {
-        write(.slot_target_count, args);
+    pub fn slot_target_count(op: Compare, value: anytype) void {
+        write(.slot_target_count, .{ op, value });
     }
     pub fn random(args: anytype) void {
         write(.random, args);
