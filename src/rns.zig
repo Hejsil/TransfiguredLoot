@@ -3782,6 +3782,9 @@ pub const tset = opaque {
     pub fn uservar_spent_slots(args: anytype) void {
         write("tset_uservar_spent_slots", args);
     }
+    pub fn uservar_sqvar(args: anytype) void {
+        write("tset_uservar_sqvar", args);
+    }
 
     fn write(set: []const u8, args: anytype) void {
         std.debug.assert(g.have_trigger);
