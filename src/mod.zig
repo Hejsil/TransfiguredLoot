@@ -80,7 +80,7 @@ fn transfiguredArcaneSet() !void {
     });
     trig.onDamageDone(&.{.dmg_self_special});
     cond.hb_available();
-    ttrg.player_damaged();
+    targ.player_damaged();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
@@ -120,12 +120,12 @@ fn transfiguredArcaneSet() !void {
 
     trig.strCalc1c(&.{});
     cond.hb_check_square_var(.{ 0, 0 });
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.primary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.primary});
     qpat.hb_add_strcalcbuff(.{ .amount = blackwing_staff_mult });
 
     trig.strCalc1c(&.{});
     cond.hb_check_square_var_gte(.{ 0, 1 });
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.primary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.primary});
     qpat.hb_add_strcalcbuff(.{ .amount = blackwing_staff_mult * 3 });
 
     item(.{
@@ -157,7 +157,7 @@ fn transfiguredArcaneSet() !void {
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
     qpat.hb_run_cooldown();
-    ttrg.player_damaged();
+    targ.player_damaged();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
@@ -193,13 +193,13 @@ fn transfiguredArcaneSet() !void {
 
     trig.hbsCreated(&.{.hbs_selfcast});
     cond.false(.{s.isBuff});
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_reset_cooldown();
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
@@ -256,11 +256,11 @@ fn transfiguredArcaneSet() !void {
         .strMult = 35,
     });
     trig.onDamageDone(&.{.dmg_self_special});
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.isBuff, .@"==", 0);
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.isBuff, .@"==", 0);
     tset.uservar_hbscount(.{"u_debuff_count"});
     cond.eval("u_debuff_count", .@"!=", 0);
-    ttrg.player_damaged();
+    targ.player_damaged();
     tset.strength_def();
     apat.melee_hit(.{ .numberStr = "u_debuff_count" });
 
@@ -289,8 +289,8 @@ fn transfiguredArcaneSet() !void {
         .hbVar1 = redblack_ribbon_dmg_mult,
     });
     trig.cdCalc2b(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune_bufftype(.{0});
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune_bufftype(.{0});
     qpat.hb_mult_length_hbs(.{ .mult = redblack_ribbon_mult_length_hbs + 1 });
 
     const opal_necklace_dmg_per_debuff = 0.20;
@@ -381,7 +381,7 @@ fn transfiguredNightSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.sleeping_greatbow(.{});
 
@@ -415,7 +415,7 @@ fn transfiguredNightSet() !void {
     trig.onDamageDone(&.{.dmg_self_primary});
     cond.hb_available();
     qpat.hb_run_cooldown();
-    ttrg.player_damaged();
+    targ.player_damaged();
     tset.strength_def();
     tset.critratio(.{1});
     apat.black_wakizashi(.{});
@@ -445,11 +445,11 @@ fn transfiguredNightSet() !void {
     });
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
-    ttrg.hotbarslots_ally();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.special);
-    ttrg.hotbarslots_prune_noreset();
+    targ.hotbarslots_ally();
+    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.special);
+    targ.hotbarslots_prune_noreset();
     qpat.hb_reset_cooldown();
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_flash_item(.{});
 
     const nightstar_grimoire_radius = 200;
@@ -483,7 +483,7 @@ fn transfiguredNightSet() !void {
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown();
     tset.strength_def();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.uservar_random_range(.{ "u_x", nightstar_grimoire_radius, 1800 - nightstar_grimoire_radius });
     tset.uservar_random_range(.{ "u_y", nightstar_grimoire_radius, 1000 - nightstar_grimoire_radius });
     apat.meteor_staff(.{ .fxStr = "u_x", .fyStr = "u_y" });
@@ -520,7 +520,7 @@ fn transfiguredNightSet() !void {
     trig.hotbarUsedProc(&.{.hb_special});
     qpat.hb_flash_item(.{});
     tset.strength_def();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.uservar_random_range(.{ "u_x", moon_pendant_radius, 1800 - moon_pendant_radius });
     tset.uservar_random_range(.{ "u_y", moon_pendant_radius, 1000 - moon_pendant_radius });
     apat.meteor_staff(.{ .fxStr = "u_x", .fyStr = "u_y" });
@@ -545,10 +545,10 @@ fn transfiguredNightSet() !void {
         .hbVar0 = pajama_hat_cd_reduction,
     });
     trig.hotbarUsedProc(&.{.hb_defensive});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.defensive);
-    ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
-    ttrg.hotbarslots_prune(thss.resettable, .@"==", 1);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.defensive);
+    targ.hotbarslots_prune(thss.cooldown, .@">", 0);
+    targ.hotbarslots_prune(thss.resettable, .@"==", 1);
     qpat.hb_flash_item(.{});
     qpat.hb_add_cooldown(.{ .amount = -pajama_hat_cd_reduction });
 
@@ -583,7 +583,7 @@ fn transfiguredNightSet() !void {
     cond.hb_check_square_var(.{ 0, stuffed_rabbit_activate_count });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     apat.apply_invuln(.{ .duration = stuffed_rabbit_invul_dur });
 
     item(.{
@@ -615,7 +615,7 @@ fn transfiguredNightSet() !void {
 
     for ([_]WeaponType{ .secondary, .defensive }) |weapon_type| {
         trig.hotbarUsed2(&.{.hb_self});
-        ttrg.hotbarslots_self_weapontype(.{weapon_type});
+        targ.hotbarslots_self_weapontype(.{weapon_type});
         cond.hb_check_chargeable0(.{});
         cond.eval(ths0.strengthMult, .@">", 0);
         qpat.hb_charge(.{ .type = .omegacharge });
@@ -664,7 +664,7 @@ fn transfiguredTimespaceSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
-    ttrg.players_ally();
+    targ.players_ally();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
@@ -693,16 +693,16 @@ fn transfiguredTimespaceSet() !void {
     });
     trig.cdCalc5(&.{});
     for (WeaponType.abilities_with_gcd) |weapontype| {
-        ttrg.hotbarslots_self_weapontype(.{weapontype});
+        targ.hotbarslots_self_weapontype(.{weapontype});
         qpat.hb_add_gcd_permanent(.{ .amount = timewarp_wand_gcd_shorting });
     }
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.statusId, .@">=", @intFromEnum(Hbs.hastes[0]));
-    ttrg.hbstatus_prune(thbss.statusId, .@"<=", @intFromEnum(Hbs.hastes[Hbs.hastes.len - 1]));
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.statusId, .@">=", @intFromEnum(Hbs.hastes[0]));
+    targ.hbstatus_prune(thbss.statusId, .@"<=", @intFromEnum(Hbs.hastes[Hbs.hastes.len - 1]));
     tset.uservar_hbscount(.{"u_hastes"});
     cond.unequal(.{ "u_hastes", 0 });
     for (WeaponType.abilities_with_gcd) |weapontype| {
-        ttrg.hotbarslots_self_weapontype(.{weapontype});
+        targ.hotbarslots_self_weapontype(.{weapontype});
         qpat.hb_add_gcd_permanent(.{ .amount = timewarp_wand_gcd_shorting });
     }
 
@@ -806,13 +806,13 @@ fn transfiguredTimespaceSet() !void {
 
     trig.hotbarUsed(&.{.hb_self});
     cond.hb_check_square_var(.{ 0, 0 });
-    ttrg.player_self();
+    targ.player_self();
     tset.hbskey(.{ Hbs.haste_2, r.hbsLength });
     apat.apply_hbs(.{});
 
     trig.hotbarUsed(&.{.hb_self});
     cond.hb_check_square_var(.{ 0, 1 });
-    ttrg.player_self();
+    targ.player_self();
     tset.hbskey(.{ Hbs.smite_3, r.hbsLength });
     apat.apply_hbs(.{});
 
@@ -843,8 +843,8 @@ fn transfiguredTimespaceSet() !void {
         .hbVar0 = timemage_cap_cd_set,
     });
     trig.cdCalc5(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.cooldown, .@">", timemage_cap_cd_set);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.cooldown, .@">", timemage_cap_cd_set);
     qpat.hb_set_cooldown_permanent(.{ .time = timemage_cap_cd_set });
 
     const starry_cloak_cd_threshold = 15 * std.time.ms_per_s;
@@ -872,7 +872,7 @@ fn transfiguredTimespaceSet() !void {
     });
     trig.hotbarUsedProc(&.{.hb_selfcast});
     cond.eval(s.cooldown, .@">=", starry_cloak_cd_threshold);
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
@@ -901,11 +901,11 @@ fn transfiguredTimespaceSet() !void {
     });
     trig.hotbarUsedProc(&.{.hb_loot});
     cond.random_def(.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.hbId, .@"==", s.hbId);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.hbId, .@"==", s.hbId);
     cond.hb_check_resettable0(.{});
     qpat.hb_reset_cooldown();
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_flash_item(.{});
     qpat.hb_lucky_proc();
 }
@@ -940,9 +940,9 @@ fn transfiguredWindSet() !void {
         .hbVar0 = @abs(hawkfeather_fan_cd_reduction),
     });
     trig.cdCalc2b(&.{});
-    ttrg.player_self();
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
+    targ.player_self();
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.cooldown, .@">", 0);
     qpat.hb_add_cooldown_permanent(.{ .amount = hawkfeather_fan_cd_reduction });
 
     const windbite_dagger_mult = -0.2;
@@ -969,7 +969,7 @@ fn transfiguredWindSet() !void {
         .hbVar1 = @abs(windbite_dagger_mult),
     });
     trig.cdCalc4b(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
+    targ.hotbarslots_self_weapontype(.{WeaponType.special});
     qpat.hb_set_gcd_permanent(.{ .amount = windbite_dagger_gcd });
 
     const pidgeon_bow_num_proj = 3;
@@ -1008,7 +1008,7 @@ fn transfiguredWindSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.floral_bow(.{});
 
@@ -1062,10 +1062,10 @@ fn transfiguredWindSet() !void {
     qpat.hb_reset_statchange();
 
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune_base_has_str();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.loot);
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune_base_has_str();
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.loot);
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
     tset.uservar2("u_str", r.sqVar0, .@"*", eaglewing_charm_extra_dmg);
     qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
@@ -1103,7 +1103,7 @@ fn transfiguredWindSet() !void {
     tset.uservar2("u_str", r.sqVar0, .@"*", sparrow_feather_dmg_inc);
     tset.uservar2("u_str", "u_str", .@"+", sparrow_feather_dmg);
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     tset.strength(.{"u_str"});
     apat.crown_of_storms(.{});
@@ -1205,7 +1205,7 @@ fn transfiguredBloodwolfSet() !void {
     });
     trig.hotbarUsedProc(&.{.hb_defensive});
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
-    ttrg.players_opponent_backstab();
+    targ.players_opponent_backstab();
     tset.hbs_def();
     tset.hbskey(.{ Hbs.bleed_1, r.hbsLength });
     apat.poisonfrog_charm(.{});
@@ -1242,7 +1242,7 @@ fn transfiguredBloodwolfSet() !void {
     });
     trig.luckyProc(&.{});
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent_random(.{});
+    targ.players_opponent_random(.{});
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
@@ -1320,7 +1320,7 @@ fn transfiguredBloodwolfSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
@@ -1328,7 +1328,7 @@ fn transfiguredBloodwolfSet() !void {
     cond.eval(s.statusId, .@">=", @intFromEnum(Hbs.bleeds[0]));
     cond.eval(s.statusId, .@"<=", @intFromEnum(Hbs.bleeds[Hbs.bleeds.len - 1]));
     qpat.hb_flash_item(.{});
-    ttrg.player_afflicted_source();
+    targ.player_afflicted_source();
     tset.strength_def();
     apat.melee_hit(.{});
 
@@ -1473,7 +1473,7 @@ fn transfiguredAssassinSet() !void {
     cond.hb_check_square_var_gte(.{ 0, 1 });
     qpat.hb_flash_item(.{});
     qpat.hb_lucky_proc();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.black_wakizashi(.{ .numberStr = r.sqVar0 });
 
@@ -1494,8 +1494,8 @@ fn transfiguredAssassinSet() !void {
         .treasureType = .blue,
     });
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.number, .@">", 2);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.number, .@">", 2);
     qpat.hb_add_hitbox_var(.{
         .hitboxVar = .number,
         .amount = 1,
@@ -1562,18 +1562,18 @@ fn transfiguredAssassinSet() !void {
         .hbVar2 = kunoichi_hood_str,
     });
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.potion);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.potion);
     tset.uservar_slotcount(.{"u_count"});
     tset.uservar2("u_str", "u_count", .@"*", kunoichi_hood_str_per_potions);
     tset.uservar2("u_str", "u_str", .@"+", kunoichi_hood_str);
-    ttrg.hotbarslots_self_abilities();
-    ttrg.hotbarslots_prune_base_has_str();
+    targ.hotbarslots_self_abilities();
+    targ.hotbarslots_prune_base_has_str();
     qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
     trig.strCalc1c(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.potion);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.potion);
     qpat.hb_add_strcalcbuff(.{ .amount = kunoichi_hood_potion_str_mult });
 
     item(.{
@@ -1680,7 +1680,7 @@ fn transfiguredRockdragonSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
@@ -1708,14 +1708,14 @@ fn transfiguredRockdragonSet() !void {
         .hbVar1 = @abs(greysteel_shield_cd_reduction),
     });
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
+    targ.hotbarslots_self_weapontype(.{WeaponType.defensive});
     qpat.hb_mult_hitbox_var(.{
         .hitboxVar = .radius,
         .mult = 1 + greysteel_shield_aoe,
     });
 
     trig.cdCalc2b(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
+    targ.hotbarslots_self_weapontype(.{WeaponType.defensive});
     qpat.hb_add_cooldown_permanent(.{ .amount = greysteel_shield_cd_reduction });
 
     item(.{
@@ -1757,10 +1757,10 @@ fn transfiguredRockdragonSet() !void {
         .hbVar0 = tough_gauntlet_dmg,
     });
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
-    ttrg.hotbarslots_prune(thss.number, .@"<=", 1);
-    ttrg.hotbarslots_prune(thss.strength, .@"!=", 0);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
+    targ.hotbarslots_prune(thss.number, .@"<=", 1);
+    targ.hotbarslots_prune(thss.strength, .@"!=", 0);
     qpat.hb_add_strength(.{ .amount = tough_gauntlet_dmg });
 
     const rockdragon_mail_every_nth_hit = 2;
@@ -1796,7 +1796,7 @@ fn transfiguredRockdragonSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
     qpat.player_shield();
-    ttrg.player_self();
+    targ.player_self();
     apat.apply_invuln(.{});
 
     const obsidian_hairpin_special_dmg = 0.2;
@@ -1823,7 +1823,7 @@ fn transfiguredRockdragonSet() !void {
         .hbVar0 = obsidian_hairpin_special_dmg,
     });
     trig.hotbarUsedProc(&.{.hb_special});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
+    targ.hotbarslots_self_weapontype(.{WeaponType.defensive});
     cond.hb_check_resettable0(.{});
     cond.random_def(.{});
     qpat.hb_reset_cooldown();
@@ -1887,7 +1887,7 @@ fn transfiguredFlameSet() !void {
     }) |trigger| {
         trig.onDamageDone(&.{trigger});
         cond.hb_available();
-        ttrg.player_damaged();
+        targ.player_damaged();
         tset.hbs_def();
         tset.hbs_burnhit();
         apat.apply_hbs(.{});
@@ -1899,8 +1899,8 @@ fn transfiguredFlameSet() !void {
     qpat.hb_flash_item(.{});
 
     trig.cdCalc2b(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune_bufftype(.{0});
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune_bufftype(.{0});
     qpat.hb_mult_length_hbs(.{ .mult = 0.5 });
 
     item(.{
@@ -1966,7 +1966,7 @@ fn transfiguredFlameSet() !void {
     trig.onDamageDone(&.{.dmg_islarge});
     cond.hb_available();
     qpat.hb_run_cooldown();
-    ttrg.player_damaged();
+    targ.player_damaged();
     tset.hbs_def();
     tset.hbs_burnhit();
     apat.apply_hbs(.{});
@@ -2004,7 +2004,7 @@ fn transfiguredFlameSet() !void {
     trig.hbsShield5(&.{.pl_self});
     cond.eval(s.hp, .@"==", 1);
     cond.random_def(.{});
-    ttrg.player_self();
+    targ.player_self();
     apat.apply_invuln(.{});
     qpat.player_shield();
     qpat.hb_flash_item(.{ .message = .shield });
@@ -2069,7 +2069,7 @@ fn transfiguredFlameSet() !void {
     ) |condition, burn| {
         trig.onDamageDone(&.{condition});
         cond.hb_check_square_var_false(.{ 0, 0 });
-        ttrg.player_damaged();
+        targ.player_damaged();
         tset.hbs_burnhit();
         tset.hbskey(.{ burn, r.hbsLength });
         apat.apply_hbs(.{});
@@ -2145,7 +2145,7 @@ fn transfiguredGemSet() !void {
 
     trig.distanceTickBattle(&.{.pl_self});
     cond.eval(r.cdSecLeft, .@"!=", 0);
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
     apat.dark_shield(.{ .duration = 0, .radius = diamond_shield_radius });
@@ -2181,8 +2181,8 @@ fn transfiguredGemSet() !void {
     qpat.hb_reset_statchange();
 
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune_base_has_str();
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune_base_has_str();
     tset.uservar2("u_str", r.sqVar0, .@"*", peridot_rapier_dmg_per_erase);
     qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
@@ -2268,7 +2268,7 @@ fn transfiguredGemSet() !void {
     cond.hb_check_square_var_false(.{ 0, 0 });
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_ally();
+    targ.players_ally();
     for (0..sapphire_violin_num_buffs) |_| {
         tset.hbs_randombuff();
         apat.ornamental_bell(.{});
@@ -2446,16 +2446,16 @@ fn transfiguredLightningSet() !void {
         .strMult = brightstorm_spear_strength,
     });
     trig.onDamageDone(&.{.pl_self});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.hbId, .@"==", s.originHbId);
-    ttrg.hotbarslots_prune(thss.hbId, .@"!=", r.hbId);
-    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.hbId, .@"==", s.originHbId);
+    targ.hotbarslots_prune(thss.hbId, .@"!=", r.hbId);
+    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
     tset.uservar_slotcount(.{"u_count"});
     cond.eval("u_count", .@">", 0);
     cond.random_def(.{});
     qpat.hb_lucky_proc();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.crown_of_storms(.{});
 
@@ -2521,7 +2521,7 @@ fn transfiguredLightningSet() !void {
         .dmg_self_defensive,
     }) |trigger| {
         trig.onDamageDone(&.{trigger});
-        ttrg.players_opponent();
+        targ.players_opponent();
         tset.strength_def();
         apat.crown_of_storms(.{});
     }
@@ -2550,14 +2550,14 @@ fn transfiguredLightningSet() !void {
     for ([_]Condition{ .hb_primary, .hb_secondary, .hb_special, .hb_defensive }) |hb| {
         trig.hotbarUsedProc(&.{hb});
         for ([_]TriggerVariables{ ths0, ths1, ths2, ths3, ths4 }, 0..) |target_hotbar, i| {
-            ttrg.hotbarslots_current_players();
-            ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
-            ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+            targ.hotbarslots_current_players();
+            targ.hotbarslots_prune(thss.cooldown, .@">", 0);
+            targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
 
             tset.uservar_slotcount(.{"u_slots"});
             cond.eval("u_slots", .@">", i);
 
-            ttrg.hotbarslots_prune(thss.hbId, .@"==", target_hotbar.hbId);
+            targ.hotbarslots_prune(thss.hbId, .@"==", target_hotbar.hbId);
             tset.uservar2("u_new_cd", ths0.cdSecLeft, .@"-", darkcloud_necklace_cooldown_reduction);
             qpat.hb_run_cooldown_ext(.{ .lengthStr = "u_new_cd" });
         }
@@ -2583,8 +2583,8 @@ fn transfiguredLightningSet() !void {
         .hbVar0 = crown_of_storms_mult,
     });
     trig.strCalc1c(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.luck, .@">", 0);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.luck, .@">", 0);
     qpat.hb_add_strcalcbuff(.{ .amount = crown_of_storms_mult });
 
     item(.{
@@ -2618,7 +2618,7 @@ fn transfiguredLightningSet() !void {
     cond.random_def(.{});
     qpat.hb_flash_item(.{});
     qpat.hb_lucky_proc();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.crown_of_storms(.{});
 
@@ -2643,7 +2643,7 @@ fn transfiguredLightningSet() !void {
     });
     trig.onDamage(&.{.pl_self});
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.crown_of_storms(.{});
 }
@@ -2690,13 +2690,13 @@ fn transfiguredShrineSet() !void {
 
     trig.hbsCreated(&.{.hbs_selfafl});
     cond.eval(s.isBuff, .@"==", 1);
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_reset_cooldown();
 
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
@@ -2737,16 +2737,16 @@ fn transfiguredShrineSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.isBuff, .@"==", 1);
+    targ.player_self();
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.isBuff, .@"==", 1);
     tset.uservar_hbscount(.{"u_buffs"});
     tset.uservar2("u_allMult", "u_buffs", .@"*", sacred_bow_mult_per_buff);
     tset.uservar2("u_extraStr", "u_allMult", .@"*", sacred_bow_dmg);
     tset.uservar2("u_str", "u_extraStr", .@"+", sacred_bow_dmg);
     tset.strength_def();
     tset.strength(.{"u_str"});
-    ttrg.players_opponent();
+    targ.players_opponent();
     apat.floral_bow(.{});
 
     item(.{
@@ -2808,8 +2808,8 @@ fn transfiguredShrineSet() !void {
         .hbVar1 = shrinemaidens_kosode_mult_per_buff,
     });
     trig.strCalc0(&.{});
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.isBuff, .@"==", 1);
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.isBuff, .@"==", 1);
     tset.uservar_hbscount(.{"u_buffs"});
     tset.uservar2("u_allMult", "u_buffs", .@"*", shrinemaidens_kosode_mult_per_buff);
     qpat.hb_reset_statchange_norefresh();
@@ -3012,7 +3012,7 @@ fn transfiguredLuckySet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
@@ -3020,14 +3020,14 @@ fn transfiguredLuckySet() !void {
     tset.uservar_gold(.{"u_gold"});
     tset.uservar2("u_str", "u_gold", .@"*", golden_katana_dmg_per_gold);
     tset.uservar2("u_str", "u_str", .@"/", golden_katana_gold_per_dmg);
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
     trig.cdCalc2b(&.{});
     tset.uservar_gold(.{"u_gold"});
     tset.uservar2("u_cooldown", "u_gold", .@"*", golden_katana_cd_per_gold);
     tset.uservar2("u_cooldown", "u_cooldown", .@"/", golden_katana_gold_per_cd);
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_add_cooldown_permanent(.{ .amountStr = "u_cooldown" });
 
     item(.{
@@ -3090,7 +3090,7 @@ fn transfiguredLuckySet() !void {
 
     trig.strCalc2(&.{});
     tset.uservar_gold(.{"u_gold"});
-    ttrg.hotbarslots_current_players();
+    targ.hotbarslots_current_players();
     tset.uservar2("u_aoeMult", "u_gold", .@"*", royal_staff_aoe_buff);
     tset.uservar2("u_aoeMult", "u_aoeMult", .@"/", royal_staff_gold_per_aoe);
     tset.uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
@@ -3126,7 +3126,7 @@ fn transfiguredLuckySet() !void {
         .charradius = -ballroom_gown_buff,
     });
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
+    targ.hotbarslots_current_players();
     qpat.hb_mult_hitbox_var(.{
         .hitboxVar = .radius,
         .mult = 1 + ballroom_gown_buff * 0.01,
@@ -3208,7 +3208,7 @@ fn transfiguredLuckySet() !void {
     cond.random_def(.{});
     qpat.hb_flash_item(.{});
     qpat.hb_lucky_proc();
-    ttrg.player_damaged();
+    targ.player_damaged();
     tset.strength_def();
     apat.curse_talon(.{});
 
@@ -3302,7 +3302,7 @@ fn transfiguredLifeSet() !void {
     cond.hb_available();
     qpat.hb_run_cooldown();
     qpat.hb_cdloot_proc();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.druid_2(.{});
 
@@ -3335,8 +3335,8 @@ fn transfiguredLifeSet() !void {
     });
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
-    ttrg.hotbarslots_self_abilities();
-    ttrg.hotbarslots_prune(thss.maxStock, .@">", 1);
+    targ.hotbarslots_self_abilities();
+    targ.hotbarslots_prune(thss.maxStock, .@">", 1);
     qpat.hb_increase_stock(.{ .amount = 1 });
 
     item(.{
@@ -3400,7 +3400,7 @@ fn transfiguredLifeSet() !void {
         .hbVar0 = sunflower_crown_hp,
     });
     trig.onSquarePickup(&.{.square_self});
-    ttrg.player_self();
+    targ.player_self();
     apat.heal_light(.{ .amount = sunflower_crown_hp });
 
     const midsummer_dress_hp = 1;
@@ -3430,7 +3430,7 @@ fn transfiguredLifeSet() !void {
         .hbVar1 = midsummer_dress_mult_per_hp,
     });
     trig.onSquarePickup(&.{.square_self});
-    ttrg.player_self();
+    targ.player_self();
     apat.heal_light(.{ .amount = midsummer_dress_hp });
 
     trig.strCalc0(&.{});
@@ -3467,11 +3467,11 @@ fn transfiguredLifeSet() !void {
         .hbVar1 = grasswoven_bracelet_aoe_per_hp,
     });
     trig.onSquarePickup(&.{.square_self});
-    ttrg.player_self();
+    targ.player_self();
     apat.heal_light(.{ .amount = grasswoven_bracelet_hp });
 
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
+    targ.hotbarslots_current_players();
     tset.uservar2("u_aoeMult", r.hpMax, .@"*", grasswoven_bracelet_aoe_per_hp);
     tset.uservar2("u_aoeMultFull", "u_aoeMult", .@"+", 1);
     qpat.hb_mult_hitbox_var(.{
@@ -3599,7 +3599,7 @@ fn transfiguredPoisonSet() !void {
     });
     trig.luckyProc(&.{.pl_self});
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
@@ -3705,10 +3705,10 @@ fn transfiguredDepthSet() !void {
     for (hb_conditions, WeaponType.abilities) |c, weapon| {
         trig.hotbarUsedProc(&.{c});
         cond.hb_check_square_var_gte(.{ 0, necronomicon_stacks_consumed });
-        ttrg.hotbarslots_self_weapontype(.{weapon});
+        targ.hotbarslots_self_weapontype(.{weapon});
         cond.hb_check_resettable0(.{});
         qpat.hb_reset_cooldown();
-        ttrg.hotbarslot_self();
+        targ.hotbarslot_self();
         qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -necronomicon_stacks_consumed });
         qpat.hb_flash_item(.{});
     }
@@ -3754,7 +3754,7 @@ fn transfiguredDepthSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
@@ -3771,8 +3771,8 @@ fn transfiguredDepthSet() !void {
     });
 
     trig.strCalc2(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
     tset.uservar2("u_aoeMultBase", r.sqVar0, .@"*", tidal_greatsword_aoe_mult);
     tset.uservar2("u_aoeMult", "u_aoeMultBase", .@"+", 1);
     qpat.hb_mult_hitbox_var(.{
@@ -3867,7 +3867,7 @@ fn transfiguredDepthSet() !void {
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -1 });
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.hydrous_blob(.{});
 
@@ -4012,8 +4012,8 @@ fn transfiguredDarkbiteSet() !void {
     // one for each of the possible number of slots that has strength.
     for (1..5) |slot_count| {
         trig.strCalc1c(&.{});
-        ttrg.hotbarslots_self_abilities();
-        ttrg.hotbarslots_prune_base_has_str();
+        targ.hotbarslots_self_abilities();
+        targ.hotbarslots_prune_base_has_str();
         tset.uservar_slotcount(.{"u_slots"});
         // Here is the check to exit triggers that does not match the slot count. The trigger for
         // 3 slots with base strength should not do any work if we have 4 abilities with strength.
@@ -4035,12 +4035,12 @@ fn transfiguredDarkbiteSet() !void {
         // Next, for each uservar we created earlier, we prune the slots that have strength larger
         // than the user var.
         // For 3 slots that have strength, this turns into:
-        // ttrg.hotbarslots_prune(thss.strength, .@"<=", "u_ths0_strength");
-        // ttrg.hotbarslots_prune(thss.strength, .@"<=", "u_ths1_strength");
-        // ttrg.hotbarslots_prune(thss.strength, .@"<=", "u_ths2_strength");
+        // targ.hotbarslots_prune(thss.strength, .@"<=", "u_ths0_strength");
+        // targ.hotbarslots_prune(thss.strength, .@"<=", "u_ths1_strength");
+        // targ.hotbarslots_prune(thss.strength, .@"<=", "u_ths2_strength");
         for (0..slot_count) |i| {
             const u_strength = try std.fmt.bufPrint(&buf1, "u_ths{}_strength", .{i});
-            ttrg.hotbarslots_prune(thss.strength, .@"<=", u_strength);
+            targ.hotbarslots_prune(thss.strength, .@"<=", u_strength);
         }
 
         // With the above prune, only abilites with the lowest strength should be left (there can
@@ -4194,11 +4194,11 @@ fn transfiguredTimegemSet() !void {
     });
     trig.strCalc1b(&.{});
     for (WeaponType.abilities_with_gcd) |weapon_type| {
-        ttrg.hotbarslots_self_weapontype(.{weapon_type});
+        targ.hotbarslots_self_weapontype(.{weapon_type});
         tset.uservar2("u_gcd", "u_gcd", .@"+", ths0.gcd);
     }
 
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
+    targ.hotbarslots_self_weapontype(.{WeaponType.special});
     tset.uservar2("u_gcd", "u_gcd", .@"/", std.time.ms_per_s);
     tset.uservar2("u_str", "u_gcd", .@"*", obsidian_rod_str);
     qpat.hb_set_strength(.{ .amountStr = "u_str" });
@@ -4228,14 +4228,14 @@ fn transfiguredTimegemSet() !void {
         .strMult = 200,
     });
     trig.strCalc1b(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
     for ([_]TriggerVariables{ ths5, ths4, ths3, ths2, ths1, ths0 }) |ths|
-        ttrg.hotbarslots_prune(thss.strengthMult, .@">=", ths.strengthMult);
+        targ.hotbarslots_prune(thss.strengthMult, .@">=", ths.strengthMult);
 
     tset.uservar1("u_str", ths0.strengthMult);
 
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.secondary});
     qpat.hb_set_strength(.{ .amountStr = "u_str" });
     cond.eval(ths0.number, .@">", 1);
     tset.uservar2("u_str", "u_str", .@"/", ths0.number);
@@ -4262,15 +4262,15 @@ fn transfiguredTimegemSet() !void {
         .treasureType = .purplered,
     });
     trig.strCalc1b(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
+    targ.hotbarslots_self_weapontype(.{WeaponType.special});
     tset.uservar2("u_str", ths0.strengthMult, .@"*", ths0.number);
 
     // Some abilities that hit onces will have `number` as 0. To counteract this, we filter for
     // it and adds the strenght back as `u_str` will be one in that case
-    ttrg.hotbarslots_prune(ths0.number, .@"==", 0);
+    targ.hotbarslots_prune(ths0.number, .@"==", 0);
     tset.uservar2("u_str", "u_str", .@"+", ths0.strengthMult);
 
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.secondary});
     qpat.hb_set_strength(.{ .amountStr = "u_str" });
 
     // Same here. If `number` is 0, we exit early and don't do the divide
@@ -4279,15 +4279,15 @@ fn transfiguredTimegemSet() !void {
     qpat.hb_set_strength(.{ .amountStr = "u_str" });
 
     trig.cdCalc5(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.primary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.primary});
     tset.uservar1("u_gcd", ths0.gcd);
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.secondary});
     qpat.hb_set_gcd_permanent(.{ .amountStr = "u_gcd" });
 
     trig.cdCalc6(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.defensive});
+    targ.hotbarslots_self_weapontype(.{WeaponType.defensive});
     tset.uservar2("u_cooldown", ths0.cooldown, .@"/", 2);
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.secondary});
     qpat.hb_set_cooldown_permanent(.{ .timeStr = "u_cooldown" });
 
     item(.{
@@ -4414,12 +4414,12 @@ fn transfiguredYoukaiSet() !void {
     });
     trig.hbsCreated(&.{.hbs_selfcast});
     cond.false(.{s.isBuff});
-    ttrg.hbstatus_source();
+    targ.hbstatus_source();
     qpat.hbs_destroy();
 
     trig.hbsCreated(&.{.hbs_selfafl});
     cond.true(.{s.isBuff});
-    ttrg.hbstatus_source();
+    targ.hbstatus_source();
     qpat.hbs_destroy();
 
     item(.{
@@ -4440,8 +4440,8 @@ fn transfiguredYoukaiSet() !void {
         .treasureType = .purpleyellow,
     });
     trig.strCalc1c(&.{});
-    ttrg.hotbarslots_self_abilities();
-    ttrg.hotbarslots_prune_base_has_str();
+    targ.hotbarslots_self_abilities();
+    targ.hotbarslots_prune_base_has_str();
     tset.uservar_slotcount(.{"u_slots"});
 
     tset.uservar2("u_sum0", ths0.strength, .@"+", ths1.strength);
@@ -4476,8 +4476,8 @@ fn transfiguredYoukaiSet() !void {
         .hbVar1 = oni_staff_cd,
     });
     trig.hotbarUsedProc(&.{.hb_special});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.cooldown, .@">", 0);
     qpat.hb_run_cooldown_ext(.{ .length = oni_staff_cd });
 
     item(.{
@@ -4513,7 +4513,7 @@ fn transfiguredYoukaiSet() !void {
         .treasureType = .purpleyellow,
     });
     trig.luckyProc(&.{.pl_self});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
+    targ.hotbarslots_self_weapontype(.{WeaponType.special});
     cond.hb_check_resettable0(.{});
     qpat.hb_reset_cooldown();
 
@@ -4608,7 +4608,7 @@ fn transfiguredHauntedSet() !void {
     }) |trigger| {
         trig.onDamageDone(&.{trigger});
         cond.hb_available();
-        ttrg.player_damaged();
+        targ.player_damaged();
         tset.hbs_def();
         apat.apply_hbs(.{});
         qpat.hb_cdloot_proc();
@@ -4619,8 +4619,8 @@ fn transfiguredHauntedSet() !void {
     qpat.hb_flash_item(.{});
 
     trig.cdCalc2b(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune_bufftype(.{0});
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune_bufftype(.{0});
     qpat.hb_mult_length_hbs(.{ .mult = 0.5 });
 
     item(.{
@@ -4754,7 +4754,7 @@ fn transfiguredHauntedSet() !void {
     trig.hotbarUsedProc(&.{.hb_selfcast});
     cond.eval(s.cooldown, .@">", 0);
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
@@ -4816,10 +4816,10 @@ fn transfiguredGladiatorSet() !void {
         .hbVar0 = teacher_knife_per_sec_mult,
     });
     trig.strCalc1c(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.loot);
-    ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.loot);
+    targ.hotbarslots_prune(thss.cooldown, .@">", 0);
 
     for ([_]TriggerVariables{ ths0, ths1, ths2, ths3 }) |ths| {
         tset.uservar2("u_mult_temp", ths.cooldown, .@"/", std.time.ms_per_s);
@@ -4827,7 +4827,7 @@ fn transfiguredGladiatorSet() !void {
         tset.uservar2("u_mult", "u_mult", .@"+", "u_mult_temp");
     }
 
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.secondary});
+    targ.hotbarslots_self_weapontype(.{WeaponType.secondary});
     qpat.hb_add_strcalcbuff(.{ .amountStr = "u_mult" });
 
     const tactician_rod_mult = -0.2;
@@ -4853,7 +4853,7 @@ fn transfiguredGladiatorSet() !void {
         .hbVar0 = @abs(tactician_rod_mult),
     });
     trig.cdCalc5(&.{});
-    ttrg.hotbarslots_self_weapontype(.{WeaponType.special});
+    targ.hotbarslots_self_weapontype(.{WeaponType.special});
     qpat.hb_set_cooldown_permanent(.{ .time = 0 });
 
     item(.{
@@ -4913,9 +4913,9 @@ fn transfiguredGladiatorSet() !void {
         .hbVar0 = gladiator_helmet_dmg_mult,
     });
     trig.strCalc1c(&.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
-    ttrg.hotbarslots_prune(thss.cooldown, .@"==", 0);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"!=", WeaponType.potion);
+    targ.hotbarslots_prune(thss.cooldown, .@"==", 0);
     qpat.hb_add_strcalcbuff(.{ .amount = gladiator_helmet_dmg_mult });
 
     const lancer_gauntlets_mult = 0.35;
@@ -5028,7 +5028,7 @@ fn transfiguredSparkbladeSet() !void {
         .showSqVar = true,
     });
     trig.regenTick(&.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.uservar_playercount(.{"u_count"});
     cond.hb_check_square_var_false(.{ 0, "u_count" });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amountStr = "u_count" });
@@ -5087,7 +5087,7 @@ fn transfiguredSparkbladeSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
@@ -5127,7 +5127,7 @@ fn transfiguredSparkbladeSet() !void {
     });
     trig.hotbarUsedProc(&.{.hb_defensive});
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
@@ -5138,9 +5138,9 @@ fn transfiguredSparkbladeSet() !void {
     cond.hb_check_square_var(.{ 0, battery_shield_sparks });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     apat.apply_invuln(.{ .duration = battery_shield_invul_dur });
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.crown_of_storms(.{});
 
@@ -5167,7 +5167,7 @@ fn transfiguredSparkbladeSet() !void {
     });
     trig.battleStart3(&.{});
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 
@@ -5223,7 +5223,7 @@ fn transfiguredSparkbladeSet() !void {
     cond.hb_check_square_var(.{ 0, stormdance_gown_times_dmg_dealt });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_randombuff();
     apat.apply_hbs(.{});
 
@@ -5275,7 +5275,7 @@ fn transfiguredSparkbladeSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     cond.hb_check_square_var_false(.{ 0, 0 });
     qpat.hb_flash_item(.{ .message = .broken });
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.uservar2("u_str", r.sqVar0, .@"*", blackbolt_ribbon_dmg);
     tset.strength_def();
     tset.strength(.{"u_str"});
@@ -5360,7 +5360,7 @@ fn transfiguredSwiftflightSet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
     tset.hbs_randombuff();
-    ttrg.player_self();
+    targ.player_self();
     apat.apply_hbs(.{});
 
     item(.{
@@ -5422,7 +5422,7 @@ fn transfiguredSwiftflightSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.uservar2("u_str", r.sqVar0, .@"*", hermes_bow_dmg_per_leap);
     tset.strength_def();
     tset.strength(.{"u_str"});
@@ -5460,8 +5460,8 @@ fn transfiguredSwiftflightSet() !void {
     cond.hb_check_square_var(.{ 0, talon_charm_distance });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.cooldown, .@">", 0);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.cooldown, .@">", 0);
     qpat.hb_add_cooldown(.{ .amount = talon_charm_reduction });
 
     const tiny_wings_leaps = 10.0;
@@ -5589,14 +5589,14 @@ fn transfiguredSacredflameSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
     cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashstr));
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbskey(.{ Hbs.flashdex, r.hbsLength });
     apat.apply_hbs(.{});
 
@@ -5631,14 +5631,14 @@ fn transfiguredSacredflameSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
     cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashdex));
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbskey(.{ Hbs.flashint, r.hbsLength });
     apat.apply_hbs(.{});
 
@@ -5673,14 +5673,14 @@ fn transfiguredSacredflameSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
     trig.hbsDestroyed(&.{.pl_self});
     cond.eval(s.statusId, .@"==", @intFromEnum(Hbs.flashint));
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbskey(.{ Hbs.flashchr, r.hbsLength });
     apat.apply_hbs(.{});
 
@@ -5705,7 +5705,7 @@ fn transfiguredSacredflameSet() !void {
     });
     trig.onInvuln(&.{.pl_self});
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_def();
     apat.apply_hbs(.{});
 
@@ -5746,7 +5746,7 @@ fn transfiguredSacredflameSet() !void {
         trig.hbsCreated(&.{.hbs_selfafl});
         cond.eval(s.statusId, .@"==", @intFromEnum(hbs[0]));
         qpat.hb_flash_item(.{});
-        ttrg.player_afflicted_source();
+        targ.player_afflicted_source();
         tset.hbskey(.{ hbs[1], r.hbsLength });
         apat.apply_hbs(.{});
     }
@@ -5787,7 +5787,7 @@ fn transfiguredSacredflameSet() !void {
     cond.hb_check_square_var_gte(.{ 0, sun_pendant_times });
     qpat.hb_square_add_var(.{ .varIndex = 0, .amount = -sun_pendant_times });
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     for ([_]Hbs{ .flashdex, .flashint, .flashstr }) |hbs| {
         tset.hbskey(.{ hbs, r.hbsLength });
         apat.apply_hbs(.{});
@@ -5824,7 +5824,7 @@ fn transfiguredSacredflameSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.crown_of_storms(.{});
 
@@ -5856,7 +5856,7 @@ fn transfiguredSacredflameSet() !void {
         cond.eval(s.playerId, .@"!=", r.playerId);
         cond.eval(s.teamId, .@"==", r.teamId);
         tset.hbskey(.{ buff, r.hbsLength });
-        ttrg.player_self();
+        targ.player_self();
         apat.apply_hbs(.{});
     }
 }
@@ -5925,13 +5925,13 @@ fn transfiguredRuinsSet() !void {
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_flash_item(.{});
     qpat.hb_run_cooldown();
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
     trig.hotbarUsedProc(&.{.hb_self_weapon});
     cond.eval(s.gcd, .@">=", ruins_sword_gcd_reset);
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_reset_cooldown();
 
     const mountain_staff_mult_per_gcd = 0.03;
@@ -5958,7 +5958,7 @@ fn transfiguredRuinsSet() !void {
     });
     trig.strCalc1c(&.{});
     for (WeaponType.abilities_with_gcd) |weapon| {
-        ttrg.hotbarslots_self_weapontype(.{weapon});
+        targ.hotbarslots_self_weapontype(.{weapon});
         tset.uservar2("u_mult", ths0.gcd, .@"/", mountain_staff_per_gcd);
         tset.uservar2("u_mult", "u_mult", .@"*", mountain_staff_mult_per_gcd);
         qpat.hb_add_strcalcbuff(.{ .amountStr = "u_mult" });
@@ -6015,7 +6015,7 @@ fn transfiguredRuinsSet() !void {
     });
     trig.hotbarUsedProc(&.{.hb_secondary});
     cond.hb_available();
-    ttrg.player_self();
+    targ.player_self();
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
     qpat.hb_cdloot_proc();
@@ -6023,19 +6023,19 @@ fn transfiguredRuinsSet() !void {
     apat.apply_hbs(.{});
 
     trig.hbsShield2(&.{.pl_self});
-    ttrg.player_self();
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
+    targ.player_self();
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
     tset.uservar_hbscount(.{"u_stoneskins"});
     tset.uservar1("u_count", "u_stoneskins");
-    ttrg.player_self();
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
+    targ.player_self();
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
     tset.uservar_hbscount(.{"u_graniteskins"});
     tset.uservar2("u_count", "u_count", .@"+", "u_graniteskins");
     cond.eval("u_count", .@">", 0);
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.darkmagic_blade(.{});
 
@@ -6076,21 +6076,21 @@ fn transfiguredRuinsSet() !void {
     qpat.hb_run_cooldown();
 
     trig.hotbarUsed(&.{.hb_self});
-    ttrg.player_self();
+    targ.player_self();
     qpat.hb_run_cooldown();
     qpat.hb_flash_item(.{});
     tset.hbs_def();
     apat.apply_hbs(.{});
 
     trig.hbsShield2(&.{.pl_self});
-    ttrg.player_self();
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
+    targ.player_self();
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.stoneskin));
     tset.uservar_hbscount(.{"u_stoneskins"});
     tset.uservar1("u_count", "u_stoneskins");
-    ttrg.player_self();
-    ttrg.hbstatus_target();
-    ttrg.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
+    targ.player_self();
+    targ.hbstatus_target();
+    targ.hbstatus_prune(thbss.statusId, .@"==", @intFromEnum(Hbs.graniteskin));
     tset.uservar_hbscount(.{"u_graniteskins"});
     tset.uservar2("u_count", "u_count", .@"+", "u_graniteskins");
     cond.eval("u_count", .@">", 0);
@@ -6225,8 +6225,8 @@ fn transfiguredLakeshrineSet() !void {
         trig.hbsCreated(&.{.hbs_selfafl});
         cond.eval(s.statusId, .@"==", @intFromEnum(buff));
         tset.hbskey(.{ buff, r.hbsLength });
-        ttrg.players_ally();
-        ttrg.players_prune_self();
+        targ.players_ally();
+        targ.players_prune_self();
         apat.apply_hbs(.{});
     }
 
@@ -6254,7 +6254,7 @@ fn transfiguredLakeshrineSet() !void {
     trig.hbsCreated(&.{});
     cond.false(.{s.isBuff});
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_randombuff();
     apat.apply_hbs(.{});
 
@@ -6292,7 +6292,7 @@ fn transfiguredLakeshrineSet() !void {
         cond.hb_check_square_var(.{ 0, i });
         qpat.hb_run_cooldown();
         qpat.hb_flash_item(.{});
-        ttrg.player_self();
+        targ.player_self();
         tset.hbskey(.{ hbs, r.hbsLength });
         apat.apply_hbs(.{});
     }
@@ -6342,7 +6342,7 @@ fn transfiguredLakeshrineSet() !void {
     });
     trig.battleStart3(&.{});
     qpat.hb_flash_item(.{});
-    ttrg.player_self();
+    targ.player_self();
     tset.hbs_randombuff();
     apat.apply_hbs(.{});
     tset.hbs_randombuff();
@@ -6513,7 +6513,7 @@ fn transfiguredGlacierSet() !void {
     cond.hb_check_square_var(.{ 0, 0 });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 15 });
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.hbs_def();
     apat.poisonfrog_charm(.{});
 }
@@ -7584,8 +7584,8 @@ fn transfiguredPerformersSet() !void {
     });
     trig.hotbarUsedProc(&.{});
     cond.eval(s.weaponType, .@"==", WeaponType.loot);
-    ttrg.hotbarslots_current_players();
-    ttrg.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
+    targ.hotbarslots_current_players();
+    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.loot);
     tset.transform_id(.{s.dataId});
     qpat.hb_transform_item();
     qpat.player_flash_item_transform(.{});
@@ -7836,9 +7836,9 @@ fn transfiguredTeapartySet() !void {
         .delay = 250,
     });
     trig.onSquarePickup(&.{.square_self});
-    ttrg.hotbarslots_current_players();
+    targ.hotbarslots_current_players();
     tset.uservar_spent_slots("u_spentSlots");
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
     qpat.hb_square_set_var(.{ .varIndex = 1, .amountStr = "u_spentSlots" });
 
@@ -7846,10 +7846,10 @@ fn transfiguredTeapartySet() !void {
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
 
     trig.regenTick(&.{});
-    ttrg.hotbarslots_current_players();
+    targ.hotbarslots_current_players();
     tset.uservar_spent_slots("u_newSpentSlots");
 
-    ttrg.hotbarslot_self();
+    targ.hotbarslot_self();
     tset.uservar_sqvar("u_oldSpentSlots", 1);
     qpat.hb_square_set_var(.{ .varIndex = 1, .amountStr = "u_newSpentSlots" });
     cond.hb_check_square_var_false(.{ 0, 0 });
@@ -7858,7 +7858,7 @@ fn transfiguredTeapartySet() !void {
 
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
     qpat.hb_flash_item(.{});
-    ttrg.players_opponent();
+    targ.players_opponent();
     tset.strength_def();
     apat.crown_of_storms(.{});
 
@@ -7996,7 +7996,7 @@ fn transfiguredTestSet() !void {
         trig.hotbarUsed(&.{.hb_self});
         cond.hb_check_square_var(.{ 1, i });
         qpat.hb_square_set_var(.{ .varIndex = 0, .amount = @floatFromInt(@intFromEnum(buff)) });
-        ttrg.player_self();
+        targ.player_self();
         tset.hbskey(.{ buff, std.time.ms_per_s });
         apat.apply_hbs(.{});
         i += 1;
@@ -8006,7 +8006,7 @@ fn transfiguredTestSet() !void {
         trig.hotbarUsed(&.{.hb_self});
         cond.hb_check_square_var(.{ 1, i });
         qpat.hb_square_set_var(.{ .varIndex = 0, .amount = @floatFromInt(@intFromEnum(debuff)) });
-        ttrg.players_opponent();
+        targ.players_opponent();
         tset.hbskey(.{ debuff, std.time.ms_per_s });
         apat.apply_hbs(.{});
         i += 1;
@@ -8018,7 +8018,7 @@ fn transfiguredTestSet() !void {
 
     trig.hbsCreated(&.{});
     cond.eval(s.statusId, .@"!=", r.sqVar0);
-    ttrg.player_self();
+    targ.player_self();
     apat.red_tanzaku(.{});
     tset.debug(r.teamId);
     tset.debug(s.statusId);
@@ -8154,7 +8154,7 @@ const cond = rns.cond;
 const qpat = rns.qpat;
 const trig = rns.trig;
 const tset = rns.tset;
-const ttrg = rns.ttrg;
+const targ = rns.targ;
 
 const Condition = rns.Condition;
 const Hbs = rns.Hbs;

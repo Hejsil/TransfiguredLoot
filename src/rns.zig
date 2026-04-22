@@ -3158,7 +3158,7 @@ pub const apat = opaque {
 /// at the time.
 ///
 /// https://docs.google.com/spreadsheets/d/1shtFkpagAafUjjA70XGlYGruqFIbLpQlcDjWKNNm3_4/edit?pli=1&gid=1880256260#gid=1880256260
-pub const ttrg = opaque {
+pub const targ = opaque {
     /// Clears all lists.
     pub fn none() void {
         write("ttrg_none", .{});
@@ -3497,9 +3497,9 @@ pub const ttrg = opaque {
         write("ttrg_hbstatus_target", .{});
     }
 
-    fn write(targ: []const u8, args: anytype) void {
+    fn write(t: []const u8, args: anytype) void {
         std.debug.assert(g.have_trigger);
-        g.item_csv.writer.print("target,{s}", .{targ}) catch |err| @panic(@errorName(err));
+        g.item_csv.writer.print("target,{s}", .{t}) catch |err| @panic(@errorName(err));
         writeArgs(&g.item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
