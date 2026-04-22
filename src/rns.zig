@@ -3812,6 +3812,9 @@ fn writeArgs(writer: *std.Io.Writer, args: anytype) !void {
 }
 
 fn writeCsvString(writer: anytype, string: []const u8) !void {
+    if (std.mem.indexOfAny(u8, string, "\",") == null)
+        return writer.writeAll(string);
+
     var p: usize = 0;
     try writer.writeAll("\"");
 
