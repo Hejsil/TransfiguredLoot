@@ -16,9 +16,6 @@ var g: struct {
     item_names: std.Io.Writer.Allocating = .init(gpa),
     item_descriptions: std.Io.Writer.Allocating = .init(gpa),
 
-    items_json_string: std.Io.Writer.Allocating = .init(gpa),
-    items_json: std.json.Stringify = undefined,
-
     items_full_json_string: std.Io.Writer.Allocating = .init(gpa),
     items_full_json: std.json.Stringify = undefined,
 
@@ -49,7 +46,6 @@ fn start2(mod: Mod) !void {
     try g.item_ini.ensureTotalCapacity(initial_capacity);
     try g.item_names.ensureTotalCapacity(initial_capacity);
     try g.item_descriptions.ensureTotalCapacity(initial_capacity);
-    try g.items_json_string.ensureTotalCapacity(initial_capacity);
     try g.items_steam_txt.ensureTotalCapacity(initial_capacity);
 
     try g.sheetlist.writer.writeAll(
@@ -68,12 +64,6 @@ fn start2(mod: Mod) !void {
         \\key,level,English,Japanese,Chinese
         \\
     );
-
-    g.items_json = .{
-        .writer = &g.items_json_string.writer,
-        .options = .{ .whitespace = .indent_4 },
-    };
-    try g.items_json.beginObject();
 
     g.items_full_json = .{
         .writer = &g.items_full_json_string.writer,
@@ -149,12 +139,6 @@ fn end2() !void {
         .data = g.item_descriptions.written(),
     });
 
-    try g.items_json.endObject();
-    try output_dir.writeFile(io, .{
-        .sub_path = "Items.json",
-        .data = g.items_json_string.written(),
-    });
-
     try g.items_full_json.endObject();
     try output_dir.writeFile(io, .{
         .sub_path = "Items_Full.json",
@@ -178,7 +162,6 @@ fn end2() !void {
     g.item_ini.shrinkRetainingCapacity(0);
     g.item_names.shrinkRetainingCapacity(0);
     g.item_descriptions.shrinkRetainingCapacity(0);
-    g.items_json_string.shrinkRetainingCapacity(0);
     g.items_full_json_string.shrinkRetainingCapacity(0);
     g.items_steam_txt.shrinkRetainingCapacity(0);
     g.generating_mod = false;
@@ -769,8 +752,6 @@ fn item2(opt: Item) !void {
     try new_desc_writer.writer.writeAll(desc[pos..]);
 
     const new_desc = new_desc_writer.written();
-    try g.items_json.objectField(opt.name.english);
-    try g.items_json.write(new_desc);
 
     var opt_json = opt;
     opt_json.description.english_expanded = new_desc;

@@ -56,46 +56,47 @@ fn generateChangelogModEntry(
     const old_items_ini = try old_dir.readFileAlloc(io, "Items.ini", arena, .unlimited);
     const new_items_ini = try new_dir.readFileAlloc(io, "Items.ini", arena, .unlimited);
 
-    // TODO: Use `Items_Full.json`
-    const old_items_str = try old_dir.readFileAlloc(io, "Items.json", arena, .unlimited);
-    const new_items_str = try new_dir.readFileAlloc(io, "Items.json", arena, .unlimited);
+    const old_items_str = try old_dir.readFileAlloc(io, "Items_Full.json", arena, .unlimited);
+    const new_items_str = try new_dir.readFileAlloc(io, "Items_Full.json", arena, .unlimited);
 
-    var old_items_scanner = std.json.Scanner.initCompleteInput(arena, old_items_str);
-    var new_items_scanner = std.json.Scanner.initCompleteInput(arena, new_items_str);
+    var old_items_json = try std.json.parseFromSliceLeaky(std.json.Value, arena, old_items_str, .{});
+    var new_items_json = try std.json.parseFromSliceLeaky(std.json.Value, arena, new_items_str, .{});
 
-    const old_items_json = try std.json.Value.jsonParse(arena, &old_items_scanner, .{ .max_value_len = std.math.maxInt(usize) });
-    const new_items_json = try std.json.Value.jsonParse(arena, &new_items_scanner, .{ .max_value_len = std.math.maxInt(usize) });
-
-    const old_items_names = old_items_json.object.keys();
-    const new_items_names = new_items_json.object.keys();
-    const old_items_descs = old_items_json.object.values();
-    const new_items_descs = new_items_json.object.values();
+    const old_item_values = old_items_json.object.values();
+    const new_item_values = new_items_json.object.values();
 
     var print_mod_name: bool = true;
-    for (old_items_names, new_items_names, 0..) |old_item_name, new_item_name, i| {
-        const transfigured_item_name = old_item_name;
-        std.debug.assert(std.mem.eql(u8, old_item_name, new_item_name));
+    for (old_item_values, new_item_values) |old_item_json, new_item_json| {
+        const old_item = try std.json.parseFromValueLeaky(rns.Item, arena, old_item_json, .{});
+        const new_item = try std.json.parseFromValueLeaky(rns.Item, arena, new_item_json, .{});
+
+        const transfigured_item_name = old_item.name.english;
+        const item_name = transfigured_item_name[transfigured_prefix.len..];
+
+        std.debug.assert(std.mem.eql(u8, old_item.id, new_item.id));
         std.debug.assert(std.mem.startsWith(u8, transfigured_item_name, transfigured_prefix));
 
-        const item_name = transfigured_item_name[transfigured_prefix.len..];
-        if (!std.mem.eql(u8, old_items_descs[i].string, new_items_descs[i].string)) {
+        const old_desc = old_item.description.english_expanded.?;
+        const new_desc = new_item.description.english_expanded.?;
+
+        if (!std.mem.eql(u8, old_desc, new_desc)) {
             if (print_mod_name) {
                 try writer.print("\n# {s}\n\n", .{mod_name});
                 print_mod_name = false;
             }
             try writer.print("- {s}\n", .{item_name});
-            if (std.mem.startsWith(u8, new_items_descs[i].string, "Not Implemented")) {
+            if (std.mem.startsWith(u8, new_desc, "Not Implemented")) {
                 try writer.writeAll("  - Has been removed\n");
             } else {
-                if (std.mem.startsWith(u8, old_items_descs[i].string, "Not Implemented")) {
+                if (std.mem.startsWith(u8, old_desc, "Not Implemented")) {
                     try writer.writeAll("  - Has been added\n");
                 } else {
                     try writer.writeAll("  - old: ");
-                    try writeDescription(writer, old_items_descs[i].string);
+                    try writeDescription(writer, old_desc);
                     try writer.writeAll("\n");
                 }
                 try writer.writeAll("  - new: ");
-                try writeDescription(writer, new_items_descs[i].string);
+                try writeDescription(writer, new_desc);
                 try writer.writeAll("\n");
             }
             continue;
@@ -167,4 +168,5 @@ fn writeDescription(writer: *std.Io.Writer, desc: []const u8) !void {
     try writer.writeAll(desc[pos..]);
 }
 
+const rns = @import("rns.zig");
 const std = @import("std");
