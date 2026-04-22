@@ -7822,8 +7822,8 @@ fn transfiguredTeapartySet() !void {
             .original = "Your Special deals 20% more damage.#" ++
                 "For every loot that is \"spent\" (greyed out with no effect), your Special " ++
                 "deals 40% more damage.",
-            .english = "The first time you \"spent\" (greyed out with no effect) an item, " ++
-                "deal [STR] to all enemies.",
+            .english = "The first time you \"spent\" (greyed out with no effect) an item each " ++
+                "fight, deal [STR] to all enemies.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
