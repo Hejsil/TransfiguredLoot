@@ -1,8 +1,5 @@
 pub fn main(init: std.process.Init) !void {
-    var arena_state = std.heap.ArenaAllocator.init(std.heap.page_allocator);
-    const arena = arena_state.allocator();
-    defer arena_state.deinit();
-
+    const arena = init.arena.allocator();
     const args = try init.minimal.args.toSlice(arena);
     return generateChangelog(init.io, arena, args[1], args[2]);
 }
