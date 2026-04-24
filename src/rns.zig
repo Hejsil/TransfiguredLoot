@@ -1622,79 +1622,7 @@ pub const Condition = enum {
 
     pub fn toCsvString(condition: Condition) []const u8 {
         return switch (condition) {
-            .none => "tcond_none",
-            .check_flag => "tcond_check_flag",
-            .check_no_flag => "tcond_check_no_flag",
-            .dmg_crit => "tcond_dmg_crit",
-            .dmg_islarge => "tcond_dmg_islarge",
-            .dmg_self_defensive => "tcond_dmg_self_defensive",
-            .dmg_self_primary => "tcond_dmg_self_primary",
-            .dmg_self_secondary => "tcond_dmg_self_secondary",
-            .dmg_self_special => "tcond_dmg_self_special",
-            .dmg_self_thishb => "tcond_dmg_self_thishb",
-            .dmg_self_weapon => "tcond_dmg_self_weapon",
-            .dmg_nothbs => "tcond_dmg_nothbs",
-            .equal => "tcond_equal",
-            .unequal => "tcond_unequal",
-            .eval => "tcond_eval",
-            .false => "tcond_false",
-            .true => "tcond_true",
-            .hb_auto_pl => "tcond_hb_auto_pl",
-            .hb_available_cdonly => "tcond_hb_available_cdonly",
-            .hb_available => "tcond_hb_available",
-            .hb_check_square_var => "tcond_hb_check_square_var",
-            .hb_check_square_var_false => "tcond_hb_check_square_var_false",
-            .hb_check_square_var_gte => "tcond_hb_check_square_var_gte",
-            .hb_check_square_var_lte => "tcond_hb_check_square_var_lte",
-            .hb_check_stock_gte => "tcond_hb_check_stock_gte",
-            .hb_check_stock_lte => "tcond_hb_check_stock_lte",
-            .hb_check_stock => "tcond_hb_check_stock",
-            .hb_check_var_range => "tcond_hb_check_var_range",
-            .hb_check_var => "tcond_hb_check_var",
-            .hb_primary => "tcond_hb_primary",
-            .hb_secondary => "tcond_hb_secondary",
-            .hb_special => "tcond_hb_special",
-            .hb_defensive => "tcond_hb_defensive",
-            .hb_loot => "tcond_hb_loot",
-            .hb_not_self_origin => "tcond_hb_not_self_origin",
-            .hb_not_self => "tcond_hb_not_self",
-            .hb_self => "tcond_hb_self",
-            .hb_self_attack => "tcond_hb_self_attack",
-            .hb_self_origin => "tcond_hb_self_origin",
-            .hb_self_weapon => "tcond_hb_self_weapon",
-            .hb_selfcast => "tcond_hb_selfcast",
-            .hb_team => "tcond_hb_team",
-            .hb_type_weapon => "tcond_hb_type_weapon",
-            .hbs_aflplayer => "tcond_hbs_aflplayer",
-            .hbs_aflplayer_alive => "tcond_hbs_aflplayer_alive",
-            .hbs_aflplayer_attack => "tcond_hbs_aflplayer_attack",
-            .hbs_firststack => "tcond_hbs_firststack",
-            .hbs_self => "tcond_hbs_self",
-            .hbs_thishbcast => "tcond_hbs_thishbcast",
-            .hbs_not_thishbcast => "tcond_hbs_not_thishbcast",
-            .hbs_selfafl => "tcond_hbs_selfafl",
-            .hbs_selfcast => "tcond_hbs_selfcast",
-            .hb_check_chargeable0 => "tcond_hb_check_chargeable0",
-            .hb_check_resettable0 => "tcond_hb_check_resettable0",
-            .missing_health => "tcond_missing_health",
-            .pl_alive => "tcond_pl_alive",
-            .pl_autocheck => "tcond_pl_autocheck",
-            .pl_countcheck => "tcond_pl_countcheck",
-            .pl_not_shielded => "tcond_pl_not_shielded",
-            .pl_self => "tcond_pl_self",
-            .player_target_count => "tcond_player_target_count",
-            .hbs_target_count => "tcond_hbs_target_count",
-            .slot_target_count => "tcond_slot_target_count",
-            .random => "tcond_random",
-            .random_def => "tcond_random_def",
-            .shadowemerald_varcheck => "tcond_shadowemerald_varcheck",
-            .square_self => "tcond_square_self",
-            .team_ally => "tcond_team_ally",
-            .team_enemy => "tcond_team_enemy",
-            .tick_every => "tcond_tick_every",
-            .trinket_counter_equal => "tcond_trinket_counter_equal",
-            .trinket_counter_greaterequal => "tcond_trinket_counter_greaterequal",
-            .bookofcheats_varcheck => "tcond_bookofcheats_varcheck",
+            inline else => |t| "tcond_" ++ @tagName(t),
         };
     }
 };
@@ -5388,122 +5316,7 @@ pub const Hbs = enum(u8) {
 
     pub fn toString(hbs: Hbs) []const u8 {
         return switch (hbs) {
-            .none => "hbs_none",
-            .smite_0 => "hbs_smite_0",
-            .smite_1 => "hbs_smite_1",
-            .smite_2 => "hbs_smite_2",
-            .smite_3 => "hbs_smite_3",
-            .elegy_0 => "hbs_elegy_0",
-            .elegy_1 => "hbs_elegy_1",
-            .elegy_2 => "hbs_elegy_2",
-            .haste_0 => "hbs_haste_0",
-            .haste_1 => "hbs_haste_1",
-            .haste_2 => "hbs_haste_2",
-            .stoneskin => "hbs_stoneskin",
-            .graniteskin => "hbs_graniteskin",
-            .lucky => "hbs_lucky",
-            .super => "hbs_super",
-            .flutterstep => "hbs_flutterstep",
-            .counter_0 => "hbs_counter_0",
-            .counter_1 => "hbs_counter_1",
-            .counter_2 => "hbs_counter_2",
-            .blackstrike => "hbs_blackstrike",
-            .stillness => "hbs_stillness",
-            .repeat => "hbs_repeat",
-            .wavestrike => "hbs_wavestrike",
-            .flowstr => "hbs_flowstr",
-            .flowdex => "hbs_flowdex",
-            .flowint => "hbs_flowint",
-            .flashstr => "hbs_flashstr",
-            .flashdex => "hbs_flashdex",
-            .flashint => "hbs_flashint",
-            .flashchr => "hbs_flashchr",
-            .vanish => "hbs_vanish",
-            .ghost => "hbs_ghost",
-            .warcry => "hbs_warcry",
-            .astra => "hbs_astra",
-            .astra2 => "hbs_astra2",
-            .nova => "hbs_nova",
-            .berserk => "hbs_berserk",
-            .abyssrage => "hbs_abyssrage",
-            .abyssflame => "hbs_abyssflame",
-            .quickdraw => "hbs_quickdraw",
-            .snare_0 => "hbs_snare_0",
-            .snare_1 => "hbs_snare_1",
-            .snare_2 => "hbs_snare_2",
-            .snare_3 => "hbs_snare_3",
-            .snare_4 => "hbs_snare_4",
-            .snare_5 => "hbs_snare_5",
-            .snare_6 => "hbs_snare_6",
-            .snare_7 => "hbs_snare_7",
-            .snare2_0 => "hbs_snare2_0",
-            .snare2_1 => "hbs_snare2_1",
-            .snare2_2 => "hbs_snare2_2",
-            .snare2_3 => "hbs_snare2_3",
-            .snare2_4 => "hbs_snare2_4",
-            .snare2_5 => "hbs_snare2_5",
-            .snare2_6 => "hbs_snare2_6",
-            .snare2_7 => "hbs_snare2_7",
-            .hex => "hbs_hex",
-            .hex_super => "hbs_hex_super",
-            .hex_poison => "hbs_hex_poison",
-            .hex_anti => "hbs_hex_anti",
-            .curse_0 => "hbs_curse_0",
-            .curse_1 => "hbs_curse_1",
-            .curse_2 => "hbs_curse_2",
-            .curse_3 => "hbs_curse_3",
-            .curse_4 => "hbs_curse_4",
-            .curse_5 => "hbs_curse_5",
-            .bleed_0 => "hbs_bleed_0",
-            .bleed_1 => "hbs_bleed_1",
-            .bleed_2 => "hbs_bleed_2",
-            .bleed_3 => "hbs_bleed_3",
-            .sap => "hbs_sap",
-            .spark_0 => "hbs_spark_0",
-            .spark_1 => "hbs_spark_1",
-            .spark_2 => "hbs_spark_2",
-            .spark_3 => "hbs_spark_3",
-            .spark_4 => "hbs_spark_4",
-            .spark_5 => "hbs_spark_5",
-            .spark_6 => "hbs_spark_6",
-            .decay_0 => "hbs_decay_0",
-            .decay_1 => "hbs_decay_1",
-            .decay_2 => "hbs_decay_2",
-            .poison_0 => "hbs_poison_0",
-            .poison_1 => "hbs_poison_1",
-            .poison_2 => "hbs_poison_2",
-            .poison_3 => "hbs_poison_3",
-            .poison_4 => "hbs_poison_4",
-            .poison_5 => "hbs_poison_5",
-            .poison_6 => "hbs_poison_6",
-            .burn_0 => "hbs_burn_0",
-            .burn_1 => "hbs_burn_1",
-            .burn_2 => "hbs_burn_2",
-            .burn_3 => "hbs_burn_3",
-            .burn_4 => "hbs_burn_4",
-            .burn_5 => "hbs_burn_5",
-            .burn_6 => "hbs_burn_6",
-            .stickybomb_gunner_0 => "hbs_stickybomb_gunner_0",
-            .freeze_0 => "hbs_freeze_0",
-            .freeze_1 => "hbs_freeze_1",
-            .freeze_2 => "hbs_freeze_2",
-            .freeze_3 => "hbs_freeze_3",
-            .freeze_4 => "hbs_freeze_4",
-            .freeze_5 => "hbs_freeze_5",
-            .deepfreeze_0 => "hbs_deepfreeze_0",
-            .deepfreeze_1 => "hbs_deepfreeze_1",
-            .paint_0 => "hbs_paint_0",
-            .paint_1 => "hbs_paint_1",
-            .paint_2 => "hbs_paint_2",
-            .paint_3 => "hbs_paint_3",
-            .ghostflame_0 => "hbs_ghostflame_0",
-            .ghostflame_1 => "hbs_ghostflame_1",
-            .ghostflame_2 => "hbs_ghostflame_2",
-            .ghostflame_3 => "hbs_ghostflame_3",
-            .ghostflame_4 => "hbs_ghostflame_4",
-            .ghostflame_5 => "hbs_ghostflame_5",
-            .clarity => "hbs_clarity",
-            .friendship => "hbs_friendship",
+            inline else => |t| "hbs_" ++ @tagName(t),
         };
     }
 };
@@ -5534,26 +5347,12 @@ pub const WeaponType = enum {
     };
 
     pub fn toIniString(wt: WeaponType) []const u8 {
-        return switch (wt) {
-            .none => "none",
-            .primary => "primary",
-            .secondary => "secondary",
-            .special => "special",
-            .defensive => "defensive",
-            .loot => "loot",
-            .potion => "potion",
-        };
+        return @tagName(wt);
     }
 
     pub fn toCsvString(wt: WeaponType) []const u8 {
         return switch (wt) {
-            .none => "weaponType.none",
-            .primary => "weaponType.primary",
-            .secondary => "weaponType.secondary",
-            .special => "weaponType.special",
-            .defensive => "weaponType.defensive",
-            .loot => "weaponType.loot",
-            .potion => "weaponType.potion",
+            inline else => |t| "weaponType." ++ @tagName(t),
         };
     }
 };
@@ -5568,24 +5367,12 @@ pub const ChargeType = enum {
     shackels,
 
     pub fn toIniString(ct: ChargeType) []const u8 {
-        return switch (ct) {
-            .charge => "charge",
-            .supercharge => "supercharge",
-            .ultracharge => "ultracharge",
-            .omegacharge => "omegacharge",
-            .darkspell => "darkspell",
-            .shackels => "shackels",
-        };
+        return @tagName(ct);
     }
 
     pub fn toCsvString(ct: ChargeType) []const u8 {
         return switch (ct) {
-            .charge => "chargeTypes.charge",
-            .supercharge => "chargeTypes.supercharge",
-            .ultracharge => "chargeTypes.ultracharge",
-            .omegacharge => "chargeTypes.omegacharge",
-            .darkspell => "chargeTypes.darkspell",
-            .shackels => "chargeTypes.shackels",
+            inline else => |t| "chargeTypes." ++ @tagName(t),
         };
     }
 };
@@ -5696,44 +5483,7 @@ pub const Stat = enum {
 
     pub fn toCsvString(stat: Stat) []const u8 {
         return switch (stat) {
-            .none => "stat.none",
-            .hp => "stat.hp",
-            .primaryMult => "stat.primaryMult",
-            .secondaryMult => "stat.secondaryMult",
-            .specialMult => "stat.specialMult",
-            .defensiveMult => "stat.defensiveMult",
-            .lootMult => "stat.lootMult",
-            .allMult => "stat.allMult",
-            .hbsMult => "stat.hbsMult",
-            .primaryMultHbs => "stat.primaryMultHbs",
-            .secondaryMultHbs => "stat.secondaryMultHbs",
-            .specialMultHbs => "stat.specialMultHbs",
-            .defensiveMultHbs => "stat.defensiveMultHbs",
-            .lootMultHbs => "stat.lootMultHbs",
-            .allMultHbs => "stat.allMultHbs",
-            .hbsMultHbs => "stat.hbsMultHbs",
-            .damageMult => "stat.damageMult",
-            .damagePlusP0 => "stat.damagePlusP0",
-            .damagePlusP1 => "stat.damagePlusP1",
-            .damagePlusP2 => "stat.damagePlusP2",
-            .damagePlusP3 => "stat.damagePlusP3",
-            .cdp => "stat.cdp",
-            .haste => "stat.haste",
-            .critDamage => "stat.critDamage",
-            .luck => "stat.luck",
-            .startingGold => "stat.startingGold",
-            .charspeed => "stat.charspeed",
-            .radius => "stat.radius",
-            .invulnPlus => "stat.invulnPlus",
-            .stockPlus => "stat.stockPlus",
-            .hbsFlag => "stat.hbsFlag",
-            .hbShineFlag => "stat.hbShineFlag",
-            .primaryCritRatio => "stat.primaryCritRatio",
-            .secondaryCritRatio => "stat.secondaryCritRatio",
-            .specialCritRatio => "stat.specialCritRatio",
-            .defensiveCritRatio => "stat.defensiveCritRatio",
-            .lootCritRatio => "stat.lootCritRatio",
-            .allCritRatio => "stat.allCritRatio",
+            inline else => |t| "stat." ++ @tagName(t),
         };
     }
 };
@@ -5754,17 +5504,7 @@ pub const Hitbox = enum {
 
     pub fn toCsvString(hitbox: Hitbox) []const u8 {
         return switch (hitbox) {
-            .radius => "hitbox.radius",
-            .delay => "hitbox.delay",
-            .hbInput => "hitbox.hbInput",
-            .weaponType => "hitbox.weaponType",
-            .strMult => "hitbox.strMult",
-            .number => "hitbox.number",
-            .hbsType => "hitbox.hbsType",
-            .hbsStrMult => "hitbox.hbsStrMult",
-            .hbsLength => "hitbox.hbsLength",
-            .chargeType => "hitbox.chargeType",
-            .luck => "hitbox.luck",
+            inline else => |t| "hitbox." ++ @tagName(t),
         };
     }
 };
@@ -5782,14 +5522,7 @@ pub const FlashMessage = enum {
 
     pub fn toCsvString(message: FlashMessage) []const u8 {
         return switch (message) {
-            .none => "hbFlashMessage.none",
-            .reset => "hbFlashMessage.reset",
-            .proc => "hbFlashMessage.proc",
-            .plus => "hbFlashMessage.plus",
-            .failed => "hbFlashMessage.failed",
-            .shield => "hbFlashMessage.shield",
-            .broken => "hbFlashMessage.broken",
-            .transformed => "hbFlashMessage.transformed",
+            inline else => |t| "hbFlashMessage." ++ @tagName(t),
         };
     }
 };
@@ -5802,10 +5535,7 @@ pub const Difficulty = enum {
 
     pub fn toCsvString(difficulty: Difficulty) []const u8 {
         return switch (difficulty) {
-            .cute => "difficulty.cute",
-            .normal => "difficulty.normal",
-            .hard => "difficulty.hard",
-            .lunar => "difficulty.lunar",
+            inline else => |t| "difficulty." ++ @tagName(t),
         };
     }
 };
@@ -5829,21 +5559,7 @@ pub const Stage = enum {
 
     pub fn toCsvString(difficulty: Difficulty) []const u8 {
         return switch (difficulty) {
-            .@"test" => "stage.test",
-            .outskirts => "stage.outskirts",
-            .nest => "stage.nest",
-            .arsenal => "stage.arsenal",
-            .lighthouse => "stage.lighthouse",
-            .streets => "stage.streets",
-            .lakeside => "stage.lakeside",
-            .keep => "stage.keep",
-            .pinnacle => "stage.pinnacle",
-            .geode => "stage.geode",
-            .sanct => "stage.sanct",
-            .depths => "stage.depths",
-            .aurum => "stage.aurum",
-            .darkhall => "stage.darkhall",
-            .reflection => "stage.reflection",
+            inline else => |t| "stage." ++ @tagName(t),
         };
     }
 };
@@ -5856,10 +5572,7 @@ pub const GoldSource = enum {
 
     pub fn toCsvString(difficulty: Difficulty) []const u8 {
         return switch (difficulty) {
-            .battleRewards => "goldSource.battleRewards",
-            .store => "goldSource.store",
-            .loot => "goldSource.loot",
-            .debug => "goldSource.debug",
+            inline else => |t| "goldSource." ++ @tagName(t),
         };
     }
 };
@@ -5871,12 +5584,7 @@ pub const MathSign = enum {
     @"-",
 
     pub fn toCsvString(op: MathSign) []const u8 {
-        return switch (op) {
-            .@"*" => "*",
-            .@"+" => "+",
-            .@"/" => "/",
-            .@"-" => "-",
-        };
+        return @tagName(op);
     }
 };
 
@@ -5889,14 +5597,7 @@ pub const Compare = enum {
     @"!=",
 
     pub fn toCsvString(op: Compare) []const u8 {
-        return switch (op) {
-            .@"<" => "<",
-            .@"<=" => "<=",
-            .@">" => ">",
-            .@">=" => ">=",
-            .@"==" => "==",
-            .@"!=" => "!=",
-        };
+        return @tagName(op);
     }
 };
 
