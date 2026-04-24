@@ -191,12 +191,14 @@ pub const Item = struct {
 
     /// The type of item that this is.
     type: ?enum {
-        none,
         character, // Refers to the hidden "item" that each character has.  Don't use this.
         weapon, // Refers to an ability on a character's hotbar.  Still working on supporting these
         loot, // Refers to loot that you get from treasure chests
         potion, // Potions that you buy from the shop, will go to your potion slots
+        pickup, // TODO: Doc comment
         upgrade, // The upgrade gems you find in the shop.  Adding more of these might have strange effects.
+        any, // TODO: Doc comment
+        none,
     } = null,
 
     /// Used for upgraded versions of character abilities. A number 0-6
@@ -233,8 +235,11 @@ pub const Item = struct {
         none, // Doesn't show a small item near your mini hotbars
         cooldown, // Shows a small cooldown for the item (Ex: Spiderbite Bow, Holy Greatsword)
         cooldownVarAm, // Shows a small cooldown for the item, but does not show if the item's sqVar0 is 0 (Currently only used for Sapphire Violin)
-        glowing, // Item will glow if the item's sqVar0 is over 0 (Ex: Demon Horns, Ruby Circlet)
         varAm, // Will show the sqVar0 of the item (Ex: Tornado Staff, Marble Clasp, Staticshock Earrings)
+        glowing, // Item will glow if the item's sqVar0 is over 0 (Ex: Demon Horns, Ruby Circlet)
+        glowing1, // TODO: Doc comment
+        persist, // TODO: Doc comment
+        varWeaponType, // TODO: Doc comment
     } = null,
 
     /// This will make the item appear greyed out when sqVar0 is 0, like Emerald Chestplate
@@ -254,6 +259,9 @@ pub const Item = struct {
     /// The color of the item, written as a hex code.  Will determine things like the color of
     /// the item's description.
     color: ?Color = null,
+
+    /// TODO: Doc comment
+    color2: ?Color = null,
 
     /// Determines where this item can appear within the game.
     treasureType: ?enum {
@@ -283,6 +291,7 @@ pub const Item = struct {
         upgradeD, //
     } = null,
 
+    /// TODO: Doc comment
     transformKey: ?[]const u8 = null,
 
     /// "HITBOX" VARIABLES
@@ -314,6 +323,7 @@ pub const Item = struct {
         auto, // Item will activate automatically if the character is in combat and the cooldown is available
     } = null,
 
+    /// TODO: Doc comment
     weaponType: ?WeaponType = null,
 
     /// The amount of damage this item does
@@ -873,6 +883,11 @@ pub const trig = opaque {
         write("cdCalc6", conds);
     }
 
+    /// TODO: Doc comment
+    pub fn cdCalc7(conds: []const Condition) void {
+        write("cdCalc7", conds);
+    }
+
     /// Strength calculations that happen before the % boost from your levels
     /// - Cursed Candlestaff, Ghost Spear, Phantom Dagger
     pub fn strCalc1a(conds: []const Condition) void {
@@ -1093,6 +1108,16 @@ pub const trig = opaque {
         write("hotbarUsed3", conds);
     }
 
+    /// TODO: Doc comment
+    pub fn hotbarUsedProc3(conds: []const Condition) void {
+        write("hotbarUsedProc3", conds);
+    }
+
+    /// TODO: Doc comment
+    pub fn hotbarUsedProcDelayed(conds: []const Condition) void {
+        write("hotbarUsedProcDelayed", conds);
+    }
+
     /// Called when a character takes damage. Currently only used on the items that break when you
     /// take damage
     /// - Amethyst Bracelet, Ruby Circlet
@@ -1179,6 +1204,16 @@ pub const trig = opaque {
         write("cdLootProc", conds);
     }
 
+    /// TODO: Doc comment
+    pub fn charProc(conds: []const Condition) void {
+        write("charProc", conds);
+    }
+
+    /// TODO: Doc comment
+    pub fn paintProc(conds: []const Condition) void {
+        write("paintProc", conds);
+    }
+
     /// Happens when a player starts attacking, or when a combat encounter starts.
     /// You most likely want to use this instead of "battleStart".
     /// "battleStart" won't activate outside of combat with an enemy, while this will work even if
@@ -1216,16 +1251,46 @@ pub const trig = opaque {
         write("onSquarePickup", conds);
     }
 
+    /// TODO: Doc comment
+    pub fn onSquarePickup0(conds: []const Condition) void {
+        write("onSquarePickup0", conds);
+    }
+
+    /// TODO: Doc comment
+    pub fn onSquarePickup1(conds: []const Condition) void {
+        write("onSquarePickup1", conds);
+    }
+
+    /// TODO: Doc comment
+    pub fn onSquarePickup2(conds: []const Condition) void {
+        write("onSquarePickup2", conds);
+    }
+
     /// Activates when you gain/lose gold
     /// - Royal Staff (calls for a recalculation of your stats when trigger is called)
     pub fn onGoldChange(conds: []const Condition) void {
         write("onGoldChange", conds);
     }
 
+    /// TODO: Doc comment
+    pub fn onAbilityUpgrade(conds: []const Condition) void {
+        write("onAbilityUpgrade", conds);
+    }
+
+    /// TODO: Doc comment
+    pub fn onItemRefresh(conds: []const Condition) void {
+        write("onItemRefresh", conds);
+    }
+
     /// Activates when you level up
     /// - Currently only used for Small Rabbit trinket
     pub fn onLevelup(conds: []const Condition) void {
         write("onLevelup", conds);
+    }
+
+    /// TODO: Doc comment
+    pub fn onDefeatEnemy(conds: []const Condition) void {
+        write("onDefeatEnemy", conds);
     }
 
     /// Activates when an enemy starts their Enrage cast
@@ -1276,6 +1341,10 @@ pub const Condition = enum {
     check_no_flag,
 
     /// Exclusively used for "onDamageDone" trigger;
+    /// returns true if the damage done was a critical hit
+    dmg_crit,
+
+    /// Exclusively used for "onDamageDone" trigger;
     /// returns true if damage amount is large enough to get the special flashy text
     dmg_islarge,
 
@@ -1298,6 +1367,15 @@ pub const Condition = enum {
     /// Exclusively used for "onDamageDone" trigger;
     /// returns true if the damage done was caused by this item
     dmg_self_thishb,
+
+    /// Exclusively used for "onDamageDone" trigger;
+    /// returns true if the damage done was caused by an Ability (including Defensive) used by your
+    /// player
+    dmg_self_weapon,
+
+    /// Exclusively used for "onDamageDone" trigger;
+    /// returns true if the damage done was not caused by a status effect
+    dmg_nothbs,
 
     /// value0 (any number)
     /// value1 (any number)
@@ -1334,6 +1412,9 @@ pub const Condition = enum {
     /// Returns true if YOUR player was the one that started attacking.
     hb_auto_pl,
 
+    // TODO: Doc comment
+    hb_available_cdonly,
+
     /// Returns true if this item is off cooldown and available to use.
     hb_available,
 
@@ -1357,6 +1438,13 @@ pub const Condition = enum {
     /// Checks to see if the item's sqVar is less than or equal to a number.
     hb_check_square_var_lte,
 
+    // TODO: Doc comment
+    hb_check_stock_gte,
+    hb_check_stock_lte,
+    hb_check_stock,
+    hb_check_var_range,
+    hb_check_var,
+
     /// Exclusively for use with "hotbarUsed" "hotbarUsedProc" "hotbarUsed2" etc..
     /// Returns true if the hotbar used was your own player's Primary.
     hb_primary,
@@ -1377,6 +1465,9 @@ pub const Condition = enum {
     /// Returns true if the hotbar used was your own player's loot.
     hb_loot,
 
+    /// TODO: Doc comment
+    hb_not_self_origin,
+
     /// Returns true if the hotbar calling the trigger is different than the hotbar receiving this
     /// trigger
     hb_not_self,
@@ -1388,6 +1479,9 @@ pub const Condition = enum {
     /// Returns true if the hotbar calling the trigger is an Attack (aka Primary, Secondary or
     /// Special), and used by your player
     hb_self_attack,
+
+    /// TODO: Doc comment
+    hb_self_origin,
 
     /// Returns true if the hotbar calling the trigger is an Ability (including Defensive) used by
     /// your player
@@ -1406,9 +1500,15 @@ pub const Condition = enum {
     /// with this status
     hbs_aflplayer,
 
+    /// TODO: Doc comment
+    hbs_aflplayer_alive,
+
     /// For use from status effects, checks if the hotbar just used was from the player afflicted
     /// with this status, and that the hotbar was an Attack (not Defensive or Loot)
     hbs_aflplayer_attack,
+
+    /// TODO: Doc comment
+    hbs_firststack,
 
     /// For use from status effects, checks if a status effect calling a trigger is the same as
     /// this status effect
@@ -1441,9 +1541,18 @@ pub const Condition = enum {
     /// Returns true if the player receiving this trigger is missing at least "amount" health
     missing_health,
 
+    /// TODO: Doc comment
+    pl_alive,
+
     /// Checks if the current player is currently attacking or in battle (currently only used for
     /// Ancient Emerald Defensive)
     pl_autocheck,
+
+    /// TODO: Doc comment
+    pl_countcheck,
+
+    /// TODO: Doc comment
+    pl_not_shielded,
 
     /// Checks if trigger is coming from this player (or one of their hotbars)
     pl_self,
@@ -1482,9 +1591,18 @@ pub const Condition = enum {
     /// player has a luck-increasing item, this percent chance will be that more likely to happen.
     random_def,
 
+    /// TODO: Doc comment
+    shadowemerald_varcheck,
+
     /// Exclusively for use with "onSquarePickup".
     /// Checks to see if this is the item that was picked up.
     square_self,
+
+    /// TODO: Doc comment
+    team_ally,
+
+    /// TODO: Doc comment
+    team_enemy,
 
     /// amount (an integer)
     /// Exclusively for use with "regenTick". Returns true every nth tick.
@@ -1507,37 +1625,50 @@ pub const Condition = enum {
             .none => "tcond_none",
             .check_flag => "tcond_check_flag",
             .check_no_flag => "tcond_check_no_flag",
+            .dmg_crit => "tcond_dmg_crit",
             .dmg_islarge => "tcond_dmg_islarge",
             .dmg_self_defensive => "tcond_dmg_self_defensive",
             .dmg_self_primary => "tcond_dmg_self_primary",
             .dmg_self_secondary => "tcond_dmg_self_secondary",
             .dmg_self_special => "tcond_dmg_self_special",
             .dmg_self_thishb => "tcond_dmg_self_thishb",
+            .dmg_self_weapon => "tcond_dmg_self_weapon",
+            .dmg_nothbs => "tcond_dmg_nothbs",
             .equal => "tcond_equal",
             .unequal => "tcond_unequal",
             .eval => "tcond_eval",
             .false => "tcond_false",
             .true => "tcond_true",
             .hb_auto_pl => "tcond_hb_auto_pl",
+            .hb_available_cdonly => "tcond_hb_available_cdonly",
             .hb_available => "tcond_hb_available",
             .hb_check_square_var => "tcond_hb_check_square_var",
             .hb_check_square_var_false => "tcond_hb_check_square_var_false",
             .hb_check_square_var_gte => "tcond_hb_check_square_var_gte",
             .hb_check_square_var_lte => "tcond_hb_check_square_var_lte",
+            .hb_check_stock_gte => "tcond_hb_check_stock_gte",
+            .hb_check_stock_lte => "tcond_hb_check_stock_lte",
+            .hb_check_stock => "tcond_hb_check_stock",
+            .hb_check_var_range => "tcond_hb_check_var_range",
+            .hb_check_var => "tcond_hb_check_var",
             .hb_primary => "tcond_hb_primary",
             .hb_secondary => "tcond_hb_secondary",
             .hb_special => "tcond_hb_special",
             .hb_defensive => "tcond_hb_defensive",
             .hb_loot => "tcond_hb_loot",
+            .hb_not_self_origin => "tcond_hb_not_self_origin",
             .hb_not_self => "tcond_hb_not_self",
             .hb_self => "tcond_hb_self",
             .hb_self_attack => "tcond_hb_self_attack",
+            .hb_self_origin => "tcond_hb_self_origin",
             .hb_self_weapon => "tcond_hb_self_weapon",
             .hb_selfcast => "tcond_hb_selfcast",
             .hb_team => "tcond_hb_team",
             .hb_type_weapon => "tcond_hb_type_weapon",
             .hbs_aflplayer => "tcond_hbs_aflplayer",
+            .hbs_aflplayer_alive => "tcond_hbs_aflplayer_alive",
             .hbs_aflplayer_attack => "tcond_hbs_aflplayer_attack",
+            .hbs_firststack => "tcond_hbs_firststack",
             .hbs_self => "tcond_hbs_self",
             .hbs_thishbcast => "tcond_hbs_thishbcast",
             .hbs_not_thishbcast => "tcond_hbs_not_thishbcast",
@@ -1546,14 +1677,20 @@ pub const Condition = enum {
             .hb_check_chargeable0 => "tcond_hb_check_chargeable0",
             .hb_check_resettable0 => "tcond_hb_check_resettable0",
             .missing_health => "tcond_missing_health",
+            .pl_alive => "tcond_pl_alive",
             .pl_autocheck => "tcond_pl_autocheck",
+            .pl_countcheck => "tcond_pl_countcheck",
+            .pl_not_shielded => "tcond_pl_not_shielded",
             .pl_self => "tcond_pl_self",
             .player_target_count => "tcond_player_target_count",
             .hbs_target_count => "tcond_hbs_target_count",
             .slot_target_count => "tcond_slot_target_count",
             .random => "tcond_random",
             .random_def => "tcond_random_def",
+            .shadowemerald_varcheck => "tcond_shadowemerald_varcheck",
             .square_self => "tcond_square_self",
+            .team_ally => "tcond_team_ally",
+            .team_enemy => "tcond_team_enemy",
             .tick_every => "tcond_tick_every",
             .trinket_counter_equal => "tcond_trinket_counter_equal",
             .trinket_counter_greaterequal => "tcond_trinket_counter_greaterequal",
@@ -1571,6 +1708,9 @@ pub const cond = opaque {
     }
     pub fn check_no_flag(args: anytype) void {
         write(.check_no_flag, args);
+    }
+    pub fn dmg_crit(args: anytype) void {
+        write(.dmg_crit, args);
     }
     pub fn dmg_islarge(args: anytype) void {
         write(.dmg_islarge, args);
@@ -1590,6 +1730,12 @@ pub const cond = opaque {
     pub fn dmg_self_thishb(args: anytype) void {
         write(.dmg_self_thishb, args);
     }
+    pub fn dmg_self_weapon(args: anytype) void {
+        write(.dmg_self_weapon, args);
+    }
+    pub fn dmg_nothbs(args: anytype) void {
+        write(.dmg_nothbs, args);
+    }
     pub fn equal(args: anytype) void {
         write(.equal, args);
     }
@@ -1608,6 +1754,9 @@ pub const cond = opaque {
     pub fn hb_auto_pl(args: anytype) void {
         write(.hb_auto_pl, args);
     }
+    pub fn hb_available_cdonly() void {
+        write(.hb_available_cdonly, .{});
+    }
     pub fn hb_available() void {
         write(.hb_available, .{});
     }
@@ -1622,6 +1771,21 @@ pub const cond = opaque {
     }
     pub fn hb_check_square_var_lte(args: anytype) void {
         write(.hb_check_square_var_lte, args);
+    }
+    pub fn hb_check_stock_gte(args: anytype) void {
+        write(.hb_check_stock_gte, args);
+    }
+    pub fn hb_check_stock_lte(args: anytype) void {
+        write(.hb_check_stock_lte, args);
+    }
+    pub fn hb_check_stock(args: anytype) void {
+        write(.hb_check_stock, args);
+    }
+    pub fn hb_check_var_range(args: anytype) void {
+        write(.hb_check_var_range, args);
+    }
+    pub fn hb_check_var(args: anytype) void {
+        write(.hb_check_var, args);
     }
     pub fn hb_primary(args: anytype) void {
         write(.hb_primary, args);
@@ -1638,6 +1802,9 @@ pub const cond = opaque {
     pub fn hb_loot(args: anytype) void {
         write(.hb_loot, args);
     }
+    pub fn hb_not_self_origin(args: anytype) void {
+        write(.hb_not_self_origin, args);
+    }
     pub fn hb_not_self(args: anytype) void {
         write(.hb_not_self, args);
     }
@@ -1646,6 +1813,9 @@ pub const cond = opaque {
     }
     pub fn hb_self_attack(args: anytype) void {
         write(.hb_self_attack, args);
+    }
+    pub fn hb_self_origin(args: anytype) void {
+        write(.hb_self_origin, args);
     }
     pub fn hb_self_weapon(args: anytype) void {
         write(.hb_self_weapon, args);
@@ -1662,8 +1832,14 @@ pub const cond = opaque {
     pub fn hbs_aflplayer(args: anytype) void {
         write(.hbs_aflplayer, args);
     }
+    pub fn hbs_aflplayer_alive(args: anytype) void {
+        write(.hbs_aflplayer_alive, args);
+    }
     pub fn hbs_aflplayer_attack(args: anytype) void {
         write(.hbs_aflplayer_attack, args);
+    }
+    pub fn hbs_firststack(args: anytype) void {
+        write(.hbs_firststack, args);
     }
     pub fn hbs_self(args: anytype) void {
         write(.hbs_self, args);
@@ -1689,8 +1865,17 @@ pub const cond = opaque {
     pub fn missing_health(args: anytype) void {
         write(.missing_health, args);
     }
+    pub fn pl_alive(args: anytype) void {
+        write(.pl_alive, args);
+    }
     pub fn pl_autocheck(args: anytype) void {
         write(.pl_autocheck, args);
+    }
+    pub fn pl_countcheck(args: anytype) void {
+        write(.pl_countcheck, args);
+    }
+    pub fn pl_not_shielded(args: anytype) void {
+        write(.pl_not_shielded, args);
     }
     pub fn pl_self(args: anytype) void {
         write(.pl_self, args);
@@ -1710,8 +1895,17 @@ pub const cond = opaque {
     pub fn random_def(args: anytype) void {
         write(.random_def, args);
     }
+    pub fn shadowemerald_varcheck(args: anytype) void {
+        write(.shadowemerald_varcheck, args);
+    }
     pub fn square_self(args: anytype) void {
         write(.square_self, args);
+    }
+    pub fn team_ally(args: anytype) void {
+        write(.team_ally, args);
+    }
+    pub fn team_enemy(args: anytype) void {
+        write(.team_enemy, args);
     }
     pub fn tick_every(args: anytype) void {
         write(.tick_every, args);
@@ -1732,6 +1926,12 @@ pub const cond = opaque {
         writeArgs(&g.item_csv.writer, args) catch |err| @panic(@errorName(err));
     }
 };
+
+test cond {
+    inline for (@typeInfo(Condition).@"enum".fields) |field| {
+        _ = @field(cond, field.name);
+    }
+}
 
 /// "Quick" patterns are functions that are called immediately, in line. They include things like
 /// resetting cooldowns, running GCDs, changing variables, etc..
@@ -1815,6 +2015,16 @@ pub const qpat = opaque {
         write("tpat_player_set_radius", args);
     }
 
+    /// TODO: Doc comment
+    pub fn player_set_blurcolor(args: Args) void {
+        write("tpat_player_set_blurcolor", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn player_set_fadecolor(args: Args) void {
+        write("tpat_player_set_fadecolor", args);
+    }
+
     /// "stat" (a stat to add, see "STAT" in enum reference)
     /// "amount" (a number to add)
     /// Sets a base stat for targeted players to an amount.
@@ -1862,35 +2072,52 @@ pub const qpat = opaque {
         write("tpat_player_trinket_counter_set", args);
     }
 
+    /// TODO: Doc comment
+    pub fn player_trinket_counter_set_floatingfish(args: Args) void {
+        write("tpat_player_trinket_counter_set_floatingfish", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn player_trinket_update_netplay() void {
+        write("tpat_player_trinket_update_netplay", .{});
+    }
+
     /// Make the targeted player's trinket flash/sparkle/animate
     pub fn player_trinket_flash() void {
         write("tpat_player_trinket_flash", .{});
     }
 
+    /// TODO: Doc comment
     pub fn player_add_hp(args: Args) void {
         write("tpat_player_add_hp", args);
     }
 
+    /// TODO: Doc comment
     pub fn player_set_hp(args: Args) void {
         write("tpat_player_set_hp", args);
     }
 
+    /// TODO: Doc comment
     pub fn player_add_gold(args: Args) void {
         write("tpat_player_add_gold", args);
     }
 
+    /// TODO: Doc comment
     pub fn player_set_gold(args: Args) void {
         write("tpat_player_set_gold", args);
     }
 
+    /// TODO: Doc comment
     pub fn player_add_level(args: Args) void {
         write("tpat_player_add_level", args);
     }
 
+    /// TODO: Doc comment
     pub fn player_set_level(args: Args) void {
         write("tpat_player_set_level", args);
     }
 
+    /// TODO: Doc comment
     pub fn player_flash_item_transform(args: Args) void {
         write("tpat_player_flash_item_transform", args);
     }
@@ -1907,6 +2134,11 @@ pub const qpat = opaque {
     /// overall cooldown
     pub fn hb_add_cooldown_permanent(args: Args) void {
         write("tpat_hb_add_cooldown_permanent", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hb_add_cooldown_var(args: Args) void {
+        write("tpat_hb_add_cooldown_var", args);
     }
 
     /// "flag" (a binary)
@@ -1958,6 +2190,11 @@ pub const qpat = opaque {
         write("tpat_hb_add_strcalcbuff", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hb_add_strcalcbuff_cooldown(args: Args) void {
+        write("tpat_hb_add_strcalcbuff_cooldown", args);
+    }
+
     /// "amount" (a number)
     /// To be used in strCalc2, adds an amount to strength of targeted hotbarslots
     pub fn hb_add_strength(args: Args) void {
@@ -1989,6 +2226,7 @@ pub const qpat = opaque {
         write("tpat_hb_charge_clear", .{});
     }
 
+    /// TODO: Doc comment
     pub fn hb_transform_item() void {
         write("tpat_hb_transform_item", .{});
     }
@@ -2135,6 +2373,11 @@ pub const qpat = opaque {
         write("tpat_hb_set_cooldown_permanent", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hb_set_cooldown_var(args: Args) void {
+        write("tpat_hb_set_cooldown_var", args);
+    }
+
     /// "amount" (in milliseconds)
     /// "minimum" (in milliseconds, default 200)
     /// To be called during cdCalc, sets the GCD of targeted hotbarslots to specified amount.
@@ -2148,10 +2391,25 @@ pub const qpat = opaque {
         write("tpat_hb_set_stock", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hb_set_hitbox_var(args: Args) void {
+        write("tpat_hb_set_hitbox_var", args);
+    }
+
     /// "amount" (a number)
     /// To be caled during strCalc, sets the strength of hotbarslots to a specific amount.
     pub fn hb_set_strength(args: Args) void {
         write("tpat_hb_set_strength", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hb_set_strength_cd(args: Args) void {
+        write("tpat_hb_set_strength_cd", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hb_set_strength_gcd(args: Args) void {
+        write("tpat_hb_set_strength_gcd", args);
     }
 
     /// "ratio" (a number)
@@ -2214,11 +2472,21 @@ pub const qpat = opaque {
         write("tpat_hb_square_add_var", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hb_square_add_flags(args: Args) void {
+        write("tpat_hb_square_add_flags", args);
+    }
+
     /// "varIndex" (an integer between 0-3 indicating the variable number)
     /// "amount" (a number)
     /// Sets the targeted hotbarslot's sqVar.
     pub fn hb_square_set_var(args: Args) void {
         write("tpat_hb_square_set_var", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hb_square_set_flags(args: Args) void {
+        write("tpat_hb_square_set_flags", args);
     }
 
     /// For stock, stockGcd and stockOnly hotbarslots, zeros out stock and starts the slot's
@@ -2231,6 +2499,11 @@ pub const qpat = opaque {
     /// Adds an HBS flag to targeted status effects (see hbsFlag on the "Stats" sheet)
     pub fn hbs_add_hbsflag(args: Args) void {
         write("tpat_hbs_add_hbsflag", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_add_var(args: Args) void {
+        write("tpat_hbs_add_var", args);
     }
 
     /// "flag" (a binary number representing an hbsShineFlag)
@@ -2267,6 +2540,16 @@ pub const qpat = opaque {
         write("tpat_hbs_destroy", .{});
     }
 
+    /// TODO: Doc comment
+    pub fn hbs_set_var(args: Args) void {
+        write("tpat_hbs_set_var", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_set_sprite(args: Args) void {
+        write("tpat_hbs_set_sprite", args);
+    }
+
     /// "mult" (a number)
     /// Multiplies strength of status effects targeted by specified number
     pub fn hbs_mult_str(args: Args) void {
@@ -2281,6 +2564,36 @@ pub const qpat = opaque {
     /// Don't use this
     pub fn bookofcheats_set_random() void {
         write("tpat_bookofcheats_set_random", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn shadowemerald_set_random() void {
+        write("tpat_shadowemerald_set_random", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn trk_add_hbsflag(args: Args) void {
+        write("tpat_trk_add_hbsflag", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn trk_add_shineflag(args: Args) void {
+        write("tpat_trk_add_shineflag", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn trk_add_statchange(args: Args) void {
+        write("tpat_trk_add_statchange", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn trk_reset_statchange() void {
+        write("tpat_trk_reset_statchange", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn trk_reset_statchange_norefresh() void {
+        write("tpat_trk_reset_statchange_norefresh", .{});
     }
 
     fn write(pat: []const u8, args: Args) void {
@@ -2726,347 +3039,995 @@ pub const apat = opaque {
     pub fn none_0(args: Args) void {
         write("ipat_none_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn none_1(args: Args) void {
         write("ipat_none_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn none_2(args: Args) void {
         write("ipat_none_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn none_3(args: Args) void {
         write("ipat_none_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_0(args: Args) void {
         write("ipat_ancient_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_0_petonly(args: Args) void {
         write("ipat_ancient_0_petonly", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_0_pt2(args: Args) void {
         write("ipat_ancient_0_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_0_rabbitonly(args: Args) void {
         write("ipat_ancient_0_rabbitonly", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_1(args: Args) void {
         write("ipat_ancient_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_1_auto(args: Args) void {
         write("ipat_ancient_1_auto", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_1_pt2(args: Args) void {
         write("ipat_ancient_1_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_2(args: Args) void {
         write("ipat_ancient_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_2_auto(args: Args) void {
         write("ipat_ancient_2_auto", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_2_pt2(args: Args) void {
         write("ipat_ancient_2_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_3(args: Args) void {
         write("ipat_ancient_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_3_emerald(args: Args) void {
         write("ipat_ancient_3_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_3_emerald_pt2(args: Args) void {
         write("ipat_ancient_3_emerald_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn ancient_3_emerald_pt3(args: Args) void {
         write("ipat_ancient_3_emerald_pt3", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_0(args: Args) void {
         write("ipat_assassin_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_0_ruby(args: Args) void {
         write("ipat_assassin_0_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_1(args: Args) void {
         write("ipat_assassin_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_1_garnet(args: Args) void {
         write("ipat_assassin_1_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_1_ruby(args: Args) void {
         write("ipat_assassin_1_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_1_sapphire(args: Args) void {
         write("ipat_assassin_1_sapphire", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_2(args: Args) void {
         write("ipat_assassin_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_2_opal(args: Args) void {
         write("ipat_assassin_2_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_3(args: Args) void {
         write("ipat_assassin_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_3_opal(args: Args) void {
         write("ipat_assassin_3_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn assassin_3_ruby(args: Args) void {
         write("ipat_assassin_3_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_0(args: Args) void {
         write("ipat_bruiser_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_0_saph(args: Args) void {
         write("ipat_bruiser_0_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_1(args: Args) void {
         write("ipat_bruiser_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_2(args: Args) void {
         write("ipat_bruiser_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_3(args: Args) void {
         write("ipat_bruiser_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_3_pt2(args: Args) void {
         write("ipat_bruiser_3_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn bruiser_3_ruby(args: Args) void {
         write("ipat_bruiser_3_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_0(args: Args) void {
         write("ipat_dancer_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_0_opal(args: Args) void {
         write("ipat_dancer_0_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_1(args: Args) void {
         write("ipat_dancer_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_1_emerald(args: Args) void {
         write("ipat_dancer_1_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_2(args: Args) void {
         write("ipat_dancer_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_2_saph(args: Args) void {
         write("ipat_dancer_2_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_3(args: Args) void {
         write("ipat_dancer_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn dancer_3_emerald(args: Args) void {
         write("ipat_dancer_3_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_0(args: Args) void {
         write("ipat_defender_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_0_fast(args: Args) void {
         write("ipat_defender_0_fast", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_0_ruby(args: Args) void {
         write("ipat_defender_0_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_1(args: Args) void {
         write("ipat_defender_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_1_opal(args: Args) void {
         write("ipat_defender_1_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_1_saph(args: Args) void {
         write("ipat_defender_1_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_2(args: Args) void {
         write("ipat_defender_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_2_emerald(args: Args) void {
         write("ipat_defender_2_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_3(args: Args) void {
         write("ipat_defender_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn defender_3_pt2(args: Args) void {
         write("ipat_defender_3_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_0(args: Args) void {
         write("ipat_druid_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_0_emerald(args: Args) void {
         write("ipat_druid_0_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_0_ruby(args: Args) void {
         write("ipat_druid_0_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_0_saph(args: Args) void {
         write("ipat_druid_0_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_1(args: Args) void {
         write("ipat_druid_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_1_emerald(args: Args) void {
         write("ipat_druid_1_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_1_garnet(args: Args) void {
         write("ipat_druid_1_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_1_ruby(args: Args) void {
         write("ipat_druid_1_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_2(args: Args) void {
         write("ipat_druid_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_2_2(args: Args) void {
         write("ipat_druid_2_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_2_2_garnet(args: Args) void {
         write("ipat_druid_2_2_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_2_garnet(args: Args) void {
         write("ipat_druid_2_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_2_ruby(args: Args) void {
         write("ipat_druid_2_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_3(args: Args) void {
         write("ipat_druid_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_3_emerald(args: Args) void {
         write("ipat_druid_3_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_3_opal(args: Args) void {
         write("ipat_druid_3_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_3_ruby(args: Args) void {
         write("ipat_druid_3_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn druid_3_saph(args: Args) void {
         write("ipat_druid_3_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_0(args: Args) void {
         write("ipat_hblade_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_0_garnet(args: Args) void {
         write("ipat_hblade_0_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_0_garnet_pt2(args: Args) void {
         write("ipat_hblade_0_garnet_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_1(args: Args) void {
         write("ipat_hblade_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_1_garnet(args: Args) void {
         write("ipat_hblade_1_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_1_ruby(args: Args) void {
         write("ipat_hblade_1_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_1_saph(args: Args) void {
         write("ipat_hblade_1_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_2(args: Args) void {
         write("ipat_hblade_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_2_emerald(args: Args) void {
         write("ipat_hblade_2_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_2_pt2(args: Args) void {
         write("ipat_hblade_2_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_3(args: Args) void {
         write("ipat_hblade_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_3_garnet(args: Args) void {
         write("ipat_hblade_3_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_3_opal(args: Args) void {
         write("ipat_hblade_3_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn hblade_3_ruby(args: Args) void {
         write("ipat_hblade_3_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_0(args: Args) void {
         write("ipat_sniper_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_0_emerald(args: Args) void {
         write("ipat_sniper_0_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_0_garnet(args: Args) void {
         write("ipat_sniper_0_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_0_saph(args: Args) void {
         write("ipat_sniper_0_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_1(args: Args) void {
         write("ipat_sniper_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_1_ruby(args: Args) void {
         write("ipat_sniper_1_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_2(args: Args) void {
         write("ipat_sniper_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_2_emerald(args: Args) void {
         write("ipat_sniper_2_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn sniper_3(args: Args) void {
         write("ipat_sniper_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_0(args: Args) void {
         write("ipat_spsword_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_0_pt2(args: Args) void {
         write("ipat_spsword_0_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_1(args: Args) void {
         write("ipat_spsword_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_1_emerald(args: Args) void {
         write("ipat_spsword_1_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_1_pt2(args: Args) void {
         write("ipat_spsword_1_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_2(args: Args) void {
         write("ipat_spsword_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_2_pt2(args: Args) void {
         write("ipat_spsword_2_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_3(args: Args) void {
         write("ipat_spsword_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn spsword_3_pt2(args: Args) void {
         write("ipat_spsword_3_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_0(args: Args) void {
         write("ipat_wizard_0", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_0_ruby(args: Args) void {
         write("ipat_wizard_0_ruby", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_1(args: Args) void {
         write("ipat_wizard_1", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_1_garnet(args: Args) void {
         write("ipat_wizard_1_garnet", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_1_garnet_pt2(args: Args) void {
         write("ipat_wizard_1_garnet_pt2", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_1_opal(args: Args) void {
         write("ipat_wizard_1_opal", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_2(args: Args) void {
         write("ipat_wizard_2", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_2_saph(args: Args) void {
         write("ipat_wizard_2_saph", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_3(args: Args) void {
         write("ipat_wizard_3", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_3_emerald(args: Args) void {
         write("ipat_wizard_3_emerald", args);
     }
+
+    /// TODO: Doc comment
     pub fn wizard_3_opal(args: Args) void {
         write("ipat_wizard_3_opal", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn apply_hbs_paintproc(args: Args) void {
+        write("ipat_apply_hbs_paintproc", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn bomb_throw(args: Args) void {
+        write("ipat_bomb_throw", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn bruiser_3_emerald(args: Args) void {
+        write("ipat_bruiser_3_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn bubble_buff(args: Args) void {
+        write("ipat_bubble_buff", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn butterfly_summon(args: Args) void {
+        write("ipat_butterfly_summon", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn butterfly_summon_ring(args: Args) void {
+        write("ipat_butterfly_summon_ring", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn chakram(args: Args) void {
+        write("ipat_chakram", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn claw_slash(args: Args) void {
+        write("ipat_claw_slash", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn claw_slash_hbs(args: Args) void {
+        write("ipat_claw_slash_hbs", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn defender_1_emerald(args: Args) void {
+        write("ipat_defender_1_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn explosion(args: Args) void {
+        write("ipat_explosion", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn explosion_player(args: Args) void {
+        write("ipat_explosion_player", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn explosion_spark(args: Args) void {
+        write("ipat_explosion_spark", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn flame_kick(args: Args) void {
+        write("ipat_flame_kick", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn flame_kick_miss(args: Args) void {
+        write("ipat_flame_kick_miss", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn flame_kick_pt2(args: Args) void {
+        write("ipat_flame_kick_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0(args: Args) void {
+        write("ipat_gunner_0", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_emerald(args: Args) void {
+        write("ipat_gunner_0_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_emerald_miss(args: Args) void {
+        write("ipat_gunner_0_emerald_miss", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_emerald_pt2(args: Args) void {
+        write("ipat_gunner_0_emerald_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_garnet(args: Args) void {
+        write("ipat_gunner_0_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_opal(args: Args) void {
+        write("ipat_gunner_0_opal", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_ruby(args: Args) void {
+        write("ipat_gunner_0_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_0_saph(args: Args) void {
+        write("ipat_gunner_0_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_1(args: Args) void {
+        write("ipat_gunner_1", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_2(args: Args) void {
+        write("ipat_gunner_2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_2_emerald(args: Args) void {
+        write("ipat_gunner_2_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_2_garnet(args: Args) void {
+        write("ipat_gunner_2_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_2_ruby(args: Args) void {
+        write("ipat_gunner_2_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_2_saph(args: Args) void {
+        write("ipat_gunner_2_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn gunner_3(args: Args) void {
+        write("ipat_gunner_3", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_0(args: Args) void {
+        write("ipat_hammer_0", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_0_garnet(args: Args) void {
+        write("ipat_hammer_0_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_0_saph(args: Args) void {
+        write("ipat_hammer_0_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_1(args: Args) void {
+        write("ipat_hammer_1", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_1_pt2(args: Args) void {
+        write("ipat_hammer_1_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_1_ruby(args: Args) void {
+        write("ipat_hammer_1_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_1_saph(args: Args) void {
+        write("ipat_hammer_1_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_2(args: Args) void {
+        write("ipat_hammer_2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_2_saph(args: Args) void {
+        write("ipat_hammer_2_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_3(args: Args) void {
+        write("ipat_hammer_3", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_3_emerald(args: Args) void {
+        write("ipat_hammer_3_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_3_pt2(args: Args) void {
+        write("ipat_hammer_3_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hammer_3_ruby(args: Args) void {
+        write("ipat_hammer_3_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn light_erase(args: Args) void {
+        write("ipat_light_erase", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn light_shield_hbs(args: Args) void {
+        write("ipat_light_shield_hbs", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_0(args: Args) void {
+        write("ipat_pyro_0", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_0_emerald(args: Args) void {
+        write("ipat_pyro_0_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_1(args: Args) void {
+        write("ipat_pyro_1", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_1_garnet(args: Args) void {
+        write("ipat_pyro_1_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_1_ruby(args: Args) void {
+        write("ipat_pyro_1_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2(args: Args) void {
+        write("ipat_pyro_2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2_garnet(args: Args) void {
+        write("ipat_pyro_2_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2_miss(args: Args) void {
+        write("ipat_pyro_2_miss", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2_miss_garnet(args: Args) void {
+        write("ipat_pyro_2_miss_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2_pt2(args: Args) void {
+        write("ipat_pyro_2_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2_pt2_garnet(args: Args) void {
+        write("ipat_pyro_2_pt2_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_2_saph(args: Args) void {
+        write("ipat_pyro_2_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn pyro_3(args: Args) void {
+        write("ipat_pyro_3", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_0(args: Args) void {
+        write("ipat_shadow_0", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_0_emerald(args: Args) void {
+        write("ipat_shadow_0_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_0_saph(args: Args) void {
+        write("ipat_shadow_0_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_1(args: Args) void {
+        write("ipat_shadow_1", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_1_garnet(args: Args) void {
+        write("ipat_shadow_1_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_1_pt2(args: Args) void {
+        write("ipat_shadow_1_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_1_pt2_ruby(args: Args) void {
+        write("ipat_shadow_1_pt2_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_1_ruby(args: Args) void {
+        write("ipat_shadow_1_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_1_saph(args: Args) void {
+        write("ipat_shadow_1_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_2(args: Args) void {
+        write("ipat_shadow_2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_2_emerald(args: Args) void {
+        write("ipat_shadow_2_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_3(args: Args) void {
+        write("ipat_shadow_3", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_3_emerald(args: Args) void {
+        write("ipat_shadow_3_emerald", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_3_garnet(args: Args) void {
+        write("ipat_shadow_3_garnet", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_3_opal(args: Args) void {
+        write("ipat_shadow_3_opal", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn shadow_3_ruby(args: Args) void {
+        write("ipat_shadow_3_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn sniper_1_saph(args: Args) void {
+        write("ipat_sniper_1_saph", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn sniper_2_ruby(args: Args) void {
+        write("ipat_sniper_2_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn spsword_1_ruby(args: Args) void {
+        write("ipat_spsword_1_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn spsword_3_ruby(args: Args) void {
+        write("ipat_spsword_3_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn spsword_3_ruby_pt2(args: Args) void {
+        write("ipat_spsword_3_ruby_pt2", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn stepswing(args: Args) void {
+        write("ipat_stepswing", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn swordswing(args: Args) void {
+        write("ipat_swordswing", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn wizard_1_ruby(args: Args) void {
+        write("ipat_wizard_1_ruby", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn wizard_2_ruby(args: Args) void {
+        write("ipat_wizard_2_ruby", args);
     }
 
     fn write(pat: []const u8, args: Args) void {
@@ -3219,10 +4180,16 @@ pub const targ = opaque {
         write("ttrg_players_none", .{});
     }
 
+    ///
     /// Targets all the players that are on the OPPOSITE team as the person receiving this trigger.
     /// For loot items, this means all of your enemies.
     pub fn players_opponent() void {
         write("ttrg_players_opponent", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn players_opponent_oob() void {
+        write("ttrg_players_opponent_oob", .{});
     }
 
     /// Targets all of your enemies that are facing away from you.
@@ -3279,6 +4246,16 @@ pub const targ = opaque {
         write("ttrg_players_prune", .{ a, op, b });
     }
 
+    /// TODO: Doc comment
+    pub fn players_prune_closest_pos(args: anytype) void {
+        write("ttrg_players_prune_closest_pos", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn players_prune_closest(args: anytype) void {
+        write("ttrg_players_prune_closest", args);
+    }
+
     /// Removes the player receiving this trigger from the player list, if it is in there.
     pub fn players_prune_self() void {
         write("ttrg_players_prune_self", .{});
@@ -3316,6 +4293,11 @@ pub const targ = opaque {
         write("ttrg_hotbarslot_self", .{});
     }
 
+    /// TODO: Doc comment
+    pub fn hotbarslot_source() void {
+        write("ttrg_hotbarslot_source", .{});
+    }
+
     /// Targets ALL active hotbar slots
     pub fn hotbarslots_all() void {
         write("ttrg_hotbarslots_all", .{});
@@ -3334,6 +4316,11 @@ pub const targ = opaque {
     /// Targets all the hotbar slots on your enemy's team
     pub fn hotbarslots_opponent() void {
         write("ttrg_hotbarslots_opponent", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn hotbarslots_longestrunningcd() void {
+        write("ttrg_hotbarslots_longestrunningcd", .{});
     }
 
     /// param0 (any number)
@@ -3388,6 +4375,31 @@ pub const targ = opaque {
         write("ttrg_hotbarslots_prune_cdtype", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hotbarslots_prune_cdstat(args: anytype) void {
+        write("ttrg_hotbarslots_prune_cdstat", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hotbarslots_prune_dealsdamage(args: anytype) void {
+        write("ttrg_hotbarslots_prune_dealsdamage", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hotbarslots_prune_hitboxstat(args: anytype) void {
+        write("ttrg_hotbarslots_prune_hitboxstat", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hotbarslots_prune_itemstat(args: anytype) void {
+        write("ttrg_hotbarslots_prune_itemstat", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hotbarslots_prune_itemtype(args: anytype) void {
+        write("ttrg_hotbarslots_prune_itemtype", args);
+    }
+
     /// Prune the current list of hotbar slots to only include items that can be reset.
     pub fn hotbarslots_prune_noreset() void {
         write("ttrg_hotbarslots_prune_noreset", .{});
@@ -3415,6 +4427,11 @@ pub const targ = opaque {
         write("ttrg_hotbarslots_self_loot", .{});
     }
 
+    /// TODO: Doc comment
+    pub fn hotbarslots_self_longestcd() void {
+        write("ttrg_hotbarslots_self_longestcd", .{});
+    }
+
     /// wpType (an integer representing a weapon type)
     ///
     /// Targets a particular ability of the player receiving this trigger.
@@ -3435,6 +4452,11 @@ pub const targ = opaque {
         write("ttrg_hotbarslots_self_weapontype_withstr", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hotbarslots_target_rand_from_players(args: anytype) void {
+        write("ttrg_hotbarslots_target_rand_from_players", args);
+    }
+
     /// Targets all status effects that are currently active
     pub fn hbstatus_all() void {
         write("ttrg_hbstatus_all", .{});
@@ -3445,9 +4467,19 @@ pub const targ = opaque {
         write("ttrg_hbstatus_ally", .{});
     }
 
+    /// TODO: Doc comment
+    pub fn hbstatus_ally_afflict() void {
+        write("ttrg_hbstatus_ally_afflict", .{});
+    }
+
     /// Targets all status effects that have been APPLIED by your opponent
     pub fn hbstatus_opponent() void {
         write("ttrg_hbstatus_opponent", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn hbstatus_opponent_afflict() void {
+        write("ttrg_hbstatus_opponent_afflict", .{});
     }
 
     /// Prunes current list of status effects to only include those that match the equation given.
@@ -3478,6 +4510,16 @@ pub const targ = opaque {
         write("ttrg_hbstatus_target", .{});
     }
 
+    /// TODO: Doc comment
+    pub fn hbstatus_target_afflict() void {
+        write("ttrg_hbstatus_target_afflict", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn trinket_self() void {
+        write("ttrg_trinket_self", .{});
+    }
+
     fn write(t: []const u8, args: anytype) void {
         std.debug.assert(g.have_trigger);
         g.item_csv.writer.print("target,{s}", .{t}) catch |err| @panic(@errorName(err));
@@ -3495,6 +4537,11 @@ pub const tset = opaque {
     /// Currently non-functional; but I will make it work soon-ish
     pub fn animation(args: anytype) void {
         write("tset_animation", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn colorpalette(args: anytype) void {
+        write("tset_colorpalette", args);
     }
 
     /// percent (a number between 0 - 1)
@@ -3528,6 +4575,11 @@ pub const tset = opaque {
         write("tset_debug", .{param});
     }
 
+    /// TODO: Doc comment
+    pub fn debug_itemkey(args: anytype) void {
+        write("tset_debug_itemkey", args);
+    }
+
     /// Will set the appropriate strength for applying Burn. Must be used from an onDamageDone
     /// trigger before Burn is applied.
     pub fn hbs_burnhit() void {
@@ -3546,9 +4598,39 @@ pub const tset = opaque {
         write("tset_hbs_randombuff", .{});
     }
 
+    /// TODO: Doc comment
+    pub fn hbs_randombuff_damage() void {
+        write("tset_hbs_randombuff_damage", .{});
+    }
+
     /// Similar to tset_hbs_def, but will pick a random debuff
     pub fn hbs_randomdebuff() void {
         write("tset_hbs_randomdebuff", .{});
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_randomdebuff_by_ind(args: anytype) void {
+        write("tset_hbs_randomdebuff_by_ind", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_randomdebuff_key(args: anytype) void {
+        write("tset_hbs_randomdebuff_key", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_randomdebuff_settime(args: anytype) void {
+        write("tset_hbs_randomdebuff_settime", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_id(args: anytype) void {
+        write("tset_hbs_id", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn hbs_dupevar(args: anytype) void {
+        write("tset_hbs_dupevar", args);
     }
 
     /// hbsKey (a string that is a key to a status effect)
@@ -3563,6 +4645,17 @@ pub const tset = opaque {
         write("tset_hbsstr", args);
     }
 
+    /// TODO: Doc comment
+    pub fn hbsvars(args: anytype) void {
+        write("tset_hbsvars", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn print(args: anytype) void {
+        write("tset_print", args);
+    }
+
+    /// TODO: Doc comment
     pub fn transform_key(args: anytype) void {
         write("tset_transform_key", args);
     }
@@ -3618,9 +4711,13 @@ pub const tset = opaque {
     pub fn strmult_debuffcount(args: anytype) void {
         write("tset_strmult_debuffcount", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar1(name: []const u8, v: anytype) void {
         write("tset_uservar", .{ name, v });
     }
+
+    /// TODO: Doc comment
     pub fn uservar2(name: []const u8, a: anytype, op: MathSign, b: anytype) void {
         write("tset_uservar", .{ name, a, op, b });
     }
@@ -3629,6 +4726,11 @@ pub const tset = opaque {
     /// of the afflicted player.
     pub fn uservar_aflplayer_pos(args: anytype) void {
         write("tset_uservar_aflplayer_pos", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn uservar_aflplayer_pos_source(args: anytype) void {
+        write("tset_uservar_aflplayer_pos_source", args);
     }
 
     /// key (string)
@@ -3688,6 +4790,11 @@ pub const tset = opaque {
         write("tset_uservar_each_target_player", args);
     }
 
+    /// TODO: Doc comment
+    pub fn uservar_eval(args: anytype) void {
+        write("tset_uservar_eval", args);
+    }
+
     /// key (string)
     /// playerId (integer)
     /// Creates a user variable from that key, representing the player's gold
@@ -3706,6 +4813,11 @@ pub const tset = opaque {
         write("tset_uservar_random", args);
     }
 
+    /// TODO: Doc comment
+    pub fn uservar_random_def(args: anytype) void {
+        write("tset_uservar_random_def", args);
+    }
+
     /// key (string)
     /// minimumAmount (number)
     /// maximumAmount (number)
@@ -3720,49 +4832,96 @@ pub const tset = opaque {
     /// maximumAmount (number)
     ///
     /// Saves a random number between the minimum and maximum amount to a uservar.
-    pub fn userver_random_range_int(args: anytype) void {
-        write("tset_userver_random_range_int", args);
+    pub fn uservar_random_range_int(args: anytype) void {
+        write("tset_uservar_random_range_int", args);
     }
 
+    /// TODO: Doc comment
+    pub fn uservar_random_range_int_synced(args: anytype) void {
+        write("tset_uservar_random_range_int_synced", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn uservar_battletime(args: anytype) void {
+        write("tset_uservar_battletime", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn uservar_bound(args: anytype) void {
+        write("tset_uservar_bound", args);
+    }
+
+    /// TODO: Doc comment
+    pub fn uservar_strength(args: anytype) void {
+        write("tset_uservar_strength", args);
+    }
+
+    /// TODO: Doc comment
     pub fn uservar_switch(args: anytype) void {
         write("tset_uservar_switch", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_difficulty(args: anytype) void {
         write("tset_uservar_difficulty", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_hallwaycount(args: anytype) void {
         write("tset_uservar_hallwaycount", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_stage(args: anytype) void {
         write("tset_uservar_stage", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_hb_cooldownvar(args: anytype) void {
         write("tset_uservar_hb_cooldownvar", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_hb_hitboxvar(args: anytype) void {
         write("tset_uservar_hb_hitboxvar", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_hb_itemvar(args: anytype) void {
         write("tset_uservar_hb_itemvar", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_hb_stat(args: anytype) void {
         write("tset_uservar_hb_stat", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_player_stat(args: anytype) void {
         write("tset_uservar_player_stat", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_slotcount(args: anytype) void {
         write("tset_uservar_slotcount", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_hbscount(args: anytype) void {
         write("tset_uservar_hbscount", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_playercount(args: anytype) void {
         write("tset_uservar_playercount", args);
     }
+
+    /// TODO: Doc comment
     pub fn uservar_spent_slots(uservar: []const u8) void {
         write("tset_uservar_spent_slots", .{uservar});
     }
+
+    /// TODO: Doc comment
     pub fn uservar_sqvar(uservar: []const u8, index: usize) void {
         write("tset_uservar_sqvar", .{ uservar, index });
     }
@@ -4406,6 +5565,7 @@ pub const ChargeType = enum {
     ultracharge,
     omegacharge,
     darkspell,
+    shackels,
 
     pub fn toIniString(ct: ChargeType) []const u8 {
         return switch (ct) {
@@ -4414,6 +5574,7 @@ pub const ChargeType = enum {
             .ultracharge => "ultracharge",
             .omegacharge => "omegacharge",
             .darkspell => "darkspell",
+            .shackels => "shackels",
         };
     }
 
@@ -4424,6 +5585,7 @@ pub const ChargeType = enum {
             .ultracharge => "chargeTypes.ultracharge",
             .omegacharge => "chargeTypes.omegacharge",
             .darkspell => "chargeTypes.darkspell",
+            .shackels => "chargeTypes.shackels",
         };
     }
 };
@@ -4524,6 +5686,14 @@ pub const Stat = enum {
     /// effects.
     hbShineFlag,
 
+    // TODO: Doc comment
+    primaryCritRatio,
+    secondaryCritRatio,
+    specialCritRatio,
+    defensiveCritRatio,
+    lootCritRatio,
+    allCritRatio,
+
     pub fn toCsvString(stat: Stat) []const u8 {
         return switch (stat) {
             .none => "stat.none",
@@ -4558,6 +5728,12 @@ pub const Stat = enum {
             .stockPlus => "stat.stockPlus",
             .hbsFlag => "stat.hbsFlag",
             .hbShineFlag => "stat.hbShineFlag",
+            .primaryCritRatio => "stat.primaryCritRatio",
+            .secondaryCritRatio => "stat.secondaryCritRatio",
+            .specialCritRatio => "stat.specialCritRatio",
+            .defensiveCritRatio => "stat.defensiveCritRatio",
+            .lootCritRatio => "stat.lootCritRatio",
+            .allCritRatio => "stat.allCritRatio",
         };
     }
 };
@@ -4602,6 +5778,7 @@ pub const FlashMessage = enum {
     failed,
     shield,
     broken,
+    transformed,
 
     pub fn toCsvString(message: FlashMessage) []const u8 {
         return switch (message) {
@@ -4612,6 +5789,7 @@ pub const FlashMessage = enum {
             .failed => "hbFlashMessage.failed",
             .shield => "hbFlashMessage.shield",
             .broken => "hbFlashMessage.broken",
+            .transformed => "hbFlashMessage.transformed",
         };
     }
 };
@@ -4642,6 +5820,12 @@ pub const Stage = enum {
     lakeside,
     keep,
     pinnacle,
+    geode,
+    sanct,
+    depths,
+    aurum,
+    darkhall,
+    reflection,
 
     pub fn toCsvString(difficulty: Difficulty) []const u8 {
         return switch (difficulty) {
@@ -4654,6 +5838,12 @@ pub const Stage = enum {
             .lakeside => "stage.lakeside",
             .keep => "stage.keep",
             .pinnacle => "stage.pinnacle",
+            .geode => "stage.geode",
+            .sanct => "stage.sanct",
+            .depths => "stage.depths",
+            .aurum => "stage.aurum",
+            .darkhall => "stage.darkhall",
+            .reflection => "stage.reflection",
         };
     }
 };
