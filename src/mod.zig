@@ -3116,6 +3116,7 @@ fn transfiguredLuckySet() !void {
         .hitboxVar = .radius,
         .mult = 1 + ballroom_gown_buff * 0.01,
     });
+    targ.hotbarslots_prune_base_has_str();
     qpat.hb_add_strength(.{ .amount = ballroom_gown_buff });
 
     const silver_coin_dmg_mult = 0.35;
