@@ -1879,7 +1879,7 @@ fn transfiguredFlameSet() !void {
         .cooldown = 4 * std.time.ms_per_s,
 
         .hbsType = .burn_6,
-        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsLength = 3 * std.time.ms_per_s,
     });
     for ([_]Condition{
         .dmg_self_primary, .dmg_self_secondary,
@@ -1961,7 +1961,7 @@ fn transfiguredFlameSet() !void {
 
         .delay = 250,
         .hbsType = .burn_3,
-        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsLength = 3 * std.time.ms_per_s,
     });
     trig.onDamageDone(&.{.dmg_islarge});
     cond.hb_available();
@@ -2058,7 +2058,7 @@ fn transfiguredFlameSet() !void {
         .treasureType = .red,
 
         .hbsType = .burn_0,
-        .hbsLength = 5 * std.time.ms_per_s,
+        .hbsLength = 3 * std.time.ms_per_s,
 
         .greySqVar0 = true,
         .autoOffSqVar0 = 1,
