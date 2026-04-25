@@ -2916,24 +2916,9 @@ fn transfiguredLuckySet() !void {
 
     trig.battleStart0(&.{});
     qpat.hb_flash_item(.{});
-    tset.uservar_random_range(.{ "u_pick", 1, 9 });
-    // `uservar_random_range` generates a float, I just want an int between 1 and 8
-    // TODO: Figure out a better way
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 8 });
-    cond.eval("u_pick", .@"<=", 8);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 7 });
-    cond.eval("u_pick", .@"<=", 7);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 6 });
-    cond.eval("u_pick", .@"<=", 6);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 5 });
-    cond.eval("u_pick", .@"<=", 5);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 4 });
-    cond.eval("u_pick", .@"<=", 4);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 3 });
-    cond.eval("u_pick", .@"<=", 3);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 2 });
-    cond.eval("u_pick", .@"<=", 2);
-    qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
+    tset.uservar_random_range_int_synced(.{ "u_pick", 1111, 1, 9 });
+    qpat.hb_square_set_var(.{ .varIndex = 0, .amountStr = "u_pick" });
+    qpat.hb_reset_statchange();
 
     for ([_]Stat{
         .primaryMult,
