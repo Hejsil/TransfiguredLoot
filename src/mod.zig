@@ -3147,8 +3147,8 @@ fn transfiguredLuckySet() !void {
     trig.onSquarePickup(&.{.square_self});
     qpat.hb_reset_statchange();
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
-    tset.uservar_random_range(.{ "u_flip", 0, 1 });
-    cond.eval("u_flip", .@"<", 0.5);
+    tset.uservar_random_range_int(.{ "u_flip", 0, 2 });
+    cond.eval("u_flip", .@"==", 0);
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 1 });
 
     trig.strCalc0(&.{});
