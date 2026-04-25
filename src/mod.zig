@@ -2359,7 +2359,7 @@ fn transfiguredGemSet() !void {
     trig.strCalc0(&.{});
     qpat.hb_reset_statchange_norefresh();
     cond.hb_check_square_var(.{ 0, 1 });
-    tset.uservar_gold(.{"u_gold"});
+    tset.uservar_gold(.{ "u_gold", r.playerId });
     tset.uservar2("u_haste", "u_gold", .@"*", topaz_charm_haste_per_gold);
     tset.uservar2("u_haste", "u_haste", .@"/", topaz_charm_gold_per_haste);
     qpat.hb_add_statchange_norefresh(.{
@@ -3002,14 +3002,14 @@ fn transfiguredLuckySet() !void {
     apat.darkmagic_blade(.{});
 
     trig.strCalc2(&.{});
-    tset.uservar_gold(.{"u_gold"});
+    tset.uservar_gold(.{ "u_gold", r.playerId });
     tset.uservar2("u_str", "u_gold", .@"*", golden_katana_dmg_per_gold);
     tset.uservar2("u_str", "u_str", .@"/", golden_katana_gold_per_dmg);
     targ.hotbarslot_self();
     qpat.hb_add_strength(.{ .amountStr = "u_str" });
 
     trig.cdCalc2b(&.{});
-    tset.uservar_gold(.{"u_gold"});
+    tset.uservar_gold(.{ "u_gold", r.playerId });
     tset.uservar2("u_cooldown", "u_gold", .@"*", golden_katana_cd_per_gold);
     tset.uservar2("u_cooldown", "u_cooldown", .@"/", golden_katana_gold_per_cd);
     targ.hotbarslot_self();
@@ -3064,7 +3064,7 @@ fn transfiguredLuckySet() !void {
     qpat.hb_reset_statchange();
 
     trig.strCalc0(&.{});
-    tset.uservar_gold(.{"u_gold"});
+    tset.uservar_gold(.{ "u_gold", r.playerId });
     tset.uservar2("u_critDmg", "u_gold", .@"*", royal_staff_crit_dmg_buff);
     tset.uservar2("u_critDmg", "u_critDmg", .@"/", royal_staff_gold_per_crit_dmg);
     qpat.hb_reset_statchange_norefresh();
@@ -3074,7 +3074,7 @@ fn transfiguredLuckySet() !void {
     });
 
     trig.strCalc2(&.{});
-    tset.uservar_gold(.{"u_gold"});
+    tset.uservar_gold(.{ "u_gold", r.playerId });
     targ.hotbarslots_current_players();
     tset.uservar2("u_aoeMult", "u_gold", .@"*", royal_staff_aoe_buff);
     tset.uservar2("u_aoeMult", "u_aoeMult", .@"/", royal_staff_gold_per_aoe);
