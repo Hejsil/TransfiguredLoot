@@ -3118,6 +3118,10 @@ fn transfiguredLuckySet() !void {
     });
     targ.hotbarslots_prune_base_has_str();
     qpat.hb_add_strength(.{ .amount = ballroom_gown_buff });
+    qpat.hb_add_hitbox_var(.{
+        .hitboxVar = .critRatio,
+        .amount = ballroom_gown_buff * 0.01,
+    });
 
     const silver_coin_dmg_mult = 0.35;
     item(.{

@@ -5502,6 +5502,8 @@ pub const Hitbox = enum {
     hbsLength,
     chargeType,
     luck,
+    critRatio,
+    flags,
 
     pub fn toCsvString(hitbox: Hitbox) []const u8 {
         return switch (hitbox) {
