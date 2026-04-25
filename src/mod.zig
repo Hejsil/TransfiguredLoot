@@ -2916,7 +2916,7 @@ fn transfiguredLuckySet() !void {
 
     trig.battleStart0(&.{});
     qpat.hb_flash_item(.{});
-    tset.uservar_random_range_int_synced(.{ "u_pick", 1111, 1, 9 });
+    tset.uservar_random_range_int(.{ "u_pick", 1, 9 });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amountStr = "u_pick" });
     qpat.hb_reset_statchange();
 
