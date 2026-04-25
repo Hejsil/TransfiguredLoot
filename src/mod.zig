@@ -443,14 +443,14 @@ fn transfiguredNightSet() !void {
         .cooldownType = .time,
         .cooldown = 10 * std.time.ms_per_s,
     });
+    trig.autoStart(&.{.hb_auto_pl});
+    qpat.hb_run_cooldown();
+
     trig.hotbarUsed(&.{.hb_self});
     qpat.hb_run_cooldown();
-    targ.hotbarslots_ally();
-    targ.hotbarslots_prune(thss.weaponType, .@"==", WeaponType.special);
-    targ.hotbarslots_prune_noreset();
-    qpat.hb_reset_cooldown();
-    targ.hotbarslot_self();
     qpat.hb_flash_item(.{});
+    targ.players_ally();
+    apat.lullaby_harp(.{ .type = .special, .duration = 100 });
 
     const nightstar_grimoire_radius = 200;
     item(.{

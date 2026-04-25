@@ -3994,6 +3994,7 @@ pub const apat = opaque {
         numberStr: ?[]const u8 = null,
         radius: ?u16 = null,
         amount: ?u16 = null,
+        type: ?WeaponType = null,
 
         pub fn notNullFieldCount(args: Args) usize {
             var res: usize = 0;
