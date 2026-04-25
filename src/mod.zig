@@ -2630,7 +2630,7 @@ fn transfiguredLightningSet() !void {
         },
         .description = .{
             .original = "Do 250 damage to all enemies when you gain invulnerability.",
-            .english = "Do [STR] damage to all enemies when you take damage.",
+            .english = "Do [STR] damage to all enemies when you are hit.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
@@ -2638,10 +2638,12 @@ fn transfiguredLightningSet() !void {
         .weaponType = .loot,
         .treasureType = .yellow,
 
-        .strMult = 3000,
+        .strMult = 3500,
         .delay = 150,
+
+        .hbsFlag = .{ .shield = true },
     });
-    trig.onDamage(&.{.pl_self});
+    trig.hbsShield0(&.{.pl_self});
     qpat.hb_flash_item(.{});
     targ.players_opponent();
     tset.strength_def();
