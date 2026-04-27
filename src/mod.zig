@@ -823,7 +823,6 @@ fn transfiguredTimespaceSet() !void {
     cond.hb_check_square_var(.{ 0, 2 });
     qpat.hb_square_set_var(.{ .varIndex = 0, .amount = 0 });
 
-    const timemage_cap_cd_set = 15 * std.time.ms_per_s;
     item(.{
         .id = "it_transfigured_timemage_cap",
         .name = .{
@@ -832,20 +831,14 @@ fn transfiguredTimespaceSet() !void {
         },
         .description = .{
             .original = "Cooldowns less than or equal to 10s become 5s.",
-            .english = "Cooldowns greater than [VAR0_SECONDS] become [VAR0_SECONDS].",
+            .english = "Not Implemented. Should not appear in a run.",
         },
         // .itemFlags = .{ .starting_item = true },
         .color = color,
         .type = .loot,
         .weaponType = .loot,
-        .treasureType = .purple,
-
-        .hbVar0 = timemage_cap_cd_set,
+        // .treasureType = .purple,
     });
-    trig.cdCalc5(&.{});
-    targ.hotbarslots_current_players();
-    targ.hotbarslots_prune(thss.cooldown, .@">", timemage_cap_cd_set);
-    qpat.hb_set_cooldown_permanent(.{ .time = timemage_cap_cd_set });
 
     const starry_cloak_cd_threshold = 15 * std.time.ms_per_s;
     item(.{
